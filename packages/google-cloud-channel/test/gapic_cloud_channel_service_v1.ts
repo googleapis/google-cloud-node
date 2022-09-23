@@ -284,7 +284,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomerRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.GetCustomerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -314,7 +317,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomerRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.GetCustomerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -360,7 +366,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomerRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.GetCustomerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -390,7 +399,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomerRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.GetCustomerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -411,7 +423,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CheckCloudIdentityAccountsExistRequest',
+        '.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -445,7 +457,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CheckCloudIdentityAccountsExistRequest',
+        '.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -494,7 +506,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CheckCloudIdentityAccountsExistRequest',
+        '.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -530,7 +542,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CheckCloudIdentityAccountsExistRequest',
+        '.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -555,9 +567,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.CreateCustomerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -587,9 +600,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.CreateCustomerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -635,9 +649,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.CreateCustomerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -667,9 +682,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.CreateCustomerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -690,10 +706,10 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.UpdateCustomerRequest()
       );
       request.customer ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCustomerRequest', [
-        'customer',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.UpdateCustomerRequest',
+        ['customer', 'name']
+      );
       request.customer.name = defaultValue1;
       const expectedHeaderRequestParams = `customer.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -724,10 +740,10 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.UpdateCustomerRequest()
       );
       request.customer ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCustomerRequest', [
-        'customer',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.UpdateCustomerRequest',
+        ['customer', 'name']
+      );
       request.customer.name = defaultValue1;
       const expectedHeaderRequestParams = `customer.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -774,10 +790,10 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.UpdateCustomerRequest()
       );
       request.customer ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCustomerRequest', [
-        'customer',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.UpdateCustomerRequest',
+        ['customer', 'name']
+      );
       request.customer.name = defaultValue1;
       const expectedHeaderRequestParams = `customer.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -808,10 +824,10 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.UpdateCustomerRequest()
       );
       request.customer ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCustomerRequest', [
-        'customer',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.UpdateCustomerRequest',
+        ['customer', 'name']
+      );
       request.customer.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -831,9 +847,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCustomerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.DeleteCustomerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -863,9 +880,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCustomerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.DeleteCustomerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -911,9 +929,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCustomerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.DeleteCustomerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -943,9 +962,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCustomerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.DeleteCustomerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -965,9 +985,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ImportCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportCustomerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ImportCustomerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -997,9 +1018,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ImportCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportCustomerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ImportCustomerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1045,9 +1067,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ImportCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportCustomerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ImportCustomerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1077,9 +1100,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ImportCustomerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportCustomerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ImportCustomerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1099,9 +1123,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.GetEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1131,9 +1156,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.GetEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1179,9 +1205,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.GetEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1211,9 +1238,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.GetEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1234,7 +1262,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetChannelPartnerLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetChannelPartnerLinkRequest',
+        '.google.cloud.channel.v1.GetChannelPartnerLinkRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1268,7 +1296,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetChannelPartnerLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetChannelPartnerLinkRequest',
+        '.google.cloud.channel.v1.GetChannelPartnerLinkRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1317,7 +1345,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetChannelPartnerLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetChannelPartnerLinkRequest',
+        '.google.cloud.channel.v1.GetChannelPartnerLinkRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1353,7 +1381,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetChannelPartnerLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetChannelPartnerLinkRequest',
+        '.google.cloud.channel.v1.GetChannelPartnerLinkRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1379,7 +1407,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateChannelPartnerLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateChannelPartnerLinkRequest',
+        '.google.cloud.channel.v1.CreateChannelPartnerLinkRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1413,7 +1441,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateChannelPartnerLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateChannelPartnerLinkRequest',
+        '.google.cloud.channel.v1.CreateChannelPartnerLinkRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1462,7 +1490,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateChannelPartnerLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateChannelPartnerLinkRequest',
+        '.google.cloud.channel.v1.CreateChannelPartnerLinkRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1498,7 +1526,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateChannelPartnerLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateChannelPartnerLinkRequest',
+        '.google.cloud.channel.v1.CreateChannelPartnerLinkRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1524,7 +1552,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateChannelPartnerLinkRequest',
+        '.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1558,7 +1586,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateChannelPartnerLinkRequest',
+        '.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1607,7 +1635,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateChannelPartnerLinkRequest',
+        '.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1643,7 +1671,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateChannelPartnerLinkRequest',
+        '.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1669,7 +1697,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetCustomerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.GetCustomerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1703,7 +1731,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetCustomerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.GetCustomerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1752,7 +1780,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetCustomerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.GetCustomerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1788,7 +1816,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetCustomerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.GetCustomerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1814,7 +1842,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1848,7 +1876,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1897,7 +1925,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1933,7 +1961,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1960,7 +1988,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.customerRepricingConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest',
         ['customerRepricingConfig', 'name']
       );
       request.customerRepricingConfig.name = defaultValue1;
@@ -1995,7 +2023,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.customerRepricingConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest',
         ['customerRepricingConfig', 'name']
       );
       request.customerRepricingConfig.name = defaultValue1;
@@ -2045,7 +2073,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.customerRepricingConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest',
         ['customerRepricingConfig', 'name']
       );
       request.customerRepricingConfig.name = defaultValue1;
@@ -2082,7 +2110,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.customerRepricingConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest',
         ['customerRepricingConfig', 'name']
       );
       request.customerRepricingConfig.name = defaultValue1;
@@ -2108,7 +2136,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2142,7 +2170,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2191,7 +2219,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2227,7 +2255,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCustomerRepricingConfigRequest',
+        '.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2253,7 +2281,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2287,7 +2315,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2336,7 +2364,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2372,7 +2400,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2398,7 +2426,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2434,7 +2462,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2483,7 +2511,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2519,7 +2547,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2546,7 +2574,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.channelPartnerRepricingConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest',
         ['channelPartnerRepricingConfig', 'name']
       );
       request.channelPartnerRepricingConfig.name = defaultValue1;
@@ -2583,7 +2611,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.channelPartnerRepricingConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest',
         ['channelPartnerRepricingConfig', 'name']
       );
       request.channelPartnerRepricingConfig.name = defaultValue1;
@@ -2633,7 +2661,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.channelPartnerRepricingConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest',
         ['channelPartnerRepricingConfig', 'name']
       );
       request.channelPartnerRepricingConfig.name = defaultValue1;
@@ -2670,7 +2698,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.channelPartnerRepricingConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest',
         ['channelPartnerRepricingConfig', 'name']
       );
       request.channelPartnerRepricingConfig.name = defaultValue1;
@@ -2696,7 +2724,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2732,7 +2760,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2781,7 +2809,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2817,7 +2845,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteChannelPartnerRepricingConfigRequest',
+        '.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2842,9 +2870,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.LookupOfferRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupOfferRequest', [
-        'entitlement',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.LookupOfferRequest',
+        ['entitlement']
+      );
       request.entitlement = defaultValue1;
       const expectedHeaderRequestParams = `entitlement=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2874,9 +2903,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.LookupOfferRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupOfferRequest', [
-        'entitlement',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.LookupOfferRequest',
+        ['entitlement']
+      );
       request.entitlement = defaultValue1;
       const expectedHeaderRequestParams = `entitlement=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2922,9 +2952,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.LookupOfferRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupOfferRequest', [
-        'entitlement',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.LookupOfferRequest',
+        ['entitlement']
+      );
       request.entitlement = defaultValue1;
       const expectedHeaderRequestParams = `entitlement=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2954,9 +2985,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.LookupOfferRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupOfferRequest', [
-        'entitlement',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.LookupOfferRequest',
+        ['entitlement']
+      );
       request.entitlement = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2976,9 +3008,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RegisterSubscriberRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.RegisterSubscriberRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3009,9 +3042,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RegisterSubscriberRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.RegisterSubscriberRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3057,9 +3091,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RegisterSubscriberRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.RegisterSubscriberRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3089,9 +3124,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RegisterSubscriberRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.RegisterSubscriberRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3111,9 +3147,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UnregisterSubscriberRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.UnregisterSubscriberRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3144,9 +3181,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UnregisterSubscriberRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.UnregisterSubscriberRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3192,9 +3230,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UnregisterSubscriberRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.UnregisterSubscriberRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3224,9 +3263,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UnregisterSubscriberRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.UnregisterSubscriberRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3247,7 +3287,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ProvisionCloudIdentityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ProvisionCloudIdentityRequest',
+        '.google.cloud.channel.v1.ProvisionCloudIdentityRequest',
         ['customer']
       );
       request.customer = defaultValue1;
@@ -3282,7 +3322,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ProvisionCloudIdentityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ProvisionCloudIdentityRequest',
+        '.google.cloud.channel.v1.ProvisionCloudIdentityRequest',
         ['customer']
       );
       request.customer = defaultValue1;
@@ -3338,7 +3378,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ProvisionCloudIdentityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ProvisionCloudIdentityRequest',
+        '.google.cloud.channel.v1.ProvisionCloudIdentityRequest',
         ['customer']
       );
       request.customer = defaultValue1;
@@ -3374,7 +3414,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ProvisionCloudIdentityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ProvisionCloudIdentityRequest',
+        '.google.cloud.channel.v1.ProvisionCloudIdentityRequest',
         ['customer']
       );
       request.customer = defaultValue1;
@@ -3455,9 +3495,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntitlementRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.CreateEntitlementRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3489,9 +3530,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntitlementRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.CreateEntitlementRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3544,9 +3586,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntitlementRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.CreateEntitlementRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3576,9 +3619,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntitlementRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.CreateEntitlementRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3657,9 +3701,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeParametersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ChangeParametersRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ChangeParametersRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3691,9 +3736,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeParametersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ChangeParametersRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ChangeParametersRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3746,9 +3792,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeParametersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ChangeParametersRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ChangeParametersRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3778,9 +3825,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeParametersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ChangeParametersRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ChangeParametersRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3860,7 +3908,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ChangeRenewalSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ChangeRenewalSettingsRequest',
+        '.google.cloud.channel.v1.ChangeRenewalSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3895,7 +3943,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ChangeRenewalSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ChangeRenewalSettingsRequest',
+        '.google.cloud.channel.v1.ChangeRenewalSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3951,7 +3999,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ChangeRenewalSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ChangeRenewalSettingsRequest',
+        '.google.cloud.channel.v1.ChangeRenewalSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3987,7 +4035,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ChangeRenewalSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ChangeRenewalSettingsRequest',
+        '.google.cloud.channel.v1.ChangeRenewalSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4068,7 +4116,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeOfferRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ChangeOfferRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ChangeOfferRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4099,7 +4150,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeOfferRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ChangeOfferRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ChangeOfferRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4152,7 +4206,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeOfferRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ChangeOfferRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ChangeOfferRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4182,7 +4239,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeOfferRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ChangeOfferRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ChangeOfferRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4258,9 +4318,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.StartPaidServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartPaidServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.StartPaidServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4292,9 +4353,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.StartPaidServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartPaidServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.StartPaidServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4347,9 +4409,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.StartPaidServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartPaidServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.StartPaidServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4379,9 +4442,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.StartPaidServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartPaidServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.StartPaidServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4460,9 +4524,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.SuspendEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuspendEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.SuspendEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4494,9 +4559,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.SuspendEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuspendEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.SuspendEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4549,9 +4615,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.SuspendEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuspendEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.SuspendEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4581,9 +4648,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.SuspendEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuspendEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.SuspendEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4662,9 +4730,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CancelEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.CancelEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4696,9 +4765,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CancelEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.CancelEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4751,9 +4821,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CancelEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.CancelEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4783,9 +4854,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CancelEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.CancelEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4864,9 +4936,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ActivateEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ActivateEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ActivateEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4898,9 +4971,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ActivateEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ActivateEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ActivateEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4953,9 +5027,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ActivateEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ActivateEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ActivateEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4985,9 +5060,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ActivateEntitlementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ActivateEntitlementRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ActivateEntitlementRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5066,9 +5142,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.TransferEntitlementsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TransferEntitlementsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.TransferEntitlementsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5100,9 +5177,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.TransferEntitlementsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TransferEntitlementsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.TransferEntitlementsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5155,9 +5233,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.TransferEntitlementsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TransferEntitlementsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.TransferEntitlementsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5187,9 +5266,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.TransferEntitlementsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TransferEntitlementsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.TransferEntitlementsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5269,7 +5349,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.TransferEntitlementsToGoogleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TransferEntitlementsToGoogleRequest',
+        '.google.cloud.channel.v1.TransferEntitlementsToGoogleRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5304,7 +5384,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.TransferEntitlementsToGoogleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TransferEntitlementsToGoogleRequest',
+        '.google.cloud.channel.v1.TransferEntitlementsToGoogleRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5360,7 +5440,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.TransferEntitlementsToGoogleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TransferEntitlementsToGoogleRequest',
+        '.google.cloud.channel.v1.TransferEntitlementsToGoogleRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5396,7 +5476,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.TransferEntitlementsToGoogleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TransferEntitlementsToGoogleRequest',
+        '.google.cloud.channel.v1.TransferEntitlementsToGoogleRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5478,9 +5558,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListCustomersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5512,9 +5593,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListCustomersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5562,9 +5644,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListCustomersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5594,9 +5677,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListCustomersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5649,9 +5733,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListCustomersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5699,9 +5784,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListCustomersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5743,9 +5829,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListCustomersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5786,9 +5873,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5820,9 +5908,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5870,9 +5959,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5902,9 +5992,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5957,9 +6048,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6007,9 +6099,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6051,9 +6144,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListEntitlementsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6094,9 +6188,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListTransferableSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6135,9 +6230,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListTransferableSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6191,9 +6287,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListTransferableSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6223,9 +6320,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListTransferableSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6284,9 +6382,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListTransferableSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6334,9 +6433,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListTransferableSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6384,9 +6484,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListTransferableSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6428,7 +6529,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransferableOffersRequest',
+        '.google.cloud.channel.v1.ListTransferableOffersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6470,7 +6571,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransferableOffersRequest',
+        '.google.cloud.channel.v1.ListTransferableOffersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6527,7 +6628,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransferableOffersRequest',
+        '.google.cloud.channel.v1.ListTransferableOffersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6563,7 +6664,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransferableOffersRequest',
+        '.google.cloud.channel.v1.ListTransferableOffersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6632,7 +6733,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransferableOffersRequest',
+        '.google.cloud.channel.v1.ListTransferableOffersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6690,7 +6791,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransferableOffersRequest',
+        '.google.cloud.channel.v1.ListTransferableOffersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6745,7 +6846,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransferableOffersRequest',
+        '.google.cloud.channel.v1.ListTransferableOffersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6794,7 +6895,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerLinksRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerLinksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6836,7 +6937,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerLinksRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerLinksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6893,7 +6994,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerLinksRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerLinksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6929,7 +7030,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerLinksRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerLinksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6998,7 +7099,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerLinksRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerLinksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7056,7 +7157,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerLinksRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerLinksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7112,7 +7213,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerLinksRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerLinksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7161,7 +7262,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCustomerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7203,7 +7304,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCustomerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7262,7 +7363,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCustomerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7298,7 +7399,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCustomerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7372,7 +7473,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCustomerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7435,7 +7536,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCustomerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7491,7 +7592,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCustomerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7540,7 +7641,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7584,7 +7685,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7643,7 +7744,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7679,7 +7780,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7753,7 +7854,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7816,7 +7917,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7872,7 +7973,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelPartnerRepricingConfigsRequest',
+        '.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -8143,7 +8244,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8175,7 +8279,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8223,7 +8330,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8250,7 +8360,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8300,7 +8413,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8347,7 +8463,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8388,7 +8507,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8430,9 +8552,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListOffersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8464,9 +8587,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListOffersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8514,9 +8638,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListOffersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8546,9 +8671,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListOffersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8598,9 +8724,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListOffersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8647,9 +8774,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListOffersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8691,9 +8819,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListOffersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8736,9 +8865,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
-        'customer',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListPurchasableSkusRequest',
+        ['customer']
+      );
       request.customer = defaultValue1;
       const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = [
@@ -8777,9 +8907,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
-        'customer',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListPurchasableSkusRequest',
+        ['customer']
+      );
       request.customer = defaultValue1;
       const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = [
@@ -8833,9 +8964,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
-        'customer',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListPurchasableSkusRequest',
+        ['customer']
+      );
       request.customer = defaultValue1;
       const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8865,9 +8997,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
-        'customer',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListPurchasableSkusRequest',
+        ['customer']
+      );
       request.customer = defaultValue1;
       const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = [
@@ -8926,9 +9059,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
-        'customer',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListPurchasableSkusRequest',
+        ['customer']
+      );
       request.customer = defaultValue1;
       const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8976,9 +9110,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
-        'customer',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListPurchasableSkusRequest',
+        ['customer']
+      );
       request.customer = defaultValue1;
       const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = [
@@ -9026,9 +9161,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
-        'customer',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListPurchasableSkusRequest',
+        ['customer']
+      );
       request.customer = defaultValue1;
       const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -9070,7 +9206,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPurchasableOffersRequest',
+        '.google.cloud.channel.v1.ListPurchasableOffersRequest',
         ['customer']
       );
       request.customer = defaultValue1;
@@ -9112,7 +9248,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPurchasableOffersRequest',
+        '.google.cloud.channel.v1.ListPurchasableOffersRequest',
         ['customer']
       );
       request.customer = defaultValue1;
@@ -9169,7 +9305,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPurchasableOffersRequest',
+        '.google.cloud.channel.v1.ListPurchasableOffersRequest',
         ['customer']
       );
       request.customer = defaultValue1;
@@ -9205,7 +9341,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPurchasableOffersRequest',
+        '.google.cloud.channel.v1.ListPurchasableOffersRequest',
         ['customer']
       );
       request.customer = defaultValue1;
@@ -9273,7 +9409,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPurchasableOffersRequest',
+        '.google.cloud.channel.v1.ListPurchasableOffersRequest',
         ['customer']
       );
       request.customer = defaultValue1;
@@ -9330,7 +9466,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPurchasableOffersRequest',
+        '.google.cloud.channel.v1.ListPurchasableOffersRequest',
         ['customer']
       );
       request.customer = defaultValue1;
@@ -9385,7 +9521,7 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPurchasableOffersRequest',
+        '.google.cloud.channel.v1.ListPurchasableOffersRequest',
         ['customer']
       );
       request.customer = defaultValue1;
@@ -9433,9 +9569,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSubscribersRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
@@ -9463,9 +9600,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSubscribersRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
@@ -9506,9 +9644,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSubscribersRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -9538,9 +9677,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSubscribersRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
@@ -9586,9 +9726,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSubscribersRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -9633,9 +9774,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSubscribersRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
@@ -9673,9 +9815,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
-        'account',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.ListSubscribersRequest',
+        ['account']
+      );
       request.account = defaultValue1;
       const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
