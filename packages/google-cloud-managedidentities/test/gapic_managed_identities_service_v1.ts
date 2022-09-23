@@ -280,9 +280,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ResetAdminPasswordRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetAdminPasswordRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ResetAdminPasswordRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -312,9 +313,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ResetAdminPasswordRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetAdminPasswordRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ResetAdminPasswordRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -359,9 +361,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ResetAdminPasswordRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetAdminPasswordRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ResetAdminPasswordRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -390,9 +393,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ResetAdminPasswordRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetAdminPasswordRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ResetAdminPasswordRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -411,7 +415,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.GetDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDomainRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.GetDomainRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -440,7 +447,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.GetDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDomainRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.GetDomainRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -485,7 +495,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.GetDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDomainRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.GetDomainRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -511,7 +524,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.GetDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDomainRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.GetDomainRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -531,7 +547,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         new protos.google.cloud.managedidentities.v1.CreateMicrosoftAdDomainRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateMicrosoftAdDomainRequest',
+        '.google.cloud.managedidentities.v1.CreateMicrosoftAdDomainRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -565,7 +581,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         new protos.google.cloud.managedidentities.v1.CreateMicrosoftAdDomainRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateMicrosoftAdDomainRequest',
+        '.google.cloud.managedidentities.v1.CreateMicrosoftAdDomainRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -620,7 +636,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         new protos.google.cloud.managedidentities.v1.CreateMicrosoftAdDomainRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateMicrosoftAdDomainRequest',
+        '.google.cloud.managedidentities.v1.CreateMicrosoftAdDomainRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -655,7 +671,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         new protos.google.cloud.managedidentities.v1.CreateMicrosoftAdDomainRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateMicrosoftAdDomainRequest',
+        '.google.cloud.managedidentities.v1.CreateMicrosoftAdDomainRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -735,10 +751,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         new protos.google.cloud.managedidentities.v1.UpdateDomainRequest()
       );
       request.domain ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDomainRequest', [
-        'domain',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.UpdateDomainRequest',
+        ['domain', 'name']
+      );
       request.domain.name = defaultValue1;
       const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -769,10 +785,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         new protos.google.cloud.managedidentities.v1.UpdateDomainRequest()
       );
       request.domain ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDomainRequest', [
-        'domain',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.UpdateDomainRequest',
+        ['domain', 'name']
+      );
       request.domain.name = defaultValue1;
       const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -825,10 +841,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         new protos.google.cloud.managedidentities.v1.UpdateDomainRequest()
       );
       request.domain ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDomainRequest', [
-        'domain',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.UpdateDomainRequest',
+        ['domain', 'name']
+      );
       request.domain.name = defaultValue1;
       const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -858,10 +874,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
         new protos.google.cloud.managedidentities.v1.UpdateDomainRequest()
       );
       request.domain ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDomainRequest', [
-        'domain',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.UpdateDomainRequest',
+        ['domain', 'name']
+      );
       request.domain.name = defaultValue1;
       const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -934,9 +950,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DeleteDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDomainRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.DeleteDomainRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -966,9 +983,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DeleteDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDomainRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.DeleteDomainRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1020,9 +1038,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DeleteDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDomainRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.DeleteDomainRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1051,9 +1070,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DeleteDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDomainRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.DeleteDomainRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1126,7 +1146,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.AttachTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AttachTrustRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.AttachTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1156,7 +1179,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.AttachTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AttachTrustRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.AttachTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1208,7 +1234,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.AttachTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AttachTrustRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.AttachTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1237,7 +1266,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.AttachTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AttachTrustRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.AttachTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1310,9 +1342,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ReconfigureTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReconfigureTrustRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ReconfigureTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1343,9 +1376,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ReconfigureTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReconfigureTrustRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ReconfigureTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1397,9 +1431,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ReconfigureTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReconfigureTrustRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ReconfigureTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1428,9 +1463,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ReconfigureTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReconfigureTrustRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ReconfigureTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1506,7 +1542,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DetachTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetachTrustRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.DetachTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1536,7 +1575,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DetachTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetachTrustRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.DetachTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1588,7 +1630,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DetachTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetachTrustRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.DetachTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1617,7 +1662,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DetachTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetachTrustRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.DetachTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1690,9 +1738,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ValidateTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateTrustRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ValidateTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1723,9 +1772,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ValidateTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateTrustRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ValidateTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1777,9 +1827,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ValidateTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateTrustRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ValidateTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1808,9 +1859,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ValidateTrustRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateTrustRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ValidateTrustRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1886,9 +1938,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ListDomainsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1925,9 +1978,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ListDomainsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1980,9 +2034,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ListDomainsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2011,9 +2066,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ListDomainsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2071,9 +2127,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ListDomainsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2122,9 +2179,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ListDomainsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2171,9 +2229,10 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.managedidentities.v1.ListDomainsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
