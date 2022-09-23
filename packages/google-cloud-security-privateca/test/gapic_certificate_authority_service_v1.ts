@@ -301,9 +301,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.CreateCertificateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -334,9 +335,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.CreateCertificateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -383,9 +385,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.CreateCertificateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -416,9 +419,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.CreateCertificateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -439,9 +443,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.GetCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -472,9 +477,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.GetCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -521,9 +527,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.GetCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -554,9 +561,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.GetCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -577,9 +585,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.RevokeCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RevokeCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.RevokeCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -610,9 +619,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.RevokeCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RevokeCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.RevokeCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -659,9 +669,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.RevokeCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RevokeCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.RevokeCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -692,9 +703,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.RevokeCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RevokeCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.RevokeCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -716,10 +728,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.UpdateCertificateRequest()
       );
       request.certificate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
-        'certificate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.UpdateCertificateRequest',
+        ['certificate', 'name']
+      );
       request.certificate.name = defaultValue1;
       const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -751,10 +763,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.UpdateCertificateRequest()
       );
       request.certificate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
-        'certificate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.UpdateCertificateRequest',
+        ['certificate', 'name']
+      );
       request.certificate.name = defaultValue1;
       const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -802,10 +814,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.UpdateCertificateRequest()
       );
       request.certificate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
-        'certificate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.UpdateCertificateRequest',
+        ['certificate', 'name']
+      );
       request.certificate.name = defaultValue1;
       const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -837,10 +849,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.UpdateCertificateRequest()
       );
       request.certificate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
-        'certificate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.UpdateCertificateRequest',
+        ['certificate', 'name']
+      );
       request.certificate.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -862,7 +874,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'FetchCertificateAuthorityCsrRequest',
+        '.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -897,7 +909,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'FetchCertificateAuthorityCsrRequest',
+        '.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -947,7 +959,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'FetchCertificateAuthorityCsrRequest',
+        '.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -984,7 +996,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'FetchCertificateAuthorityCsrRequest',
+        '.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1011,7 +1023,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1046,7 +1058,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1096,7 +1108,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1133,7 +1145,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1159,7 +1171,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCaPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCaPoolRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.GetCaPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1190,7 +1205,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCaPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCaPoolRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.GetCaPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1237,7 +1255,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCaPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCaPoolRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.GetCaPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1265,7 +1286,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCaPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCaPoolRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.GetCaPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1286,9 +1310,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCaCertsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchCaCertsRequest', [
-        'caPool',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.FetchCaCertsRequest',
+        ['caPool']
+      );
       request.caPool = defaultValue1;
       const expectedHeaderRequestParams = `ca_pool=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1319,9 +1344,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCaCertsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchCaCertsRequest', [
-        'caPool',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.FetchCaCertsRequest',
+        ['caPool']
+      );
       request.caPool = defaultValue1;
       const expectedHeaderRequestParams = `ca_pool=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1368,9 +1394,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCaCertsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchCaCertsRequest', [
-        'caPool',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.FetchCaCertsRequest',
+        ['caPool']
+      );
       request.caPool = defaultValue1;
       const expectedHeaderRequestParams = `ca_pool=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1401,9 +1428,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCaCertsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchCaCertsRequest', [
-        'caPool',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.FetchCaCertsRequest',
+        ['caPool']
+      );
       request.caPool = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1425,7 +1453,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateRevocationListRequest',
+        '.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1460,7 +1488,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateRevocationListRequest',
+        '.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1510,7 +1538,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateRevocationListRequest',
+        '.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1547,7 +1575,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateRevocationListRequest',
+        '.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1574,7 +1602,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.GetCertificateTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1609,7 +1637,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.GetCertificateTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1659,7 +1687,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.GetCertificateTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1696,7 +1724,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.GetCertificateTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.GetCertificateTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1723,7 +1751,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ActivateCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1759,7 +1787,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ActivateCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1816,7 +1844,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ActivateCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1853,7 +1881,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ActivateCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1939,7 +1967,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1975,7 +2003,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2032,7 +2060,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2069,7 +2097,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2155,7 +2183,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DisableCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2191,7 +2219,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DisableCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2248,7 +2276,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DisableCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2285,7 +2313,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DisableCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2371,7 +2399,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'EnableCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2407,7 +2435,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'EnableCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2464,7 +2492,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'EnableCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2501,7 +2529,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'EnableCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2587,7 +2615,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UndeleteCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2623,7 +2651,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UndeleteCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2680,7 +2708,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UndeleteCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2717,7 +2745,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UndeleteCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2803,7 +2831,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2839,7 +2867,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2896,7 +2924,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2933,7 +2961,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3020,7 +3048,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificateAuthority ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest',
         ['certificateAuthority', 'name']
       );
       request.certificateAuthority.name = defaultValue1;
@@ -3057,7 +3085,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificateAuthority ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest',
         ['certificateAuthority', 'name']
       );
       request.certificateAuthority.name = defaultValue1;
@@ -3115,7 +3143,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificateAuthority ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest',
         ['certificateAuthority', 'name']
       );
       request.certificateAuthority.name = defaultValue1;
@@ -3153,7 +3181,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificateAuthority ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateAuthorityRequest',
+        '.google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest',
         ['certificateAuthority', 'name']
       );
       request.certificateAuthority.name = defaultValue1;
@@ -3238,9 +3266,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCaPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCaPoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.CreateCaPoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3272,9 +3301,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCaPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCaPoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.CreateCaPoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3328,9 +3358,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCaPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCaPoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.CreateCaPoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3361,9 +3392,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCaPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCaPoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.CreateCaPoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3443,10 +3475,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.UpdateCaPoolRequest()
       );
       request.caPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCaPoolRequest', [
-        'caPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.UpdateCaPoolRequest',
+        ['caPool', 'name']
+      );
       request.caPool.name = defaultValue1;
       const expectedHeaderRequestParams = `ca_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3479,10 +3511,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.UpdateCaPoolRequest()
       );
       request.caPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCaPoolRequest', [
-        'caPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.UpdateCaPoolRequest',
+        ['caPool', 'name']
+      );
       request.caPool.name = defaultValue1;
       const expectedHeaderRequestParams = `ca_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3537,10 +3569,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.UpdateCaPoolRequest()
       );
       request.caPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCaPoolRequest', [
-        'caPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.UpdateCaPoolRequest',
+        ['caPool', 'name']
+      );
       request.caPool.name = defaultValue1;
       const expectedHeaderRequestParams = `ca_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3572,10 +3604,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.UpdateCaPoolRequest()
       );
       request.caPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCaPoolRequest', [
-        'caPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.UpdateCaPoolRequest',
+        ['caPool', 'name']
+      );
       request.caPool.name = defaultValue1;
       const expectedHeaderRequestParams = `ca_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3654,9 +3686,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCaPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCaPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.DeleteCaPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3688,9 +3721,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCaPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCaPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.DeleteCaPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3744,9 +3778,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCaPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCaPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.DeleteCaPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3777,9 +3812,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCaPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCaPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.DeleteCaPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3860,7 +3896,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificateRevocationList ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateRevocationListRequest',
+        '.google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest',
         ['certificateRevocationList', 'name']
       );
       request.certificateRevocationList.name = defaultValue1;
@@ -3897,7 +3933,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificateRevocationList ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateRevocationListRequest',
+        '.google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest',
         ['certificateRevocationList', 'name']
       );
       request.certificateRevocationList.name = defaultValue1;
@@ -3955,7 +3991,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificateRevocationList ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateRevocationListRequest',
+        '.google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest',
         ['certificateRevocationList', 'name']
       );
       request.certificateRevocationList.name = defaultValue1;
@@ -3991,7 +4027,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificateRevocationList ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateRevocationListRequest',
+        '.google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest',
         ['certificateRevocationList', 'name']
       );
       request.certificateRevocationList.name = defaultValue1;
@@ -4074,7 +4110,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4110,7 +4146,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4167,7 +4203,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4204,7 +4240,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4290,7 +4326,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4326,7 +4362,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4383,7 +4419,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4420,7 +4456,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4507,7 +4543,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificateTemplate ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest',
         ['certificateTemplate', 'name']
       );
       request.certificateTemplate.name = defaultValue1;
@@ -4544,7 +4580,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificateTemplate ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest',
         ['certificateTemplate', 'name']
       );
       request.certificateTemplate.name = defaultValue1;
@@ -4602,7 +4638,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificateTemplate ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest',
         ['certificateTemplate', 'name']
       );
       request.certificateTemplate.name = defaultValue1;
@@ -4640,7 +4676,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       request.certificateTemplate ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateTemplateRequest',
+        '.google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest',
         ['certificateTemplate', 'name']
       );
       request.certificateTemplate.name = defaultValue1;
@@ -4725,9 +4761,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4766,9 +4803,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4825,9 +4863,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4858,9 +4897,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4921,9 +4961,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4973,9 +5014,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5025,9 +5067,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5071,7 +5114,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateAuthoritiesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5114,7 +5157,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateAuthoritiesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5174,7 +5217,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateAuthoritiesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5211,7 +5254,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateAuthoritiesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5283,7 +5326,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateAuthoritiesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5344,7 +5387,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateAuthoritiesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5401,7 +5444,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateAuthoritiesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5450,9 +5493,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCaPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5491,9 +5535,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCaPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5548,9 +5593,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCaPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5581,9 +5627,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCaPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5644,9 +5691,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCaPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5698,9 +5746,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCaPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5749,9 +5798,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.security.privateca.v1.ListCaPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5797,7 +5847,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateRevocationListsRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5840,7 +5890,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateRevocationListsRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5900,7 +5950,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateRevocationListsRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5937,7 +5987,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateRevocationListsRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6012,7 +6062,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateRevocationListsRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6076,7 +6126,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateRevocationListsRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6133,7 +6183,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateRevocationListsRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6183,7 +6233,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateTemplatesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6226,7 +6276,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateTemplatesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6286,7 +6336,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateTemplatesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6323,7 +6373,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateTemplatesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6395,7 +6445,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateTemplatesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6456,7 +6506,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateTemplatesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6513,7 +6563,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateTemplatesRequest',
+        '.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
