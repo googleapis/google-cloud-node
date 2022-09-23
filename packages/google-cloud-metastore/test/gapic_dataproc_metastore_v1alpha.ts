@@ -277,7 +277,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -306,7 +309,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -351,7 +357,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -380,7 +389,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -399,9 +411,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.GetMetadataImportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMetadataImportRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.GetMetadataImportRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -430,9 +443,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.GetMetadataImportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMetadataImportRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.GetMetadataImportRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -477,9 +491,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.GetMetadataImportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMetadataImportRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.GetMetadataImportRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -508,9 +523,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.GetMetadataImportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMetadataImportRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.GetMetadataImportRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -529,7 +545,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.GetBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.GetBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -558,7 +577,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.GetBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.GetBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -603,7 +625,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.GetBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.GetBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -629,7 +654,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.GetBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.GetBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -648,9 +676,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.CreateServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.CreateServiceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -681,9 +710,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.CreateServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.CreateServiceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -735,9 +765,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.CreateServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.CreateServiceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -766,9 +797,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.CreateServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.CreateServiceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -845,10 +877,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         new protos.google.cloud.metastore.v1alpha.UpdateServiceRequest()
       );
       request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateServiceRequest', [
-        'service',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.UpdateServiceRequest',
+        ['service', 'name']
+      );
       request.service.name = defaultValue1;
       const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -880,10 +912,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         new protos.google.cloud.metastore.v1alpha.UpdateServiceRequest()
       );
       request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateServiceRequest', [
-        'service',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.UpdateServiceRequest',
+        ['service', 'name']
+      );
       request.service.name = defaultValue1;
       const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -936,10 +968,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         new protos.google.cloud.metastore.v1alpha.UpdateServiceRequest()
       );
       request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateServiceRequest', [
-        'service',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.UpdateServiceRequest',
+        ['service', 'name']
+      );
       request.service.name = defaultValue1;
       const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -969,10 +1001,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         new protos.google.cloud.metastore.v1alpha.UpdateServiceRequest()
       );
       request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateServiceRequest', [
-        'service',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.UpdateServiceRequest',
+        ['service', 'name']
+      );
       request.service.name = defaultValue1;
       const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1048,9 +1080,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.DeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.DeleteServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1081,9 +1114,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.DeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.DeleteServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1135,9 +1169,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.DeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.DeleteServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1166,9 +1201,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.DeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.DeleteServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1244,9 +1280,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.CreateMetadataImportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMetadataImportRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.CreateMetadataImportRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1277,9 +1314,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.CreateMetadataImportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMetadataImportRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.CreateMetadataImportRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1331,9 +1369,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.CreateMetadataImportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMetadataImportRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.CreateMetadataImportRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1362,9 +1401,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.CreateMetadataImportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMetadataImportRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.CreateMetadataImportRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1441,10 +1481,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         new protos.google.cloud.metastore.v1alpha.UpdateMetadataImportRequest()
       );
       request.metadataImport ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateMetadataImportRequest', [
-        'metadataImport',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.UpdateMetadataImportRequest',
+        ['metadataImport', 'name']
+      );
       request.metadataImport.name = defaultValue1;
       const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1476,10 +1516,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         new protos.google.cloud.metastore.v1alpha.UpdateMetadataImportRequest()
       );
       request.metadataImport ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateMetadataImportRequest', [
-        'metadataImport',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.UpdateMetadataImportRequest',
+        ['metadataImport', 'name']
+      );
       request.metadataImport.name = defaultValue1;
       const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1532,10 +1572,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         new protos.google.cloud.metastore.v1alpha.UpdateMetadataImportRequest()
       );
       request.metadataImport ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateMetadataImportRequest', [
-        'metadataImport',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.UpdateMetadataImportRequest',
+        ['metadataImport', 'name']
+      );
       request.metadataImport.name = defaultValue1;
       const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1565,10 +1605,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         new protos.google.cloud.metastore.v1alpha.UpdateMetadataImportRequest()
       );
       request.metadataImport ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateMetadataImportRequest', [
-        'metadataImport',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.UpdateMetadataImportRequest',
+        ['metadataImport', 'name']
+      );
       request.metadataImport.name = defaultValue1;
       const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1644,9 +1684,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ExportMetadataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportMetadataRequest', [
-        'service',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ExportMetadataRequest',
+        ['service']
+      );
       request.service = defaultValue1;
       const expectedHeaderRequestParams = `service=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1677,9 +1718,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ExportMetadataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportMetadataRequest', [
-        'service',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ExportMetadataRequest',
+        ['service']
+      );
       request.service = defaultValue1;
       const expectedHeaderRequestParams = `service=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1731,9 +1773,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ExportMetadataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportMetadataRequest', [
-        'service',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ExportMetadataRequest',
+        ['service']
+      );
       request.service = defaultValue1;
       const expectedHeaderRequestParams = `service=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1762,9 +1805,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ExportMetadataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportMetadataRequest', [
-        'service',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ExportMetadataRequest',
+        ['service']
+      );
       request.service = defaultValue1;
       const expectedHeaderRequestParams = `service=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1840,9 +1884,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.RestoreServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestoreServiceRequest', [
-        'service',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.RestoreServiceRequest',
+        ['service']
+      );
       request.service = defaultValue1;
       const expectedHeaderRequestParams = `service=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1873,9 +1918,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.RestoreServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestoreServiceRequest', [
-        'service',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.RestoreServiceRequest',
+        ['service']
+      );
       request.service = defaultValue1;
       const expectedHeaderRequestParams = `service=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1927,9 +1973,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.RestoreServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestoreServiceRequest', [
-        'service',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.RestoreServiceRequest',
+        ['service']
+      );
       request.service = defaultValue1;
       const expectedHeaderRequestParams = `service=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1958,9 +2005,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.RestoreServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestoreServiceRequest', [
-        'service',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.RestoreServiceRequest',
+        ['service']
+      );
       request.service = defaultValue1;
       const expectedHeaderRequestParams = `service=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2036,9 +2084,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.CreateBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.CreateBackupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2068,9 +2117,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.CreateBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.CreateBackupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2122,9 +2172,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.CreateBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.CreateBackupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2153,9 +2204,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.CreateBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.CreateBackupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2228,9 +2280,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.DeleteBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.DeleteBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2260,9 +2313,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.DeleteBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.DeleteBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2314,9 +2368,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.DeleteBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.DeleteBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2345,9 +2400,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.DeleteBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.DeleteBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2420,9 +2476,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2459,9 +2516,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2514,9 +2572,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2545,9 +2604,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2605,9 +2665,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2656,9 +2717,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2705,9 +2767,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2747,9 +2810,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListMetadataImportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMetadataImportsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListMetadataImportsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2787,9 +2851,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListMetadataImportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMetadataImportsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListMetadataImportsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2844,9 +2909,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListMetadataImportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMetadataImportsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListMetadataImportsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2875,9 +2941,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListMetadataImportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMetadataImportsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListMetadataImportsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2936,9 +3003,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListMetadataImportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMetadataImportsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListMetadataImportsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2986,9 +3054,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListMetadataImportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMetadataImportsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListMetadataImportsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3036,9 +3105,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListMetadataImportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMetadataImportsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListMetadataImportsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3079,9 +3149,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3118,9 +3189,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3173,9 +3245,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3204,9 +3277,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3264,9 +3338,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3315,9 +3390,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3364,9 +3440,10 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.metastore.v1alpha.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
