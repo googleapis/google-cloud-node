@@ -235,7 +235,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.GetPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -263,7 +266,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.GetPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -307,7 +313,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.GetPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -332,7 +341,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.GetPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -350,9 +362,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEffectivePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -381,9 +394,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEffectivePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -427,9 +441,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEffectivePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -457,9 +472,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEffectivePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -477,9 +493,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePolicyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.CreatePolicyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -507,9 +524,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePolicyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.CreatePolicyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -553,9 +571,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePolicyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.CreatePolicyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -583,9 +602,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePolicyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.CreatePolicyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -604,10 +624,10 @@ describe('v2.OrgPolicyClient', () => {
         new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.UpdatePolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -636,10 +656,10 @@ describe('v2.OrgPolicyClient', () => {
         new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.UpdatePolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -684,10 +704,10 @@ describe('v2.OrgPolicyClient', () => {
         new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.UpdatePolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -716,10 +736,10 @@ describe('v2.OrgPolicyClient', () => {
         new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.UpdatePolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -737,9 +757,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.DeletePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -767,9 +788,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.DeletePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -813,9 +835,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.DeletePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -843,9 +866,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.DeletePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -863,9 +887,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListConstraintsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -901,9 +926,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListConstraintsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -955,9 +981,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListConstraintsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -985,9 +1012,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListConstraintsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1044,9 +1072,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListConstraintsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1092,9 +1121,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListConstraintsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1140,9 +1170,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListConstraintsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1181,9 +1212,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1213,9 +1245,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1261,9 +1294,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1291,9 +1325,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1344,9 +1379,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1394,9 +1430,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1436,9 +1473,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orgpolicy.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
