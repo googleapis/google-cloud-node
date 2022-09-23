@@ -278,9 +278,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateConversationRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateConversationRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -310,9 +311,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateConversationRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateConversationRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -357,9 +359,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateConversationRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateConversationRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -388,9 +391,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateConversationRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateConversationRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -410,10 +414,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
       request.conversation ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateConversationRequest', [
-        'conversation',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateConversationRequest',
+        ['conversation', 'name']
+      );
       request.conversation.name = defaultValue1;
       const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -444,10 +448,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
       request.conversation ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateConversationRequest', [
-        'conversation',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateConversationRequest',
+        ['conversation', 'name']
+      );
       request.conversation.name = defaultValue1;
       const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -493,10 +497,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
       request.conversation ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateConversationRequest', [
-        'conversation',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateConversationRequest',
+        ['conversation', 'name']
+      );
       request.conversation.name = defaultValue1;
       const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -526,10 +530,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
       request.conversation ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateConversationRequest', [
-        'conversation',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateConversationRequest',
+        ['conversation', 'name']
+      );
       request.conversation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -548,9 +552,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConversationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetConversationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -579,9 +584,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConversationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetConversationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -626,9 +632,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConversationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetConversationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -657,9 +664,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConversationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetConversationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -678,9 +686,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteConversationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteConversationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -710,9 +719,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteConversationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteConversationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -757,9 +767,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteConversationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteConversationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -788,9 +799,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteConversationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteConversationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -809,7 +821,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnalysisRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetAnalysisRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -838,7 +853,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnalysisRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetAnalysisRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -883,7 +901,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnalysisRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetAnalysisRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -912,7 +933,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnalysisRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetAnalysisRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -931,9 +955,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAnalysisRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -962,9 +987,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAnalysisRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1009,9 +1035,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAnalysisRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1040,9 +1067,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAnalysisRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1062,10 +1090,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
       request.issueModel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIssueModelRequest', [
-        'issueModel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest',
+        ['issueModel', 'name']
+      );
       request.issueModel.name = defaultValue1;
       const expectedHeaderRequestParams = `issue_model.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1095,10 +1123,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
       request.issueModel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIssueModelRequest', [
-        'issueModel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest',
+        ['issueModel', 'name']
+      );
       request.issueModel.name = defaultValue1;
       const expectedHeaderRequestParams = `issue_model.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1144,10 +1172,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
       request.issueModel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIssueModelRequest', [
-        'issueModel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest',
+        ['issueModel', 'name']
+      );
       request.issueModel.name = defaultValue1;
       const expectedHeaderRequestParams = `issue_model.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1177,10 +1205,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
       request.issueModel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIssueModelRequest', [
-        'issueModel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest',
+        ['issueModel', 'name']
+      );
       request.issueModel.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1199,9 +1227,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1230,9 +1259,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1277,9 +1307,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1308,9 +1339,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1329,9 +1361,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIssueModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1360,9 +1393,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIssueModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1407,9 +1441,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIssueModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1438,9 +1473,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIssueModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1459,7 +1495,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIssueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetIssueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1488,7 +1527,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIssueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetIssueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1533,7 +1575,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIssueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetIssueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1559,7 +1604,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIssueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetIssueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1578,9 +1626,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIssuesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListIssuesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1609,9 +1658,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIssuesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListIssuesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1656,9 +1706,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIssuesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListIssuesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1687,9 +1738,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIssuesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListIssuesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1709,10 +1761,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
       request.issue ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIssueRequest', [
-        'issue',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateIssueRequest',
+        ['issue', 'name']
+      );
       request.issue.name = defaultValue1;
       const expectedHeaderRequestParams = `issue.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1742,10 +1794,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
       request.issue ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIssueRequest', [
-        'issue',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateIssueRequest',
+        ['issue', 'name']
+      );
       request.issue.name = defaultValue1;
       const expectedHeaderRequestParams = `issue.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1791,10 +1843,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
       request.issue ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIssueRequest', [
-        'issue',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateIssueRequest',
+        ['issue', 'name']
+      );
       request.issue.name = defaultValue1;
       const expectedHeaderRequestParams = `issue.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1824,10 +1876,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
       request.issue ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIssueRequest', [
-        'issue',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateIssueRequest',
+        ['issue', 'name']
+      );
       request.issue.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1847,7 +1899,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CalculateIssueModelStatsRequest',
+        '.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest',
         ['issueModel']
       );
       request.issueModel = defaultValue1;
@@ -1880,7 +1932,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CalculateIssueModelStatsRequest',
+        '.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest',
         ['issueModel']
       );
       request.issueModel = defaultValue1;
@@ -1928,7 +1980,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CalculateIssueModelStatsRequest',
+        '.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest',
         ['issueModel']
       );
       request.issueModel = defaultValue1;
@@ -1963,7 +2015,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CalculateIssueModelStatsRequest',
+        '.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest',
         ['issueModel']
       );
       request.issueModel = defaultValue1;
@@ -1987,9 +2039,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePhraseMatcherRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2019,9 +2072,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePhraseMatcherRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2066,9 +2120,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePhraseMatcherRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2097,9 +2152,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePhraseMatcherRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2118,9 +2174,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPhraseMatcherRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2149,9 +2206,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPhraseMatcherRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2196,9 +2254,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPhraseMatcherRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2227,9 +2286,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPhraseMatcherRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2248,9 +2308,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePhraseMatcherRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2280,9 +2341,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePhraseMatcherRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2327,9 +2389,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePhraseMatcherRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2358,9 +2421,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePhraseMatcherRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2380,10 +2444,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
       request.phraseMatcher ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePhraseMatcherRequest', [
-        'phraseMatcher',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest',
+        ['phraseMatcher', 'name']
+      );
       request.phraseMatcher.name = defaultValue1;
       const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2414,10 +2478,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
       request.phraseMatcher ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePhraseMatcherRequest', [
-        'phraseMatcher',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest',
+        ['phraseMatcher', 'name']
+      );
       request.phraseMatcher.name = defaultValue1;
       const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2463,10 +2527,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
       request.phraseMatcher ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePhraseMatcherRequest', [
-        'phraseMatcher',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest',
+        ['phraseMatcher', 'name']
+      );
       request.phraseMatcher.name = defaultValue1;
       const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2496,10 +2560,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
       request.phraseMatcher ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePhraseMatcherRequest', [
-        'phraseMatcher',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest',
+        ['phraseMatcher', 'name']
+      );
       request.phraseMatcher.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2518,9 +2582,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CalculateStatsRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CalculateStatsRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2549,9 +2614,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CalculateStatsRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CalculateStatsRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2596,9 +2662,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CalculateStatsRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CalculateStatsRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2627,9 +2694,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CalculateStatsRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CalculateStatsRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2648,7 +2716,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSettingsRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetSettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2677,7 +2748,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSettingsRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetSettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2722,7 +2796,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSettingsRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetSettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2751,7 +2828,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSettingsRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetSettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2771,10 +2851,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
       request.settings ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSettingsRequest', [
-        'settings',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest',
+        ['settings', 'name']
+      );
       request.settings.name = defaultValue1;
       const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2804,10 +2884,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
       request.settings ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSettingsRequest', [
-        'settings',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest',
+        ['settings', 'name']
+      );
       request.settings.name = defaultValue1;
       const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2853,10 +2933,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
       request.settings ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSettingsRequest', [
-        'settings',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest',
+        ['settings', 'name']
+      );
       request.settings.name = defaultValue1;
       const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2886,10 +2966,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
       request.settings ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSettingsRequest', [
-        'settings',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest',
+        ['settings', 'name']
+      );
       request.settings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2908,9 +2988,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateViewRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateViewRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2939,9 +3020,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateViewRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateViewRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2986,9 +3068,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateViewRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateViewRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3017,9 +3100,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateViewRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateViewRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3038,7 +3122,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetViewRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetViewRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3067,7 +3154,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetViewRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetViewRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3112,7 +3202,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetViewRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetViewRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3138,7 +3231,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetViewRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetViewRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3158,10 +3254,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
       request.view ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateViewRequest', [
-        'view',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateViewRequest',
+        ['view', 'name']
+      );
       request.view.name = defaultValue1;
       const expectedHeaderRequestParams = `view.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3191,10 +3287,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
       request.view ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateViewRequest', [
-        'view',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateViewRequest',
+        ['view', 'name']
+      );
       request.view.name = defaultValue1;
       const expectedHeaderRequestParams = `view.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3240,10 +3336,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
       request.view ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateViewRequest', [
-        'view',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateViewRequest',
+        ['view', 'name']
+      );
       request.view.name = defaultValue1;
       const expectedHeaderRequestParams = `view.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3273,10 +3369,10 @@ describe('v1.ContactCenterInsightsClient', () => {
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
       request.view ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateViewRequest', [
-        'view',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateViewRequest',
+        ['view', 'name']
+      );
       request.view.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3295,7 +3391,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteViewRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteViewRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3324,7 +3423,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteViewRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteViewRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3369,7 +3471,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteViewRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteViewRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3398,7 +3503,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteViewRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteViewRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3417,9 +3525,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAnalysisRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3450,9 +3559,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAnalysisRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3504,9 +3614,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAnalysisRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3535,9 +3646,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAnalysisRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3613,9 +3725,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportInsightsDataRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3646,9 +3759,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportInsightsDataRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3700,9 +3814,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportInsightsDataRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3731,9 +3846,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportInsightsDataRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3809,9 +3925,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIssueModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3842,9 +3959,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIssueModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3896,9 +4014,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIssueModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3927,9 +4046,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIssueModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4005,9 +4125,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4038,9 +4159,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4092,9 +4214,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4123,9 +4246,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4201,9 +4325,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4234,9 +4359,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4288,9 +4414,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4319,9 +4446,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4397,9 +4525,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeployIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4430,9 +4559,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeployIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4484,9 +4614,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeployIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4515,9 +4646,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeployIssueModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4593,9 +4725,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListConversationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4632,9 +4765,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListConversationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4689,9 +4823,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListConversationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4720,9 +4855,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListConversationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4783,9 +4919,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListConversationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4835,9 +4972,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListConversationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4885,9 +5023,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListConversationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4928,9 +5067,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4967,9 +5107,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5024,9 +5165,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5055,9 +5197,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5116,9 +5259,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5168,9 +5312,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5218,9 +5363,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnalysesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5261,9 +5407,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5301,9 +5448,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5358,9 +5506,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5389,9 +5538,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5452,9 +5602,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5504,9 +5655,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5554,9 +5706,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseMatchersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5597,7 +5750,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListViewsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5634,7 +5790,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListViewsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5687,7 +5846,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListViewsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5713,7 +5875,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListViewsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5772,7 +5937,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListViewsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5822,7 +5990,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListViewsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5869,7 +6040,10 @@ describe('v1.ContactCenterInsightsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListViewsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListViewsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
