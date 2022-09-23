@@ -267,7 +267,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.GetHubRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetHubRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.GetHubRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.GetHubRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetHubRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.GetHubRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.GetHubRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetHubRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.GetHubRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -364,7 +373,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.GetHubRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetHubRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.GetHubRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -382,7 +394,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.GetSpokeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSpokeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.GetSpokeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -410,7 +425,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.GetSpokeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSpokeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.GetSpokeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -454,7 +472,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.GetSpokeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSpokeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.GetSpokeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -479,7 +500,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.GetSpokeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSpokeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.GetSpokeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -497,7 +521,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.CreateHubRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateHubRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.CreateHubRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -526,7 +553,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.CreateHubRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateHubRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.CreateHubRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -577,7 +607,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.CreateHubRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateHubRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.CreateHubRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -605,7 +638,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.CreateHubRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateHubRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.CreateHubRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -676,10 +712,10 @@ describe('v1.HubServiceClient', () => {
         new protos.google.cloud.networkconnectivity.v1.UpdateHubRequest()
       );
       request.hub ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateHubRequest', [
-        'hub',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.UpdateHubRequest',
+        ['hub', 'name']
+      );
       request.hub.name = defaultValue1;
       const expectedHeaderRequestParams = `hub.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -709,10 +745,10 @@ describe('v1.HubServiceClient', () => {
         new protos.google.cloud.networkconnectivity.v1.UpdateHubRequest()
       );
       request.hub ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateHubRequest', [
-        'hub',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.UpdateHubRequest',
+        ['hub', 'name']
+      );
       request.hub.name = defaultValue1;
       const expectedHeaderRequestParams = `hub.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -764,10 +800,10 @@ describe('v1.HubServiceClient', () => {
         new protos.google.cloud.networkconnectivity.v1.UpdateHubRequest()
       );
       request.hub ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateHubRequest', [
-        'hub',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.UpdateHubRequest',
+        ['hub', 'name']
+      );
       request.hub.name = defaultValue1;
       const expectedHeaderRequestParams = `hub.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -796,10 +832,10 @@ describe('v1.HubServiceClient', () => {
         new protos.google.cloud.networkconnectivity.v1.UpdateHubRequest()
       );
       request.hub ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateHubRequest', [
-        'hub',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.UpdateHubRequest',
+        ['hub', 'name']
+      );
       request.hub.name = defaultValue1;
       const expectedHeaderRequestParams = `hub.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -869,7 +905,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.DeleteHubRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteHubRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.DeleteHubRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -898,7 +937,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.DeleteHubRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteHubRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.DeleteHubRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -949,7 +991,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.DeleteHubRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteHubRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.DeleteHubRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -977,7 +1022,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.DeleteHubRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteHubRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.DeleteHubRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1047,9 +1095,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.CreateSpokeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSpokeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.CreateSpokeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1078,9 +1127,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.CreateSpokeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSpokeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.CreateSpokeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1131,9 +1181,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.CreateSpokeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSpokeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.CreateSpokeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1161,9 +1212,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.CreateSpokeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSpokeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.CreateSpokeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1234,10 +1286,10 @@ describe('v1.HubServiceClient', () => {
         new protos.google.cloud.networkconnectivity.v1.UpdateSpokeRequest()
       );
       request.spoke ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSpokeRequest', [
-        'spoke',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.UpdateSpokeRequest',
+        ['spoke', 'name']
+      );
       request.spoke.name = defaultValue1;
       const expectedHeaderRequestParams = `spoke.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1267,10 +1319,10 @@ describe('v1.HubServiceClient', () => {
         new protos.google.cloud.networkconnectivity.v1.UpdateSpokeRequest()
       );
       request.spoke ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSpokeRequest', [
-        'spoke',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.UpdateSpokeRequest',
+        ['spoke', 'name']
+      );
       request.spoke.name = defaultValue1;
       const expectedHeaderRequestParams = `spoke.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1322,10 +1374,10 @@ describe('v1.HubServiceClient', () => {
         new protos.google.cloud.networkconnectivity.v1.UpdateSpokeRequest()
       );
       request.spoke ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSpokeRequest', [
-        'spoke',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.UpdateSpokeRequest',
+        ['spoke', 'name']
+      );
       request.spoke.name = defaultValue1;
       const expectedHeaderRequestParams = `spoke.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1354,10 +1406,10 @@ describe('v1.HubServiceClient', () => {
         new protos.google.cloud.networkconnectivity.v1.UpdateSpokeRequest()
       );
       request.spoke ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSpokeRequest', [
-        'spoke',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.UpdateSpokeRequest',
+        ['spoke', 'name']
+      );
       request.spoke.name = defaultValue1;
       const expectedHeaderRequestParams = `spoke.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1427,7 +1479,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.DeleteSpokeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSpokeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.DeleteSpokeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1456,7 +1511,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.DeleteSpokeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSpokeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.DeleteSpokeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1507,7 +1565,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.DeleteSpokeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSpokeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.DeleteSpokeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1535,7 +1596,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.DeleteSpokeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSpokeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.DeleteSpokeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1605,7 +1669,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListHubsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHubsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListHubsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1641,7 +1708,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListHubsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHubsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListHubsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1693,7 +1763,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListHubsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHubsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListHubsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1718,7 +1791,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListHubsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHubsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListHubsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1775,7 +1851,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListHubsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHubsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListHubsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1823,7 +1902,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListHubsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHubsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListHubsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1868,7 +1950,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListHubsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHubsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListHubsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1908,9 +1993,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListSpokesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpokesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListSpokesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1946,9 +2032,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListSpokesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpokesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListSpokesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2000,9 +2087,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListSpokesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpokesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListSpokesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2030,9 +2118,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListSpokesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpokesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListSpokesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2090,9 +2179,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListSpokesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpokesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListSpokesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2141,9 +2231,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListSpokesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpokesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListSpokesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2189,9 +2280,10 @@ describe('v1.HubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1.ListSpokesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpokesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1.ListSpokesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
