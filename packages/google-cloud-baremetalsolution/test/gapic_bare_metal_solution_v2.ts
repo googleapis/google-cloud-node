@@ -275,7 +275,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -303,7 +306,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -347,7 +353,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -375,7 +384,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -393,7 +405,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVolumeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetVolumeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -421,7 +436,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVolumeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetVolumeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -465,7 +483,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVolumeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetVolumeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -490,7 +511,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVolumeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetVolumeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -508,9 +532,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworkUsageRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -538,9 +563,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworkUsageRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -584,9 +610,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworkUsageRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -614,9 +641,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworkUsageRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -634,7 +662,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNetworkRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetNetworkRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -662,7 +693,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNetworkRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetNetworkRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -706,7 +740,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNetworkRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetNetworkRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -734,7 +771,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNetworkRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetNetworkRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -752,7 +792,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLunRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetLunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -780,7 +823,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLunRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetLunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -824,7 +870,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLunRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetLunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -849,7 +898,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLunRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetLunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -867,7 +919,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNfsShareRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetNfsShareRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -895,7 +950,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNfsShareRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetNfsShareRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -939,7 +997,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNfsShareRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetNfsShareRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -967,7 +1028,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNfsShareRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.GetNfsShareRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -986,10 +1050,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
       );
       request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'instance',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateInstanceRequest',
+        ['instance', 'name']
+      );
       request.instance.name = defaultValue1;
       const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1020,10 +1084,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
       );
       request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'instance',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateInstanceRequest',
+        ['instance', 'name']
+      );
       request.instance.name = defaultValue1;
       const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1075,10 +1139,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
       );
       request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'instance',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateInstanceRequest',
+        ['instance', 'name']
+      );
       request.instance.name = defaultValue1;
       const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1107,10 +1171,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
       );
       request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'instance',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateInstanceRequest',
+        ['instance', 'name']
+      );
       request.instance.name = defaultValue1;
       const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1183,9 +1247,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ResetInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1215,9 +1280,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ResetInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1268,9 +1334,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ResetInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1298,9 +1365,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ResetInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1373,9 +1441,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.StartInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1405,9 +1474,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.StartInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1458,9 +1528,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.StartInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1488,9 +1559,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.StartInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1563,9 +1635,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.StopInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1594,9 +1667,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.StopInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1647,9 +1721,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.StopInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1677,9 +1752,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.StopInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1749,9 +1825,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetachLunRequest', [
-        'instance',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.DetachLunRequest',
+        ['instance']
+      );
       request.instance = defaultValue1;
       const expectedHeaderRequestParams = `instance=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1780,9 +1857,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetachLunRequest', [
-        'instance',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.DetachLunRequest',
+        ['instance']
+      );
       request.instance = defaultValue1;
       const expectedHeaderRequestParams = `instance=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1833,9 +1911,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetachLunRequest', [
-        'instance',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.DetachLunRequest',
+        ['instance']
+      );
       request.instance = defaultValue1;
       const expectedHeaderRequestParams = `instance=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1863,9 +1942,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetachLunRequest', [
-        'instance',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.DetachLunRequest',
+        ['instance']
+      );
       request.instance = defaultValue1;
       const expectedHeaderRequestParams = `instance=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1936,10 +2016,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
       );
       request.volume ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateVolumeRequest', [
-        'volume',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateVolumeRequest',
+        ['volume', 'name']
+      );
       request.volume.name = defaultValue1;
       const expectedHeaderRequestParams = `volume.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1969,10 +2049,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
       );
       request.volume ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateVolumeRequest', [
-        'volume',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateVolumeRequest',
+        ['volume', 'name']
+      );
       request.volume.name = defaultValue1;
       const expectedHeaderRequestParams = `volume.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2024,10 +2104,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
       );
       request.volume ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateVolumeRequest', [
-        'volume',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateVolumeRequest',
+        ['volume', 'name']
+      );
       request.volume.name = defaultValue1;
       const expectedHeaderRequestParams = `volume.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2056,10 +2136,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
       );
       request.volume ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateVolumeRequest', [
-        'volume',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateVolumeRequest',
+        ['volume', 'name']
+      );
       request.volume.name = defaultValue1;
       const expectedHeaderRequestParams = `volume.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2129,9 +2209,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResizeVolumeRequest', [
-        'volume',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ResizeVolumeRequest',
+        ['volume']
+      );
       request.volume = defaultValue1;
       const expectedHeaderRequestParams = `volume=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2160,9 +2241,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResizeVolumeRequest', [
-        'volume',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ResizeVolumeRequest',
+        ['volume']
+      );
       request.volume = defaultValue1;
       const expectedHeaderRequestParams = `volume=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2213,9 +2295,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResizeVolumeRequest', [
-        'volume',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ResizeVolumeRequest',
+        ['volume']
+      );
       request.volume = defaultValue1;
       const expectedHeaderRequestParams = `volume=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2243,9 +2326,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResizeVolumeRequest', [
-        'volume',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ResizeVolumeRequest',
+        ['volume']
+      );
       request.volume = defaultValue1;
       const expectedHeaderRequestParams = `volume=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2316,10 +2400,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
       );
       request.network ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNetworkRequest', [
-        'network',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateNetworkRequest',
+        ['network', 'name']
+      );
       request.network.name = defaultValue1;
       const expectedHeaderRequestParams = `network.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2350,10 +2434,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
       );
       request.network ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNetworkRequest', [
-        'network',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateNetworkRequest',
+        ['network', 'name']
+      );
       request.network.name = defaultValue1;
       const expectedHeaderRequestParams = `network.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2405,10 +2489,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
       );
       request.network ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNetworkRequest', [
-        'network',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateNetworkRequest',
+        ['network', 'name']
+      );
       request.network.name = defaultValue1;
       const expectedHeaderRequestParams = `network.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2437,10 +2521,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
       );
       request.network ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNetworkRequest', [
-        'network',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateNetworkRequest',
+        ['network', 'name']
+      );
       request.network.name = defaultValue1;
       const expectedHeaderRequestParams = `network.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2514,10 +2598,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
       );
       request.nfsShare ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNfsShareRequest', [
-        'nfsShare',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest',
+        ['nfsShare', 'name']
+      );
       request.nfsShare.name = defaultValue1;
       const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2548,10 +2632,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
       );
       request.nfsShare ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNfsShareRequest', [
-        'nfsShare',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest',
+        ['nfsShare', 'name']
+      );
       request.nfsShare.name = defaultValue1;
       const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2603,10 +2687,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
       );
       request.nfsShare ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNfsShareRequest', [
-        'nfsShare',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest',
+        ['nfsShare', 'name']
+      );
       request.nfsShare.name = defaultValue1;
       const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2635,10 +2719,10 @@ describe('v2.BareMetalSolutionClient', () => {
         new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
       );
       request.nfsShare ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNfsShareRequest', [
-        'nfsShare',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest',
+        ['nfsShare', 'name']
+      );
       request.nfsShare.name = defaultValue1;
       const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2711,9 +2795,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2749,9 +2834,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2803,9 +2889,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2833,9 +2920,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2893,9 +2981,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2942,9 +3031,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2991,9 +3081,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3033,9 +3124,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3071,9 +3163,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3125,9 +3218,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3155,9 +3249,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3214,9 +3309,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3264,9 +3360,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3312,9 +3409,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListVolumesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3356,9 +3454,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3394,9 +3493,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3448,9 +3548,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3478,9 +3579,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3538,9 +3640,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3589,9 +3692,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3637,9 +3741,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNetworksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3679,7 +3784,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLunsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3715,7 +3823,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLunsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3767,7 +3878,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLunsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3792,7 +3906,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLunsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3849,7 +3966,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLunsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3897,7 +4017,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLunsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3942,7 +4065,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLunsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListLunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3982,9 +4108,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNfsSharesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4020,9 +4147,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNfsSharesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4074,9 +4202,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNfsSharesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4104,9 +4233,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNfsSharesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4164,9 +4294,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNfsSharesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4213,9 +4344,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNfsSharesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4262,9 +4394,10 @@ describe('v2.BareMetalSolutionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNfsSharesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.baremetalsolution.v2.ListNfsSharesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
