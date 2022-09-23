@@ -1045,6 +1045,9 @@ describe('resumable-upload', () => {
     });
 
     describe('request preparation', () => {
+      // Simulating the amount of data written from upstream (exhaustive)
+      const UPSTREAM_BUFFER_SIZE = 512;
+      const UPSTREAM_ENDED = true;
       // a convenient handle for getting the request options
       let reqOpts: GaxiosOptions;
 
@@ -1074,8 +1077,8 @@ describe('resumable-upload', () => {
 
           reqOpts = requestOptions;
         };
-        up.upstreamChunkBuffer = Buffer.alloc(512);
-        up.upstreamEnded = true;
+        up.upstreamChunkBuffer = Buffer.alloc(UPSTREAM_BUFFER_SIZE);
+        up.upstreamEnded = UPSTREAM_ENDED;
       });
 
       describe('single chunk', () => {
@@ -1153,18 +1156,25 @@ describe('resumable-upload', () => {
 
         it('should prepare a valid request if `contentLength` is unknown', async () => {
           const OFFSET = 100;
+          const EXPECTED_STREAM_AMOUNT = Math.min(
+            UPSTREAM_BUFFER_SIZE - OFFSET,
+            CHUNK_SIZE
+          );
+          const ENDING_BYTE = EXPECTED_STREAM_AMOUNT + OFFSET - 1;
 
           up.offset = OFFSET;
           up.contentLength = '*';
 
           await up.startUploading();
 
-          const endByte = OFFSET + CHUNK_SIZE - 1;
           assert(reqOpts.headers);
-          assert.equal(reqOpts.headers['Content-Length'], CHUNK_SIZE);
+          assert.equal(
+            reqOpts.headers['Content-Length'],
+            EXPECTED_STREAM_AMOUNT
+          );
           assert.equal(
             reqOpts.headers['Content-Range'],
-            `bytes ${OFFSET}-${endByte}/*`
+            `bytes ${OFFSET}-${ENDING_BYTE}/*`
           );
           assert.ok(
             X_GOOG_API_HEADER_REGEX.test(reqOpts.headers['x-goog-api-client'])

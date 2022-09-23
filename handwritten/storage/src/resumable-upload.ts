@@ -665,7 +665,7 @@ export class Upload extends Writable {
 
     let expectedUploadSize: number | undefined = undefined;
 
-    // Set `expectedUploadSize` to `contentLength` if available
+    // Set `expectedUploadSize` to `contentLength - this.numBytesWritten`, if available
     if (typeof this.contentLength === 'number') {
       expectedUploadSize = this.contentLength - this.numBytesWritten;
     }
@@ -718,13 +718,37 @@ export class Upload extends Writable {
     };
 
     // If using multiple chunk upload, set appropriate header
-    if (multiChunkMode && expectedUploadSize) {
-      // The '-1' is because the ending byte is inclusive in the request.
-      const endingByte = expectedUploadSize + this.numBytesWritten - 1;
-      headers['Content-Length'] = expectedUploadSize;
+    if (multiChunkMode) {
+      // We need to know how much data is available upstream to set the `Content-Range` header.
+      const oneChunkIterator = this.upstreamIterator(expectedUploadSize, true);
+      const {value} = await oneChunkIterator.next();
+
+      const bytesToUpload = value!.chunk.byteLength;
+
+      // Important: we want to know if the upstream has ended and the queue is empty before
+      // unshifting data back into the queue. This way we will know if this is the last request or not.
+      const isLastChunkOfUpload = !(await this.waitForNextChunk());
+
+      // Important: put the data back in the queue for the actual upload iterator
+      this.unshiftChunkBuffer(value!.chunk);
+
+      let totalObjectSize = this.contentLength;
+
+      if (typeof this.contentLength !== 'number' && isLastChunkOfUpload) {
+        // Let's let the server know this is the last chunk since
+        // we didn't know the content-length beforehand.
+        totalObjectSize = bytesToUpload + this.numBytesWritten;
+      }
+
+      // `- 1` as the ending byte is inclusive in the request.
+      const endingByte = bytesToUpload + this.numBytesWritten - 1;
+
+      // `Content-Length` for multiple chunk uploads is the size of the chunk,
+      // not the overall object
+      headers['Content-Length'] = bytesToUpload;
       headers[
         'Content-Range'
-      ] = `bytes ${this.offset}-${endingByte}/${this.contentLength}`;
+      ] = `bytes ${this.offset}-${endingByte}/${totalObjectSize}`;
     } else {
       headers['Content-Range'] = `bytes ${this.offset}-*/${this.contentLength}`;
     }
@@ -798,11 +822,13 @@ export class Upload extends Writable {
       // continue uploading next chunk
       this.continueUploading();
     } else if (!this.isSuccessfulResponse(resp.status)) {
-      const err: ApiError = {
-        code: resp.status,
-        name: 'Upload failed',
-        message: 'Upload failed',
-      };
+      const err: ApiError = new Error('Upload failed');
+      err.code = resp.status;
+      err.name = 'Upload failed';
+      if (resp?.data) {
+        err.errors = [resp?.data];
+      }
+
       this.destroy(err);
     } else {
       // remove the last chunk sent to free memory
