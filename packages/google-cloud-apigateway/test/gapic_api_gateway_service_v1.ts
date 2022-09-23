@@ -269,7 +269,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGatewayRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.GetGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -297,7 +300,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGatewayRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.GetGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -341,7 +347,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGatewayRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.GetGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -369,7 +378,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGatewayRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.GetGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -387,7 +399,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApiRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.GetApiRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -415,7 +430,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApiRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.GetApiRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -459,7 +477,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApiRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.GetApiRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -484,7 +505,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApiRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.GetApiRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -502,9 +526,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApiConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.GetApiConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -532,9 +557,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApiConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.GetApiConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -578,9 +604,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApiConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.GetApiConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -608,9 +635,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.GetApiConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApiConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.GetApiConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -628,9 +656,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateGatewayRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.CreateGatewayRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -660,9 +689,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateGatewayRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.CreateGatewayRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -713,9 +743,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateGatewayRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.CreateGatewayRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -743,9 +774,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateGatewayRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.CreateGatewayRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -819,10 +851,10 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.UpdateGatewayRequest()
       );
       request.gateway ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateGatewayRequest', [
-        'gateway',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.UpdateGatewayRequest',
+        ['gateway', 'name']
+      );
       request.gateway.name = defaultValue1;
       const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -853,10 +885,10 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.UpdateGatewayRequest()
       );
       request.gateway ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateGatewayRequest', [
-        'gateway',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.UpdateGatewayRequest',
+        ['gateway', 'name']
+      );
       request.gateway.name = defaultValue1;
       const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -908,10 +940,10 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.UpdateGatewayRequest()
       );
       request.gateway ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateGatewayRequest', [
-        'gateway',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.UpdateGatewayRequest',
+        ['gateway', 'name']
+      );
       request.gateway.name = defaultValue1;
       const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -940,10 +972,10 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.UpdateGatewayRequest()
       );
       request.gateway ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateGatewayRequest', [
-        'gateway',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.UpdateGatewayRequest',
+        ['gateway', 'name']
+      );
       request.gateway.name = defaultValue1;
       const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1016,9 +1048,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteGatewayRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.DeleteGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1048,9 +1081,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteGatewayRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.DeleteGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1101,9 +1135,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteGatewayRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.DeleteGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1131,9 +1166,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteGatewayRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.DeleteGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1206,7 +1242,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateApiRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.CreateApiRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1235,7 +1274,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateApiRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.CreateApiRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1286,7 +1328,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateApiRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.CreateApiRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1314,7 +1359,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateApiRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.CreateApiRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1385,10 +1433,10 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.UpdateApiRequest()
       );
       request.api ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateApiRequest', [
-        'api',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.UpdateApiRequest',
+        ['api', 'name']
+      );
       request.api.name = defaultValue1;
       const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1418,10 +1466,10 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.UpdateApiRequest()
       );
       request.api ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateApiRequest', [
-        'api',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.UpdateApiRequest',
+        ['api', 'name']
+      );
       request.api.name = defaultValue1;
       const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1473,10 +1521,10 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.UpdateApiRequest()
       );
       request.api ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateApiRequest', [
-        'api',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.UpdateApiRequest',
+        ['api', 'name']
+      );
       request.api.name = defaultValue1;
       const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1505,10 +1553,10 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.UpdateApiRequest()
       );
       request.api ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateApiRequest', [
-        'api',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.UpdateApiRequest',
+        ['api', 'name']
+      );
       request.api.name = defaultValue1;
       const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1578,7 +1626,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteApiRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.DeleteApiRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1607,7 +1658,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteApiRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.DeleteApiRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1658,7 +1712,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteApiRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.DeleteApiRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1686,7 +1743,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteApiRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.DeleteApiRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1756,9 +1816,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateApiConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.CreateApiConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1788,9 +1849,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateApiConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.CreateApiConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1841,9 +1903,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateApiConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.CreateApiConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1871,9 +1934,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.CreateApiConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateApiConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.CreateApiConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1947,10 +2011,10 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.UpdateApiConfigRequest()
       );
       request.apiConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateApiConfigRequest', [
-        'apiConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.UpdateApiConfigRequest',
+        ['apiConfig', 'name']
+      );
       request.apiConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1981,10 +2045,10 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.UpdateApiConfigRequest()
       );
       request.apiConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateApiConfigRequest', [
-        'apiConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.UpdateApiConfigRequest',
+        ['apiConfig', 'name']
+      );
       request.apiConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2036,10 +2100,10 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.UpdateApiConfigRequest()
       );
       request.apiConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateApiConfigRequest', [
-        'apiConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.UpdateApiConfigRequest',
+        ['apiConfig', 'name']
+      );
       request.apiConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2068,10 +2132,10 @@ describe('v1.ApiGatewayServiceClient', () => {
         new protos.google.cloud.apigateway.v1.UpdateApiConfigRequest()
       );
       request.apiConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateApiConfigRequest', [
-        'apiConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.UpdateApiConfigRequest',
+        ['apiConfig', 'name']
+      );
       request.apiConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2144,9 +2208,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteApiConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.DeleteApiConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2176,9 +2241,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteApiConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.DeleteApiConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2229,9 +2295,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteApiConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.DeleteApiConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2259,9 +2326,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.DeleteApiConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteApiConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.DeleteApiConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2334,9 +2402,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2366,9 +2435,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2414,9 +2484,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2444,9 +2515,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2497,9 +2569,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2547,9 +2620,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2589,9 +2663,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2630,7 +2705,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApisRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2660,7 +2738,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApisRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2706,7 +2787,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApisRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2731,7 +2815,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApisRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2779,7 +2866,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApisRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2824,7 +2914,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApisRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2863,7 +2956,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApisRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApisRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApisRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2903,9 +2999,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApiConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2941,9 +3038,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApiConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2995,9 +3093,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApiConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3025,9 +3124,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApiConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3084,9 +3184,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApiConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3132,9 +3233,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApiConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3180,9 +3282,10 @@ describe('v1.ApiGatewayServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ListApiConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApiConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.apigateway.v1.ListApiConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
