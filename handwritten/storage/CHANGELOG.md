@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.5.2](https://github.com/googleapis/nodejs-storage/compare/v6.5.1...v6.5.2) (2022-09-23)
+
+
+### Bug Fixes
+
+* Determine `Content-Length` Before Attempting Multi-chunk Upload ([#2074](https://github.com/googleapis/nodejs-storage/issues/2074)) ([666402a](https://github.com/googleapis/nodejs-storage/commit/666402a6a65c2ee8e91bc4fe072e91c0b893864e))
+
 ## [6.5.1](https://github.com/googleapis/nodejs-storage/compare/v6.5.0...v6.5.1) (2022-09-20)
 
 
