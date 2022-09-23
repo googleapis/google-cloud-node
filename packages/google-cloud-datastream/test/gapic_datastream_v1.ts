@@ -273,9 +273,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetConnectionProfileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectionProfileRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetConnectionProfileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -304,9 +305,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetConnectionProfileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectionProfileRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetConnectionProfileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -350,9 +352,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetConnectionProfileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectionProfileRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetConnectionProfileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -380,9 +383,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetConnectionProfileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectionProfileRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetConnectionProfileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -401,7 +405,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DiscoverConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DiscoverConnectionProfileRequest',
+        '.google.cloud.datastream.v1.DiscoverConnectionProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -433,7 +437,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DiscoverConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DiscoverConnectionProfileRequest',
+        '.google.cloud.datastream.v1.DiscoverConnectionProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -480,7 +484,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DiscoverConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DiscoverConnectionProfileRequest',
+        '.google.cloud.datastream.v1.DiscoverConnectionProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -514,7 +518,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DiscoverConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DiscoverConnectionProfileRequest',
+        '.google.cloud.datastream.v1.DiscoverConnectionProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -537,7 +541,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStreamRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -565,7 +572,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStreamRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -609,7 +619,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStreamRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -634,7 +647,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStreamRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -652,9 +668,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamObjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStreamObjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetStreamObjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -682,9 +699,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamObjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStreamObjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetStreamObjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -728,9 +746,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamObjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStreamObjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetStreamObjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -758,9 +777,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetStreamObjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStreamObjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetStreamObjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -778,9 +798,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.LookupStreamObjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupStreamObjectRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.LookupStreamObjectRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -809,9 +830,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.LookupStreamObjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupStreamObjectRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.LookupStreamObjectRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -855,9 +877,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.LookupStreamObjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupStreamObjectRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.LookupStreamObjectRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -885,9 +908,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.LookupStreamObjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupStreamObjectRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.LookupStreamObjectRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -905,9 +929,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StartBackfillJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartBackfillJobRequest', [
-        'object',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.StartBackfillJobRequest',
+        ['object']
+      );
       request.object = defaultValue1;
       const expectedHeaderRequestParams = `object=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -935,9 +960,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StartBackfillJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartBackfillJobRequest', [
-        'object',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.StartBackfillJobRequest',
+        ['object']
+      );
       request.object = defaultValue1;
       const expectedHeaderRequestParams = `object=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -981,9 +1007,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StartBackfillJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartBackfillJobRequest', [
-        'object',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.StartBackfillJobRequest',
+        ['object']
+      );
       request.object = defaultValue1;
       const expectedHeaderRequestParams = `object=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1011,9 +1038,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StartBackfillJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartBackfillJobRequest', [
-        'object',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.StartBackfillJobRequest',
+        ['object']
+      );
       request.object = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1031,9 +1059,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StopBackfillJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopBackfillJobRequest', [
-        'object',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.StopBackfillJobRequest',
+        ['object']
+      );
       request.object = defaultValue1;
       const expectedHeaderRequestParams = `object=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1061,9 +1090,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StopBackfillJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopBackfillJobRequest', [
-        'object',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.StopBackfillJobRequest',
+        ['object']
+      );
       request.object = defaultValue1;
       const expectedHeaderRequestParams = `object=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1107,9 +1137,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StopBackfillJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopBackfillJobRequest', [
-        'object',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.StopBackfillJobRequest',
+        ['object']
+      );
       request.object = defaultValue1;
       const expectedHeaderRequestParams = `object=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1137,9 +1168,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.StopBackfillJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopBackfillJobRequest', [
-        'object',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.StopBackfillJobRequest',
+        ['object']
+      );
       request.object = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1157,9 +1189,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetPrivateConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPrivateConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetPrivateConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1188,9 +1221,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetPrivateConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPrivateConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetPrivateConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1234,9 +1268,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetPrivateConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPrivateConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetPrivateConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1264,9 +1299,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetPrivateConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPrivateConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetPrivateConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1284,7 +1320,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRouteRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetRouteRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1312,7 +1351,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRouteRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetRouteRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1356,7 +1398,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRouteRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetRouteRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1381,7 +1426,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.GetRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRouteRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.GetRouteRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1400,7 +1448,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.CreateConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConnectionProfileRequest',
+        '.google.cloud.datastream.v1.CreateConnectionProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1433,7 +1481,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.CreateConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConnectionProfileRequest',
+        '.google.cloud.datastream.v1.CreateConnectionProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1487,7 +1535,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.CreateConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConnectionProfileRequest',
+        '.google.cloud.datastream.v1.CreateConnectionProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1521,7 +1569,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.CreateConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConnectionProfileRequest',
+        '.google.cloud.datastream.v1.CreateConnectionProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1599,7 +1647,7 @@ describe('v1.DatastreamClient', () => {
       );
       request.connectionProfile ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConnectionProfileRequest',
+        '.google.cloud.datastream.v1.UpdateConnectionProfileRequest',
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
@@ -1633,7 +1681,7 @@ describe('v1.DatastreamClient', () => {
       );
       request.connectionProfile ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConnectionProfileRequest',
+        '.google.cloud.datastream.v1.UpdateConnectionProfileRequest',
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
@@ -1688,7 +1736,7 @@ describe('v1.DatastreamClient', () => {
       );
       request.connectionProfile ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConnectionProfileRequest',
+        '.google.cloud.datastream.v1.UpdateConnectionProfileRequest',
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
@@ -1723,7 +1771,7 @@ describe('v1.DatastreamClient', () => {
       );
       request.connectionProfile ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConnectionProfileRequest',
+        '.google.cloud.datastream.v1.UpdateConnectionProfileRequest',
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
@@ -1800,7 +1848,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DeleteConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConnectionProfileRequest',
+        '.google.cloud.datastream.v1.DeleteConnectionProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1833,7 +1881,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DeleteConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConnectionProfileRequest',
+        '.google.cloud.datastream.v1.DeleteConnectionProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1887,7 +1935,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DeleteConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConnectionProfileRequest',
+        '.google.cloud.datastream.v1.DeleteConnectionProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1921,7 +1969,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DeleteConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConnectionProfileRequest',
+        '.google.cloud.datastream.v1.DeleteConnectionProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1997,9 +2045,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateStreamRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.CreateStreamRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2028,9 +2077,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateStreamRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.CreateStreamRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2081,9 +2131,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateStreamRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.CreateStreamRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2111,9 +2162,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateStreamRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.CreateStreamRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2184,10 +2236,10 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.UpdateStreamRequest()
       );
       request.stream ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateStreamRequest', [
-        'stream',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.UpdateStreamRequest',
+        ['stream', 'name']
+      );
       request.stream.name = defaultValue1;
       const expectedHeaderRequestParams = `stream.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2217,10 +2269,10 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.UpdateStreamRequest()
       );
       request.stream ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateStreamRequest', [
-        'stream',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.UpdateStreamRequest',
+        ['stream', 'name']
+      );
       request.stream.name = defaultValue1;
       const expectedHeaderRequestParams = `stream.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2272,10 +2324,10 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.UpdateStreamRequest()
       );
       request.stream ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateStreamRequest', [
-        'stream',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.UpdateStreamRequest',
+        ['stream', 'name']
+      );
       request.stream.name = defaultValue1;
       const expectedHeaderRequestParams = `stream.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2304,10 +2356,10 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.UpdateStreamRequest()
       );
       request.stream ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateStreamRequest', [
-        'stream',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.UpdateStreamRequest',
+        ['stream', 'name']
+      );
       request.stream.name = defaultValue1;
       const expectedHeaderRequestParams = `stream.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2377,9 +2429,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteStreamRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.DeleteStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2408,9 +2461,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteStreamRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.DeleteStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2461,9 +2515,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteStreamRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.DeleteStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2491,9 +2546,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteStreamRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.DeleteStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2564,7 +2620,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.CreatePrivateConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreatePrivateConnectionRequest',
+        '.google.cloud.datastream.v1.CreatePrivateConnectionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2597,7 +2653,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.CreatePrivateConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreatePrivateConnectionRequest',
+        '.google.cloud.datastream.v1.CreatePrivateConnectionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2651,7 +2707,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.CreatePrivateConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreatePrivateConnectionRequest',
+        '.google.cloud.datastream.v1.CreatePrivateConnectionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2685,7 +2741,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.CreatePrivateConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreatePrivateConnectionRequest',
+        '.google.cloud.datastream.v1.CreatePrivateConnectionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2762,7 +2818,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DeletePrivateConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePrivateConnectionRequest',
+        '.google.cloud.datastream.v1.DeletePrivateConnectionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2795,7 +2851,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DeletePrivateConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePrivateConnectionRequest',
+        '.google.cloud.datastream.v1.DeletePrivateConnectionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2849,7 +2905,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DeletePrivateConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePrivateConnectionRequest',
+        '.google.cloud.datastream.v1.DeletePrivateConnectionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2883,7 +2939,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.DeletePrivateConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePrivateConnectionRequest',
+        '.google.cloud.datastream.v1.DeletePrivateConnectionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2959,9 +3015,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRouteRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.CreateRouteRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2990,9 +3047,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRouteRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.CreateRouteRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3043,9 +3101,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRouteRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.CreateRouteRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3073,9 +3132,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.CreateRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRouteRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.CreateRouteRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3145,7 +3205,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRouteRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.DeleteRouteRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3174,7 +3237,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRouteRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.DeleteRouteRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3225,7 +3291,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRouteRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.DeleteRouteRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3253,7 +3322,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.DeleteRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRouteRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.DeleteRouteRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3324,7 +3396,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.datastream.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3364,7 +3436,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.datastream.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3421,7 +3493,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.datastream.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3455,7 +3527,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.datastream.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3522,7 +3594,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.datastream.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3578,7 +3650,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.datastream.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3632,7 +3704,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.datastream.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3678,9 +3750,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3710,9 +3783,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3758,9 +3832,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3788,9 +3863,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3841,9 +3917,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3891,9 +3968,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3933,9 +4011,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3976,9 +4055,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamObjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4014,9 +4094,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamObjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4068,9 +4149,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamObjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4098,9 +4180,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamObjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4157,9 +4240,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamObjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4205,9 +4289,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamObjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4253,9 +4338,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListStreamObjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStreamObjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListStreamObjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4294,9 +4380,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.FetchStaticIpsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
@@ -4322,9 +4409,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.FetchStaticIpsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
@@ -4363,9 +4451,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.FetchStaticIpsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4393,9 +4482,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.FetchStaticIpsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
@@ -4439,9 +4529,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.FetchStaticIpsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4484,9 +4575,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.FetchStaticIpsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
@@ -4522,9 +4614,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.FetchStaticIpsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchStaticIpsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.FetchStaticIpsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4564,7 +4657,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPrivateConnectionsRequest',
+        '.google.cloud.datastream.v1.ListPrivateConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4604,7 +4697,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPrivateConnectionsRequest',
+        '.google.cloud.datastream.v1.ListPrivateConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4661,7 +4754,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPrivateConnectionsRequest',
+        '.google.cloud.datastream.v1.ListPrivateConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4695,7 +4788,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPrivateConnectionsRequest',
+        '.google.cloud.datastream.v1.ListPrivateConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4762,7 +4855,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPrivateConnectionsRequest',
+        '.google.cloud.datastream.v1.ListPrivateConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4818,7 +4911,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPrivateConnectionsRequest',
+        '.google.cloud.datastream.v1.ListPrivateConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4872,7 +4965,7 @@ describe('v1.DatastreamClient', () => {
         new protos.google.cloud.datastream.v1.ListPrivateConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPrivateConnectionsRequest',
+        '.google.cloud.datastream.v1.ListPrivateConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4918,9 +5011,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListRoutesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4950,9 +5044,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListRoutesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4998,9 +5093,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListRoutesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5028,9 +5124,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListRoutesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5081,9 +5178,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListRoutesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5131,9 +5229,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListRoutesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5173,9 +5272,10 @@ describe('v1.DatastreamClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datastream.v1.ListRoutesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
