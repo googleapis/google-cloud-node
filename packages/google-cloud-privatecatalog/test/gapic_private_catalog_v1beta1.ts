@@ -237,9 +237,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchCatalogsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = [
@@ -275,9 +276,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchCatalogsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = [
@@ -331,9 +333,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchCatalogsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -361,9 +364,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchCatalogsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = [
@@ -421,9 +425,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchCatalogsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -470,9 +475,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchCatalogsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = [
@@ -519,9 +525,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchCatalogsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -561,9 +568,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchProductsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchProductsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = [
@@ -599,9 +607,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchProductsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchProductsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = [
@@ -655,9 +664,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchProductsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchProductsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -685,9 +695,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchProductsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchProductsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = [
@@ -745,9 +756,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchProductsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchProductsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -794,9 +806,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchProductsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchProductsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = [
@@ -843,9 +856,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchProductsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchProductsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -885,9 +899,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchVersionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = [
@@ -923,9 +938,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchVersionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = [
@@ -979,9 +995,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchVersionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1009,9 +1026,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchVersionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = [
@@ -1069,9 +1087,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchVersionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1118,9 +1137,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchVersionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = [
@@ -1167,9 +1187,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchVersionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
