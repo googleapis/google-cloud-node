@@ -174,7 +174,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetQuestionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.GetQuestionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -202,7 +205,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetQuestionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.GetQuestionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -246,7 +252,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetQuestionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.GetQuestionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -274,7 +283,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetQuestionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.GetQuestionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -292,9 +304,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateQuestionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.CreateQuestionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -322,9 +335,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateQuestionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.CreateQuestionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -368,9 +382,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateQuestionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.CreateQuestionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -398,9 +413,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateQuestionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.CreateQuestionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -418,9 +434,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExecuteQuestionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -448,9 +465,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExecuteQuestionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -494,9 +512,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExecuteQuestionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -524,9 +543,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExecuteQuestionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -544,9 +564,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetUserFeedbackRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -574,9 +595,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetUserFeedbackRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -620,9 +642,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetUserFeedbackRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -650,9 +673,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetUserFeedbackRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -671,10 +695,10 @@ describe('v1alpha.QuestionServiceClient', () => {
         new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
       );
       request.userFeedback ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateUserFeedbackRequest', [
-        'userFeedback',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest',
+        ['userFeedback', 'name']
+      );
       request.userFeedback.name = defaultValue1;
       const expectedHeaderRequestParams = `user_feedback.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -704,10 +728,10 @@ describe('v1alpha.QuestionServiceClient', () => {
         new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
       );
       request.userFeedback ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateUserFeedbackRequest', [
-        'userFeedback',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest',
+        ['userFeedback', 'name']
+      );
       request.userFeedback.name = defaultValue1;
       const expectedHeaderRequestParams = `user_feedback.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -752,10 +776,10 @@ describe('v1alpha.QuestionServiceClient', () => {
         new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
       );
       request.userFeedback ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateUserFeedbackRequest', [
-        'userFeedback',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest',
+        ['userFeedback', 'name']
+      );
       request.userFeedback.name = defaultValue1;
       const expectedHeaderRequestParams = `user_feedback.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -784,10 +808,10 @@ describe('v1alpha.QuestionServiceClient', () => {
         new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
       );
       request.userFeedback ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateUserFeedbackRequest', [
-        'userFeedback',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest',
+        ['userFeedback', 'name']
+      );
       request.userFeedback.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();

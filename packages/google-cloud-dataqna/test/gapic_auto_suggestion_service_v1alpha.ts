@@ -185,9 +185,10 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuggestQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.SuggestQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -216,9 +217,10 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuggestQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.SuggestQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -263,9 +265,10 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuggestQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.SuggestQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -294,9 +297,10 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuggestQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataqna.v1alpha.SuggestQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
