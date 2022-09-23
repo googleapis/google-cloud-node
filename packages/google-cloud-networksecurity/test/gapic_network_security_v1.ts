@@ -276,7 +276,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -308,7 +308,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -355,7 +355,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -389,7 +389,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -412,9 +412,10 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServerTlsPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -443,9 +444,10 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServerTlsPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -489,9 +491,10 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServerTlsPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -519,9 +522,10 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServerTlsPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -539,9 +543,10 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetClientTlsPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -570,9 +575,10 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetClientTlsPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -616,9 +622,10 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetClientTlsPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -646,9 +653,10 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetClientTlsPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -667,7 +675,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -700,7 +708,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -754,7 +762,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -788,7 +796,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -866,7 +874,7 @@ describe('v1.NetworkSecurityClient', () => {
       );
       request.authorizationPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest',
         ['authorizationPolicy', 'name']
       );
       request.authorizationPolicy.name = defaultValue1;
@@ -900,7 +908,7 @@ describe('v1.NetworkSecurityClient', () => {
       );
       request.authorizationPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest',
         ['authorizationPolicy', 'name']
       );
       request.authorizationPolicy.name = defaultValue1;
@@ -955,7 +963,7 @@ describe('v1.NetworkSecurityClient', () => {
       );
       request.authorizationPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest',
         ['authorizationPolicy', 'name']
       );
       request.authorizationPolicy.name = defaultValue1;
@@ -990,7 +998,7 @@ describe('v1.NetworkSecurityClient', () => {
       );
       request.authorizationPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest',
         ['authorizationPolicy', 'name']
       );
       request.authorizationPolicy.name = defaultValue1;
@@ -1067,7 +1075,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1100,7 +1108,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1154,7 +1162,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1188,7 +1196,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAuthorizationPolicyRequest',
+        '.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1265,7 +1273,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateServerTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1298,7 +1306,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateServerTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1352,7 +1360,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateServerTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1386,7 +1394,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateServerTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1463,7 +1471,7 @@ describe('v1.NetworkSecurityClient', () => {
       );
       request.serverTlsPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateServerTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest',
         ['serverTlsPolicy', 'name']
       );
       request.serverTlsPolicy.name = defaultValue1;
@@ -1497,7 +1505,7 @@ describe('v1.NetworkSecurityClient', () => {
       );
       request.serverTlsPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateServerTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest',
         ['serverTlsPolicy', 'name']
       );
       request.serverTlsPolicy.name = defaultValue1;
@@ -1552,7 +1560,7 @@ describe('v1.NetworkSecurityClient', () => {
       );
       request.serverTlsPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateServerTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest',
         ['serverTlsPolicy', 'name']
       );
       request.serverTlsPolicy.name = defaultValue1;
@@ -1587,7 +1595,7 @@ describe('v1.NetworkSecurityClient', () => {
       );
       request.serverTlsPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateServerTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest',
         ['serverTlsPolicy', 'name']
       );
       request.serverTlsPolicy.name = defaultValue1;
@@ -1663,7 +1671,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteServerTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1696,7 +1704,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteServerTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1750,7 +1758,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteServerTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1784,7 +1792,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteServerTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1860,7 +1868,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateClientTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1893,7 +1901,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateClientTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1947,7 +1955,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateClientTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1981,7 +1989,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateClientTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2058,7 +2066,7 @@ describe('v1.NetworkSecurityClient', () => {
       );
       request.clientTlsPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateClientTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest',
         ['clientTlsPolicy', 'name']
       );
       request.clientTlsPolicy.name = defaultValue1;
@@ -2092,7 +2100,7 @@ describe('v1.NetworkSecurityClient', () => {
       );
       request.clientTlsPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateClientTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest',
         ['clientTlsPolicy', 'name']
       );
       request.clientTlsPolicy.name = defaultValue1;
@@ -2147,7 +2155,7 @@ describe('v1.NetworkSecurityClient', () => {
       );
       request.clientTlsPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateClientTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest',
         ['clientTlsPolicy', 'name']
       );
       request.clientTlsPolicy.name = defaultValue1;
@@ -2182,7 +2190,7 @@ describe('v1.NetworkSecurityClient', () => {
       );
       request.clientTlsPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateClientTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest',
         ['clientTlsPolicy', 'name']
       );
       request.clientTlsPolicy.name = defaultValue1;
@@ -2258,7 +2266,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteClientTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2291,7 +2299,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteClientTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2345,7 +2353,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteClientTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2379,7 +2387,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteClientTlsPolicyRequest',
+        '.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2455,7 +2463,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizationPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2495,7 +2503,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizationPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2552,7 +2560,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizationPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2586,7 +2594,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizationPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2655,7 +2663,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizationPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2713,7 +2721,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizationPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2767,7 +2775,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizationPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2814,7 +2822,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServerTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2854,7 +2862,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServerTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2911,7 +2919,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServerTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2945,7 +2953,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServerTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3014,7 +3022,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServerTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3072,7 +3080,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServerTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3126,7 +3134,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServerTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3173,7 +3181,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3213,7 +3221,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3270,7 +3278,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3304,7 +3312,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3373,7 +3381,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3431,7 +3439,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3485,7 +3493,7 @@ describe('v1.NetworkSecurityClient', () => {
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientTlsPoliciesRequest',
+        '.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
