@@ -267,7 +267,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -364,7 +373,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -382,9 +394,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyStringRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyStringRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyStringRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -412,9 +425,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyStringRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyStringRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyStringRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -458,9 +472,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyStringRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyStringRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyStringRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -488,9 +503,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyStringRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyStringRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyStringRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -588,7 +604,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.CreateKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateKeyRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.CreateKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -617,7 +636,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.CreateKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateKeyRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.CreateKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -668,7 +690,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.CreateKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateKeyRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.CreateKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -696,7 +721,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.CreateKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateKeyRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.CreateKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -767,10 +795,10 @@ describe('v2.ApiKeysClient', () => {
         new protos.google.api.apikeys.v2.UpdateKeyRequest()
       );
       request.key ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateKeyRequest', [
-        'key',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UpdateKeyRequest',
+        ['key', 'name']
+      );
       request.key.name = defaultValue1;
       const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -800,10 +828,10 @@ describe('v2.ApiKeysClient', () => {
         new protos.google.api.apikeys.v2.UpdateKeyRequest()
       );
       request.key ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateKeyRequest', [
-        'key',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UpdateKeyRequest',
+        ['key', 'name']
+      );
       request.key.name = defaultValue1;
       const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -855,10 +883,10 @@ describe('v2.ApiKeysClient', () => {
         new protos.google.api.apikeys.v2.UpdateKeyRequest()
       );
       request.key ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateKeyRequest', [
-        'key',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UpdateKeyRequest',
+        ['key', 'name']
+      );
       request.key.name = defaultValue1;
       const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -887,10 +915,10 @@ describe('v2.ApiKeysClient', () => {
         new protos.google.api.apikeys.v2.UpdateKeyRequest()
       );
       request.key ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateKeyRequest', [
-        'key',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UpdateKeyRequest',
+        ['key', 'name']
+      );
       request.key.name = defaultValue1;
       const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -960,7 +988,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.DeleteKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.DeleteKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -989,7 +1020,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.DeleteKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.DeleteKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1040,7 +1074,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.DeleteKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.DeleteKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1068,7 +1105,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.DeleteKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.DeleteKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1138,7 +1178,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.UndeleteKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UndeleteKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1167,7 +1210,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.UndeleteKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UndeleteKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1218,7 +1264,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.UndeleteKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UndeleteKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1246,7 +1295,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.UndeleteKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UndeleteKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1316,7 +1368,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1346,7 +1401,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1392,7 +1450,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1417,7 +1478,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1465,7 +1529,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1510,7 +1577,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1549,7 +1619,10 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

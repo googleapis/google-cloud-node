@@ -269,9 +269,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClientRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureClientRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClientRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -299,9 +300,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClientRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureClientRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClientRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -345,9 +347,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClientRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureClientRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClientRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -375,9 +378,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClientRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureClientRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClientRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -395,9 +399,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -425,9 +430,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -471,9 +477,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -501,9 +508,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -522,7 +530,7 @@ describe('v1.AzureClustersClient', () => {
         new protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateAzureAccessTokenRequest',
+        '.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest',
         ['azureCluster']
       );
       request.azureCluster = defaultValue1;
@@ -554,7 +562,7 @@ describe('v1.AzureClustersClient', () => {
         new protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateAzureAccessTokenRequest',
+        '.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest',
         ['azureCluster']
       );
       request.azureCluster = defaultValue1;
@@ -601,7 +609,7 @@ describe('v1.AzureClustersClient', () => {
         new protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateAzureAccessTokenRequest',
+        '.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest',
         ['azureCluster']
       );
       request.azureCluster = defaultValue1;
@@ -635,7 +643,7 @@ describe('v1.AzureClustersClient', () => {
         new protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateAzureAccessTokenRequest',
+        '.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest',
         ['azureCluster']
       );
       request.azureCluster = defaultValue1;
@@ -658,9 +666,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -688,9 +697,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -734,9 +744,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -764,9 +775,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -784,9 +796,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureServerConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -815,9 +828,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureServerConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -861,9 +875,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureServerConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -891,9 +906,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAzureServerConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -911,9 +927,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClientRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAzureClientRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClientRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -943,9 +960,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClientRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAzureClientRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClientRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -996,9 +1014,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClientRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAzureClientRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClientRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1026,9 +1045,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClientRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAzureClientRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClientRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1101,9 +1121,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAzureClientRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1133,9 +1154,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAzureClientRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1186,9 +1208,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAzureClientRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1216,9 +1239,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAzureClientRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1291,9 +1315,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAzureClusterRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1323,9 +1348,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAzureClusterRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1376,9 +1402,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAzureClusterRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1406,9 +1433,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAzureClusterRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1482,10 +1510,10 @@ describe('v1.AzureClustersClient', () => {
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest()
       );
       request.azureCluster ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAzureClusterRequest', [
-        'azureCluster',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest',
+        ['azureCluster', 'name']
+      );
       request.azureCluster.name = defaultValue1;
       const expectedHeaderRequestParams = `azure_cluster.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1516,10 +1544,10 @@ describe('v1.AzureClustersClient', () => {
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest()
       );
       request.azureCluster ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAzureClusterRequest', [
-        'azureCluster',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest',
+        ['azureCluster', 'name']
+      );
       request.azureCluster.name = defaultValue1;
       const expectedHeaderRequestParams = `azure_cluster.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1571,10 +1599,10 @@ describe('v1.AzureClustersClient', () => {
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest()
       );
       request.azureCluster ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAzureClusterRequest', [
-        'azureCluster',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest',
+        ['azureCluster', 'name']
+      );
       request.azureCluster.name = defaultValue1;
       const expectedHeaderRequestParams = `azure_cluster.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1603,10 +1631,10 @@ describe('v1.AzureClustersClient', () => {
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest()
       );
       request.azureCluster ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAzureClusterRequest', [
-        'azureCluster',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest',
+        ['azureCluster', 'name']
+      );
       request.azureCluster.name = defaultValue1;
       const expectedHeaderRequestParams = `azure_cluster.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1679,9 +1707,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAzureClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1711,9 +1740,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAzureClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1764,9 +1794,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAzureClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1794,9 +1825,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAzureClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1869,9 +1901,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAzureNodePoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1901,9 +1934,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAzureNodePoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1954,9 +1988,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAzureNodePoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1984,9 +2019,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAzureNodePoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2060,10 +2096,10 @@ describe('v1.AzureClustersClient', () => {
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest()
       );
       request.azureNodePool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAzureNodePoolRequest', [
-        'azureNodePool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest',
+        ['azureNodePool', 'name']
+      );
       request.azureNodePool.name = defaultValue1;
       const expectedHeaderRequestParams = `azure_node_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2094,10 +2130,10 @@ describe('v1.AzureClustersClient', () => {
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest()
       );
       request.azureNodePool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAzureNodePoolRequest', [
-        'azureNodePool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest',
+        ['azureNodePool', 'name']
+      );
       request.azureNodePool.name = defaultValue1;
       const expectedHeaderRequestParams = `azure_node_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2149,10 +2185,10 @@ describe('v1.AzureClustersClient', () => {
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest()
       );
       request.azureNodePool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAzureNodePoolRequest', [
-        'azureNodePool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest',
+        ['azureNodePool', 'name']
+      );
       request.azureNodePool.name = defaultValue1;
       const expectedHeaderRequestParams = `azure_node_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2181,10 +2217,10 @@ describe('v1.AzureClustersClient', () => {
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest()
       );
       request.azureNodePool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAzureNodePoolRequest', [
-        'azureNodePool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest',
+        ['azureNodePool', 'name']
+      );
       request.azureNodePool.name = defaultValue1;
       const expectedHeaderRequestParams = `azure_node_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2257,9 +2293,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAzureNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2289,9 +2326,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAzureNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2342,9 +2380,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAzureNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2372,9 +2411,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAzureNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2447,9 +2487,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClientsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2485,9 +2526,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClientsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2539,9 +2581,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClientsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2569,9 +2612,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClientsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2629,9 +2673,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClientsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2678,9 +2723,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClientsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2726,9 +2772,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClientsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2768,9 +2815,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClustersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2806,9 +2854,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClustersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2860,9 +2909,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClustersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2890,9 +2940,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClustersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2950,9 +3001,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClustersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2999,9 +3051,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClustersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3048,9 +3101,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureClustersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3090,9 +3144,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureNodePoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3129,9 +3184,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureNodePoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3185,9 +3241,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureNodePoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3215,9 +3272,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureNodePoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3275,9 +3333,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureNodePoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3324,9 +3383,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureNodePoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3373,9 +3433,10 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAzureNodePoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

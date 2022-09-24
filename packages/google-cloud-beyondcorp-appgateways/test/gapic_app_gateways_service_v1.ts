@@ -275,9 +275,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.GetAppGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAppGatewayRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.GetAppGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -305,9 +306,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.GetAppGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAppGatewayRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.GetAppGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -351,9 +353,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.GetAppGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAppGatewayRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.GetAppGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -381,9 +384,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.GetAppGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAppGatewayRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.GetAppGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -401,9 +405,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.CreateAppGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAppGatewayRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.CreateAppGatewayRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -433,9 +438,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.CreateAppGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAppGatewayRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.CreateAppGatewayRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -486,9 +492,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.CreateAppGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAppGatewayRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.CreateAppGatewayRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -516,9 +523,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.CreateAppGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAppGatewayRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.CreateAppGatewayRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -591,9 +599,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.DeleteAppGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAppGatewayRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.DeleteAppGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -623,9 +632,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.DeleteAppGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAppGatewayRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.DeleteAppGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -676,9 +686,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.DeleteAppGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAppGatewayRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.DeleteAppGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -706,9 +717,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.DeleteAppGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAppGatewayRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.DeleteAppGatewayRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -781,9 +793,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -819,9 +832,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -875,9 +889,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -905,9 +920,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -967,9 +983,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1018,9 +1035,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1067,9 +1085,10 @@ describe('v1.AppGatewaysServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppGatewaysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appgateways.v1.ListAppGatewaysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

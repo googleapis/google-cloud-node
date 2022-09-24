@@ -284,9 +284,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.GetAppConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAppConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.GetAppConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -315,9 +316,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.GetAppConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAppConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.GetAppConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -362,9 +364,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.GetAppConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAppConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.GetAppConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -393,9 +396,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.GetAppConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAppConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.GetAppConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -414,9 +418,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.CreateAppConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAppConnectorRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.CreateAppConnectorRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -447,9 +452,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.CreateAppConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAppConnectorRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.CreateAppConnectorRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -501,9 +507,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.CreateAppConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAppConnectorRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.CreateAppConnectorRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -532,9 +539,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.CreateAppConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAppConnectorRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.CreateAppConnectorRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -611,10 +619,10 @@ describe('v1.AppConnectorsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnectors.v1.UpdateAppConnectorRequest()
       );
       request.appConnector ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAppConnectorRequest', [
-        'appConnector',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.UpdateAppConnectorRequest',
+        ['appConnector', 'name']
+      );
       request.appConnector.name = defaultValue1;
       const expectedHeaderRequestParams = `app_connector.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -646,10 +654,10 @@ describe('v1.AppConnectorsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnectors.v1.UpdateAppConnectorRequest()
       );
       request.appConnector ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAppConnectorRequest', [
-        'appConnector',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.UpdateAppConnectorRequest',
+        ['appConnector', 'name']
+      );
       request.appConnector.name = defaultValue1;
       const expectedHeaderRequestParams = `app_connector.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -702,10 +710,10 @@ describe('v1.AppConnectorsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnectors.v1.UpdateAppConnectorRequest()
       );
       request.appConnector ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAppConnectorRequest', [
-        'appConnector',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.UpdateAppConnectorRequest',
+        ['appConnector', 'name']
+      );
       request.appConnector.name = defaultValue1;
       const expectedHeaderRequestParams = `app_connector.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -735,10 +743,10 @@ describe('v1.AppConnectorsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnectors.v1.UpdateAppConnectorRequest()
       );
       request.appConnector ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAppConnectorRequest', [
-        'appConnector',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.UpdateAppConnectorRequest',
+        ['appConnector', 'name']
+      );
       request.appConnector.name = defaultValue1;
       const expectedHeaderRequestParams = `app_connector.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -814,9 +822,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.DeleteAppConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAppConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.DeleteAppConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -847,9 +856,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.DeleteAppConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAppConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.DeleteAppConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -901,9 +911,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.DeleteAppConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAppConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.DeleteAppConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -932,9 +943,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.DeleteAppConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAppConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.DeleteAppConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1010,9 +1022,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.ReportStatusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportStatusRequest', [
-        'appConnector',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.ReportStatusRequest',
+        ['appConnector']
+      );
       request.appConnector = defaultValue1;
       const expectedHeaderRequestParams = `app_connector=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1042,9 +1055,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.ReportStatusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportStatusRequest', [
-        'appConnector',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.ReportStatusRequest',
+        ['appConnector']
+      );
       request.appConnector = defaultValue1;
       const expectedHeaderRequestParams = `app_connector=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1096,9 +1110,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.ReportStatusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportStatusRequest', [
-        'appConnector',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.ReportStatusRequest',
+        ['appConnector']
+      );
       request.appConnector = defaultValue1;
       const expectedHeaderRequestParams = `app_connector=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1127,9 +1142,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.ReportStatusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportStatusRequest', [
-        'appConnector',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.ReportStatusRequest',
+        ['appConnector']
+      );
       request.appConnector = defaultValue1;
       const expectedHeaderRequestParams = `app_connector=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1202,9 +1218,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1241,9 +1258,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1298,9 +1316,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1329,9 +1348,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1392,9 +1412,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1444,9 +1465,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1494,9 +1516,10 @@ describe('v1.AppConnectorsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnectors.v1.ListAppConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

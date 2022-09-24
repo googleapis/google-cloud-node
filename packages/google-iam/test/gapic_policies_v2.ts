@@ -267,7 +267,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.GetPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.GetPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.GetPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.GetPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.GetPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.GetPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -364,7 +373,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.GetPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.GetPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -382,9 +394,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.CreatePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePolicyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.CreatePolicyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -413,9 +426,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.CreatePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePolicyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.CreatePolicyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -466,9 +480,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.CreatePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePolicyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.CreatePolicyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -496,9 +511,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.CreatePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePolicyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.CreatePolicyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -569,10 +585,10 @@ describe('v2.PoliciesClient', () => {
         new protos.google.iam.v2.UpdatePolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.UpdatePolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -602,10 +618,10 @@ describe('v2.PoliciesClient', () => {
         new protos.google.iam.v2.UpdatePolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.UpdatePolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -657,10 +673,10 @@ describe('v2.PoliciesClient', () => {
         new protos.google.iam.v2.UpdatePolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.UpdatePolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -689,10 +705,10 @@ describe('v2.PoliciesClient', () => {
         new protos.google.iam.v2.UpdatePolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.UpdatePolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -762,9 +778,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.DeletePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.DeletePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -793,9 +810,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.DeletePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.DeletePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -846,9 +864,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.DeletePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.DeletePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -876,9 +895,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.DeletePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.DeletePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -948,9 +968,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -980,9 +1001,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1028,9 +1050,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1058,9 +1081,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1108,9 +1132,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1155,9 +1180,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1197,9 +1223,10 @@ describe('v2.PoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v2.ListPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v2.ListPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1239,7 +1266,7 @@ describe('v2.PoliciesClient', () => {
         new protos.google.iam.v2.ListApplicablePoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListApplicablePoliciesRequest',
+        '.google.iam.v2.ListApplicablePoliciesRequest',
         ['attachmentPoint']
       );
       request.attachmentPoint = defaultValue1;
@@ -1273,7 +1300,7 @@ describe('v2.PoliciesClient', () => {
         new protos.google.iam.v2.ListApplicablePoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListApplicablePoliciesRequest',
+        '.google.iam.v2.ListApplicablePoliciesRequest',
         ['attachmentPoint']
       );
       request.attachmentPoint = defaultValue1;
@@ -1322,7 +1349,7 @@ describe('v2.PoliciesClient', () => {
         new protos.google.iam.v2.ListApplicablePoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListApplicablePoliciesRequest',
+        '.google.iam.v2.ListApplicablePoliciesRequest',
         ['attachmentPoint']
       );
       request.attachmentPoint = defaultValue1;
@@ -1356,7 +1383,7 @@ describe('v2.PoliciesClient', () => {
         new protos.google.iam.v2.ListApplicablePoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListApplicablePoliciesRequest',
+        '.google.iam.v2.ListApplicablePoliciesRequest',
         ['attachmentPoint']
       );
       request.attachmentPoint = defaultValue1;
@@ -1413,7 +1440,7 @@ describe('v2.PoliciesClient', () => {
         new protos.google.iam.v2.ListApplicablePoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListApplicablePoliciesRequest',
+        '.google.iam.v2.ListApplicablePoliciesRequest',
         ['attachmentPoint']
       );
       request.attachmentPoint = defaultValue1;
@@ -1465,7 +1492,7 @@ describe('v2.PoliciesClient', () => {
         new protos.google.iam.v2.ListApplicablePoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListApplicablePoliciesRequest',
+        '.google.iam.v2.ListApplicablePoliciesRequest',
         ['attachmentPoint']
       );
       request.attachmentPoint = defaultValue1;
@@ -1512,7 +1539,7 @@ describe('v2.PoliciesClient', () => {
         new protos.google.iam.v2.ListApplicablePoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListApplicablePoliciesRequest',
+        '.google.iam.v2.ListApplicablePoliciesRequest',
         ['attachmentPoint']
       );
       request.attachmentPoint = defaultValue1;
