@@ -612,7 +612,7 @@ export class AppConnectionsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAppConnection(request, options, callback);
@@ -741,7 +741,7 @@ export class AppConnectionsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createAppConnection(request, options, callback);
@@ -907,7 +907,7 @@ export class AppConnectionsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'app_connection.name': request.appConnection!.name || '',
+        'app_connection.name': request.appConnection!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateAppConnection(request, options, callback);
@@ -1063,7 +1063,7 @@ export class AppConnectionsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteAppConnection(request, options, callback);
@@ -1210,7 +1210,7 @@ export class AppConnectionsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAppConnections(request, options, callback);
@@ -1262,7 +1262,7 @@ export class AppConnectionsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1323,7 +1323,7 @@ export class AppConnectionsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1440,7 +1440,7 @@ export class AppConnectionsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.resolveAppConnections(request, options, callback);
@@ -1489,7 +1489,7 @@ export class AppConnectionsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['resolveAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1547,7 +1547,7 @@ export class AppConnectionsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['resolveAppConnections'];
     const callSettings = defaultCallSettings.merge(options);

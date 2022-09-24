@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -254,26 +269,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClientRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClientRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AzureClient()
       );
       client.innerApiCalls.getAzureClient = stubSimpleCall(expectedResponse);
       const [response] = await client.getAzureClient(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAzureClient as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAzureClient as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureClient as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAzureClient without error using callback', async () => {
@@ -285,15 +300,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClientRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClientRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AzureClient()
       );
@@ -316,11 +328,14 @@ describe('v1.AzureClustersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAzureClient as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAzureClient as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureClient as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAzureClient with error', async () => {
@@ -332,26 +347,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClientRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClientRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAzureClient = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getAzureClient(request), expectedError);
-      assert(
-        (client.innerApiCalls.getAzureClient as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAzureClient as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureClient as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAzureClient with closed client', async () => {
@@ -363,7 +378,11 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClientRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClientRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAzureClient(request), expectedError);
@@ -380,26 +399,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AzureCluster()
       );
       client.innerApiCalls.getAzureCluster = stubSimpleCall(expectedResponse);
       const [response] = await client.getAzureCluster(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAzureCluster without error using callback', async () => {
@@ -411,15 +430,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AzureCluster()
       );
@@ -442,11 +458,14 @@ describe('v1.AzureClustersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAzureCluster with error', async () => {
@@ -458,26 +477,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAzureCluster = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getAzureCluster(request), expectedError);
-      assert(
-        (client.innerApiCalls.getAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAzureCluster with closed client', async () => {
@@ -489,7 +508,11 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureClusterRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAzureCluster(request), expectedError);
@@ -506,15 +529,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest()
       );
-      request.azureCluster = '';
-      const expectedHeaderRequestParams = 'azure_cluster=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenResponse()
       );
@@ -522,11 +542,14 @@ describe('v1.AzureClustersClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.generateAzureAccessToken(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.generateAzureAccessToken as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.generateAzureAccessToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateAzureAccessToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes generateAzureAccessToken without error using callback', async () => {
@@ -538,15 +561,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest()
       );
-      request.azureCluster = '';
-      const expectedHeaderRequestParams = 'azure_cluster=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenResponse()
       );
@@ -569,11 +589,14 @@ describe('v1.AzureClustersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.generateAzureAccessToken as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.generateAzureAccessToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateAzureAccessToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes generateAzureAccessToken with error', async () => {
@@ -585,15 +608,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest()
       );
-      request.azureCluster = '';
-      const expectedHeaderRequestParams = 'azure_cluster=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateAzureAccessToken = stubSimpleCall(
         undefined,
@@ -603,11 +623,14 @@ describe('v1.AzureClustersClient', () => {
         client.generateAzureAccessToken(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.generateAzureAccessToken as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.generateAzureAccessToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateAzureAccessToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes generateAzureAccessToken with closed client', async () => {
@@ -619,7 +642,11 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest()
       );
-      request.azureCluster = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -639,26 +666,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AzureNodePool()
       );
       client.innerApiCalls.getAzureNodePool = stubSimpleCall(expectedResponse);
       const [response] = await client.getAzureNodePool(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAzureNodePool without error using callback', async () => {
@@ -670,15 +697,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AzureNodePool()
       );
@@ -701,11 +725,14 @@ describe('v1.AzureClustersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAzureNodePool with error', async () => {
@@ -717,26 +744,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAzureNodePool = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getAzureNodePool(request), expectedError);
-      assert(
-        (client.innerApiCalls.getAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAzureNodePool with closed client', async () => {
@@ -748,7 +775,11 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureNodePoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAzureNodePool(request), expectedError);
@@ -765,15 +796,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AzureServerConfig()
       );
@@ -781,11 +809,14 @@ describe('v1.AzureClustersClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getAzureServerConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAzureServerConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAzureServerConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureServerConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAzureServerConfig without error using callback', async () => {
@@ -797,15 +828,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AzureServerConfig()
       );
@@ -828,11 +856,14 @@ describe('v1.AzureClustersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAzureServerConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAzureServerConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureServerConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAzureServerConfig with error', async () => {
@@ -844,26 +875,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAzureServerConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getAzureServerConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.getAzureServerConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAzureServerConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureServerConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAzureServerConfig with closed client', async () => {
@@ -875,7 +906,11 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureServerConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAzureServerConfig(request), expectedError);
@@ -892,15 +927,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClientRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClientRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -909,11 +941,14 @@ describe('v1.AzureClustersClient', () => {
       const [operation] = await client.createAzureClient(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAzureClient as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAzureClient as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAzureClient as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAzureClient without error using callback', async () => {
@@ -925,15 +960,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClientRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClientRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -963,11 +995,14 @@ describe('v1.AzureClustersClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAzureClient as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAzureClient as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAzureClient as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAzureClient with call error', async () => {
@@ -979,26 +1014,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClientRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClientRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAzureClient = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createAzureClient(request), expectedError);
-      assert(
-        (client.innerApiCalls.createAzureClient as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAzureClient as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAzureClient as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAzureClient with LRO error', async () => {
@@ -1010,15 +1045,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClientRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClientRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAzureClient = stubLongRunningCall(
         undefined,
@@ -1027,11 +1059,14 @@ describe('v1.AzureClustersClient', () => {
       );
       const [operation] = await client.createAzureClient(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createAzureClient as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAzureClient as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAzureClient as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateAzureClientProgress without error', async () => {
@@ -1086,15 +1121,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1103,11 +1135,14 @@ describe('v1.AzureClustersClient', () => {
       const [operation] = await client.deleteAzureClient(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAzureClient as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAzureClient as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAzureClient as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAzureClient without error using callback', async () => {
@@ -1119,15 +1154,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1157,11 +1189,14 @@ describe('v1.AzureClustersClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAzureClient as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAzureClient as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAzureClient as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAzureClient with call error', async () => {
@@ -1173,26 +1208,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAzureClient = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteAzureClient(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAzureClient as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAzureClient as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAzureClient as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAzureClient with LRO error', async () => {
@@ -1204,15 +1239,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClientRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAzureClient = stubLongRunningCall(
         undefined,
@@ -1221,11 +1253,14 @@ describe('v1.AzureClustersClient', () => {
       );
       const [operation] = await client.deleteAzureClient(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAzureClient as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAzureClient as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAzureClient as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteAzureClientProgress without error', async () => {
@@ -1280,15 +1315,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1297,11 +1329,14 @@ describe('v1.AzureClustersClient', () => {
       const [operation] = await client.createAzureCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAzureCluster without error using callback', async () => {
@@ -1313,15 +1348,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1351,11 +1383,14 @@ describe('v1.AzureClustersClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAzureCluster with call error', async () => {
@@ -1367,26 +1402,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAzureCluster = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createAzureCluster(request), expectedError);
-      assert(
-        (client.innerApiCalls.createAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAzureCluster with LRO error', async () => {
@@ -1398,15 +1433,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureClusterRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAzureCluster = stubLongRunningCall(
         undefined,
@@ -1415,11 +1447,14 @@ describe('v1.AzureClustersClient', () => {
       );
       const [operation] = await client.createAzureCluster(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateAzureClusterProgress without error', async () => {
@@ -1474,16 +1509,13 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest()
       );
-      request.azureCluster = {};
-      request.azureCluster.name = '';
-      const expectedHeaderRequestParams = 'azure_cluster.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.azureCluster ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest',
+        ['azureCluster', 'name']
+      );
+      request.azureCluster.name = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1492,11 +1524,14 @@ describe('v1.AzureClustersClient', () => {
       const [operation] = await client.updateAzureCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAzureCluster without error using callback', async () => {
@@ -1508,16 +1543,13 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest()
       );
-      request.azureCluster = {};
-      request.azureCluster.name = '';
-      const expectedHeaderRequestParams = 'azure_cluster.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.azureCluster ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest',
+        ['azureCluster', 'name']
+      );
+      request.azureCluster.name = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1547,11 +1579,14 @@ describe('v1.AzureClustersClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAzureCluster with call error', async () => {
@@ -1563,27 +1598,27 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest()
       );
-      request.azureCluster = {};
-      request.azureCluster.name = '';
-      const expectedHeaderRequestParams = 'azure_cluster.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.azureCluster ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest',
+        ['azureCluster', 'name']
+      );
+      request.azureCluster.name = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAzureCluster = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateAzureCluster(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAzureCluster with LRO error', async () => {
@@ -1595,16 +1630,13 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest()
       );
-      request.azureCluster = {};
-      request.azureCluster.name = '';
-      const expectedHeaderRequestParams = 'azure_cluster.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.azureCluster ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureClusterRequest',
+        ['azureCluster', 'name']
+      );
+      request.azureCluster.name = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAzureCluster = stubLongRunningCall(
         undefined,
@@ -1613,11 +1645,14 @@ describe('v1.AzureClustersClient', () => {
       );
       const [operation] = await client.updateAzureCluster(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateAzureClusterProgress without error', async () => {
@@ -1672,15 +1707,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1689,11 +1721,14 @@ describe('v1.AzureClustersClient', () => {
       const [operation] = await client.deleteAzureCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAzureCluster without error using callback', async () => {
@@ -1705,15 +1740,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1743,11 +1775,14 @@ describe('v1.AzureClustersClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAzureCluster with call error', async () => {
@@ -1759,26 +1794,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAzureCluster = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteAzureCluster(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAzureCluster with LRO error', async () => {
@@ -1790,15 +1825,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAzureCluster = stubLongRunningCall(
         undefined,
@@ -1807,11 +1839,14 @@ describe('v1.AzureClustersClient', () => {
       );
       const [operation] = await client.deleteAzureCluster(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAzureCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAzureCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAzureCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteAzureClusterProgress without error', async () => {
@@ -1866,15 +1901,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1883,11 +1915,14 @@ describe('v1.AzureClustersClient', () => {
       const [operation] = await client.createAzureNodePool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAzureNodePool without error using callback', async () => {
@@ -1899,15 +1934,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1937,11 +1969,14 @@ describe('v1.AzureClustersClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAzureNodePool with call error', async () => {
@@ -1953,26 +1988,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAzureNodePool = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createAzureNodePool(request), expectedError);
-      assert(
-        (client.innerApiCalls.createAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAzureNodePool with LRO error', async () => {
@@ -1984,15 +2019,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.CreateAzureNodePoolRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAzureNodePool = stubLongRunningCall(
         undefined,
@@ -2001,11 +2033,14 @@ describe('v1.AzureClustersClient', () => {
       );
       const [operation] = await client.createAzureNodePool(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateAzureNodePoolProgress without error', async () => {
@@ -2060,16 +2095,13 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest()
       );
-      request.azureNodePool = {};
-      request.azureNodePool.name = '';
-      const expectedHeaderRequestParams = 'azure_node_pool.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.azureNodePool ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest',
+        ['azureNodePool', 'name']
+      );
+      request.azureNodePool.name = defaultValue1;
+      const expectedHeaderRequestParams = `azure_node_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2078,11 +2110,14 @@ describe('v1.AzureClustersClient', () => {
       const [operation] = await client.updateAzureNodePool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAzureNodePool without error using callback', async () => {
@@ -2094,16 +2129,13 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest()
       );
-      request.azureNodePool = {};
-      request.azureNodePool.name = '';
-      const expectedHeaderRequestParams = 'azure_node_pool.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.azureNodePool ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest',
+        ['azureNodePool', 'name']
+      );
+      request.azureNodePool.name = defaultValue1;
+      const expectedHeaderRequestParams = `azure_node_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2133,11 +2165,14 @@ describe('v1.AzureClustersClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAzureNodePool with call error', async () => {
@@ -2149,27 +2184,27 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest()
       );
-      request.azureNodePool = {};
-      request.azureNodePool.name = '';
-      const expectedHeaderRequestParams = 'azure_node_pool.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.azureNodePool ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest',
+        ['azureNodePool', 'name']
+      );
+      request.azureNodePool.name = defaultValue1;
+      const expectedHeaderRequestParams = `azure_node_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAzureNodePool = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateAzureNodePool(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAzureNodePool with LRO error', async () => {
@@ -2181,16 +2216,13 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest()
       );
-      request.azureNodePool = {};
-      request.azureNodePool.name = '';
-      const expectedHeaderRequestParams = 'azure_node_pool.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.azureNodePool ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.UpdateAzureNodePoolRequest',
+        ['azureNodePool', 'name']
+      );
+      request.azureNodePool.name = defaultValue1;
+      const expectedHeaderRequestParams = `azure_node_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAzureNodePool = stubLongRunningCall(
         undefined,
@@ -2199,11 +2231,14 @@ describe('v1.AzureClustersClient', () => {
       );
       const [operation] = await client.updateAzureNodePool(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateAzureNodePoolProgress without error', async () => {
@@ -2258,15 +2293,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2275,11 +2307,14 @@ describe('v1.AzureClustersClient', () => {
       const [operation] = await client.deleteAzureNodePool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAzureNodePool without error using callback', async () => {
@@ -2291,15 +2326,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2329,11 +2361,14 @@ describe('v1.AzureClustersClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAzureNodePool with call error', async () => {
@@ -2345,26 +2380,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAzureNodePool = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteAzureNodePool(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAzureNodePool with LRO error', async () => {
@@ -2376,15 +2411,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAzureNodePool = stubLongRunningCall(
         undefined,
@@ -2393,11 +2425,14 @@ describe('v1.AzureClustersClient', () => {
       );
       const [operation] = await client.deleteAzureNodePool(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAzureNodePool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAzureNodePool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAzureNodePool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteAzureNodePoolProgress without error', async () => {
@@ -2452,15 +2487,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AzureClient()
@@ -2475,11 +2507,14 @@ describe('v1.AzureClustersClient', () => {
       client.innerApiCalls.listAzureClients = stubSimpleCall(expectedResponse);
       const [response] = await client.listAzureClients(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAzureClients as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAzureClients as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAzureClients as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAzureClients without error using callback', async () => {
@@ -2491,15 +2526,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AzureClient()
@@ -2530,11 +2562,14 @@ describe('v1.AzureClustersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAzureClients as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAzureClients as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAzureClients as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAzureClients with error', async () => {
@@ -2546,26 +2581,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAzureClients = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAzureClients(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAzureClients as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAzureClients as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAzureClients as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAzureClientsStream without error', async () => {
@@ -2577,8 +2612,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AzureClient()
@@ -2616,11 +2655,12 @@ describe('v1.AzureClustersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAzureClients, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAzureClients.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAzureClients.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2633,8 +2673,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAzureClients.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2661,11 +2705,12 @@ describe('v1.AzureClustersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAzureClients, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAzureClients.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAzureClients.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2678,8 +2723,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AzureClient()
@@ -2705,11 +2754,12 @@ describe('v1.AzureClustersClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAzureClients.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAzureClients.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2722,8 +2772,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClientsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClientsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAzureClients.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2741,11 +2795,12 @@ describe('v1.AzureClustersClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAzureClients.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAzureClients.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2760,15 +2815,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AzureCluster()
@@ -2783,11 +2835,14 @@ describe('v1.AzureClustersClient', () => {
       client.innerApiCalls.listAzureClusters = stubSimpleCall(expectedResponse);
       const [response] = await client.listAzureClusters(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAzureClusters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAzureClusters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAzureClusters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAzureClusters without error using callback', async () => {
@@ -2799,15 +2854,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AzureCluster()
@@ -2838,11 +2890,14 @@ describe('v1.AzureClustersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAzureClusters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAzureClusters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAzureClusters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAzureClusters with error', async () => {
@@ -2854,26 +2909,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAzureClusters = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAzureClusters(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAzureClusters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAzureClusters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAzureClusters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAzureClustersStream without error', async () => {
@@ -2885,8 +2940,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AzureCluster()
@@ -2924,11 +2983,12 @@ describe('v1.AzureClustersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAzureClusters, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAzureClusters.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAzureClusters.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2941,8 +3001,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAzureClusters.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2969,11 +3033,12 @@ describe('v1.AzureClustersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAzureClusters, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAzureClusters.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAzureClusters.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2986,8 +3051,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AzureCluster()
@@ -3014,11 +3083,12 @@ describe('v1.AzureClustersClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAzureClusters.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAzureClusters.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3031,8 +3101,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAzureClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3050,11 +3124,12 @@ describe('v1.AzureClustersClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAzureClusters.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAzureClusters.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3069,15 +3144,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AzureNodePool()
@@ -3093,11 +3165,14 @@ describe('v1.AzureClustersClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listAzureNodePools(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAzureNodePools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAzureNodePools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAzureNodePools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAzureNodePools without error using callback', async () => {
@@ -3109,15 +3184,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AzureNodePool()
@@ -3150,11 +3222,14 @@ describe('v1.AzureClustersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAzureNodePools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAzureNodePools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAzureNodePools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAzureNodePools with error', async () => {
@@ -3166,26 +3241,26 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAzureNodePools = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAzureNodePools(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAzureNodePools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAzureNodePools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAzureNodePools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAzureNodePoolsStream without error', async () => {
@@ -3197,8 +3272,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AzureNodePool()
@@ -3236,11 +3315,12 @@ describe('v1.AzureClustersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAzureNodePools, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAzureNodePools.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAzureNodePools.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3253,8 +3333,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAzureNodePools.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3281,11 +3365,12 @@ describe('v1.AzureClustersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAzureNodePools, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAzureNodePools.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAzureNodePools.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3298,8 +3383,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AzureNodePool()
@@ -3326,11 +3415,12 @@ describe('v1.AzureClustersClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAzureNodePools.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAzureNodePools.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3343,8 +3433,12 @@ describe('v1.AzureClustersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.ListAzureNodePoolsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAzureNodePools.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3362,11 +3456,12 @@ describe('v1.AzureClustersClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAzureNodePools.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAzureNodePools.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
