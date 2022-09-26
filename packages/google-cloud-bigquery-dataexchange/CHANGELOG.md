@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/nodejs-bigquery-data-exchange/compare/v0.2.1...v0.3.0) (2022-09-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* refactor references to Category message
+* refresh current dataexchange/v1beta1/* directory to include recent change in protos. Removed
+
+### Features
+
+* update BigQuery Analytics Hub API v1beta1 client ([fe3d671](https://github.com/googleapis/nodejs-bigquery-data-exchange/commit/fe3d671d2cecbdb1285975dc273fc17cfebf6538))
+
+
+### Bug Fixes
+
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-bigquery-data-exchange/issues/1553)) ([#23](https://github.com/googleapis/nodejs-bigquery-data-exchange/issues/23)) ([c2bd811](https://github.com/googleapis/nodejs-bigquery-data-exchange/commit/c2bd811802e7ae10d21eba8d901bcbbf528f003e))
+* refactor references to Category message ([fe3d671](https://github.com/googleapis/nodejs-bigquery-data-exchange/commit/fe3d671d2cecbdb1285975dc273fc17cfebf6538))
+* use google-gax v3.3.0 ([c2bd811](https://github.com/googleapis/nodejs-bigquery-data-exchange/commit/c2bd811802e7ae10d21eba8d901bcbbf528f003e))
+
 ## [0.2.1](https://github.com/googleapis/nodejs-bigquery-data-exchange/compare/v0.2.0...v0.2.1) (2022-08-23)
 
 
