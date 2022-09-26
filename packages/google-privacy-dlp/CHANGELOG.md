@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/nodejs-dlp/compare/v4.1.1...v4.2.0) (2022-09-22)
+
+
+### Features
+
+* Add Deidentify action ([#742](https://github.com/googleapis/nodejs-dlp/issues/742)) ([27bb912](https://github.com/googleapis/nodejs-dlp/commit/27bb91296c3a685f4e5edb470517d6c44ebd3801))
+
+
+### Bug Fixes
+
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-dlp/issues/1553)) ([#741](https://github.com/googleapis/nodejs-dlp/issues/741)) ([655d6af](https://github.com/googleapis/nodejs-dlp/commit/655d6af3f4ea5e4cac3d4a9f72b9181076699084))
+* Preserve default values in x-goog-request-params header ([#746](https://github.com/googleapis/nodejs-dlp/issues/746)) ([7c53b9f](https://github.com/googleapis/nodejs-dlp/commit/7c53b9fb61d90cbc3e592070fcf577289d54ba21))
+
 ## [4.1.1](https://github.com/googleapis/nodejs-dlp/compare/v4.1.0...v4.1.1) (2022-08-23)
 
 
