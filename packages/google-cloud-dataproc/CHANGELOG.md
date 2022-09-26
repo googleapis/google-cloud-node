@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/nodejs-dataproc/compare/v4.0.1...v4.1.0) (2022-09-22)
+
+
+### Features
+
+* Add support for Dataproc metric configuration ([#626](https://github.com/googleapis/nodejs-dataproc/issues/626)) ([79a4958](https://github.com/googleapis/nodejs-dataproc/commit/79a495881e472f2d48ae2fab7afacc83db580d16))
+* Support regapic LRO ([350626e](https://github.com/googleapis/nodejs-dataproc/commit/350626e47ae672496236c3f760a1a544092284fe))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#612](https://github.com/googleapis/nodejs-dataproc/issues/612)) ([caba80a](https://github.com/googleapis/nodejs-dataproc/commit/caba80afbaf2347d6709162d5188aee89f184950))
+* **deps:** Do not depend on protobufjs ([#607](https://github.com/googleapis/nodejs-dataproc/issues/607)) ([4b62ef6](https://github.com/googleapis/nodejs-dataproc/commit/4b62ef60af6e78923472327787118f9333927b77))
+* **deps:** Roll back dependency @google-cloud/dataproc to ^4.0.0 ([#627](https://github.com/googleapis/nodejs-dataproc/issues/627)) ([e1c6d8b](https://github.com/googleapis/nodejs-dataproc/commit/e1c6d8bfdf766f857398520fdf9fd3b9d9ca0028))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-dataproc/issues/1553)) ([#617](https://github.com/googleapis/nodejs-dataproc/issues/617)) ([2e2bea1](https://github.com/googleapis/nodejs-dataproc/commit/2e2bea14de632a57445d6a363cea00d0e411aa59))
+* Preserve default values in x-goog-request-params header ([#620](https://github.com/googleapis/nodejs-dataproc/issues/620)) ([484a023](https://github.com/googleapis/nodejs-dataproc/commit/484a023501c573a6bed4d6f6bd624c6569e6c9ed))
+
 ## [4.0.1](https://github.com/googleapis/nodejs-dataproc/compare/v4.0.0...v4.0.1) (2022-06-20)
 
 
