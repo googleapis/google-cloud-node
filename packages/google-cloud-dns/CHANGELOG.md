@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [3.0.2](https://github.com/googleapis/nodejs-dns/compare/v3.0.1...v3.0.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* remove pip install statements ([#1546](https://github.com/googleapis/nodejs-dns/issues/1546)) ([#534](https://github.com/googleapis/nodejs-dns/issues/534)) ([b3a77f0](https://github.com/googleapis/nodejs-dns/commit/b3a77f071df17739c2fcd682f181ac5bdddffae6))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-dns/compare/v3.0.0...v3.0.1) (2022-06-09)
 
 
