@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.1.1](https://github.com/googleapis/nodejs-dialogflow-cx/compare/v3.1.0...v3.1.1) (2022-09-14)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#310](https://github.com/googleapis/nodejs-dialogflow-cx/issues/310)) ([5eb33cd](https://github.com/googleapis/nodejs-dialogflow-cx/commit/5eb33cd1e3ace81e70a844b870d9fc102ec73a3e))
+* Better support for fallback mode ([#305](https://github.com/googleapis/nodejs-dialogflow-cx/issues/305)) ([f63bcf2](https://github.com/googleapis/nodejs-dialogflow-cx/commit/f63bcf25e3354b00d4a428cad0a082134642b661))
+* Change import long to require ([#306](https://github.com/googleapis/nodejs-dialogflow-cx/issues/306)) ([343bc0e](https://github.com/googleapis/nodejs-dialogflow-cx/commit/343bc0efe2ee44888c706f3f377399df3fef13af))
+* **deps:** Update dependency uuid to v9 ([#311](https://github.com/googleapis/nodejs-dialogflow-cx/issues/311)) ([f7ba638](https://github.com/googleapis/nodejs-dialogflow-cx/commit/f7ba63867b32a4435f089584c08c5721eec428a7))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-dialogflow-cx/issues/1553)) ([#309](https://github.com/googleapis/nodejs-dialogflow-cx/issues/309)) ([844c8f7](https://github.com/googleapis/nodejs-dialogflow-cx/commit/844c8f71bf36ed7829542c3f5ff552baee17811a))
+* Preserve default values in x-goog-request-params header ([#312](https://github.com/googleapis/nodejs-dialogflow-cx/issues/312)) ([239d018](https://github.com/googleapis/nodejs-dialogflow-cx/commit/239d0185f5897109914543c96116cc35574fd2af))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-dialogflow-cx/issues/1546)) ([#308](https://github.com/googleapis/nodejs-dialogflow-cx/issues/308)) ([7363dfe](https://github.com/googleapis/nodejs-dialogflow-cx/commit/7363dfe3bf9ba7431871a7a9ecbff68024a37191))
+* use google-gax v3.3.0 ([844c8f7](https://github.com/googleapis/nodejs-dialogflow-cx/commit/844c8f71bf36ed7829542c3f5ff552baee17811a))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-dialogflow-cx/compare/v3.0.0...v3.1.0) (2022-07-08)
 
 
