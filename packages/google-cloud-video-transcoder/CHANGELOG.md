@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.2](https://github.com/googleapis/nodejs-video-transcoder/compare/v2.2.1...v2.2.2) (2022-09-23)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#210](https://github.com/googleapis/nodejs-video-transcoder/issues/210)) ([cd73192](https://github.com/googleapis/nodejs-video-transcoder/commit/cd73192a866208be399035e21b1d51e2a1ae1cfc))
+
 ## [2.2.1](https://github.com/googleapis/nodejs-video-transcoder/compare/v2.2.0...v2.2.1) (2022-09-01)
 
 

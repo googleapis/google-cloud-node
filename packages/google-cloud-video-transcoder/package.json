@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/video-transcoder",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Transcoder client for Node.js",
   "repository": "googleapis/nodejs-video-transcoder",
   "license": "Apache-2.0",
