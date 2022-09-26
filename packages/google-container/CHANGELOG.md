@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/nodejs-cloud-container/compare/v4.1.3...v4.2.0) (2022-09-22)
+
+
+### Features
+
+* Added High Throughput Logging API for Google Kubernetes Engine ([#571](https://github.com/googleapis/nodejs-cloud-container/issues/571)) ([588b19a](https://github.com/googleapis/nodejs-cloud-container/commit/588b19a19daca6d994a28d04e8b9a8a2f081324b))
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#568](https://github.com/googleapis/nodejs-cloud-container/issues/568)) ([575531f](https://github.com/googleapis/nodejs-cloud-container/commit/575531f012d3448eb796f73fda6d62ef9ba425fd))
+
 ## [4.1.3](https://github.com/googleapis/nodejs-cloud-container/compare/v4.1.2...v4.1.3) (2022-09-13)
 
 
