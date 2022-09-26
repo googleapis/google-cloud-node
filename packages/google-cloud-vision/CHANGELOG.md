@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [3.0.1](https://github.com/googleapis/nodejs-vision/compare/v3.0.0...v3.0.1) (2022-09-21)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#1044](https://github.com/googleapis/nodejs-vision/issues/1044)) ([a5baeca](https://github.com/googleapis/nodejs-vision/commit/a5baeca8fc50b9d805b55515db493c86cff26299))
+
 ## [3.0.0](https://github.com/googleapis/nodejs-vision/compare/v2.4.2...v3.0.0) (2022-09-01)
 
 
