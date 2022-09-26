@@ -284,9 +284,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAppConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -315,9 +316,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAppConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -362,9 +364,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAppConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -393,9 +396,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAppConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -414,9 +418,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAppConnectionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -447,9 +452,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAppConnectionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -501,9 +507,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAppConnectionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -532,9 +539,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAppConnectionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -611,10 +619,10 @@ describe('v1.AppConnectionsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest()
       );
       request.appConnection ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAppConnectionRequest', [
-        'appConnection',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest',
+        ['appConnection', 'name']
+      );
       request.appConnection.name = defaultValue1;
       const expectedHeaderRequestParams = `app_connection.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -646,10 +654,10 @@ describe('v1.AppConnectionsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest()
       );
       request.appConnection ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAppConnectionRequest', [
-        'appConnection',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest',
+        ['appConnection', 'name']
+      );
       request.appConnection.name = defaultValue1;
       const expectedHeaderRequestParams = `app_connection.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -702,10 +710,10 @@ describe('v1.AppConnectionsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest()
       );
       request.appConnection ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAppConnectionRequest', [
-        'appConnection',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest',
+        ['appConnection', 'name']
+      );
       request.appConnection.name = defaultValue1;
       const expectedHeaderRequestParams = `app_connection.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -735,10 +743,10 @@ describe('v1.AppConnectionsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest()
       );
       request.appConnection ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAppConnectionRequest', [
-        'appConnection',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest',
+        ['appConnection', 'name']
+      );
       request.appConnection.name = defaultValue1;
       const expectedHeaderRequestParams = `app_connection.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -814,9 +822,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAppConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -847,9 +856,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAppConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -901,9 +911,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAppConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -932,9 +943,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAppConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1010,9 +1022,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1050,9 +1063,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1107,9 +1121,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1138,9 +1153,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1201,9 +1217,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1253,9 +1270,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1303,9 +1321,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1347,7 +1366,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResolveAppConnectionsRequest',
+        '.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1388,7 +1407,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResolveAppConnectionsRequest',
+        '.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1446,7 +1465,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResolveAppConnectionsRequest',
+        '.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1481,7 +1500,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResolveAppConnectionsRequest',
+        '.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1551,7 +1570,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResolveAppConnectionsRequest',
+        '.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1610,7 +1629,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResolveAppConnectionsRequest',
+        '.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1665,7 +1684,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResolveAppConnectionsRequest',
+        '.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;

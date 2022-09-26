@@ -270,9 +270,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -300,9 +301,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -346,9 +348,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -376,9 +379,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -397,10 +401,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new protos.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest()
       );
       request.repository ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRepositoryRequest', [
-        'repository',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest',
+        ['repository', 'name']
+      );
       request.repository.name = defaultValue1;
       const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -429,10 +433,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new protos.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest()
       );
       request.repository ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRepositoryRequest', [
-        'repository',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest',
+        ['repository', 'name']
+      );
       request.repository.name = defaultValue1;
       const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -477,10 +481,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new protos.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest()
       );
       request.repository ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRepositoryRequest', [
-        'repository',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest',
+        ['repository', 'name']
+      );
       request.repository.name = defaultValue1;
       const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -509,10 +513,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new protos.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest()
       );
       request.repository ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRepositoryRequest', [
-        'repository',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest',
+        ['repository', 'name']
+      );
       request.repository.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -530,7 +534,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetPackageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPackageRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetPackageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -558,7 +565,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetPackageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPackageRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetPackageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -602,7 +612,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetPackageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPackageRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetPackageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -630,7 +643,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetPackageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPackageRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetPackageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -648,7 +664,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -676,7 +695,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -720,7 +742,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -748,7 +773,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -766,7 +794,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFileRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetFileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -794,7 +825,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFileRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetFileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -838,7 +872,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFileRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetFileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -863,7 +900,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFileRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetFileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -881,7 +921,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTagRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -909,7 +952,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTagRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -953,7 +999,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTagRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -978,7 +1027,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTagRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -996,7 +1048,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTagRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.CreateTagRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1024,7 +1079,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTagRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.CreateTagRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1068,7 +1126,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTagRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.CreateTagRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1093,7 +1154,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTagRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.CreateTagRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1112,10 +1176,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new protos.google.devtools.artifactregistry.v1beta2.UpdateTagRequest()
       );
       request.tag ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagRequest', [
-        'tag',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.UpdateTagRequest',
+        ['tag', 'name']
+      );
       request.tag.name = defaultValue1;
       const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1144,10 +1208,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new protos.google.devtools.artifactregistry.v1beta2.UpdateTagRequest()
       );
       request.tag ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagRequest', [
-        'tag',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.UpdateTagRequest',
+        ['tag', 'name']
+      );
       request.tag.name = defaultValue1;
       const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1192,10 +1256,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new protos.google.devtools.artifactregistry.v1beta2.UpdateTagRequest()
       );
       request.tag ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagRequest', [
-        'tag',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.UpdateTagRequest',
+        ['tag', 'name']
+      );
       request.tag.name = defaultValue1;
       const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1221,10 +1285,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         new protos.google.devtools.artifactregistry.v1beta2.UpdateTagRequest()
       );
       request.tag ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagRequest', [
-        'tag',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.UpdateTagRequest',
+        ['tag', 'name']
+      );
       request.tag.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1242,7 +1306,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeleteTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1270,7 +1337,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeleteTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1314,7 +1384,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeleteTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1339,7 +1412,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeleteTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1357,9 +1433,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1387,9 +1464,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1433,9 +1511,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1463,9 +1542,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1483,9 +1563,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1513,9 +1594,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1559,9 +1641,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1589,9 +1672,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1609,9 +1693,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1640,9 +1725,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1686,9 +1772,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1716,9 +1803,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1736,9 +1824,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProjectSettingsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1767,9 +1856,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProjectSettingsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1813,9 +1903,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProjectSettingsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1843,9 +1934,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProjectSettingsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1865,7 +1957,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.projectSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateProjectSettingsRequest',
+        '.google.devtools.artifactregistry.v1beta2.UpdateProjectSettingsRequest',
         ['projectSettings', 'name']
       );
       request.projectSettings.name = defaultValue1;
@@ -1898,7 +1990,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.projectSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateProjectSettingsRequest',
+        '.google.devtools.artifactregistry.v1beta2.UpdateProjectSettingsRequest',
         ['projectSettings', 'name']
       );
       request.projectSettings.name = defaultValue1;
@@ -1946,7 +2038,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.projectSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateProjectSettingsRequest',
+        '.google.devtools.artifactregistry.v1beta2.UpdateProjectSettingsRequest',
         ['projectSettings', 'name']
       );
       request.projectSettings.name = defaultValue1;
@@ -1981,7 +2073,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       );
       request.projectSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateProjectSettingsRequest',
+        '.google.devtools.artifactregistry.v1beta2.UpdateProjectSettingsRequest',
         ['projectSettings', 'name']
       );
       request.projectSettings.name = defaultValue1;
@@ -2004,9 +2096,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportAptArtifactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2036,9 +2129,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportAptArtifactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2089,9 +2183,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportAptArtifactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2119,9 +2214,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportAptArtifactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2194,9 +2290,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportYumArtifactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2226,9 +2323,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportYumArtifactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2279,9 +2377,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportYumArtifactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2309,9 +2408,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportYumArtifactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2384,9 +2484,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRepositoryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.CreateRepositoryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2416,9 +2517,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRepositoryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.CreateRepositoryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2469,9 +2571,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRepositoryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.CreateRepositoryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2499,9 +2602,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRepositoryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.CreateRepositoryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2574,9 +2678,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeleteRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2606,9 +2711,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeleteRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2659,9 +2765,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeleteRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2689,9 +2796,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeleteRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2764,9 +2872,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeletePackageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePackageRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeletePackageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2796,9 +2905,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeletePackageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePackageRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeletePackageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2849,9 +2959,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeletePackageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePackageRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeletePackageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2879,9 +2990,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeletePackageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePackageRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeletePackageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2954,9 +3066,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeleteVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2986,9 +3099,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeleteVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3039,9 +3153,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeleteVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3069,9 +3184,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.DeleteVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3144,9 +3260,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3182,9 +3299,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3238,9 +3356,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3268,9 +3387,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3330,9 +3450,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3381,9 +3502,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3430,9 +3552,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3472,9 +3595,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPackagesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListPackagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3510,9 +3634,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPackagesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListPackagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3566,9 +3691,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPackagesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListPackagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3596,9 +3722,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPackagesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListPackagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3658,9 +3785,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPackagesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListPackagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3711,9 +3839,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPackagesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListPackagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3760,9 +3889,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPackagesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListPackagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3802,9 +3932,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3840,9 +3971,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3896,9 +4028,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3926,9 +4059,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3988,9 +4122,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4041,9 +4176,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4090,9 +4226,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4132,7 +4269,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFilesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListFilesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4168,7 +4308,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFilesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListFilesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4222,7 +4365,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFilesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListFilesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4247,7 +4393,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFilesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListFilesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4305,7 +4454,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFilesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListFilesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4354,7 +4506,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFilesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListFilesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4400,7 +4555,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFilesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListFilesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4441,7 +4599,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4477,7 +4638,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4531,7 +4695,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4556,7 +4723,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4614,7 +4784,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4663,7 +4836,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4709,7 +4885,10 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.artifactregistry.v1beta2.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
