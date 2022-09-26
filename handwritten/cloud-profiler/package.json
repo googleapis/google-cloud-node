@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/profiler",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "description": "Adds support for Cloud Profiler to Node.js applications",
   "repository": "googleapis/cloud-profiler-nodejs",
   "main": "build/src/index.js",
