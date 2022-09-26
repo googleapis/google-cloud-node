@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/nodejs-apigee-registry/compare/v0.2.0...v0.2.1) (2022-09-21)
+
+
+### Bug Fixes
+
+* Additional error codes added to service configuration for retry ([#16](https://github.com/googleapis/nodejs-apigee-registry/issues/16)) ([4be826d](https://github.com/googleapis/nodejs-apigee-registry/commit/4be826ddc63cd21391a7c204fc361156c5c0b673))
+* Preserve default values in x-goog-request-params header ([#18](https://github.com/googleapis/nodejs-apigee-registry/issues/18)) ([19c2bf9](https://github.com/googleapis/nodejs-apigee-registry/commit/19c2bf9e6bc00d99fd3b07c9c71ca946ece94695))
+
 ## [0.2.0](https://github.com/googleapis/nodejs-apigee-registry/compare/v0.1.0...v0.2.0) (2022-08-30)
 
 
