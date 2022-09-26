@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [4.4.0](https://github.com/googleapis/nodejs-asset/compare/v4.3.0...v4.4.0) (2022-09-22)
+
+
+### Features
+
+* Add client library support for AssetService v1 SavedQuery APIs ([#662](https://github.com/googleapis/nodejs-asset/issues/662)) ([68c8ece](https://github.com/googleapis/nodejs-asset/commit/68c8eceb6b0ff0c646992439886892eb0528ec8d))
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#658](https://github.com/googleapis/nodejs-asset/issues/658)) ([e351ed1](https://github.com/googleapis/nodejs-asset/commit/e351ed172211d240968beb82cd0f106222f2b632))
+
 ## [4.3.0](https://github.com/googleapis/nodejs-asset/compare/v4.2.0...v4.3.0) (2022-09-09)
 
 
