@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/nodejs-ai-platform/compare/v2.2.0...v2.3.0) (2022-09-21)
+
+
+### Features
+
+* Add deleteFeatureValues in aiplatform v1beta1 featurestore_service.proto ([#371](https://github.com/googleapis/nodejs-ai-platform/issues/371)) ([e1c5cd6](https://github.com/googleapis/nodejs-ai-platform/commit/e1c5cd6b5d03afb03911ba9aa685457aa359a602))
+* Add timestamp_outside_retention_rows_count, RemoveContextChildren, order_by, InputArtifact, read_mask, TransferLearningConfig ([#450](https://github.com/googleapis/nodejs-ai-platform/issues/450)) ([3a3f71f](https://github.com/googleapis/nodejs-ai-platform/commit/3a3f71faf9add8925a9ca9fa6427a6f6f50e0990))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#365](https://github.com/googleapis/nodejs-ai-platform/issues/365)) ([6200e38](https://github.com/googleapis/nodejs-ai-platform/commit/6200e38d052636102ee3d8a817682f2d8c388213))
+* Preserve default values in x-goog-request-params header ([#370](https://github.com/googleapis/nodejs-ai-platform/issues/370)) ([6860cfd](https://github.com/googleapis/nodejs-ai-platform/commit/6860cfded924648ef79706278b66d31736dbfe23))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-ai-platform/compare/v2.1.0...v2.2.0) (2022-08-27)
 
 
