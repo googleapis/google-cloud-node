@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [5.0.3](https://github.com/googleapis/nodejs-speech/compare/v5.0.2...v5.0.3) (2022-09-22)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#928](https://github.com/googleapis/nodejs-speech/issues/928)) ([ea654b5](https://github.com/googleapis/nodejs-speech/commit/ea654b5bf2e4067bf7682f9729cf8364ca4145a5))
+
 ## [5.0.2](https://github.com/googleapis/nodejs-speech/compare/v5.0.1...v5.0.2) (2022-09-01)
 
 
