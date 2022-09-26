@@ -18,7 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {AnalyticsHubServiceClient} = require('@google-cloud/analyticshub').v1;
+const {AnalyticsHubServiceClient} =
+  require('@google-cloud/bigquery-analyticshub').v1;
 const analyticshubClient = new AnalyticsHubServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
