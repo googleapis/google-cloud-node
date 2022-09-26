@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [3.0.2](https://github.com/googleapis/nodejs-monitoring/compare/v3.0.1...v3.0.2) (2022-09-09)
+
+
+### Bug Fixes
+
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-monitoring/issues/1553)) ([#627](https://github.com/googleapis/nodejs-monitoring/issues/627)) ([647e8ab](https://github.com/googleapis/nodejs-monitoring/commit/647e8abda29928143953929c3ef0113ea88e9e9c))
+* use google-gax v3.3.0 ([647e8ab](https://github.com/googleapis/nodejs-monitoring/commit/647e8abda29928143953929c3ef0113ea88e9e9c))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-monitoring/compare/v3.0.0...v3.0.1) (2022-08-23)
 
 
