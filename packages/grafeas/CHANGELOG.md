@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [4.1.2](https://github.com/googleapis/nodejs-grafeas/compare/v4.1.1...v4.1.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#365](https://github.com/googleapis/nodejs-grafeas/issues/365)) ([31ddb47](https://github.com/googleapis/nodejs-grafeas/commit/31ddb47402a6cd1dc56170d6a61954b46de0678e))
+
 ## [4.1.1](https://github.com/googleapis/nodejs-grafeas/compare/v4.1.0...v4.1.1) (2022-09-01)
 
 
