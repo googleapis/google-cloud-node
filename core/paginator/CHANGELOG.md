@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+## [4.0.1](https://github.com/googleapis/nodejs-paginator/compare/v4.0.0...v4.0.1) (2022-09-09)
+
+
+### Bug Fixes
+
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-paginator/issues/1546)) ([#329](https://github.com/googleapis/nodejs-paginator/issues/329)) ([697567b](https://github.com/googleapis/nodejs-paginator/commit/697567bdd86226b740304734b9562a2f2241a96f))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-paginator/compare/v3.0.7...v4.0.0) (2022-05-17)
 
 
