@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/run",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Cloud Run Admin API",
   "repository": "googleapis/nodejs-run",
   "license": "Apache-2.0",

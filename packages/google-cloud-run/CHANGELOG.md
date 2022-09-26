@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.3](https://github.com/googleapis/nodejs-run/compare/v0.2.2...v0.2.3) (2022-09-14)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#24](https://github.com/googleapis/nodejs-run/issues/24)) ([91e2ac5](https://github.com/googleapis/nodejs-run/commit/91e2ac501ccca33172181831a46b0f4e43b34a8d))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-run/issues/1553)) ([#23](https://github.com/googleapis/nodejs-run/issues/23)) ([acda49f](https://github.com/googleapis/nodejs-run/commit/acda49f96c44771c1576f19bdcfb9945d6bffb86))
+* Preserve default values in x-goog-request-params header ([#26](https://github.com/googleapis/nodejs-run/issues/26)) ([debc1eb](https://github.com/googleapis/nodejs-run/commit/debc1eb94c06bf38af391dc7574691444fe2ed93))
+* use google-gax v3.3.0 ([acda49f](https://github.com/googleapis/nodejs-run/commit/acda49f96c44771c1576f19bdcfb9945d6bffb86))
+
 ## [0.2.2](https://github.com/googleapis/nodejs-run/compare/v0.2.1...v0.2.2) (2022-08-23)
 
 
