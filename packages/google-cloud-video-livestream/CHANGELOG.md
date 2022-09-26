@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.3](https://github.com/googleapis/nodejs-video-live-stream/compare/v0.3.2...v0.3.3) (2022-09-14)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#65](https://github.com/googleapis/nodejs-video-live-stream/issues/65)) ([a612a49](https://github.com/googleapis/nodejs-video-live-stream/commit/a612a492a4d4016b913b97431a741c95a0cdd09d))
+
 ## [0.3.2](https://github.com/googleapis/nodejs-video-live-stream/compare/v0.3.1...v0.3.2) (2022-09-01)
 
 

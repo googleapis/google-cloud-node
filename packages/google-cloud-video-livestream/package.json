@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/livestream",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "livestream client for Node.js",
   "repository": "googleapis/nodejs-video-live-stream",
   "license": "Apache-2.0",
