@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/googleapis/nodejs-bigquery-reservation/compare/v2.0.1...v2.0.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#170](https://github.com/googleapis/nodejs-bigquery-reservation/issues/170)) ([a2bdb93](https://github.com/googleapis/nodejs-bigquery-reservation/commit/a2bdb9342de046fec22897343b3a1c1e696928fc))
+
 ## [2.0.1](https://github.com/googleapis/nodejs-bigquery-reservation/compare/v2.0.0...v2.0.1) (2022-09-01)
 
 
