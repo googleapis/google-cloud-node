@@ -1,0 +1,17 @@
+{
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-video-intelligence",
+  "name": "video",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5084810",
+  "default_version": "v1",
+  "api_id": "videointelligence.googleapis.com",
+  "distribution_name": "@google-cloud/video-intelligence",
+  "requires_billing": true,
+  "product_documentation": "https://cloud.google.com/video-intelligence",
+  "codeowner_team": "@googleapis/ml-apis",
+  "name_pretty": "Google Cloud Video Intelligence",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/video-intelligence/latest",
+  "release_level": "stable",
+  "api_shortname": "videointelligence",
+  "library_type": "GAPIC_AUTO"
+}
