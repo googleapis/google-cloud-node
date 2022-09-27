@@ -30,8 +30,8 @@
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
-    "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
-    "system-test": "c8 mocha build/system-test --timeout 600000",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test",
     "fix": "gts fix",
     "docs-test": "linkinator docs",

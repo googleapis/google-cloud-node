@@ -7,13 +7,14 @@
     "packages/google-cloud-beyondcorp-appgateways": {},
     "packages/google-cloud-beyondcorp-clientconnectorservices": {},
     "packages/google-cloud-beyondcorp-clientgateways": {},
+    "packages/google-cloud-bigquery-analyticshub": {},
     "packages/google-cloud-gkemulticloud": {},
     "packages/google-cloud-redis": {},
     "packages/google-cloud-security-publicca": {},
+    "packages/google-cloud-videointelligence": {},
     "packages/google-devtools-artifactregistry": {},
     "packages/google-iam": {},
-    "packages/typeless-sample-bot": {},
-    "packages/google-cloud-bigquery-analyticshub": {}
+    "packages/typeless-sample-bot": {}
   },
   "release-type": "node"
 }
