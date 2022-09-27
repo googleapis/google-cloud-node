@@ -40,7 +40,7 @@ LATEST_VERSION=$(jq -r ".[\"${PACKAGE_PATH}\"]" .release-please-manifest.json)
 LATEST_RELEASE_SHA=$(git log --format=oneline ${PACKAGE_PATH}/package.json | grep release | head -n 1 | awk '{ print $1 }')
 echo "Found latest version: ${LATEST_VERSION} at ${LATEST_RELEASE_SHA}"
 
-COMMAND="git tag ${LATEST_RELEASE_SHA} ${COMPONENT}-v${LATEST_VERSION}"
+COMMAND="git tag ${COMPONENT}-v${LATEST_VERSION} ${LATEST_RELEASE_SHA}"
 echo ${COMMAND}
 
 if [[ "${PUSH_ARG}" == "--push" ]]

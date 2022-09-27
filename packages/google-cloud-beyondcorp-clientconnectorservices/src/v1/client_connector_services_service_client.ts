@@ -611,7 +611,7 @@ export class ClientConnectorServicesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getClientConnectorService(
@@ -746,7 +746,7 @@ export class ClientConnectorServicesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createClientConnectorService(
@@ -916,7 +916,7 @@ export class ClientConnectorServicesServiceClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         'client_connector_service.name':
-          request.clientConnectorService!.name || '',
+          request.clientConnectorService!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateClientConnectorService(
@@ -1075,7 +1075,7 @@ export class ClientConnectorServicesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteClientConnectorService(
@@ -1217,7 +1217,7 @@ export class ClientConnectorServicesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listClientConnectorServices(
@@ -1264,7 +1264,7 @@ export class ClientConnectorServicesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listClientConnectorServices'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1316,7 +1316,7 @@ export class ClientConnectorServicesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listClientConnectorServices'];
     const callSettings = defaultCallSettings.merge(options);

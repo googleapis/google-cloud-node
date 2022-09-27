@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -252,26 +267,26 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.apikeys.v2.Key()
       );
       client.innerApiCalls.getKey = stubSimpleCall(expectedResponse);
       const [response] = await client.getKey(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.getKey as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getKey without error using callback', async () => {
@@ -283,15 +298,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.apikeys.v2.Key()
       );
@@ -314,11 +326,14 @@ describe('v2.ApiKeysClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.getKey as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getKey with error', async () => {
@@ -330,23 +345,23 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getKey = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getKey(request), expectedError);
-      assert(
-        (client.innerApiCalls.getKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.getKey as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getKey with closed client', async () => {
@@ -358,7 +373,11 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getKey(request), expectedError);
@@ -375,26 +394,26 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyStringRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyStringRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyStringResponse()
       );
       client.innerApiCalls.getKeyString = stubSimpleCall(expectedResponse);
       const [response] = await client.getKeyString(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getKeyString as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getKeyString as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKeyString as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getKeyString without error using callback', async () => {
@@ -406,15 +425,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyStringRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyStringRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyStringResponse()
       );
@@ -437,11 +453,14 @@ describe('v2.ApiKeysClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getKeyString as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getKeyString as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKeyString as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getKeyString with error', async () => {
@@ -453,26 +472,26 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyStringRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyStringRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getKeyString = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getKeyString(request), expectedError);
-      assert(
-        (client.innerApiCalls.getKeyString as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getKeyString as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKeyString as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getKeyString with closed client', async () => {
@@ -484,7 +503,11 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.GetKeyStringRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.GetKeyStringRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getKeyString(request), expectedError);
@@ -501,18 +524,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.LookupKeyRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.apikeys.v2.LookupKeyResponse()
       );
       client.innerApiCalls.lookupKey = stubSimpleCall(expectedResponse);
       const [response] = await client.lookupKey(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.lookupKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes lookupKey without error using callback', async () => {
@@ -524,7 +541,6 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.LookupKeyRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.apikeys.v2.LookupKeyResponse()
       );
@@ -547,11 +563,6 @@ describe('v2.ApiKeysClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.lookupKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes lookupKey with error', async () => {
@@ -563,15 +574,9 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.LookupKeyRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.lookupKey = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.lookupKey(request), expectedError);
-      assert(
-        (client.innerApiCalls.lookupKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes lookupKey with closed client', async () => {
@@ -599,15 +604,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.CreateKeyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.CreateKeyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -615,11 +617,14 @@ describe('v2.ApiKeysClient', () => {
       const [operation] = await client.createKey(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createKey without error using callback', async () => {
@@ -631,15 +636,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.CreateKeyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.CreateKeyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -669,11 +671,14 @@ describe('v2.ApiKeysClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createKey with call error', async () => {
@@ -685,26 +690,26 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.CreateKeyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.CreateKeyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKey = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createKey(request), expectedError);
-      assert(
-        (client.innerApiCalls.createKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createKey with LRO error', async () => {
@@ -716,15 +721,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.CreateKeyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.CreateKeyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKey = stubLongRunningCall(
         undefined,
@@ -733,11 +735,14 @@ describe('v2.ApiKeysClient', () => {
       );
       const [operation] = await client.createKey(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateKeyProgress without error', async () => {
@@ -789,16 +794,13 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.UpdateKeyRequest()
       );
-      request.key = {};
-      request.key.name = '';
-      const expectedHeaderRequestParams = 'key.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.key ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UpdateKeyRequest',
+        ['key', 'name']
+      );
+      request.key.name = defaultValue1;
+      const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -806,11 +808,14 @@ describe('v2.ApiKeysClient', () => {
       const [operation] = await client.updateKey(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateKey without error using callback', async () => {
@@ -822,16 +827,13 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.UpdateKeyRequest()
       );
-      request.key = {};
-      request.key.name = '';
-      const expectedHeaderRequestParams = 'key.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.key ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UpdateKeyRequest',
+        ['key', 'name']
+      );
+      request.key.name = defaultValue1;
+      const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -861,11 +863,14 @@ describe('v2.ApiKeysClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateKey with call error', async () => {
@@ -877,27 +882,27 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.UpdateKeyRequest()
       );
-      request.key = {};
-      request.key.name = '';
-      const expectedHeaderRequestParams = 'key.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.key ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UpdateKeyRequest',
+        ['key', 'name']
+      );
+      request.key.name = defaultValue1;
+      const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateKey = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateKey(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateKey with LRO error', async () => {
@@ -909,16 +914,13 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.UpdateKeyRequest()
       );
-      request.key = {};
-      request.key.name = '';
-      const expectedHeaderRequestParams = 'key.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.key ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UpdateKeyRequest',
+        ['key', 'name']
+      );
+      request.key.name = defaultValue1;
+      const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateKey = stubLongRunningCall(
         undefined,
@@ -927,11 +929,14 @@ describe('v2.ApiKeysClient', () => {
       );
       const [operation] = await client.updateKey(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateKeyProgress without error', async () => {
@@ -983,15 +988,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.DeleteKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.DeleteKeyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -999,11 +1001,14 @@ describe('v2.ApiKeysClient', () => {
       const [operation] = await client.deleteKey(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteKey without error using callback', async () => {
@@ -1015,15 +1020,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.DeleteKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.DeleteKeyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1053,11 +1055,14 @@ describe('v2.ApiKeysClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteKey with call error', async () => {
@@ -1069,26 +1074,26 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.DeleteKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.DeleteKeyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteKey = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteKey(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteKey with LRO error', async () => {
@@ -1100,15 +1105,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.DeleteKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.DeleteKeyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteKey = stubLongRunningCall(
         undefined,
@@ -1117,11 +1119,14 @@ describe('v2.ApiKeysClient', () => {
       );
       const [operation] = await client.deleteKey(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteKeyProgress without error', async () => {
@@ -1173,15 +1178,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.UndeleteKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UndeleteKeyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1189,11 +1191,14 @@ describe('v2.ApiKeysClient', () => {
       const [operation] = await client.undeleteKey(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.undeleteKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeleteKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeleteKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeleteKey without error using callback', async () => {
@@ -1205,15 +1210,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.UndeleteKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UndeleteKeyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1243,11 +1245,14 @@ describe('v2.ApiKeysClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.undeleteKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeleteKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeleteKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeleteKey with call error', async () => {
@@ -1259,26 +1264,26 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.UndeleteKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UndeleteKeyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteKey = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.undeleteKey(request), expectedError);
-      assert(
-        (client.innerApiCalls.undeleteKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeleteKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeleteKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeleteKey with LRO error', async () => {
@@ -1290,15 +1295,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.UndeleteKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.UndeleteKeyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteKey = stubLongRunningCall(
         undefined,
@@ -1307,11 +1309,14 @@ describe('v2.ApiKeysClient', () => {
       );
       const [operation] = await client.undeleteKey(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.undeleteKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeleteKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeleteKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUndeleteKeyProgress without error', async () => {
@@ -1363,15 +1368,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
@@ -1380,11 +1382,14 @@ describe('v2.ApiKeysClient', () => {
       client.innerApiCalls.listKeys = stubSimpleCall(expectedResponse);
       const [response] = await client.listKeys(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listKeys as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listKeys as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKeys as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listKeys without error using callback', async () => {
@@ -1396,15 +1401,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
@@ -1429,11 +1431,14 @@ describe('v2.ApiKeysClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listKeys as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listKeys as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKeys as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listKeys with error', async () => {
@@ -1445,23 +1450,23 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listKeys = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listKeys(request), expectedError);
-      assert(
-        (client.innerApiCalls.listKeys as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listKeys as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKeys as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listKeysStream without error', async () => {
@@ -1473,8 +1478,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
@@ -1502,10 +1511,12 @@ describe('v2.ApiKeysClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listKeys, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listKeys.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listKeys.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1518,8 +1529,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKeys.createStream = stubPageStreamingCall(
         undefined,
@@ -1544,10 +1559,12 @@ describe('v2.ApiKeysClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listKeys, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listKeys.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listKeys.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1560,8 +1577,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
         generateSampleMessage(new protos.google.api.apikeys.v2.Key()),
@@ -1580,10 +1601,12 @@ describe('v2.ApiKeysClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listKeys.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listKeys.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1596,8 +1619,12 @@ describe('v2.ApiKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.apikeys.v2.ListKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.apikeys.v2.ListKeysRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKeys.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1615,10 +1642,12 @@ describe('v2.ApiKeysClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listKeys.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listKeys.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

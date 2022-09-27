@@ -1,16 +1,19 @@
 {
-  "release-type": "node",
   "packages": {
-    "packages/google-cloud-beyondcorp-appconnectors": {},
-    "packages/google-cloud-beyondcorp-appgateways": {},
-    "packages/google-cloud-beyondcorp-clientgateways": {},
-    "packages/google-cloud-beyondcorp-clientconnectorservices": {},
-    "packages/google-cloud-beyondcorp-appconnections": {},
-    "packages/typeless-sample-bot": {},
-    "packages/google-cloud-gkemulticloud": {},
     "packages/google-api-apikeys": {},
     "packages/google-cloud-batch": {},
+    "packages/google-cloud-beyondcorp-appconnections": {},
+    "packages/google-cloud-beyondcorp-appconnectors": {},
+    "packages/google-cloud-beyondcorp-appgateways": {},
+    "packages/google-cloud-beyondcorp-clientconnectorservices": {},
+    "packages/google-cloud-beyondcorp-clientgateways": {},
+    "packages/google-cloud-gkemulticloud": {},
+    "packages/google-cloud-redis": {},
+    "packages/google-cloud-security-publicca": {},
+    "packages/google-devtools-artifactregistry": {},
     "packages/google-iam": {},
-    "packages/google-cloud-security-publicca": {}
-  }
+    "packages/typeless-sample-bot": {},
+    "packages/google-cloud-bigquery-analyticshub": {}
+  },
+  "release-type": "node"
 }

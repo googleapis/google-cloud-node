@@ -72,6 +72,16 @@ echo "adding compile step to samples-test"
 jq -r ".scripts[\"samples-test\"] = \"npm run compile && cd samples/ && npm link ../ && npm i && npm test\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
 mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
 
+IMAGE="gcr.io/cloud-devrel-public-resources/owlbot-nodejs-mono-repo:latest"
+echo "Running post-processor: ${IMAGE}"
+docker pull "${IMAGE}"
+docker run --rm \
+  --user $(id -u):$(id -g) \
+  -v $(pwd):/workspace/google-cloud-node \
+  -w /workspace/google-cloud-node \
+  -e "DEFAULT_BRANCH=main" \
+  "${IMAGE}"
+
 # add changes to local git directory
 git add .
 git commit -am "build: add release-please config, fix owlbot-config"
