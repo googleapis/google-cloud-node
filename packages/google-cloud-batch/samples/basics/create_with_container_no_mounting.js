@@ -82,7 +82,7 @@ function main(projectId, region, jobName) {
   job.logs_policy.destination = batch.LogsPolicy.Destination.CLOUD_LOGGING;
 
   // The job's parent is the project and region in which the job will run
-  const parent = 'projects/' + projectId + '/locations/' + region;
+  const parent = `projects/${projectId}/locations/${region}`;
 
   async function callCreateJob() {
     // Construct request
