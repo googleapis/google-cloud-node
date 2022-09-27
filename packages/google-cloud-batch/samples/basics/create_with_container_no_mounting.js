@@ -14,6 +14,16 @@
 
 'use strict';
 
+/**
+ * Creates a new Batch job that runs the specified container on multiple VM instances at once.
+ *
+ * @param {string} projectId - ID or number of the Google Cloud project you want to use.
+ * @param {string} region - The Google Cloud region to use, e.g. 'us-central1'
+ * @param {string} jobName - ID used to uniquely identify the Job within this project and region.
+ *  This field should contain at most 63 characters.
+ *  Only alphanumeric characters or '-' are accepted.
+ *  The '-' character cannot be the first or the last one.
+ */
 function main(projectId, region, jobName) {
   // [START batch_create_container_job]
   /**
