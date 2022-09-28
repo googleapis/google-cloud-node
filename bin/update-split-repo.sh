@@ -55,7 +55,7 @@ README.md'
 # Delete the owlbot.py, if any, and replace it with just ignoring the README 
 OWLBOT_PY=/tmp/${SPLIT_REPO}/owlbot.py
 
-rm OWLBOT_PY
+rm $OWLBOT_PY
 
 echo "$IGNORE_README_TXT" >> $OWLBOT_PY
 README_MD=/tmp/${SPLIT_REPO}/README.md
