@@ -41,3 +41,6 @@ ${SCRIPT_DIR}/migrate-git-history.sh \
   "${PACKAGE_PATH}" \
   ".kokoro,.github,.trampolinerc,SECURITY.md,renovate.json" \
   ".github/.OwlBot.yaml"
+
+# run the script to update the split repo
+${SCRIPT_DIR}/update-split-repo.sh ${SPLIT_REPO} ${ARTIFACT_NAME}
