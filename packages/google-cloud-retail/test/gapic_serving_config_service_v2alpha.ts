@@ -248,9 +248,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateServingConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServingConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateServingConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -280,9 +281,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateServingConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServingConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateServingConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -327,9 +329,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateServingConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServingConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateServingConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -358,9 +361,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateServingConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServingConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateServingConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -379,9 +383,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteServingConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServingConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.DeleteServingConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -411,9 +416,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteServingConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServingConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.DeleteServingConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -458,9 +464,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteServingConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServingConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.DeleteServingConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -489,9 +496,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteServingConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServingConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.DeleteServingConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -511,10 +519,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.UpdateServingConfigRequest()
       );
       request.servingConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateServingConfigRequest', [
-        'servingConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.UpdateServingConfigRequest',
+        ['servingConfig', 'name']
+      );
       request.servingConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -545,10 +553,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.UpdateServingConfigRequest()
       );
       request.servingConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateServingConfigRequest', [
-        'servingConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.UpdateServingConfigRequest',
+        ['servingConfig', 'name']
+      );
       request.servingConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -594,10 +602,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.UpdateServingConfigRequest()
       );
       request.servingConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateServingConfigRequest', [
-        'servingConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.UpdateServingConfigRequest',
+        ['servingConfig', 'name']
+      );
       request.servingConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -627,10 +635,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.UpdateServingConfigRequest()
       );
       request.servingConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateServingConfigRequest', [
-        'servingConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.UpdateServingConfigRequest',
+        ['servingConfig', 'name']
+      );
       request.servingConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -649,9 +657,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetServingConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServingConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetServingConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -680,9 +689,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetServingConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServingConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetServingConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -727,9 +737,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetServingConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServingConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetServingConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -758,9 +769,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetServingConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServingConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetServingConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -779,9 +791,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddControlRequest', [
-        'servingConfig',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.AddControlRequest',
+        ['servingConfig']
+      );
       request.servingConfig = defaultValue1;
       const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -810,9 +823,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddControlRequest', [
-        'servingConfig',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.AddControlRequest',
+        ['servingConfig']
+      );
       request.servingConfig = defaultValue1;
       const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -857,9 +871,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddControlRequest', [
-        'servingConfig',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.AddControlRequest',
+        ['servingConfig']
+      );
       request.servingConfig = defaultValue1;
       const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -888,9 +903,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddControlRequest', [
-        'servingConfig',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.AddControlRequest',
+        ['servingConfig']
+      );
       request.servingConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -909,9 +925,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.RemoveControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveControlRequest', [
-        'servingConfig',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.RemoveControlRequest',
+        ['servingConfig']
+      );
       request.servingConfig = defaultValue1;
       const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -940,9 +957,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.RemoveControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveControlRequest', [
-        'servingConfig',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.RemoveControlRequest',
+        ['servingConfig']
+      );
       request.servingConfig = defaultValue1;
       const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -987,9 +1005,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.RemoveControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveControlRequest', [
-        'servingConfig',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.RemoveControlRequest',
+        ['servingConfig']
+      );
       request.servingConfig = defaultValue1;
       const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1018,9 +1037,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.RemoveControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveControlRequest', [
-        'servingConfig',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.RemoveControlRequest',
+        ['servingConfig']
+      );
       request.servingConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1039,9 +1059,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1079,9 +1100,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1134,9 +1156,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1165,9 +1188,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1226,9 +1250,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1276,9 +1301,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1325,9 +1351,10 @@ describe('v2alpha.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListServingConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListServingConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -238,10 +238,10 @@ describe('v2.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2.UpdateCatalogRequest()
       );
       request.catalog ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCatalogRequest', [
-        'catalog',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.UpdateCatalogRequest',
+        ['catalog', 'name']
+      );
       request.catalog.name = defaultValue1;
       const expectedHeaderRequestParams = `catalog.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -270,10 +270,10 @@ describe('v2.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2.UpdateCatalogRequest()
       );
       request.catalog ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCatalogRequest', [
-        'catalog',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.UpdateCatalogRequest',
+        ['catalog', 'name']
+      );
       request.catalog.name = defaultValue1;
       const expectedHeaderRequestParams = `catalog.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -318,10 +318,10 @@ describe('v2.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2.UpdateCatalogRequest()
       );
       request.catalog ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCatalogRequest', [
-        'catalog',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.UpdateCatalogRequest',
+        ['catalog', 'name']
+      );
       request.catalog.name = defaultValue1;
       const expectedHeaderRequestParams = `catalog.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -350,10 +350,10 @@ describe('v2.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2.UpdateCatalogRequest()
       );
       request.catalog ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCatalogRequest', [
-        'catalog',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.UpdateCatalogRequest',
+        ['catalog', 'name']
+      );
       request.catalog.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -371,9 +371,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.SetDefaultBranchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetDefaultBranchRequest', [
-        'catalog',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.SetDefaultBranchRequest',
+        ['catalog']
+      );
       request.catalog = defaultValue1;
       const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -401,9 +402,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.SetDefaultBranchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetDefaultBranchRequest', [
-        'catalog',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.SetDefaultBranchRequest',
+        ['catalog']
+      );
       request.catalog = defaultValue1;
       const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -447,9 +449,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.SetDefaultBranchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetDefaultBranchRequest', [
-        'catalog',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.SetDefaultBranchRequest',
+        ['catalog']
+      );
       request.catalog = defaultValue1;
       const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -477,9 +480,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.SetDefaultBranchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetDefaultBranchRequest', [
-        'catalog',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.SetDefaultBranchRequest',
+        ['catalog']
+      );
       request.catalog = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -497,9 +501,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.GetDefaultBranchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDefaultBranchRequest', [
-        'catalog',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.GetDefaultBranchRequest',
+        ['catalog']
+      );
       request.catalog = defaultValue1;
       const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -527,9 +532,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.GetDefaultBranchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDefaultBranchRequest', [
-        'catalog',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.GetDefaultBranchRequest',
+        ['catalog']
+      );
       request.catalog = defaultValue1;
       const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -573,9 +579,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.GetDefaultBranchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDefaultBranchRequest', [
-        'catalog',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.GetDefaultBranchRequest',
+        ['catalog']
+      );
       request.catalog = defaultValue1;
       const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -603,9 +610,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.GetDefaultBranchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDefaultBranchRequest', [
-        'catalog',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.GetDefaultBranchRequest',
+        ['catalog']
+      );
       request.catalog = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -623,9 +631,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.GetCompletionConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCompletionConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.GetCompletionConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -654,9 +663,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.GetCompletionConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCompletionConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.GetCompletionConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -700,9 +710,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.GetCompletionConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCompletionConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.GetCompletionConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -730,9 +741,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.GetCompletionConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCompletionConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.GetCompletionConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -752,7 +764,7 @@ describe('v2.CatalogServiceClient', () => {
       );
       request.completionConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCompletionConfigRequest',
+        '.google.cloud.retail.v2.UpdateCompletionConfigRequest',
         ['completionConfig', 'name']
       );
       request.completionConfig.name = defaultValue1;
@@ -785,7 +797,7 @@ describe('v2.CatalogServiceClient', () => {
       );
       request.completionConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCompletionConfigRequest',
+        '.google.cloud.retail.v2.UpdateCompletionConfigRequest',
         ['completionConfig', 'name']
       );
       request.completionConfig.name = defaultValue1;
@@ -833,7 +845,7 @@ describe('v2.CatalogServiceClient', () => {
       );
       request.completionConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCompletionConfigRequest',
+        '.google.cloud.retail.v2.UpdateCompletionConfigRequest',
         ['completionConfig', 'name']
       );
       request.completionConfig.name = defaultValue1;
@@ -868,7 +880,7 @@ describe('v2.CatalogServiceClient', () => {
       );
       request.completionConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCompletionConfigRequest',
+        '.google.cloud.retail.v2.UpdateCompletionConfigRequest',
         ['completionConfig', 'name']
       );
       request.completionConfig.name = defaultValue1;
@@ -891,9 +903,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.GetAttributesConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAttributesConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.GetAttributesConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -922,9 +935,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.GetAttributesConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAttributesConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.GetAttributesConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -968,9 +982,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.GetAttributesConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAttributesConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.GetAttributesConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -998,9 +1013,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.GetAttributesConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAttributesConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.GetAttributesConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1020,7 +1036,7 @@ describe('v2.CatalogServiceClient', () => {
       );
       request.attributesConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAttributesConfigRequest',
+        '.google.cloud.retail.v2.UpdateAttributesConfigRequest',
         ['attributesConfig', 'name']
       );
       request.attributesConfig.name = defaultValue1;
@@ -1053,7 +1069,7 @@ describe('v2.CatalogServiceClient', () => {
       );
       request.attributesConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAttributesConfigRequest',
+        '.google.cloud.retail.v2.UpdateAttributesConfigRequest',
         ['attributesConfig', 'name']
       );
       request.attributesConfig.name = defaultValue1;
@@ -1101,7 +1117,7 @@ describe('v2.CatalogServiceClient', () => {
       );
       request.attributesConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAttributesConfigRequest',
+        '.google.cloud.retail.v2.UpdateAttributesConfigRequest',
         ['attributesConfig', 'name']
       );
       request.attributesConfig.name = defaultValue1;
@@ -1136,7 +1152,7 @@ describe('v2.CatalogServiceClient', () => {
       );
       request.attributesConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAttributesConfigRequest',
+        '.google.cloud.retail.v2.UpdateAttributesConfigRequest',
         ['attributesConfig', 'name']
       );
       request.attributesConfig.name = defaultValue1;
@@ -1159,9 +1175,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.AddCatalogAttributeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddCatalogAttributeRequest', [
-        'attributesConfig',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.AddCatalogAttributeRequest',
+        ['attributesConfig']
+      );
       request.attributesConfig = defaultValue1;
       const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1190,9 +1207,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.AddCatalogAttributeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddCatalogAttributeRequest', [
-        'attributesConfig',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.AddCatalogAttributeRequest',
+        ['attributesConfig']
+      );
       request.attributesConfig = defaultValue1;
       const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1236,9 +1254,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.AddCatalogAttributeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddCatalogAttributeRequest', [
-        'attributesConfig',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.AddCatalogAttributeRequest',
+        ['attributesConfig']
+      );
       request.attributesConfig = defaultValue1;
       const expectedHeaderRequestParams = `attributes_config=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1266,9 +1285,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.AddCatalogAttributeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddCatalogAttributeRequest', [
-        'attributesConfig',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.AddCatalogAttributeRequest',
+        ['attributesConfig']
+      );
       request.attributesConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1287,7 +1307,7 @@ describe('v2.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2.RemoveCatalogAttributeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveCatalogAttributeRequest',
+        '.google.cloud.retail.v2.RemoveCatalogAttributeRequest',
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
@@ -1319,7 +1339,7 @@ describe('v2.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2.RemoveCatalogAttributeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveCatalogAttributeRequest',
+        '.google.cloud.retail.v2.RemoveCatalogAttributeRequest',
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
@@ -1366,7 +1386,7 @@ describe('v2.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2.RemoveCatalogAttributeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveCatalogAttributeRequest',
+        '.google.cloud.retail.v2.RemoveCatalogAttributeRequest',
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
@@ -1400,7 +1420,7 @@ describe('v2.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2.RemoveCatalogAttributeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveCatalogAttributeRequest',
+        '.google.cloud.retail.v2.RemoveCatalogAttributeRequest',
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
@@ -1424,7 +1444,7 @@ describe('v2.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2.ReplaceCatalogAttributeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ReplaceCatalogAttributeRequest',
+        '.google.cloud.retail.v2.ReplaceCatalogAttributeRequest',
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
@@ -1456,7 +1476,7 @@ describe('v2.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2.ReplaceCatalogAttributeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ReplaceCatalogAttributeRequest',
+        '.google.cloud.retail.v2.ReplaceCatalogAttributeRequest',
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
@@ -1503,7 +1523,7 @@ describe('v2.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2.ReplaceCatalogAttributeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ReplaceCatalogAttributeRequest',
+        '.google.cloud.retail.v2.ReplaceCatalogAttributeRequest',
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
@@ -1537,7 +1557,7 @@ describe('v2.CatalogServiceClient', () => {
         new protos.google.cloud.retail.v2.ReplaceCatalogAttributeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ReplaceCatalogAttributeRequest',
+        '.google.cloud.retail.v2.ReplaceCatalogAttributeRequest',
         ['attributesConfig']
       );
       request.attributesConfig = defaultValue1;
@@ -1560,9 +1580,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ListCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCatalogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ListCatalogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1592,9 +1613,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ListCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCatalogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ListCatalogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1640,9 +1662,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ListCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCatalogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ListCatalogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1670,9 +1693,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ListCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCatalogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ListCatalogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1720,9 +1744,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ListCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCatalogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ListCatalogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1767,9 +1792,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ListCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCatalogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ListCatalogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1809,9 +1835,10 @@ describe('v2.CatalogServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ListCatalogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCatalogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ListCatalogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

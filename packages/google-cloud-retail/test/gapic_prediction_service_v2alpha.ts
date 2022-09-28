@@ -205,9 +205,10 @@ describe('v2alpha.PredictionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PredictRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PredictRequest', [
-        'placement',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.PredictRequest',
+        ['placement']
+      );
       request.placement = defaultValue1;
       const expectedHeaderRequestParams = `placement=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -236,9 +237,10 @@ describe('v2alpha.PredictionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PredictRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PredictRequest', [
-        'placement',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.PredictRequest',
+        ['placement']
+      );
       request.placement = defaultValue1;
       const expectedHeaderRequestParams = `placement=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -283,9 +285,10 @@ describe('v2alpha.PredictionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PredictRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PredictRequest', [
-        'placement',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.PredictRequest',
+        ['placement']
+      );
       request.placement = defaultValue1;
       const expectedHeaderRequestParams = `placement=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -311,9 +314,10 @@ describe('v2alpha.PredictionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PredictRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PredictRequest', [
-        'placement',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.PredictRequest',
+        ['placement']
+      );
       request.placement = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();

@@ -234,9 +234,10 @@ describe('v2.CompletionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.CompleteQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteQueryRequest', [
-        'catalog',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.CompleteQueryRequest',
+        ['catalog']
+      );
       request.catalog = defaultValue1;
       const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -264,9 +265,10 @@ describe('v2.CompletionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.CompleteQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteQueryRequest', [
-        'catalog',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.CompleteQueryRequest',
+        ['catalog']
+      );
       request.catalog = defaultValue1;
       const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -310,9 +312,10 @@ describe('v2.CompletionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.CompleteQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteQueryRequest', [
-        'catalog',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.CompleteQueryRequest',
+        ['catalog']
+      );
       request.catalog = defaultValue1;
       const expectedHeaderRequestParams = `catalog=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -340,9 +343,10 @@ describe('v2.CompletionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.CompleteQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteQueryRequest', [
-        'catalog',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.CompleteQueryRequest',
+        ['catalog']
+      );
       request.catalog = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -360,9 +364,10 @@ describe('v2.CompletionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ImportCompletionDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportCompletionDataRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ImportCompletionDataRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -392,9 +397,10 @@ describe('v2.CompletionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ImportCompletionDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportCompletionDataRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ImportCompletionDataRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -445,9 +451,10 @@ describe('v2.CompletionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ImportCompletionDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportCompletionDataRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ImportCompletionDataRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -475,9 +482,10 @@ describe('v2.CompletionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ImportCompletionDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportCompletionDataRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ImportCompletionDataRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -237,7 +237,10 @@ describe('v2beta.SearchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.SearchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchRequest', ['placement']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.SearchRequest',
+        ['placement']
+      );
       request.placement = defaultValue1;
       const expectedHeaderRequestParams = `placement=${defaultValue1}`;
       const expectedResponse = [
@@ -273,7 +276,10 @@ describe('v2beta.SearchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.SearchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchRequest', ['placement']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.SearchRequest',
+        ['placement']
+      );
       request.placement = defaultValue1;
       const expectedHeaderRequestParams = `placement=${defaultValue1}`;
       const expectedResponse = [
@@ -327,7 +333,10 @@ describe('v2beta.SearchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.SearchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchRequest', ['placement']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.SearchRequest',
+        ['placement']
+      );
       request.placement = defaultValue1;
       const expectedHeaderRequestParams = `placement=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -352,7 +361,10 @@ describe('v2beta.SearchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.SearchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchRequest', ['placement']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.SearchRequest',
+        ['placement']
+      );
       request.placement = defaultValue1;
       const expectedHeaderRequestParams = `placement=${defaultValue1}`;
       const expectedResponse = [
@@ -412,7 +424,10 @@ describe('v2beta.SearchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.SearchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchRequest', ['placement']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.SearchRequest',
+        ['placement']
+      );
       request.placement = defaultValue1;
       const expectedHeaderRequestParams = `placement=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -463,7 +478,10 @@ describe('v2beta.SearchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.SearchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchRequest', ['placement']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.SearchRequest',
+        ['placement']
+      );
       request.placement = defaultValue1;
       const expectedHeaderRequestParams = `placement=${defaultValue1}`;
       const expectedResponse = [
@@ -509,7 +527,10 @@ describe('v2beta.SearchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.SearchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchRequest', ['placement']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.SearchRequest',
+        ['placement']
+      );
       request.placement = defaultValue1;
       const expectedHeaderRequestParams = `placement=${defaultValue1}`;
       const expectedError = new Error('expected');

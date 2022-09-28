@@ -274,7 +274,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.PauseModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.PauseModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -302,7 +305,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.PauseModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.PauseModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -346,7 +352,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.PauseModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.PauseModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -374,7 +383,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.PauseModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.PauseModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -392,7 +404,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ResumeModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.ResumeModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -420,7 +435,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ResumeModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.ResumeModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -464,7 +482,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ResumeModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.ResumeModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -492,7 +513,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ResumeModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.ResumeModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -510,7 +534,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.DeleteModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.DeleteModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -538,7 +565,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.DeleteModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.DeleteModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -582,7 +612,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.DeleteModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.DeleteModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -610,7 +643,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.DeleteModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.DeleteModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -629,10 +665,10 @@ describe('v2beta.ModelServiceClient', () => {
         new protos.google.cloud.retail.v2beta.UpdateModelRequest()
       );
       request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateModelRequest', [
-        'model',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.UpdateModelRequest',
+        ['model', 'name']
+      );
       request.model.name = defaultValue1;
       const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -661,10 +697,10 @@ describe('v2beta.ModelServiceClient', () => {
         new protos.google.cloud.retail.v2beta.UpdateModelRequest()
       );
       request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateModelRequest', [
-        'model',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.UpdateModelRequest',
+        ['model', 'name']
+      );
       request.model.name = defaultValue1;
       const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -709,10 +745,10 @@ describe('v2beta.ModelServiceClient', () => {
         new protos.google.cloud.retail.v2beta.UpdateModelRequest()
       );
       request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateModelRequest', [
-        'model',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.UpdateModelRequest',
+        ['model', 'name']
+      );
       request.model.name = defaultValue1;
       const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -741,10 +777,10 @@ describe('v2beta.ModelServiceClient', () => {
         new protos.google.cloud.retail.v2beta.UpdateModelRequest()
       );
       request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateModelRequest', [
-        'model',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.UpdateModelRequest',
+        ['model', 'name']
+      );
       request.model.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -762,9 +798,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.CreateModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.CreateModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -793,9 +830,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.CreateModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.CreateModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -846,9 +884,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.CreateModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.CreateModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -876,9 +915,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.CreateModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.CreateModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -948,7 +988,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.TuneModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TuneModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.TuneModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -977,7 +1020,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.TuneModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TuneModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.TuneModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1028,7 +1074,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.TuneModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TuneModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.TuneModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1056,7 +1105,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.TuneModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TuneModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.TuneModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1126,9 +1178,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1158,9 +1211,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1206,9 +1260,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1236,9 +1291,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1289,9 +1345,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1339,9 +1396,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1381,9 +1439,10 @@ describe('v2beta.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2beta.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

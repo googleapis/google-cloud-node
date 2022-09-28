@@ -237,9 +237,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateControlRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateControlRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -267,9 +268,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateControlRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateControlRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -313,9 +315,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateControlRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateControlRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -343,9 +346,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateControlRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateControlRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -363,9 +367,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteControlRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.DeleteControlRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -393,9 +398,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteControlRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.DeleteControlRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -439,9 +445,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteControlRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.DeleteControlRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -469,9 +476,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteControlRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.DeleteControlRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -490,10 +498,10 @@ describe('v2alpha.ControlServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.UpdateControlRequest()
       );
       request.control ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateControlRequest', [
-        'control',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.UpdateControlRequest',
+        ['control', 'name']
+      );
       request.control.name = defaultValue1;
       const expectedHeaderRequestParams = `control.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -522,10 +530,10 @@ describe('v2alpha.ControlServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.UpdateControlRequest()
       );
       request.control ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateControlRequest', [
-        'control',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.UpdateControlRequest',
+        ['control', 'name']
+      );
       request.control.name = defaultValue1;
       const expectedHeaderRequestParams = `control.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -570,10 +578,10 @@ describe('v2alpha.ControlServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.UpdateControlRequest()
       );
       request.control ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateControlRequest', [
-        'control',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.UpdateControlRequest',
+        ['control', 'name']
+      );
       request.control.name = defaultValue1;
       const expectedHeaderRequestParams = `control.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -602,10 +610,10 @@ describe('v2alpha.ControlServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.UpdateControlRequest()
       );
       request.control ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateControlRequest', [
-        'control',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.UpdateControlRequest',
+        ['control', 'name']
+      );
       request.control.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -623,7 +631,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetControlRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetControlRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -651,7 +662,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetControlRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetControlRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -695,7 +709,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetControlRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetControlRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -723,7 +740,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetControlRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetControlRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetControlRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -741,9 +761,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListControlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -773,9 +794,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListControlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -821,9 +843,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListControlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -851,9 +874,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListControlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -904,9 +928,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListControlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -954,9 +979,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListControlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -996,9 +1022,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListControlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -274,9 +274,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateProductRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateProductRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateProductRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -304,9 +305,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateProductRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateProductRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateProductRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -350,9 +352,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateProductRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateProductRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateProductRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -380,9 +383,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateProductRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateProductRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.CreateProductRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -400,7 +404,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetProductRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProductRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetProductRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -428,7 +435,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetProductRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProductRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetProductRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -472,7 +482,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetProductRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProductRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetProductRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -500,7 +513,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetProductRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProductRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetProductRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -519,10 +535,10 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.UpdateProductRequest()
       );
       request.product ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateProductRequest', [
-        'product',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.UpdateProductRequest',
+        ['product', 'name']
+      );
       request.product.name = defaultValue1;
       const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -551,10 +567,10 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.UpdateProductRequest()
       );
       request.product ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateProductRequest', [
-        'product',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.UpdateProductRequest',
+        ['product', 'name']
+      );
       request.product.name = defaultValue1;
       const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -599,10 +615,10 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.UpdateProductRequest()
       );
       request.product ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateProductRequest', [
-        'product',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.UpdateProductRequest',
+        ['product', 'name']
+      );
       request.product.name = defaultValue1;
       const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -631,10 +647,10 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.UpdateProductRequest()
       );
       request.product ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateProductRequest', [
-        'product',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.UpdateProductRequest',
+        ['product', 'name']
+      );
       request.product.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -652,9 +668,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteProductRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteProductRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.DeleteProductRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -682,9 +699,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteProductRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteProductRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.DeleteProductRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -728,9 +746,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteProductRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteProductRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.DeleteProductRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -758,9 +777,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteProductRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteProductRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.DeleteProductRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -778,9 +798,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PurgeProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PurgeProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.PurgeProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -810,9 +831,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PurgeProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PurgeProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.PurgeProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -863,9 +885,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PurgeProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PurgeProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.PurgeProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -893,9 +916,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PurgeProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PurgeProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.PurgeProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -968,9 +992,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ImportProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ImportProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1000,9 +1025,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ImportProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ImportProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1053,9 +1079,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ImportProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ImportProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1083,9 +1110,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ImportProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ImportProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1159,10 +1187,10 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.SetInventoryRequest()
       );
       request.inventory ??= {};
-      const defaultValue1 = getTypeDefaultValue('SetInventoryRequest', [
-        'inventory',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.SetInventoryRequest',
+        ['inventory', 'name']
+      );
       request.inventory.name = defaultValue1;
       const expectedHeaderRequestParams = `inventory.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1192,10 +1220,10 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.SetInventoryRequest()
       );
       request.inventory ??= {};
-      const defaultValue1 = getTypeDefaultValue('SetInventoryRequest', [
-        'inventory',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.SetInventoryRequest',
+        ['inventory', 'name']
+      );
       request.inventory.name = defaultValue1;
       const expectedHeaderRequestParams = `inventory.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1247,10 +1275,10 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.SetInventoryRequest()
       );
       request.inventory ??= {};
-      const defaultValue1 = getTypeDefaultValue('SetInventoryRequest', [
-        'inventory',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.SetInventoryRequest',
+        ['inventory', 'name']
+      );
       request.inventory.name = defaultValue1;
       const expectedHeaderRequestParams = `inventory.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1279,10 +1307,10 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.SetInventoryRequest()
       );
       request.inventory ??= {};
-      const defaultValue1 = getTypeDefaultValue('SetInventoryRequest', [
-        'inventory',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.SetInventoryRequest',
+        ['inventory', 'name']
+      );
       request.inventory.name = defaultValue1;
       const expectedHeaderRequestParams = `inventory.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1352,9 +1380,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddFulfillmentPlacesRequest', [
-        'product',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest',
+        ['product']
+      );
       request.product = defaultValue1;
       const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1384,9 +1413,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddFulfillmentPlacesRequest', [
-        'product',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest',
+        ['product']
+      );
       request.product = defaultValue1;
       const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1437,9 +1467,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddFulfillmentPlacesRequest', [
-        'product',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest',
+        ['product']
+      );
       request.product = defaultValue1;
       const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1467,9 +1498,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddFulfillmentPlacesRequest', [
-        'product',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest',
+        ['product']
+      );
       request.product = defaultValue1;
       const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1543,7 +1575,7 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveFulfillmentPlacesRequest',
+        '.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest',
         ['product']
       );
       request.product = defaultValue1;
@@ -1576,7 +1608,7 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveFulfillmentPlacesRequest',
+        '.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest',
         ['product']
       );
       request.product = defaultValue1;
@@ -1630,7 +1662,7 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveFulfillmentPlacesRequest',
+        '.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest',
         ['product']
       );
       request.product = defaultValue1;
@@ -1664,7 +1696,7 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveFulfillmentPlacesRequest',
+        '.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest',
         ['product']
       );
       request.product = defaultValue1;
@@ -1740,9 +1772,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddLocalInventoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddLocalInventoriesRequest', [
-        'product',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.AddLocalInventoriesRequest',
+        ['product']
+      );
       request.product = defaultValue1;
       const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1772,9 +1805,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddLocalInventoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddLocalInventoriesRequest', [
-        'product',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.AddLocalInventoriesRequest',
+        ['product']
+      );
       request.product = defaultValue1;
       const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1825,9 +1859,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddLocalInventoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddLocalInventoriesRequest', [
-        'product',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.AddLocalInventoriesRequest',
+        ['product']
+      );
       request.product = defaultValue1;
       const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1855,9 +1890,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddLocalInventoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddLocalInventoriesRequest', [
-        'product',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.AddLocalInventoriesRequest',
+        ['product']
+      );
       request.product = defaultValue1;
       const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1931,7 +1967,7 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveLocalInventoriesRequest',
+        '.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest',
         ['product']
       );
       request.product = defaultValue1;
@@ -1964,7 +2000,7 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveLocalInventoriesRequest',
+        '.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest',
         ['product']
       );
       request.product = defaultValue1;
@@ -2018,7 +2054,7 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveLocalInventoriesRequest',
+        '.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest',
         ['product']
       );
       request.product = defaultValue1;
@@ -2052,7 +2088,7 @@ describe('v2alpha.ProductServiceClient', () => {
         new protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveLocalInventoriesRequest',
+        '.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest',
         ['product']
       );
       request.product = defaultValue1;
@@ -2127,9 +2163,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2159,9 +2196,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2207,9 +2245,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2237,9 +2276,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2290,9 +2330,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2340,9 +2381,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2382,9 +2424,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListProductsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

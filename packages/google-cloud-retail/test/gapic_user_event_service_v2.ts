@@ -234,9 +234,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.WriteUserEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WriteUserEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.WriteUserEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -264,9 +265,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.WriteUserEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WriteUserEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.WriteUserEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -310,9 +312,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.WriteUserEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WriteUserEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.WriteUserEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -340,9 +343,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.WriteUserEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WriteUserEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.WriteUserEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -360,9 +364,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.CollectUserEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CollectUserEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.CollectUserEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -390,9 +395,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.CollectUserEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CollectUserEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.CollectUserEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -433,9 +439,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.CollectUserEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CollectUserEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.CollectUserEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -463,9 +470,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.CollectUserEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CollectUserEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.CollectUserEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -483,9 +491,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.PurgeUserEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PurgeUserEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.PurgeUserEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -515,9 +524,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.PurgeUserEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PurgeUserEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.PurgeUserEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -568,9 +578,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.PurgeUserEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PurgeUserEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.PurgeUserEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -598,9 +609,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.PurgeUserEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PurgeUserEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.PurgeUserEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -673,9 +685,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ImportUserEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportUserEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ImportUserEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -705,9 +718,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ImportUserEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportUserEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ImportUserEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -758,9 +772,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ImportUserEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportUserEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ImportUserEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -788,9 +803,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.ImportUserEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportUserEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.ImportUserEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -863,9 +879,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.RejoinUserEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RejoinUserEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.RejoinUserEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -895,9 +912,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.RejoinUserEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RejoinUserEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.RejoinUserEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -948,9 +966,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.RejoinUserEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RejoinUserEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.RejoinUserEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -978,9 +997,10 @@ describe('v2.UserEventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2.RejoinUserEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RejoinUserEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2.RejoinUserEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
