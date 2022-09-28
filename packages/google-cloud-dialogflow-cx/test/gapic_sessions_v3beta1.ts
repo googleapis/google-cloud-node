@@ -211,9 +211,10 @@ describe('v3beta1.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DetectIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetectIntentRequest', [
-        'session',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DetectIntentRequest',
+        ['session']
+      );
       request.session = defaultValue1;
       const expectedHeaderRequestParams = `session=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -241,9 +242,10 @@ describe('v3beta1.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DetectIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetectIntentRequest', [
-        'session',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DetectIntentRequest',
+        ['session']
+      );
       request.session = defaultValue1;
       const expectedHeaderRequestParams = `session=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -287,9 +289,10 @@ describe('v3beta1.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DetectIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetectIntentRequest', [
-        'session',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DetectIntentRequest',
+        ['session']
+      );
       request.session = defaultValue1;
       const expectedHeaderRequestParams = `session=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -317,9 +320,10 @@ describe('v3beta1.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DetectIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetectIntentRequest', [
-        'session',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DetectIntentRequest',
+        ['session']
+      );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -337,9 +341,10 @@ describe('v3beta1.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.MatchIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MatchIntentRequest', [
-        'session',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.MatchIntentRequest',
+        ['session']
+      );
       request.session = defaultValue1;
       const expectedHeaderRequestParams = `session=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -367,9 +372,10 @@ describe('v3beta1.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.MatchIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MatchIntentRequest', [
-        'session',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.MatchIntentRequest',
+        ['session']
+      );
       request.session = defaultValue1;
       const expectedHeaderRequestParams = `session=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -413,9 +419,10 @@ describe('v3beta1.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.MatchIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MatchIntentRequest', [
-        'session',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.MatchIntentRequest',
+        ['session']
+      );
       request.session = defaultValue1;
       const expectedHeaderRequestParams = `session=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -443,9 +450,10 @@ describe('v3beta1.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.MatchIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MatchIntentRequest', [
-        'session',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.MatchIntentRequest',
+        ['session']
+      );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -464,10 +472,10 @@ describe('v3beta1.SessionsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.FulfillIntentRequest()
       );
       request.matchIntentRequest ??= {};
-      const defaultValue1 = getTypeDefaultValue('FulfillIntentRequest', [
-        'matchIntentRequest',
-        'session',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.FulfillIntentRequest',
+        ['matchIntentRequest', 'session']
+      );
       request.matchIntentRequest.session = defaultValue1;
       const expectedHeaderRequestParams = `match_intent_request.session=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -496,10 +504,10 @@ describe('v3beta1.SessionsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.FulfillIntentRequest()
       );
       request.matchIntentRequest ??= {};
-      const defaultValue1 = getTypeDefaultValue('FulfillIntentRequest', [
-        'matchIntentRequest',
-        'session',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.FulfillIntentRequest',
+        ['matchIntentRequest', 'session']
+      );
       request.matchIntentRequest.session = defaultValue1;
       const expectedHeaderRequestParams = `match_intent_request.session=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -544,10 +552,10 @@ describe('v3beta1.SessionsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.FulfillIntentRequest()
       );
       request.matchIntentRequest ??= {};
-      const defaultValue1 = getTypeDefaultValue('FulfillIntentRequest', [
-        'matchIntentRequest',
-        'session',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.FulfillIntentRequest',
+        ['matchIntentRequest', 'session']
+      );
       request.matchIntentRequest.session = defaultValue1;
       const expectedHeaderRequestParams = `match_intent_request.session=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -576,10 +584,10 @@ describe('v3beta1.SessionsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.FulfillIntentRequest()
       );
       request.matchIntentRequest ??= {};
-      const defaultValue1 = getTypeDefaultValue('FulfillIntentRequest', [
-        'matchIntentRequest',
-        'session',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.FulfillIntentRequest',
+        ['matchIntentRequest', 'session']
+      );
       request.matchIntentRequest.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();

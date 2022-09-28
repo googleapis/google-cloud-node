@@ -249,7 +249,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.GetTransitionRouteGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.GetTransitionRouteGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -282,7 +282,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.GetTransitionRouteGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.GetTransitionRouteGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -330,7 +330,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.GetTransitionRouteGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.GetTransitionRouteGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -365,7 +365,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.GetTransitionRouteGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.GetTransitionRouteGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -390,7 +390,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateTransitionRouteGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.CreateTransitionRouteGroupRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -423,7 +423,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateTransitionRouteGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.CreateTransitionRouteGroupRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -471,7 +471,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateTransitionRouteGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.CreateTransitionRouteGroupRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -506,7 +506,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateTransitionRouteGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.CreateTransitionRouteGroupRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -532,7 +532,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       );
       request.transitionRouteGroup ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateTransitionRouteGroupRequest',
         ['transitionRouteGroup', 'name']
       );
       request.transitionRouteGroup.name = defaultValue1;
@@ -566,7 +566,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       );
       request.transitionRouteGroup ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateTransitionRouteGroupRequest',
         ['transitionRouteGroup', 'name']
       );
       request.transitionRouteGroup.name = defaultValue1;
@@ -615,7 +615,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       );
       request.transitionRouteGroup ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateTransitionRouteGroupRequest',
         ['transitionRouteGroup', 'name']
       );
       request.transitionRouteGroup.name = defaultValue1;
@@ -651,7 +651,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       );
       request.transitionRouteGroup ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateTransitionRouteGroupRequest',
         ['transitionRouteGroup', 'name']
       );
       request.transitionRouteGroup.name = defaultValue1;
@@ -676,7 +676,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteTransitionRouteGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteTransitionRouteGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -709,7 +709,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteTransitionRouteGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteTransitionRouteGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -757,7 +757,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteTransitionRouteGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteTransitionRouteGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -792,7 +792,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteTransitionRouteGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTransitionRouteGroupRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteTransitionRouteGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -817,7 +817,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransitionRouteGroupsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -858,7 +858,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransitionRouteGroupsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -916,7 +916,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransitionRouteGroupsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -951,7 +951,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransitionRouteGroupsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1021,7 +1021,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransitionRouteGroupsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1080,7 +1080,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransitionRouteGroupsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1135,7 +1135,7 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTransitionRouteGroupsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;

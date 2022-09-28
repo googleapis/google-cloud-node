@@ -272,7 +272,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -300,7 +303,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -344,7 +350,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -372,7 +381,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -391,10 +403,10 @@ describe('v3.VersionsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateVersionRequest()
       );
       request.version ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateVersionRequest', [
-        'version',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateVersionRequest',
+        ['version', 'name']
+      );
       request.version.name = defaultValue1;
       const expectedHeaderRequestParams = `version.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -423,10 +435,10 @@ describe('v3.VersionsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateVersionRequest()
       );
       request.version ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateVersionRequest', [
-        'version',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateVersionRequest',
+        ['version', 'name']
+      );
       request.version.name = defaultValue1;
       const expectedHeaderRequestParams = `version.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -471,10 +483,10 @@ describe('v3.VersionsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateVersionRequest()
       );
       request.version ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateVersionRequest', [
-        'version',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateVersionRequest',
+        ['version', 'name']
+      );
       request.version.name = defaultValue1;
       const expectedHeaderRequestParams = `version.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -503,10 +515,10 @@ describe('v3.VersionsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateVersionRequest()
       );
       request.version ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateVersionRequest', [
-        'version',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateVersionRequest',
+        ['version', 'name']
+      );
       request.version.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -524,9 +536,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -554,9 +567,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -600,9 +614,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -630,9 +645,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -650,9 +666,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CompareVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompareVersionsRequest', [
-        'baseVersion',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CompareVersionsRequest',
+        ['baseVersion']
+      );
       request.baseVersion = defaultValue1;
       const expectedHeaderRequestParams = `base_version=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -680,9 +697,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CompareVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompareVersionsRequest', [
-        'baseVersion',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CompareVersionsRequest',
+        ['baseVersion']
+      );
       request.baseVersion = defaultValue1;
       const expectedHeaderRequestParams = `base_version=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -726,9 +744,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CompareVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompareVersionsRequest', [
-        'baseVersion',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CompareVersionsRequest',
+        ['baseVersion']
+      );
       request.baseVersion = defaultValue1;
       const expectedHeaderRequestParams = `base_version=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -756,9 +775,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CompareVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompareVersionsRequest', [
-        'baseVersion',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CompareVersionsRequest',
+        ['baseVersion']
+      );
       request.baseVersion = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -776,9 +796,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateVersionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateVersionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -808,9 +829,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateVersionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateVersionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -861,9 +883,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateVersionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateVersionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -891,9 +914,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateVersionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateVersionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -966,7 +990,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.LoadVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LoadVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.LoadVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -995,7 +1022,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.LoadVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LoadVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.LoadVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1046,7 +1076,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.LoadVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LoadVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.LoadVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1074,7 +1107,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.LoadVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LoadVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.LoadVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1144,9 +1180,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1182,9 +1219,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1236,9 +1274,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1266,9 +1305,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1325,9 +1365,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1375,9 +1416,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1423,9 +1465,10 @@ describe('v3.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

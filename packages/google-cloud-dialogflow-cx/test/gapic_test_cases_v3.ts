@@ -272,9 +272,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -303,9 +304,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -349,9 +351,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -379,9 +382,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.BatchDeleteTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -399,7 +403,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTestCaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetTestCaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -427,7 +434,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTestCaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetTestCaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -471,7 +481,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTestCaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetTestCaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -499,7 +512,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTestCaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetTestCaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -517,9 +533,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTestCaseRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -547,9 +564,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTestCaseRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -593,9 +611,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTestCaseRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -623,9 +642,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTestCaseRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateTestCaseRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -644,10 +664,10 @@ describe('v3.TestCasesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest()
       );
       request.testCase ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTestCaseRequest', [
-        'testCase',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest',
+        ['testCase', 'name']
+      );
       request.testCase.name = defaultValue1;
       const expectedHeaderRequestParams = `test_case.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -676,10 +696,10 @@ describe('v3.TestCasesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest()
       );
       request.testCase ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTestCaseRequest', [
-        'testCase',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest',
+        ['testCase', 'name']
+      );
       request.testCase.name = defaultValue1;
       const expectedHeaderRequestParams = `test_case.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -724,10 +744,10 @@ describe('v3.TestCasesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest()
       );
       request.testCase ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTestCaseRequest', [
-        'testCase',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest',
+        ['testCase', 'name']
+      );
       request.testCase.name = defaultValue1;
       const expectedHeaderRequestParams = `test_case.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -756,10 +776,10 @@ describe('v3.TestCasesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest()
       );
       request.testCase ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTestCaseRequest', [
-        'testCase',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateTestCaseRequest',
+        ['testCase', 'name']
+      );
       request.testCase.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -777,9 +797,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CalculateCoverageRequest', [
-        'agent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest',
+        ['agent']
+      );
       request.agent = defaultValue1;
       const expectedHeaderRequestParams = `agent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -807,9 +828,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CalculateCoverageRequest', [
-        'agent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest',
+        ['agent']
+      );
       request.agent = defaultValue1;
       const expectedHeaderRequestParams = `agent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -853,9 +875,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CalculateCoverageRequest', [
-        'agent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest',
+        ['agent']
+      );
       request.agent = defaultValue1;
       const expectedHeaderRequestParams = `agent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -883,9 +906,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CalculateCoverageRequest', [
-        'agent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CalculateCoverageRequest',
+        ['agent']
+      );
       request.agent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -903,9 +927,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTestCaseResultRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -933,9 +958,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTestCaseResultRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -979,9 +1005,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTestCaseResultRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1009,9 +1036,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTestCaseResultRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetTestCaseResultRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1029,7 +1057,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunTestCaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunTestCaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.RunTestCaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1058,7 +1089,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunTestCaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunTestCaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.RunTestCaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1109,7 +1143,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunTestCaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunTestCaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.RunTestCaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1137,7 +1174,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunTestCaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunTestCaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.RunTestCaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1207,9 +1247,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchRunTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchRunTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.BatchRunTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1239,9 +1280,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchRunTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchRunTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.BatchRunTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1292,9 +1334,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchRunTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchRunTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.BatchRunTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1322,9 +1365,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.BatchRunTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchRunTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.BatchRunTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1397,9 +1441,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ImportTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ImportTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1429,9 +1474,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ImportTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ImportTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1482,9 +1528,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ImportTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ImportTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1512,9 +1559,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ImportTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ImportTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1587,9 +1635,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ExportTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1619,9 +1668,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ExportTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1672,9 +1722,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ExportTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1702,9 +1753,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ExportTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1777,9 +1829,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1815,9 +1868,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1869,9 +1923,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1899,9 +1954,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1958,9 +2014,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2006,9 +2063,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2054,9 +2112,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2095,9 +2154,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCaseResultsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2134,9 +2194,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCaseResultsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2190,9 +2251,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCaseResultsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2220,9 +2282,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCaseResultsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2280,9 +2343,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCaseResultsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2329,9 +2393,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCaseResultsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2378,9 +2443,10 @@ describe('v3.TestCasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTestCaseResultsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListTestCaseResultsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

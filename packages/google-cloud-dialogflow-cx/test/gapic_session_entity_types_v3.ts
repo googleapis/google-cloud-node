@@ -237,9 +237,10 @@ describe('v3.SessionEntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetSessionEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSessionEntityTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetSessionEntityTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -268,9 +269,10 @@ describe('v3.SessionEntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetSessionEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSessionEntityTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetSessionEntityTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -314,9 +316,10 @@ describe('v3.SessionEntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetSessionEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSessionEntityTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetSessionEntityTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -344,9 +347,10 @@ describe('v3.SessionEntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetSessionEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSessionEntityTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetSessionEntityTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -365,7 +369,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.CreateSessionEntityTypeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateSessionEntityTypeRequest',
+        '.google.cloud.dialogflow.cx.v3.CreateSessionEntityTypeRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -397,7 +401,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.CreateSessionEntityTypeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateSessionEntityTypeRequest',
+        '.google.cloud.dialogflow.cx.v3.CreateSessionEntityTypeRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -444,7 +448,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.CreateSessionEntityTypeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateSessionEntityTypeRequest',
+        '.google.cloud.dialogflow.cx.v3.CreateSessionEntityTypeRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -478,7 +482,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.CreateSessionEntityTypeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateSessionEntityTypeRequest',
+        '.google.cloud.dialogflow.cx.v3.CreateSessionEntityTypeRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -503,7 +507,7 @@ describe('v3.SessionEntityTypesClient', () => {
       );
       request.sessionEntityType ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateSessionEntityTypeRequest',
+        '.google.cloud.dialogflow.cx.v3.UpdateSessionEntityTypeRequest',
         ['sessionEntityType', 'name']
       );
       request.sessionEntityType.name = defaultValue1;
@@ -536,7 +540,7 @@ describe('v3.SessionEntityTypesClient', () => {
       );
       request.sessionEntityType ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateSessionEntityTypeRequest',
+        '.google.cloud.dialogflow.cx.v3.UpdateSessionEntityTypeRequest',
         ['sessionEntityType', 'name']
       );
       request.sessionEntityType.name = defaultValue1;
@@ -584,7 +588,7 @@ describe('v3.SessionEntityTypesClient', () => {
       );
       request.sessionEntityType ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateSessionEntityTypeRequest',
+        '.google.cloud.dialogflow.cx.v3.UpdateSessionEntityTypeRequest',
         ['sessionEntityType', 'name']
       );
       request.sessionEntityType.name = defaultValue1;
@@ -619,7 +623,7 @@ describe('v3.SessionEntityTypesClient', () => {
       );
       request.sessionEntityType ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateSessionEntityTypeRequest',
+        '.google.cloud.dialogflow.cx.v3.UpdateSessionEntityTypeRequest',
         ['sessionEntityType', 'name']
       );
       request.sessionEntityType.name = defaultValue1;
@@ -643,7 +647,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.DeleteSessionEntityTypeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteSessionEntityTypeRequest',
+        '.google.cloud.dialogflow.cx.v3.DeleteSessionEntityTypeRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -675,7 +679,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.DeleteSessionEntityTypeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteSessionEntityTypeRequest',
+        '.google.cloud.dialogflow.cx.v3.DeleteSessionEntityTypeRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -722,7 +726,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.DeleteSessionEntityTypeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteSessionEntityTypeRequest',
+        '.google.cloud.dialogflow.cx.v3.DeleteSessionEntityTypeRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -756,7 +760,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.DeleteSessionEntityTypeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteSessionEntityTypeRequest',
+        '.google.cloud.dialogflow.cx.v3.DeleteSessionEntityTypeRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -780,7 +784,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListSessionEntityTypesRequest',
+        '.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -820,7 +824,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListSessionEntityTypesRequest',
+        '.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -877,7 +881,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListSessionEntityTypesRequest',
+        '.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -911,7 +915,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListSessionEntityTypesRequest',
+        '.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -980,7 +984,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListSessionEntityTypesRequest',
+        '.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1038,7 +1042,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListSessionEntityTypesRequest',
+        '.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1092,7 +1096,7 @@ describe('v3.SessionEntityTypesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListSessionEntityTypesRequest',
+        '.google.cloud.dialogflow.cx.v3.ListSessionEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;

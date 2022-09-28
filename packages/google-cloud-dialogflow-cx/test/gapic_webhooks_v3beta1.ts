@@ -235,7 +235,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetWebhookRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWebhookRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetWebhookRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -263,7 +266,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetWebhookRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWebhookRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetWebhookRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -307,7 +313,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetWebhookRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWebhookRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetWebhookRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -335,7 +344,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetWebhookRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWebhookRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetWebhookRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -353,9 +365,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateWebhookRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWebhookRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.CreateWebhookRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -383,9 +396,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateWebhookRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWebhookRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.CreateWebhookRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -429,9 +443,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateWebhookRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWebhookRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.CreateWebhookRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -459,9 +474,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateWebhookRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWebhookRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.CreateWebhookRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -480,10 +496,10 @@ describe('v3beta1.WebhooksClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateWebhookRequest()
       );
       request.webhook ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateWebhookRequest', [
-        'webhook',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateWebhookRequest',
+        ['webhook', 'name']
+      );
       request.webhook.name = defaultValue1;
       const expectedHeaderRequestParams = `webhook.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -512,10 +528,10 @@ describe('v3beta1.WebhooksClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateWebhookRequest()
       );
       request.webhook ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateWebhookRequest', [
-        'webhook',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateWebhookRequest',
+        ['webhook', 'name']
+      );
       request.webhook.name = defaultValue1;
       const expectedHeaderRequestParams = `webhook.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -560,10 +576,10 @@ describe('v3beta1.WebhooksClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateWebhookRequest()
       );
       request.webhook ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateWebhookRequest', [
-        'webhook',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateWebhookRequest',
+        ['webhook', 'name']
+      );
       request.webhook.name = defaultValue1;
       const expectedHeaderRequestParams = `webhook.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -592,10 +608,10 @@ describe('v3beta1.WebhooksClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateWebhookRequest()
       );
       request.webhook ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateWebhookRequest', [
-        'webhook',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateWebhookRequest',
+        ['webhook', 'name']
+      );
       request.webhook.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -613,9 +629,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteWebhookRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWebhookRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteWebhookRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -643,9 +660,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteWebhookRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWebhookRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteWebhookRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -689,9 +707,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteWebhookRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWebhookRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteWebhookRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -719,9 +738,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteWebhookRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWebhookRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteWebhookRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -739,9 +759,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWebhooksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -777,9 +798,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWebhooksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -831,9 +853,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWebhooksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -861,9 +884,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWebhooksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -921,9 +945,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWebhooksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -972,9 +997,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWebhooksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1021,9 +1047,10 @@ describe('v3beta1.WebhooksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWebhooksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListWebhooksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

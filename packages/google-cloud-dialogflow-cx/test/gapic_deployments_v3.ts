@@ -235,9 +235,10 @@ describe('v3.DeploymentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetDeploymentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeploymentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetDeploymentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -265,9 +266,10 @@ describe('v3.DeploymentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetDeploymentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeploymentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetDeploymentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -311,9 +313,10 @@ describe('v3.DeploymentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetDeploymentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeploymentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetDeploymentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -341,9 +344,10 @@ describe('v3.DeploymentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetDeploymentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeploymentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetDeploymentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -361,9 +365,10 @@ describe('v3.DeploymentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -399,9 +404,10 @@ describe('v3.DeploymentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -453,9 +459,10 @@ describe('v3.DeploymentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -483,9 +490,10 @@ describe('v3.DeploymentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -542,9 +550,10 @@ describe('v3.DeploymentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -590,9 +599,10 @@ describe('v3.DeploymentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -638,9 +648,10 @@ describe('v3.DeploymentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -272,7 +272,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAgentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -300,7 +303,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAgentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -344,7 +350,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAgentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -369,7 +378,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAgentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -387,9 +399,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAgentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateAgentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -417,9 +430,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAgentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateAgentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -463,9 +477,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAgentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateAgentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -493,9 +508,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAgentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateAgentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -514,10 +530,10 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateAgentRequest()
       );
       request.agent ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAgentRequest', [
-        'agent',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateAgentRequest',
+        ['agent', 'name']
+      );
       request.agent.name = defaultValue1;
       const expectedHeaderRequestParams = `agent.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -546,10 +562,10 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateAgentRequest()
       );
       request.agent ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAgentRequest', [
-        'agent',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateAgentRequest',
+        ['agent', 'name']
+      );
       request.agent.name = defaultValue1;
       const expectedHeaderRequestParams = `agent.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -594,10 +610,10 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateAgentRequest()
       );
       request.agent ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAgentRequest', [
-        'agent',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateAgentRequest',
+        ['agent', 'name']
+      );
       request.agent.name = defaultValue1;
       const expectedHeaderRequestParams = `agent.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -626,10 +642,10 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateAgentRequest()
       );
       request.agent ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAgentRequest', [
-        'agent',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateAgentRequest',
+        ['agent', 'name']
+      );
       request.agent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -647,7 +663,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAgentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -675,7 +694,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAgentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -719,7 +741,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAgentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -747,7 +772,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAgentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -765,9 +793,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ValidateAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateAgentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ValidateAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -795,9 +824,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ValidateAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateAgentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ValidateAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -841,9 +871,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ValidateAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateAgentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ValidateAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -871,9 +902,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ValidateAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateAgentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ValidateAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -892,7 +924,7 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetAgentValidationResultRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAgentValidationResultRequest',
+        '.google.cloud.dialogflow.cx.v3.GetAgentValidationResultRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -924,7 +956,7 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetAgentValidationResultRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAgentValidationResultRequest',
+        '.google.cloud.dialogflow.cx.v3.GetAgentValidationResultRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -971,7 +1003,7 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetAgentValidationResultRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAgentValidationResultRequest',
+        '.google.cloud.dialogflow.cx.v3.GetAgentValidationResultRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1005,7 +1037,7 @@ describe('v3.AgentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetAgentValidationResultRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAgentValidationResultRequest',
+        '.google.cloud.dialogflow.cx.v3.GetAgentValidationResultRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1028,7 +1060,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportAgentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ExportAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1057,7 +1092,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportAgentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ExportAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1108,7 +1146,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportAgentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ExportAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1136,7 +1177,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportAgentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ExportAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1206,9 +1250,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RestoreAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestoreAgentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.RestoreAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1237,9 +1282,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RestoreAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestoreAgentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.RestoreAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1290,9 +1336,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RestoreAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestoreAgentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.RestoreAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1320,9 +1367,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RestoreAgentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestoreAgentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.RestoreAgentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1392,9 +1440,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListAgentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListAgentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1424,9 +1473,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListAgentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListAgentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1472,9 +1522,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListAgentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListAgentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1502,9 +1553,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListAgentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListAgentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1555,9 +1607,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListAgentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListAgentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1605,9 +1658,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListAgentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListAgentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1647,9 +1701,10 @@ describe('v3.AgentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListAgentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListAgentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

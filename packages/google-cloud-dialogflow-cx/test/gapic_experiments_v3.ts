@@ -235,9 +235,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -265,9 +266,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -311,9 +313,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -341,9 +344,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -361,9 +365,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateExperimentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateExperimentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -391,9 +396,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateExperimentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateExperimentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -437,9 +443,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateExperimentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateExperimentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -467,9 +474,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateExperimentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateExperimentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -488,10 +496,10 @@ describe('v3.ExperimentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateExperimentRequest()
       );
       request.experiment ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateExperimentRequest', [
-        'experiment',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateExperimentRequest',
+        ['experiment', 'name']
+      );
       request.experiment.name = defaultValue1;
       const expectedHeaderRequestParams = `experiment.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -520,10 +528,10 @@ describe('v3.ExperimentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateExperimentRequest()
       );
       request.experiment ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateExperimentRequest', [
-        'experiment',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateExperimentRequest',
+        ['experiment', 'name']
+      );
       request.experiment.name = defaultValue1;
       const expectedHeaderRequestParams = `experiment.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -568,10 +576,10 @@ describe('v3.ExperimentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateExperimentRequest()
       );
       request.experiment ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateExperimentRequest', [
-        'experiment',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateExperimentRequest',
+        ['experiment', 'name']
+      );
       request.experiment.name = defaultValue1;
       const expectedHeaderRequestParams = `experiment.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -600,10 +608,10 @@ describe('v3.ExperimentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateExperimentRequest()
       );
       request.experiment ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateExperimentRequest', [
-        'experiment',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateExperimentRequest',
+        ['experiment', 'name']
+      );
       request.experiment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -621,9 +629,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -651,9 +660,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -697,9 +707,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -727,9 +738,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -747,9 +759,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.StartExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.StartExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -777,9 +790,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.StartExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.StartExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -823,9 +837,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.StartExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.StartExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -853,9 +868,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.StartExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.StartExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -873,9 +889,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.StopExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.StopExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -903,9 +920,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.StopExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.StopExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -949,9 +967,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.StopExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.StopExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -979,9 +998,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.StopExperimentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopExperimentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.StopExperimentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -999,9 +1019,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListExperimentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExperimentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListExperimentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1037,9 +1058,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListExperimentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExperimentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListExperimentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1091,9 +1113,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListExperimentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExperimentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListExperimentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1121,9 +1144,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListExperimentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExperimentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListExperimentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1180,9 +1204,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListExperimentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExperimentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListExperimentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1228,9 +1253,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListExperimentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExperimentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListExperimentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1276,9 +1302,10 @@ describe('v3.ExperimentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListExperimentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExperimentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListExperimentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

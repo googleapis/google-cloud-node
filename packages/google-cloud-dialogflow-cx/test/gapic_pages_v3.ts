@@ -235,7 +235,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetPageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPageRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetPageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -263,7 +266,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetPageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPageRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetPageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -307,7 +313,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetPageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPageRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetPageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -332,7 +341,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetPageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPageRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetPageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -350,9 +362,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreatePageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePageRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreatePageRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -380,9 +393,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreatePageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePageRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreatePageRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -426,9 +440,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreatePageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePageRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreatePageRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -456,9 +471,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreatePageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePageRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreatePageRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -477,10 +493,10 @@ describe('v3.PagesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdatePageRequest()
       );
       request.page ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePageRequest', [
-        'page',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdatePageRequest',
+        ['page', 'name']
+      );
       request.page.name = defaultValue1;
       const expectedHeaderRequestParams = `page.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -509,10 +525,10 @@ describe('v3.PagesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdatePageRequest()
       );
       request.page ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePageRequest', [
-        'page',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdatePageRequest',
+        ['page', 'name']
+      );
       request.page.name = defaultValue1;
       const expectedHeaderRequestParams = `page.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -557,10 +573,10 @@ describe('v3.PagesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdatePageRequest()
       );
       request.page ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePageRequest', [
-        'page',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdatePageRequest',
+        ['page', 'name']
+      );
       request.page.name = defaultValue1;
       const expectedHeaderRequestParams = `page.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -589,10 +605,10 @@ describe('v3.PagesClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdatePageRequest()
       );
       request.page ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePageRequest', [
-        'page',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdatePageRequest',
+        ['page', 'name']
+      );
       request.page.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -610,7 +626,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeletePageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePageRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeletePageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -638,7 +657,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeletePageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePageRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeletePageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -682,7 +704,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeletePageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePageRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeletePageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -710,7 +735,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeletePageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePageRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeletePageRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -728,7 +756,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListPagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPagesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListPagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -758,7 +789,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListPagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPagesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListPagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -804,7 +838,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListPagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPagesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListPagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -829,7 +866,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListPagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPagesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListPagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -880,7 +920,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListPagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPagesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListPagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -928,7 +971,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListPagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPagesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListPagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -967,7 +1013,10 @@ describe('v3.PagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListPagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPagesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListPagesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

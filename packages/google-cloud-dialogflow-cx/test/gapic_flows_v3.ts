@@ -272,9 +272,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFlowRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateFlowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -302,9 +303,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFlowRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateFlowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -348,9 +350,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFlowRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateFlowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -378,9 +381,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFlowRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateFlowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -398,7 +402,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -426,7 +433,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -470,7 +480,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -498,7 +511,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -516,7 +532,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -544,7 +563,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -588,7 +610,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -613,7 +638,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -632,10 +660,10 @@ describe('v3.FlowsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateFlowRequest()
       );
       request.flow ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFlowRequest', [
-        'flow',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateFlowRequest',
+        ['flow', 'name']
+      );
       request.flow.name = defaultValue1;
       const expectedHeaderRequestParams = `flow.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -664,10 +692,10 @@ describe('v3.FlowsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateFlowRequest()
       );
       request.flow ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFlowRequest', [
-        'flow',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateFlowRequest',
+        ['flow', 'name']
+      );
       request.flow.name = defaultValue1;
       const expectedHeaderRequestParams = `flow.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -712,10 +740,10 @@ describe('v3.FlowsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateFlowRequest()
       );
       request.flow ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFlowRequest', [
-        'flow',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateFlowRequest',
+        ['flow', 'name']
+      );
       request.flow.name = defaultValue1;
       const expectedHeaderRequestParams = `flow.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -744,10 +772,10 @@ describe('v3.FlowsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateFlowRequest()
       );
       request.flow ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFlowRequest', [
-        'flow',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateFlowRequest',
+        ['flow', 'name']
+      );
       request.flow.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -765,9 +793,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ValidateFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateFlowRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ValidateFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -795,9 +824,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ValidateFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateFlowRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ValidateFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -841,9 +871,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ValidateFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateFlowRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ValidateFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -871,9 +902,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ValidateFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateFlowRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ValidateFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -892,7 +924,7 @@ describe('v3.FlowsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetFlowValidationResultRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetFlowValidationResultRequest',
+        '.google.cloud.dialogflow.cx.v3.GetFlowValidationResultRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -924,7 +956,7 @@ describe('v3.FlowsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetFlowValidationResultRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetFlowValidationResultRequest',
+        '.google.cloud.dialogflow.cx.v3.GetFlowValidationResultRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -971,7 +1003,7 @@ describe('v3.FlowsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetFlowValidationResultRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetFlowValidationResultRequest',
+        '.google.cloud.dialogflow.cx.v3.GetFlowValidationResultRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1005,7 +1037,7 @@ describe('v3.FlowsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.GetFlowValidationResultRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetFlowValidationResultRequest',
+        '.google.cloud.dialogflow.cx.v3.GetFlowValidationResultRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1028,7 +1060,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TrainFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TrainFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.TrainFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1057,7 +1092,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TrainFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TrainFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.TrainFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1108,7 +1146,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TrainFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TrainFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.TrainFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1136,7 +1177,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.TrainFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TrainFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.TrainFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1206,9 +1250,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ImportFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportFlowRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ImportFlowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1237,9 +1282,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ImportFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportFlowRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ImportFlowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1290,9 +1336,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ImportFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportFlowRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ImportFlowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1320,9 +1367,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ImportFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportFlowRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ImportFlowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1392,7 +1440,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ExportFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1421,7 +1472,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ExportFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1472,7 +1526,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ExportFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1500,7 +1557,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ExportFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportFlowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ExportFlowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1570,7 +1630,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListFlowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFlowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListFlowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1600,7 +1663,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListFlowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFlowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListFlowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1646,7 +1712,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListFlowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFlowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListFlowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1671,7 +1740,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListFlowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFlowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListFlowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1722,7 +1794,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListFlowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFlowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListFlowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1770,7 +1845,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListFlowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFlowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListFlowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1809,7 +1887,10 @@ describe('v3.FlowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListFlowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFlowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListFlowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

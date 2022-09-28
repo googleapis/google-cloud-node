@@ -264,7 +264,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateSecuritySettingsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -299,7 +299,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateSecuritySettingsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -349,7 +349,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateSecuritySettingsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -386,7 +386,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateSecuritySettingsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -412,9 +412,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecuritySettingsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -446,9 +447,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecuritySettingsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -495,9 +497,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecuritySettingsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -528,9 +531,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecuritySettingsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -553,7 +557,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       );
       request.securitySettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateSecuritySettingsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest',
         ['securitySettings', 'name']
       );
       request.securitySettings.name = defaultValue1;
@@ -589,7 +593,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       );
       request.securitySettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateSecuritySettingsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest',
         ['securitySettings', 'name']
       );
       request.securitySettings.name = defaultValue1;
@@ -640,7 +644,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       );
       request.securitySettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateSecuritySettingsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest',
         ['securitySettings', 'name']
       );
       request.securitySettings.name = defaultValue1;
@@ -678,7 +682,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       );
       request.securitySettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateSecuritySettingsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest',
         ['securitySettings', 'name']
       );
       request.securitySettings.name = defaultValue1;
@@ -705,7 +709,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteSecuritySettingsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -740,7 +744,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteSecuritySettingsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -790,7 +794,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteSecuritySettingsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -827,7 +831,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteSecuritySettingsRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -853,9 +857,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecuritySettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -895,9 +900,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecuritySettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -954,9 +960,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecuritySettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -987,9 +994,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecuritySettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1052,9 +1060,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecuritySettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1106,9 +1115,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecuritySettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1158,9 +1168,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecuritySettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -272,9 +272,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -302,9 +303,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -348,9 +350,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -378,9 +381,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.GetEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -398,9 +402,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -428,9 +433,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -474,9 +480,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -504,9 +511,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeleteEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -524,9 +532,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEnvironmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateEnvironmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -556,9 +565,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEnvironmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateEnvironmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -609,9 +619,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEnvironmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateEnvironmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -639,9 +650,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEnvironmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.CreateEnvironmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -715,10 +727,10 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateEnvironmentRequest()
       );
       request.environment ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEnvironmentRequest', [
-        'environment',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateEnvironmentRequest',
+        ['environment', 'name']
+      );
       request.environment.name = defaultValue1;
       const expectedHeaderRequestParams = `environment.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -749,10 +761,10 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateEnvironmentRequest()
       );
       request.environment ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEnvironmentRequest', [
-        'environment',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateEnvironmentRequest',
+        ['environment', 'name']
+      );
       request.environment.name = defaultValue1;
       const expectedHeaderRequestParams = `environment.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -804,10 +816,10 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateEnvironmentRequest()
       );
       request.environment ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEnvironmentRequest', [
-        'environment',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateEnvironmentRequest',
+        ['environment', 'name']
+      );
       request.environment.name = defaultValue1;
       const expectedHeaderRequestParams = `environment.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -836,10 +848,10 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.UpdateEnvironmentRequest()
       );
       request.environment ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEnvironmentRequest', [
-        'environment',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.UpdateEnvironmentRequest',
+        ['environment', 'name']
+      );
       request.environment.name = defaultValue1;
       const expectedHeaderRequestParams = `environment.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -912,9 +924,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunContinuousTestRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunContinuousTestRequest', [
-        'environment',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.RunContinuousTestRequest',
+        ['environment']
+      );
       request.environment = defaultValue1;
       const expectedHeaderRequestParams = `environment=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -944,9 +957,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunContinuousTestRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunContinuousTestRequest', [
-        'environment',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.RunContinuousTestRequest',
+        ['environment']
+      );
       request.environment = defaultValue1;
       const expectedHeaderRequestParams = `environment=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -997,9 +1011,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunContinuousTestRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunContinuousTestRequest', [
-        'environment',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.RunContinuousTestRequest',
+        ['environment']
+      );
       request.environment = defaultValue1;
       const expectedHeaderRequestParams = `environment=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1027,9 +1042,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunContinuousTestRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunContinuousTestRequest', [
-        'environment',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.RunContinuousTestRequest',
+        ['environment']
+      );
       request.environment = defaultValue1;
       const expectedHeaderRequestParams = `environment=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1102,9 +1118,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeployFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployFlowRequest', [
-        'environment',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeployFlowRequest',
+        ['environment']
+      );
       request.environment = defaultValue1;
       const expectedHeaderRequestParams = `environment=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1133,9 +1150,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeployFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployFlowRequest', [
-        'environment',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeployFlowRequest',
+        ['environment']
+      );
       request.environment = defaultValue1;
       const expectedHeaderRequestParams = `environment=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1186,9 +1204,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeployFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployFlowRequest', [
-        'environment',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeployFlowRequest',
+        ['environment']
+      );
       request.environment = defaultValue1;
       const expectedHeaderRequestParams = `environment=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1216,9 +1235,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeployFlowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployFlowRequest', [
-        'environment',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.DeployFlowRequest',
+        ['environment']
+      );
       request.environment = defaultValue1;
       const expectedHeaderRequestParams = `environment=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1288,9 +1308,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1326,9 +1347,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1380,9 +1402,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1410,9 +1433,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1470,9 +1494,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1519,9 +1544,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1567,9 +1593,10 @@ describe('v3.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1610,7 +1637,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'LookupEnvironmentHistoryRequest',
+        '.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1650,7 +1677,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'LookupEnvironmentHistoryRequest',
+        '.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1705,7 +1732,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'LookupEnvironmentHistoryRequest',
+        '.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1739,7 +1766,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'LookupEnvironmentHistoryRequest',
+        '.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1806,7 +1833,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'LookupEnvironmentHistoryRequest',
+        '.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1862,7 +1889,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'LookupEnvironmentHistoryRequest',
+        '.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1915,7 +1942,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'LookupEnvironmentHistoryRequest',
+        '.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1962,7 +1989,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListContinuousTestResultsRequest',
+        '.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2002,7 +2029,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListContinuousTestResultsRequest',
+        '.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2059,7 +2086,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListContinuousTestResultsRequest',
+        '.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2093,7 +2120,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListContinuousTestResultsRequest',
+        '.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2162,7 +2189,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListContinuousTestResultsRequest',
+        '.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2220,7 +2247,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListContinuousTestResultsRequest',
+        '.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2274,7 +2301,7 @@ describe('v3.EnvironmentsClient', () => {
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListContinuousTestResultsRequest',
+        '.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
