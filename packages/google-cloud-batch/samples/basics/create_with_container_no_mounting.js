@@ -54,8 +54,8 @@ function main(projectId, region, jobName) {
   runnable.container = new batch.Runnable.Container();
   runnable.container.imageUri = 'gcr.io/google-containers/busybox';
   runnable.container.entrypoint = '/bin/sh';
-  runnable.container.commands =
-    'echo Hello world! This is task ${BATCH_TASK_INDEX}. This job has a total of ${BATCH_TASK_COUNT} tasks.';
+  runnable.container.commands = [
+    'echo Hello world! This is task ${BATCH_TASK_INDEX}. This job has a total of ${BATCH_TASK_COUNT} tasks.'];
   task.runnables = [runnable];
 
   // We can specify what resources are requested by each task.
@@ -98,6 +98,7 @@ function main(projectId, region, jobName) {
     // Construct request
     const request = {
       parent,
+      jobId: jobName,
       job,
     };
 
