@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/gkemulticloud": "^0.1.1"
+    "@google-cloud/gkemulticloud": "^0.1.2"
   },
   "devDependencies": {
     "c8": "^7.1.0",

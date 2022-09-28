@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigquery-analyticshub",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Analytics Hub API client for Node.js",
   "repository": "googleapis/google-cloud-node",
   "license": "Apache-2.0",
