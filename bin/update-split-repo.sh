@@ -56,11 +56,11 @@ README.md'
 OWLBOT_PY=/tmp/${SPLIT_REPO}/owlbot.py
 
 rm $OWLBOT_PY
-
 echo "$IGNORE_README_TXT" >> $OWLBOT_PY
-README_MD=/tmp/${SPLIT_REPO}/README.md
 
 # Update the README
+README_MD=/tmp/${SPLIT_REPO}/README.md
+
 echo -e "'**_THIS REPOSITORY IS DEPRECATED. ALL OF ITS CONTENT AND HISTORY HAS BEEN MOVED TO [GOOGLE-CLOUD-NODE](https://github.com/googleapis/google-cloud-node/tree/main/packages/${ARTIFACT_NAME})_**'\n$(cat $README_MD)" > $README_MD
 
 # Delete the .OwlBot.yaml file
@@ -71,4 +71,12 @@ git commit -m 'build: update README for deprecation notice and delete .OwlBot.ya
 
 git push -f --set-upstream origin removeOwlBotAndUpdateREADME
 
-gh pr create --title "build: update README for deprecation notice and delete .OwlBot.yaml"
+# create pull request
+if gh --help > /dev/null
+then
+  gh pr create --title "build: update README for deprecation notice and delete .OwlBot.yaml"
+else
+  hub pull-request -m "build: update README for deprecation notice and delete .OwlBot.yaml"
+fi
+
+rm -rf /tmp/${SPLIT_REPO}
