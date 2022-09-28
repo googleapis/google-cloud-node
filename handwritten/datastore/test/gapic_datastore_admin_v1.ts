@@ -269,11 +269,15 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.GetIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIndexRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.GetIndexRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIndexRequest', ['indexId']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.GetIndexRequest',
+        ['indexId']
+      );
       request.indexId = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&index_id=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -301,11 +305,15 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.GetIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIndexRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.GetIndexRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIndexRequest', ['indexId']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.GetIndexRequest',
+        ['indexId']
+      );
       request.indexId = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&index_id=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -349,11 +357,15 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.GetIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIndexRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.GetIndexRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIndexRequest', ['indexId']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.GetIndexRequest',
+        ['indexId']
+      );
       request.indexId = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&index_id=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -378,11 +390,15 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.GetIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIndexRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.GetIndexRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIndexRequest', ['indexId']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.GetIndexRequest',
+        ['indexId']
+      );
       request.indexId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -400,9 +416,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ExportEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportEntitiesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ExportEntitiesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -432,9 +449,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ExportEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportEntitiesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ExportEntitiesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -485,9 +503,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ExportEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportEntitiesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ExportEntitiesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -515,9 +534,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ExportEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportEntitiesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ExportEntitiesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -590,9 +610,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ImportEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportEntitiesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ImportEntitiesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -622,9 +643,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ImportEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportEntitiesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ImportEntitiesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -675,9 +697,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ImportEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportEntitiesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ImportEntitiesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -705,9 +728,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ImportEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportEntitiesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ImportEntitiesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -780,9 +804,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.CreateIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIndexRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.CreateIndexRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -811,9 +836,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.CreateIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIndexRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.CreateIndexRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -864,9 +890,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.CreateIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIndexRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.CreateIndexRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -894,9 +921,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.CreateIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIndexRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.CreateIndexRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -966,13 +994,15 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.DeleteIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIndexRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.DeleteIndexRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteIndexRequest', [
-        'indexId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.DeleteIndexRequest',
+        ['indexId']
+      );
       request.indexId = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&index_id=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1001,13 +1031,15 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.DeleteIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIndexRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.DeleteIndexRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteIndexRequest', [
-        'indexId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.DeleteIndexRequest',
+        ['indexId']
+      );
       request.indexId = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&index_id=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1058,13 +1090,15 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.DeleteIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIndexRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.DeleteIndexRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteIndexRequest', [
-        'indexId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.DeleteIndexRequest',
+        ['indexId']
+      );
       request.indexId = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&index_id=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1092,13 +1126,15 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.DeleteIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIndexRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.DeleteIndexRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteIndexRequest', [
-        'indexId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.DeleteIndexRequest',
+        ['indexId']
+      );
       request.indexId = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&index_id=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1168,9 +1204,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ListIndexesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ListIndexesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = [
@@ -1200,9 +1237,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ListIndexesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ListIndexesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = [
@@ -1248,9 +1286,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ListIndexesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ListIndexesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1278,9 +1317,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ListIndexesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ListIndexesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = [
@@ -1331,9 +1371,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ListIndexesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ListIndexesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1381,9 +1422,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ListIndexesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ListIndexesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = [
@@ -1423,9 +1465,10 @@ describe('v1.DatastoreAdminClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.admin.v1.ListIndexesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexesRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.admin.v1.ListIndexesRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');

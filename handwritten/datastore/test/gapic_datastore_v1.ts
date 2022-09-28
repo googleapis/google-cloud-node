@@ -195,7 +195,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.LookupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.LookupRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -223,7 +226,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.LookupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.LookupRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -267,7 +273,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.LookupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.LookupRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -292,7 +301,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.LookupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.LookupRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -310,9 +322,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunQueryRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.RunQueryRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -340,9 +353,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunQueryRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.RunQueryRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -386,9 +400,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunQueryRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.RunQueryRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -413,9 +428,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunQueryRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.RunQueryRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -433,9 +449,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BeginTransactionRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.BeginTransactionRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -463,9 +480,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BeginTransactionRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.BeginTransactionRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -509,9 +527,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BeginTransactionRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.BeginTransactionRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -539,9 +558,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BeginTransactionRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.BeginTransactionRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -559,7 +579,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.CommitRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CommitRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.CommitRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -587,7 +610,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.CommitRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CommitRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.CommitRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -631,7 +657,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.CommitRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CommitRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.CommitRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -656,7 +685,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.CommitRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CommitRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.CommitRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -674,9 +706,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RollbackRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RollbackRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.RollbackRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -704,9 +737,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RollbackRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RollbackRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.RollbackRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -750,9 +784,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RollbackRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RollbackRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.RollbackRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -777,9 +812,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RollbackRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RollbackRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.RollbackRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -797,9 +833,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AllocateIdsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.AllocateIdsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -827,9 +864,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AllocateIdsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.AllocateIdsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -873,9 +911,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AllocateIdsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.AllocateIdsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -903,9 +942,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AllocateIdsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.AllocateIdsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -923,9 +963,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReserveIdsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.ReserveIdsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -953,9 +994,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReserveIdsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.ReserveIdsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -999,9 +1041,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReserveIdsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.ReserveIdsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1029,9 +1072,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReserveIdsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.datastore.v1.ReserveIdsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
