@@ -39,5 +39,5 @@ ${SCRIPT_DIR}/migrate-git-history.sh \
   "googleapis/google-cloud-node" \
   "" \
   "${PACKAGE_PATH}" \
-  ".kokoro,.github,.trampolinerc,SECURITY.md,renovate.json" \
-  ".github/.OwlBot.yaml"
+  ".kokoro,.github,.trampolinerc,SECURITY.md,renovate.json,samples" \
+  ".github/.OwlBot.yaml,samples/quickstart.js,samples/test/quickstart.js,samples/test/quickstart.test.js,system-test/test/quickstart.test.js,system-test/test/quickstart.js,samples/README.md,samples/package.json,samples/generated"
