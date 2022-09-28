@@ -352,6 +352,11 @@
                 "batchCreateMessages"
               ]
             },
+            "SuggestConversationSummary": {
+              "methods": [
+                "suggestConversationSummary"
+              ]
+            },
             "ListConversations": {
               "methods": [
                 "listConversations",
@@ -389,6 +394,11 @@
             "BatchCreateMessages": {
               "methods": [
                 "batchCreateMessages"
+              ]
+            },
+            "SuggestConversationSummary": {
+              "methods": [
+                "suggestConversationSummary"
               ]
             },
             "ListConversations": {

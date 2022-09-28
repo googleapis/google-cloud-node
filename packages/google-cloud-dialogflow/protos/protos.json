@@ -10879,7 +10879,8 @@
                             "TYPE_UNSPECIFIED": 0,
                             "ARTICLE_SUGGESTION": 1,
                             "FAQ": 2,
-                            "SMART_REPLY": 3
+                            "SMART_REPLY": 3,
+                            "CONVERSATION_SUMMARIZATION": 8
                           }
                         }
                       }
@@ -15399,6 +15400,32 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "SuggestConversationSummary": {
+                          "requestType": "SuggestConversationSummaryRequest",
+                          "responseType": "SuggestConversationSummaryResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2beta1/{conversation=projects/*/conversations/*}/suggestions:suggestConversationSummary",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2beta1/{conversation=projects/*/locations/*/conversations/*}/suggestions:suggestConversationSummary",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "conversation"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta1/{conversation=projects/*/conversations/*}/suggestions:suggestConversationSummary",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2beta1/{conversation=projects/*/locations/*/conversations/*}/suggestions:suggestConversationSummary",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "conversation"
+                            }
+                          ]
                         }
                       }
                     },
@@ -15653,6 +15680,70 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "SuggestConversationSummaryRequest": {
+                      "fields": {
+                        "conversation": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Conversation"
+                          }
+                        },
+                        "latestMessage": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Message"
+                          }
+                        },
+                        "contextSize": {
+                          "type": "int32",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SuggestConversationSummaryResponse": {
+                      "fields": {
+                        "summary": {
+                          "type": "Summary",
+                          "id": 1
+                        },
+                        "latestMessage": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Message"
+                          }
+                        },
+                        "contextSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Summary": {
+                          "fields": {
+                            "text": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "textSections": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 4
+                            },
+                            "answerRecord": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/AnswerRecord"
+                              }
+                            }
+                          }
                         }
                       }
                     },

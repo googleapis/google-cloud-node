@@ -1388,6 +1388,54 @@
             }
         },
         {
+            "regionTag": "dialogflow_v2beta1_generated_Conversations_SuggestConversationSummary_async",
+            "title": "dialogflow suggestConversationSummary Sample",
+            "origin": "API_DEFINITION",
+            "description": " Suggest summary for a conversation based on specific historical messages. The range of the messages to be used for summary can be specified in the request.",
+            "canonical": true,
+            "file": "conversations.suggest_conversation_summary.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SuggestConversationSummary",
+                "fullName": "google.cloud.dialogflow.v2beta1.Conversations.SuggestConversationSummary",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "conversation",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "latest_message",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "context_size",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse",
+                "client": {
+                    "shortName": "ConversationsClient",
+                    "fullName": "google.cloud.dialogflow.v2beta1.ConversationsClient"
+                },
+                "method": {
+                    "shortName": "SuggestConversationSummary",
+                    "fullName": "google.cloud.dialogflow.v2beta1.Conversations.SuggestConversationSummary",
+                    "service": {
+                        "shortName": "Conversations",
+                        "fullName": "google.cloud.dialogflow.v2beta1.Conversations"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "dialogflow_v2beta1_generated_Documents_ListDocuments_async",
             "title": "dialogflow listDocuments Sample",
             "origin": "API_DEFINITION",

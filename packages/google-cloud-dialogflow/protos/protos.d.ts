@@ -36875,7 +36875,8 @@ export namespace google {
                         TYPE_UNSPECIFIED = 0,
                         ARTICLE_SUGGESTION = 1,
                         FAQ = 2,
-                        SMART_REPLY = 3
+                        SMART_REPLY = 3,
+                        CONVERSATION_SUMMARIZATION = 8
                     }
                 }
 
@@ -54017,6 +54018,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listMessages(request: google.cloud.dialogflow.v2beta1.IListMessagesRequest): Promise<google.cloud.dialogflow.v2beta1.ListMessagesResponse>;
+
+                    /**
+                     * Calls SuggestConversationSummary.
+                     * @param request SuggestConversationSummaryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SuggestConversationSummaryResponse
+                     */
+                    public suggestConversationSummary(request: google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryRequest, callback: google.cloud.dialogflow.v2beta1.Conversations.SuggestConversationSummaryCallback): void;
+
+                    /**
+                     * Calls SuggestConversationSummary.
+                     * @param request SuggestConversationSummaryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public suggestConversationSummary(request: google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryRequest): Promise<google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse>;
                 }
 
                 namespace Conversations {
@@ -54062,6 +54077,13 @@ export namespace google {
                      * @param [response] ListMessagesResponse
                      */
                     type ListMessagesCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2beta1.ListMessagesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dialogflow.v2beta1.Conversations|suggestConversationSummary}.
+                     * @param error Error, if any
+                     * @param [response] SuggestConversationSummaryResponse
+                     */
+                    type SuggestConversationSummaryCallback = (error: (Error|null), response?: google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse) => void;
                 }
 
                 /** Properties of a Conversation. */
@@ -55351,6 +55373,336 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SuggestConversationSummaryRequest. */
+                interface ISuggestConversationSummaryRequest {
+
+                    /** SuggestConversationSummaryRequest conversation */
+                    conversation?: (string|null);
+
+                    /** SuggestConversationSummaryRequest latestMessage */
+                    latestMessage?: (string|null);
+
+                    /** SuggestConversationSummaryRequest contextSize */
+                    contextSize?: (number|null);
+                }
+
+                /** Represents a SuggestConversationSummaryRequest. */
+                class SuggestConversationSummaryRequest implements ISuggestConversationSummaryRequest {
+
+                    /**
+                     * Constructs a new SuggestConversationSummaryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryRequest);
+
+                    /** SuggestConversationSummaryRequest conversation. */
+                    public conversation: string;
+
+                    /** SuggestConversationSummaryRequest latestMessage. */
+                    public latestMessage: string;
+
+                    /** SuggestConversationSummaryRequest contextSize. */
+                    public contextSize: number;
+
+                    /**
+                     * Creates a new SuggestConversationSummaryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SuggestConversationSummaryRequest instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryRequest): google.cloud.dialogflow.v2beta1.SuggestConversationSummaryRequest;
+
+                    /**
+                     * Encodes the specified SuggestConversationSummaryRequest message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SuggestConversationSummaryRequest.verify|verify} messages.
+                     * @param message SuggestConversationSummaryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SuggestConversationSummaryRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SuggestConversationSummaryRequest.verify|verify} messages.
+                     * @param message SuggestConversationSummaryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SuggestConversationSummaryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SuggestConversationSummaryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.SuggestConversationSummaryRequest;
+
+                    /**
+                     * Decodes a SuggestConversationSummaryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SuggestConversationSummaryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.SuggestConversationSummaryRequest;
+
+                    /**
+                     * Verifies a SuggestConversationSummaryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SuggestConversationSummaryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SuggestConversationSummaryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.SuggestConversationSummaryRequest;
+
+                    /**
+                     * Creates a plain object from a SuggestConversationSummaryRequest message. Also converts values to other types if specified.
+                     * @param message SuggestConversationSummaryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.SuggestConversationSummaryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SuggestConversationSummaryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SuggestConversationSummaryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SuggestConversationSummaryResponse. */
+                interface ISuggestConversationSummaryResponse {
+
+                    /** SuggestConversationSummaryResponse summary */
+                    summary?: (google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.ISummary|null);
+
+                    /** SuggestConversationSummaryResponse latestMessage */
+                    latestMessage?: (string|null);
+
+                    /** SuggestConversationSummaryResponse contextSize */
+                    contextSize?: (number|null);
+                }
+
+                /** Represents a SuggestConversationSummaryResponse. */
+                class SuggestConversationSummaryResponse implements ISuggestConversationSummaryResponse {
+
+                    /**
+                     * Constructs a new SuggestConversationSummaryResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryResponse);
+
+                    /** SuggestConversationSummaryResponse summary. */
+                    public summary?: (google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.ISummary|null);
+
+                    /** SuggestConversationSummaryResponse latestMessage. */
+                    public latestMessage: string;
+
+                    /** SuggestConversationSummaryResponse contextSize. */
+                    public contextSize: number;
+
+                    /**
+                     * Creates a new SuggestConversationSummaryResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SuggestConversationSummaryResponse instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryResponse): google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse;
+
+                    /**
+                     * Encodes the specified SuggestConversationSummaryResponse message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.verify|verify} messages.
+                     * @param message SuggestConversationSummaryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SuggestConversationSummaryResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.verify|verify} messages.
+                     * @param message SuggestConversationSummaryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.ISuggestConversationSummaryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SuggestConversationSummaryResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SuggestConversationSummaryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse;
+
+                    /**
+                     * Decodes a SuggestConversationSummaryResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SuggestConversationSummaryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse;
+
+                    /**
+                     * Verifies a SuggestConversationSummaryResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SuggestConversationSummaryResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SuggestConversationSummaryResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse;
+
+                    /**
+                     * Creates a plain object from a SuggestConversationSummaryResponse message. Also converts values to other types if specified.
+                     * @param message SuggestConversationSummaryResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SuggestConversationSummaryResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SuggestConversationSummaryResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SuggestConversationSummaryResponse {
+
+                    /** Properties of a Summary. */
+                    interface ISummary {
+
+                        /** Summary text */
+                        text?: (string|null);
+
+                        /** Summary textSections */
+                        textSections?: ({ [k: string]: string }|null);
+
+                        /** Summary answerRecord */
+                        answerRecord?: (string|null);
+                    }
+
+                    /** Represents a Summary. */
+                    class Summary implements ISummary {
+
+                        /**
+                         * Constructs a new Summary.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.ISummary);
+
+                        /** Summary text. */
+                        public text: string;
+
+                        /** Summary textSections. */
+                        public textSections: { [k: string]: string };
+
+                        /** Summary answerRecord. */
+                        public answerRecord: string;
+
+                        /**
+                         * Creates a new Summary instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Summary instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.ISummary): google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.Summary;
+
+                        /**
+                         * Encodes the specified Summary message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.Summary.verify|verify} messages.
+                         * @param message Summary message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.ISummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Summary message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.Summary.verify|verify} messages.
+                         * @param message Summary message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.ISummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Summary message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Summary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.Summary;
+
+                        /**
+                         * Decodes a Summary message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Summary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.Summary;
+
+                        /**
+                         * Verifies a Summary message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Summary message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Summary
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.Summary;
+
+                        /**
+                         * Creates a plain object from a Summary message. Also converts values to other types if specified.
+                         * @param message Summary
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.v2beta1.SuggestConversationSummaryResponse.Summary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Summary to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Summary
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a ConversationEvent. */
