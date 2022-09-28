@@ -65,7 +65,7 @@ function main(projectId, region, jobName) {
   task.computeResource = resources;
 
   task.maxRetryCount = 2;
-  task.maxRunDuration = '3600s';
+  task.maxRunDuration = {seconds: 3600};
 
   // Tasks are grouped inside a job using TaskGroups.
   const group = new batch.TaskGroup();
