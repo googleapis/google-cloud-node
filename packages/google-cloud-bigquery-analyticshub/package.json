@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/analyticshub",
+  "name": "@google-cloud/bigquery-analyticshub",
   "version": "0.0.0",
   "description": "Analytics Hub API client for Node.js",
   "repository": "googleapis/google-cloud-node",

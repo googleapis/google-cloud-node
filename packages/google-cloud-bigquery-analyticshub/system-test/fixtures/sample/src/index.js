@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const analyticshub = require('@google-cloud/analyticshub');
+const analyticshub = require('@google-cloud/bigquery-analyticshub');
 
 function main() {
   const analyticsHubServiceClient =
