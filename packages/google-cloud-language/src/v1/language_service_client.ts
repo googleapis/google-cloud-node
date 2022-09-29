@@ -492,10 +492,8 @@ export class LanguageServiceClient {
     return this.innerApiCalls.analyzeEntities(request, options, callback);
   }
   /**
-   * Finds entities, similar to
-   * {@link google.cloud.language.v1.LanguageService.AnalyzeEntities|AnalyzeEntities}
-   * in the text and analyzes sentiment associated with each entity and its
-   * mentions.
+   * Finds entities, similar to {@link google.cloud.language.v1.LanguageService.AnalyzeEntities|AnalyzeEntities} in the text and analyzes
+   * sentiment associated with each entity and its mentions.
    *
    * @param {Object} request
    *   The request object that will be sent.
