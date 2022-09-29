@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-deploy/compare/v2.1.2...v2.2.0) (2022-09-29)
+
+
+### Features
+
+* Publish new JobRun resource and associated methods for Google Cloud Deploy ([8183015](https://github.com/googleapis/nodejs-deploy/commit/8183015c907f932346fde8c3b6dc981a3e561efe))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-deploy/compare/v2.1.1...v2.1.2) (2022-09-21)
 
 

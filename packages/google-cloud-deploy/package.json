@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/deploy",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "clouddeploy client for Node.js",
   "repository": "googleapis/nodejs-deploy",
   "license": "Apache-2.0",
