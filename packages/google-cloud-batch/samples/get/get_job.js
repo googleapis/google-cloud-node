@@ -15,7 +15,7 @@
 'use strict';
 
 /**
- * Creates a new Batch job that runs the specified script on multiple VM instances at once.
+ * Retrieves information about the specified job, most notably its status.
  *
  * @param {string} projectId - ID or number of the Google Cloud project you want to use.
  * @param {string} region - The Google Cloud region to use, e.g. 'us-central1'
