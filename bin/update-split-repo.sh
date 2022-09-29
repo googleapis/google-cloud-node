@@ -25,12 +25,20 @@ fi
 SPLIT_REPO=$1
 # destination directory (e.g. google-cloud-asset)
 ARTIFACT_NAME=$2
+
 rm -rf /tmp/${SPLIT_REPO}
 git clone git@github.com:googleapis/${SPLIT_REPO}.git /tmp/${SPLIT_REPO}
 
 cd /tmp/${SPLIT_REPO}
 
 git checkout -b 'removeOwlBotAndUpdateREADME'
+
+shopt -s extglob
+
+# Delete everything first that's not the samples, README.md, and git folder
+rm -rf !("samples"|"README.md"|".git") 
+rm -rf /tmp/${SPLIT_REPO}/.[!.git]*
+rm -rf /tmp/${SPLIT_REPO}/.github
 
 IGNORE_README_TXT="# Copyright 2021 Google LLC
 #
@@ -52,10 +60,8 @@ node.owlbot_main(templates_excludes=[
 README.md'
 ])"
 
-# Delete the owlbot.py, if any, and replace it with just ignoring the README 
 OWLBOT_PY=/tmp/${SPLIT_REPO}/owlbot.py
 
-rm $OWLBOT_PY
 echo "$IGNORE_README_TXT" >> $OWLBOT_PY
 
 # Update the README
@@ -63,20 +69,17 @@ README_MD=/tmp/${SPLIT_REPO}/README.md
 
 echo -e "'**_THIS REPOSITORY IS DEPRECATED. ALL OF ITS CONTENT AND HISTORY HAS BEEN MOVED TO [GOOGLE-CLOUD-NODE](https://github.com/googleapis/google-cloud-node/tree/main/packages/${ARTIFACT_NAME})_**'\n$(cat $README_MD)" > $README_MD
 
-# Delete the .OwlBot.yaml file
-rm /tmp/${SPLIT_REPO}/.github/.OwlBot.yaml
-
 git add .
-git commit -m 'build: update README for deprecation notice and delete .OwlBot.yaml'
+git commit -m 'build: update README for deprecation notice and delete all files except samples'
 
 git push -f --set-upstream origin removeOwlBotAndUpdateREADME
 
 # create pull request
 if gh --help > /dev/null
 then
-  gh pr create --title "build: update README for deprecation notice and delete .OwlBot.yaml"
+  gh pr create --title "build: update README for deprecation notice and delete all files except samples"
 else
-  hub pull-request -m "build: update README for deprecation notice and delete .OwlBot.yaml"
+  hub pull-request -m "build: update README for deprecation notice and delete all files except samples"
 fi
 
 rm -rf /tmp/${SPLIT_REPO}
