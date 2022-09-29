@@ -63,10 +63,9 @@ describe('Create jobs', () => {
   });
 
   it('list jobs', async () => {
-    const output = execSync(
-      `node list/list_jobs.js ${projectId} us-central1`,
-      {cwd}
-    );
+    const output = execSync(`node list/list_jobs.js ${projectId} us-central1`, {
+      cwd,
+    });
     assert(output !== null);
   });
 });
