@@ -1661,7 +1661,7 @@
                         },
                         "dataprocMetricConfig": {
                           "type": "DataprocMetricConfig",
-                          "id": 21,
+                          "id": 23,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2346,21 +2346,14 @@
                         }
                       }
                     },
-                    "Metric": {
+                    "DataprocMetricConfig": {
                       "fields": {
-                        "metricSource": {
-                          "type": "MetricSource",
+                        "metrics": {
+                          "rule": "repeated",
+                          "type": "Metric",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "metricOverrides": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -2375,17 +2368,24 @@
                             "SPARK_HISTORY_SERVER": 5,
                             "HIVESERVER2": 6
                           }
-                        }
-                      }
-                    },
-                    "DataprocMetricConfig": {
-                      "fields": {
-                        "metrics": {
-                          "rule": "repeated",
-                          "type": "Metric",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "Metric": {
+                          "fields": {
+                            "metricSource": {
+                              "type": "MetricSource",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "metricOverrides": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }

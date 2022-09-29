@@ -7145,128 +7145,11 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a Metric. */
-                interface IMetric {
-
-                    /** Metric metricSource */
-                    metricSource?: (google.cloud.dataproc.v1.Metric.MetricSource|keyof typeof google.cloud.dataproc.v1.Metric.MetricSource|null);
-
-                    /** Metric metricOverrides */
-                    metricOverrides?: (string[]|null);
-                }
-
-                /** Represents a Metric. */
-                class Metric implements IMetric {
-
-                    /**
-                     * Constructs a new Metric.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataproc.v1.IMetric);
-
-                    /** Metric metricSource. */
-                    public metricSource: (google.cloud.dataproc.v1.Metric.MetricSource|keyof typeof google.cloud.dataproc.v1.Metric.MetricSource);
-
-                    /** Metric metricOverrides. */
-                    public metricOverrides: string[];
-
-                    /**
-                     * Creates a new Metric instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Metric instance
-                     */
-                    public static create(properties?: google.cloud.dataproc.v1.IMetric): google.cloud.dataproc.v1.Metric;
-
-                    /**
-                     * Encodes the specified Metric message. Does not implicitly {@link google.cloud.dataproc.v1.Metric.verify|verify} messages.
-                     * @param message Metric message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataproc.v1.IMetric, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Metric message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.Metric.verify|verify} messages.
-                     * @param message Metric message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataproc.v1.IMetric, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Metric message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Metric
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.Metric;
-
-                    /**
-                     * Decodes a Metric message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Metric
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.Metric;
-
-                    /**
-                     * Verifies a Metric message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Metric message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Metric
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.Metric;
-
-                    /**
-                     * Creates a plain object from a Metric message. Also converts values to other types if specified.
-                     * @param message Metric
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataproc.v1.Metric, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Metric to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Metric
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace Metric {
-
-                    /** MetricSource enum. */
-                    enum MetricSource {
-                        METRIC_SOURCE_UNSPECIFIED = 0,
-                        MONITORING_AGENT_DEFAULTS = 1,
-                        HDFS = 2,
-                        SPARK = 3,
-                        YARN = 4,
-                        SPARK_HISTORY_SERVER = 5,
-                        HIVESERVER2 = 6
-                    }
-                }
-
                 /** Properties of a DataprocMetricConfig. */
                 interface IDataprocMetricConfig {
 
                     /** DataprocMetricConfig metrics */
-                    metrics?: (google.cloud.dataproc.v1.IMetric[]|null);
+                    metrics?: (google.cloud.dataproc.v1.DataprocMetricConfig.IMetric[]|null);
                 }
 
                 /** Represents a DataprocMetricConfig. */
@@ -7279,7 +7162,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataproc.v1.IDataprocMetricConfig);
 
                     /** DataprocMetricConfig metrics. */
-                    public metrics: google.cloud.dataproc.v1.IMetric[];
+                    public metrics: google.cloud.dataproc.v1.DataprocMetricConfig.IMetric[];
 
                     /**
                      * Creates a new DataprocMetricConfig instance using the specified properties.
@@ -7357,6 +7240,123 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DataprocMetricConfig {
+
+                    /** MetricSource enum. */
+                    enum MetricSource {
+                        METRIC_SOURCE_UNSPECIFIED = 0,
+                        MONITORING_AGENT_DEFAULTS = 1,
+                        HDFS = 2,
+                        SPARK = 3,
+                        YARN = 4,
+                        SPARK_HISTORY_SERVER = 5,
+                        HIVESERVER2 = 6
+                    }
+
+                    /** Properties of a Metric. */
+                    interface IMetric {
+
+                        /** Metric metricSource */
+                        metricSource?: (google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource|keyof typeof google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource|null);
+
+                        /** Metric metricOverrides */
+                        metricOverrides?: (string[]|null);
+                    }
+
+                    /** Represents a Metric. */
+                    class Metric implements IMetric {
+
+                        /**
+                         * Constructs a new Metric.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataproc.v1.DataprocMetricConfig.IMetric);
+
+                        /** Metric metricSource. */
+                        public metricSource: (google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource|keyof typeof google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource);
+
+                        /** Metric metricOverrides. */
+                        public metricOverrides: string[];
+
+                        /**
+                         * Creates a new Metric instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Metric instance
+                         */
+                        public static create(properties?: google.cloud.dataproc.v1.DataprocMetricConfig.IMetric): google.cloud.dataproc.v1.DataprocMetricConfig.Metric;
+
+                        /**
+                         * Encodes the specified Metric message. Does not implicitly {@link google.cloud.dataproc.v1.DataprocMetricConfig.Metric.verify|verify} messages.
+                         * @param message Metric message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataproc.v1.DataprocMetricConfig.IMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Metric message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.DataprocMetricConfig.Metric.verify|verify} messages.
+                         * @param message Metric message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataproc.v1.DataprocMetricConfig.IMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Metric message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Metric
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.DataprocMetricConfig.Metric;
+
+                        /**
+                         * Decodes a Metric message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Metric
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.DataprocMetricConfig.Metric;
+
+                        /**
+                         * Verifies a Metric message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Metric message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Metric
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.DataprocMetricConfig.Metric;
+
+                        /**
+                         * Creates a plain object from a Metric message. Also converts values to other types if specified.
+                         * @param message Metric
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataproc.v1.DataprocMetricConfig.Metric, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Metric to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Metric
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a ClusterMetrics. */
