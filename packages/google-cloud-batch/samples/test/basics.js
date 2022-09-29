@@ -53,4 +53,12 @@ describe('Create jobs', () => {
     );
     assert(output !== null);
   });
+
+  it('get information about a job', async () => {
+    const output = execSync(
+      `node get/get_job.js ${projectId} us-central1 test-job-js-script-${testRunId}`,
+      {cwd}
+    );
+    assert(output !== null);
+  });
 });
