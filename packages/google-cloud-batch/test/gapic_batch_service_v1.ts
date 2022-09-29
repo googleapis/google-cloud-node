@@ -273,7 +273,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -301,7 +304,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -345,7 +351,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -370,7 +379,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -388,7 +400,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -416,7 +431,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -460,7 +478,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -485,7 +506,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -503,7 +527,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.GetTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.GetTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -531,7 +558,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.GetTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.GetTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -575,7 +605,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.GetTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.GetTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -600,7 +633,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.GetTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.GetTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -618,7 +654,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -647,7 +686,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -698,7 +740,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -726,7 +771,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -796,7 +844,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -826,7 +877,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -872,7 +926,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -897,7 +954,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -945,7 +1005,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -990,7 +1053,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1029,7 +1095,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1069,7 +1138,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1099,7 +1171,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1145,7 +1220,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1170,7 +1248,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1218,7 +1299,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1263,7 +1347,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1302,7 +1389,10 @@ describe('v1.BatchServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

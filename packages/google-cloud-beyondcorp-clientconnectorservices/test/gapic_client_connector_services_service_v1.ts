@@ -302,7 +302,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.GetClientConnectorServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.GetClientConnectorServiceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -337,7 +337,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.GetClientConnectorServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.GetClientConnectorServiceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -387,7 +387,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.GetClientConnectorServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.GetClientConnectorServiceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -424,7 +424,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.GetClientConnectorServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.GetClientConnectorServiceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -451,7 +451,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.CreateClientConnectorServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.CreateClientConnectorServiceRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -487,7 +487,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.CreateClientConnectorServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.CreateClientConnectorServiceRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -544,7 +544,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.CreateClientConnectorServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.CreateClientConnectorServiceRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -581,7 +581,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.CreateClientConnectorServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.CreateClientConnectorServiceRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -668,7 +668,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
       );
       request.clientConnectorService ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.UpdateClientConnectorServiceRequest',
         ['clientConnectorService', 'name']
       );
       request.clientConnectorService.name = defaultValue1;
@@ -705,7 +705,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
       );
       request.clientConnectorService ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.UpdateClientConnectorServiceRequest',
         ['clientConnectorService', 'name']
       );
       request.clientConnectorService.name = defaultValue1;
@@ -763,7 +763,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
       );
       request.clientConnectorService ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.UpdateClientConnectorServiceRequest',
         ['clientConnectorService', 'name']
       );
       request.clientConnectorService.name = defaultValue1;
@@ -801,7 +801,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
       );
       request.clientConnectorService ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.UpdateClientConnectorServiceRequest',
         ['clientConnectorService', 'name']
       );
       request.clientConnectorService.name = defaultValue1;
@@ -887,7 +887,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.DeleteClientConnectorServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.DeleteClientConnectorServiceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -923,7 +923,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.DeleteClientConnectorServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.DeleteClientConnectorServiceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -980,7 +980,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.DeleteClientConnectorServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.DeleteClientConnectorServiceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1017,7 +1017,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.DeleteClientConnectorServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteClientConnectorServiceRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.DeleteClientConnectorServiceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1103,7 +1103,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientConnectorServicesRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1146,7 +1146,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientConnectorServicesRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1206,7 +1206,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientConnectorServicesRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1243,7 +1243,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientConnectorServicesRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1315,7 +1315,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientConnectorServicesRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1376,7 +1376,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientConnectorServicesRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1433,7 +1433,7 @@ describe('v1.ClientConnectorServicesServiceClient', () => {
         new protos.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListClientConnectorServicesRequest',
+        '.google.cloud.beyondcorp.clientconnectorservices.v1.ListClientConnectorServicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;

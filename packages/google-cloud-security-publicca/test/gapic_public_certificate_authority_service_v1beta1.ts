@@ -207,7 +207,7 @@ describe('v1beta1.PublicCertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.publicca.v1beta1.CreateExternalAccountKeyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateExternalAccountKeyRequest',
+        '.google.cloud.security.publicca.v1beta1.CreateExternalAccountKeyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -242,7 +242,7 @@ describe('v1beta1.PublicCertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.publicca.v1beta1.CreateExternalAccountKeyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateExternalAccountKeyRequest',
+        '.google.cloud.security.publicca.v1beta1.CreateExternalAccountKeyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -292,7 +292,7 @@ describe('v1beta1.PublicCertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.publicca.v1beta1.CreateExternalAccountKeyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateExternalAccountKeyRequest',
+        '.google.cloud.security.publicca.v1beta1.CreateExternalAccountKeyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -329,7 +329,7 @@ describe('v1beta1.PublicCertificateAuthorityServiceClient', () => {
         new protos.google.cloud.security.publicca.v1beta1.CreateExternalAccountKeyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateExternalAccountKeyRequest',
+        '.google.cloud.security.publicca.v1beta1.CreateExternalAccountKeyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
