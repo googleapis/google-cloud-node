@@ -89,8 +89,8 @@ function main(projectId, region, jobName) {
   job.allocationPolicy = allocationPolicy;
   job.labels = {env: 'testing', type: 'container'};
   // We use Cloud Logging as it's an out option available out of the box
-  job.logs_policy = new batch.LogsPolicy();
-  job.logs_policy.destination = batch.LogsPolicy.Destination.CLOUD_LOGGING;
+  job.logsPolicy = new batch.LogsPolicy();
+  job.logsPolicy.destination = batch.LogsPolicy.Destination.CLOUD_LOGGING;
 
   // The job's parent is the project and region in which the job will run
   const parent = `projects/${projectId}/locations/${region}`;
