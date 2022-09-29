@@ -269,7 +269,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetChannelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -297,7 +300,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetChannelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -341,7 +347,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetChannelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -369,7 +378,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetChannelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -387,7 +399,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetInputRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInputRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetInputRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -415,7 +430,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetInputRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInputRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetInputRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -459,7 +477,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetInputRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInputRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetInputRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -484,7 +505,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetInputRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInputRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetInputRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -502,9 +526,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -532,9 +557,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -578,9 +604,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -608,9 +635,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -628,7 +656,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEventRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -656,7 +687,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEventRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -700,7 +734,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEventRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -725,7 +762,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEventRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -743,7 +783,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEventRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -771,7 +814,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEventRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -815,7 +861,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEventRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -843,7 +892,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEventRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -861,9 +913,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateChannelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateChannelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -893,9 +946,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateChannelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateChannelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -946,9 +1000,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateChannelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateChannelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -976,9 +1031,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateChannelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateChannelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1051,9 +1107,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteChannelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1083,9 +1140,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteChannelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1136,9 +1194,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteChannelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1166,9 +1225,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteChannelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1242,10 +1302,10 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.UpdateChannelRequest()
       );
       request.channel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateChannelRequest', [
-        'channel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdateChannelRequest',
+        ['channel', 'name']
+      );
       request.channel.name = defaultValue1;
       const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1276,10 +1336,10 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.UpdateChannelRequest()
       );
       request.channel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateChannelRequest', [
-        'channel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdateChannelRequest',
+        ['channel', 'name']
+      );
       request.channel.name = defaultValue1;
       const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1331,10 +1391,10 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.UpdateChannelRequest()
       );
       request.channel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateChannelRequest', [
-        'channel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdateChannelRequest',
+        ['channel', 'name']
+      );
       request.channel.name = defaultValue1;
       const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1363,10 +1423,10 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.UpdateChannelRequest()
       );
       request.channel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateChannelRequest', [
-        'channel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdateChannelRequest',
+        ['channel', 'name']
+      );
       request.channel.name = defaultValue1;
       const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1439,9 +1499,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StartChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartChannelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.StartChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1470,9 +1531,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StartChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartChannelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.StartChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1523,9 +1585,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StartChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartChannelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.StartChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1553,9 +1616,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StartChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartChannelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.StartChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1625,7 +1689,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StopChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopChannelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.StopChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1654,7 +1721,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StopChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopChannelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.StopChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1705,7 +1775,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StopChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopChannelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.StopChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1733,7 +1806,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StopChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopChannelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.StopChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1803,9 +1879,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateInputRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateInputRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateInputRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1834,9 +1911,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateInputRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateInputRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateInputRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1887,9 +1965,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateInputRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateInputRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateInputRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1917,9 +1996,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateInputRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateInputRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateInputRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1989,7 +2069,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteInputRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInputRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteInputRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2018,7 +2101,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteInputRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInputRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteInputRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2069,7 +2155,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteInputRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInputRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteInputRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2097,7 +2186,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteInputRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInputRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteInputRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2168,10 +2260,10 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.UpdateInputRequest()
       );
       request.input ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateInputRequest', [
-        'input',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdateInputRequest',
+        ['input', 'name']
+      );
       request.input.name = defaultValue1;
       const expectedHeaderRequestParams = `input.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2201,10 +2293,10 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.UpdateInputRequest()
       );
       request.input ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateInputRequest', [
-        'input',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdateInputRequest',
+        ['input', 'name']
+      );
       request.input.name = defaultValue1;
       const expectedHeaderRequestParams = `input.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2256,10 +2348,10 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.UpdateInputRequest()
       );
       request.input ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateInputRequest', [
-        'input',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdateInputRequest',
+        ['input', 'name']
+      );
       request.input.name = defaultValue1;
       const expectedHeaderRequestParams = `input.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2288,10 +2380,10 @@ describe('v1.LivestreamServiceClient', () => {
         new protos.google.cloud.video.livestream.v1.UpdateInputRequest()
       );
       request.input ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateInputRequest', [
-        'input',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdateInputRequest',
+        ['input', 'name']
+      );
       request.input.name = defaultValue1;
       const expectedHeaderRequestParams = `input.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2361,9 +2453,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2399,9 +2492,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2453,9 +2547,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2483,9 +2578,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2542,9 +2638,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2592,9 +2689,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2640,9 +2738,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2682,9 +2781,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInputsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListInputsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2720,9 +2820,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInputsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListInputsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2774,9 +2875,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInputsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListInputsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2804,9 +2906,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInputsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListInputsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2863,9 +2966,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInputsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListInputsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2913,9 +3017,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInputsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListInputsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2961,9 +3066,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInputsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListInputsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3004,9 +3110,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3042,9 +3149,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3096,9 +3204,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3126,9 +3235,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3185,9 +3295,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3235,9 +3346,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3283,9 +3395,10 @@ describe('v1.LivestreamServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
