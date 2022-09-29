@@ -239,7 +239,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateMigrationWorkflowRequest',
+        '.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -271,7 +271,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateMigrationWorkflowRequest',
+        '.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -318,7 +318,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateMigrationWorkflowRequest',
+        '.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -352,7 +352,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateMigrationWorkflowRequest',
+        '.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -375,9 +375,10 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigrationWorkflowRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -406,9 +407,10 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigrationWorkflowRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -452,9 +454,10 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigrationWorkflowRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -482,9 +485,10 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigrationWorkflowRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -503,7 +507,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteMigrationWorkflowRequest',
+        '.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -535,7 +539,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteMigrationWorkflowRequest',
+        '.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -582,7 +586,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteMigrationWorkflowRequest',
+        '.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -616,7 +620,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteMigrationWorkflowRequest',
+        '.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -640,7 +644,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'StartMigrationWorkflowRequest',
+        '.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -672,7 +676,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'StartMigrationWorkflowRequest',
+        '.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -719,7 +723,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'StartMigrationWorkflowRequest',
+        '.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -753,7 +757,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'StartMigrationWorkflowRequest',
+        '.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -776,9 +780,10 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigrationSubtaskRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -807,9 +812,10 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigrationSubtaskRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -853,9 +859,10 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigrationSubtaskRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -883,9 +890,10 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigrationSubtaskRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -904,7 +912,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationWorkflowsRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -944,7 +952,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationWorkflowsRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1001,7 +1009,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationWorkflowsRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1035,7 +1043,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationWorkflowsRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1104,7 +1112,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationWorkflowsRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1162,7 +1170,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationWorkflowsRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1216,7 +1224,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationWorkflowsRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1263,7 +1271,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationSubtasksRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1303,7 +1311,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationSubtasksRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1360,7 +1368,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationSubtasksRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1394,7 +1402,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationSubtasksRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1463,7 +1471,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationSubtasksRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1521,7 +1529,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationSubtasksRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1575,7 +1583,7 @@ describe('v2alpha.MigrationServiceClient', () => {
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMigrationSubtasksRequest',
+        '.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
