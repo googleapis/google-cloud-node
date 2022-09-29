@@ -1428,7 +1428,7 @@ describe('v2.PoliciesClient', () => {
       );
       client.operationsClient.deleteOperation =
         stubSimpleCall(expectedResponse);
-      const response = awai client.deleteOperation(request);
+      const response = await client.deleteOperation(request);
       assert.deepStrictEqual(response, [expectedResponse]);
       assert(
         (client.operationsClient.deleteOperation as SinonStub)
