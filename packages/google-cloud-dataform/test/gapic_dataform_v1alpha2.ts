@@ -235,9 +235,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.GetRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -265,9 +266,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.GetRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -311,9 +313,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.GetRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -341,9 +344,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.GetRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -361,9 +365,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRepositoryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.CreateRepositoryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -391,9 +396,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRepositoryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.CreateRepositoryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -437,9 +443,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRepositoryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.CreateRepositoryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -467,9 +474,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRepositoryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.CreateRepositoryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -488,10 +496,10 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.UpdateRepositoryRequest()
       );
       request.repository ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRepositoryRequest', [
-        'repository',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.UpdateRepositoryRequest',
+        ['repository', 'name']
+      );
       request.repository.name = defaultValue1;
       const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -520,10 +528,10 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.UpdateRepositoryRequest()
       );
       request.repository ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRepositoryRequest', [
-        'repository',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.UpdateRepositoryRequest',
+        ['repository', 'name']
+      );
       request.repository.name = defaultValue1;
       const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -568,10 +576,10 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.UpdateRepositoryRequest()
       );
       request.repository ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRepositoryRequest', [
-        'repository',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.UpdateRepositoryRequest',
+        ['repository', 'name']
+      );
       request.repository.name = defaultValue1;
       const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -600,10 +608,10 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.UpdateRepositoryRequest()
       );
       request.repository ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRepositoryRequest', [
-        'repository',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.UpdateRepositoryRequest',
+        ['repository', 'name']
+      );
       request.repository.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -621,9 +629,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.DeleteRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -651,9 +660,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.DeleteRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -697,9 +707,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.DeleteRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -727,9 +738,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteRepositoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRepositoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.DeleteRepositoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -747,9 +759,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchRemoteBranchesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchRemoteBranchesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchRemoteBranchesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -778,9 +791,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchRemoteBranchesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchRemoteBranchesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchRemoteBranchesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -824,9 +838,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchRemoteBranchesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchRemoteBranchesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchRemoteBranchesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -854,9 +869,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchRemoteBranchesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchRemoteBranchesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchRemoteBranchesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -874,9 +890,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkspaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.GetWorkspaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -904,9 +921,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkspaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.GetWorkspaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -950,9 +968,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkspaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.GetWorkspaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -980,9 +999,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkspaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.GetWorkspaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1000,9 +1020,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkspaceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.CreateWorkspaceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1030,9 +1051,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkspaceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.CreateWorkspaceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1076,9 +1098,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkspaceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.CreateWorkspaceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1106,9 +1129,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkspaceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.CreateWorkspaceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1126,9 +1150,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkspaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.DeleteWorkspaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1156,9 +1181,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkspaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.DeleteWorkspaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1202,9 +1228,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkspaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.DeleteWorkspaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1232,9 +1259,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkspaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.DeleteWorkspaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1252,9 +1280,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.InstallNpmPackagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InstallNpmPackagesRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.InstallNpmPackagesRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1283,9 +1312,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.InstallNpmPackagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InstallNpmPackagesRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.InstallNpmPackagesRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1329,9 +1359,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.InstallNpmPackagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InstallNpmPackagesRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.InstallNpmPackagesRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1359,9 +1390,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.InstallNpmPackagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InstallNpmPackagesRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.InstallNpmPackagesRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1379,9 +1411,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PullGitCommitsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PullGitCommitsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.PullGitCommitsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1409,9 +1442,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PullGitCommitsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PullGitCommitsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.PullGitCommitsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1455,9 +1489,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PullGitCommitsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PullGitCommitsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.PullGitCommitsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1485,9 +1520,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PullGitCommitsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PullGitCommitsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.PullGitCommitsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1505,9 +1541,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PushGitCommitsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PushGitCommitsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.PushGitCommitsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1535,9 +1572,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PushGitCommitsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PushGitCommitsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.PushGitCommitsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1581,9 +1619,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PushGitCommitsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PushGitCommitsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.PushGitCommitsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1611,9 +1650,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PushGitCommitsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PushGitCommitsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.PushGitCommitsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1631,9 +1671,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileGitStatusesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchFileGitStatusesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchFileGitStatusesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1662,9 +1703,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileGitStatusesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchFileGitStatusesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchFileGitStatusesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1708,9 +1750,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileGitStatusesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchFileGitStatusesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchFileGitStatusesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1738,9 +1781,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileGitStatusesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchFileGitStatusesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchFileGitStatusesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1758,9 +1802,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchGitAheadBehindRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchGitAheadBehindRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchGitAheadBehindRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1789,9 +1834,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchGitAheadBehindRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchGitAheadBehindRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchGitAheadBehindRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1835,9 +1881,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchGitAheadBehindRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchGitAheadBehindRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchGitAheadBehindRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1865,9 +1912,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchGitAheadBehindRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchGitAheadBehindRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchGitAheadBehindRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1886,7 +1934,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CommitWorkspaceChangesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CommitWorkspaceChangesRequest',
+        '.google.cloud.dataform.v1alpha2.CommitWorkspaceChangesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1918,7 +1966,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CommitWorkspaceChangesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CommitWorkspaceChangesRequest',
+        '.google.cloud.dataform.v1alpha2.CommitWorkspaceChangesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1965,7 +2013,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CommitWorkspaceChangesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CommitWorkspaceChangesRequest',
+        '.google.cloud.dataform.v1alpha2.CommitWorkspaceChangesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1999,7 +2047,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CommitWorkspaceChangesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CommitWorkspaceChangesRequest',
+        '.google.cloud.dataform.v1alpha2.CommitWorkspaceChangesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2023,7 +2071,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ResetWorkspaceChangesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResetWorkspaceChangesRequest',
+        '.google.cloud.dataform.v1alpha2.ResetWorkspaceChangesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2055,7 +2103,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ResetWorkspaceChangesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResetWorkspaceChangesRequest',
+        '.google.cloud.dataform.v1alpha2.ResetWorkspaceChangesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2102,7 +2150,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ResetWorkspaceChangesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResetWorkspaceChangesRequest',
+        '.google.cloud.dataform.v1alpha2.ResetWorkspaceChangesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2136,7 +2184,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ResetWorkspaceChangesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResetWorkspaceChangesRequest',
+        '.google.cloud.dataform.v1alpha2.ResetWorkspaceChangesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2159,9 +2207,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileDiffRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchFileDiffRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchFileDiffRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2189,9 +2238,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileDiffRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchFileDiffRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchFileDiffRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2235,9 +2285,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileDiffRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchFileDiffRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchFileDiffRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2265,9 +2316,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileDiffRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchFileDiffRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.FetchFileDiffRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2285,9 +2337,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MakeDirectoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MakeDirectoryRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.MakeDirectoryRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2315,9 +2368,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MakeDirectoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MakeDirectoryRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.MakeDirectoryRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2361,9 +2415,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MakeDirectoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MakeDirectoryRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.MakeDirectoryRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2391,9 +2446,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MakeDirectoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MakeDirectoryRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.MakeDirectoryRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2411,9 +2467,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveDirectoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveDirectoryRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.RemoveDirectoryRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2441,9 +2498,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveDirectoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveDirectoryRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.RemoveDirectoryRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2487,9 +2545,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveDirectoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveDirectoryRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.RemoveDirectoryRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2517,9 +2576,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveDirectoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveDirectoryRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.RemoveDirectoryRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2537,9 +2597,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveDirectoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveDirectoryRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.MoveDirectoryRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2567,9 +2628,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveDirectoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveDirectoryRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.MoveDirectoryRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2613,9 +2675,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveDirectoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveDirectoryRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.MoveDirectoryRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2643,9 +2706,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveDirectoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveDirectoryRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.MoveDirectoryRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2663,9 +2727,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ReadFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReadFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ReadFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2693,9 +2758,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ReadFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReadFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ReadFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2739,9 +2805,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ReadFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReadFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ReadFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2766,9 +2833,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ReadFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReadFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ReadFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2786,9 +2854,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.RemoveFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2816,9 +2885,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.RemoveFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2862,9 +2932,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.RemoveFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2892,9 +2963,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.RemoveFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2912,9 +2984,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.MoveFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2942,9 +3015,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.MoveFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2988,9 +3062,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.MoveFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3015,9 +3090,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.MoveFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3035,9 +3111,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WriteFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WriteFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.WriteFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3065,9 +3142,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WriteFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WriteFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.WriteFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3111,9 +3189,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WriteFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WriteFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.WriteFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3138,9 +3217,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WriteFileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WriteFileRequest', [
-        'workspace',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.WriteFileRequest',
+        ['workspace']
+      );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3158,9 +3238,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetCompilationResultRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCompilationResultRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.GetCompilationResultRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3189,9 +3270,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetCompilationResultRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCompilationResultRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.GetCompilationResultRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3235,9 +3317,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetCompilationResultRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCompilationResultRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.GetCompilationResultRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3265,9 +3348,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetCompilationResultRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCompilationResultRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.GetCompilationResultRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3286,7 +3370,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CreateCompilationResultRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCompilationResultRequest',
+        '.google.cloud.dataform.v1alpha2.CreateCompilationResultRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3318,7 +3402,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CreateCompilationResultRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCompilationResultRequest',
+        '.google.cloud.dataform.v1alpha2.CreateCompilationResultRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3365,7 +3449,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CreateCompilationResultRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCompilationResultRequest',
+        '.google.cloud.dataform.v1alpha2.CreateCompilationResultRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3399,7 +3483,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CreateCompilationResultRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCompilationResultRequest',
+        '.google.cloud.dataform.v1alpha2.CreateCompilationResultRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3423,7 +3507,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.GetWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.GetWorkflowInvocationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3455,7 +3539,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.GetWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.GetWorkflowInvocationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3502,7 +3586,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.GetWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.GetWorkflowInvocationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3536,7 +3620,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.GetWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.GetWorkflowInvocationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3560,7 +3644,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CreateWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.CreateWorkflowInvocationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3592,7 +3676,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CreateWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.CreateWorkflowInvocationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3639,7 +3723,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CreateWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.CreateWorkflowInvocationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3673,7 +3757,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CreateWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.CreateWorkflowInvocationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3697,7 +3781,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.DeleteWorkflowInvocationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3729,7 +3813,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.DeleteWorkflowInvocationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3776,7 +3860,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.DeleteWorkflowInvocationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3810,7 +3894,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.DeleteWorkflowInvocationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3834,7 +3918,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CancelWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.CancelWorkflowInvocationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3866,7 +3950,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CancelWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.CancelWorkflowInvocationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3913,7 +3997,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CancelWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.CancelWorkflowInvocationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3947,7 +4031,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.CancelWorkflowInvocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelWorkflowInvocationRequest',
+        '.google.cloud.dataform.v1alpha2.CancelWorkflowInvocationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3970,9 +4054,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4008,9 +4093,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4062,9 +4148,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4092,9 +4179,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4152,9 +4240,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4201,9 +4290,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4249,9 +4339,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListRepositoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4291,9 +4382,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListWorkspacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4329,9 +4421,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListWorkspacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4383,9 +4476,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListWorkspacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4413,9 +4507,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListWorkspacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4472,9 +4567,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListWorkspacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4520,9 +4616,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListWorkspacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4568,9 +4665,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataform.v1alpha2.ListWorkspacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4611,7 +4709,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryDirectoryContentsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest',
         ['workspace']
       );
       request.workspace = defaultValue1;
@@ -4651,7 +4749,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryDirectoryContentsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest',
         ['workspace']
       );
       request.workspace = defaultValue1;
@@ -4708,7 +4806,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryDirectoryContentsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest',
         ['workspace']
       );
       request.workspace = defaultValue1;
@@ -4742,7 +4840,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryDirectoryContentsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest',
         ['workspace']
       );
       request.workspace = defaultValue1;
@@ -4811,7 +4909,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryDirectoryContentsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest',
         ['workspace']
       );
       request.workspace = defaultValue1;
@@ -4869,7 +4967,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryDirectoryContentsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest',
         ['workspace']
       );
       request.workspace = defaultValue1;
@@ -4923,7 +5021,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryDirectoryContentsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest',
         ['workspace']
       );
       request.workspace = defaultValue1;
@@ -4970,7 +5068,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCompilationResultsRequest',
+        '.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5010,7 +5108,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCompilationResultsRequest',
+        '.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5067,7 +5165,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCompilationResultsRequest',
+        '.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5101,7 +5199,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCompilationResultsRequest',
+        '.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5170,7 +5268,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCompilationResultsRequest',
+        '.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5228,7 +5326,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCompilationResultsRequest',
+        '.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5282,7 +5380,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCompilationResultsRequest',
+        '.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5329,7 +5427,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryCompilationResultActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -5369,7 +5467,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryCompilationResultActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -5426,7 +5524,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryCompilationResultActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -5460,7 +5558,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryCompilationResultActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -5532,7 +5630,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryCompilationResultActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -5593,7 +5691,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryCompilationResultActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -5647,7 +5745,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryCompilationResultActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -5694,7 +5792,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowInvocationsRequest',
+        '.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5734,7 +5832,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowInvocationsRequest',
+        '.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5791,7 +5889,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowInvocationsRequest',
+        '.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5825,7 +5923,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowInvocationsRequest',
+        '.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5894,7 +5992,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowInvocationsRequest',
+        '.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5952,7 +6050,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowInvocationsRequest',
+        '.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6006,7 +6104,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowInvocationsRequest',
+        '.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6053,7 +6151,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryWorkflowInvocationActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -6093,7 +6191,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryWorkflowInvocationActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -6150,7 +6248,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryWorkflowInvocationActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -6184,7 +6282,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryWorkflowInvocationActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -6256,7 +6354,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryWorkflowInvocationActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -6317,7 +6415,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryWorkflowInvocationActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -6371,7 +6469,7 @@ describe('v1alpha2.DataformClient', () => {
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'QueryWorkflowInvocationActionsRequest',
+        '.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest',
         ['name']
       );
       request.name = defaultValue1;
