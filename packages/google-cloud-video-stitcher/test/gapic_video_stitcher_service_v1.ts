@@ -246,9 +246,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCdnKeyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateCdnKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -277,9 +278,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCdnKeyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateCdnKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -324,9 +326,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCdnKeyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateCdnKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -355,9 +358,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCdnKeyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateCdnKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -376,7 +380,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCdnKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetCdnKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -405,7 +412,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCdnKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetCdnKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -450,7 +460,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCdnKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetCdnKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -476,7 +489,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCdnKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetCdnKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -495,9 +511,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCdnKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -526,9 +543,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCdnKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -573,9 +591,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCdnKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -604,9 +623,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCdnKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -626,10 +646,10 @@ describe('v1.VideoStitcherServiceClient', () => {
         new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
       );
       request.cdnKey ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCdnKeyRequest', [
-        'cdnKey',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest',
+        ['cdnKey', 'name']
+      );
       request.cdnKey.name = defaultValue1;
       const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -659,10 +679,10 @@ describe('v1.VideoStitcherServiceClient', () => {
         new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
       );
       request.cdnKey ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCdnKeyRequest', [
-        'cdnKey',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest',
+        ['cdnKey', 'name']
+      );
       request.cdnKey.name = defaultValue1;
       const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -708,10 +728,10 @@ describe('v1.VideoStitcherServiceClient', () => {
         new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
       );
       request.cdnKey ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCdnKeyRequest', [
-        'cdnKey',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest',
+        ['cdnKey', 'name']
+      );
       request.cdnKey.name = defaultValue1;
       const expectedHeaderRequestParams = `cdn_key.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -741,10 +761,10 @@ describe('v1.VideoStitcherServiceClient', () => {
         new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
       );
       request.cdnKey ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCdnKeyRequest', [
-        'cdnKey',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest',
+        ['cdnKey', 'name']
+      );
       request.cdnKey.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -763,9 +783,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateVodSessionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateVodSessionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -794,9 +815,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateVodSessionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateVodSessionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -841,9 +863,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateVodSessionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateVodSessionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -872,9 +895,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateVodSessionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateVodSessionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -893,9 +917,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVodSessionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetVodSessionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -924,9 +949,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVodSessionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetVodSessionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -971,9 +997,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVodSessionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetVodSessionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1002,9 +1029,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVodSessionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetVodSessionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1023,9 +1051,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVodStitchDetailRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1055,9 +1084,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVodStitchDetailRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1102,9 +1132,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVodStitchDetailRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1133,9 +1164,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVodStitchDetailRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1154,9 +1186,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVodAdTagDetailRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1185,9 +1218,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVodAdTagDetailRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1232,9 +1266,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVodAdTagDetailRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1263,9 +1298,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVodAdTagDetailRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1284,9 +1320,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLiveAdTagDetailRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1316,9 +1353,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLiveAdTagDetailRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1363,9 +1401,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLiveAdTagDetailRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1394,9 +1433,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLiveAdTagDetailRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1415,9 +1455,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSlateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateSlateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1446,9 +1487,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSlateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateSlateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1493,9 +1535,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSlateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateSlateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1524,9 +1567,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSlateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateSlateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1545,7 +1589,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSlateRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetSlateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1574,7 +1621,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSlateRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetSlateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1619,7 +1669,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSlateRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetSlateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1645,7 +1698,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSlateRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetSlateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1665,10 +1721,10 @@ describe('v1.VideoStitcherServiceClient', () => {
         new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
       );
       request.slate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSlateRequest', [
-        'slate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.UpdateSlateRequest',
+        ['slate', 'name']
+      );
       request.slate.name = defaultValue1;
       const expectedHeaderRequestParams = `slate.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1698,10 +1754,10 @@ describe('v1.VideoStitcherServiceClient', () => {
         new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
       );
       request.slate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSlateRequest', [
-        'slate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.UpdateSlateRequest',
+        ['slate', 'name']
+      );
       request.slate.name = defaultValue1;
       const expectedHeaderRequestParams = `slate.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1747,10 +1803,10 @@ describe('v1.VideoStitcherServiceClient', () => {
         new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
       );
       request.slate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSlateRequest', [
-        'slate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.UpdateSlateRequest',
+        ['slate', 'name']
+      );
       request.slate.name = defaultValue1;
       const expectedHeaderRequestParams = `slate.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1780,10 +1836,10 @@ describe('v1.VideoStitcherServiceClient', () => {
         new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
       );
       request.slate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSlateRequest', [
-        'slate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.UpdateSlateRequest',
+        ['slate', 'name']
+      );
       request.slate.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1802,7 +1858,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSlateRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.DeleteSlateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1831,7 +1890,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSlateRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.DeleteSlateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1876,7 +1938,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSlateRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.DeleteSlateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1905,7 +1970,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSlateRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.DeleteSlateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1924,9 +1992,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateLiveSessionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateLiveSessionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1955,9 +2024,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateLiveSessionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateLiveSessionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2002,9 +2072,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateLiveSessionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateLiveSessionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2033,9 +2104,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateLiveSessionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.CreateLiveSessionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2054,9 +2126,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLiveSessionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetLiveSessionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2085,9 +2158,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLiveSessionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetLiveSessionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2132,9 +2206,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLiveSessionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetLiveSessionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2163,9 +2238,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLiveSessionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.GetLiveSessionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2184,9 +2260,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCdnKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2223,9 +2300,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCdnKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2278,9 +2356,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCdnKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2309,9 +2388,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCdnKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2369,9 +2449,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCdnKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2420,9 +2501,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCdnKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2469,9 +2551,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCdnKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListCdnKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2513,9 +2596,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodStitchDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2553,9 +2637,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodStitchDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2610,9 +2695,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodStitchDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2641,9 +2727,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodStitchDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2702,9 +2789,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodStitchDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2752,9 +2840,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodStitchDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2802,9 +2891,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodStitchDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2845,9 +2935,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2885,9 +2976,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2942,9 +3034,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2973,9 +3066,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3034,9 +3128,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3084,9 +3179,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3134,9 +3230,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVodAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3177,9 +3274,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLiveAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3217,9 +3315,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLiveAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3274,9 +3373,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLiveAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3305,9 +3405,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLiveAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3366,9 +3467,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLiveAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3416,9 +3518,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLiveAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3466,9 +3569,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLiveAdTagDetailsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3509,9 +3613,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSlatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3548,9 +3653,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSlatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3603,9 +3709,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSlatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3634,9 +3741,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSlatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3694,9 +3802,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSlatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3745,9 +3854,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSlatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3794,9 +3904,10 @@ describe('v1.VideoStitcherServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSlatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.stitcher.v1.ListSlatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
