@@ -25,6 +25,11 @@
                 "getRelease"
               ]
             },
+            "AbandonRelease": {
+              "methods": [
+                "abandonRelease"
+              ]
+            },
             "ApproveRollout": {
               "methods": [
                 "approveRollout"
@@ -33,6 +38,16 @@
             "GetRollout": {
               "methods": [
                 "getRollout"
+              ]
+            },
+            "RetryJob": {
+              "methods": [
+                "retryJob"
+              ]
+            },
+            "GetJobRun": {
+              "methods": [
+                "getJobRun"
               ]
             },
             "GetConfig": {
@@ -106,6 +121,13 @@
                 "listRollouts",
                 "listRolloutsStream",
                 "listRolloutsAsync"
+              ]
+            },
+            "ListJobRuns": {
+              "methods": [
+                "listJobRuns",
+                "listJobRunsStream",
+                "listJobRunsAsync"
               ]
             }
           }
@@ -128,6 +150,11 @@
                 "getRelease"
               ]
             },
+            "AbandonRelease": {
+              "methods": [
+                "abandonRelease"
+              ]
+            },
             "ApproveRollout": {
               "methods": [
                 "approveRollout"
@@ -136,6 +163,16 @@
             "GetRollout": {
               "methods": [
                 "getRollout"
+              ]
+            },
+            "RetryJob": {
+              "methods": [
+                "retryJob"
+              ]
+            },
+            "GetJobRun": {
+              "methods": [
+                "getJobRun"
               ]
             },
             "GetConfig": {
@@ -209,6 +246,13 @@
                 "listRollouts",
                 "listRolloutsStream",
                 "listRolloutsAsync"
+              ]
+            },
+            "ListJobRuns": {
+              "methods": [
+                "listJobRuns",
+                "listJobRunsStream",
+                "listJobRunsAsync"
               ]
             }
           }

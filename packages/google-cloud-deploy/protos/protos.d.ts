@@ -229,6 +229,20 @@ export namespace google {
                     public createRelease(request: google.cloud.deploy.v1.ICreateReleaseRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls AbandonRelease.
+                     * @param request AbandonReleaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AbandonReleaseResponse
+                     */
+                    public abandonRelease(request: google.cloud.deploy.v1.IAbandonReleaseRequest, callback: google.cloud.deploy.v1.CloudDeploy.AbandonReleaseCallback): void;
+
+                    /**
+                     * Calls AbandonRelease.
+                     * @param request AbandonReleaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public abandonRelease(request: google.cloud.deploy.v1.IAbandonReleaseRequest): Promise<google.cloud.deploy.v1.AbandonReleaseResponse>;
+
+                    /**
                      * Calls ApproveRollout.
                      * @param request ApproveRolloutRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ApproveRolloutResponse
@@ -283,6 +297,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public createRollout(request: google.cloud.deploy.v1.ICreateRolloutRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RetryJob.
+                     * @param request RetryJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RetryJobResponse
+                     */
+                    public retryJob(request: google.cloud.deploy.v1.IRetryJobRequest, callback: google.cloud.deploy.v1.CloudDeploy.RetryJobCallback): void;
+
+                    /**
+                     * Calls RetryJob.
+                     * @param request RetryJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retryJob(request: google.cloud.deploy.v1.IRetryJobRequest): Promise<google.cloud.deploy.v1.RetryJobResponse>;
+
+                    /**
+                     * Calls ListJobRuns.
+                     * @param request ListJobRunsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListJobRunsResponse
+                     */
+                    public listJobRuns(request: google.cloud.deploy.v1.IListJobRunsRequest, callback: google.cloud.deploy.v1.CloudDeploy.ListJobRunsCallback): void;
+
+                    /**
+                     * Calls ListJobRuns.
+                     * @param request ListJobRunsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listJobRuns(request: google.cloud.deploy.v1.IListJobRunsRequest): Promise<google.cloud.deploy.v1.ListJobRunsResponse>;
+
+                    /**
+                     * Calls GetJobRun.
+                     * @param request GetJobRunRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and JobRun
+                     */
+                    public getJobRun(request: google.cloud.deploy.v1.IGetJobRunRequest, callback: google.cloud.deploy.v1.CloudDeploy.GetJobRunCallback): void;
+
+                    /**
+                     * Calls GetJobRun.
+                     * @param request GetJobRunRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getJobRun(request: google.cloud.deploy.v1.IGetJobRunRequest): Promise<google.cloud.deploy.v1.JobRun>;
 
                     /**
                      * Calls GetConfig.
@@ -393,6 +449,13 @@ export namespace google {
                     type CreateReleaseCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|abandonRelease}.
+                     * @param error Error, if any
+                     * @param [response] AbandonReleaseResponse
+                     */
+                    type AbandonReleaseCallback = (error: (Error|null), response?: google.cloud.deploy.v1.AbandonReleaseResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|approveRollout}.
                      * @param error Error, if any
                      * @param [response] ApproveRolloutResponse
@@ -419,6 +482,27 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type CreateRolloutCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|retryJob}.
+                     * @param error Error, if any
+                     * @param [response] RetryJobResponse
+                     */
+                    type RetryJobCallback = (error: (Error|null), response?: google.cloud.deploy.v1.RetryJobResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|listJobRuns}.
+                     * @param error Error, if any
+                     * @param [response] ListJobRunsResponse
+                     */
+                    type ListJobRunsCallback = (error: (Error|null), response?: google.cloud.deploy.v1.ListJobRunsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|getJobRun}.
+                     * @param error Error, if any
+                     * @param [response] JobRun
+                     */
+                    type GetJobRunCallback = (error: (Error|null), response?: google.cloud.deploy.v1.JobRun) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|getConfig}.
@@ -460,6 +544,9 @@ export namespace google {
 
                     /** DeliveryPipeline etag */
                     etag?: (string|null);
+
+                    /** DeliveryPipeline suspended */
+                    suspended?: (boolean|null);
                 }
 
                 /** Represents a DeliveryPipeline. */
@@ -500,6 +587,9 @@ export namespace google {
 
                     /** DeliveryPipeline etag. */
                     public etag: string;
+
+                    /** DeliveryPipeline suspended. */
+                    public suspended: boolean;
 
                     /** DeliveryPipeline pipeline. */
                     public pipeline?: "serialPipeline";
@@ -687,6 +777,9 @@ export namespace google {
 
                     /** Stage profiles */
                     profiles?: (string[]|null);
+
+                    /** Stage strategy */
+                    strategy?: (google.cloud.deploy.v1.IStrategy|null);
                 }
 
                 /** Represents a Stage. */
@@ -703,6 +796,9 @@ export namespace google {
 
                     /** Stage profiles. */
                     public profiles: string[];
+
+                    /** Stage strategy. */
+                    public strategy?: (google.cloud.deploy.v1.IStrategy|null);
 
                     /**
                      * Creates a new Stage instance using the specified properties.
@@ -776,6 +872,203 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Stage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Strategy. */
+                interface IStrategy {
+
+                    /** Strategy standard */
+                    standard?: (google.cloud.deploy.v1.IStandard|null);
+                }
+
+                /** Represents a Strategy. */
+                class Strategy implements IStrategy {
+
+                    /**
+                     * Constructs a new Strategy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IStrategy);
+
+                    /** Strategy standard. */
+                    public standard?: (google.cloud.deploy.v1.IStandard|null);
+
+                    /** Strategy deploymentStrategy. */
+                    public deploymentStrategy?: "standard";
+
+                    /**
+                     * Creates a new Strategy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Strategy instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IStrategy): google.cloud.deploy.v1.Strategy;
+
+                    /**
+                     * Encodes the specified Strategy message. Does not implicitly {@link google.cloud.deploy.v1.Strategy.verify|verify} messages.
+                     * @param message Strategy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Strategy message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Strategy.verify|verify} messages.
+                     * @param message Strategy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Strategy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Strategy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.Strategy;
+
+                    /**
+                     * Decodes a Strategy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Strategy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.Strategy;
+
+                    /**
+                     * Verifies a Strategy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Strategy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Strategy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.Strategy;
+
+                    /**
+                     * Creates a plain object from a Strategy message. Also converts values to other types if specified.
+                     * @param message Strategy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.Strategy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Strategy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Strategy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Standard. */
+                interface IStandard {
+
+                    /** Standard verify */
+                    verify?: (boolean|null);
+                }
+
+                /** Represents a Standard. */
+                class Standard implements IStandard {
+
+                    /**
+                     * Constructs a new Standard.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IStandard);
+
+                    /** Standard verify. */
+                    public verify: boolean;
+
+                    /**
+                     * Creates a new Standard instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Standard instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IStandard): google.cloud.deploy.v1.Standard;
+
+                    /**
+                     * Encodes the specified Standard message. Does not implicitly {@link google.cloud.deploy.v1.Standard.verify|verify} messages.
+                     * @param message Standard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IStandard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Standard message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Standard.verify|verify} messages.
+                     * @param message Standard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IStandard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Standard message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Standard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.Standard;
+
+                    /**
+                     * Decodes a Standard message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Standard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.Standard;
+
+                    /**
+                     * Verifies a Standard message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Standard message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Standard
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.Standard;
+
+                    /**
+                     * Creates a plain object from a Standard message. Also converts values to other types if specified.
+                     * @param message Standard
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.Standard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Standard to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Standard
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -1829,6 +2122,9 @@ export namespace google {
                     /** Target anthosCluster */
                     anthosCluster?: (google.cloud.deploy.v1.IAnthosCluster|null);
 
+                    /** Target run */
+                    run?: (google.cloud.deploy.v1.ICloudRunLocation|null);
+
                     /** Target etag */
                     etag?: (string|null);
 
@@ -1878,6 +2174,9 @@ export namespace google {
                     /** Target anthosCluster. */
                     public anthosCluster?: (google.cloud.deploy.v1.IAnthosCluster|null);
 
+                    /** Target run. */
+                    public run?: (google.cloud.deploy.v1.ICloudRunLocation|null);
+
                     /** Target etag. */
                     public etag: string;
 
@@ -1885,7 +2184,7 @@ export namespace google {
                     public executionConfigs: google.cloud.deploy.v1.IExecutionConfig[];
 
                     /** Target deploymentTarget. */
-                    public deploymentTarget?: ("gke"|"anthosCluster");
+                    public deploymentTarget?: ("gke"|"anthosCluster"|"run");
 
                     /**
                      * Creates a new Target instance using the specified properties.
@@ -1985,6 +2284,9 @@ export namespace google {
 
                     /** ExecutionConfig artifactStorage */
                     artifactStorage?: (string|null);
+
+                    /** ExecutionConfig executionTimeout */
+                    executionTimeout?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents an ExecutionConfig. */
@@ -2013,6 +2315,9 @@ export namespace google {
 
                     /** ExecutionConfig artifactStorage. */
                     public artifactStorage: string;
+
+                    /** ExecutionConfig executionTimeout. */
+                    public executionTimeout?: (google.protobuf.IDuration|null);
 
                     /** ExecutionConfig executionEnvironment. */
                     public executionEnvironment?: ("defaultPool"|"privatePool");
@@ -2101,7 +2406,8 @@ export namespace google {
                     enum ExecutionEnvironmentUsage {
                         EXECUTION_ENVIRONMENT_USAGE_UNSPECIFIED = 0,
                         RENDER = 1,
-                        DEPLOY = 2
+                        DEPLOY = 2,
+                        VERIFY = 3
                     }
                 }
 
@@ -2511,6 +2817,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AnthosCluster
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudRunLocation. */
+                interface ICloudRunLocation {
+
+                    /** CloudRunLocation location */
+                    location?: (string|null);
+                }
+
+                /** Represents a CloudRunLocation. */
+                class CloudRunLocation implements ICloudRunLocation {
+
+                    /**
+                     * Constructs a new CloudRunLocation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ICloudRunLocation);
+
+                    /** CloudRunLocation location. */
+                    public location: string;
+
+                    /**
+                     * Creates a new CloudRunLocation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudRunLocation instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ICloudRunLocation): google.cloud.deploy.v1.CloudRunLocation;
+
+                    /**
+                     * Encodes the specified CloudRunLocation message. Does not implicitly {@link google.cloud.deploy.v1.CloudRunLocation.verify|verify} messages.
+                     * @param message CloudRunLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ICloudRunLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudRunLocation message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CloudRunLocation.verify|verify} messages.
+                     * @param message CloudRunLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ICloudRunLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudRunLocation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudRunLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.CloudRunLocation;
+
+                    /**
+                     * Decodes a CloudRunLocation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudRunLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.CloudRunLocation;
+
+                    /**
+                     * Verifies a CloudRunLocation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudRunLocation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudRunLocation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.CloudRunLocation;
+
+                    /**
+                     * Creates a plain object from a CloudRunLocation message. Also converts values to other types if specified.
+                     * @param message CloudRunLocation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.CloudRunLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudRunLocation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudRunLocation
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3225,6 +3628,9 @@ export namespace google {
                     /** Release labels */
                     labels?: ({ [k: string]: string }|null);
 
+                    /** Release abandoned */
+                    abandoned?: (boolean|null);
+
                     /** Release createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
@@ -3288,6 +3694,9 @@ export namespace google {
 
                     /** Release labels. */
                     public labels: { [k: string]: string };
+
+                    /** Release abandoned. */
+                    public abandoned: boolean;
 
                     /** Release createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -3427,6 +3836,9 @@ export namespace google {
 
                         /** TargetRender failureCause */
                         failureCause?: (google.cloud.deploy.v1.Release.TargetRender.FailureCause|keyof typeof google.cloud.deploy.v1.Release.TargetRender.FailureCause|null);
+
+                        /** TargetRender failureMessage */
+                        failureMessage?: (string|null);
                     }
 
                     /** Represents a TargetRender. */
@@ -3446,6 +3858,9 @@ export namespace google {
 
                         /** TargetRender failureCause. */
                         public failureCause: (google.cloud.deploy.v1.Release.TargetRender.FailureCause|keyof typeof google.cloud.deploy.v1.Release.TargetRender.FailureCause);
+
+                        /** TargetRender failureMessage. */
+                        public failureMessage: string;
 
                         /**
                          * Creates a new TargetRender instance using the specified properties.
@@ -4260,6 +4675,12 @@ export namespace google {
 
                     /** Rollout deployFailureCause */
                     deployFailureCause?: (google.cloud.deploy.v1.Rollout.FailureCause|keyof typeof google.cloud.deploy.v1.Rollout.FailureCause|null);
+
+                    /** Rollout phases */
+                    phases?: (google.cloud.deploy.v1.IPhase[]|null);
+
+                    /** Rollout metadata */
+                    metadata?: (google.cloud.deploy.v1.IMetadata|null);
                 }
 
                 /** Represents a Rollout. */
@@ -4321,6 +4742,12 @@ export namespace google {
 
                     /** Rollout deployFailureCause. */
                     public deployFailureCause: (google.cloud.deploy.v1.Rollout.FailureCause|keyof typeof google.cloud.deploy.v1.Rollout.FailureCause);
+
+                    /** Rollout phases. */
+                    public phases: google.cloud.deploy.v1.IPhase[];
+
+                    /** Rollout metadata. */
+                    public metadata?: (google.cloud.deploy.v1.IMetadata|null);
 
                     /**
                      * Creates a new Rollout instance using the specified properties.
@@ -4429,8 +4856,861 @@ export namespace google {
                         CLOUD_BUILD_UNAVAILABLE = 1,
                         EXECUTION_FAILED = 2,
                         DEADLINE_EXCEEDED = 3,
-                        RELEASE_FAILED = 4
+                        RELEASE_FAILED = 4,
+                        RELEASE_ABANDONED = 5,
+                        VERIFICATION_CONFIG_NOT_FOUND = 6
                     }
+                }
+
+                /** Properties of a Metadata. */
+                interface IMetadata {
+
+                    /** Metadata cloudRun */
+                    cloudRun?: (google.cloud.deploy.v1.ICloudRunMetadata|null);
+                }
+
+                /** Represents a Metadata. */
+                class Metadata implements IMetadata {
+
+                    /**
+                     * Constructs a new Metadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IMetadata);
+
+                    /** Metadata cloudRun. */
+                    public cloudRun?: (google.cloud.deploy.v1.ICloudRunMetadata|null);
+
+                    /**
+                     * Creates a new Metadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Metadata instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IMetadata): google.cloud.deploy.v1.Metadata;
+
+                    /**
+                     * Encodes the specified Metadata message. Does not implicitly {@link google.cloud.deploy.v1.Metadata.verify|verify} messages.
+                     * @param message Metadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Metadata message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Metadata.verify|verify} messages.
+                     * @param message Metadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Metadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Metadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.Metadata;
+
+                    /**
+                     * Decodes a Metadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Metadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.Metadata;
+
+                    /**
+                     * Verifies a Metadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Metadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.Metadata;
+
+                    /**
+                     * Creates a plain object from a Metadata message. Also converts values to other types if specified.
+                     * @param message Metadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.Metadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Metadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Metadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeployJobRunMetadata. */
+                interface IDeployJobRunMetadata {
+
+                    /** DeployJobRunMetadata cloudRun */
+                    cloudRun?: (google.cloud.deploy.v1.ICloudRunMetadata|null);
+                }
+
+                /** Represents a DeployJobRunMetadata. */
+                class DeployJobRunMetadata implements IDeployJobRunMetadata {
+
+                    /**
+                     * Constructs a new DeployJobRunMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IDeployJobRunMetadata);
+
+                    /** DeployJobRunMetadata cloudRun. */
+                    public cloudRun?: (google.cloud.deploy.v1.ICloudRunMetadata|null);
+
+                    /**
+                     * Creates a new DeployJobRunMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployJobRunMetadata instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IDeployJobRunMetadata): google.cloud.deploy.v1.DeployJobRunMetadata;
+
+                    /**
+                     * Encodes the specified DeployJobRunMetadata message. Does not implicitly {@link google.cloud.deploy.v1.DeployJobRunMetadata.verify|verify} messages.
+                     * @param message DeployJobRunMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IDeployJobRunMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployJobRunMetadata message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeployJobRunMetadata.verify|verify} messages.
+                     * @param message DeployJobRunMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IDeployJobRunMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployJobRunMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployJobRunMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.DeployJobRunMetadata;
+
+                    /**
+                     * Decodes a DeployJobRunMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployJobRunMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.DeployJobRunMetadata;
+
+                    /**
+                     * Verifies a DeployJobRunMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployJobRunMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployJobRunMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.DeployJobRunMetadata;
+
+                    /**
+                     * Creates a plain object from a DeployJobRunMetadata message. Also converts values to other types if specified.
+                     * @param message DeployJobRunMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.DeployJobRunMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployJobRunMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeployJobRunMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudRunMetadata. */
+                interface ICloudRunMetadata {
+
+                    /** CloudRunMetadata service */
+                    service?: (string|null);
+
+                    /** CloudRunMetadata serviceUrls */
+                    serviceUrls?: (string[]|null);
+
+                    /** CloudRunMetadata revision */
+                    revision?: (string|null);
+                }
+
+                /** Represents a CloudRunMetadata. */
+                class CloudRunMetadata implements ICloudRunMetadata {
+
+                    /**
+                     * Constructs a new CloudRunMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ICloudRunMetadata);
+
+                    /** CloudRunMetadata service. */
+                    public service: string;
+
+                    /** CloudRunMetadata serviceUrls. */
+                    public serviceUrls: string[];
+
+                    /** CloudRunMetadata revision. */
+                    public revision: string;
+
+                    /**
+                     * Creates a new CloudRunMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudRunMetadata instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ICloudRunMetadata): google.cloud.deploy.v1.CloudRunMetadata;
+
+                    /**
+                     * Encodes the specified CloudRunMetadata message. Does not implicitly {@link google.cloud.deploy.v1.CloudRunMetadata.verify|verify} messages.
+                     * @param message CloudRunMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ICloudRunMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudRunMetadata message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CloudRunMetadata.verify|verify} messages.
+                     * @param message CloudRunMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ICloudRunMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudRunMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudRunMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.CloudRunMetadata;
+
+                    /**
+                     * Decodes a CloudRunMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudRunMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.CloudRunMetadata;
+
+                    /**
+                     * Verifies a CloudRunMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudRunMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudRunMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.CloudRunMetadata;
+
+                    /**
+                     * Creates a plain object from a CloudRunMetadata message. Also converts values to other types if specified.
+                     * @param message CloudRunMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.CloudRunMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudRunMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudRunMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Phase. */
+                interface IPhase {
+
+                    /** Phase id */
+                    id?: (string|null);
+
+                    /** Phase state */
+                    state?: (google.cloud.deploy.v1.Phase.State|keyof typeof google.cloud.deploy.v1.Phase.State|null);
+
+                    /** Phase deploymentJobs */
+                    deploymentJobs?: (google.cloud.deploy.v1.IDeploymentJobs|null);
+                }
+
+                /** Represents a Phase. */
+                class Phase implements IPhase {
+
+                    /**
+                     * Constructs a new Phase.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IPhase);
+
+                    /** Phase id. */
+                    public id: string;
+
+                    /** Phase state. */
+                    public state: (google.cloud.deploy.v1.Phase.State|keyof typeof google.cloud.deploy.v1.Phase.State);
+
+                    /** Phase deploymentJobs. */
+                    public deploymentJobs?: (google.cloud.deploy.v1.IDeploymentJobs|null);
+
+                    /** Phase jobs. */
+                    public jobs?: "deploymentJobs";
+
+                    /**
+                     * Creates a new Phase instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Phase instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IPhase): google.cloud.deploy.v1.Phase;
+
+                    /**
+                     * Encodes the specified Phase message. Does not implicitly {@link google.cloud.deploy.v1.Phase.verify|verify} messages.
+                     * @param message Phase message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IPhase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Phase message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Phase.verify|verify} messages.
+                     * @param message Phase message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IPhase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Phase message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Phase
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.Phase;
+
+                    /**
+                     * Decodes a Phase message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Phase
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.Phase;
+
+                    /**
+                     * Verifies a Phase message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Phase message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Phase
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.Phase;
+
+                    /**
+                     * Creates a plain object from a Phase message. Also converts values to other types if specified.
+                     * @param message Phase
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.Phase, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Phase to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Phase
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Phase {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 1,
+                        IN_PROGRESS = 2,
+                        SUCCEEDED = 3,
+                        FAILED = 4,
+                        ABORTED = 5
+                    }
+                }
+
+                /** Properties of a DeploymentJobs. */
+                interface IDeploymentJobs {
+
+                    /** DeploymentJobs deployJob */
+                    deployJob?: (google.cloud.deploy.v1.IJob|null);
+
+                    /** DeploymentJobs verifyJob */
+                    verifyJob?: (google.cloud.deploy.v1.IJob|null);
+                }
+
+                /** Represents a DeploymentJobs. */
+                class DeploymentJobs implements IDeploymentJobs {
+
+                    /**
+                     * Constructs a new DeploymentJobs.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IDeploymentJobs);
+
+                    /** DeploymentJobs deployJob. */
+                    public deployJob?: (google.cloud.deploy.v1.IJob|null);
+
+                    /** DeploymentJobs verifyJob. */
+                    public verifyJob?: (google.cloud.deploy.v1.IJob|null);
+
+                    /**
+                     * Creates a new DeploymentJobs instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeploymentJobs instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IDeploymentJobs): google.cloud.deploy.v1.DeploymentJobs;
+
+                    /**
+                     * Encodes the specified DeploymentJobs message. Does not implicitly {@link google.cloud.deploy.v1.DeploymentJobs.verify|verify} messages.
+                     * @param message DeploymentJobs message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IDeploymentJobs, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeploymentJobs message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeploymentJobs.verify|verify} messages.
+                     * @param message DeploymentJobs message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IDeploymentJobs, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeploymentJobs message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeploymentJobs
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.DeploymentJobs;
+
+                    /**
+                     * Decodes a DeploymentJobs message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeploymentJobs
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.DeploymentJobs;
+
+                    /**
+                     * Verifies a DeploymentJobs message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeploymentJobs message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeploymentJobs
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.DeploymentJobs;
+
+                    /**
+                     * Creates a plain object from a DeploymentJobs message. Also converts values to other types if specified.
+                     * @param message DeploymentJobs
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.DeploymentJobs, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeploymentJobs to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeploymentJobs
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Job. */
+                interface IJob {
+
+                    /** Job id */
+                    id?: (string|null);
+
+                    /** Job state */
+                    state?: (google.cloud.deploy.v1.Job.State|keyof typeof google.cloud.deploy.v1.Job.State|null);
+
+                    /** Job jobRun */
+                    jobRun?: (string|null);
+
+                    /** Job deployJob */
+                    deployJob?: (google.cloud.deploy.v1.IDeployJob|null);
+
+                    /** Job verifyJob */
+                    verifyJob?: (google.cloud.deploy.v1.IVerifyJob|null);
+                }
+
+                /** Represents a Job. */
+                class Job implements IJob {
+
+                    /**
+                     * Constructs a new Job.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IJob);
+
+                    /** Job id. */
+                    public id: string;
+
+                    /** Job state. */
+                    public state: (google.cloud.deploy.v1.Job.State|keyof typeof google.cloud.deploy.v1.Job.State);
+
+                    /** Job jobRun. */
+                    public jobRun: string;
+
+                    /** Job deployJob. */
+                    public deployJob?: (google.cloud.deploy.v1.IDeployJob|null);
+
+                    /** Job verifyJob. */
+                    public verifyJob?: (google.cloud.deploy.v1.IVerifyJob|null);
+
+                    /** Job jobType. */
+                    public jobType?: ("deployJob"|"verifyJob");
+
+                    /**
+                     * Creates a new Job instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Job instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IJob): google.cloud.deploy.v1.Job;
+
+                    /**
+                     * Encodes the specified Job message. Does not implicitly {@link google.cloud.deploy.v1.Job.verify|verify} messages.
+                     * @param message Job message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Job message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Job.verify|verify} messages.
+                     * @param message Job message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Job message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Job
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.Job;
+
+                    /**
+                     * Decodes a Job message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Job
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.Job;
+
+                    /**
+                     * Verifies a Job message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Job message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Job
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.Job;
+
+                    /**
+                     * Creates a plain object from a Job message. Also converts values to other types if specified.
+                     * @param message Job
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.Job, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Job to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Job
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Job {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 1,
+                        DISABLED = 2,
+                        IN_PROGRESS = 3,
+                        SUCCEEDED = 4,
+                        FAILED = 5,
+                        ABORTED = 6
+                    }
+                }
+
+                /** Properties of a DeployJob. */
+                interface IDeployJob {
+                }
+
+                /** Represents a DeployJob. */
+                class DeployJob implements IDeployJob {
+
+                    /**
+                     * Constructs a new DeployJob.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IDeployJob);
+
+                    /**
+                     * Creates a new DeployJob instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployJob instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IDeployJob): google.cloud.deploy.v1.DeployJob;
+
+                    /**
+                     * Encodes the specified DeployJob message. Does not implicitly {@link google.cloud.deploy.v1.DeployJob.verify|verify} messages.
+                     * @param message DeployJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IDeployJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployJob message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeployJob.verify|verify} messages.
+                     * @param message DeployJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IDeployJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployJob message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.DeployJob;
+
+                    /**
+                     * Decodes a DeployJob message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.DeployJob;
+
+                    /**
+                     * Verifies a DeployJob message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployJob message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployJob
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.DeployJob;
+
+                    /**
+                     * Creates a plain object from a DeployJob message. Also converts values to other types if specified.
+                     * @param message DeployJob
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.DeployJob, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployJob to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeployJob
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VerifyJob. */
+                interface IVerifyJob {
+                }
+
+                /** Represents a VerifyJob. */
+                class VerifyJob implements IVerifyJob {
+
+                    /**
+                     * Constructs a new VerifyJob.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IVerifyJob);
+
+                    /**
+                     * Creates a new VerifyJob instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerifyJob instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IVerifyJob): google.cloud.deploy.v1.VerifyJob;
+
+                    /**
+                     * Encodes the specified VerifyJob message. Does not implicitly {@link google.cloud.deploy.v1.VerifyJob.verify|verify} messages.
+                     * @param message VerifyJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IVerifyJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerifyJob message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.VerifyJob.verify|verify} messages.
+                     * @param message VerifyJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IVerifyJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerifyJob message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerifyJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.VerifyJob;
+
+                    /**
+                     * Decodes a VerifyJob message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerifyJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.VerifyJob;
+
+                    /**
+                     * Verifies a VerifyJob message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerifyJob message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerifyJob
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.VerifyJob;
+
+                    /**
+                     * Creates a plain object from a VerifyJob message. Also converts values to other types if specified.
+                     * @param message VerifyJob
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.VerifyJob, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerifyJob to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerifyJob
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListRolloutsRequest. */
@@ -5208,6 +6488,1151 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RetryJobRequest. */
+                interface IRetryJobRequest {
+
+                    /** RetryJobRequest rollout */
+                    rollout?: (string|null);
+
+                    /** RetryJobRequest phaseId */
+                    phaseId?: (string|null);
+
+                    /** RetryJobRequest jobId */
+                    jobId?: (string|null);
+                }
+
+                /** Represents a RetryJobRequest. */
+                class RetryJobRequest implements IRetryJobRequest {
+
+                    /**
+                     * Constructs a new RetryJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IRetryJobRequest);
+
+                    /** RetryJobRequest rollout. */
+                    public rollout: string;
+
+                    /** RetryJobRequest phaseId. */
+                    public phaseId: string;
+
+                    /** RetryJobRequest jobId. */
+                    public jobId: string;
+
+                    /**
+                     * Creates a new RetryJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetryJobRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IRetryJobRequest): google.cloud.deploy.v1.RetryJobRequest;
+
+                    /**
+                     * Encodes the specified RetryJobRequest message. Does not implicitly {@link google.cloud.deploy.v1.RetryJobRequest.verify|verify} messages.
+                     * @param message RetryJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IRetryJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetryJobRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RetryJobRequest.verify|verify} messages.
+                     * @param message RetryJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IRetryJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetryJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetryJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.RetryJobRequest;
+
+                    /**
+                     * Decodes a RetryJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetryJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.RetryJobRequest;
+
+                    /**
+                     * Verifies a RetryJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetryJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetryJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.RetryJobRequest;
+
+                    /**
+                     * Creates a plain object from a RetryJobRequest message. Also converts values to other types if specified.
+                     * @param message RetryJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.RetryJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetryJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetryJobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetryJobResponse. */
+                interface IRetryJobResponse {
+                }
+
+                /** Represents a RetryJobResponse. */
+                class RetryJobResponse implements IRetryJobResponse {
+
+                    /**
+                     * Constructs a new RetryJobResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IRetryJobResponse);
+
+                    /**
+                     * Creates a new RetryJobResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetryJobResponse instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IRetryJobResponse): google.cloud.deploy.v1.RetryJobResponse;
+
+                    /**
+                     * Encodes the specified RetryJobResponse message. Does not implicitly {@link google.cloud.deploy.v1.RetryJobResponse.verify|verify} messages.
+                     * @param message RetryJobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IRetryJobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetryJobResponse message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RetryJobResponse.verify|verify} messages.
+                     * @param message RetryJobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IRetryJobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetryJobResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetryJobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.RetryJobResponse;
+
+                    /**
+                     * Decodes a RetryJobResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetryJobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.RetryJobResponse;
+
+                    /**
+                     * Verifies a RetryJobResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetryJobResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetryJobResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.RetryJobResponse;
+
+                    /**
+                     * Creates a plain object from a RetryJobResponse message. Also converts values to other types if specified.
+                     * @param message RetryJobResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.RetryJobResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetryJobResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetryJobResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AbandonReleaseRequest. */
+                interface IAbandonReleaseRequest {
+
+                    /** AbandonReleaseRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an AbandonReleaseRequest. */
+                class AbandonReleaseRequest implements IAbandonReleaseRequest {
+
+                    /**
+                     * Constructs a new AbandonReleaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IAbandonReleaseRequest);
+
+                    /** AbandonReleaseRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new AbandonReleaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AbandonReleaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IAbandonReleaseRequest): google.cloud.deploy.v1.AbandonReleaseRequest;
+
+                    /**
+                     * Encodes the specified AbandonReleaseRequest message. Does not implicitly {@link google.cloud.deploy.v1.AbandonReleaseRequest.verify|verify} messages.
+                     * @param message AbandonReleaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IAbandonReleaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AbandonReleaseRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AbandonReleaseRequest.verify|verify} messages.
+                     * @param message AbandonReleaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IAbandonReleaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AbandonReleaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AbandonReleaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.AbandonReleaseRequest;
+
+                    /**
+                     * Decodes an AbandonReleaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AbandonReleaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.AbandonReleaseRequest;
+
+                    /**
+                     * Verifies an AbandonReleaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AbandonReleaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AbandonReleaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.AbandonReleaseRequest;
+
+                    /**
+                     * Creates a plain object from an AbandonReleaseRequest message. Also converts values to other types if specified.
+                     * @param message AbandonReleaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.AbandonReleaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AbandonReleaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AbandonReleaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AbandonReleaseResponse. */
+                interface IAbandonReleaseResponse {
+                }
+
+                /** Represents an AbandonReleaseResponse. */
+                class AbandonReleaseResponse implements IAbandonReleaseResponse {
+
+                    /**
+                     * Constructs a new AbandonReleaseResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IAbandonReleaseResponse);
+
+                    /**
+                     * Creates a new AbandonReleaseResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AbandonReleaseResponse instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IAbandonReleaseResponse): google.cloud.deploy.v1.AbandonReleaseResponse;
+
+                    /**
+                     * Encodes the specified AbandonReleaseResponse message. Does not implicitly {@link google.cloud.deploy.v1.AbandonReleaseResponse.verify|verify} messages.
+                     * @param message AbandonReleaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IAbandonReleaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AbandonReleaseResponse message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AbandonReleaseResponse.verify|verify} messages.
+                     * @param message AbandonReleaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IAbandonReleaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AbandonReleaseResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AbandonReleaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.AbandonReleaseResponse;
+
+                    /**
+                     * Decodes an AbandonReleaseResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AbandonReleaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.AbandonReleaseResponse;
+
+                    /**
+                     * Verifies an AbandonReleaseResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AbandonReleaseResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AbandonReleaseResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.AbandonReleaseResponse;
+
+                    /**
+                     * Creates a plain object from an AbandonReleaseResponse message. Also converts values to other types if specified.
+                     * @param message AbandonReleaseResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.AbandonReleaseResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AbandonReleaseResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AbandonReleaseResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a JobRun. */
+                interface IJobRun {
+
+                    /** JobRun name */
+                    name?: (string|null);
+
+                    /** JobRun uid */
+                    uid?: (string|null);
+
+                    /** JobRun phaseId */
+                    phaseId?: (string|null);
+
+                    /** JobRun jobId */
+                    jobId?: (string|null);
+
+                    /** JobRun createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** JobRun startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** JobRun endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** JobRun state */
+                    state?: (google.cloud.deploy.v1.JobRun.State|keyof typeof google.cloud.deploy.v1.JobRun.State|null);
+
+                    /** JobRun deployJobRun */
+                    deployJobRun?: (google.cloud.deploy.v1.IDeployJobRun|null);
+
+                    /** JobRun verifyJobRun */
+                    verifyJobRun?: (google.cloud.deploy.v1.IVerifyJobRun|null);
+
+                    /** JobRun etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a JobRun. */
+                class JobRun implements IJobRun {
+
+                    /**
+                     * Constructs a new JobRun.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IJobRun);
+
+                    /** JobRun name. */
+                    public name: string;
+
+                    /** JobRun uid. */
+                    public uid: string;
+
+                    /** JobRun phaseId. */
+                    public phaseId: string;
+
+                    /** JobRun jobId. */
+                    public jobId: string;
+
+                    /** JobRun createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** JobRun startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** JobRun endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** JobRun state. */
+                    public state: (google.cloud.deploy.v1.JobRun.State|keyof typeof google.cloud.deploy.v1.JobRun.State);
+
+                    /** JobRun deployJobRun. */
+                    public deployJobRun?: (google.cloud.deploy.v1.IDeployJobRun|null);
+
+                    /** JobRun verifyJobRun. */
+                    public verifyJobRun?: (google.cloud.deploy.v1.IVerifyJobRun|null);
+
+                    /** JobRun etag. */
+                    public etag: string;
+
+                    /** JobRun jobRun. */
+                    public jobRun?: ("deployJobRun"|"verifyJobRun");
+
+                    /**
+                     * Creates a new JobRun instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns JobRun instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IJobRun): google.cloud.deploy.v1.JobRun;
+
+                    /**
+                     * Encodes the specified JobRun message. Does not implicitly {@link google.cloud.deploy.v1.JobRun.verify|verify} messages.
+                     * @param message JobRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IJobRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified JobRun message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.JobRun.verify|verify} messages.
+                     * @param message JobRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IJobRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a JobRun message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns JobRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.JobRun;
+
+                    /**
+                     * Decodes a JobRun message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns JobRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.JobRun;
+
+                    /**
+                     * Verifies a JobRun message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a JobRun message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns JobRun
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.JobRun;
+
+                    /**
+                     * Creates a plain object from a JobRun message. Also converts values to other types if specified.
+                     * @param message JobRun
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.JobRun, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this JobRun to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for JobRun
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace JobRun {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        IN_PROGRESS = 1,
+                        SUCCEEDED = 2,
+                        FAILED = 3
+                    }
+                }
+
+                /** Properties of a DeployJobRun. */
+                interface IDeployJobRun {
+
+                    /** DeployJobRun build */
+                    build?: (string|null);
+
+                    /** DeployJobRun failureCause */
+                    failureCause?: (google.cloud.deploy.v1.DeployJobRun.FailureCause|keyof typeof google.cloud.deploy.v1.DeployJobRun.FailureCause|null);
+
+                    /** DeployJobRun failureMessage */
+                    failureMessage?: (string|null);
+
+                    /** DeployJobRun metadata */
+                    metadata?: (google.cloud.deploy.v1.IDeployJobRunMetadata|null);
+                }
+
+                /** Represents a DeployJobRun. */
+                class DeployJobRun implements IDeployJobRun {
+
+                    /**
+                     * Constructs a new DeployJobRun.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IDeployJobRun);
+
+                    /** DeployJobRun build. */
+                    public build: string;
+
+                    /** DeployJobRun failureCause. */
+                    public failureCause: (google.cloud.deploy.v1.DeployJobRun.FailureCause|keyof typeof google.cloud.deploy.v1.DeployJobRun.FailureCause);
+
+                    /** DeployJobRun failureMessage. */
+                    public failureMessage: string;
+
+                    /** DeployJobRun metadata. */
+                    public metadata?: (google.cloud.deploy.v1.IDeployJobRunMetadata|null);
+
+                    /**
+                     * Creates a new DeployJobRun instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployJobRun instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IDeployJobRun): google.cloud.deploy.v1.DeployJobRun;
+
+                    /**
+                     * Encodes the specified DeployJobRun message. Does not implicitly {@link google.cloud.deploy.v1.DeployJobRun.verify|verify} messages.
+                     * @param message DeployJobRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IDeployJobRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployJobRun message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeployJobRun.verify|verify} messages.
+                     * @param message DeployJobRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IDeployJobRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployJobRun message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployJobRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.DeployJobRun;
+
+                    /**
+                     * Decodes a DeployJobRun message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployJobRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.DeployJobRun;
+
+                    /**
+                     * Verifies a DeployJobRun message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployJobRun message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployJobRun
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.DeployJobRun;
+
+                    /**
+                     * Creates a plain object from a DeployJobRun message. Also converts values to other types if specified.
+                     * @param message DeployJobRun
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.DeployJobRun, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployJobRun to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeployJobRun
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DeployJobRun {
+
+                    /** FailureCause enum. */
+                    enum FailureCause {
+                        FAILURE_CAUSE_UNSPECIFIED = 0,
+                        CLOUD_BUILD_UNAVAILABLE = 1,
+                        EXECUTION_FAILED = 2,
+                        DEADLINE_EXCEEDED = 3
+                    }
+                }
+
+                /** Properties of a VerifyJobRun. */
+                interface IVerifyJobRun {
+
+                    /** VerifyJobRun build */
+                    build?: (string|null);
+
+                    /** VerifyJobRun artifactUri */
+                    artifactUri?: (string|null);
+
+                    /** VerifyJobRun eventLogPath */
+                    eventLogPath?: (string|null);
+
+                    /** VerifyJobRun failureCause */
+                    failureCause?: (google.cloud.deploy.v1.VerifyJobRun.FailureCause|keyof typeof google.cloud.deploy.v1.VerifyJobRun.FailureCause|null);
+
+                    /** VerifyJobRun failureMessage */
+                    failureMessage?: (string|null);
+                }
+
+                /** Represents a VerifyJobRun. */
+                class VerifyJobRun implements IVerifyJobRun {
+
+                    /**
+                     * Constructs a new VerifyJobRun.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IVerifyJobRun);
+
+                    /** VerifyJobRun build. */
+                    public build: string;
+
+                    /** VerifyJobRun artifactUri. */
+                    public artifactUri: string;
+
+                    /** VerifyJobRun eventLogPath. */
+                    public eventLogPath: string;
+
+                    /** VerifyJobRun failureCause. */
+                    public failureCause: (google.cloud.deploy.v1.VerifyJobRun.FailureCause|keyof typeof google.cloud.deploy.v1.VerifyJobRun.FailureCause);
+
+                    /** VerifyJobRun failureMessage. */
+                    public failureMessage: string;
+
+                    /**
+                     * Creates a new VerifyJobRun instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerifyJobRun instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IVerifyJobRun): google.cloud.deploy.v1.VerifyJobRun;
+
+                    /**
+                     * Encodes the specified VerifyJobRun message. Does not implicitly {@link google.cloud.deploy.v1.VerifyJobRun.verify|verify} messages.
+                     * @param message VerifyJobRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IVerifyJobRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerifyJobRun message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.VerifyJobRun.verify|verify} messages.
+                     * @param message VerifyJobRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IVerifyJobRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerifyJobRun message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerifyJobRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.VerifyJobRun;
+
+                    /**
+                     * Decodes a VerifyJobRun message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerifyJobRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.VerifyJobRun;
+
+                    /**
+                     * Verifies a VerifyJobRun message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerifyJobRun message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerifyJobRun
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.VerifyJobRun;
+
+                    /**
+                     * Creates a plain object from a VerifyJobRun message. Also converts values to other types if specified.
+                     * @param message VerifyJobRun
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.VerifyJobRun, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerifyJobRun to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerifyJobRun
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VerifyJobRun {
+
+                    /** FailureCause enum. */
+                    enum FailureCause {
+                        FAILURE_CAUSE_UNSPECIFIED = 0,
+                        CLOUD_BUILD_UNAVAILABLE = 1,
+                        EXECUTION_FAILED = 2,
+                        DEADLINE_EXCEEDED = 3,
+                        VERIFICATION_CONFIG_NOT_FOUND = 4
+                    }
+                }
+
+                /** Properties of a ListJobRunsRequest. */
+                interface IListJobRunsRequest {
+
+                    /** ListJobRunsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListJobRunsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListJobRunsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListJobRunsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListJobRunsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListJobRunsRequest. */
+                class ListJobRunsRequest implements IListJobRunsRequest {
+
+                    /**
+                     * Constructs a new ListJobRunsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IListJobRunsRequest);
+
+                    /** ListJobRunsRequest parent. */
+                    public parent: string;
+
+                    /** ListJobRunsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListJobRunsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListJobRunsRequest filter. */
+                    public filter: string;
+
+                    /** ListJobRunsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListJobRunsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListJobRunsRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IListJobRunsRequest): google.cloud.deploy.v1.ListJobRunsRequest;
+
+                    /**
+                     * Encodes the specified ListJobRunsRequest message. Does not implicitly {@link google.cloud.deploy.v1.ListJobRunsRequest.verify|verify} messages.
+                     * @param message ListJobRunsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IListJobRunsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListJobRunsRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ListJobRunsRequest.verify|verify} messages.
+                     * @param message ListJobRunsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IListJobRunsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListJobRunsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListJobRunsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.ListJobRunsRequest;
+
+                    /**
+                     * Decodes a ListJobRunsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListJobRunsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.ListJobRunsRequest;
+
+                    /**
+                     * Verifies a ListJobRunsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListJobRunsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListJobRunsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.ListJobRunsRequest;
+
+                    /**
+                     * Creates a plain object from a ListJobRunsRequest message. Also converts values to other types if specified.
+                     * @param message ListJobRunsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.ListJobRunsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListJobRunsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListJobRunsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListJobRunsResponse. */
+                interface IListJobRunsResponse {
+
+                    /** ListJobRunsResponse jobRuns */
+                    jobRuns?: (google.cloud.deploy.v1.IJobRun[]|null);
+
+                    /** ListJobRunsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListJobRunsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListJobRunsResponse. */
+                class ListJobRunsResponse implements IListJobRunsResponse {
+
+                    /**
+                     * Constructs a new ListJobRunsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IListJobRunsResponse);
+
+                    /** ListJobRunsResponse jobRuns. */
+                    public jobRuns: google.cloud.deploy.v1.IJobRun[];
+
+                    /** ListJobRunsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListJobRunsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListJobRunsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListJobRunsResponse instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IListJobRunsResponse): google.cloud.deploy.v1.ListJobRunsResponse;
+
+                    /**
+                     * Encodes the specified ListJobRunsResponse message. Does not implicitly {@link google.cloud.deploy.v1.ListJobRunsResponse.verify|verify} messages.
+                     * @param message ListJobRunsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IListJobRunsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListJobRunsResponse message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ListJobRunsResponse.verify|verify} messages.
+                     * @param message ListJobRunsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IListJobRunsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListJobRunsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListJobRunsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.ListJobRunsResponse;
+
+                    /**
+                     * Decodes a ListJobRunsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListJobRunsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.ListJobRunsResponse;
+
+                    /**
+                     * Verifies a ListJobRunsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListJobRunsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListJobRunsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.ListJobRunsResponse;
+
+                    /**
+                     * Creates a plain object from a ListJobRunsResponse message. Also converts values to other types if specified.
+                     * @param message ListJobRunsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.ListJobRunsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListJobRunsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListJobRunsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetJobRunRequest. */
+                interface IGetJobRunRequest {
+
+                    /** GetJobRunRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetJobRunRequest. */
+                class GetJobRunRequest implements IGetJobRunRequest {
+
+                    /**
+                     * Constructs a new GetJobRunRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IGetJobRunRequest);
+
+                    /** GetJobRunRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetJobRunRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetJobRunRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IGetJobRunRequest): google.cloud.deploy.v1.GetJobRunRequest;
+
+                    /**
+                     * Encodes the specified GetJobRunRequest message. Does not implicitly {@link google.cloud.deploy.v1.GetJobRunRequest.verify|verify} messages.
+                     * @param message GetJobRunRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IGetJobRunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetJobRunRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.GetJobRunRequest.verify|verify} messages.
+                     * @param message GetJobRunRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IGetJobRunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetJobRunRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetJobRunRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.GetJobRunRequest;
+
+                    /**
+                     * Decodes a GetJobRunRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetJobRunRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.GetJobRunRequest;
+
+                    /**
+                     * Verifies a GetJobRunRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetJobRunRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetJobRunRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.GetJobRunRequest;
+
+                    /**
+                     * Creates a plain object from a GetJobRunRequest message. Also converts values to other types if specified.
+                     * @param message GetJobRunRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.GetJobRunRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetJobRunRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetJobRunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Config. */
                 interface IConfig {
 
@@ -5631,6 +8056,139 @@ export namespace google {
                     TYPE_UNSPECIFIED = 0,
                     TYPE_PUBSUB_NOTIFICATION_FAILURE = 1,
                     TYPE_RENDER_STATUES_CHANGE = 2
+                }
+
+                /** Properties of a JobRunNotificationEvent. */
+                interface IJobRunNotificationEvent {
+
+                    /** JobRunNotificationEvent message */
+                    message?: (string|null);
+
+                    /** JobRunNotificationEvent jobRun */
+                    jobRun?: (string|null);
+
+                    /** JobRunNotificationEvent pipelineUid */
+                    pipelineUid?: (string|null);
+
+                    /** JobRunNotificationEvent releaseUid */
+                    releaseUid?: (string|null);
+
+                    /** JobRunNotificationEvent rolloutUid */
+                    rolloutUid?: (string|null);
+
+                    /** JobRunNotificationEvent targetId */
+                    targetId?: (string|null);
+
+                    /** JobRunNotificationEvent type */
+                    type?: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type|null);
+                }
+
+                /** Represents a JobRunNotificationEvent. */
+                class JobRunNotificationEvent implements IJobRunNotificationEvent {
+
+                    /**
+                     * Constructs a new JobRunNotificationEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IJobRunNotificationEvent);
+
+                    /** JobRunNotificationEvent message. */
+                    public message: string;
+
+                    /** JobRunNotificationEvent jobRun. */
+                    public jobRun: string;
+
+                    /** JobRunNotificationEvent pipelineUid. */
+                    public pipelineUid: string;
+
+                    /** JobRunNotificationEvent releaseUid. */
+                    public releaseUid: string;
+
+                    /** JobRunNotificationEvent rolloutUid. */
+                    public rolloutUid: string;
+
+                    /** JobRunNotificationEvent targetId. */
+                    public targetId: string;
+
+                    /** JobRunNotificationEvent type. */
+                    public type: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type);
+
+                    /**
+                     * Creates a new JobRunNotificationEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns JobRunNotificationEvent instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IJobRunNotificationEvent): google.cloud.deploy.v1.JobRunNotificationEvent;
+
+                    /**
+                     * Encodes the specified JobRunNotificationEvent message. Does not implicitly {@link google.cloud.deploy.v1.JobRunNotificationEvent.verify|verify} messages.
+                     * @param message JobRunNotificationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IJobRunNotificationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified JobRunNotificationEvent message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.JobRunNotificationEvent.verify|verify} messages.
+                     * @param message JobRunNotificationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IJobRunNotificationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a JobRunNotificationEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns JobRunNotificationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.JobRunNotificationEvent;
+
+                    /**
+                     * Decodes a JobRunNotificationEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns JobRunNotificationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.JobRunNotificationEvent;
+
+                    /**
+                     * Verifies a JobRunNotificationEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a JobRunNotificationEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns JobRunNotificationEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.JobRunNotificationEvent;
+
+                    /**
+                     * Creates a plain object from a JobRunNotificationEvent message. Also converts values to other types if specified.
+                     * @param message JobRunNotificationEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.JobRunNotificationEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this JobRunNotificationEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for JobRunNotificationEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ReleaseNotificationEvent. */
