@@ -27,7 +27,7 @@ SPLIT_REPO=$1
 ARTIFACT_NAME=$2
 
 rm -rf /tmp/${SPLIT_REPO}
-git clone git@github.com:googleapis/${SPLIT_REPO}.git /tmp/${SPLIT_REPO}
+git clone "git@github.com:googleapis/${SPLIT_REPO}.git" "/tmp/${SPLIT_REPO}"
 
 cd /tmp/${SPLIT_REPO}
 
