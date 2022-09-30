@@ -15,6 +15,7 @@
 import {ImprovedStreamingClient} from './helpers';
 import * as v1p1beta1 from './v1p1beta1';
 import * as v1 from './v1';
+import * as v2 from './v2';
 
 // The following code is adapted from http://www.typescriptlang.org/docs/handbook/mixins.html
 // tslint:disable-next-line no-any
@@ -34,14 +35,22 @@ Object.defineProperty(
     'streamingRecognize'
   )!
 );
+Object.defineProperty(
+  v2.SpeechClient.prototype,
+  'streamingRecognize',
+  Object.getOwnPropertyDescriptor(
+    ImprovedStreamingClient.prototype,
+    'streamingRecognize'
+  )!
+);
 
 const SpeechClient = v1.SpeechClient;
 type SpeechClient = v1.SpeechClient;
 const AdaptationClient = v1.AdaptationClient;
 type AdaptationClient = v1.AdaptationClient;
-export {v1, v1p1beta1, SpeechClient, AdaptationClient};
+export {v1, v1p1beta1, v2, SpeechClient, AdaptationClient};
 // For compatibility with JavaScript libraries we need to provide this default export:
 // tslint:disable-next-line no-default-export
-export default {v1, v1p1beta1, SpeechClient, AdaptationClient};
+export default {v1, v1p1beta1, v2, SpeechClient, AdaptationClient};
 import * as protos from '../protos/protos';
 export {protos};
