@@ -15,5 +15,10 @@
     "packages/typeless-sample-bot": {},
     "packages/google-cloud-bigquery-analyticshub": {}
   },
+  "plugins": [
+    {
+      "type": "sentence-case"
+    }
+  ],
   "release-type": "node"
 }
