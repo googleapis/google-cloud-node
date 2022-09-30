@@ -182,11 +182,6 @@ export class PoliciesClient {
         'nextPageToken',
         'policies'
       ),
-      listApplicablePolicies: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'policies'
-      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -301,7 +296,6 @@ export class PoliciesClient {
       'createPolicy',
       'updatePolicy',
       'deletePolicy',
-      'listApplicablePolicies',
     ];
     for (const methodName of policiesStubMethods) {
       const callPromise = this.policiesStub.then(
@@ -487,8 +481,8 @@ export class PoliciesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource that the policy is attached to, along with the kind
-   *   of policy to create. Format: `policies/{attachment_point}/denypolicies`
+   *   Required. The resource that the policy is attached to, along with the kind of policy
+   *   to create. Format: `policies/{attachment_point}/denypolicies`
    *
    *
    *   The attachment point is identified by its URL-encoded full resource name,
@@ -643,8 +637,7 @@ export class PoliciesClient {
    *
    * To update a policy, you should use a read-modify-write loop:
    *
-   * 1. Use {@link google.iam.v2.Policies.GetPolicy|GetPolicy} to read the current
-   * version of the policy.
+   * 1. Use {@link google.iam.v2.Policies.GetPolicy|GetPolicy} to read the current version of the policy.
    * 2. Modify the policy as needed.
    * 3. Use `UpdatePolicy` to write the updated policy.
    *
@@ -806,9 +799,9 @@ export class PoliciesClient {
    *   For organizations and folders, use the numeric ID in the full resource
    *   name. For projects, you can use the alphanumeric or the numeric ID.
    * @param {string} [request.etag]
-   *   Optional. The expected `etag` of the policy to delete. If the value does
-   *   not match the value that is stored in IAM, the request fails with a `409`
-   *   error code and `ABORTED` status.
+   *   Optional. The expected `etag` of the policy to delete. If the value does not match
+   *   the value that is stored in IAM, the request fails with a `409` error code
+   *   and `ABORTED` status.
    *
    *   If you omit this field, the policy is deleted regardless of its current
    *   `etag`.
@@ -953,8 +946,9 @@ export class PoliciesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource that the policy is attached to, along with the kind
-   *   of policy to list. Format: `policies/{attachment_point}/denypolicies`
+   *   Required. The resource that the policy is attached to, along with the kind of policy
+   *   to list. Format:
+   *   `policies/{attachment_point}/denypolicies`
    *
    *
    *   The attachment point is identified by its URL-encoded full resource name,
@@ -968,9 +962,8 @@ export class PoliciesClient {
    *   The maximum number of policies to return. IAM ignores this value and uses
    *   the value 1000.
    * @param {string} request.pageToken
-   *   A page token received in a
-   *   {@link google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this
-   *   token to retrieve the next page.
+   *   A page token received in a {@link google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
+   *   retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1056,8 +1049,9 @@ export class PoliciesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource that the policy is attached to, along with the kind
-   *   of policy to list. Format: `policies/{attachment_point}/denypolicies`
+   *   Required. The resource that the policy is attached to, along with the kind of policy
+   *   to list. Format:
+   *   `policies/{attachment_point}/denypolicies`
    *
    *
    *   The attachment point is identified by its URL-encoded full resource name,
@@ -1071,9 +1065,8 @@ export class PoliciesClient {
    *   The maximum number of policies to return. IAM ignores this value and uses
    *   the value 1000.
    * @param {string} request.pageToken
-   *   A page token received in a
-   *   {@link google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this
-   *   token to retrieve the next page.
+   *   A page token received in a {@link google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
+   *   retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1115,8 +1108,9 @@ export class PoliciesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource that the policy is attached to, along with the kind
-   *   of policy to list. Format: `policies/{attachment_point}/denypolicies`
+   *   Required. The resource that the policy is attached to, along with the kind of policy
+   *   to list. Format:
+   *   `policies/{attachment_point}/denypolicies`
    *
    *
    *   The attachment point is identified by its URL-encoded full resource name,
@@ -1130,9 +1124,8 @@ export class PoliciesClient {
    *   The maximum number of policies to return. IAM ignores this value and uses
    *   the value 1000.
    * @param {string} request.pageToken
-   *   A page token received in a
-   *   {@link google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this
-   *   token to retrieve the next page.
+   *   A page token received in a {@link google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
+   *   retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1163,259 +1156,6 @@ export class PoliciesClient {
     this.initialize();
     return this.descriptors.page.listPolicies.asyncIterate(
       this.innerApiCalls['listPolicies'] as GaxCall,
-      request as {},
-      callSettings
-    ) as AsyncIterable<protos.google.iam.v2.IPolicy>;
-  }
-  /**
-   * Retrieves all the policies that are attached to the specified resource,
-   * or anywhere in the ancestry of the resource. For example, for a project
-   * this endpoint would return all the `denyPolicy` kind policies attached to
-   * the project, its parent folder (if any), and its parent organization (if
-   * any).
-   * The endpoint requires the same permissions that it would take to call
-   * `ListPolicies` or `GetPolicy`.
-   *
-   * The main reason to use this endpoint is as a policy admin to debug access
-   * issues for a resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.attachmentPoint
-   *   Required. The Cloud resource at which the applicable policies are to be
-   *   retrieved. Format: `{attachment-point}` Use the URL-encoded full resource
-   *   name, which means that the forward-slash character, `/`, must be written as
-   *   `%2F`. For example,
-   *   `cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project`.
-   * @param {string} request.filter
-   *   Filtering currently only supports the kind of policies to return, and
-   *   must be in the format “kind:[policyKind1] OR kind:[policyKind2]”.  New
-   *   policy kinds may be added in the future without notice.
-   *
-   *   Example value: “kind:denyPolicies”
-   * @param {string} request.pageToken
-   *   If present, then retrieve the batch of results following the results from
-   *   the preceding call to this method.  `page_token` must be the value of
-   *   `next_page_token`
-   *   {@link google.iam.v2.ListApplicablePoliciesResponse.next_page_token|ListApplicablePoliciesResponse.next_page_token}
-   *   from the previous response.  The values of other method parameters should
-   *   be identical to those in the previous call.
-   * @param {number} request.pageSize
-   *   Limit on the number of policies to include in the response.
-   *   Further policies can subsequently be obtained by including the
-   *   {@link google.iam.admin.v1.ListApplicablePoliciesResponse.next_page_token|ListApplicablePoliciesResponse.next_page_token}
-   *   in a subsequent request.
-   *   The minimum is 25, and the maximum is 100.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Policy]{@link google.iam.v2.Policy}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listApplicablePoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listApplicablePolicies(
-    request?: protos.google.iam.v2.IListApplicablePoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v2.IPolicy[],
-      protos.google.iam.v2.IListApplicablePoliciesRequest | null,
-      protos.google.iam.v2.IListApplicablePoliciesResponse
-    ]
-  >;
-  listApplicablePolicies(
-    request: protos.google.iam.v2.IListApplicablePoliciesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.iam.v2.IListApplicablePoliciesRequest,
-      protos.google.iam.v2.IListApplicablePoliciesResponse | null | undefined,
-      protos.google.iam.v2.IPolicy
-    >
-  ): void;
-  listApplicablePolicies(
-    request: protos.google.iam.v2.IListApplicablePoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.iam.v2.IListApplicablePoliciesRequest,
-      protos.google.iam.v2.IListApplicablePoliciesResponse | null | undefined,
-      protos.google.iam.v2.IPolicy
-    >
-  ): void;
-  listApplicablePolicies(
-    request?: protos.google.iam.v2.IListApplicablePoliciesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
-          protos.google.iam.v2.IListApplicablePoliciesRequest,
-          | protos.google.iam.v2.IListApplicablePoliciesResponse
-          | null
-          | undefined,
-          protos.google.iam.v2.IPolicy
-        >,
-    callback?: PaginationCallback<
-      protos.google.iam.v2.IListApplicablePoliciesRequest,
-      protos.google.iam.v2.IListApplicablePoliciesResponse | null | undefined,
-      protos.google.iam.v2.IPolicy
-    >
-  ): Promise<
-    [
-      protos.google.iam.v2.IPolicy[],
-      protos.google.iam.v2.IListApplicablePoliciesRequest | null,
-      protos.google.iam.v2.IListApplicablePoliciesResponse
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        attachment_point: request.attachmentPoint ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.listApplicablePolicies(
-      request,
-      options,
-      callback
-    );
-  }
-
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.attachmentPoint
-   *   Required. The Cloud resource at which the applicable policies are to be
-   *   retrieved. Format: `{attachment-point}` Use the URL-encoded full resource
-   *   name, which means that the forward-slash character, `/`, must be written as
-   *   `%2F`. For example,
-   *   `cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project`.
-   * @param {string} request.filter
-   *   Filtering currently only supports the kind of policies to return, and
-   *   must be in the format “kind:[policyKind1] OR kind:[policyKind2]”.  New
-   *   policy kinds may be added in the future without notice.
-   *
-   *   Example value: “kind:denyPolicies”
-   * @param {string} request.pageToken
-   *   If present, then retrieve the batch of results following the results from
-   *   the preceding call to this method.  `page_token` must be the value of
-   *   `next_page_token`
-   *   {@link google.iam.v2.ListApplicablePoliciesResponse.next_page_token|ListApplicablePoliciesResponse.next_page_token}
-   *   from the previous response.  The values of other method parameters should
-   *   be identical to those in the previous call.
-   * @param {number} request.pageSize
-   *   Limit on the number of policies to include in the response.
-   *   Further policies can subsequently be obtained by including the
-   *   {@link google.iam.admin.v1.ListApplicablePoliciesResponse.next_page_token|ListApplicablePoliciesResponse.next_page_token}
-   *   in a subsequent request.
-   *   The minimum is 25, and the maximum is 100.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [Policy]{@link google.iam.v2.Policy} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listApplicablePoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listApplicablePoliciesStream(
-    request?: protos.google.iam.v2.IListApplicablePoliciesRequest,
-    options?: CallOptions
-  ): Transform {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        attachment_point: request.attachmentPoint ?? '',
-      });
-    const defaultCallSettings = this._defaults['listApplicablePolicies'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    return this.descriptors.page.listApplicablePolicies.createStream(
-      this.innerApiCalls.listApplicablePolicies as GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-  /**
-   * Equivalent to `listApplicablePolicies`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.attachmentPoint
-   *   Required. The Cloud resource at which the applicable policies are to be
-   *   retrieved. Format: `{attachment-point}` Use the URL-encoded full resource
-   *   name, which means that the forward-slash character, `/`, must be written as
-   *   `%2F`. For example,
-   *   `cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project`.
-   * @param {string} request.filter
-   *   Filtering currently only supports the kind of policies to return, and
-   *   must be in the format “kind:[policyKind1] OR kind:[policyKind2]”.  New
-   *   policy kinds may be added in the future without notice.
-   *
-   *   Example value: “kind:denyPolicies”
-   * @param {string} request.pageToken
-   *   If present, then retrieve the batch of results following the results from
-   *   the preceding call to this method.  `page_token` must be the value of
-   *   `next_page_token`
-   *   {@link google.iam.v2.ListApplicablePoliciesResponse.next_page_token|ListApplicablePoliciesResponse.next_page_token}
-   *   from the previous response.  The values of other method parameters should
-   *   be identical to those in the previous call.
-   * @param {number} request.pageSize
-   *   Limit on the number of policies to include in the response.
-   *   Further policies can subsequently be obtained by including the
-   *   {@link google.iam.admin.v1.ListApplicablePoliciesResponse.next_page_token|ListApplicablePoliciesResponse.next_page_token}
-   *   in a subsequent request.
-   *   The minimum is 25, and the maximum is 100.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [Policy]{@link google.iam.v2.Policy}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/policies.list_applicable_policies.js</caption>
-   * region_tag:iam_v2_generated_Policies_ListApplicablePolicies_async
-   */
-  listApplicablePoliciesAsync(
-    request?: protos.google.iam.v2.IListApplicablePoliciesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.iam.v2.IPolicy> {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        attachment_point: request.attachmentPoint ?? '',
-      });
-    const defaultCallSettings = this._defaults['listApplicablePolicies'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    return this.descriptors.page.listApplicablePolicies.asyncIterate(
-      this.innerApiCalls['listApplicablePolicies'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.iam.v2.IPolicy>;
