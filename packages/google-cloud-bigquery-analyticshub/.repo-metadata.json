@@ -1,0 +1,16 @@
+{
+  "name": "analyticshub",
+  "name_pretty": "Analytics Hub API",
+  "product_documentation": "",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/analyticshub/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/analyticshub",
+  "api_id": "google.cloud.bigquery.analyticshub.v1",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}
+
