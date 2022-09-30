@@ -14,22 +14,22 @@
 
 'use strict';
 
-const assert = require('assert');
-const path = require('path');
-const cp = require('child_process');
+// const assert = require('assert');
+// const path = require('path');
+// const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {RoutesClient} = require('@googlemaps/routing').v2;
-const routingClient = new RoutesClient();
+// const {RoutesClient} = require('@googlemaps/routing').v2;
+// const routingClient = new RoutesClient();
 
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+// const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const cwd = path.join(__dirname, '..');
+// const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
-  let projectId;
+  // let projectId;
 
   before(async () => {
-    projectId = await routingClient.getProjectId();
+    // projectId = await routingClient.getProjectId();
   });
 
   it('should run quickstart', async () => {
