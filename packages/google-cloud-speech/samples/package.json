@@ -15,7 +15,7 @@
     "test": "c8 mocha system-test --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/speech": "^5.0.3",
+    "@google-cloud/speech": "^5.1.0",
     "@google-cloud/storage": "^6.0.0",
     "chalk": "^5.0.0",
     "fs.promises": "^0.1.2",
