@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/apikeys",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "API Keys API client for Node.js",
   "repository": "googleapis/google-cloud-node",
   "license": "Apache-2.0",

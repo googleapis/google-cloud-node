@@ -84,8 +84,20 @@ then
   FILTER="(rm -rf ${FOLDERS} || true)"
   if [[ ! -z "${KEEP_FILES}" ]]
   then
+    KEEP_FILES_SPACES=($(echo ${KEEP_FILES} | tr "," " "))
+    LAST_ELEMENT=$(( ${#KEEP_FILES_SPACES[@]} - 1 ))
+    KEEP_FILE_COMMANDS=""
+    for file in "${KEEP_FILES_SPACES[@]}"
+    do
+      if [[ $file == "${KEEP_FILES_SPACES[$LAST_ELEMENT]}" ]]
+      then
+        KEEP_FILE_COMMANDS+="git checkout -- ${file} 2>/dev/null || true"
+      else 
+        KEEP_FILE_COMMANDS+="git checkout -- ${file} 2>/dev/null || true; "
+      fi   
+    done
     # restore files to keep, silence errors if the file doesn't exist
-    FILTER="${FILTER}; git checkout -- ${KEEP_FILES} 2> /dev/null || true"
+    FILTER="${FILTER}; ${KEEP_FILE_COMMANDS}"
   fi
   git filter-branch \
     --force \
