@@ -40,7 +40,7 @@ rm -rf !("samples"|"README.md"|".git")
 rm -rf /tmp/${SPLIT_REPO}/.[!.git]*
 rm -rf /tmp/${SPLIT_REPO}/.github
 
-IGNORE_README_TXT="# Copyright 2021 Google LLC
+IGNORE_README_TXT="# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
