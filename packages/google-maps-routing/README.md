@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -54,6 +54,106 @@ npm install @googlemaps/routing
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. Origin waypoint.
+ */
+// const origin = {}
+/**
+ *  Required. Destination waypoint.
+ */
+// const destination = {}
+/**
+ *  Optional. A set of waypoints along the route (excluding terminal points),
+ *  for either stopping at or passing by. Up to 25 intermediate waypoints are
+ *  supported.
+ */
+// const intermediates = 1234
+/**
+ *  Optional. Specifies the mode of transportation.
+ */
+// const travelMode = {}
+/**
+ *  Optional. Specifies how to compute the route. The server
+ *  attempts to use the selected routing preference to compute the route. If
+ *   the routing preference results in an error or an extra long latency, then
+ *  an error is returned. In the future, we might implement a fallback
+ *  mechanism to use a different option when the preferred option does not give
+ *  a valid result. You can specify this option only when the `travel_mode` is
+ *  `DRIVE` or `TWO_WHEELER`, otherwise the request fails.
+ */
+// const routingPreference = {}
+/**
+ *  Optional. Specifies your preference for the quality of the polyline.
+ */
+// const polylineQuality = {}
+/**
+ *  Optional. Specifies the preferred encoding for the polyline.
+ */
+// const polylineEncoding = {}
+/**
+ *  Optional. The departure time. If you don't set this value, then this value
+ *  defaults to the time that you made the request. If you set this value to a
+ *  time that has already occurred, then the request fails.
+ */
+// const departureTime = {}
+/**
+ *  Optional. Specifies whether to calculate alternate routes in addition to the route.
+ */
+// const computeAlternativeRoutes = true
+/**
+ *  Optional. A set of conditions to satisfy that affect the way routes are
+ *  calculated.
+ */
+// const routeModifiers = {}
+/**
+ *  Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+ *  information, see
+ *  http://www.unicode.org/reports/tr35/#Unicode_locale_identifier. See
+ *  Language Support (https://developers.google.com/maps/faq#languagesupport)
+ *  for the list of supported languages. When you don't provide this value, the
+ *  display language is inferred from the location of the route request.
+ */
+// const languageCode = 'abc123'
+/**
+ *  Optional. Specifies the units of measure for the display fields. This
+ *  includes the `instruction` field in `NavigationInstruction`. The units of
+ *  measure used for the route, leg, step distance, and duration are not
+ *  affected by this value. If you don't provide this value, then the display
+ *  units are inferred from the location of the request.
+ */
+// const units = {}
+
+// Imports the Routing library
+const {RoutesClient} = require('@googlemaps/routing').v2;
+
+// Instantiates a client
+const routingClient = new RoutesClient();
+
+async function callComputeRoutes() {
+  // Construct request
+  const request = {
+    origin,
+    destination,
+  };
+
+  // Run request
+  const response = await routingClient.computeRoutes(request);
+  console.log(response);
+}
+
+callComputeRoutes();
+
+```
+
 
 
 ## Samples
@@ -64,6 +164,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | --------------------------- | --------------------------------- | ------ |
 | Routes.compute_route_matrix | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routing/samples/generated/v2/routes.compute_route_matrix.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-routing/samples/generated/v2/routes.compute_route_matrix.js,samples/README.md) |
 | Routes.compute_routes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routing/samples/generated/v2/routes.compute_routes.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-routing/samples/generated/v2/routes.compute_routes.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routing/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-routing/samples/quickstart.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routing/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-routing/samples/test/quickstart.js,samples/README.md) |
 
 
