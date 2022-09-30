@@ -1,0 +1,16 @@
+{
+  "name": "datapolicies",
+  "name_pretty": "",
+  "product_documentation": "",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datapolicies/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/bigquery-datapolicies",
+  "api_id": "google.cloud.bigquery.datapolicies.v1beta1",
+  "default_version": "v1beta1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}
+
