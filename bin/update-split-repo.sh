@@ -26,10 +26,10 @@ SPLIT_REPO=$1
 # destination directory (e.g. google-cloud-asset)
 ARTIFACT_NAME=$2
 
-rm -rf /tmp/${SPLIT_REPO}
+rm -rf "/tmp/${SPLIT_REPO}"
 git clone "git@github.com:googleapis/${SPLIT_REPO}.git" "/tmp/${SPLIT_REPO}"
 
-cd /tmp/${SPLIT_REPO}
+cd "/tmp/${SPLIT_REPO}"
 
 git checkout -b 'removeOwlBotAndUpdateREADME'
 
@@ -37,8 +37,8 @@ shopt -s extglob
 
 # Delete everything first that's not the samples, README.md, and git folder
 rm -rf !("samples"|"README.md"|".git") 
-rm -rf /tmp/${SPLIT_REPO}/.[!.git]*
-rm -rf /tmp/${SPLIT_REPO}/.github
+rm -rf "/tmp/${SPLIT_REPO}/.[!.git]*"
+rm -rf "/tmp/${SPLIT_REPO}/.github"
 
 IGNORE_README_TXT="# Copyright 2022 Google LLC
 #
@@ -60,12 +60,12 @@ node.owlbot_main(templates_excludes=[
 README.md'
 ])"
 
-OWLBOT_PY=/tmp/${SPLIT_REPO}/owlbot.py
+OWLBOT_PY="/tmp/${SPLIT_REPO}/owlbot.py"
 
-echo "$IGNORE_README_TXT" >> $OWLBOT_PY
+echo "$IGNORE_README_TXT" >> "$OWLBOT_PY"
 
 # Update the README
-README_MD=/tmp/${SPLIT_REPO}/README.md
+README_MD="/tmp/${SPLIT_REPO}/README.md"
 
 echo -e "'**_THIS REPOSITORY IS DEPRECATED. ALL OF ITS CONTENT AND HISTORY HAS BEEN MOVED TO [GOOGLE-CLOUD-NODE](https://github.com/googleapis/google-cloud-node/tree/main/packages/${ARTIFACT_NAME})_**'\n$(cat $README_MD)" > $README_MD
 
@@ -82,4 +82,4 @@ else
   hub pull-request -m "build: update README for deprecation notice and delete all files except samples"
 fi
 
-rm -rf /tmp/${SPLIT_REPO}
+rm -rf "/tmp/${SPLIT_REPO}"
