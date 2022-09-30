@@ -2444,12 +2444,6 @@
                         return object;
                     var message = new $root.google.protobuf.Value();
                     switch (object.nullValue) {
-                    default:
-                        if (typeof object.nullValue === "number") {
-                            message.nullValue = object.nullValue;
-                            break;
-                        }
-                        break;
                     case "NULL_VALUE":
                     case 0:
                         message.nullValue = 0;
@@ -2488,7 +2482,7 @@
                         options = {};
                     var object = {};
                     if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
-                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] === undefined ? message.nullValue : $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
+                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
                         if (options.oneofs)
                             object.kind = "nullValue";
                     }
@@ -5534,12 +5528,6 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
-                    default:
-                        if (typeof object.label === "number") {
-                            message.label = object.label;
-                            break;
-                        }
-                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -5554,12 +5542,6 @@
                         break;
                     }
                     switch (object.type) {
-                    default:
-                        if (typeof object.type === "number") {
-                            message.type = object.type;
-                            break;
-                        }
-                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -5686,9 +5668,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -8007,12 +7989,6 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
-                    default:
-                        if (typeof object.optimizeFor === "number") {
-                            message.optimizeFor = object.optimizeFor;
-                            break;
-                        }
-                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -8109,7 +8085,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -8858,12 +8834,6 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
-                    default:
-                        if (typeof object.ctype === "number") {
-                            message.ctype = object.ctype;
-                            break;
-                        }
-                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -8880,12 +8850,6 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
-                    default:
-                        if (typeof object.jstype === "number") {
-                            message.jstype = object.jstype;
-                            break;
-                        }
-                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -8924,10 +8888,6 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
-                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
-                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
-                                    break;
-                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -8992,7 +8952,7 @@
                         object.unverifiedLazy = false;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -9000,7 +8960,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -9013,7 +8973,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     return object;
                 };
@@ -10368,12 +10328,6 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
-                    default:
-                        if (typeof object.idempotencyLevel === "number") {
-                            message.idempotencyLevel = object.idempotencyLevel;
-                            break;
-                        }
-                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -10437,7 +10391,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -12190,12 +12144,6 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
-                        default:
-                            if (typeof object.semantic === "number") {
-                                message.semantic = object.semantic;
-                                break;
-                            }
-                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -12245,7 +12193,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -13748,12 +13696,6 @@
                                 return object;
                             var message = new $root.google.maps.routing.v2.FallbackInfo();
                             switch (object.routingMode) {
-                            default:
-                                if (typeof object.routingMode === "number") {
-                                    message.routingMode = object.routingMode;
-                                    break;
-                                }
-                                break;
                             case "FALLBACK_ROUTING_MODE_UNSPECIFIED":
                             case 0:
                                 message.routingMode = 0;
@@ -13768,12 +13710,6 @@
                                 break;
                             }
                             switch (object.reason) {
-                            default:
-                                if (typeof object.reason === "number") {
-                                    message.reason = object.reason;
-                                    break;
-                                }
-                                break;
                             case "FALLBACK_REASON_UNSPECIFIED":
                             case 0:
                                 message.reason = 0;
@@ -13808,9 +13744,9 @@
                                 object.reason = options.enums === String ? "FALLBACK_REASON_UNSPECIFIED" : 0;
                             }
                             if (message.routingMode != null && message.hasOwnProperty("routingMode"))
-                                object.routingMode = options.enums === String ? $root.google.maps.routing.v2.FallbackRoutingMode[message.routingMode] === undefined ? message.routingMode : $root.google.maps.routing.v2.FallbackRoutingMode[message.routingMode] : message.routingMode;
+                                object.routingMode = options.enums === String ? $root.google.maps.routing.v2.FallbackRoutingMode[message.routingMode] : message.routingMode;
                             if (message.reason != null && message.hasOwnProperty("reason"))
-                                object.reason = options.enums === String ? $root.google.maps.routing.v2.FallbackReason[message.reason] === undefined ? message.reason : $root.google.maps.routing.v2.FallbackReason[message.reason] : message.reason;
+                                object.reason = options.enums === String ? $root.google.maps.routing.v2.FallbackReason[message.reason] : message.reason;
                             return object;
                         };
     
@@ -14350,12 +14286,6 @@
                                 return object;
                             var message = new $root.google.maps.routing.v2.NavigationInstruction();
                             switch (object.maneuver) {
-                            default:
-                                if (typeof object.maneuver === "number") {
-                                    message.maneuver = object.maneuver;
-                                    break;
-                                }
-                                break;
                             case "MANEUVER_UNSPECIFIED":
                             case 0:
                                 message.maneuver = 0;
@@ -14456,7 +14386,7 @@
                                 object.instructions = "";
                             }
                             if (message.maneuver != null && message.hasOwnProperty("maneuver"))
-                                object.maneuver = options.enums === String ? $root.google.maps.routing.v2.Maneuver[message.maneuver] === undefined ? message.maneuver : $root.google.maps.routing.v2.Maneuver[message.maneuver] : message.maneuver;
+                                object.maneuver = options.enums === String ? $root.google.maps.routing.v2.Maneuver[message.maneuver] : message.maneuver;
                             if (message.instructions != null && message.hasOwnProperty("instructions"))
                                 object.instructions = message.instructions;
                             return object;
@@ -16977,12 +16907,6 @@
                             if (object.endPolylinePointIndex != null)
                                 message.endPolylinePointIndex = object.endPolylinePointIndex | 0;
                             switch (object.speed) {
-                            default:
-                                if (typeof object.speed === "number") {
-                                    message.speed = object.speed;
-                                    break;
-                                }
-                                break;
                             case "SPEED_UNSPECIFIED":
                             case 0:
                                 message.speed = 0;
@@ -17029,7 +16953,7 @@
                                     object._endPolylinePointIndex = "endPolylinePointIndex";
                             }
                             if (message.speed != null && message.hasOwnProperty("speed"))
-                                object.speed = options.enums === String ? $root.google.maps.routing.v2.SpeedReadingInterval.Speed[message.speed] === undefined ? message.speed : $root.google.maps.routing.v2.SpeedReadingInterval.Speed[message.speed] : message.speed;
+                                object.speed = options.enums === String ? $root.google.maps.routing.v2.SpeedReadingInterval.Speed[message.speed] : message.speed;
                             return object;
                         };
     
@@ -17676,10 +17600,6 @@
                                 for (var i = 0; i < object.tollPasses.length; ++i)
                                     switch (object.tollPasses[i]) {
                                     default:
-                                        if (typeof object.tollPasses[i] === "number") {
-                                            message.tollPasses[i] = object.tollPasses[i];
-                                            break;
-                                        }
                                     case "TOLL_PASS_UNSPECIFIED":
                                     case 0:
                                         message.tollPasses[i] = 0;
@@ -18088,7 +18008,7 @@
                             if (message.tollPasses && message.tollPasses.length) {
                                 object.tollPasses = [];
                                 for (var j = 0; j < message.tollPasses.length; ++j)
-                                    object.tollPasses[j] = options.enums === String ? $root.google.maps.routing.v2.TollPass[message.tollPasses[j]] === undefined ? message.tollPasses[j] : $root.google.maps.routing.v2.TollPass[message.tollPasses[j]] : message.tollPasses[j];
+                                    object.tollPasses[j] = options.enums === String ? $root.google.maps.routing.v2.TollPass[message.tollPasses[j]] : message.tollPasses[j];
                             }
                             return object;
                         };
@@ -18473,12 +18393,6 @@
                                 return object;
                             var message = new $root.google.maps.routing.v2.VehicleInfo();
                             switch (object.emissionType) {
-                            default:
-                                if (typeof object.emissionType === "number") {
-                                    message.emissionType = object.emissionType;
-                                    break;
-                                }
-                                break;
                             case "VEHICLE_EMISSION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.emissionType = 0;
@@ -18515,7 +18429,7 @@
                             if (options.defaults)
                                 object.emissionType = options.enums === String ? "VEHICLE_EMISSION_TYPE_UNSPECIFIED" : 0;
                             if (message.emissionType != null && message.hasOwnProperty("emissionType"))
-                                object.emissionType = options.enums === String ? $root.google.maps.routing.v2.VehicleEmissionType[message.emissionType] === undefined ? message.emissionType : $root.google.maps.routing.v2.VehicleEmissionType[message.emissionType] : message.emissionType;
+                                object.emissionType = options.enums === String ? $root.google.maps.routing.v2.VehicleEmissionType[message.emissionType] : message.emissionType;
                             return object;
                         };
     
@@ -19106,12 +19020,6 @@
                                 }
                             }
                             switch (object.travelMode) {
-                            default:
-                                if (typeof object.travelMode === "number") {
-                                    message.travelMode = object.travelMode;
-                                    break;
-                                }
-                                break;
                             case "TRAVEL_MODE_UNSPECIFIED":
                             case 0:
                                 message.travelMode = 0;
@@ -19134,12 +19042,6 @@
                                 break;
                             }
                             switch (object.routingPreference) {
-                            default:
-                                if (typeof object.routingPreference === "number") {
-                                    message.routingPreference = object.routingPreference;
-                                    break;
-                                }
-                                break;
                             case "ROUTING_PREFERENCE_UNSPECIFIED":
                             case 0:
                                 message.routingPreference = 0;
@@ -19158,12 +19060,6 @@
                                 break;
                             }
                             switch (object.polylineQuality) {
-                            default:
-                                if (typeof object.polylineQuality === "number") {
-                                    message.polylineQuality = object.polylineQuality;
-                                    break;
-                                }
-                                break;
                             case "POLYLINE_QUALITY_UNSPECIFIED":
                             case 0:
                                 message.polylineQuality = 0;
@@ -19178,12 +19074,6 @@
                                 break;
                             }
                             switch (object.polylineEncoding) {
-                            default:
-                                if (typeof object.polylineEncoding === "number") {
-                                    message.polylineEncoding = object.polylineEncoding;
-                                    break;
-                                }
-                                break;
                             case "POLYLINE_ENCODING_UNSPECIFIED":
                             case 0:
                                 message.polylineEncoding = 0;
@@ -19212,12 +19102,6 @@
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
                             switch (object.units) {
-                            default:
-                                if (typeof object.units === "number") {
-                                    message.units = object.units;
-                                    break;
-                                }
-                                break;
                             case "UNITS_UNSPECIFIED":
                             case 0:
                                 message.units = 0;
@@ -19272,11 +19156,11 @@
                                     object.intermediates[j] = $root.google.maps.routing.v2.Waypoint.toObject(message.intermediates[j], options);
                             }
                             if (message.travelMode != null && message.hasOwnProperty("travelMode"))
-                                object.travelMode = options.enums === String ? $root.google.maps.routing.v2.RouteTravelMode[message.travelMode] === undefined ? message.travelMode : $root.google.maps.routing.v2.RouteTravelMode[message.travelMode] : message.travelMode;
+                                object.travelMode = options.enums === String ? $root.google.maps.routing.v2.RouteTravelMode[message.travelMode] : message.travelMode;
                             if (message.routingPreference != null && message.hasOwnProperty("routingPreference"))
-                                object.routingPreference = options.enums === String ? $root.google.maps.routing.v2.RoutingPreference[message.routingPreference] === undefined ? message.routingPreference : $root.google.maps.routing.v2.RoutingPreference[message.routingPreference] : message.routingPreference;
+                                object.routingPreference = options.enums === String ? $root.google.maps.routing.v2.RoutingPreference[message.routingPreference] : message.routingPreference;
                             if (message.polylineQuality != null && message.hasOwnProperty("polylineQuality"))
-                                object.polylineQuality = options.enums === String ? $root.google.maps.routing.v2.PolylineQuality[message.polylineQuality] === undefined ? message.polylineQuality : $root.google.maps.routing.v2.PolylineQuality[message.polylineQuality] : message.polylineQuality;
+                                object.polylineQuality = options.enums === String ? $root.google.maps.routing.v2.PolylineQuality[message.polylineQuality] : message.polylineQuality;
                             if (message.departureTime != null && message.hasOwnProperty("departureTime"))
                                 object.departureTime = $root.google.protobuf.Timestamp.toObject(message.departureTime, options);
                             if (message.computeAlternativeRoutes != null && message.hasOwnProperty("computeAlternativeRoutes"))
@@ -19286,9 +19170,9 @@
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
                             if (message.units != null && message.hasOwnProperty("units"))
-                                object.units = options.enums === String ? $root.google.maps.routing.v2.Units[message.units] === undefined ? message.units : $root.google.maps.routing.v2.Units[message.units] : message.units;
+                                object.units = options.enums === String ? $root.google.maps.routing.v2.Units[message.units] : message.units;
                             if (message.polylineEncoding != null && message.hasOwnProperty("polylineEncoding"))
-                                object.polylineEncoding = options.enums === String ? $root.google.maps.routing.v2.PolylineEncoding[message.polylineEncoding] === undefined ? message.polylineEncoding : $root.google.maps.routing.v2.PolylineEncoding[message.polylineEncoding] : message.polylineEncoding;
+                                object.polylineEncoding = options.enums === String ? $root.google.maps.routing.v2.PolylineEncoding[message.polylineEncoding] : message.polylineEncoding;
                             return object;
                         };
     
@@ -19853,12 +19737,6 @@
                                 }
                             }
                             switch (object.travelMode) {
-                            default:
-                                if (typeof object.travelMode === "number") {
-                                    message.travelMode = object.travelMode;
-                                    break;
-                                }
-                                break;
                             case "TRAVEL_MODE_UNSPECIFIED":
                             case 0:
                                 message.travelMode = 0;
@@ -19881,12 +19759,6 @@
                                 break;
                             }
                             switch (object.routingPreference) {
-                            default:
-                                if (typeof object.routingPreference === "number") {
-                                    message.routingPreference = object.routingPreference;
-                                    break;
-                                }
-                                break;
                             case "ROUTING_PREFERENCE_UNSPECIFIED":
                             case 0:
                                 message.routingPreference = 0;
@@ -19945,9 +19817,9 @@
                                     object.destinations[j] = $root.google.maps.routing.v2.RouteMatrixDestination.toObject(message.destinations[j], options);
                             }
                             if (message.travelMode != null && message.hasOwnProperty("travelMode"))
-                                object.travelMode = options.enums === String ? $root.google.maps.routing.v2.RouteTravelMode[message.travelMode] === undefined ? message.travelMode : $root.google.maps.routing.v2.RouteTravelMode[message.travelMode] : message.travelMode;
+                                object.travelMode = options.enums === String ? $root.google.maps.routing.v2.RouteTravelMode[message.travelMode] : message.travelMode;
                             if (message.routingPreference != null && message.hasOwnProperty("routingPreference"))
-                                object.routingPreference = options.enums === String ? $root.google.maps.routing.v2.RoutingPreference[message.routingPreference] === undefined ? message.routingPreference : $root.google.maps.routing.v2.RoutingPreference[message.routingPreference] : message.routingPreference;
+                                object.routingPreference = options.enums === String ? $root.google.maps.routing.v2.RoutingPreference[message.routingPreference] : message.routingPreference;
                             if (message.departureTime != null && message.hasOwnProperty("departureTime"))
                                 object.departureTime = $root.google.protobuf.Timestamp.toObject(message.departureTime, options);
                             return object;
@@ -20776,12 +20648,6 @@
                                 message.status = $root.google.rpc.Status.fromObject(object.status);
                             }
                             switch (object.condition) {
-                            default:
-                                if (typeof object.condition === "number") {
-                                    message.condition = object.condition;
-                                    break;
-                                }
-                                break;
                             case "ROUTE_MATRIX_ELEMENT_CONDITION_UNSPECIFIED":
                             case 0:
                                 message.condition = 0;
@@ -20865,7 +20731,7 @@
                             if (message.fallbackInfo != null && message.hasOwnProperty("fallbackInfo"))
                                 object.fallbackInfo = $root.google.maps.routing.v2.FallbackInfo.toObject(message.fallbackInfo, options);
                             if (message.condition != null && message.hasOwnProperty("condition"))
-                                object.condition = options.enums === String ? $root.google.maps.routing.v2.RouteMatrixElementCondition[message.condition] === undefined ? message.condition : $root.google.maps.routing.v2.RouteMatrixElementCondition[message.condition] : message.condition;
+                                object.condition = options.enums === String ? $root.google.maps.routing.v2.RouteMatrixElementCondition[message.condition] : message.condition;
                             return object;
                         };
     
