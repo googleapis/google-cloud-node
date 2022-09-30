@@ -18,7 +18,6 @@ import {
   Metadata,
 } from './nodejs-common';
 import {promisifyAll} from '@google-cloud/promisify';
-import arrify = require('arrify');
 
 export interface AclOptions {
   pathPrefix: string;
@@ -742,7 +741,7 @@ class Acl extends AclRoleAccessorMethods {
         let results;
 
         if (resp.items) {
-          results = arrify(resp.items).map(this.makeAclObject_);
+          results = resp.items.map(this.makeAclObject_);
         } else {
           results = this.makeAclObject_(resp);
         }

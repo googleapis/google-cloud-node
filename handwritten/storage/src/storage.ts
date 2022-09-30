@@ -15,7 +15,6 @@
 import {ApiError, Metadata, Service, ServiceOptions} from './nodejs-common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
-import arrify = require('arrify');
 import {Readable} from 'stream';
 
 import {Bucket} from './bucket';
@@ -1234,7 +1233,8 @@ export class Storage extends Service {
           return;
         }
 
-        const buckets = arrify(resp.items).map((bucket: Metadata) => {
+        const itemsArray = resp.items ? resp.items : [];
+        const buckets = itemsArray.map((bucket: Metadata) => {
           const bucketInstance = this.bucket(bucket.id);
           bucketInstance.metadata = bucket;
           return bucketInstance;
@@ -1355,7 +1355,8 @@ export class Storage extends Service {
           return;
         }
 
-        const hmacKeys = arrify(resp.items).map((hmacKey: HmacKeyMetadata) => {
+        const itemsArray = resp.items ? resp.items : [];
+        const hmacKeys = itemsArray.map((hmacKey: HmacKeyMetadata) => {
           const hmacKeyInstance = this.hmacKey(hmacKey.accessId, {
             projectId: hmacKey.projectId,
           });

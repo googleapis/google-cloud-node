@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import {promisifyAll} from '@google-cloud/promisify';
-import arrify = require('arrify');
 import {EventEmitter} from 'events';
 import * as extend from 'extend';
 import * as r from 'teeny-request';
@@ -573,7 +572,9 @@ class ServiceObject<T = any> extends EventEmitter {
       })
       .join('/');
 
-    const childInterceptors = arrify(reqOpts.interceptors_!);
+    const childInterceptors = Array.isArray(reqOpts.interceptors_)
+      ? reqOpts.interceptors_
+      : [];
     const localInterceptors = [].slice.call(this.interceptors);
 
     reqOpts.interceptors_ = childInterceptors.concat(localInterceptors);

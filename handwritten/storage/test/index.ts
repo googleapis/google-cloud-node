@@ -21,7 +21,6 @@ import {
   util,
 } from '../src/nodejs-common';
 import {PromisifyAllOptions} from '@google-cloud/promisify';
-import arrify = require('arrify');
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
 import * as proxyquire from 'proxyquire';
@@ -63,7 +62,6 @@ const fakePaginator = {
         return;
       }
 
-      methods = arrify(methods);
       assert.strictEqual(Class.name, 'Storage');
       assert.deepStrictEqual(methods, ['getBuckets', 'getHmacKeys']);
       extended = true;

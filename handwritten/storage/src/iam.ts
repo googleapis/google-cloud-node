@@ -18,7 +18,6 @@ import {
   Metadata,
 } from './nodejs-common';
 import {promisifyAll} from '@google-cloud/promisify';
-import arrify = require('arrify');
 
 import {Bucket} from './bucket';
 import {normalize} from './util';
@@ -448,7 +447,9 @@ class Iam {
       TestIamPermissionsCallback
     >(optionsOrCallback, callback);
 
-    const permissionsArray = arrify(permissions);
+    const permissionsArray = Array.isArray(permissions)
+      ? permissions
+      : [permissions];
 
     const req = Object.assign(
       {
@@ -469,7 +470,7 @@ class Iam {
           return;
         }
 
-        const availablePermissions = arrify(resp.permissions);
+        const availablePermissions = resp.permissions;
 
         const permissionsHash = permissionsArray.reduce(
           (acc: {[index: string]: boolean}, permission) => {

@@ -28,7 +28,6 @@ import {
 } from './nodejs-common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
-import arrify = require('arrify');
 import * as extend from 'extend';
 import * as fs from 'fs';
 import * as http from 'http';
@@ -1395,9 +1394,11 @@ class Bucket extends ServiceObject {
         return;
       }
 
-      const currentLifecycleRules = arrify(
+      const currentLifecycleRules = Array.isArray(
         metadata.lifecycle && metadata.lifecycle.rule
-      );
+      )
+        ? metadata.lifecycle && metadata.lifecycle.rule
+        : [];
 
       this.setMetadata(
         {
@@ -2126,11 +2127,10 @@ class Bucket extends ServiceObject {
 
     if (typeof labelsOrCallbackOrOptions === 'function') {
       callback = labelsOrCallbackOrOptions;
-    } else if (
-      typeof labelsOrCallbackOrOptions === 'string' ||
-      Array.isArray(labelsOrCallbackOrOptions)
-    ) {
-      labels = arrify(labelsOrCallbackOrOptions);
+    } else if (typeof labelsOrCallbackOrOptions === 'string') {
+      labels = [labelsOrCallbackOrOptions];
+    } else if (Array.isArray(labelsOrCallbackOrOptions)) {
+      labels = labelsOrCallbackOrOptions;
     } else if (labelsOrCallbackOrOptions) {
       options = labelsOrCallbackOrOptions;
     }
@@ -2687,7 +2687,8 @@ class Bucket extends ServiceObject {
           return;
         }
 
-        const files = arrify(resp.items).map((file: Metadata) => {
+        const itemsArray = resp.items ? resp.items : [];
+        const files = itemsArray.map((file: Metadata) => {
           const options = {} as FileOptions;
 
           if (query.versions) {
@@ -2873,14 +2874,12 @@ class Bucket extends ServiceObject {
           callback!(err, null, resp);
           return;
         }
-
-        const notifications = arrify(resp.items).map(
-          (notification: Metadata) => {
-            const notificationInstance = this.notification(notification.id);
-            notificationInstance.metadata = notification;
-            return notificationInstance;
-          }
-        );
+        const itemsArray = resp.items ? resp.items : [];
+        const notifications = itemsArray.map((notification: Metadata) => {
+          const notificationInstance = this.notification(notification.id);
+          notificationInstance.metadata = notification;
+          return notificationInstance;
+        });
 
         callback!(null, notifications, resp);
       }

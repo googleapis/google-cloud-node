@@ -19,7 +19,6 @@ import {
   ServiceObjectConfig,
   util,
 } from '../src/nodejs-common';
-import arrify = require('arrify');
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as fs from 'fs';
@@ -131,8 +130,7 @@ const fakePaginator = {
       if (Class.name !== 'Bucket') {
         return;
       }
-
-      methods = arrify(methods);
+      methods = Array.isArray(methods) ? methods : [methods];
       assert.strictEqual(Class.name, 'Bucket');
       assert.deepStrictEqual(methods, ['getFiles']);
       extended = true;

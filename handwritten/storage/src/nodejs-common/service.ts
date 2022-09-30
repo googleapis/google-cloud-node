@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import arrify = require('arrify');
 import * as extend from 'extend';
 import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import * as r from 'teeny-request';
@@ -103,7 +102,9 @@ export class Service {
     this.baseUrl = config.baseUrl;
     this.apiEndpoint = config.apiEndpoint;
     this.timeout = options.timeout;
-    this.globalInterceptors = arrify(options.interceptors_!);
+    this.globalInterceptors = Array.isArray(options.interceptors_)
+      ? options.interceptors_
+      : [];
     this.interceptors = [];
     this.packageJson = config.packageJson;
     this.projectId = options.projectId || DEFAULT_PROJECT_ID_TOKEN;
@@ -223,8 +224,10 @@ export class Service {
       .replace(/\/:/g, ':');
 
     const requestInterceptors = this.getRequestInterceptors();
-
-    arrify(reqOpts.interceptors_!).forEach(interceptor => {
+    const interceptorArray = Array.isArray(reqOpts.interceptors_)
+      ? reqOpts.interceptors_
+      : [];
+    interceptorArray.forEach(interceptor => {
       if (typeof interceptor.request === 'function') {
         requestInterceptors.push(interceptor.request);
       }
