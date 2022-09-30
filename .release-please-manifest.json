@@ -15,5 +15,5 @@
   "packages/typeless-sample-bot": "1.0.0",
   "packages/google-cloud-bigquery-analyticshub": "0.1.0",
   "packages/google-cloud-bigquery-datapolicies": "0.1.0",
-  "packages/google-maps-routing": "0.1.0"
+  "packages/google-maps-routing": "0.1.1"
 }
