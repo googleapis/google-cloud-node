@@ -13,7 +13,8 @@
     "packages/google-devtools-artifactregistry": {},
     "packages/google-iam": {},
     "packages/typeless-sample-bot": {},
-    "packages/google-cloud-bigquery-analyticshub": {}
+    "packages/google-cloud-bigquery-analyticshub": {},
+    "packages/google-maps-routing": {}
   },
   "plugins": [
     {
