@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/iam-v0.1.1...iam-v0.2.0) (2022-09-30)
+
+
+### Features
+
+* remove unused ListApplicablePolicies ([5d5b1bc](https://github.com/googleapis/google-cloud-node/commit/5d5b1bcaaccaf87a3bd58fa0499fa77de80bffe4))
+* Remove unused ListApplicablePolicies ([#3370](https://github.com/googleapis/google-cloud-node/issues/3370)) ([5d5b1bc](https://github.com/googleapis/google-cloud-node/commit/5d5b1bcaaccaf87a3bd58fa0499fa77de80bffe4))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/iam-v0.1.0...iam-v0.1.1) (2022-09-28)
 
 

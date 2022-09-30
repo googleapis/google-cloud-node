@@ -161,24 +161,6 @@
                           }
                         }
                       ]
-                    },
-                    "ListApplicablePolicies": {
-                      "requestType": "ListApplicablePoliciesRequest",
-                      "responseType": "ListApplicablePoliciesResponse",
-                      "options": {
-                        "(google.api.http).get": "/v2/{attachment_point=*}:listApplicablePolicies",
-                        "(google.api.method_signature)": "attachment_point"
-                      },
-                      "parsedOptions": [
-                        {
-                          "(google.api.http)": {
-                            "get": "/v2/{attachment_point=*}:listApplicablePolicies"
-                          }
-                        },
-                        {
-                          "(google.api.method_signature)": "attachment_point"
-                        }
-                      ]
                     }
                   }
                 },
@@ -363,47 +345,6 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
-                    }
-                  }
-                },
-                "ListApplicablePoliciesRequest": {
-                  "fields": {
-                    "attachmentPoint": {
-                      "type": "string",
-                      "id": 1,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED"
-                      }
-                    },
-                    "filter": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "pageToken": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "pageSize": {
-                      "type": "int32",
-                      "id": 4
-                    }
-                  }
-                },
-                "ListApplicablePoliciesResponse": {
-                  "fields": {
-                    "policies": {
-                      "rule": "repeated",
-                      "type": "Policy",
-                      "id": 1
-                    },
-                    "inaccessible": {
-                      "rule": "repeated",
-                      "type": "string",
-                      "id": 2
-                    },
-                    "nextPageToken": {
-                      "type": "string",
-                      "id": 3
                     }
                   }
                 },
