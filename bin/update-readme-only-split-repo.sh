@@ -35,10 +35,9 @@ git checkout -b 'removeOwlBotAndUpdateREADME'
 
 shopt -s extglob
 
-# Delete everything first that's not the samples, README.md, and git folder
-rm -rf !("samples"|"README.md"|".git") 
-rm -rf "/tmp/${SPLIT_REPO}/.[!.git]*"
-rm -rf "/tmp/${SPLIT_REPO}/.github"
+OWLBOT_PY="/tmp/${SPLIT_REPO}/owlbot.py"
+# Delete owlbot.yaml
+rm -rf "$OWLBOT_PY"
 
 IGNORE_README_TXT="# Copyright 2022 Google LLC
 #
@@ -60,8 +59,6 @@ node.owlbot_main(templates_excludes=[
 README.md'
 ])"
 
-OWLBOT_PY="/tmp/${SPLIT_REPO}/owlbot.py"
-
 echo "$IGNORE_README_TXT" >> "$OWLBOT_PY"
 
 # Update the README
@@ -77,9 +74,9 @@ git push -f --set-upstream origin removeOwlBotAndUpdateREADME
 # create pull request
 if gh --help > /dev/null
 then
-  gh pr create --title "build: update README for deprecation notice and delete all files except samples"
+  gh pr create --title "build: update README for deprecation notice"
 else
-  hub pull-request -m "build: update README for deprecation notice and delete all files except samples"
+  hub pull-request -m "build: update README for deprecation notice"
 fi
 
 rm -rf "/tmp/${SPLIT_REPO}"

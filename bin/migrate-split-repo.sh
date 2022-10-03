@@ -42,5 +42,6 @@ ${SCRIPT_DIR}/migrate-git-history.sh \
   ".kokoro,.github,.trampolinerc,SECURITY.md,renovate.json,samples" \
   ".github/.OwlBot.yaml,samples/quickstart.js,samples/test/quickstart.js,samples/test/quickstart.test.js,system-test/test/quickstart.test.js,system-test/test/quickstart.js,samples/README.md,samples/package.json,samples/generated"
 
-# run the script to update the split repo
-${SCRIPT_DIR}/update-split-repo.sh ${SPLIT_REPO} ${ARTIFACT_NAME}
+# run the script to update the split repo and either delete all the samples or just update the README
+${SCRIPT_DIR}/delete-samples-split-repo.sh ${SPLIT_REPO} ${ARTIFACT_NAME}
+${SCRIPT_DIR}/update-readme-only-split-repo.sh ${SPLIT_REPO} ${ARTIFACT_NAME}
