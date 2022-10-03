@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-storage-transfer/compare/v2.1.2...v2.2.0) (2022-09-23)
+
+
+### Features
+
+* add AWS S3 compatible data source ([35ae4f8](https://github.com/googleapis/nodejs-storage-transfer/commit/35ae4f8ef13c1a71ced84b919542a79fe93fcd01))
+* add default retry configuration ([35ae4f8](https://github.com/googleapis/nodejs-storage-transfer/commit/35ae4f8ef13c1a71ced84b919542a79fe93fcd01))
+* add DeleteTransferJob operation ([35ae4f8](https://github.com/googleapis/nodejs-storage-transfer/commit/35ae4f8ef13c1a71ced84b919542a79fe93fcd01))
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#94](https://github.com/googleapis/nodejs-storage-transfer/issues/94)) ([35ae4f8](https://github.com/googleapis/nodejs-storage-transfer/commit/35ae4f8ef13c1a71ced84b919542a79fe93fcd01))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-storage-transfer/compare/v2.1.1...v2.1.2) (2022-09-01)
 
 
