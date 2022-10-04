@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(dnsAuthorization, updateMask) {
-  // [START certificatemanager_v1_generated_CertificateManager_UpdateDnsAuthorization_async]
+function main(parent, certificateIssuanceConfigId, certificateIssuanceConfig) {
+  // [START certificatemanager_v1_generated_CertificateManager_CreateCertificateIssuanceConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,15 +29,18 @@ function main(dnsAuthorization, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A definition of the dns authorization to update.
+   *  Required. The parent resource of the certificate issuance config. Must be
+   *  in the format `projects/* /locations/*`.
    */
-  // const dnsAuthorization = {}
+  // const parent = 'abc123'
   /**
-   *  Required. The update mask applies to the resource. For the `FieldMask`
-   *  definition, see
-   *  https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+   *  Required. A user-provided name of the certificate config.
    */
-  // const updateMask = {}
+  // const certificateIssuanceConfigId = 'abc123'
+  /**
+   *  Required. A definition of the certificate issuance config to create.
+   */
+  // const certificateIssuanceConfig = {}
 
   // Imports the Certificatemanager library
   const {CertificateManagerClient} = require('@google-cloud/certificate-manager').v1;
@@ -45,21 +48,22 @@ function main(dnsAuthorization, updateMask) {
   // Instantiates a client
   const certificatemanagerClient = new CertificateManagerClient();
 
-  async function callUpdateDnsAuthorization() {
+  async function callCreateCertificateIssuanceConfig() {
     // Construct request
     const request = {
-      dnsAuthorization,
-      updateMask,
+      parent,
+      certificateIssuanceConfigId,
+      certificateIssuanceConfig,
     };
 
     // Run request
-    const [operation] = await certificatemanagerClient.updateDnsAuthorization(request);
+    const [operation] = await certificatemanagerClient.createCertificateIssuanceConfig(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callUpdateDnsAuthorization();
-  // [END certificatemanager_v1_generated_CertificateManager_UpdateDnsAuthorization_async]
+  callCreateCertificateIssuanceConfig();
+  // [END certificatemanager_v1_generated_CertificateManager_CreateCertificateIssuanceConfig_async]
 }
 
 process.on('unhandledRejection', err => {

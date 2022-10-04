@@ -26,6 +26,894 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Properties of a ListCertificateIssuanceConfigsRequest. */
+                interface IListCertificateIssuanceConfigsRequest {
+
+                    /** ListCertificateIssuanceConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListCertificateIssuanceConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListCertificateIssuanceConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListCertificateIssuanceConfigsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListCertificateIssuanceConfigsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListCertificateIssuanceConfigsRequest. */
+                class ListCertificateIssuanceConfigsRequest implements IListCertificateIssuanceConfigsRequest {
+
+                    /**
+                     * Constructs a new ListCertificateIssuanceConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest);
+
+                    /** ListCertificateIssuanceConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListCertificateIssuanceConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListCertificateIssuanceConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListCertificateIssuanceConfigsRequest filter. */
+                    public filter: string;
+
+                    /** ListCertificateIssuanceConfigsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListCertificateIssuanceConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCertificateIssuanceConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest): google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListCertificateIssuanceConfigsRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest.verify|verify} messages.
+                     * @param message ListCertificateIssuanceConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCertificateIssuanceConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest.verify|verify} messages.
+                     * @param message ListCertificateIssuanceConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCertificateIssuanceConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCertificateIssuanceConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest;
+
+                    /**
+                     * Decodes a ListCertificateIssuanceConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCertificateIssuanceConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest;
+
+                    /**
+                     * Verifies a ListCertificateIssuanceConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCertificateIssuanceConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCertificateIssuanceConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListCertificateIssuanceConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListCertificateIssuanceConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCertificateIssuanceConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCertificateIssuanceConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCertificateIssuanceConfigsResponse. */
+                interface IListCertificateIssuanceConfigsResponse {
+
+                    /** ListCertificateIssuanceConfigsResponse certificateIssuanceConfigs */
+                    certificateIssuanceConfigs?: (google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[]|null);
+
+                    /** ListCertificateIssuanceConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListCertificateIssuanceConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListCertificateIssuanceConfigsResponse. */
+                class ListCertificateIssuanceConfigsResponse implements IListCertificateIssuanceConfigsResponse {
+
+                    /**
+                     * Constructs a new ListCertificateIssuanceConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse);
+
+                    /** ListCertificateIssuanceConfigsResponse certificateIssuanceConfigs. */
+                    public certificateIssuanceConfigs: google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[];
+
+                    /** ListCertificateIssuanceConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListCertificateIssuanceConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListCertificateIssuanceConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCertificateIssuanceConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse): google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListCertificateIssuanceConfigsResponse message. Does not implicitly {@link google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse.verify|verify} messages.
+                     * @param message ListCertificateIssuanceConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCertificateIssuanceConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse.verify|verify} messages.
+                     * @param message ListCertificateIssuanceConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCertificateIssuanceConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCertificateIssuanceConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse;
+
+                    /**
+                     * Decodes a ListCertificateIssuanceConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCertificateIssuanceConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse;
+
+                    /**
+                     * Verifies a ListCertificateIssuanceConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCertificateIssuanceConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCertificateIssuanceConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListCertificateIssuanceConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListCertificateIssuanceConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCertificateIssuanceConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCertificateIssuanceConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetCertificateIssuanceConfigRequest. */
+                interface IGetCertificateIssuanceConfigRequest {
+
+                    /** GetCertificateIssuanceConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCertificateIssuanceConfigRequest. */
+                class GetCertificateIssuanceConfigRequest implements IGetCertificateIssuanceConfigRequest {
+
+                    /**
+                     * Constructs a new GetCertificateIssuanceConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest);
+
+                    /** GetCertificateIssuanceConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCertificateIssuanceConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCertificateIssuanceConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest): google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest;
+
+                    /**
+                     * Encodes the specified GetCertificateIssuanceConfigRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest.verify|verify} messages.
+                     * @param message GetCertificateIssuanceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCertificateIssuanceConfigRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest.verify|verify} messages.
+                     * @param message GetCertificateIssuanceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCertificateIssuanceConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCertificateIssuanceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest;
+
+                    /**
+                     * Decodes a GetCertificateIssuanceConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCertificateIssuanceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest;
+
+                    /**
+                     * Verifies a GetCertificateIssuanceConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCertificateIssuanceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCertificateIssuanceConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetCertificateIssuanceConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetCertificateIssuanceConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCertificateIssuanceConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCertificateIssuanceConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateCertificateIssuanceConfigRequest. */
+                interface ICreateCertificateIssuanceConfigRequest {
+
+                    /** CreateCertificateIssuanceConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateCertificateIssuanceConfigRequest certificateIssuanceConfigId */
+                    certificateIssuanceConfigId?: (string|null);
+
+                    /** CreateCertificateIssuanceConfigRequest certificateIssuanceConfig */
+                    certificateIssuanceConfig?: (google.cloud.certificatemanager.v1.ICertificateIssuanceConfig|null);
+                }
+
+                /** Represents a CreateCertificateIssuanceConfigRequest. */
+                class CreateCertificateIssuanceConfigRequest implements ICreateCertificateIssuanceConfigRequest {
+
+                    /**
+                     * Constructs a new CreateCertificateIssuanceConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest);
+
+                    /** CreateCertificateIssuanceConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateCertificateIssuanceConfigRequest certificateIssuanceConfigId. */
+                    public certificateIssuanceConfigId: string;
+
+                    /** CreateCertificateIssuanceConfigRequest certificateIssuanceConfig. */
+                    public certificateIssuanceConfig?: (google.cloud.certificatemanager.v1.ICertificateIssuanceConfig|null);
+
+                    /**
+                     * Creates a new CreateCertificateIssuanceConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCertificateIssuanceConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest): google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateCertificateIssuanceConfigRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest.verify|verify} messages.
+                     * @param message CreateCertificateIssuanceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCertificateIssuanceConfigRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest.verify|verify} messages.
+                     * @param message CreateCertificateIssuanceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCertificateIssuanceConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCertificateIssuanceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest;
+
+                    /**
+                     * Decodes a CreateCertificateIssuanceConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCertificateIssuanceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest;
+
+                    /**
+                     * Verifies a CreateCertificateIssuanceConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCertificateIssuanceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCertificateIssuanceConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCertificateIssuanceConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateCertificateIssuanceConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCertificateIssuanceConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCertificateIssuanceConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCertificateIssuanceConfigRequest. */
+                interface IDeleteCertificateIssuanceConfigRequest {
+
+                    /** DeleteCertificateIssuanceConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteCertificateIssuanceConfigRequest. */
+                class DeleteCertificateIssuanceConfigRequest implements IDeleteCertificateIssuanceConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteCertificateIssuanceConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest);
+
+                    /** DeleteCertificateIssuanceConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteCertificateIssuanceConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCertificateIssuanceConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest): google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteCertificateIssuanceConfigRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest.verify|verify} messages.
+                     * @param message DeleteCertificateIssuanceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCertificateIssuanceConfigRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest.verify|verify} messages.
+                     * @param message DeleteCertificateIssuanceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCertificateIssuanceConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCertificateIssuanceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest;
+
+                    /**
+                     * Decodes a DeleteCertificateIssuanceConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCertificateIssuanceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest;
+
+                    /**
+                     * Verifies a DeleteCertificateIssuanceConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCertificateIssuanceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCertificateIssuanceConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCertificateIssuanceConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCertificateIssuanceConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCertificateIssuanceConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCertificateIssuanceConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CertificateIssuanceConfig. */
+                interface ICertificateIssuanceConfig {
+
+                    /** CertificateIssuanceConfig name */
+                    name?: (string|null);
+
+                    /** CertificateIssuanceConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CertificateIssuanceConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CertificateIssuanceConfig labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** CertificateIssuanceConfig description */
+                    description?: (string|null);
+
+                    /** CertificateIssuanceConfig certificateAuthorityConfig */
+                    certificateAuthorityConfig?: (google.cloud.certificatemanager.v1.CertificateIssuanceConfig.ICertificateAuthorityConfig|null);
+
+                    /** CertificateIssuanceConfig lifetime */
+                    lifetime?: (google.protobuf.IDuration|null);
+
+                    /** CertificateIssuanceConfig rotationWindowPercentage */
+                    rotationWindowPercentage?: (number|null);
+
+                    /** CertificateIssuanceConfig keyAlgorithm */
+                    keyAlgorithm?: (google.cloud.certificatemanager.v1.CertificateIssuanceConfig.KeyAlgorithm|keyof typeof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.KeyAlgorithm|null);
+                }
+
+                /** Represents a CertificateIssuanceConfig. */
+                class CertificateIssuanceConfig implements ICertificateIssuanceConfig {
+
+                    /**
+                     * Constructs a new CertificateIssuanceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.ICertificateIssuanceConfig);
+
+                    /** CertificateIssuanceConfig name. */
+                    public name: string;
+
+                    /** CertificateIssuanceConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CertificateIssuanceConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CertificateIssuanceConfig labels. */
+                    public labels: { [k: string]: string };
+
+                    /** CertificateIssuanceConfig description. */
+                    public description: string;
+
+                    /** CertificateIssuanceConfig certificateAuthorityConfig. */
+                    public certificateAuthorityConfig?: (google.cloud.certificatemanager.v1.CertificateIssuanceConfig.ICertificateAuthorityConfig|null);
+
+                    /** CertificateIssuanceConfig lifetime. */
+                    public lifetime?: (google.protobuf.IDuration|null);
+
+                    /** CertificateIssuanceConfig rotationWindowPercentage. */
+                    public rotationWindowPercentage: number;
+
+                    /** CertificateIssuanceConfig keyAlgorithm. */
+                    public keyAlgorithm: (google.cloud.certificatemanager.v1.CertificateIssuanceConfig.KeyAlgorithm|keyof typeof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.KeyAlgorithm);
+
+                    /**
+                     * Creates a new CertificateIssuanceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CertificateIssuanceConfig instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.ICertificateIssuanceConfig): google.cloud.certificatemanager.v1.CertificateIssuanceConfig;
+
+                    /**
+                     * Encodes the specified CertificateIssuanceConfig message. Does not implicitly {@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig.verify|verify} messages.
+                     * @param message CertificateIssuanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.ICertificateIssuanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CertificateIssuanceConfig message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig.verify|verify} messages.
+                     * @param message CertificateIssuanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.ICertificateIssuanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CertificateIssuanceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CertificateIssuanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.CertificateIssuanceConfig;
+
+                    /**
+                     * Decodes a CertificateIssuanceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CertificateIssuanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.CertificateIssuanceConfig;
+
+                    /**
+                     * Verifies a CertificateIssuanceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CertificateIssuanceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CertificateIssuanceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.CertificateIssuanceConfig;
+
+                    /**
+                     * Creates a plain object from a CertificateIssuanceConfig message. Also converts values to other types if specified.
+                     * @param message CertificateIssuanceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.CertificateIssuanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CertificateIssuanceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CertificateIssuanceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CertificateIssuanceConfig {
+
+                    /** Properties of a CertificateAuthorityConfig. */
+                    interface ICertificateAuthorityConfig {
+
+                        /** CertificateAuthorityConfig certificateAuthorityServiceConfig */
+                        certificateAuthorityServiceConfig?: (google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.ICertificateAuthorityServiceConfig|null);
+                    }
+
+                    /** Represents a CertificateAuthorityConfig. */
+                    class CertificateAuthorityConfig implements ICertificateAuthorityConfig {
+
+                        /**
+                         * Constructs a new CertificateAuthorityConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.certificatemanager.v1.CertificateIssuanceConfig.ICertificateAuthorityConfig);
+
+                        /** CertificateAuthorityConfig certificateAuthorityServiceConfig. */
+                        public certificateAuthorityServiceConfig?: (google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.ICertificateAuthorityServiceConfig|null);
+
+                        /** CertificateAuthorityConfig kind. */
+                        public kind?: "certificateAuthorityServiceConfig";
+
+                        /**
+                         * Creates a new CertificateAuthorityConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateAuthorityConfig instance
+                         */
+                        public static create(properties?: google.cloud.certificatemanager.v1.CertificateIssuanceConfig.ICertificateAuthorityConfig): google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig;
+
+                        /**
+                         * Encodes the specified CertificateAuthorityConfig message. Does not implicitly {@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.verify|verify} messages.
+                         * @param message CertificateAuthorityConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.certificatemanager.v1.CertificateIssuanceConfig.ICertificateAuthorityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateAuthorityConfig message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.verify|verify} messages.
+                         * @param message CertificateAuthorityConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.certificatemanager.v1.CertificateIssuanceConfig.ICertificateAuthorityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateAuthorityConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateAuthorityConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig;
+
+                        /**
+                         * Decodes a CertificateAuthorityConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateAuthorityConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig;
+
+                        /**
+                         * Verifies a CertificateAuthorityConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateAuthorityConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateAuthorityConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig;
+
+                        /**
+                         * Creates a plain object from a CertificateAuthorityConfig message. Also converts values to other types if specified.
+                         * @param message CertificateAuthorityConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateAuthorityConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateAuthorityConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CertificateAuthorityConfig {
+
+                        /** Properties of a CertificateAuthorityServiceConfig. */
+                        interface ICertificateAuthorityServiceConfig {
+
+                            /** CertificateAuthorityServiceConfig caPool */
+                            caPool?: (string|null);
+                        }
+
+                        /** Represents a CertificateAuthorityServiceConfig. */
+                        class CertificateAuthorityServiceConfig implements ICertificateAuthorityServiceConfig {
+
+                            /**
+                             * Constructs a new CertificateAuthorityServiceConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.ICertificateAuthorityServiceConfig);
+
+                            /** CertificateAuthorityServiceConfig caPool. */
+                            public caPool: string;
+
+                            /**
+                             * Creates a new CertificateAuthorityServiceConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CertificateAuthorityServiceConfig instance
+                             */
+                            public static create(properties?: google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.ICertificateAuthorityServiceConfig): google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig;
+
+                            /**
+                             * Encodes the specified CertificateAuthorityServiceConfig message. Does not implicitly {@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig.verify|verify} messages.
+                             * @param message CertificateAuthorityServiceConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.ICertificateAuthorityServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CertificateAuthorityServiceConfig message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig.verify|verify} messages.
+                             * @param message CertificateAuthorityServiceConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.ICertificateAuthorityServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CertificateAuthorityServiceConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CertificateAuthorityServiceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig;
+
+                            /**
+                             * Decodes a CertificateAuthorityServiceConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CertificateAuthorityServiceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig;
+
+                            /**
+                             * Verifies a CertificateAuthorityServiceConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CertificateAuthorityServiceConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CertificateAuthorityServiceConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig;
+
+                            /**
+                             * Creates a plain object from a CertificateAuthorityServiceConfig message. Also converts values to other types if specified.
+                             * @param message CertificateAuthorityServiceConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CertificateAuthorityServiceConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CertificateAuthorityServiceConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** KeyAlgorithm enum. */
+                    enum KeyAlgorithm {
+                        KEY_ALGORITHM_UNSPECIFIED = 0,
+                        RSA_2048 = 1,
+                        ECDSA_P256 = 4
+                    }
+                }
+
                 /** Represents a CertificateManager */
                 class CertificateManager extends $protobuf.rpc.Service {
 
@@ -325,6 +1213,62 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteDnsAuthorization(request: google.cloud.certificatemanager.v1.IDeleteDnsAuthorizationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListCertificateIssuanceConfigs.
+                     * @param request ListCertificateIssuanceConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListCertificateIssuanceConfigsResponse
+                     */
+                    public listCertificateIssuanceConfigs(request: google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest, callback: google.cloud.certificatemanager.v1.CertificateManager.ListCertificateIssuanceConfigsCallback): void;
+
+                    /**
+                     * Calls ListCertificateIssuanceConfigs.
+                     * @param request ListCertificateIssuanceConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listCertificateIssuanceConfigs(request: google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest): Promise<google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse>;
+
+                    /**
+                     * Calls GetCertificateIssuanceConfig.
+                     * @param request GetCertificateIssuanceConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CertificateIssuanceConfig
+                     */
+                    public getCertificateIssuanceConfig(request: google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest, callback: google.cloud.certificatemanager.v1.CertificateManager.GetCertificateIssuanceConfigCallback): void;
+
+                    /**
+                     * Calls GetCertificateIssuanceConfig.
+                     * @param request GetCertificateIssuanceConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getCertificateIssuanceConfig(request: google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest): Promise<google.cloud.certificatemanager.v1.CertificateIssuanceConfig>;
+
+                    /**
+                     * Calls CreateCertificateIssuanceConfig.
+                     * @param request CreateCertificateIssuanceConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createCertificateIssuanceConfig(request: google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest, callback: google.cloud.certificatemanager.v1.CertificateManager.CreateCertificateIssuanceConfigCallback): void;
+
+                    /**
+                     * Calls CreateCertificateIssuanceConfig.
+                     * @param request CreateCertificateIssuanceConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCertificateIssuanceConfig(request: google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteCertificateIssuanceConfig.
+                     * @param request DeleteCertificateIssuanceConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteCertificateIssuanceConfig(request: google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest, callback: google.cloud.certificatemanager.v1.CertificateManager.DeleteCertificateIssuanceConfigCallback): void;
+
+                    /**
+                     * Calls DeleteCertificateIssuanceConfig.
+                     * @param request DeleteCertificateIssuanceConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCertificateIssuanceConfig(request: google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace CertificateManager {
@@ -468,6 +1412,34 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteDnsAuthorizationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|listCertificateIssuanceConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListCertificateIssuanceConfigsResponse
+                     */
+                    type ListCertificateIssuanceConfigsCallback = (error: (Error|null), response?: google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|getCertificateIssuanceConfig}.
+                     * @param error Error, if any
+                     * @param [response] CertificateIssuanceConfig
+                     */
+                    type GetCertificateIssuanceConfigCallback = (error: (Error|null), response?: google.cloud.certificatemanager.v1.CertificateIssuanceConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|createCertificateIssuanceConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateCertificateIssuanceConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|deleteCertificateIssuanceConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteCertificateIssuanceConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a ListCertificatesRequest. */
@@ -3421,6 +4393,9 @@ export namespace google {
                         /** ManagedCertificate dnsAuthorizations */
                         dnsAuthorizations?: (string[]|null);
 
+                        /** ManagedCertificate issuanceConfig */
+                        issuanceConfig?: (string|null);
+
                         /** ManagedCertificate state */
                         state?: (google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.State|keyof typeof google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.State|null);
 
@@ -3445,6 +4420,9 @@ export namespace google {
 
                         /** ManagedCertificate dnsAuthorizations. */
                         public dnsAuthorizations: string[];
+
+                        /** ManagedCertificate issuanceConfig. */
+                        public issuanceConfig: string;
 
                         /** ManagedCertificate state. */
                         public state: (google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.State|keyof typeof google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.State);
@@ -4561,6 +5539,270 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Http. */
         interface IHttp {
 
@@ -4915,270 +6157,6 @@ export namespace google {
 
             /**
              * Gets the default type url for CustomHttpPattern
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceDescriptor
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceReference
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -8535,109 +9513,6 @@ export namespace google {
             }
         }
 
-        /** Properties of an Any. */
-        interface IAny {
-
-            /** Any type_url */
-            type_url?: (string|null);
-
-            /** Any value */
-            value?: (Uint8Array|string|null);
-        }
-
-        /** Represents an Any. */
-        class Any implements IAny {
-
-            /**
-             * Constructs a new Any.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IAny);
-
-            /** Any type_url. */
-            public type_url: string;
-
-            /** Any value. */
-            public value: (Uint8Array|string);
-
-            /**
-             * Creates a new Any instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Any instance
-             */
-            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
-
-            /**
-             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
-
-            /**
-             * Verifies an Any message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Any message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Any
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
-
-            /**
-             * Creates a plain object from an Any message. Also converts values to other types if specified.
-             * @param message Any
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Any to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Any
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -8735,6 +9610,212 @@ export namespace google {
 
             /**
              * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -8923,109 +10004,6 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

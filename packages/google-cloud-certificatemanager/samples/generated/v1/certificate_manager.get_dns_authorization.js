@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A name of the dns authorization to describe. Must be in the format
-   *  `projects/* /locations/* /dnsAuthorizations/*`.
+   *  Required. A name of the dns authorization to describe. Must be in the
+   *  format `projects/* /locations/* /dnsAuthorizations/*`.
    */
   // const name = 'abc123'
 

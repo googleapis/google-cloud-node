@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(dnsAuthorization, updateMask) {
-  // [START certificatemanager_v1_generated_CertificateManager_UpdateDnsAuthorization_async]
+function main(parent) {
+  // [START certificatemanager_v1_generated_CertificateManager_ListCertificateIssuanceConfigs_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,15 +29,31 @@ function main(dnsAuthorization, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A definition of the dns authorization to update.
+   *  Required. The project and location from which the certificate should be
+   *  listed, specified in the format `projects/* /locations/*`.
    */
-  // const dnsAuthorization = {}
+  // const parent = 'abc123'
   /**
-   *  Required. The update mask applies to the resource. For the `FieldMask`
-   *  definition, see
-   *  https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+   *  Maximum number of certificate configs to return per call.
    */
-  // const updateMask = {}
+  // const pageSize = 1234
+  /**
+   *  The value returned by the last `ListCertificateIssuanceConfigsResponse`.
+   *  Indicates that this is a continuation of a prior
+   *  `ListCertificateIssuanceConfigs` call, and that the system should return
+   *  the next page of data.
+   */
+  // const pageToken = 'abc123'
+  /**
+   *  Filter expression to restrict the Certificates Configs returned.
+   */
+  // const filter = 'abc123'
+  /**
+   *  A list of Certificate Config field names used to specify the order of the
+   *  returned results. The default sorting order is ascending. To specify
+   *  descending order for a field, add a suffix " desc".
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Certificatemanager library
   const {CertificateManagerClient} = require('@google-cloud/certificate-manager').v1;
@@ -45,21 +61,21 @@ function main(dnsAuthorization, updateMask) {
   // Instantiates a client
   const certificatemanagerClient = new CertificateManagerClient();
 
-  async function callUpdateDnsAuthorization() {
+  async function callListCertificateIssuanceConfigs() {
     // Construct request
     const request = {
-      dnsAuthorization,
-      updateMask,
+      parent,
     };
 
     // Run request
-    const [operation] = await certificatemanagerClient.updateDnsAuthorization(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await certificatemanagerClient.listCertificateIssuanceConfigsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callUpdateDnsAuthorization();
-  // [END certificatemanager_v1_generated_CertificateManager_UpdateDnsAuthorization_async]
+  callListCertificateIssuanceConfigs();
+  // [END certificatemanager_v1_generated_CertificateManager_ListCertificateIssuanceConfigs_async]
 }
 
 process.on('unhandledRejection', err => {

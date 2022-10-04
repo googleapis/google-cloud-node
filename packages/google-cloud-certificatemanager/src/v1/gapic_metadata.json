@@ -30,6 +30,11 @@
                 "getDnsAuthorization"
               ]
             },
+            "GetCertificateIssuanceConfig": {
+              "methods": [
+                "getCertificateIssuanceConfig"
+              ]
+            },
             "CreateCertificate": {
               "methods": [
                 "createCertificate"
@@ -90,6 +95,16 @@
                 "deleteDnsAuthorization"
               ]
             },
+            "CreateCertificateIssuanceConfig": {
+              "methods": [
+                "createCertificateIssuanceConfig"
+              ]
+            },
+            "DeleteCertificateIssuanceConfig": {
+              "methods": [
+                "deleteCertificateIssuanceConfig"
+              ]
+            },
             "ListCertificates": {
               "methods": [
                 "listCertificates",
@@ -116,6 +131,13 @@
                 "listDnsAuthorizations",
                 "listDnsAuthorizationsStream",
                 "listDnsAuthorizationsAsync"
+              ]
+            },
+            "ListCertificateIssuanceConfigs": {
+              "methods": [
+                "listCertificateIssuanceConfigs",
+                "listCertificateIssuanceConfigsStream",
+                "listCertificateIssuanceConfigsAsync"
               ]
             }
           }
@@ -143,6 +165,11 @@
                 "getDnsAuthorization"
               ]
             },
+            "GetCertificateIssuanceConfig": {
+              "methods": [
+                "getCertificateIssuanceConfig"
+              ]
+            },
             "CreateCertificate": {
               "methods": [
                 "createCertificate"
@@ -203,6 +230,16 @@
                 "deleteDnsAuthorization"
               ]
             },
+            "CreateCertificateIssuanceConfig": {
+              "methods": [
+                "createCertificateIssuanceConfig"
+              ]
+            },
+            "DeleteCertificateIssuanceConfig": {
+              "methods": [
+                "deleteCertificateIssuanceConfig"
+              ]
+            },
             "ListCertificates": {
               "methods": [
                 "listCertificates",
@@ -229,6 +266,13 @@
                 "listDnsAuthorizations",
                 "listDnsAuthorizationsStream",
                 "listDnsAuthorizationsAsync"
+              ]
+            },
+            "ListCertificateIssuanceConfigs": {
+              "methods": [
+                "listCertificateIssuanceConfigs",
+                "listCertificateIssuanceConfigsStream",
+                "listCertificateIssuanceConfigsAsync"
               ]
             }
           }

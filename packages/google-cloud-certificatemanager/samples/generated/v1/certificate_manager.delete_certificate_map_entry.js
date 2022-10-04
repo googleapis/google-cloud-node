@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A name of the certificate map entry to delete. Must be in the format
-   *  `projects/* /locations/* /certificateMaps/* /certificateMapEntries/*`.
+   *  Required. A name of the certificate map entry to delete. Must be in the
+   *  format `projects/* /locations/* /certificateMaps/* /certificateMapEntries/*`.
    */
   // const name = 'abc123'
 

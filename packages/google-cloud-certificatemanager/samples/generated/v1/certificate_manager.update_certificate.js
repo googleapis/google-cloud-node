@@ -33,8 +33,8 @@ function main(certificate, updateMask) {
    */
   // const certificate = {}
   /**
-   *  Required. The update mask applies to the resource. For the `FieldMask` definition,
-   *  see
+   *  Required. The update mask applies to the resource. For the `FieldMask`
+   *  definition, see
    *  https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
    */
   // const updateMask = {}

@@ -213,6 +213,9 @@ export class CertificateManagerClient {
       certificatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/certificates/{certificate}'
       ),
+      certificateIssuanceConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/certificateIssuanceConfigs/{certificate_issuance_config}'
+      ),
       certificateMapPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/certificateMaps/{certificate_map}'
       ),
@@ -250,6 +253,11 @@ export class CertificateManagerClient {
         'pageToken',
         'nextPageToken',
         'dnsAuthorizations'
+      ),
+      listCertificateIssuanceConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'certificateIssuanceConfigs'
       ),
     };
 
@@ -366,6 +374,18 @@ export class CertificateManagerClient {
     const deleteDnsAuthorizationMetadata = protoFilesRoot.lookup(
       '.google.cloud.certificatemanager.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createCertificateIssuanceConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.certificatemanager.v1.CertificateIssuanceConfig'
+    ) as gax.protobuf.Type;
+    const createCertificateIssuanceConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.certificatemanager.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteCertificateIssuanceConfigResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteCertificateIssuanceConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.certificatemanager.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createCertificate: new this._gaxModule.LongrunningDescriptor(
@@ -452,6 +472,26 @@ export class CertificateManagerClient {
           deleteDnsAuthorizationMetadata
         )
       ),
+      createCertificateIssuanceConfig:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          createCertificateIssuanceConfigResponse.decode.bind(
+            createCertificateIssuanceConfigResponse
+          ),
+          createCertificateIssuanceConfigMetadata.decode.bind(
+            createCertificateIssuanceConfigMetadata
+          )
+        ),
+      deleteCertificateIssuanceConfig:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          deleteCertificateIssuanceConfigResponse.decode.bind(
+            deleteCertificateIssuanceConfigResponse
+          ),
+          deleteCertificateIssuanceConfigMetadata.decode.bind(
+            deleteCertificateIssuanceConfigMetadata
+          )
+        ),
     };
 
     // Put together the default options sent with requests.
@@ -525,6 +565,10 @@ export class CertificateManagerClient {
       'createDnsAuthorization',
       'updateDnsAuthorization',
       'deleteDnsAuthorization',
+      'listCertificateIssuanceConfigs',
+      'getCertificateIssuanceConfig',
+      'createCertificateIssuanceConfig',
+      'deleteCertificateIssuanceConfig',
     ];
     for (const methodName of certificateManagerStubMethods) {
       const callPromise = this.certificateManagerStub.then(
@@ -915,8 +959,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. A name of the dns authorization to describe. Must be in the format
-   *   `projects/* /locations/* /dnsAuthorizations/*`.
+   *   Required. A name of the dns authorization to describe. Must be in the
+   *   format `projects/* /locations/* /dnsAuthorizations/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1006,6 +1050,108 @@ export class CertificateManagerClient {
       });
     this.initialize();
     return this.innerApiCalls.getDnsAuthorization(request, options, callback);
+  }
+  /**
+   * Gets details of a single CertificateIssuanceConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the certificate issuance config to describe. Must be in
+   *   the format `projects/* /locations/* /certificateIssuanceConfigs/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CertificateIssuanceConfig]{@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/certificate_manager.get_certificate_issuance_config.js</caption>
+   * region_tag:certificatemanager_v1_generated_CertificateManager_GetCertificateIssuanceConfig_async
+   */
+  getCertificateIssuanceConfig(
+    request?: protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+      (
+        | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getCertificateIssuanceConfig(
+    request: protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+      | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCertificateIssuanceConfig(
+    request: protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest,
+    callback: Callback<
+      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+      | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCertificateIssuanceConfig(
+    request?: protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+          | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+      | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+      (
+        | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getCertificateIssuanceConfig(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -1159,8 +1305,8 @@ export class CertificateManagerClient {
    * @param {google.cloud.certificatemanager.v1.Certificate} request.certificate
    *   Required. A definition of the certificate to update.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
+   *   Required. The update mask applies to the resource. For the `FieldMask`
+   *   definition, see
    *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1583,8 +1729,8 @@ export class CertificateManagerClient {
    * @param {google.cloud.certificatemanager.v1.CertificateMap} request.certificateMap
    *   Required. A definition of the certificate map to update.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
+   *   Required. The update mask applies to the resource. For the `FieldMask`
+   *   definition, see
    *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2013,8 +2159,8 @@ export class CertificateManagerClient {
    * @param {google.cloud.certificatemanager.v1.CertificateMapEntry} request.certificateMapEntry
    *   Required. A definition of the certificate map entry to create map entry.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
+   *   Required. The update mask applies to the resource. For the `FieldMask`
+   *   definition, see
    *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2157,8 +2303,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. A name of the certificate map entry to delete. Must be in the format
-   *   `projects/* /locations/* /certificateMaps/* /certificateMapEntries/*`.
+   *   Required. A name of the certificate map entry to delete. Must be in the
+   *   format `projects/* /locations/* /certificateMaps/* /certificateMapEntries/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2300,8 +2446,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource of the dns authorization. Must be in the format
-   *   `projects/* /locations/*`.
+   *   Required. The parent resource of the dns authorization. Must be in the
+   *   format `projects/* /locations/*`.
    * @param {string} request.dnsAuthorizationId
    *   Required. A user-provided name of the dns authorization.
    * @param {google.cloud.certificatemanager.v1.DnsAuthorization} request.dnsAuthorization
@@ -2449,8 +2595,8 @@ export class CertificateManagerClient {
    * @param {google.cloud.certificatemanager.v1.DnsAuthorization} request.dnsAuthorization
    *   Required. A definition of the dns authorization to update.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
+   *   Required. The update mask applies to the resource. For the `FieldMask`
+   *   definition, see
    *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2731,13 +2877,303 @@ export class CertificateManagerClient {
     >;
   }
   /**
+   * Creates a new CertificateIssuanceConfig in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the certificate issuance config. Must be
+   *   in the format `projects/* /locations/*`.
+   * @param {string} request.certificateIssuanceConfigId
+   *   Required. A user-provided name of the certificate config.
+   * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig} request.certificateIssuanceConfig
+   *   Required. A definition of the certificate issuance config to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_issuance_config.js</caption>
+   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateIssuanceConfig_async
+   */
+  createCertificateIssuanceConfig(
+    request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createCertificateIssuanceConfig(
+    request: protos.google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCertificateIssuanceConfig(
+    request: protos.google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCertificateIssuanceConfig(
+    request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createCertificateIssuanceConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `createCertificateIssuanceConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_issuance_config.js</caption>
+   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateIssuanceConfig_async
+   */
+  async checkCreateCertificateIssuanceConfigProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig,
+      protos.google.cloud.certificatemanager.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createCertificateIssuanceConfig,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig,
+      protos.google.cloud.certificatemanager.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single CertificateIssuanceConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the certificate issuance config to delete. Must be in
+   *   the format `projects/* /locations/* /certificateIssuanceConfigs/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_issuance_config.js</caption>
+   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateIssuanceConfig_async
+   */
+  deleteCertificateIssuanceConfig(
+    request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteCertificateIssuanceConfig(
+    request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCertificateIssuanceConfig(
+    request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCertificateIssuanceConfig(
+    request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteCertificateIssuanceConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteCertificateIssuanceConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_issuance_config.js</caption>
+   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateIssuanceConfig_async
+   */
+  async checkDeleteCertificateIssuanceConfigProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.certificatemanager.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteCertificateIssuanceConfig,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.certificatemanager.v1.OperationMetadata
+    >;
+  }
+  /**
    * Lists Certificates in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the certificate should be listed,
-   *   specified in the format `projects/* /locations/*`.
+   *   Required. The project and location from which the certificate should be
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of certificates to return per call.
    * @param {string} request.pageToken
@@ -2843,8 +3279,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the certificate should be listed,
-   *   specified in the format `projects/* /locations/*`.
+   *   Required. The project and location from which the certificate should be
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of certificates to return per call.
    * @param {string} request.pageToken
@@ -2898,8 +3334,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the certificate should be listed,
-   *   specified in the format `projects/* /locations/*`.
+   *   Required. The project and location from which the certificate should be
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of certificates to return per call.
    * @param {string} request.pageToken
@@ -2952,8 +3388,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the certificate maps should be listed,
-   *   specified in the format `projects/* /locations/*`.
+   *   Required. The project and location from which the certificate maps should
+   *   be listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of certificate maps to return per call.
    * @param {string} request.pageToken
@@ -3059,8 +3495,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the certificate maps should be listed,
-   *   specified in the format `projects/* /locations/*`.
+   *   Required. The project and location from which the certificate maps should
+   *   be listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of certificate maps to return per call.
    * @param {string} request.pageToken
@@ -3114,8 +3550,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the certificate maps should be listed,
-   *   specified in the format `projects/* /locations/*`.
+   *   Required. The project and location from which the certificate maps should
+   *   be listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of certificate maps to return per call.
    * @param {string} request.pageToken
@@ -3168,8 +3604,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project, location and certificate map from which the certificate map
-   *   entries should be listed, specified in the format
+   *   Required. The project, location and certificate map from which the
+   *   certificate map entries should be listed, specified in the format
    *   `projects/* /locations/* /certificateMaps/*`.
    * @param {number} request.pageSize
    *   Maximum number of certificate map entries to return. The service may return
@@ -3284,8 +3720,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project, location and certificate map from which the certificate map
-   *   entries should be listed, specified in the format
+   *   Required. The project, location and certificate map from which the
+   *   certificate map entries should be listed, specified in the format
    *   `projects/* /locations/* /certificateMaps/*`.
    * @param {number} request.pageSize
    *   Maximum number of certificate map entries to return. The service may return
@@ -3344,8 +3780,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project, location and certificate map from which the certificate map
-   *   entries should be listed, specified in the format
+   *   Required. The project, location and certificate map from which the
+   *   certificate map entries should be listed, specified in the format
    *   `projects/* /locations/* /certificateMaps/*`.
    * @param {number} request.pageSize
    *   Maximum number of certificate map entries to return. The service may return
@@ -3403,8 +3839,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the dns authorizations should be
-   *   listed, specified in the format `projects/* /locations/*`.
+   *   Required. The project and location from which the dns authorizations should
+   *   be listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of dns authorizations to return per call.
    * @param {string} request.pageToken
@@ -3510,8 +3946,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the dns authorizations should be
-   *   listed, specified in the format `projects/* /locations/*`.
+   *   Required. The project and location from which the dns authorizations should
+   *   be listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of dns authorizations to return per call.
    * @param {string} request.pageToken
@@ -3565,8 +4001,8 @@ export class CertificateManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location from which the dns authorizations should be
-   *   listed, specified in the format `projects/* /locations/*`.
+   *   Required. The project and location from which the dns authorizations should
+   *   be listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of dns authorizations to return per call.
    * @param {string} request.pageToken
@@ -3612,6 +4048,231 @@ export class CertificateManagerClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.certificatemanager.v1.IDnsAuthorization>;
+  }
+  /**
+   * Lists CertificateIssuanceConfigs in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the certificate should be
+   *   listed, specified in the format `projects/* /locations/*`.
+   * @param {number} request.pageSize
+   *   Maximum number of certificate configs to return per call.
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListCertificateIssuanceConfigsResponse`.
+   *   Indicates that this is a continuation of a prior
+   *   `ListCertificateIssuanceConfigs` call, and that the system should return
+   *   the next page of data.
+   * @param {string} request.filter
+   *   Filter expression to restrict the Certificates Configs returned.
+   * @param {string} request.orderBy
+   *   A list of Certificate Config field names used to specify the order of the
+   *   returned results. The default sorting order is ascending. To specify
+   *   descending order for a field, add a suffix " desc".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [CertificateIssuanceConfig]{@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCertificateIssuanceConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listCertificateIssuanceConfigs(
+    request?: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[],
+      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest | null,
+      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
+    ]
+  >;
+  listCertificateIssuanceConfigs(
+    request: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+      | protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig
+    >
+  ): void;
+  listCertificateIssuanceConfigs(
+    request: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+      | protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig
+    >
+  ): void;
+  listCertificateIssuanceConfigs(
+    request?: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+          | protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+      | protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig
+    >
+  ): Promise<
+    [
+      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[],
+      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest | null,
+      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listCertificateIssuanceConfigs(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the certificate should be
+   *   listed, specified in the format `projects/* /locations/*`.
+   * @param {number} request.pageSize
+   *   Maximum number of certificate configs to return per call.
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListCertificateIssuanceConfigsResponse`.
+   *   Indicates that this is a continuation of a prior
+   *   `ListCertificateIssuanceConfigs` call, and that the system should return
+   *   the next page of data.
+   * @param {string} request.filter
+   *   Filter expression to restrict the Certificates Configs returned.
+   * @param {string} request.orderBy
+   *   A list of Certificate Config field names used to specify the order of the
+   *   returned results. The default sorting order is ascending. To specify
+   *   descending order for a field, add a suffix " desc".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [CertificateIssuanceConfig]{@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCertificateIssuanceConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listCertificateIssuanceConfigsStream(
+    request?: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listCertificateIssuanceConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listCertificateIssuanceConfigs.createStream(
+      this.innerApiCalls.listCertificateIssuanceConfigs as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listCertificateIssuanceConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the certificate should be
+   *   listed, specified in the format `projects/* /locations/*`.
+   * @param {number} request.pageSize
+   *   Maximum number of certificate configs to return per call.
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListCertificateIssuanceConfigsResponse`.
+   *   Indicates that this is a continuation of a prior
+   *   `ListCertificateIssuanceConfigs` call, and that the system should return
+   *   the next page of data.
+   * @param {string} request.filter
+   *   Filter expression to restrict the Certificates Configs returned.
+   * @param {string} request.orderBy
+   *   A list of Certificate Config field names used to specify the order of the
+   *   returned results. The default sorting order is ascending. To specify
+   *   descending order for a field, add a suffix " desc".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [CertificateIssuanceConfig]{@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/certificate_manager.list_certificate_issuance_configs.js</caption>
+   * region_tag:certificatemanager_v1_generated_CertificateManager_ListCertificateIssuanceConfigs_async
+   */
+  listCertificateIssuanceConfigsAsync(
+    request?: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listCertificateIssuanceConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listCertificateIssuanceConfigs.asyncIterate(
+      this.innerApiCalls['listCertificateIssuanceConfigs'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig>;
   }
   /**
    * Gets information about a location.
@@ -3924,6 +4585,71 @@ export class CertificateManagerClient {
   matchCertificateFromCertificateName(certificateName: string) {
     return this.pathTemplates.certificatePathTemplate.match(certificateName)
       .certificate;
+  }
+
+  /**
+   * Return a fully-qualified certificateIssuanceConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} certificate_issuance_config
+   * @returns {string} Resource name string.
+   */
+  certificateIssuanceConfigPath(
+    project: string,
+    location: string,
+    certificateIssuanceConfig: string
+  ) {
+    return this.pathTemplates.certificateIssuanceConfigPathTemplate.render({
+      project: project,
+      location: location,
+      certificate_issuance_config: certificateIssuanceConfig,
+    });
+  }
+
+  /**
+   * Parse the project from CertificateIssuanceConfig resource.
+   *
+   * @param {string} certificateIssuanceConfigName
+   *   A fully-qualified path representing CertificateIssuanceConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCertificateIssuanceConfigName(
+    certificateIssuanceConfigName: string
+  ) {
+    return this.pathTemplates.certificateIssuanceConfigPathTemplate.match(
+      certificateIssuanceConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CertificateIssuanceConfig resource.
+   *
+   * @param {string} certificateIssuanceConfigName
+   *   A fully-qualified path representing CertificateIssuanceConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCertificateIssuanceConfigName(
+    certificateIssuanceConfigName: string
+  ) {
+    return this.pathTemplates.certificateIssuanceConfigPathTemplate.match(
+      certificateIssuanceConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the certificate_issuance_config from CertificateIssuanceConfig resource.
+   *
+   * @param {string} certificateIssuanceConfigName
+   *   A fully-qualified path representing CertificateIssuanceConfig resource.
+   * @returns {string} A string representing the certificate_issuance_config.
+   */
+  matchCertificateIssuanceConfigFromCertificateIssuanceConfigName(
+    certificateIssuanceConfigName: string
+  ) {
+    return this.pathTemplates.certificateIssuanceConfigPathTemplate.match(
+      certificateIssuanceConfigName
+    ).certificate_issuance_config;
   }
 
   /**

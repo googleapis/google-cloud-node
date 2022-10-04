@@ -29,8 +29,8 @@ function main(parent, dnsAuthorizationId, dnsAuthorization) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource of the dns authorization. Must be in the format
-   *  `projects/* /locations/*`.
+   *  Required. The parent resource of the dns authorization. Must be in the
+   *  format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**

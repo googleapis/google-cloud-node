@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location from which the certificate should be listed,
-   *  specified in the format `projects/* /locations/*`.
+   *  Required. The project and location from which the certificate should be
+   *  listed, specified in the format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**

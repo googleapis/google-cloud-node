@@ -66,6 +66,2159 @@
                      */
                     var v1 = {};
     
+                    v1.ListCertificateIssuanceConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListCertificateIssuanceConfigsRequest.
+                         * @memberof google.cloud.certificatemanager.v1
+                         * @interface IListCertificateIssuanceConfigsRequest
+                         * @property {string|null} [parent] ListCertificateIssuanceConfigsRequest parent
+                         * @property {number|null} [pageSize] ListCertificateIssuanceConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListCertificateIssuanceConfigsRequest pageToken
+                         * @property {string|null} [filter] ListCertificateIssuanceConfigsRequest filter
+                         * @property {string|null} [orderBy] ListCertificateIssuanceConfigsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListCertificateIssuanceConfigsRequest.
+                         * @memberof google.cloud.certificatemanager.v1
+                         * @classdesc Represents a ListCertificateIssuanceConfigsRequest.
+                         * @implements IListCertificateIssuanceConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListCertificateIssuanceConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCertificateIssuanceConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @instance
+                         */
+                        ListCertificateIssuanceConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListCertificateIssuanceConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @instance
+                         */
+                        ListCertificateIssuanceConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListCertificateIssuanceConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @instance
+                         */
+                        ListCertificateIssuanceConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListCertificateIssuanceConfigsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @instance
+                         */
+                        ListCertificateIssuanceConfigsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListCertificateIssuanceConfigsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @instance
+                         */
+                        ListCertificateIssuanceConfigsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListCertificateIssuanceConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest} ListCertificateIssuanceConfigsRequest instance
+                         */
+                        ListCertificateIssuanceConfigsRequest.create = function create(properties) {
+                            return new ListCertificateIssuanceConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCertificateIssuanceConfigsRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest} message ListCertificateIssuanceConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCertificateIssuanceConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCertificateIssuanceConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest} message ListCertificateIssuanceConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCertificateIssuanceConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCertificateIssuanceConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest} ListCertificateIssuanceConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCertificateIssuanceConfigsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCertificateIssuanceConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest} ListCertificateIssuanceConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCertificateIssuanceConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCertificateIssuanceConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCertificateIssuanceConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCertificateIssuanceConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest} ListCertificateIssuanceConfigsRequest
+                         */
+                        ListCertificateIssuanceConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCertificateIssuanceConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest} message ListCertificateIssuanceConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCertificateIssuanceConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCertificateIssuanceConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCertificateIssuanceConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListCertificateIssuanceConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListCertificateIssuanceConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest";
+                        };
+    
+                        return ListCertificateIssuanceConfigsRequest;
+                    })();
+    
+                    v1.ListCertificateIssuanceConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListCertificateIssuanceConfigsResponse.
+                         * @memberof google.cloud.certificatemanager.v1
+                         * @interface IListCertificateIssuanceConfigsResponse
+                         * @property {Array.<google.cloud.certificatemanager.v1.ICertificateIssuanceConfig>|null} [certificateIssuanceConfigs] ListCertificateIssuanceConfigsResponse certificateIssuanceConfigs
+                         * @property {string|null} [nextPageToken] ListCertificateIssuanceConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListCertificateIssuanceConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListCertificateIssuanceConfigsResponse.
+                         * @memberof google.cloud.certificatemanager.v1
+                         * @classdesc Represents a ListCertificateIssuanceConfigsResponse.
+                         * @implements IListCertificateIssuanceConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListCertificateIssuanceConfigsResponse(properties) {
+                            this.certificateIssuanceConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCertificateIssuanceConfigsResponse certificateIssuanceConfigs.
+                         * @member {Array.<google.cloud.certificatemanager.v1.ICertificateIssuanceConfig>} certificateIssuanceConfigs
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @instance
+                         */
+                        ListCertificateIssuanceConfigsResponse.prototype.certificateIssuanceConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListCertificateIssuanceConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @instance
+                         */
+                        ListCertificateIssuanceConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListCertificateIssuanceConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @instance
+                         */
+                        ListCertificateIssuanceConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListCertificateIssuanceConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse} ListCertificateIssuanceConfigsResponse instance
+                         */
+                        ListCertificateIssuanceConfigsResponse.create = function create(properties) {
+                            return new ListCertificateIssuanceConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCertificateIssuanceConfigsResponse message. Does not implicitly {@link google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse} message ListCertificateIssuanceConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCertificateIssuanceConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.certificateIssuanceConfigs != null && message.certificateIssuanceConfigs.length)
+                                for (var i = 0; i < message.certificateIssuanceConfigs.length; ++i)
+                                    $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.encode(message.certificateIssuanceConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCertificateIssuanceConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse} message ListCertificateIssuanceConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCertificateIssuanceConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCertificateIssuanceConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse} ListCertificateIssuanceConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCertificateIssuanceConfigsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.certificateIssuanceConfigs && message.certificateIssuanceConfigs.length))
+                                            message.certificateIssuanceConfigs = [];
+                                        message.certificateIssuanceConfigs.push($root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCertificateIssuanceConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse} ListCertificateIssuanceConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCertificateIssuanceConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCertificateIssuanceConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCertificateIssuanceConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.certificateIssuanceConfigs != null && message.hasOwnProperty("certificateIssuanceConfigs")) {
+                                if (!Array.isArray(message.certificateIssuanceConfigs))
+                                    return "certificateIssuanceConfigs: array expected";
+                                for (var i = 0; i < message.certificateIssuanceConfigs.length; ++i) {
+                                    var error = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.verify(message.certificateIssuanceConfigs[i]);
+                                    if (error)
+                                        return "certificateIssuanceConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCertificateIssuanceConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse} ListCertificateIssuanceConfigsResponse
+                         */
+                        ListCertificateIssuanceConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse();
+                            if (object.certificateIssuanceConfigs) {
+                                if (!Array.isArray(object.certificateIssuanceConfigs))
+                                    throw TypeError(".google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse.certificateIssuanceConfigs: array expected");
+                                message.certificateIssuanceConfigs = [];
+                                for (var i = 0; i < object.certificateIssuanceConfigs.length; ++i) {
+                                    if (typeof object.certificateIssuanceConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse.certificateIssuanceConfigs: object expected");
+                                    message.certificateIssuanceConfigs[i] = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.fromObject(object.certificateIssuanceConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCertificateIssuanceConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse} message ListCertificateIssuanceConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCertificateIssuanceConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.certificateIssuanceConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.certificateIssuanceConfigs && message.certificateIssuanceConfigs.length) {
+                                object.certificateIssuanceConfigs = [];
+                                for (var j = 0; j < message.certificateIssuanceConfigs.length; ++j)
+                                    object.certificateIssuanceConfigs[j] = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.toObject(message.certificateIssuanceConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCertificateIssuanceConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCertificateIssuanceConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListCertificateIssuanceConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListCertificateIssuanceConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse";
+                        };
+    
+                        return ListCertificateIssuanceConfigsResponse;
+                    })();
+    
+                    v1.GetCertificateIssuanceConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetCertificateIssuanceConfigRequest.
+                         * @memberof google.cloud.certificatemanager.v1
+                         * @interface IGetCertificateIssuanceConfigRequest
+                         * @property {string|null} [name] GetCertificateIssuanceConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetCertificateIssuanceConfigRequest.
+                         * @memberof google.cloud.certificatemanager.v1
+                         * @classdesc Represents a GetCertificateIssuanceConfigRequest.
+                         * @implements IGetCertificateIssuanceConfigRequest
+                         * @constructor
+                         * @param {google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest=} [properties] Properties to set
+                         */
+                        function GetCertificateIssuanceConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetCertificateIssuanceConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest
+                         * @instance
+                         */
+                        GetCertificateIssuanceConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetCertificateIssuanceConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest} GetCertificateIssuanceConfigRequest instance
+                         */
+                        GetCertificateIssuanceConfigRequest.create = function create(properties) {
+                            return new GetCertificateIssuanceConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetCertificateIssuanceConfigRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest} message GetCertificateIssuanceConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCertificateIssuanceConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetCertificateIssuanceConfigRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest} message GetCertificateIssuanceConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCertificateIssuanceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetCertificateIssuanceConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest} GetCertificateIssuanceConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCertificateIssuanceConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetCertificateIssuanceConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest} GetCertificateIssuanceConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCertificateIssuanceConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetCertificateIssuanceConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetCertificateIssuanceConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetCertificateIssuanceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest} GetCertificateIssuanceConfigRequest
+                         */
+                        GetCertificateIssuanceConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetCertificateIssuanceConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest} message GetCertificateIssuanceConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetCertificateIssuanceConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetCertificateIssuanceConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetCertificateIssuanceConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetCertificateIssuanceConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetCertificateIssuanceConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest";
+                        };
+    
+                        return GetCertificateIssuanceConfigRequest;
+                    })();
+    
+                    v1.CreateCertificateIssuanceConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateCertificateIssuanceConfigRequest.
+                         * @memberof google.cloud.certificatemanager.v1
+                         * @interface ICreateCertificateIssuanceConfigRequest
+                         * @property {string|null} [parent] CreateCertificateIssuanceConfigRequest parent
+                         * @property {string|null} [certificateIssuanceConfigId] CreateCertificateIssuanceConfigRequest certificateIssuanceConfigId
+                         * @property {google.cloud.certificatemanager.v1.ICertificateIssuanceConfig|null} [certificateIssuanceConfig] CreateCertificateIssuanceConfigRequest certificateIssuanceConfig
+                         */
+    
+                        /**
+                         * Constructs a new CreateCertificateIssuanceConfigRequest.
+                         * @memberof google.cloud.certificatemanager.v1
+                         * @classdesc Represents a CreateCertificateIssuanceConfigRequest.
+                         * @implements ICreateCertificateIssuanceConfigRequest
+                         * @constructor
+                         * @param {google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest=} [properties] Properties to set
+                         */
+                        function CreateCertificateIssuanceConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateCertificateIssuanceConfigRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @instance
+                         */
+                        CreateCertificateIssuanceConfigRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateCertificateIssuanceConfigRequest certificateIssuanceConfigId.
+                         * @member {string} certificateIssuanceConfigId
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @instance
+                         */
+                        CreateCertificateIssuanceConfigRequest.prototype.certificateIssuanceConfigId = "";
+    
+                        /**
+                         * CreateCertificateIssuanceConfigRequest certificateIssuanceConfig.
+                         * @member {google.cloud.certificatemanager.v1.ICertificateIssuanceConfig|null|undefined} certificateIssuanceConfig
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @instance
+                         */
+                        CreateCertificateIssuanceConfigRequest.prototype.certificateIssuanceConfig = null;
+    
+                        /**
+                         * Creates a new CreateCertificateIssuanceConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest} CreateCertificateIssuanceConfigRequest instance
+                         */
+                        CreateCertificateIssuanceConfigRequest.create = function create(properties) {
+                            return new CreateCertificateIssuanceConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCertificateIssuanceConfigRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest} message CreateCertificateIssuanceConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCertificateIssuanceConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.certificateIssuanceConfigId != null && Object.hasOwnProperty.call(message, "certificateIssuanceConfigId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.certificateIssuanceConfigId);
+                            if (message.certificateIssuanceConfig != null && Object.hasOwnProperty.call(message, "certificateIssuanceConfig"))
+                                $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.encode(message.certificateIssuanceConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCertificateIssuanceConfigRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest} message CreateCertificateIssuanceConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCertificateIssuanceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateCertificateIssuanceConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest} CreateCertificateIssuanceConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCertificateIssuanceConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.certificateIssuanceConfigId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.certificateIssuanceConfig = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateCertificateIssuanceConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest} CreateCertificateIssuanceConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCertificateIssuanceConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateCertificateIssuanceConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateCertificateIssuanceConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.certificateIssuanceConfigId != null && message.hasOwnProperty("certificateIssuanceConfigId"))
+                                if (!$util.isString(message.certificateIssuanceConfigId))
+                                    return "certificateIssuanceConfigId: string expected";
+                            if (message.certificateIssuanceConfig != null && message.hasOwnProperty("certificateIssuanceConfig")) {
+                                var error = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.verify(message.certificateIssuanceConfig);
+                                if (error)
+                                    return "certificateIssuanceConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateCertificateIssuanceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest} CreateCertificateIssuanceConfigRequest
+                         */
+                        CreateCertificateIssuanceConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.certificateIssuanceConfigId != null)
+                                message.certificateIssuanceConfigId = String(object.certificateIssuanceConfigId);
+                            if (object.certificateIssuanceConfig != null) {
+                                if (typeof object.certificateIssuanceConfig !== "object")
+                                    throw TypeError(".google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest.certificateIssuanceConfig: object expected");
+                                message.certificateIssuanceConfig = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.fromObject(object.certificateIssuanceConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateCertificateIssuanceConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest} message CreateCertificateIssuanceConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateCertificateIssuanceConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.certificateIssuanceConfigId = "";
+                                object.certificateIssuanceConfig = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.certificateIssuanceConfigId != null && message.hasOwnProperty("certificateIssuanceConfigId"))
+                                object.certificateIssuanceConfigId = message.certificateIssuanceConfigId;
+                            if (message.certificateIssuanceConfig != null && message.hasOwnProperty("certificateIssuanceConfig"))
+                                object.certificateIssuanceConfig = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.toObject(message.certificateIssuanceConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateCertificateIssuanceConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateCertificateIssuanceConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateCertificateIssuanceConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateCertificateIssuanceConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest";
+                        };
+    
+                        return CreateCertificateIssuanceConfigRequest;
+                    })();
+    
+                    v1.DeleteCertificateIssuanceConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteCertificateIssuanceConfigRequest.
+                         * @memberof google.cloud.certificatemanager.v1
+                         * @interface IDeleteCertificateIssuanceConfigRequest
+                         * @property {string|null} [name] DeleteCertificateIssuanceConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteCertificateIssuanceConfigRequest.
+                         * @memberof google.cloud.certificatemanager.v1
+                         * @classdesc Represents a DeleteCertificateIssuanceConfigRequest.
+                         * @implements IDeleteCertificateIssuanceConfigRequest
+                         * @constructor
+                         * @param {google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest=} [properties] Properties to set
+                         */
+                        function DeleteCertificateIssuanceConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteCertificateIssuanceConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest
+                         * @instance
+                         */
+                        DeleteCertificateIssuanceConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteCertificateIssuanceConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest} DeleteCertificateIssuanceConfigRequest instance
+                         */
+                        DeleteCertificateIssuanceConfigRequest.create = function create(properties) {
+                            return new DeleteCertificateIssuanceConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCertificateIssuanceConfigRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest} message DeleteCertificateIssuanceConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCertificateIssuanceConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCertificateIssuanceConfigRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest} message DeleteCertificateIssuanceConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCertificateIssuanceConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteCertificateIssuanceConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest} DeleteCertificateIssuanceConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCertificateIssuanceConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteCertificateIssuanceConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest} DeleteCertificateIssuanceConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCertificateIssuanceConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteCertificateIssuanceConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteCertificateIssuanceConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteCertificateIssuanceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest} DeleteCertificateIssuanceConfigRequest
+                         */
+                        DeleteCertificateIssuanceConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteCertificateIssuanceConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest} message DeleteCertificateIssuanceConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteCertificateIssuanceConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteCertificateIssuanceConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteCertificateIssuanceConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteCertificateIssuanceConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteCertificateIssuanceConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest";
+                        };
+    
+                        return DeleteCertificateIssuanceConfigRequest;
+                    })();
+    
+                    v1.CertificateIssuanceConfig = (function() {
+    
+                        /**
+                         * Properties of a CertificateIssuanceConfig.
+                         * @memberof google.cloud.certificatemanager.v1
+                         * @interface ICertificateIssuanceConfig
+                         * @property {string|null} [name] CertificateIssuanceConfig name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] CertificateIssuanceConfig createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] CertificateIssuanceConfig updateTime
+                         * @property {Object.<string,string>|null} [labels] CertificateIssuanceConfig labels
+                         * @property {string|null} [description] CertificateIssuanceConfig description
+                         * @property {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.ICertificateAuthorityConfig|null} [certificateAuthorityConfig] CertificateIssuanceConfig certificateAuthorityConfig
+                         * @property {google.protobuf.IDuration|null} [lifetime] CertificateIssuanceConfig lifetime
+                         * @property {number|null} [rotationWindowPercentage] CertificateIssuanceConfig rotationWindowPercentage
+                         * @property {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.KeyAlgorithm|null} [keyAlgorithm] CertificateIssuanceConfig keyAlgorithm
+                         */
+    
+                        /**
+                         * Constructs a new CertificateIssuanceConfig.
+                         * @memberof google.cloud.certificatemanager.v1
+                         * @classdesc Represents a CertificateIssuanceConfig.
+                         * @implements ICertificateIssuanceConfig
+                         * @constructor
+                         * @param {google.cloud.certificatemanager.v1.ICertificateIssuanceConfig=} [properties] Properties to set
+                         */
+                        function CertificateIssuanceConfig(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CertificateIssuanceConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @instance
+                         */
+                        CertificateIssuanceConfig.prototype.name = "";
+    
+                        /**
+                         * CertificateIssuanceConfig createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @instance
+                         */
+                        CertificateIssuanceConfig.prototype.createTime = null;
+    
+                        /**
+                         * CertificateIssuanceConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @instance
+                         */
+                        CertificateIssuanceConfig.prototype.updateTime = null;
+    
+                        /**
+                         * CertificateIssuanceConfig labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @instance
+                         */
+                        CertificateIssuanceConfig.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * CertificateIssuanceConfig description.
+                         * @member {string} description
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @instance
+                         */
+                        CertificateIssuanceConfig.prototype.description = "";
+    
+                        /**
+                         * CertificateIssuanceConfig certificateAuthorityConfig.
+                         * @member {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.ICertificateAuthorityConfig|null|undefined} certificateAuthorityConfig
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @instance
+                         */
+                        CertificateIssuanceConfig.prototype.certificateAuthorityConfig = null;
+    
+                        /**
+                         * CertificateIssuanceConfig lifetime.
+                         * @member {google.protobuf.IDuration|null|undefined} lifetime
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @instance
+                         */
+                        CertificateIssuanceConfig.prototype.lifetime = null;
+    
+                        /**
+                         * CertificateIssuanceConfig rotationWindowPercentage.
+                         * @member {number} rotationWindowPercentage
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @instance
+                         */
+                        CertificateIssuanceConfig.prototype.rotationWindowPercentage = 0;
+    
+                        /**
+                         * CertificateIssuanceConfig keyAlgorithm.
+                         * @member {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.KeyAlgorithm} keyAlgorithm
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @instance
+                         */
+                        CertificateIssuanceConfig.prototype.keyAlgorithm = 0;
+    
+                        /**
+                         * Creates a new CertificateIssuanceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.ICertificateIssuanceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.certificatemanager.v1.CertificateIssuanceConfig} CertificateIssuanceConfig instance
+                         */
+                        CertificateIssuanceConfig.create = function create(properties) {
+                            return new CertificateIssuanceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CertificateIssuanceConfig message. Does not implicitly {@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.ICertificateIssuanceConfig} message CertificateIssuanceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CertificateIssuanceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
+                            if (message.certificateAuthorityConfig != null && Object.hasOwnProperty.call(message, "certificateAuthorityConfig"))
+                                $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.encode(message.certificateAuthorityConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.lifetime != null && Object.hasOwnProperty.call(message, "lifetime"))
+                                $root.google.protobuf.Duration.encode(message.lifetime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.rotationWindowPercentage != null && Object.hasOwnProperty.call(message, "rotationWindowPercentage"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.rotationWindowPercentage);
+                            if (message.keyAlgorithm != null && Object.hasOwnProperty.call(message, "keyAlgorithm"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.keyAlgorithm);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CertificateIssuanceConfig message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.ICertificateIssuanceConfig} message CertificateIssuanceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CertificateIssuanceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CertificateIssuanceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.certificatemanager.v1.CertificateIssuanceConfig} CertificateIssuanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CertificateIssuanceConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.certificateAuthorityConfig = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.lifetime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.rotationWindowPercentage = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.keyAlgorithm = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CertificateIssuanceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.certificatemanager.v1.CertificateIssuanceConfig} CertificateIssuanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CertificateIssuanceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CertificateIssuanceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CertificateIssuanceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.certificateAuthorityConfig != null && message.hasOwnProperty("certificateAuthorityConfig")) {
+                                var error = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.verify(message.certificateAuthorityConfig);
+                                if (error)
+                                    return "certificateAuthorityConfig." + error;
+                            }
+                            if (message.lifetime != null && message.hasOwnProperty("lifetime")) {
+                                var error = $root.google.protobuf.Duration.verify(message.lifetime);
+                                if (error)
+                                    return "lifetime." + error;
+                            }
+                            if (message.rotationWindowPercentage != null && message.hasOwnProperty("rotationWindowPercentage"))
+                                if (!$util.isInteger(message.rotationWindowPercentage))
+                                    return "rotationWindowPercentage: integer expected";
+                            if (message.keyAlgorithm != null && message.hasOwnProperty("keyAlgorithm"))
+                                switch (message.keyAlgorithm) {
+                                default:
+                                    return "keyAlgorithm: enum value expected";
+                                case 0:
+                                case 1:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CertificateIssuanceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.certificatemanager.v1.CertificateIssuanceConfig} CertificateIssuanceConfig
+                         */
+                        CertificateIssuanceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig)
+                                return object;
+                            var message = new $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.certificatemanager.v1.CertificateIssuanceConfig.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.certificatemanager.v1.CertificateIssuanceConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.certificatemanager.v1.CertificateIssuanceConfig.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.certificateAuthorityConfig != null) {
+                                if (typeof object.certificateAuthorityConfig !== "object")
+                                    throw TypeError(".google.cloud.certificatemanager.v1.CertificateIssuanceConfig.certificateAuthorityConfig: object expected");
+                                message.certificateAuthorityConfig = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.fromObject(object.certificateAuthorityConfig);
+                            }
+                            if (object.lifetime != null) {
+                                if (typeof object.lifetime !== "object")
+                                    throw TypeError(".google.cloud.certificatemanager.v1.CertificateIssuanceConfig.lifetime: object expected");
+                                message.lifetime = $root.google.protobuf.Duration.fromObject(object.lifetime);
+                            }
+                            if (object.rotationWindowPercentage != null)
+                                message.rotationWindowPercentage = object.rotationWindowPercentage | 0;
+                            switch (object.keyAlgorithm) {
+                            case "KEY_ALGORITHM_UNSPECIFIED":
+                            case 0:
+                                message.keyAlgorithm = 0;
+                                break;
+                            case "RSA_2048":
+                            case 1:
+                                message.keyAlgorithm = 1;
+                                break;
+                            case "ECDSA_P256":
+                            case 4:
+                                message.keyAlgorithm = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CertificateIssuanceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @static
+                         * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig} message CertificateIssuanceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CertificateIssuanceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.certificateAuthorityConfig = null;
+                                object.lifetime = null;
+                                object.rotationWindowPercentage = 0;
+                                object.keyAlgorithm = options.enums === String ? "KEY_ALGORITHM_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.certificateAuthorityConfig != null && message.hasOwnProperty("certificateAuthorityConfig"))
+                                object.certificateAuthorityConfig = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.toObject(message.certificateAuthorityConfig, options);
+                            if (message.lifetime != null && message.hasOwnProperty("lifetime"))
+                                object.lifetime = $root.google.protobuf.Duration.toObject(message.lifetime, options);
+                            if (message.rotationWindowPercentage != null && message.hasOwnProperty("rotationWindowPercentage"))
+                                object.rotationWindowPercentage = message.rotationWindowPercentage;
+                            if (message.keyAlgorithm != null && message.hasOwnProperty("keyAlgorithm"))
+                                object.keyAlgorithm = options.enums === String ? $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.KeyAlgorithm[message.keyAlgorithm] : message.keyAlgorithm;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CertificateIssuanceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CertificateIssuanceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CertificateIssuanceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CertificateIssuanceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.certificatemanager.v1.CertificateIssuanceConfig";
+                        };
+    
+                        CertificateIssuanceConfig.CertificateAuthorityConfig = (function() {
+    
+                            /**
+                             * Properties of a CertificateAuthorityConfig.
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                             * @interface ICertificateAuthorityConfig
+                             * @property {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.ICertificateAuthorityServiceConfig|null} [certificateAuthorityServiceConfig] CertificateAuthorityConfig certificateAuthorityServiceConfig
+                             */
+    
+                            /**
+                             * Constructs a new CertificateAuthorityConfig.
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig
+                             * @classdesc Represents a CertificateAuthorityConfig.
+                             * @implements ICertificateAuthorityConfig
+                             * @constructor
+                             * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.ICertificateAuthorityConfig=} [properties] Properties to set
+                             */
+                            function CertificateAuthorityConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CertificateAuthorityConfig certificateAuthorityServiceConfig.
+                             * @member {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.ICertificateAuthorityServiceConfig|null|undefined} certificateAuthorityServiceConfig
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                             * @instance
+                             */
+                            CertificateAuthorityConfig.prototype.certificateAuthorityServiceConfig = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * CertificateAuthorityConfig kind.
+                             * @member {"certificateAuthorityServiceConfig"|undefined} kind
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                             * @instance
+                             */
+                            Object.defineProperty(CertificateAuthorityConfig.prototype, "kind", {
+                                get: $util.oneOfGetter($oneOfFields = ["certificateAuthorityServiceConfig"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new CertificateAuthorityConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                             * @static
+                             * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.ICertificateAuthorityConfig=} [properties] Properties to set
+                             * @returns {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig} CertificateAuthorityConfig instance
+                             */
+                            CertificateAuthorityConfig.create = function create(properties) {
+                                return new CertificateAuthorityConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateAuthorityConfig message. Does not implicitly {@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                             * @static
+                             * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.ICertificateAuthorityConfig} message CertificateAuthorityConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateAuthorityConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.certificateAuthorityServiceConfig != null && Object.hasOwnProperty.call(message, "certificateAuthorityServiceConfig"))
+                                    $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig.encode(message.certificateAuthorityServiceConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateAuthorityConfig message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                             * @static
+                             * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.ICertificateAuthorityConfig} message CertificateAuthorityConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateAuthorityConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CertificateAuthorityConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig} CertificateAuthorityConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateAuthorityConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.certificateAuthorityServiceConfig = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CertificateAuthorityConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig} CertificateAuthorityConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateAuthorityConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CertificateAuthorityConfig message.
+                             * @function verify
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CertificateAuthorityConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.certificateAuthorityServiceConfig != null && message.hasOwnProperty("certificateAuthorityServiceConfig")) {
+                                    properties.kind = 1;
+                                    {
+                                        var error = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig.verify(message.certificateAuthorityServiceConfig);
+                                        if (error)
+                                            return "certificateAuthorityServiceConfig." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CertificateAuthorityConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig} CertificateAuthorityConfig
+                             */
+                            CertificateAuthorityConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig)
+                                    return object;
+                                var message = new $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig();
+                                if (object.certificateAuthorityServiceConfig != null) {
+                                    if (typeof object.certificateAuthorityServiceConfig !== "object")
+                                        throw TypeError(".google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.certificateAuthorityServiceConfig: object expected");
+                                    message.certificateAuthorityServiceConfig = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig.fromObject(object.certificateAuthorityServiceConfig);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CertificateAuthorityConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                             * @static
+                             * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig} message CertificateAuthorityConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CertificateAuthorityConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.certificateAuthorityServiceConfig != null && message.hasOwnProperty("certificateAuthorityServiceConfig")) {
+                                    object.certificateAuthorityServiceConfig = $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig.toObject(message.certificateAuthorityServiceConfig, options);
+                                    if (options.oneofs)
+                                        object.kind = "certificateAuthorityServiceConfig";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CertificateAuthorityConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CertificateAuthorityConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CertificateAuthorityConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CertificateAuthorityConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig";
+                            };
+    
+                            CertificateAuthorityConfig.CertificateAuthorityServiceConfig = (function() {
+    
+                                /**
+                                 * Properties of a CertificateAuthorityServiceConfig.
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                                 * @interface ICertificateAuthorityServiceConfig
+                                 * @property {string|null} [caPool] CertificateAuthorityServiceConfig caPool
+                                 */
+    
+                                /**
+                                 * Constructs a new CertificateAuthorityServiceConfig.
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig
+                                 * @classdesc Represents a CertificateAuthorityServiceConfig.
+                                 * @implements ICertificateAuthorityServiceConfig
+                                 * @constructor
+                                 * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.ICertificateAuthorityServiceConfig=} [properties] Properties to set
+                                 */
+                                function CertificateAuthorityServiceConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * CertificateAuthorityServiceConfig caPool.
+                                 * @member {string} caPool
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig
+                                 * @instance
+                                 */
+                                CertificateAuthorityServiceConfig.prototype.caPool = "";
+    
+                                /**
+                                 * Creates a new CertificateAuthorityServiceConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig
+                                 * @static
+                                 * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.ICertificateAuthorityServiceConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig} CertificateAuthorityServiceConfig instance
+                                 */
+                                CertificateAuthorityServiceConfig.create = function create(properties) {
+                                    return new CertificateAuthorityServiceConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified CertificateAuthorityServiceConfig message. Does not implicitly {@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig
+                                 * @static
+                                 * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.ICertificateAuthorityServiceConfig} message CertificateAuthorityServiceConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CertificateAuthorityServiceConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.caPool != null && Object.hasOwnProperty.call(message, "caPool"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.caPool);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified CertificateAuthorityServiceConfig message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig
+                                 * @static
+                                 * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.ICertificateAuthorityServiceConfig} message CertificateAuthorityServiceConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CertificateAuthorityServiceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a CertificateAuthorityServiceConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig} CertificateAuthorityServiceConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CertificateAuthorityServiceConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.caPool = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a CertificateAuthorityServiceConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig} CertificateAuthorityServiceConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CertificateAuthorityServiceConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a CertificateAuthorityServiceConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                CertificateAuthorityServiceConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.caPool != null && message.hasOwnProperty("caPool"))
+                                        if (!$util.isString(message.caPool))
+                                            return "caPool: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a CertificateAuthorityServiceConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig} CertificateAuthorityServiceConfig
+                                 */
+                                CertificateAuthorityServiceConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig();
+                                    if (object.caPool != null)
+                                        message.caPool = String(object.caPool);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a CertificateAuthorityServiceConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig
+                                 * @static
+                                 * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig} message CertificateAuthorityServiceConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                CertificateAuthorityServiceConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.caPool = "";
+                                    if (message.caPool != null && message.hasOwnProperty("caPool"))
+                                        object.caPool = message.caPool;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this CertificateAuthorityServiceConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                CertificateAuthorityServiceConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for CertificateAuthorityServiceConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                CertificateAuthorityServiceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig";
+                                };
+    
+                                return CertificateAuthorityServiceConfig;
+                            })();
+    
+                            return CertificateAuthorityConfig;
+                        })();
+    
+                        /**
+                         * KeyAlgorithm enum.
+                         * @name google.cloud.certificatemanager.v1.CertificateIssuanceConfig.KeyAlgorithm
+                         * @enum {number}
+                         * @property {number} KEY_ALGORITHM_UNSPECIFIED=0 KEY_ALGORITHM_UNSPECIFIED value
+                         * @property {number} RSA_2048=1 RSA_2048 value
+                         * @property {number} ECDSA_P256=4 ECDSA_P256 value
+                         */
+                        CertificateIssuanceConfig.KeyAlgorithm = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "KEY_ALGORITHM_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RSA_2048"] = 1;
+                            values[valuesById[4] = "ECDSA_P256"] = 4;
+                            return values;
+                        })();
+    
+                        return CertificateIssuanceConfig;
+                    })();
+    
                     v1.CertificateManager = (function() {
     
                         /**
@@ -754,6 +2907,138 @@
                          * @memberof google.cloud.certificatemanager.v1.CertificateManager
                          * @instance
                          * @param {google.cloud.certificatemanager.v1.IDeleteDnsAuthorizationRequest} request DeleteDnsAuthorizationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|listCertificateIssuanceConfigs}.
+                         * @memberof google.cloud.certificatemanager.v1.CertificateManager
+                         * @typedef ListCertificateIssuanceConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse} [response] ListCertificateIssuanceConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListCertificateIssuanceConfigs.
+                         * @function listCertificateIssuanceConfigs
+                         * @memberof google.cloud.certificatemanager.v1.CertificateManager
+                         * @instance
+                         * @param {google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest} request ListCertificateIssuanceConfigsRequest message or plain object
+                         * @param {google.cloud.certificatemanager.v1.CertificateManager.ListCertificateIssuanceConfigsCallback} callback Node-style callback called with the error, if any, and ListCertificateIssuanceConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CertificateManager.prototype.listCertificateIssuanceConfigs = function listCertificateIssuanceConfigs(request, callback) {
+                            return this.rpcCall(listCertificateIssuanceConfigs, $root.google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsRequest, $root.google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse, request, callback);
+                        }, "name", { value: "ListCertificateIssuanceConfigs" });
+    
+                        /**
+                         * Calls ListCertificateIssuanceConfigs.
+                         * @function listCertificateIssuanceConfigs
+                         * @memberof google.cloud.certificatemanager.v1.CertificateManager
+                         * @instance
+                         * @param {google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest} request ListCertificateIssuanceConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.certificatemanager.v1.ListCertificateIssuanceConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|getCertificateIssuanceConfig}.
+                         * @memberof google.cloud.certificatemanager.v1.CertificateManager
+                         * @typedef GetCertificateIssuanceConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig} [response] CertificateIssuanceConfig
+                         */
+    
+                        /**
+                         * Calls GetCertificateIssuanceConfig.
+                         * @function getCertificateIssuanceConfig
+                         * @memberof google.cloud.certificatemanager.v1.CertificateManager
+                         * @instance
+                         * @param {google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest} request GetCertificateIssuanceConfigRequest message or plain object
+                         * @param {google.cloud.certificatemanager.v1.CertificateManager.GetCertificateIssuanceConfigCallback} callback Node-style callback called with the error, if any, and CertificateIssuanceConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CertificateManager.prototype.getCertificateIssuanceConfig = function getCertificateIssuanceConfig(request, callback) {
+                            return this.rpcCall(getCertificateIssuanceConfig, $root.google.cloud.certificatemanager.v1.GetCertificateIssuanceConfigRequest, $root.google.cloud.certificatemanager.v1.CertificateIssuanceConfig, request, callback);
+                        }, "name", { value: "GetCertificateIssuanceConfig" });
+    
+                        /**
+                         * Calls GetCertificateIssuanceConfig.
+                         * @function getCertificateIssuanceConfig
+                         * @memberof google.cloud.certificatemanager.v1.CertificateManager
+                         * @instance
+                         * @param {google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest} request GetCertificateIssuanceConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.certificatemanager.v1.CertificateIssuanceConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|createCertificateIssuanceConfig}.
+                         * @memberof google.cloud.certificatemanager.v1.CertificateManager
+                         * @typedef CreateCertificateIssuanceConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateCertificateIssuanceConfig.
+                         * @function createCertificateIssuanceConfig
+                         * @memberof google.cloud.certificatemanager.v1.CertificateManager
+                         * @instance
+                         * @param {google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest} request CreateCertificateIssuanceConfigRequest message or plain object
+                         * @param {google.cloud.certificatemanager.v1.CertificateManager.CreateCertificateIssuanceConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CertificateManager.prototype.createCertificateIssuanceConfig = function createCertificateIssuanceConfig(request, callback) {
+                            return this.rpcCall(createCertificateIssuanceConfig, $root.google.cloud.certificatemanager.v1.CreateCertificateIssuanceConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateCertificateIssuanceConfig" });
+    
+                        /**
+                         * Calls CreateCertificateIssuanceConfig.
+                         * @function createCertificateIssuanceConfig
+                         * @memberof google.cloud.certificatemanager.v1.CertificateManager
+                         * @instance
+                         * @param {google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest} request CreateCertificateIssuanceConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|deleteCertificateIssuanceConfig}.
+                         * @memberof google.cloud.certificatemanager.v1.CertificateManager
+                         * @typedef DeleteCertificateIssuanceConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteCertificateIssuanceConfig.
+                         * @function deleteCertificateIssuanceConfig
+                         * @memberof google.cloud.certificatemanager.v1.CertificateManager
+                         * @instance
+                         * @param {google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest} request DeleteCertificateIssuanceConfigRequest message or plain object
+                         * @param {google.cloud.certificatemanager.v1.CertificateManager.DeleteCertificateIssuanceConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CertificateManager.prototype.deleteCertificateIssuanceConfig = function deleteCertificateIssuanceConfig(request, callback) {
+                            return this.rpcCall(deleteCertificateIssuanceConfig, $root.google.cloud.certificatemanager.v1.DeleteCertificateIssuanceConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteCertificateIssuanceConfig" });
+    
+                        /**
+                         * Calls DeleteCertificateIssuanceConfig.
+                         * @function deleteCertificateIssuanceConfig
+                         * @memberof google.cloud.certificatemanager.v1.CertificateManager
+                         * @instance
+                         * @param {google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest} request DeleteCertificateIssuanceConfigRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
@@ -7825,6 +10110,7 @@
                              * @interface IManagedCertificate
                              * @property {Array.<string>|null} [domains] ManagedCertificate domains
                              * @property {Array.<string>|null} [dnsAuthorizations] ManagedCertificate dnsAuthorizations
+                             * @property {string|null} [issuanceConfig] ManagedCertificate issuanceConfig
                              * @property {google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.State|null} [state] ManagedCertificate state
                              * @property {google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.IProvisioningIssue|null} [provisioningIssue] ManagedCertificate provisioningIssue
                              * @property {Array.<google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.IAuthorizationAttemptInfo>|null} [authorizationAttemptInfo] ManagedCertificate authorizationAttemptInfo
@@ -7863,6 +10149,14 @@
                              * @instance
                              */
                             ManagedCertificate.prototype.dnsAuthorizations = $util.emptyArray;
+    
+                            /**
+                             * ManagedCertificate issuanceConfig.
+                             * @member {string} issuanceConfig
+                             * @memberof google.cloud.certificatemanager.v1.Certificate.ManagedCertificate
+                             * @instance
+                             */
+                            ManagedCertificate.prototype.issuanceConfig = "";
     
                             /**
                              * ManagedCertificate state.
@@ -7925,6 +10219,8 @@
                                 if (message.authorizationAttemptInfo != null && message.authorizationAttemptInfo.length)
                                     for (var i = 0; i < message.authorizationAttemptInfo.length; ++i)
                                         $root.google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.AuthorizationAttemptInfo.encode(message.authorizationAttemptInfo[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.issuanceConfig != null && Object.hasOwnProperty.call(message, "issuanceConfig"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.issuanceConfig);
                                 return writer;
                             };
     
@@ -7969,6 +10265,10 @@
                                             if (!(message.dnsAuthorizations && message.dnsAuthorizations.length))
                                                 message.dnsAuthorizations = [];
                                             message.dnsAuthorizations.push(reader.string());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.issuanceConfig = reader.string();
                                             break;
                                         }
                                     case 4: {
@@ -8034,6 +10334,9 @@
                                         if (!$util.isString(message.dnsAuthorizations[i]))
                                             return "dnsAuthorizations: string[] expected";
                                 }
+                                if (message.issuanceConfig != null && message.hasOwnProperty("issuanceConfig"))
+                                    if (!$util.isString(message.issuanceConfig))
+                                        return "issuanceConfig: string expected";
                                 if (message.state != null && message.hasOwnProperty("state"))
                                     switch (message.state) {
                                     default:
@@ -8087,6 +10390,8 @@
                                     for (var i = 0; i < object.dnsAuthorizations.length; ++i)
                                         message.dnsAuthorizations[i] = String(object.dnsAuthorizations[i]);
                                 }
+                                if (object.issuanceConfig != null)
+                                    message.issuanceConfig = String(object.issuanceConfig);
                                 switch (object.state) {
                                 case "STATE_UNSPECIFIED":
                                 case 0:
@@ -8144,6 +10449,7 @@
                                 if (options.defaults) {
                                     object.provisioningIssue = null;
                                     object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.issuanceConfig = "";
                                 }
                                 if (message.domains && message.domains.length) {
                                     object.domains = [];
@@ -8164,6 +10470,8 @@
                                     for (var j = 0; j < message.authorizationAttemptInfo.length; ++j)
                                         object.authorizationAttemptInfo[j] = $root.google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.AuthorizationAttemptInfo.toObject(message.authorizationAttemptInfo[j], options);
                                 }
+                                if (message.issuanceConfig != null && message.hasOwnProperty("issuanceConfig"))
+                                    object.issuanceConfig = message.issuanceConfig;
                                 return object;
                             };
     
@@ -10978,6 +13286,706 @@
              */
             var api = {};
     
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
+                                    message.style.push(reader.int32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
+                };
+    
+                return ResourceReference;
+            })();
+    
             api.Http = (function() {
     
                 /**
@@ -11939,706 +14947,6 @@
                 };
     
                 return CustomHttpPattern;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                return values;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    this.style = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * ResourceDescriptor style.
-                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.style = $util.emptyArray;
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    if (message.style != null && message.style.length) {
-                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
-                        for (var i = 0; i < message.style.length; ++i)
-                            writer.int32(message.style[i]);
-                        writer.ldelim();
-                    }
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                if (!(message.pattern && message.pattern.length))
-                                    message.pattern = [];
-                                message.pattern.push(reader.string());
-                                break;
-                            }
-                        case 3: {
-                                message.nameField = reader.string();
-                                break;
-                            }
-                        case 4: {
-                                message.history = reader.int32();
-                                break;
-                            }
-                        case 5: {
-                                message.plural = reader.string();
-                                break;
-                            }
-                        case 6: {
-                                message.singular = reader.string();
-                                break;
-                            }
-                        case 10: {
-                                if (!(message.style && message.style.length))
-                                    message.style = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
-                                        message.style.push(reader.int32());
-                                } else
-                                    message.style.push(reader.int32());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
-                        if (!Array.isArray(message.style))
-                            return "style: array expected";
-                        for (var i = 0; i < message.style.length; ++i)
-                            switch (message.style[i]) {
-                            default:
-                                return "style: enum value[] expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    if (object.style) {
-                        if (!Array.isArray(object.style))
-                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
-                        message.style = [];
-                        for (var i = 0; i < object.style.length; ++i)
-                            switch (object.style[i]) {
-                            default:
-                            case "STYLE_UNSPECIFIED":
-                            case 0:
-                                message.style[i] = 0;
-                                break;
-                            case "DECLARATIVE_FRIENDLY":
-                            case 1:
-                                message.style[i] = 1;
-                                break;
-                            }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.pattern = [];
-                        object.style = [];
-                    }
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    if (message.style && message.style.length) {
-                        object.style = [];
-                        for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ResourceDescriptor
-                 * @function getTypeUrl
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {number}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * Style enum.
-                 * @name google.api.ResourceDescriptor.Style
-                 * @enum {number}
-                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
-                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
-                 */
-                ResourceDescriptor.Style = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.childType = reader.string();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ResourceReference
-                 * @function getTypeUrl
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.ResourceReference";
-                };
-    
-                return ResourceReference;
             })();
     
             return api;
@@ -22007,242 +24315,6 @@
                 return GeneratedCodeInfo;
             })();
     
-            protobuf.Any = (function() {
-    
-                /**
-                 * Properties of an Any.
-                 * @memberof google.protobuf
-                 * @interface IAny
-                 * @property {string|null} [type_url] Any type_url
-                 * @property {Uint8Array|null} [value] Any value
-                 */
-    
-                /**
-                 * Constructs a new Any.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Any.
-                 * @implements IAny
-                 * @constructor
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 */
-                function Any(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Any type_url.
-                 * @member {string} type_url
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.type_url = "";
-    
-                /**
-                 * Any value.
-                 * @member {Uint8Array} value
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.value = $util.newBuffer([]);
-    
-                /**
-                 * Creates a new Any instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 * @returns {google.protobuf.Any} Any instance
-                 */
-                Any.create = function create(properties) {
-                    return new Any(properties);
-                };
-    
-                /**
-                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type_url = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.value = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Any message.
-                 * @function verify
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Any.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        if (!$util.isString(message.type_url))
-                            return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
-                            return "value: buffer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Any} Any
-                 */
-                Any.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Any)
-                        return object;
-                    var message = new $root.google.protobuf.Any();
-                    if (object.type_url != null)
-                        message.type_url = String(object.type_url);
-                    if (object.value != null)
-                        if (typeof object.value === "string")
-                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length >= 0)
-                            message.value = object.value;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Any message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.Any} message Any
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Any.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type_url = "";
-                        if (options.bytes === String)
-                            object.value = "";
-                        else {
-                            object.value = [];
-                            if (options.bytes !== Array)
-                                object.value = $util.newBuffer(object.value);
-                        }
-                    }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Any to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Any.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Any
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Any";
-                };
-    
-                return Any;
-            })();
-    
             protobuf.Duration = (function() {
     
                 /**
@@ -22482,6 +24554,483 @@
                 };
     
                 return Duration;
+            })();
+    
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
+                return Timestamp;
+            })();
+    
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
             })();
     
             protobuf.Empty = (function() {
@@ -22876,247 +25425,6 @@
                 };
     
                 return FieldMask;
-            })();
-    
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.seconds = reader.int64();
-                                break;
-                            }
-                        case 2: {
-                                message.nanos = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Timestamp
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Timestamp";
-                };
-    
-                return Timestamp;
             })();
     
             return protobuf;

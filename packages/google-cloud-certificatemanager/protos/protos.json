@@ -14,9 +14,208 @@
                     "java_outer_classname": "CertificateManagerProto",
                     "java_package": "com.google.cloud.certificatemanager.v1",
                     "php_namespace": "Google\\Cloud\\CertificateManager\\V1",
-                    "ruby_package": "Google::Cloud::CertificateManager::V1"
+                    "ruby_package": "Google::Cloud::CertificateManager::V1",
+                    "(google.api.resource_definition).type": "privateca.googleapis.com/CaPool",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/caPools/{ca_pool}"
                   },
                   "nested": {
+                    "ListCertificateIssuanceConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListCertificateIssuanceConfigsResponse": {
+                      "fields": {
+                        "certificateIssuanceConfigs": {
+                          "rule": "repeated",
+                          "type": "CertificateIssuanceConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetCertificateIssuanceConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "certificatemanager.googleapis.com/CertificateIssuanceConfig"
+                          }
+                        }
+                      }
+                    },
+                    "CreateCertificateIssuanceConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "certificateIssuanceConfigId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "certificateIssuanceConfig": {
+                          "type": "CertificateIssuanceConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCertificateIssuanceConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "certificatemanager.googleapis.com/CertificateIssuanceConfig"
+                          }
+                        }
+                      }
+                    },
+                    "CertificateIssuanceConfig": {
+                      "options": {
+                        "(google.api.resource).type": "certificatemanager.googleapis.com/CertificateIssuanceConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/certificateIssuanceConfigs/{certificate_issuance_config}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "certificateAuthorityConfig": {
+                          "type": "CertificateAuthorityConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "lifetime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rotationWindowPercentage": {
+                          "type": "int32",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "keyAlgorithm": {
+                          "type": "KeyAlgorithm",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CertificateAuthorityConfig": {
+                          "oneofs": {
+                            "kind": {
+                              "oneof": [
+                                "certificateAuthorityServiceConfig"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "certificateAuthorityServiceConfig": {
+                              "type": "CertificateAuthorityServiceConfig",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "CertificateAuthorityServiceConfig": {
+                              "fields": {
+                                "caPool": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "privateca.googleapis.com/CaPool"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "KeyAlgorithm": {
+                          "values": {
+                            "KEY_ALGORITHM_UNSPECIFIED": 0,
+                            "RSA_2048": 1,
+                            "ECDSA_P256": 4
+                          }
+                        }
+                      }
+                    },
                     "CertificateManager": {
                       "options": {
                         "(google.api.default_host)": "certificatemanager.googleapis.com",
@@ -482,6 +681,96 @@
                             {
                               "(google.api.http)": {
                                 "delete": "/v1/{name=projects/*/locations/*/dnsAuthorizations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListCertificateIssuanceConfigs": {
+                          "requestType": "ListCertificateIssuanceConfigsRequest",
+                          "responseType": "ListCertificateIssuanceConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/certificateIssuanceConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/certificateIssuanceConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetCertificateIssuanceConfig": {
+                          "requestType": "GetCertificateIssuanceConfigRequest",
+                          "responseType": "CertificateIssuanceConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/certificateIssuanceConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/certificateIssuanceConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateCertificateIssuanceConfig": {
+                          "requestType": "CreateCertificateIssuanceConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/certificateIssuanceConfigs",
+                            "(google.api.http).body": "certificate_issuance_config",
+                            "(google.api.method_signature)": "parent,certificate_issuance_config,certificate_issuance_config_id",
+                            "(google.longrunning.operation_info).response_type": "CertificateIssuanceConfig",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/certificateIssuanceConfigs",
+                                "body": "certificate_issuance_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,certificate_issuance_config,certificate_issuance_config_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CertificateIssuanceConfig",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteCertificateIssuanceConfig": {
+                          "requestType": "DeleteCertificateIssuanceConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/certificateIssuanceConfigs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/certificateIssuanceConfigs/*}"
                               }
                             },
                             {
@@ -1102,6 +1391,14 @@
                                 "(google.api.resource_reference).type": "certificatemanager.googleapis.com/DnsAuthorization"
                               }
                             },
+                            "issuanceConfig": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.resource_reference).type": "certificatemanager.googleapis.com/CertificateIssuanceConfig"
+                              }
+                            },
                             "state": {
                               "type": "State",
                               "id": 4,
@@ -1111,7 +1408,10 @@
                             },
                             "provisioningIssue": {
                               "type": "ProvisioningIssue",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "authorizationAttemptInfo": {
                               "rule": "repeated",
@@ -1135,11 +1435,17 @@
                               "fields": {
                                 "reason": {
                                   "type": "Reason",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 },
                                 "details": {
                                   "type": "string",
-                                  "id": 2
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 }
                               },
                               "nested": {
@@ -1160,7 +1466,10 @@
                                 },
                                 "state": {
                                   "type": "State",
-                                  "id": 2
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 },
                                 "failureReason": {
                                   "type": "FailureReason",
@@ -1171,7 +1480,10 @@
                                 },
                                 "details": {
                                   "type": "string",
-                                  "id": 4
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 }
                               },
                               "nested": {
@@ -1258,16 +1570,25 @@
                           "fields": {
                             "targetHttpsProxy": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "targetSslProxy": {
                               "type": "string",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "ipConfigs": {
                               "rule": "repeated",
                               "type": "IpConfig",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -1275,12 +1596,18 @@
                               "fields": {
                                 "ipAddress": {
                                   "type": "string",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 },
                                 "ports": {
                                   "rule": "repeated",
                                   "type": "uint32",
-                                  "id": 3
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 }
                               }
                             }
@@ -1455,12 +1782,107 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
+            "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
           },
           "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -1563,101 +1985,6 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
             }
           }
         },
@@ -2592,18 +2919,6 @@
                 }
               }
             },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -2612,6 +2927,30 @@
                 },
                 "nanos": {
                   "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
                   "id": 2
                 }
               }
@@ -2625,18 +2964,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
-                }
-              }
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
                 }
               }
             }
