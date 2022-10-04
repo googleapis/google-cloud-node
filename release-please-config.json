@@ -15,7 +15,8 @@
     "packages/typeless-sample-bot": {},
     "packages/google-cloud-bigquery-datapolicies": {},
     "packages/google-cloud-bigquery-analyticshub": {},
-    "packages/google-maps-routing": {}
+    "packages/google-maps-routing": {},
+    "packages/google-cloud-discoveryengine": {}
   },
   "plugins": [
     {
