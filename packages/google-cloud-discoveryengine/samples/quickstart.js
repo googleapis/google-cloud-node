@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent) {
@@ -49,17 +47,18 @@ function main(parent) {
    *  A page token
    *  ListDocumentsResponse.next_page_token google.cloud.discoveryengine.v1beta.ListDocumentsResponse.next_page_token,
    *  received from a previous
-   *  DocumentService.ListDocuments google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments 
+   *  DocumentService.ListDocuments google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments
    *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  DocumentService.ListDocuments google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments 
+   *  DocumentService.ListDocuments google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments
    *  must match the call that provided the page token. Otherwise, an
    *  INVALID_ARGUMENT error is returned.
    */
   // const pageToken = 'abc123'
 
   // Imports the Discoveryengine library
-  const {DocumentServiceClient} = require('@google-cloud/discoveryengine').v1beta;
+  const {DocumentServiceClient} =
+    require('@google-cloud/discoveryengine').v1beta;
 
   // Instantiates a client
   const discoveryengineClient = new DocumentServiceClient();
@@ -73,7 +72,7 @@ function main(parent) {
     // Run request
     const iterable = await discoveryengineClient.listDocumentsAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
