@@ -14,7 +14,7 @@
     "test": "c8 mocha --recursive test/ --timeout=800000"
   },
   "dependencies": {
-    "@google-cloud/certificate-manager": "^0.5.0"
+    "@google-cloud/certificate-manager": "^0.6.0"
   },
   "devDependencies": {
     "c8": "^7.0.0",

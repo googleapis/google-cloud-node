@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/nodejs-certificate-manager/compare/v0.5.0...v0.6.0) (2022-10-04)
+
+
+### Features
+
+* Added support for Private Trust to Certificate Manager API ([#55](https://github.com/googleapis/nodejs-certificate-manager/issues/55)) ([d9ff953](https://github.com/googleapis/nodejs-certificate-manager/commit/d9ff953cc5ea584970e831171a91b4320832fd3d))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#49](https://github.com/googleapis/nodejs-certificate-manager/issues/49)) ([f8f86e5](https://github.com/googleapis/nodejs-certificate-manager/commit/f8f86e5b29e5e7dc2896f8bd71c1de8804a0d92b))
+* Better support for fallback mode ([#44](https://github.com/googleapis/nodejs-certificate-manager/issues/44)) ([75c72a9](https://github.com/googleapis/nodejs-certificate-manager/commit/75c72a92beb6890ec4429cb3ecdcf8d40238a175))
+* Change import long to require ([#45](https://github.com/googleapis/nodejs-certificate-manager/issues/45)) ([1dc45d7](https://github.com/googleapis/nodejs-certificate-manager/commit/1dc45d71c836a8f87ed6b4f5fc0a3750034cb84f))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-certificate-manager/issues/1553)) ([#48](https://github.com/googleapis/nodejs-certificate-manager/issues/48)) ([96e4038](https://github.com/googleapis/nodejs-certificate-manager/commit/96e403827bf1ac75c6c4d38f100db9a6f9bd8b35))
+* Preserve default values in x-goog-request-params header ([#51](https://github.com/googleapis/nodejs-certificate-manager/issues/51)) ([13c6ab0](https://github.com/googleapis/nodejs-certificate-manager/commit/13c6ab08318349e4061ff52e4fd6b62c9f3482dd))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-certificate-manager/issues/1546)) ([#47](https://github.com/googleapis/nodejs-certificate-manager/issues/47)) ([c5002fd](https://github.com/googleapis/nodejs-certificate-manager/commit/c5002fd71850233f5aac6daffb3fb09ace696229))
+* use google-gax v3.3.0 ([96e4038](https://github.com/googleapis/nodejs-certificate-manager/commit/96e403827bf1ac75c6c4d38f100db9a6f9bd8b35))
+
 ## [0.5.0](https://github.com/googleapis/nodejs-certificate-manager/compare/v0.4.0...v0.5.0) (2022-07-08)
 
 
