@@ -1,3 +1,2 @@
 handleGHRelease: true
 manifest: true
-initialVersion: '0.1.0'

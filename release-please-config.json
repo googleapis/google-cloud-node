@@ -22,5 +22,6 @@
       "type": "sentence-case"
     }
   ],
-  "release-type": "node"
+  "release-type": "node",
+  "initialVersion": "0.1.0"
 }
