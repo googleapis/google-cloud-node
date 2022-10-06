@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [3.5.1](https://github.com/googleapis/nodejs-compute/compare/v3.5.0...v3.5.1) (2022-09-22)
+
+
+### Bug Fixes
+
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-compute/issues/1553)) ([#785](https://github.com/googleapis/nodejs-compute/issues/785)) ([b036441](https://github.com/googleapis/nodejs-compute/commit/b036441828a15323ae1f8db26ad12f4366d1305d))
+* use google-gax v3.3.0 ([b036441](https://github.com/googleapis/nodejs-compute/commit/b036441828a15323ae1f8db26ad12f4366d1305d))
+
 ## [3.5.0](https://github.com/googleapis/nodejs-compute/compare/v3.4.0...v3.5.0) (2022-09-08)
 
 
