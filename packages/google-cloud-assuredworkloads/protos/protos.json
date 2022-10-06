@@ -73,6 +73,22 @@
                             }
                           ]
                         },
+                        "RestrictAllowedResources": {
+                          "requestType": "RestrictAllowedResourcesRequest",
+                          "responseType": "RestrictAllowedResourcesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=organizations/*/locations/*/workloads/*}:restrictAllowedResources",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=organizations/*/locations/*/workloads/*}:restrictAllowedResources",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteWorkload": {
                           "requestType": "DeleteWorkloadRequest",
                           "responseType": "google.protobuf.Empty",
@@ -126,6 +142,34 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "ListViolations": {
+                          "requestType": "ListViolationsRequest",
+                          "responseType": "ListViolationsResponse",
+                          "options": {
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetViolation": {
+                          "requestType": "GetViolationRequest",
+                          "responseType": "Violation",
+                          "options": {
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "AcknowledgeViolation": {
+                          "requestType": "AcknowledgeViolationRequest",
+                          "responseType": "AcknowledgeViolationResponse"
                         }
                       }
                     },
@@ -287,7 +331,7 @@
                           "type": "string",
                           "id": 6,
                           "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "etag": {
@@ -316,6 +360,7 @@
                           "type": "KMSSettings",
                           "id": 14,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "INPUT_ONLY"
                           }
                         },
@@ -347,6 +392,21 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "compliantButDisallowedServices": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "partner": {
+                          "type": "Partner",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -366,13 +426,33 @@
                               "values": {
                                 "RESOURCE_TYPE_UNSPECIFIED": 0,
                                 "CONSUMER_PROJECT": 1,
+                                "CONSUMER_FOLDER": 4,
                                 "ENCRYPTION_KEYS_PROJECT": 2,
                                 "KEYRING": 3
                               }
                             }
                           }
                         },
+                        "ComplianceRegime": {
+                          "values": {
+                            "COMPLIANCE_REGIME_UNSPECIFIED": 0,
+                            "IL4": 1,
+                            "CJIS": 2,
+                            "FEDRAMP_HIGH": 3,
+                            "FEDRAMP_MODERATE": 4,
+                            "US_REGIONAL_ACCESS": 5,
+                            "HIPAA": 6,
+                            "HITRUST": 7,
+                            "EU_REGIONS_AND_SUPPORT": 8,
+                            "CA_REGIONS_AND_SUPPORT": 9,
+                            "ITAR": 10,
+                            "ASSURED_WORKLOADS_FOR_PARTNERS": 12
+                          }
+                        },
                         "KMSSettings": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "nextRotationTime": {
                               "type": "google.protobuf.Timestamp",
@@ -404,6 +484,13 @@
                               "type": "string",
                               "id": 3
                             }
+                          }
+                        },
+                        "KajEnrollmentState": {
+                          "values": {
+                            "KAJ_ENROLLMENT_STATE_UNSPECIFIED": 0,
+                            "KAJ_ENROLLMENT_STATE_PENDING": 1,
+                            "KAJ_ENROLLMENT_STATE_COMPLETE": 2
                           }
                         },
                         "SaaEnrollmentResponse": {
@@ -447,26 +534,10 @@
                             }
                           }
                         },
-                        "ComplianceRegime": {
+                        "Partner": {
                           "values": {
-                            "COMPLIANCE_REGIME_UNSPECIFIED": 0,
-                            "IL4": 1,
-                            "CJIS": 2,
-                            "FEDRAMP_HIGH": 3,
-                            "FEDRAMP_MODERATE": 4,
-                            "US_REGIONAL_ACCESS": 5,
-                            "HIPAA": 6,
-                            "HITRUST": 7,
-                            "EU_REGIONS_AND_SUPPORT": 8,
-                            "CA_REGIONS_AND_SUPPORT": 9,
-                            "ITAR": 10
-                          }
-                        },
-                        "KajEnrollmentState": {
-                          "values": {
-                            "KAJ_ENROLLMENT_STATE_UNSPECIFIED": 0,
-                            "KAJ_ENROLLMENT_STATE_PENDING": 1,
-                            "KAJ_ENROLLMENT_STATE_COMPLETE": 2
+                            "PARTNER_UNSPECIFIED": 0,
+                            "LOCAL_CONTROLS_BY_S3NS": 1
                           }
                         }
                       }
@@ -499,6 +570,344 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RestrictAllowedResourcesRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "restrictionType": {
+                          "type": "RestrictionType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RestrictionType": {
+                          "values": {
+                            "RESTRICTION_TYPE_UNSPECIFIED": 0,
+                            "ALLOW_ALL_GCP_RESOURCES": 1,
+                            "ALLOW_COMPLIANT_RESOURCES": 2
+                          }
+                        }
+                      }
+                    },
+                    "RestrictAllowedResourcesResponse": {
+                      "fields": {}
+                    },
+                    "AcknowledgeViolationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "comment": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "nonCompliantOrgPolicy": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AcknowledgeViolationResponse": {
+                      "fields": {}
+                    },
+                    "TimeWindow": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListViolationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "assuredworkloads.googleapis.com/Violation"
+                          }
+                        },
+                        "interval": {
+                          "type": "TimeWindow",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListViolationsResponse": {
+                      "fields": {
+                        "violations": {
+                          "rule": "repeated",
+                          "type": "Violation",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetViolationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "assuredworkloads.googleapis.com/Violation"
+                          }
+                        }
+                      }
+                    },
+                    "Violation": {
+                      "options": {
+                        "(google.api.resource).type": "assuredworkloads.googleapis.com/Violation",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/workloads/{workload}/violations/{violation}"
+                      },
+                      "oneofs": {
+                        "_acknowledgementTime": {
+                          "oneof": [
+                            "acknowledgementTime"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "beginTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "resolveTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "category": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "orgPolicyConstraint": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "auditLogLink": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "nonCompliantOrgPolicy": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "remediation": {
+                          "type": "Remediation",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "acknowledged": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "acknowledgementTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RESOLVED": 2,
+                            "UNRESOLVED": 3,
+                            "EXCEPTION": 4
+                          }
+                        },
+                        "Remediation": {
+                          "fields": {
+                            "instructions": {
+                              "type": "Instructions",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "compliantValues": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "remediationType": {
+                              "type": "RemediationType",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RemediationType": {
+                              "values": {
+                                "REMEDIATION_TYPE_UNSPECIFIED": 0,
+                                "REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION": 1,
+                                "REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION": 2,
+                                "REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION": 3,
+                                "REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION": 4
+                              }
+                            },
+                            "Instructions": {
+                              "fields": {
+                                "gcloudInstructions": {
+                                  "type": "Gcloud",
+                                  "id": 1
+                                },
+                                "consoleInstructions": {
+                                  "type": "Console",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "Gcloud": {
+                                  "fields": {
+                                    "gcloudCommands": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "steps": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "additionalLinks": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "Console": {
+                                  "fields": {
+                                    "consoleUris": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "steps": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "additionalLinks": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 3
+                                    }
+                                  }
+                                }
+                              }
+                            }
                           }
                         }
                       }

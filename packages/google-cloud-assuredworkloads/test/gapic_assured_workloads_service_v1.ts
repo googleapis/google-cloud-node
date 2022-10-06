@@ -407,6 +407,147 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
     });
   });
 
+  describe('restrictAllowedResources', () => {
+    it('invokes restrictAllowedResources without error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse()
+      );
+      client.innerApiCalls.restrictAllowedResources =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.restrictAllowedResources(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.restrictAllowedResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restrictAllowedResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes restrictAllowedResources without error using callback', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse()
+      );
+      client.innerApiCalls.restrictAllowedResources =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.restrictAllowedResources(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.restrictAllowedResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restrictAllowedResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes restrictAllowedResources with error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.restrictAllowedResources = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.restrictAllowedResources(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.restrictAllowedResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restrictAllowedResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes restrictAllowedResources with closed client', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.restrictAllowedResources(request),
+        expectedError
+      );
+    });
+  });
+
   describe('deleteWorkload', () => {
     it('invokes deleteWorkload without error', async () => {
       const client =
@@ -672,6 +813,181 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getWorkload(request), expectedError);
+    });
+  });
+
+  describe('getViolation', () => {
+    it('invokes getViolation without error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.GetViolationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.Violation()
+      );
+      client.innerApiCalls.getViolation = stubSimpleCall(expectedResponse);
+      const [response] = await client.getViolation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes getViolation without error using callback', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.GetViolationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.Violation()
+      );
+      client.innerApiCalls.getViolation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getViolation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.assuredworkloads.v1.IViolation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes getViolation with error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.GetViolationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getViolation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getViolation(request), expectedError);
+    });
+
+    it('invokes getViolation with closed client', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.GetViolationRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getViolation(request), expectedError);
+    });
+  });
+
+  describe('acknowledgeViolation', () => {
+    it('invokes acknowledgeViolation without error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse()
+      );
+      client.innerApiCalls.acknowledgeViolation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.acknowledgeViolation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes acknowledgeViolation without error using callback', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse()
+      );
+      client.innerApiCalls.acknowledgeViolation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.acknowledgeViolation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.assuredworkloads.v1.IAcknowledgeViolationResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes acknowledgeViolation with error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.acknowledgeViolation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.acknowledgeViolation(request), expectedError);
+    });
+
+    it('invokes acknowledgeViolation with closed client', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.acknowledgeViolation(request), expectedError);
     });
   });
 
@@ -1210,6 +1526,564 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
     });
   });
 
+  describe('listViolations', () => {
+    it('invokes listViolations without error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.assuredworkloads.v1.Violation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.assuredworkloads.v1.Violation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.assuredworkloads.v1.Violation()
+        ),
+      ];
+      client.innerApiCalls.listViolations = stubSimpleCall(expectedResponse);
+      const [response] = await client.listViolations(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes listViolations without error using callback', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.assuredworkloads.v1.Violation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.assuredworkloads.v1.Violation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.assuredworkloads.v1.Violation()
+        ),
+      ];
+      client.innerApiCalls.listViolations =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listViolations(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.assuredworkloads.v1.IViolation[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes listViolations with error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listViolations = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listViolations(request), expectedError);
+    });
+
+    it('invokes listViolationsStream without error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.assuredworkloads.v1.Violation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.assuredworkloads.v1.Violation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.assuredworkloads.v1.Violation()
+        ),
+      ];
+      client.descriptors.page.listViolations.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listViolationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.assuredworkloads.v1.Violation[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.assuredworkloads.v1.Violation) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listViolations.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listViolations, request)
+      );
+    });
+
+    it('invokes listViolationsStream with error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listViolations.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listViolationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.assuredworkloads.v1.Violation[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.assuredworkloads.v1.Violation) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listViolations.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listViolations, request)
+      );
+    });
+
+    it('uses async iteration with listViolations without error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.assuredworkloads.v1.Violation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.assuredworkloads.v1.Violation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.assuredworkloads.v1.Violation()
+        ),
+      ];
+      client.descriptors.page.listViolations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.assuredworkloads.v1.IViolation[] =
+        [];
+      const iterable = client.listViolationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listViolations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+
+    it('uses async iteration with listViolations with error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listViolations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listViolationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.assuredworkloads.v1.IViolation[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listViolations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
+  describe('getOperation', () => {
+    it('invokes getOperation without error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const response = await client.getOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes getOperation without error using callback', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.getOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: operationsProtos.google.longrunning.Operation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+    it('invokes getOperation with error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.getOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('cancelOperation', () => {
+    it('invokes cancelOperation without error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.cancelOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes cancelOperation without error using callback', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.cancelOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+    });
+    it('invokes cancelOperation with error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.cancelOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.cancelOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('deleteOperation', () => {
+    it('invokes deleteOperation without error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.deleteOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes deleteOperation without error using callback', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.deleteOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+    });
+    it('invokes deleteOperation with error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.deleteOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.deleteOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('listOperationsAsync', () => {
+    it('uses async iteration with listOperations without error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+      ];
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+        [];
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+    it('uses async iteration with listOperations with error', async () => {
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('location', () => {
       const fakePath = '/rendered/path/location';
@@ -1297,6 +2171,83 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
         assert.strictEqual(result, 'organizationValue');
         assert(
           (client.pathTemplates.organizationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('violation', () => {
+      const fakePath = '/rendered/path/violation';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        workload: 'workloadValue',
+        violation: 'violationValue',
+      };
+      const client =
+        new assuredworkloadsserviceModule.v1.AssuredWorkloadsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.violationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.violationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('violationPath', () => {
+        const result = client.violationPath(
+          'organizationValue',
+          'locationValue',
+          'workloadValue',
+          'violationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.violationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromViolationName', () => {
+        const result = client.matchOrganizationFromViolationName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (client.pathTemplates.violationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromViolationName', () => {
+        const result = client.matchLocationFromViolationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.violationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchWorkloadFromViolationName', () => {
+        const result = client.matchWorkloadFromViolationName(fakePath);
+        assert.strictEqual(result, 'workloadValue');
+        assert(
+          (client.pathTemplates.violationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchViolationFromViolationName', () => {
+        const result = client.matchViolationFromViolationName(fakePath);
+        assert.strictEqual(result, 'violationValue');
+        assert(
+          (client.pathTemplates.violationPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

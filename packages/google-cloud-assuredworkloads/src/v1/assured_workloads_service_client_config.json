@@ -30,6 +30,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "RestrictAllowedResources": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteWorkload": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -41,6 +46,21 @@
           "retry_params_name": "default"
         },
         "ListWorkloads": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListViolations": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetViolation": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "AcknowledgeViolation": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

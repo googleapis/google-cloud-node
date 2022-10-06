@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(workload, updateMask) {
-  // [START assuredworkloads_v1_generated_AssuredWorkloadsService_UpdateWorkload_async]
+function main(name, comment) {
+  // [START assuredworkloads_v1_generated_AssuredWorkloadsService_AcknowledgeViolation_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,16 +29,24 @@ function main(workload, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The workload to update.
-   *  The workload's `name` field is used to identify the workload to be updated.
+   *  Required. The resource name of the Violation to acknowledge.
    *  Format:
-   *  organizations/{org_id}/locations/{location_id}/workloads/{workload_id}
+   *  organizations/{organization}/locations/{location}/workloads/{workload}/violations/{violation}
    */
-  // const workload = {}
+  // const name = 'abc123'
   /**
-   *  Required. The list of fields to be updated.
+   *  Required. Business justification explaining the need for violation acknowledgement
    */
-  // const updateMask = {}
+  // const comment = 'abc123'
+  /**
+   *  Optional. Name of the OrgPolicy which was modified with non-compliant change and
+   *  resulted in this violation.
+   *  Format:
+   *  projects/{project_number}/policies/{constraint_name}
+   *  folders/{folder_id}/policies/{constraint_name}
+   *  organizations/{organization_id}/policies/{constraint_name}
+   */
+  // const nonCompliantOrgPolicy = 'abc123'
 
   // Imports the Assuredworkloads library
   const {AssuredWorkloadsServiceClient} = require('@google-cloud/assured-workloads').v1;
@@ -46,20 +54,20 @@ function main(workload, updateMask) {
   // Instantiates a client
   const assuredworkloadsClient = new AssuredWorkloadsServiceClient();
 
-  async function callUpdateWorkload() {
+  async function callAcknowledgeViolation() {
     // Construct request
     const request = {
-      workload,
-      updateMask,
+      name,
+      comment,
     };
 
     // Run request
-    const response = await assuredworkloadsClient.updateWorkload(request);
+    const response = await assuredworkloadsClient.acknowledgeViolation(request);
     console.log(response);
   }
 
-  callUpdateWorkload();
-  // [END assuredworkloads_v1_generated_AssuredWorkloadsService_UpdateWorkload_async]
+  callAcknowledgeViolation();
+  // [END assuredworkloads_v1_generated_AssuredWorkloadsService_AcknowledgeViolation_async]
 }
 
 process.on('unhandledRejection', err => {

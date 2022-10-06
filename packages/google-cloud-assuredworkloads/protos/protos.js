@@ -165,6 +165,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService|restrictAllowedResources}.
+                         * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
+                         * @typedef RestrictAllowedResourcesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse} [response] RestrictAllowedResourcesResponse
+                         */
+    
+                        /**
+                         * Calls RestrictAllowedResources.
+                         * @function restrictAllowedResources
+                         * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
+                         * @instance
+                         * @param {google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest} request RestrictAllowedResourcesRequest message or plain object
+                         * @param {google.cloud.assuredworkloads.v1.AssuredWorkloadsService.RestrictAllowedResourcesCallback} callback Node-style callback called with the error, if any, and RestrictAllowedResourcesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssuredWorkloadsService.prototype.restrictAllowedResources = function restrictAllowedResources(request, callback) {
+                            return this.rpcCall(restrictAllowedResources, $root.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest, $root.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse, request, callback);
+                        }, "name", { value: "RestrictAllowedResources" });
+    
+                        /**
+                         * Calls RestrictAllowedResources.
+                         * @function restrictAllowedResources
+                         * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
+                         * @instance
+                         * @param {google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest} request RestrictAllowedResourcesRequest message or plain object
+                         * @returns {Promise<google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService|deleteWorkload}.
                          * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
                          * @typedef DeleteWorkloadCallback
@@ -260,6 +293,105 @@
                          * @instance
                          * @param {google.cloud.assuredworkloads.v1.IListWorkloadsRequest} request ListWorkloadsRequest message or plain object
                          * @returns {Promise<google.cloud.assuredworkloads.v1.ListWorkloadsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService|listViolations}.
+                         * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
+                         * @typedef ListViolationsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.assuredworkloads.v1.ListViolationsResponse} [response] ListViolationsResponse
+                         */
+    
+                        /**
+                         * Calls ListViolations.
+                         * @function listViolations
+                         * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
+                         * @instance
+                         * @param {google.cloud.assuredworkloads.v1.IListViolationsRequest} request ListViolationsRequest message or plain object
+                         * @param {google.cloud.assuredworkloads.v1.AssuredWorkloadsService.ListViolationsCallback} callback Node-style callback called with the error, if any, and ListViolationsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssuredWorkloadsService.prototype.listViolations = function listViolations(request, callback) {
+                            return this.rpcCall(listViolations, $root.google.cloud.assuredworkloads.v1.ListViolationsRequest, $root.google.cloud.assuredworkloads.v1.ListViolationsResponse, request, callback);
+                        }, "name", { value: "ListViolations" });
+    
+                        /**
+                         * Calls ListViolations.
+                         * @function listViolations
+                         * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
+                         * @instance
+                         * @param {google.cloud.assuredworkloads.v1.IListViolationsRequest} request ListViolationsRequest message or plain object
+                         * @returns {Promise<google.cloud.assuredworkloads.v1.ListViolationsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService|getViolation}.
+                         * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
+                         * @typedef GetViolationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.assuredworkloads.v1.Violation} [response] Violation
+                         */
+    
+                        /**
+                         * Calls GetViolation.
+                         * @function getViolation
+                         * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
+                         * @instance
+                         * @param {google.cloud.assuredworkloads.v1.IGetViolationRequest} request GetViolationRequest message or plain object
+                         * @param {google.cloud.assuredworkloads.v1.AssuredWorkloadsService.GetViolationCallback} callback Node-style callback called with the error, if any, and Violation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssuredWorkloadsService.prototype.getViolation = function getViolation(request, callback) {
+                            return this.rpcCall(getViolation, $root.google.cloud.assuredworkloads.v1.GetViolationRequest, $root.google.cloud.assuredworkloads.v1.Violation, request, callback);
+                        }, "name", { value: "GetViolation" });
+    
+                        /**
+                         * Calls GetViolation.
+                         * @function getViolation
+                         * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
+                         * @instance
+                         * @param {google.cloud.assuredworkloads.v1.IGetViolationRequest} request GetViolationRequest message or plain object
+                         * @returns {Promise<google.cloud.assuredworkloads.v1.Violation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService|acknowledgeViolation}.
+                         * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
+                         * @typedef AcknowledgeViolationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse} [response] AcknowledgeViolationResponse
+                         */
+    
+                        /**
+                         * Calls AcknowledgeViolation.
+                         * @function acknowledgeViolation
+                         * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
+                         * @instance
+                         * @param {google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest} request AcknowledgeViolationRequest message or plain object
+                         * @param {google.cloud.assuredworkloads.v1.AssuredWorkloadsService.AcknowledgeViolationCallback} callback Node-style callback called with the error, if any, and AcknowledgeViolationResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssuredWorkloadsService.prototype.acknowledgeViolation = function acknowledgeViolation(request, callback) {
+                            return this.rpcCall(acknowledgeViolation, $root.google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest, $root.google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse, request, callback);
+                        }, "name", { value: "AcknowledgeViolation" });
+    
+                        /**
+                         * Calls AcknowledgeViolation.
+                         * @function acknowledgeViolation
+                         * @memberof google.cloud.assuredworkloads.v1.AssuredWorkloadsService
+                         * @instance
+                         * @param {google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest} request AcknowledgeViolationRequest message or plain object
+                         * @returns {Promise<google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse>} Promise
                          * @variation 2
                          */
     
@@ -1729,6 +1861,8 @@
                          * @property {google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState|null} [kajEnrollmentState] Workload kajEnrollmentState
                          * @property {boolean|null} [enableSovereignControls] Workload enableSovereignControls
                          * @property {google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse|null} [saaEnrollmentResponse] Workload saaEnrollmentResponse
+                         * @property {Array.<string>|null} [compliantButDisallowedServices] Workload compliantButDisallowedServices
+                         * @property {google.cloud.assuredworkloads.v1.Workload.Partner|null} [partner] Workload partner
                          */
     
                         /**
@@ -1743,6 +1877,7 @@
                             this.resources = [];
                             this.labels = {};
                             this.resourceSettings = [];
+                            this.compliantButDisallowedServices = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1862,6 +1997,22 @@
                         Workload.prototype.saaEnrollmentResponse = null;
     
                         /**
+                         * Workload compliantButDisallowedServices.
+                         * @member {Array.<string>} compliantButDisallowedServices
+                         * @memberof google.cloud.assuredworkloads.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.compliantButDisallowedServices = $util.emptyArray;
+    
+                        /**
+                         * Workload partner.
+                         * @member {google.cloud.assuredworkloads.v1.Workload.Partner} partner
+                         * @memberof google.cloud.assuredworkloads.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.partner = 0;
+    
+                        /**
                          * Creates a new Workload instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.assuredworkloads.v1.Workload
@@ -1916,6 +2067,11 @@
                                 writer.uint32(/* id 18, wireType 0 =*/144).bool(message.enableSovereignControls);
                             if (message.saaEnrollmentResponse != null && Object.hasOwnProperty.call(message, "saaEnrollmentResponse"))
                                 $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.encode(message.saaEnrollmentResponse, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.compliantButDisallowedServices != null && message.compliantButDisallowedServices.length)
+                                for (var i = 0; i < message.compliantButDisallowedServices.length; ++i)
+                                    writer.uint32(/* id 24, wireType 2 =*/194).string(message.compliantButDisallowedServices[i]);
+                            if (message.partner != null && Object.hasOwnProperty.call(message, "partner"))
+                                writer.uint32(/* id 25, wireType 0 =*/200).int32(message.partner);
                             return writer;
                         };
     
@@ -2029,6 +2185,16 @@
                                         message.saaEnrollmentResponse = $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 24: {
+                                        if (!(message.compliantButDisallowedServices && message.compliantButDisallowedServices.length))
+                                            message.compliantButDisallowedServices = [];
+                                        message.compliantButDisallowedServices.push(reader.string());
+                                        break;
+                                    }
+                                case 25: {
+                                        message.partner = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2094,6 +2260,7 @@
                                 case 8:
                                 case 9:
                                 case 10:
+                                case 12:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -2149,6 +2316,21 @@
                                 if (error)
                                     return "saaEnrollmentResponse." + error;
                             }
+                            if (message.compliantButDisallowedServices != null && message.hasOwnProperty("compliantButDisallowedServices")) {
+                                if (!Array.isArray(message.compliantButDisallowedServices))
+                                    return "compliantButDisallowedServices: array expected";
+                                for (var i = 0; i < message.compliantButDisallowedServices.length; ++i)
+                                    if (!$util.isString(message.compliantButDisallowedServices[i]))
+                                        return "compliantButDisallowedServices: string[] expected";
+                            }
+                            if (message.partner != null && message.hasOwnProperty("partner"))
+                                switch (message.partner) {
+                                default:
+                                    return "partner: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -2223,6 +2405,10 @@
                             case 10:
                                 message.complianceRegime = 10;
                                 break;
+                            case "ASSURED_WORKLOADS_FOR_PARTNERS":
+                            case 12:
+                                message.complianceRegime = 12;
+                                break;
                             }
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
@@ -2278,6 +2464,23 @@
                                     throw TypeError(".google.cloud.assuredworkloads.v1.Workload.saaEnrollmentResponse: object expected");
                                 message.saaEnrollmentResponse = $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.fromObject(object.saaEnrollmentResponse);
                             }
+                            if (object.compliantButDisallowedServices) {
+                                if (!Array.isArray(object.compliantButDisallowedServices))
+                                    throw TypeError(".google.cloud.assuredworkloads.v1.Workload.compliantButDisallowedServices: array expected");
+                                message.compliantButDisallowedServices = [];
+                                for (var i = 0; i < object.compliantButDisallowedServices.length; ++i)
+                                    message.compliantButDisallowedServices[i] = String(object.compliantButDisallowedServices[i]);
+                            }
+                            switch (object.partner) {
+                            case "PARTNER_UNSPECIFIED":
+                            case 0:
+                                message.partner = 0;
+                                break;
+                            case "LOCAL_CONTROLS_BY_S3NS":
+                            case 1:
+                                message.partner = 1;
+                                break;
+                            }
                             return message;
                         };
     
@@ -2297,6 +2500,7 @@
                             if (options.arrays || options.defaults) {
                                 object.resources = [];
                                 object.resourceSettings = [];
+                                object.compliantButDisallowedServices = [];
                             }
                             if (options.objects || options.defaults)
                                 object.labels = {};
@@ -2312,6 +2516,7 @@
                                 object.kajEnrollmentState = options.enums === String ? "KAJ_ENROLLMENT_STATE_UNSPECIFIED" : 0;
                                 object.enableSovereignControls = false;
                                 object.saaEnrollmentResponse = null;
+                                object.partner = options.enums === String ? "PARTNER_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2351,6 +2556,13 @@
                                 object.enableSovereignControls = message.enableSovereignControls;
                             if (message.saaEnrollmentResponse != null && message.hasOwnProperty("saaEnrollmentResponse"))
                                 object.saaEnrollmentResponse = $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.toObject(message.saaEnrollmentResponse, options);
+                            if (message.compliantButDisallowedServices && message.compliantButDisallowedServices.length) {
+                                object.compliantButDisallowedServices = [];
+                                for (var j = 0; j < message.compliantButDisallowedServices.length; ++j)
+                                    object.compliantButDisallowedServices[j] = message.compliantButDisallowedServices[j];
+                            }
+                            if (message.partner != null && message.hasOwnProperty("partner"))
+                                object.partner = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.Partner[message.partner] : message.partner;
                             return object;
                         };
     
@@ -2535,6 +2747,7 @@
                                         return "resourceType: enum value expected";
                                     case 0:
                                     case 1:
+                                    case 4:
                                     case 2:
                                     case 3:
                                         break;
@@ -2571,6 +2784,10 @@
                                 case "CONSUMER_PROJECT":
                                 case 1:
                                     message.resourceType = 1;
+                                    break;
+                                case "CONSUMER_FOLDER":
+                                case 4:
+                                    message.resourceType = 4;
                                     break;
                                 case "ENCRYPTION_KEYS_PROJECT":
                                 case 2:
@@ -2647,6 +2864,7 @@
                              * @enum {number}
                              * @property {number} RESOURCE_TYPE_UNSPECIFIED=0 RESOURCE_TYPE_UNSPECIFIED value
                              * @property {number} CONSUMER_PROJECT=1 CONSUMER_PROJECT value
+                             * @property {number} CONSUMER_FOLDER=4 CONSUMER_FOLDER value
                              * @property {number} ENCRYPTION_KEYS_PROJECT=2 ENCRYPTION_KEYS_PROJECT value
                              * @property {number} KEYRING=3 KEYRING value
                              */
@@ -2654,12 +2872,47 @@
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "RESOURCE_TYPE_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "CONSUMER_PROJECT"] = 1;
+                                values[valuesById[4] = "CONSUMER_FOLDER"] = 4;
                                 values[valuesById[2] = "ENCRYPTION_KEYS_PROJECT"] = 2;
                                 values[valuesById[3] = "KEYRING"] = 3;
                                 return values;
                             })();
     
                             return ResourceInfo;
+                        })();
+    
+                        /**
+                         * ComplianceRegime enum.
+                         * @name google.cloud.assuredworkloads.v1.Workload.ComplianceRegime
+                         * @enum {number}
+                         * @property {number} COMPLIANCE_REGIME_UNSPECIFIED=0 COMPLIANCE_REGIME_UNSPECIFIED value
+                         * @property {number} IL4=1 IL4 value
+                         * @property {number} CJIS=2 CJIS value
+                         * @property {number} FEDRAMP_HIGH=3 FEDRAMP_HIGH value
+                         * @property {number} FEDRAMP_MODERATE=4 FEDRAMP_MODERATE value
+                         * @property {number} US_REGIONAL_ACCESS=5 US_REGIONAL_ACCESS value
+                         * @property {number} HIPAA=6 HIPAA value
+                         * @property {number} HITRUST=7 HITRUST value
+                         * @property {number} EU_REGIONS_AND_SUPPORT=8 EU_REGIONS_AND_SUPPORT value
+                         * @property {number} CA_REGIONS_AND_SUPPORT=9 CA_REGIONS_AND_SUPPORT value
+                         * @property {number} ITAR=10 ITAR value
+                         * @property {number} ASSURED_WORKLOADS_FOR_PARTNERS=12 ASSURED_WORKLOADS_FOR_PARTNERS value
+                         */
+                        Workload.ComplianceRegime = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "COMPLIANCE_REGIME_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IL4"] = 1;
+                            values[valuesById[2] = "CJIS"] = 2;
+                            values[valuesById[3] = "FEDRAMP_HIGH"] = 3;
+                            values[valuesById[4] = "FEDRAMP_MODERATE"] = 4;
+                            values[valuesById[5] = "US_REGIONAL_ACCESS"] = 5;
+                            values[valuesById[6] = "HIPAA"] = 6;
+                            values[valuesById[7] = "HITRUST"] = 7;
+                            values[valuesById[8] = "EU_REGIONS_AND_SUPPORT"] = 8;
+                            values[valuesById[9] = "CA_REGIONS_AND_SUPPORT"] = 9;
+                            values[valuesById[10] = "ITAR"] = 10;
+                            values[valuesById[12] = "ASSURED_WORKLOADS_FOR_PARTNERS"] = 12;
+                            return values;
                         })();
     
                         Workload.KMSSettings = (function() {
@@ -3069,6 +3322,7 @@
                                         return "resourceType: enum value expected";
                                     case 0:
                                     case 1:
+                                    case 4:
                                     case 2:
                                     case 3:
                                         break;
@@ -3101,6 +3355,10 @@
                                 case "CONSUMER_PROJECT":
                                 case 1:
                                     message.resourceType = 1;
+                                    break;
+                                case "CONSUMER_FOLDER":
+                                case 4:
+                                    message.resourceType = 4;
                                     break;
                                 case "ENCRYPTION_KEYS_PROJECT":
                                 case 2:
@@ -3170,6 +3428,22 @@
                             };
     
                             return ResourceSettings;
+                        })();
+    
+                        /**
+                         * KajEnrollmentState enum.
+                         * @name google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState
+                         * @enum {number}
+                         * @property {number} KAJ_ENROLLMENT_STATE_UNSPECIFIED=0 KAJ_ENROLLMENT_STATE_UNSPECIFIED value
+                         * @property {number} KAJ_ENROLLMENT_STATE_PENDING=1 KAJ_ENROLLMENT_STATE_PENDING value
+                         * @property {number} KAJ_ENROLLMENT_STATE_COMPLETE=2 KAJ_ENROLLMENT_STATE_COMPLETE value
+                         */
+                        Workload.KajEnrollmentState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "KAJ_ENROLLMENT_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "KAJ_ENROLLMENT_STATE_PENDING"] = 1;
+                            values[valuesById[2] = "KAJ_ENROLLMENT_STATE_COMPLETE"] = 2;
+                            return values;
                         })();
     
                         Workload.SaaEnrollmentResponse = (function() {
@@ -3526,50 +3800,16 @@
                         })();
     
                         /**
-                         * ComplianceRegime enum.
-                         * @name google.cloud.assuredworkloads.v1.Workload.ComplianceRegime
+                         * Partner enum.
+                         * @name google.cloud.assuredworkloads.v1.Workload.Partner
                          * @enum {number}
-                         * @property {number} COMPLIANCE_REGIME_UNSPECIFIED=0 COMPLIANCE_REGIME_UNSPECIFIED value
-                         * @property {number} IL4=1 IL4 value
-                         * @property {number} CJIS=2 CJIS value
-                         * @property {number} FEDRAMP_HIGH=3 FEDRAMP_HIGH value
-                         * @property {number} FEDRAMP_MODERATE=4 FEDRAMP_MODERATE value
-                         * @property {number} US_REGIONAL_ACCESS=5 US_REGIONAL_ACCESS value
-                         * @property {number} HIPAA=6 HIPAA value
-                         * @property {number} HITRUST=7 HITRUST value
-                         * @property {number} EU_REGIONS_AND_SUPPORT=8 EU_REGIONS_AND_SUPPORT value
-                         * @property {number} CA_REGIONS_AND_SUPPORT=9 CA_REGIONS_AND_SUPPORT value
-                         * @property {number} ITAR=10 ITAR value
+                         * @property {number} PARTNER_UNSPECIFIED=0 PARTNER_UNSPECIFIED value
+                         * @property {number} LOCAL_CONTROLS_BY_S3NS=1 LOCAL_CONTROLS_BY_S3NS value
                          */
-                        Workload.ComplianceRegime = (function() {
+                        Workload.Partner = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "COMPLIANCE_REGIME_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "IL4"] = 1;
-                            values[valuesById[2] = "CJIS"] = 2;
-                            values[valuesById[3] = "FEDRAMP_HIGH"] = 3;
-                            values[valuesById[4] = "FEDRAMP_MODERATE"] = 4;
-                            values[valuesById[5] = "US_REGIONAL_ACCESS"] = 5;
-                            values[valuesById[6] = "HIPAA"] = 6;
-                            values[valuesById[7] = "HITRUST"] = 7;
-                            values[valuesById[8] = "EU_REGIONS_AND_SUPPORT"] = 8;
-                            values[valuesById[9] = "CA_REGIONS_AND_SUPPORT"] = 9;
-                            values[valuesById[10] = "ITAR"] = 10;
-                            return values;
-                        })();
-    
-                        /**
-                         * KajEnrollmentState enum.
-                         * @name google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState
-                         * @enum {number}
-                         * @property {number} KAJ_ENROLLMENT_STATE_UNSPECIFIED=0 KAJ_ENROLLMENT_STATE_UNSPECIFIED value
-                         * @property {number} KAJ_ENROLLMENT_STATE_PENDING=1 KAJ_ENROLLMENT_STATE_PENDING value
-                         * @property {number} KAJ_ENROLLMENT_STATE_COMPLETE=2 KAJ_ENROLLMENT_STATE_COMPLETE value
-                         */
-                        Workload.KajEnrollmentState = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "KAJ_ENROLLMENT_STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "KAJ_ENROLLMENT_STATE_PENDING"] = 1;
-                            values[valuesById[2] = "KAJ_ENROLLMENT_STATE_COMPLETE"] = 2;
+                            values[valuesById[0] = "PARTNER_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "LOCAL_CONTROLS_BY_S3NS"] = 1;
                             return values;
                         })();
     
@@ -3778,6 +4018,7 @@
                                 case 8:
                                 case 9:
                                 case 10:
+                                case 12:
                                     break;
                                 }
                             return null;
@@ -3849,6 +4090,10 @@
                             case 10:
                                 message.complianceRegime = 10;
                                 break;
+                            case "ASSURED_WORKLOADS_FOR_PARTNERS":
+                            case 12:
+                                message.complianceRegime = 12;
+                                break;
                             }
                             return message;
                         };
@@ -3910,6 +4155,3575 @@
                         };
     
                         return CreateWorkloadOperationMetadata;
+                    })();
+    
+                    v1.RestrictAllowedResourcesRequest = (function() {
+    
+                        /**
+                         * Properties of a RestrictAllowedResourcesRequest.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @interface IRestrictAllowedResourcesRequest
+                         * @property {string|null} [name] RestrictAllowedResourcesRequest name
+                         * @property {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType|null} [restrictionType] RestrictAllowedResourcesRequest restrictionType
+                         */
+    
+                        /**
+                         * Constructs a new RestrictAllowedResourcesRequest.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @classdesc Represents a RestrictAllowedResourcesRequest.
+                         * @implements IRestrictAllowedResourcesRequest
+                         * @constructor
+                         * @param {google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest=} [properties] Properties to set
+                         */
+                        function RestrictAllowedResourcesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RestrictAllowedResourcesRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest
+                         * @instance
+                         */
+                        RestrictAllowedResourcesRequest.prototype.name = "";
+    
+                        /**
+                         * RestrictAllowedResourcesRequest restrictionType.
+                         * @member {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType} restrictionType
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest
+                         * @instance
+                         */
+                        RestrictAllowedResourcesRequest.prototype.restrictionType = 0;
+    
+                        /**
+                         * Creates a new RestrictAllowedResourcesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest} RestrictAllowedResourcesRequest instance
+                         */
+                        RestrictAllowedResourcesRequest.create = function create(properties) {
+                            return new RestrictAllowedResourcesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RestrictAllowedResourcesRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest} message RestrictAllowedResourcesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RestrictAllowedResourcesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.restrictionType != null && Object.hasOwnProperty.call(message, "restrictionType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.restrictionType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RestrictAllowedResourcesRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest} message RestrictAllowedResourcesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RestrictAllowedResourcesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RestrictAllowedResourcesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest} RestrictAllowedResourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RestrictAllowedResourcesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.restrictionType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RestrictAllowedResourcesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest} RestrictAllowedResourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RestrictAllowedResourcesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RestrictAllowedResourcesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RestrictAllowedResourcesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.restrictionType != null && message.hasOwnProperty("restrictionType"))
+                                switch (message.restrictionType) {
+                                default:
+                                    return "restrictionType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RestrictAllowedResourcesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest} RestrictAllowedResourcesRequest
+                         */
+                        RestrictAllowedResourcesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest)
+                                return object;
+                            var message = new $root.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.restrictionType) {
+                            case "RESTRICTION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.restrictionType = 0;
+                                break;
+                            case "ALLOW_ALL_GCP_RESOURCES":
+                            case 1:
+                                message.restrictionType = 1;
+                                break;
+                            case "ALLOW_COMPLIANT_RESOURCES":
+                            case 2:
+                                message.restrictionType = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RestrictAllowedResourcesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest} message RestrictAllowedResourcesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RestrictAllowedResourcesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.restrictionType = options.enums === String ? "RESTRICTION_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.restrictionType != null && message.hasOwnProperty("restrictionType"))
+                                object.restrictionType = options.enums === String ? $root.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType[message.restrictionType] : message.restrictionType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RestrictAllowedResourcesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RestrictAllowedResourcesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RestrictAllowedResourcesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RestrictAllowedResourcesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest";
+                        };
+    
+                        /**
+                         * RestrictionType enum.
+                         * @name google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType
+                         * @enum {number}
+                         * @property {number} RESTRICTION_TYPE_UNSPECIFIED=0 RESTRICTION_TYPE_UNSPECIFIED value
+                         * @property {number} ALLOW_ALL_GCP_RESOURCES=1 ALLOW_ALL_GCP_RESOURCES value
+                         * @property {number} ALLOW_COMPLIANT_RESOURCES=2 ALLOW_COMPLIANT_RESOURCES value
+                         */
+                        RestrictAllowedResourcesRequest.RestrictionType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RESTRICTION_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ALLOW_ALL_GCP_RESOURCES"] = 1;
+                            values[valuesById[2] = "ALLOW_COMPLIANT_RESOURCES"] = 2;
+                            return values;
+                        })();
+    
+                        return RestrictAllowedResourcesRequest;
+                    })();
+    
+                    v1.RestrictAllowedResourcesResponse = (function() {
+    
+                        /**
+                         * Properties of a RestrictAllowedResourcesResponse.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @interface IRestrictAllowedResourcesResponse
+                         */
+    
+                        /**
+                         * Constructs a new RestrictAllowedResourcesResponse.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @classdesc Represents a RestrictAllowedResourcesResponse.
+                         * @implements IRestrictAllowedResourcesResponse
+                         * @constructor
+                         * @param {google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesResponse=} [properties] Properties to set
+                         */
+                        function RestrictAllowedResourcesResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new RestrictAllowedResourcesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse} RestrictAllowedResourcesResponse instance
+                         */
+                        RestrictAllowedResourcesResponse.create = function create(properties) {
+                            return new RestrictAllowedResourcesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RestrictAllowedResourcesResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesResponse} message RestrictAllowedResourcesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RestrictAllowedResourcesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RestrictAllowedResourcesResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesResponse} message RestrictAllowedResourcesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RestrictAllowedResourcesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RestrictAllowedResourcesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse} RestrictAllowedResourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RestrictAllowedResourcesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RestrictAllowedResourcesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse} RestrictAllowedResourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RestrictAllowedResourcesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RestrictAllowedResourcesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RestrictAllowedResourcesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RestrictAllowedResourcesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse} RestrictAllowedResourcesResponse
+                         */
+                        RestrictAllowedResourcesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse)
+                                return object;
+                            return new $root.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a RestrictAllowedResourcesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse} message RestrictAllowedResourcesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RestrictAllowedResourcesResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this RestrictAllowedResourcesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RestrictAllowedResourcesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RestrictAllowedResourcesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RestrictAllowedResourcesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse";
+                        };
+    
+                        return RestrictAllowedResourcesResponse;
+                    })();
+    
+                    v1.AcknowledgeViolationRequest = (function() {
+    
+                        /**
+                         * Properties of an AcknowledgeViolationRequest.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @interface IAcknowledgeViolationRequest
+                         * @property {string|null} [name] AcknowledgeViolationRequest name
+                         * @property {string|null} [comment] AcknowledgeViolationRequest comment
+                         * @property {string|null} [nonCompliantOrgPolicy] AcknowledgeViolationRequest nonCompliantOrgPolicy
+                         */
+    
+                        /**
+                         * Constructs a new AcknowledgeViolationRequest.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @classdesc Represents an AcknowledgeViolationRequest.
+                         * @implements IAcknowledgeViolationRequest
+                         * @constructor
+                         * @param {google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest=} [properties] Properties to set
+                         */
+                        function AcknowledgeViolationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AcknowledgeViolationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @instance
+                         */
+                        AcknowledgeViolationRequest.prototype.name = "";
+    
+                        /**
+                         * AcknowledgeViolationRequest comment.
+                         * @member {string} comment
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @instance
+                         */
+                        AcknowledgeViolationRequest.prototype.comment = "";
+    
+                        /**
+                         * AcknowledgeViolationRequest nonCompliantOrgPolicy.
+                         * @member {string} nonCompliantOrgPolicy
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @instance
+                         */
+                        AcknowledgeViolationRequest.prototype.nonCompliantOrgPolicy = "";
+    
+                        /**
+                         * Creates a new AcknowledgeViolationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest} AcknowledgeViolationRequest instance
+                         */
+                        AcknowledgeViolationRequest.create = function create(properties) {
+                            return new AcknowledgeViolationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AcknowledgeViolationRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest} message AcknowledgeViolationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AcknowledgeViolationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.comment != null && Object.hasOwnProperty.call(message, "comment"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.comment);
+                            if (message.nonCompliantOrgPolicy != null && Object.hasOwnProperty.call(message, "nonCompliantOrgPolicy"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.nonCompliantOrgPolicy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AcknowledgeViolationRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest} message AcknowledgeViolationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AcknowledgeViolationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AcknowledgeViolationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest} AcknowledgeViolationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AcknowledgeViolationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.comment = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.nonCompliantOrgPolicy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AcknowledgeViolationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest} AcknowledgeViolationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AcknowledgeViolationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AcknowledgeViolationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AcknowledgeViolationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.comment != null && message.hasOwnProperty("comment"))
+                                if (!$util.isString(message.comment))
+                                    return "comment: string expected";
+                            if (message.nonCompliantOrgPolicy != null && message.hasOwnProperty("nonCompliantOrgPolicy"))
+                                if (!$util.isString(message.nonCompliantOrgPolicy))
+                                    return "nonCompliantOrgPolicy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AcknowledgeViolationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest} AcknowledgeViolationRequest
+                         */
+                        AcknowledgeViolationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest)
+                                return object;
+                            var message = new $root.google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.comment != null)
+                                message.comment = String(object.comment);
+                            if (object.nonCompliantOrgPolicy != null)
+                                message.nonCompliantOrgPolicy = String(object.nonCompliantOrgPolicy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AcknowledgeViolationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest} message AcknowledgeViolationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AcknowledgeViolationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.comment = "";
+                                object.nonCompliantOrgPolicy = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.comment != null && message.hasOwnProperty("comment"))
+                                object.comment = message.comment;
+                            if (message.nonCompliantOrgPolicy != null && message.hasOwnProperty("nonCompliantOrgPolicy"))
+                                object.nonCompliantOrgPolicy = message.nonCompliantOrgPolicy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AcknowledgeViolationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AcknowledgeViolationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AcknowledgeViolationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AcknowledgeViolationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest";
+                        };
+    
+                        return AcknowledgeViolationRequest;
+                    })();
+    
+                    v1.AcknowledgeViolationResponse = (function() {
+    
+                        /**
+                         * Properties of an AcknowledgeViolationResponse.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @interface IAcknowledgeViolationResponse
+                         */
+    
+                        /**
+                         * Constructs a new AcknowledgeViolationResponse.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @classdesc Represents an AcknowledgeViolationResponse.
+                         * @implements IAcknowledgeViolationResponse
+                         * @constructor
+                         * @param {google.cloud.assuredworkloads.v1.IAcknowledgeViolationResponse=} [properties] Properties to set
+                         */
+                        function AcknowledgeViolationResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new AcknowledgeViolationResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IAcknowledgeViolationResponse=} [properties] Properties to set
+                         * @returns {google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse} AcknowledgeViolationResponse instance
+                         */
+                        AcknowledgeViolationResponse.create = function create(properties) {
+                            return new AcknowledgeViolationResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AcknowledgeViolationResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IAcknowledgeViolationResponse} message AcknowledgeViolationResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AcknowledgeViolationResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AcknowledgeViolationResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IAcknowledgeViolationResponse} message AcknowledgeViolationResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AcknowledgeViolationResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AcknowledgeViolationResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse} AcknowledgeViolationResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AcknowledgeViolationResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AcknowledgeViolationResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse} AcknowledgeViolationResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AcknowledgeViolationResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AcknowledgeViolationResponse message.
+                         * @function verify
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AcknowledgeViolationResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AcknowledgeViolationResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse} AcknowledgeViolationResponse
+                         */
+                        AcknowledgeViolationResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse)
+                                return object;
+                            return new $root.google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from an AcknowledgeViolationResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse} message AcknowledgeViolationResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AcknowledgeViolationResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this AcknowledgeViolationResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AcknowledgeViolationResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AcknowledgeViolationResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AcknowledgeViolationResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse";
+                        };
+    
+                        return AcknowledgeViolationResponse;
+                    })();
+    
+                    v1.TimeWindow = (function() {
+    
+                        /**
+                         * Properties of a TimeWindow.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @interface ITimeWindow
+                         * @property {google.protobuf.ITimestamp|null} [startTime] TimeWindow startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] TimeWindow endTime
+                         */
+    
+                        /**
+                         * Constructs a new TimeWindow.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @classdesc Represents a TimeWindow.
+                         * @implements ITimeWindow
+                         * @constructor
+                         * @param {google.cloud.assuredworkloads.v1.ITimeWindow=} [properties] Properties to set
+                         */
+                        function TimeWindow(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TimeWindow startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.assuredworkloads.v1.TimeWindow
+                         * @instance
+                         */
+                        TimeWindow.prototype.startTime = null;
+    
+                        /**
+                         * TimeWindow endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.assuredworkloads.v1.TimeWindow
+                         * @instance
+                         */
+                        TimeWindow.prototype.endTime = null;
+    
+                        /**
+                         * Creates a new TimeWindow instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.assuredworkloads.v1.TimeWindow
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.ITimeWindow=} [properties] Properties to set
+                         * @returns {google.cloud.assuredworkloads.v1.TimeWindow} TimeWindow instance
+                         */
+                        TimeWindow.create = function create(properties) {
+                            return new TimeWindow(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TimeWindow message. Does not implicitly {@link google.cloud.assuredworkloads.v1.TimeWindow.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.assuredworkloads.v1.TimeWindow
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.ITimeWindow} message TimeWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TimeWindow.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TimeWindow message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.TimeWindow.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.TimeWindow
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.ITimeWindow} message TimeWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TimeWindow.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TimeWindow message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.assuredworkloads.v1.TimeWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.assuredworkloads.v1.TimeWindow} TimeWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TimeWindow.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.TimeWindow();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TimeWindow message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.TimeWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.assuredworkloads.v1.TimeWindow} TimeWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TimeWindow.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TimeWindow message.
+                         * @function verify
+                         * @memberof google.cloud.assuredworkloads.v1.TimeWindow
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TimeWindow.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TimeWindow message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.assuredworkloads.v1.TimeWindow
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.assuredworkloads.v1.TimeWindow} TimeWindow
+                         */
+                        TimeWindow.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.assuredworkloads.v1.TimeWindow)
+                                return object;
+                            var message = new $root.google.cloud.assuredworkloads.v1.TimeWindow();
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.assuredworkloads.v1.TimeWindow.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.assuredworkloads.v1.TimeWindow.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TimeWindow message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.assuredworkloads.v1.TimeWindow
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.TimeWindow} message TimeWindow
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TimeWindow.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.endTime = null;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TimeWindow to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.assuredworkloads.v1.TimeWindow
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TimeWindow.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TimeWindow
+                         * @function getTypeUrl
+                         * @memberof google.cloud.assuredworkloads.v1.TimeWindow
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TimeWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.TimeWindow";
+                        };
+    
+                        return TimeWindow;
+                    })();
+    
+                    v1.ListViolationsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListViolationsRequest.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @interface IListViolationsRequest
+                         * @property {string|null} [parent] ListViolationsRequest parent
+                         * @property {google.cloud.assuredworkloads.v1.ITimeWindow|null} [interval] ListViolationsRequest interval
+                         * @property {number|null} [pageSize] ListViolationsRequest pageSize
+                         * @property {string|null} [pageToken] ListViolationsRequest pageToken
+                         * @property {string|null} [filter] ListViolationsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListViolationsRequest.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @classdesc Represents a ListViolationsRequest.
+                         * @implements IListViolationsRequest
+                         * @constructor
+                         * @param {google.cloud.assuredworkloads.v1.IListViolationsRequest=} [properties] Properties to set
+                         */
+                        function ListViolationsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListViolationsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @instance
+                         */
+                        ListViolationsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListViolationsRequest interval.
+                         * @member {google.cloud.assuredworkloads.v1.ITimeWindow|null|undefined} interval
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @instance
+                         */
+                        ListViolationsRequest.prototype.interval = null;
+    
+                        /**
+                         * ListViolationsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @instance
+                         */
+                        ListViolationsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListViolationsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @instance
+                         */
+                        ListViolationsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListViolationsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @instance
+                         */
+                        ListViolationsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListViolationsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IListViolationsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.assuredworkloads.v1.ListViolationsRequest} ListViolationsRequest instance
+                         */
+                        ListViolationsRequest.create = function create(properties) {
+                            return new ListViolationsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListViolationsRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.ListViolationsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IListViolationsRequest} message ListViolationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListViolationsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.interval != null && Object.hasOwnProperty.call(message, "interval"))
+                                $root.google.cloud.assuredworkloads.v1.TimeWindow.encode(message.interval, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListViolationsRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.ListViolationsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IListViolationsRequest} message ListViolationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListViolationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListViolationsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.assuredworkloads.v1.ListViolationsRequest} ListViolationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListViolationsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.ListViolationsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.interval = $root.google.cloud.assuredworkloads.v1.TimeWindow.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListViolationsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.assuredworkloads.v1.ListViolationsRequest} ListViolationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListViolationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListViolationsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListViolationsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.interval != null && message.hasOwnProperty("interval")) {
+                                var error = $root.google.cloud.assuredworkloads.v1.TimeWindow.verify(message.interval);
+                                if (error)
+                                    return "interval." + error;
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListViolationsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.assuredworkloads.v1.ListViolationsRequest} ListViolationsRequest
+                         */
+                        ListViolationsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.assuredworkloads.v1.ListViolationsRequest)
+                                return object;
+                            var message = new $root.google.cloud.assuredworkloads.v1.ListViolationsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.interval != null) {
+                                if (typeof object.interval !== "object")
+                                    throw TypeError(".google.cloud.assuredworkloads.v1.ListViolationsRequest.interval: object expected");
+                                message.interval = $root.google.cloud.assuredworkloads.v1.TimeWindow.fromObject(object.interval);
+                            }
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListViolationsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.ListViolationsRequest} message ListViolationsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListViolationsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.interval = null;
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.interval != null && message.hasOwnProperty("interval"))
+                                object.interval = $root.google.cloud.assuredworkloads.v1.TimeWindow.toObject(message.interval, options);
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListViolationsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListViolationsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListViolationsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListViolationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.ListViolationsRequest";
+                        };
+    
+                        return ListViolationsRequest;
+                    })();
+    
+                    v1.ListViolationsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListViolationsResponse.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @interface IListViolationsResponse
+                         * @property {Array.<google.cloud.assuredworkloads.v1.IViolation>|null} [violations] ListViolationsResponse violations
+                         * @property {string|null} [nextPageToken] ListViolationsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListViolationsResponse.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @classdesc Represents a ListViolationsResponse.
+                         * @implements IListViolationsResponse
+                         * @constructor
+                         * @param {google.cloud.assuredworkloads.v1.IListViolationsResponse=} [properties] Properties to set
+                         */
+                        function ListViolationsResponse(properties) {
+                            this.violations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListViolationsResponse violations.
+                         * @member {Array.<google.cloud.assuredworkloads.v1.IViolation>} violations
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsResponse
+                         * @instance
+                         */
+                        ListViolationsResponse.prototype.violations = $util.emptyArray;
+    
+                        /**
+                         * ListViolationsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsResponse
+                         * @instance
+                         */
+                        ListViolationsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListViolationsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsResponse
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IListViolationsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.assuredworkloads.v1.ListViolationsResponse} ListViolationsResponse instance
+                         */
+                        ListViolationsResponse.create = function create(properties) {
+                            return new ListViolationsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListViolationsResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1.ListViolationsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsResponse
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IListViolationsResponse} message ListViolationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListViolationsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.violations != null && message.violations.length)
+                                for (var i = 0; i < message.violations.length; ++i)
+                                    $root.google.cloud.assuredworkloads.v1.Violation.encode(message.violations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListViolationsResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.ListViolationsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsResponse
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IListViolationsResponse} message ListViolationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListViolationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListViolationsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.assuredworkloads.v1.ListViolationsResponse} ListViolationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListViolationsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.ListViolationsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.violations && message.violations.length))
+                                            message.violations = [];
+                                        message.violations.push($root.google.cloud.assuredworkloads.v1.Violation.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListViolationsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.assuredworkloads.v1.ListViolationsResponse} ListViolationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListViolationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListViolationsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListViolationsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.violations != null && message.hasOwnProperty("violations")) {
+                                if (!Array.isArray(message.violations))
+                                    return "violations: array expected";
+                                for (var i = 0; i < message.violations.length; ++i) {
+                                    var error = $root.google.cloud.assuredworkloads.v1.Violation.verify(message.violations[i]);
+                                    if (error)
+                                        return "violations." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListViolationsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.assuredworkloads.v1.ListViolationsResponse} ListViolationsResponse
+                         */
+                        ListViolationsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.assuredworkloads.v1.ListViolationsResponse)
+                                return object;
+                            var message = new $root.google.cloud.assuredworkloads.v1.ListViolationsResponse();
+                            if (object.violations) {
+                                if (!Array.isArray(object.violations))
+                                    throw TypeError(".google.cloud.assuredworkloads.v1.ListViolationsResponse.violations: array expected");
+                                message.violations = [];
+                                for (var i = 0; i < object.violations.length; ++i) {
+                                    if (typeof object.violations[i] !== "object")
+                                        throw TypeError(".google.cloud.assuredworkloads.v1.ListViolationsResponse.violations: object expected");
+                                    message.violations[i] = $root.google.cloud.assuredworkloads.v1.Violation.fromObject(object.violations[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListViolationsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsResponse
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.ListViolationsResponse} message ListViolationsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListViolationsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.violations = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.violations && message.violations.length) {
+                                object.violations = [];
+                                for (var j = 0; j < message.violations.length; ++j)
+                                    object.violations[j] = $root.google.cloud.assuredworkloads.v1.Violation.toObject(message.violations[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListViolationsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListViolationsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListViolationsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.assuredworkloads.v1.ListViolationsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListViolationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.ListViolationsResponse";
+                        };
+    
+                        return ListViolationsResponse;
+                    })();
+    
+                    v1.GetViolationRequest = (function() {
+    
+                        /**
+                         * Properties of a GetViolationRequest.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @interface IGetViolationRequest
+                         * @property {string|null} [name] GetViolationRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetViolationRequest.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @classdesc Represents a GetViolationRequest.
+                         * @implements IGetViolationRequest
+                         * @constructor
+                         * @param {google.cloud.assuredworkloads.v1.IGetViolationRequest=} [properties] Properties to set
+                         */
+                        function GetViolationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetViolationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.assuredworkloads.v1.GetViolationRequest
+                         * @instance
+                         */
+                        GetViolationRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetViolationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.assuredworkloads.v1.GetViolationRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IGetViolationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.assuredworkloads.v1.GetViolationRequest} GetViolationRequest instance
+                         */
+                        GetViolationRequest.create = function create(properties) {
+                            return new GetViolationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetViolationRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.GetViolationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.assuredworkloads.v1.GetViolationRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IGetViolationRequest} message GetViolationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetViolationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetViolationRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.GetViolationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.GetViolationRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IGetViolationRequest} message GetViolationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetViolationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetViolationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.assuredworkloads.v1.GetViolationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.assuredworkloads.v1.GetViolationRequest} GetViolationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetViolationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.GetViolationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetViolationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.GetViolationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.assuredworkloads.v1.GetViolationRequest} GetViolationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetViolationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetViolationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.assuredworkloads.v1.GetViolationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetViolationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetViolationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.assuredworkloads.v1.GetViolationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.assuredworkloads.v1.GetViolationRequest} GetViolationRequest
+                         */
+                        GetViolationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.assuredworkloads.v1.GetViolationRequest)
+                                return object;
+                            var message = new $root.google.cloud.assuredworkloads.v1.GetViolationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetViolationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.assuredworkloads.v1.GetViolationRequest
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.GetViolationRequest} message GetViolationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetViolationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetViolationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.assuredworkloads.v1.GetViolationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetViolationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetViolationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.assuredworkloads.v1.GetViolationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetViolationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.GetViolationRequest";
+                        };
+    
+                        return GetViolationRequest;
+                    })();
+    
+                    v1.Violation = (function() {
+    
+                        /**
+                         * Properties of a Violation.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @interface IViolation
+                         * @property {string|null} [name] Violation name
+                         * @property {string|null} [description] Violation description
+                         * @property {google.protobuf.ITimestamp|null} [beginTime] Violation beginTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Violation updateTime
+                         * @property {google.protobuf.ITimestamp|null} [resolveTime] Violation resolveTime
+                         * @property {string|null} [category] Violation category
+                         * @property {google.cloud.assuredworkloads.v1.Violation.State|null} [state] Violation state
+                         * @property {string|null} [orgPolicyConstraint] Violation orgPolicyConstraint
+                         * @property {string|null} [auditLogLink] Violation auditLogLink
+                         * @property {string|null} [nonCompliantOrgPolicy] Violation nonCompliantOrgPolicy
+                         * @property {google.cloud.assuredworkloads.v1.Violation.IRemediation|null} [remediation] Violation remediation
+                         * @property {boolean|null} [acknowledged] Violation acknowledged
+                         * @property {google.protobuf.ITimestamp|null} [acknowledgementTime] Violation acknowledgementTime
+                         */
+    
+                        /**
+                         * Constructs a new Violation.
+                         * @memberof google.cloud.assuredworkloads.v1
+                         * @classdesc Represents a Violation.
+                         * @implements IViolation
+                         * @constructor
+                         * @param {google.cloud.assuredworkloads.v1.IViolation=} [properties] Properties to set
+                         */
+                        function Violation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Violation name.
+                         * @member {string} name
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.name = "";
+    
+                        /**
+                         * Violation description.
+                         * @member {string} description
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.description = "";
+    
+                        /**
+                         * Violation beginTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} beginTime
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.beginTime = null;
+    
+                        /**
+                         * Violation updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.updateTime = null;
+    
+                        /**
+                         * Violation resolveTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} resolveTime
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.resolveTime = null;
+    
+                        /**
+                         * Violation category.
+                         * @member {string} category
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.category = "";
+    
+                        /**
+                         * Violation state.
+                         * @member {google.cloud.assuredworkloads.v1.Violation.State} state
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.state = 0;
+    
+                        /**
+                         * Violation orgPolicyConstraint.
+                         * @member {string} orgPolicyConstraint
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.orgPolicyConstraint = "";
+    
+                        /**
+                         * Violation auditLogLink.
+                         * @member {string} auditLogLink
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.auditLogLink = "";
+    
+                        /**
+                         * Violation nonCompliantOrgPolicy.
+                         * @member {string} nonCompliantOrgPolicy
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.nonCompliantOrgPolicy = "";
+    
+                        /**
+                         * Violation remediation.
+                         * @member {google.cloud.assuredworkloads.v1.Violation.IRemediation|null|undefined} remediation
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.remediation = null;
+    
+                        /**
+                         * Violation acknowledged.
+                         * @member {boolean} acknowledged
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.acknowledged = false;
+    
+                        /**
+                         * Violation acknowledgementTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} acknowledgementTime
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.acknowledgementTime = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Violation _acknowledgementTime.
+                         * @member {"acknowledgementTime"|undefined} _acknowledgementTime
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Object.defineProperty(Violation.prototype, "_acknowledgementTime", {
+                            get: $util.oneOfGetter($oneOfFields = ["acknowledgementTime"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Violation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IViolation=} [properties] Properties to set
+                         * @returns {google.cloud.assuredworkloads.v1.Violation} Violation instance
+                         */
+                        Violation.create = function create(properties) {
+                            return new Violation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Violation message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IViolation} message Violation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Violation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.beginTime != null && Object.hasOwnProperty.call(message, "beginTime"))
+                                $root.google.protobuf.Timestamp.encode(message.beginTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.resolveTime != null && Object.hasOwnProperty.call(message, "resolveTime"))
+                                $root.google.protobuf.Timestamp.encode(message.resolveTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.category);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.state);
+                            if (message.orgPolicyConstraint != null && Object.hasOwnProperty.call(message, "orgPolicyConstraint"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.orgPolicyConstraint);
+                            if (message.auditLogLink != null && Object.hasOwnProperty.call(message, "auditLogLink"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.auditLogLink);
+                            if (message.nonCompliantOrgPolicy != null && Object.hasOwnProperty.call(message, "nonCompliantOrgPolicy"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.nonCompliantOrgPolicy);
+                            if (message.remediation != null && Object.hasOwnProperty.call(message, "remediation"))
+                                $root.google.cloud.assuredworkloads.v1.Violation.Remediation.encode(message.remediation, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.acknowledged != null && Object.hasOwnProperty.call(message, "acknowledged"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.acknowledged);
+                            if (message.acknowledgementTime != null && Object.hasOwnProperty.call(message, "acknowledgementTime"))
+                                $root.google.protobuf.Timestamp.encode(message.acknowledgementTime, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Violation message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.IViolation} message Violation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Violation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Violation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.assuredworkloads.v1.Violation} Violation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Violation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.Violation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.beginTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.resolveTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.category = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.orgPolicyConstraint = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.auditLogLink = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.nonCompliantOrgPolicy = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.remediation = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.acknowledged = reader.bool();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.acknowledgementTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Violation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.assuredworkloads.v1.Violation} Violation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Violation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Violation message.
+                         * @function verify
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Violation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.beginTime != null && message.hasOwnProperty("beginTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.beginTime);
+                                if (error)
+                                    return "beginTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.resolveTime != null && message.hasOwnProperty("resolveTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.resolveTime);
+                                if (error)
+                                    return "resolveTime." + error;
+                            }
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                if (!$util.isString(message.category))
+                                    return "category: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.orgPolicyConstraint != null && message.hasOwnProperty("orgPolicyConstraint"))
+                                if (!$util.isString(message.orgPolicyConstraint))
+                                    return "orgPolicyConstraint: string expected";
+                            if (message.auditLogLink != null && message.hasOwnProperty("auditLogLink"))
+                                if (!$util.isString(message.auditLogLink))
+                                    return "auditLogLink: string expected";
+                            if (message.nonCompliantOrgPolicy != null && message.hasOwnProperty("nonCompliantOrgPolicy"))
+                                if (!$util.isString(message.nonCompliantOrgPolicy))
+                                    return "nonCompliantOrgPolicy: string expected";
+                            if (message.remediation != null && message.hasOwnProperty("remediation")) {
+                                var error = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.verify(message.remediation);
+                                if (error)
+                                    return "remediation." + error;
+                            }
+                            if (message.acknowledged != null && message.hasOwnProperty("acknowledged"))
+                                if (typeof message.acknowledged !== "boolean")
+                                    return "acknowledged: boolean expected";
+                            if (message.acknowledgementTime != null && message.hasOwnProperty("acknowledgementTime")) {
+                                properties._acknowledgementTime = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.acknowledgementTime);
+                                    if (error)
+                                        return "acknowledgementTime." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Violation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.assuredworkloads.v1.Violation} Violation
+                         */
+                        Violation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.assuredworkloads.v1.Violation)
+                                return object;
+                            var message = new $root.google.cloud.assuredworkloads.v1.Violation();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.beginTime != null) {
+                                if (typeof object.beginTime !== "object")
+                                    throw TypeError(".google.cloud.assuredworkloads.v1.Violation.beginTime: object expected");
+                                message.beginTime = $root.google.protobuf.Timestamp.fromObject(object.beginTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.assuredworkloads.v1.Violation.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.resolveTime != null) {
+                                if (typeof object.resolveTime !== "object")
+                                    throw TypeError(".google.cloud.assuredworkloads.v1.Violation.resolveTime: object expected");
+                                message.resolveTime = $root.google.protobuf.Timestamp.fromObject(object.resolveTime);
+                            }
+                            if (object.category != null)
+                                message.category = String(object.category);
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "RESOLVED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "UNRESOLVED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "EXCEPTION":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.orgPolicyConstraint != null)
+                                message.orgPolicyConstraint = String(object.orgPolicyConstraint);
+                            if (object.auditLogLink != null)
+                                message.auditLogLink = String(object.auditLogLink);
+                            if (object.nonCompliantOrgPolicy != null)
+                                message.nonCompliantOrgPolicy = String(object.nonCompliantOrgPolicy);
+                            if (object.remediation != null) {
+                                if (typeof object.remediation !== "object")
+                                    throw TypeError(".google.cloud.assuredworkloads.v1.Violation.remediation: object expected");
+                                message.remediation = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.fromObject(object.remediation);
+                            }
+                            if (object.acknowledged != null)
+                                message.acknowledged = Boolean(object.acknowledged);
+                            if (object.acknowledgementTime != null) {
+                                if (typeof object.acknowledgementTime !== "object")
+                                    throw TypeError(".google.cloud.assuredworkloads.v1.Violation.acknowledgementTime: object expected");
+                                message.acknowledgementTime = $root.google.protobuf.Timestamp.fromObject(object.acknowledgementTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Violation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @static
+                         * @param {google.cloud.assuredworkloads.v1.Violation} message Violation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Violation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.beginTime = null;
+                                object.updateTime = null;
+                                object.resolveTime = null;
+                                object.category = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.orgPolicyConstraint = "";
+                                object.auditLogLink = "";
+                                object.nonCompliantOrgPolicy = "";
+                                object.remediation = null;
+                                object.acknowledged = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.beginTime != null && message.hasOwnProperty("beginTime"))
+                                object.beginTime = $root.google.protobuf.Timestamp.toObject(message.beginTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.resolveTime != null && message.hasOwnProperty("resolveTime"))
+                                object.resolveTime = $root.google.protobuf.Timestamp.toObject(message.resolveTime, options);
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                object.category = message.category;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Violation.State[message.state] : message.state;
+                            if (message.orgPolicyConstraint != null && message.hasOwnProperty("orgPolicyConstraint"))
+                                object.orgPolicyConstraint = message.orgPolicyConstraint;
+                            if (message.auditLogLink != null && message.hasOwnProperty("auditLogLink"))
+                                object.auditLogLink = message.auditLogLink;
+                            if (message.nonCompliantOrgPolicy != null && message.hasOwnProperty("nonCompliantOrgPolicy"))
+                                object.nonCompliantOrgPolicy = message.nonCompliantOrgPolicy;
+                            if (message.remediation != null && message.hasOwnProperty("remediation"))
+                                object.remediation = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.toObject(message.remediation, options);
+                            if (message.acknowledged != null && message.hasOwnProperty("acknowledged"))
+                                object.acknowledged = message.acknowledged;
+                            if (message.acknowledgementTime != null && message.hasOwnProperty("acknowledgementTime")) {
+                                object.acknowledgementTime = $root.google.protobuf.Timestamp.toObject(message.acknowledgementTime, options);
+                                if (options.oneofs)
+                                    object._acknowledgementTime = "acknowledgementTime";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Violation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Violation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Violation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Violation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.Violation";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.assuredworkloads.v1.Violation.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} RESOLVED=2 RESOLVED value
+                         * @property {number} UNRESOLVED=3 UNRESOLVED value
+                         * @property {number} EXCEPTION=4 EXCEPTION value
+                         */
+                        Violation.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[2] = "RESOLVED"] = 2;
+                            values[valuesById[3] = "UNRESOLVED"] = 3;
+                            values[valuesById[4] = "EXCEPTION"] = 4;
+                            return values;
+                        })();
+    
+                        Violation.Remediation = (function() {
+    
+                            /**
+                             * Properties of a Remediation.
+                             * @memberof google.cloud.assuredworkloads.v1.Violation
+                             * @interface IRemediation
+                             * @property {google.cloud.assuredworkloads.v1.Violation.Remediation.IInstructions|null} [instructions] Remediation instructions
+                             * @property {Array.<string>|null} [compliantValues] Remediation compliantValues
+                             * @property {google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType|null} [remediationType] Remediation remediationType
+                             */
+    
+                            /**
+                             * Constructs a new Remediation.
+                             * @memberof google.cloud.assuredworkloads.v1.Violation
+                             * @classdesc Represents a Remediation.
+                             * @implements IRemediation
+                             * @constructor
+                             * @param {google.cloud.assuredworkloads.v1.Violation.IRemediation=} [properties] Properties to set
+                             */
+                            function Remediation(properties) {
+                                this.compliantValues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Remediation instructions.
+                             * @member {google.cloud.assuredworkloads.v1.Violation.Remediation.IInstructions|null|undefined} instructions
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @instance
+                             */
+                            Remediation.prototype.instructions = null;
+    
+                            /**
+                             * Remediation compliantValues.
+                             * @member {Array.<string>} compliantValues
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @instance
+                             */
+                            Remediation.prototype.compliantValues = $util.emptyArray;
+    
+                            /**
+                             * Remediation remediationType.
+                             * @member {google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType} remediationType
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @instance
+                             */
+                            Remediation.prototype.remediationType = 0;
+    
+                            /**
+                             * Creates a new Remediation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1.Violation.IRemediation=} [properties] Properties to set
+                             * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation} Remediation instance
+                             */
+                            Remediation.create = function create(properties) {
+                                return new Remediation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Remediation message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1.Violation.IRemediation} message Remediation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Remediation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.instructions != null && Object.hasOwnProperty.call(message, "instructions"))
+                                    $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.encode(message.instructions, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.compliantValues != null && message.compliantValues.length)
+                                    for (var i = 0; i < message.compliantValues.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.compliantValues[i]);
+                                if (message.remediationType != null && Object.hasOwnProperty.call(message, "remediationType"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.remediationType);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Remediation message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1.Violation.IRemediation} message Remediation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Remediation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Remediation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation} Remediation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Remediation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.Violation.Remediation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.instructions = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.compliantValues && message.compliantValues.length))
+                                                message.compliantValues = [];
+                                            message.compliantValues.push(reader.string());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.remediationType = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Remediation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation} Remediation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Remediation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Remediation message.
+                             * @function verify
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Remediation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.instructions != null && message.hasOwnProperty("instructions")) {
+                                    var error = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.verify(message.instructions);
+                                    if (error)
+                                        return "instructions." + error;
+                                }
+                                if (message.compliantValues != null && message.hasOwnProperty("compliantValues")) {
+                                    if (!Array.isArray(message.compliantValues))
+                                        return "compliantValues: array expected";
+                                    for (var i = 0; i < message.compliantValues.length; ++i)
+                                        if (!$util.isString(message.compliantValues[i]))
+                                            return "compliantValues: string[] expected";
+                                }
+                                if (message.remediationType != null && message.hasOwnProperty("remediationType"))
+                                    switch (message.remediationType) {
+                                    default:
+                                        return "remediationType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Remediation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation} Remediation
+                             */
+                            Remediation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.assuredworkloads.v1.Violation.Remediation)
+                                    return object;
+                                var message = new $root.google.cloud.assuredworkloads.v1.Violation.Remediation();
+                                if (object.instructions != null) {
+                                    if (typeof object.instructions !== "object")
+                                        throw TypeError(".google.cloud.assuredworkloads.v1.Violation.Remediation.instructions: object expected");
+                                    message.instructions = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.fromObject(object.instructions);
+                                }
+                                if (object.compliantValues) {
+                                    if (!Array.isArray(object.compliantValues))
+                                        throw TypeError(".google.cloud.assuredworkloads.v1.Violation.Remediation.compliantValues: array expected");
+                                    message.compliantValues = [];
+                                    for (var i = 0; i < object.compliantValues.length; ++i)
+                                        message.compliantValues[i] = String(object.compliantValues[i]);
+                                }
+                                switch (object.remediationType) {
+                                case "REMEDIATION_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.remediationType = 0;
+                                    break;
+                                case "REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION":
+                                case 1:
+                                    message.remediationType = 1;
+                                    break;
+                                case "REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION":
+                                case 2:
+                                    message.remediationType = 2;
+                                    break;
+                                case "REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION":
+                                case 3:
+                                    message.remediationType = 3;
+                                    break;
+                                case "REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION":
+                                case 4:
+                                    message.remediationType = 4;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Remediation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @static
+                             * @param {google.cloud.assuredworkloads.v1.Violation.Remediation} message Remediation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Remediation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.compliantValues = [];
+                                if (options.defaults) {
+                                    object.instructions = null;
+                                    object.remediationType = options.enums === String ? "REMEDIATION_TYPE_UNSPECIFIED" : 0;
+                                }
+                                if (message.instructions != null && message.hasOwnProperty("instructions"))
+                                    object.instructions = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.toObject(message.instructions, options);
+                                if (message.compliantValues && message.compliantValues.length) {
+                                    object.compliantValues = [];
+                                    for (var j = 0; j < message.compliantValues.length; ++j)
+                                        object.compliantValues[j] = message.compliantValues[j];
+                                }
+                                if (message.remediationType != null && message.hasOwnProperty("remediationType"))
+                                    object.remediationType = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType[message.remediationType] : message.remediationType;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Remediation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Remediation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Remediation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Remediation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.Violation.Remediation";
+                            };
+    
+                            /**
+                             * RemediationType enum.
+                             * @name google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType
+                             * @enum {number}
+                             * @property {number} REMEDIATION_TYPE_UNSPECIFIED=0 REMEDIATION_TYPE_UNSPECIFIED value
+                             * @property {number} REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION=1 REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION value
+                             * @property {number} REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION=2 REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION value
+                             * @property {number} REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION=3 REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION value
+                             * @property {number} REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION=4 REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION value
+                             */
+                            Remediation.RemediationType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "REMEDIATION_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION"] = 1;
+                                values[valuesById[2] = "REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION"] = 2;
+                                values[valuesById[3] = "REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION"] = 3;
+                                values[valuesById[4] = "REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION"] = 4;
+                                return values;
+                            })();
+    
+                            Remediation.Instructions = (function() {
+    
+                                /**
+                                 * Properties of an Instructions.
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                                 * @interface IInstructions
+                                 * @property {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IGcloud|null} [gcloudInstructions] Instructions gcloudInstructions
+                                 * @property {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IConsole|null} [consoleInstructions] Instructions consoleInstructions
+                                 */
+    
+                                /**
+                                 * Constructs a new Instructions.
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation
+                                 * @classdesc Represents an Instructions.
+                                 * @implements IInstructions
+                                 * @constructor
+                                 * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.IInstructions=} [properties] Properties to set
+                                 */
+                                function Instructions(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Instructions gcloudInstructions.
+                                 * @member {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IGcloud|null|undefined} gcloudInstructions
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                 * @instance
+                                 */
+                                Instructions.prototype.gcloudInstructions = null;
+    
+                                /**
+                                 * Instructions consoleInstructions.
+                                 * @member {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IConsole|null|undefined} consoleInstructions
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                 * @instance
+                                 */
+                                Instructions.prototype.consoleInstructions = null;
+    
+                                /**
+                                 * Creates a new Instructions instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.IInstructions=} [properties] Properties to set
+                                 * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions} Instructions instance
+                                 */
+                                Instructions.create = function create(properties) {
+                                    return new Instructions(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Instructions message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.IInstructions} message Instructions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Instructions.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.gcloudInstructions != null && Object.hasOwnProperty.call(message, "gcloudInstructions"))
+                                        $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud.encode(message.gcloudInstructions, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.consoleInstructions != null && Object.hasOwnProperty.call(message, "consoleInstructions"))
+                                        $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console.encode(message.consoleInstructions, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Instructions message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.IInstructions} message Instructions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Instructions.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an Instructions message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions} Instructions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Instructions.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.gcloudInstructions = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.consoleInstructions = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an Instructions message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions} Instructions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Instructions.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an Instructions message.
+                                 * @function verify
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Instructions.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.gcloudInstructions != null && message.hasOwnProperty("gcloudInstructions")) {
+                                        var error = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud.verify(message.gcloudInstructions);
+                                        if (error)
+                                            return "gcloudInstructions." + error;
+                                    }
+                                    if (message.consoleInstructions != null && message.hasOwnProperty("consoleInstructions")) {
+                                        var error = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console.verify(message.consoleInstructions);
+                                        if (error)
+                                            return "consoleInstructions." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an Instructions message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions} Instructions
+                                 */
+                                Instructions.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions)
+                                        return object;
+                                    var message = new $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions();
+                                    if (object.gcloudInstructions != null) {
+                                        if (typeof object.gcloudInstructions !== "object")
+                                            throw TypeError(".google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.gcloudInstructions: object expected");
+                                        message.gcloudInstructions = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud.fromObject(object.gcloudInstructions);
+                                    }
+                                    if (object.consoleInstructions != null) {
+                                        if (typeof object.consoleInstructions !== "object")
+                                            throw TypeError(".google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.consoleInstructions: object expected");
+                                        message.consoleInstructions = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console.fromObject(object.consoleInstructions);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an Instructions message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions} message Instructions
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Instructions.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.gcloudInstructions = null;
+                                        object.consoleInstructions = null;
+                                    }
+                                    if (message.gcloudInstructions != null && message.hasOwnProperty("gcloudInstructions"))
+                                        object.gcloudInstructions = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud.toObject(message.gcloudInstructions, options);
+                                    if (message.consoleInstructions != null && message.hasOwnProperty("consoleInstructions"))
+                                        object.consoleInstructions = $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console.toObject(message.consoleInstructions, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Instructions to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Instructions.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Instructions
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Instructions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions";
+                                };
+    
+                                Instructions.Gcloud = (function() {
+    
+                                    /**
+                                     * Properties of a Gcloud.
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                     * @interface IGcloud
+                                     * @property {Array.<string>|null} [gcloudCommands] Gcloud gcloudCommands
+                                     * @property {Array.<string>|null} [steps] Gcloud steps
+                                     * @property {Array.<string>|null} [additionalLinks] Gcloud additionalLinks
+                                     */
+    
+                                    /**
+                                     * Constructs a new Gcloud.
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                     * @classdesc Represents a Gcloud.
+                                     * @implements IGcloud
+                                     * @constructor
+                                     * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IGcloud=} [properties] Properties to set
+                                     */
+                                    function Gcloud(properties) {
+                                        this.gcloudCommands = [];
+                                        this.steps = [];
+                                        this.additionalLinks = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Gcloud gcloudCommands.
+                                     * @member {Array.<string>} gcloudCommands
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @instance
+                                     */
+                                    Gcloud.prototype.gcloudCommands = $util.emptyArray;
+    
+                                    /**
+                                     * Gcloud steps.
+                                     * @member {Array.<string>} steps
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @instance
+                                     */
+                                    Gcloud.prototype.steps = $util.emptyArray;
+    
+                                    /**
+                                     * Gcloud additionalLinks.
+                                     * @member {Array.<string>} additionalLinks
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @instance
+                                     */
+                                    Gcloud.prototype.additionalLinks = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new Gcloud instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IGcloud=} [properties] Properties to set
+                                     * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud} Gcloud instance
+                                     */
+                                    Gcloud.create = function create(properties) {
+                                        return new Gcloud(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Gcloud message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IGcloud} message Gcloud message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Gcloud.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.gcloudCommands != null && message.gcloudCommands.length)
+                                            for (var i = 0; i < message.gcloudCommands.length; ++i)
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.gcloudCommands[i]);
+                                        if (message.steps != null && message.steps.length)
+                                            for (var i = 0; i < message.steps.length; ++i)
+                                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.steps[i]);
+                                        if (message.additionalLinks != null && message.additionalLinks.length)
+                                            for (var i = 0; i < message.additionalLinks.length; ++i)
+                                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.additionalLinks[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Gcloud message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IGcloud} message Gcloud message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Gcloud.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Gcloud message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud} Gcloud
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Gcloud.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.gcloudCommands && message.gcloudCommands.length))
+                                                        message.gcloudCommands = [];
+                                                    message.gcloudCommands.push(reader.string());
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    if (!(message.steps && message.steps.length))
+                                                        message.steps = [];
+                                                    message.steps.push(reader.string());
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    if (!(message.additionalLinks && message.additionalLinks.length))
+                                                        message.additionalLinks = [];
+                                                    message.additionalLinks.push(reader.string());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Gcloud message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud} Gcloud
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Gcloud.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Gcloud message.
+                                     * @function verify
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Gcloud.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.gcloudCommands != null && message.hasOwnProperty("gcloudCommands")) {
+                                            if (!Array.isArray(message.gcloudCommands))
+                                                return "gcloudCommands: array expected";
+                                            for (var i = 0; i < message.gcloudCommands.length; ++i)
+                                                if (!$util.isString(message.gcloudCommands[i]))
+                                                    return "gcloudCommands: string[] expected";
+                                        }
+                                        if (message.steps != null && message.hasOwnProperty("steps")) {
+                                            if (!Array.isArray(message.steps))
+                                                return "steps: array expected";
+                                            for (var i = 0; i < message.steps.length; ++i)
+                                                if (!$util.isString(message.steps[i]))
+                                                    return "steps: string[] expected";
+                                        }
+                                        if (message.additionalLinks != null && message.hasOwnProperty("additionalLinks")) {
+                                            if (!Array.isArray(message.additionalLinks))
+                                                return "additionalLinks: array expected";
+                                            for (var i = 0; i < message.additionalLinks.length; ++i)
+                                                if (!$util.isString(message.additionalLinks[i]))
+                                                    return "additionalLinks: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Gcloud message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud} Gcloud
+                                     */
+                                    Gcloud.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud)
+                                            return object;
+                                        var message = new $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud();
+                                        if (object.gcloudCommands) {
+                                            if (!Array.isArray(object.gcloudCommands))
+                                                throw TypeError(".google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud.gcloudCommands: array expected");
+                                            message.gcloudCommands = [];
+                                            for (var i = 0; i < object.gcloudCommands.length; ++i)
+                                                message.gcloudCommands[i] = String(object.gcloudCommands[i]);
+                                        }
+                                        if (object.steps) {
+                                            if (!Array.isArray(object.steps))
+                                                throw TypeError(".google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud.steps: array expected");
+                                            message.steps = [];
+                                            for (var i = 0; i < object.steps.length; ++i)
+                                                message.steps[i] = String(object.steps[i]);
+                                        }
+                                        if (object.additionalLinks) {
+                                            if (!Array.isArray(object.additionalLinks))
+                                                throw TypeError(".google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud.additionalLinks: array expected");
+                                            message.additionalLinks = [];
+                                            for (var i = 0; i < object.additionalLinks.length; ++i)
+                                                message.additionalLinks[i] = String(object.additionalLinks[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Gcloud message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud} message Gcloud
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Gcloud.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults) {
+                                            object.gcloudCommands = [];
+                                            object.steps = [];
+                                            object.additionalLinks = [];
+                                        }
+                                        if (message.gcloudCommands && message.gcloudCommands.length) {
+                                            object.gcloudCommands = [];
+                                            for (var j = 0; j < message.gcloudCommands.length; ++j)
+                                                object.gcloudCommands[j] = message.gcloudCommands[j];
+                                        }
+                                        if (message.steps && message.steps.length) {
+                                            object.steps = [];
+                                            for (var j = 0; j < message.steps.length; ++j)
+                                                object.steps[j] = message.steps[j];
+                                        }
+                                        if (message.additionalLinks && message.additionalLinks.length) {
+                                            object.additionalLinks = [];
+                                            for (var j = 0; j < message.additionalLinks.length; ++j)
+                                                object.additionalLinks[j] = message.additionalLinks[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Gcloud to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Gcloud.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Gcloud
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Gcloud.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud";
+                                    };
+    
+                                    return Gcloud;
+                                })();
+    
+                                Instructions.Console = (function() {
+    
+                                    /**
+                                     * Properties of a Console.
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                     * @interface IConsole
+                                     * @property {Array.<string>|null} [consoleUris] Console consoleUris
+                                     * @property {Array.<string>|null} [steps] Console steps
+                                     * @property {Array.<string>|null} [additionalLinks] Console additionalLinks
+                                     */
+    
+                                    /**
+                                     * Constructs a new Console.
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions
+                                     * @classdesc Represents a Console.
+                                     * @implements IConsole
+                                     * @constructor
+                                     * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IConsole=} [properties] Properties to set
+                                     */
+                                    function Console(properties) {
+                                        this.consoleUris = [];
+                                        this.steps = [];
+                                        this.additionalLinks = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Console consoleUris.
+                                     * @member {Array.<string>} consoleUris
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @instance
+                                     */
+                                    Console.prototype.consoleUris = $util.emptyArray;
+    
+                                    /**
+                                     * Console steps.
+                                     * @member {Array.<string>} steps
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @instance
+                                     */
+                                    Console.prototype.steps = $util.emptyArray;
+    
+                                    /**
+                                     * Console additionalLinks.
+                                     * @member {Array.<string>} additionalLinks
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @instance
+                                     */
+                                    Console.prototype.additionalLinks = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new Console instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IConsole=} [properties] Properties to set
+                                     * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console} Console instance
+                                     */
+                                    Console.create = function create(properties) {
+                                        return new Console(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Console message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IConsole} message Console message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Console.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.consoleUris != null && message.consoleUris.length)
+                                            for (var i = 0; i < message.consoleUris.length; ++i)
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.consoleUris[i]);
+                                        if (message.steps != null && message.steps.length)
+                                            for (var i = 0; i < message.steps.length; ++i)
+                                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.steps[i]);
+                                        if (message.additionalLinks != null && message.additionalLinks.length)
+                                            for (var i = 0; i < message.additionalLinks.length; ++i)
+                                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.additionalLinks[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Console message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IConsole} message Console message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Console.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Console message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console} Console
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Console.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.consoleUris && message.consoleUris.length))
+                                                        message.consoleUris = [];
+                                                    message.consoleUris.push(reader.string());
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    if (!(message.steps && message.steps.length))
+                                                        message.steps = [];
+                                                    message.steps.push(reader.string());
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    if (!(message.additionalLinks && message.additionalLinks.length))
+                                                        message.additionalLinks = [];
+                                                    message.additionalLinks.push(reader.string());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Console message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console} Console
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Console.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Console message.
+                                     * @function verify
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Console.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.consoleUris != null && message.hasOwnProperty("consoleUris")) {
+                                            if (!Array.isArray(message.consoleUris))
+                                                return "consoleUris: array expected";
+                                            for (var i = 0; i < message.consoleUris.length; ++i)
+                                                if (!$util.isString(message.consoleUris[i]))
+                                                    return "consoleUris: string[] expected";
+                                        }
+                                        if (message.steps != null && message.hasOwnProperty("steps")) {
+                                            if (!Array.isArray(message.steps))
+                                                return "steps: array expected";
+                                            for (var i = 0; i < message.steps.length; ++i)
+                                                if (!$util.isString(message.steps[i]))
+                                                    return "steps: string[] expected";
+                                        }
+                                        if (message.additionalLinks != null && message.hasOwnProperty("additionalLinks")) {
+                                            if (!Array.isArray(message.additionalLinks))
+                                                return "additionalLinks: array expected";
+                                            for (var i = 0; i < message.additionalLinks.length; ++i)
+                                                if (!$util.isString(message.additionalLinks[i]))
+                                                    return "additionalLinks: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Console message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console} Console
+                                     */
+                                    Console.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console)
+                                            return object;
+                                        var message = new $root.google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console();
+                                        if (object.consoleUris) {
+                                            if (!Array.isArray(object.consoleUris))
+                                                throw TypeError(".google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console.consoleUris: array expected");
+                                            message.consoleUris = [];
+                                            for (var i = 0; i < object.consoleUris.length; ++i)
+                                                message.consoleUris[i] = String(object.consoleUris[i]);
+                                        }
+                                        if (object.steps) {
+                                            if (!Array.isArray(object.steps))
+                                                throw TypeError(".google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console.steps: array expected");
+                                            message.steps = [];
+                                            for (var i = 0; i < object.steps.length; ++i)
+                                                message.steps[i] = String(object.steps[i]);
+                                        }
+                                        if (object.additionalLinks) {
+                                            if (!Array.isArray(object.additionalLinks))
+                                                throw TypeError(".google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console.additionalLinks: array expected");
+                                            message.additionalLinks = [];
+                                            for (var i = 0; i < object.additionalLinks.length; ++i)
+                                                message.additionalLinks[i] = String(object.additionalLinks[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Console message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console} message Console
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Console.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults) {
+                                            object.consoleUris = [];
+                                            object.steps = [];
+                                            object.additionalLinks = [];
+                                        }
+                                        if (message.consoleUris && message.consoleUris.length) {
+                                            object.consoleUris = [];
+                                            for (var j = 0; j < message.consoleUris.length; ++j)
+                                                object.consoleUris[j] = message.consoleUris[j];
+                                        }
+                                        if (message.steps && message.steps.length) {
+                                            object.steps = [];
+                                            for (var j = 0; j < message.steps.length; ++j)
+                                                object.steps[j] = message.steps[j];
+                                        }
+                                        if (message.additionalLinks && message.additionalLinks.length) {
+                                            object.additionalLinks = [];
+                                            for (var j = 0; j < message.additionalLinks.length; ++j)
+                                                object.additionalLinks[j] = message.additionalLinks[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Console to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Console.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Console
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Console.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console";
+                                    };
+    
+                                    return Console;
+                                })();
+    
+                                return Instructions;
+                            })();
+    
+                            return Remediation;
+                        })();
+    
+                        return Violation;
                     })();
     
                     return v1;

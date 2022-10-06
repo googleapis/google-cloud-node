@@ -75,6 +75,20 @@ export namespace google {
                     public updateWorkload(request: google.cloud.assuredworkloads.v1.IUpdateWorkloadRequest): Promise<google.cloud.assuredworkloads.v1.Workload>;
 
                     /**
+                     * Calls RestrictAllowedResources.
+                     * @param request RestrictAllowedResourcesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestrictAllowedResourcesResponse
+                     */
+                    public restrictAllowedResources(request: google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest, callback: google.cloud.assuredworkloads.v1.AssuredWorkloadsService.RestrictAllowedResourcesCallback): void;
+
+                    /**
+                     * Calls RestrictAllowedResources.
+                     * @param request RestrictAllowedResourcesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public restrictAllowedResources(request: google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest): Promise<google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse>;
+
+                    /**
                      * Calls DeleteWorkload.
                      * @param request DeleteWorkloadRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Empty
@@ -115,6 +129,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public listWorkloads(request: google.cloud.assuredworkloads.v1.IListWorkloadsRequest): Promise<google.cloud.assuredworkloads.v1.ListWorkloadsResponse>;
+
+                    /**
+                     * Calls ListViolations.
+                     * @param request ListViolationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListViolationsResponse
+                     */
+                    public listViolations(request: google.cloud.assuredworkloads.v1.IListViolationsRequest, callback: google.cloud.assuredworkloads.v1.AssuredWorkloadsService.ListViolationsCallback): void;
+
+                    /**
+                     * Calls ListViolations.
+                     * @param request ListViolationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listViolations(request: google.cloud.assuredworkloads.v1.IListViolationsRequest): Promise<google.cloud.assuredworkloads.v1.ListViolationsResponse>;
+
+                    /**
+                     * Calls GetViolation.
+                     * @param request GetViolationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Violation
+                     */
+                    public getViolation(request: google.cloud.assuredworkloads.v1.IGetViolationRequest, callback: google.cloud.assuredworkloads.v1.AssuredWorkloadsService.GetViolationCallback): void;
+
+                    /**
+                     * Calls GetViolation.
+                     * @param request GetViolationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getViolation(request: google.cloud.assuredworkloads.v1.IGetViolationRequest): Promise<google.cloud.assuredworkloads.v1.Violation>;
+
+                    /**
+                     * Calls AcknowledgeViolation.
+                     * @param request AcknowledgeViolationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AcknowledgeViolationResponse
+                     */
+                    public acknowledgeViolation(request: google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest, callback: google.cloud.assuredworkloads.v1.AssuredWorkloadsService.AcknowledgeViolationCallback): void;
+
+                    /**
+                     * Calls AcknowledgeViolation.
+                     * @param request AcknowledgeViolationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public acknowledgeViolation(request: google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest): Promise<google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse>;
                 }
 
                 namespace AssuredWorkloadsService {
@@ -132,6 +188,13 @@ export namespace google {
                      * @param [response] Workload
                      */
                     type UpdateWorkloadCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1.Workload) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService|restrictAllowedResources}.
+                     * @param error Error, if any
+                     * @param [response] RestrictAllowedResourcesResponse
+                     */
+                    type RestrictAllowedResourcesCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService|deleteWorkload}.
@@ -153,6 +216,27 @@ export namespace google {
                      * @param [response] ListWorkloadsResponse
                      */
                     type ListWorkloadsCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1.ListWorkloadsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService|listViolations}.
+                     * @param error Error, if any
+                     * @param [response] ListViolationsResponse
+                     */
+                    type ListViolationsCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1.ListViolationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService|getViolation}.
+                     * @param error Error, if any
+                     * @param [response] Violation
+                     */
+                    type GetViolationCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1.Violation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService|acknowledgeViolation}.
+                     * @param error Error, if any
+                     * @param [response] AcknowledgeViolationResponse
+                     */
+                    type AcknowledgeViolationCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse) => void;
                 }
 
                 /** Properties of a CreateWorkloadRequest. */
@@ -829,6 +913,12 @@ export namespace google {
 
                     /** Workload saaEnrollmentResponse */
                     saaEnrollmentResponse?: (google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse|null);
+
+                    /** Workload compliantButDisallowedServices */
+                    compliantButDisallowedServices?: (string[]|null);
+
+                    /** Workload partner */
+                    partner?: (google.cloud.assuredworkloads.v1.Workload.Partner|keyof typeof google.cloud.assuredworkloads.v1.Workload.Partner|null);
                 }
 
                 /** Represents a Workload. */
@@ -881,6 +971,12 @@ export namespace google {
 
                     /** Workload saaEnrollmentResponse. */
                     public saaEnrollmentResponse?: (google.cloud.assuredworkloads.v1.Workload.ISaaEnrollmentResponse|null);
+
+                    /** Workload compliantButDisallowedServices. */
+                    public compliantButDisallowedServices: string[];
+
+                    /** Workload partner. */
+                    public partner: (google.cloud.assuredworkloads.v1.Workload.Partner|keyof typeof google.cloud.assuredworkloads.v1.Workload.Partner);
 
                     /**
                      * Creates a new Workload instance using the specified properties.
@@ -1071,9 +1167,26 @@ export namespace google {
                         enum ResourceType {
                             RESOURCE_TYPE_UNSPECIFIED = 0,
                             CONSUMER_PROJECT = 1,
+                            CONSUMER_FOLDER = 4,
                             ENCRYPTION_KEYS_PROJECT = 2,
                             KEYRING = 3
                         }
+                    }
+
+                    /** ComplianceRegime enum. */
+                    enum ComplianceRegime {
+                        COMPLIANCE_REGIME_UNSPECIFIED = 0,
+                        IL4 = 1,
+                        CJIS = 2,
+                        FEDRAMP_HIGH = 3,
+                        FEDRAMP_MODERATE = 4,
+                        US_REGIONAL_ACCESS = 5,
+                        HIPAA = 6,
+                        HITRUST = 7,
+                        EU_REGIONS_AND_SUPPORT = 8,
+                        CA_REGIONS_AND_SUPPORT = 9,
+                        ITAR = 10,
+                        ASSURED_WORKLOADS_FOR_PARTNERS = 12
                     }
 
                     /** Properties of a KMSSettings. */
@@ -1288,6 +1401,13 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** KajEnrollmentState enum. */
+                    enum KajEnrollmentState {
+                        KAJ_ENROLLMENT_STATE_UNSPECIFIED = 0,
+                        KAJ_ENROLLMENT_STATE_PENDING = 1,
+                        KAJ_ENROLLMENT_STATE_COMPLETE = 2
+                    }
+
                     /** Properties of a SaaEnrollmentResponse. */
                     interface ISaaEnrollmentResponse {
 
@@ -1413,26 +1533,10 @@ export namespace google {
                         }
                     }
 
-                    /** ComplianceRegime enum. */
-                    enum ComplianceRegime {
-                        COMPLIANCE_REGIME_UNSPECIFIED = 0,
-                        IL4 = 1,
-                        CJIS = 2,
-                        FEDRAMP_HIGH = 3,
-                        FEDRAMP_MODERATE = 4,
-                        US_REGIONAL_ACCESS = 5,
-                        HIPAA = 6,
-                        HITRUST = 7,
-                        EU_REGIONS_AND_SUPPORT = 8,
-                        CA_REGIONS_AND_SUPPORT = 9,
-                        ITAR = 10
-                    }
-
-                    /** KajEnrollmentState enum. */
-                    enum KajEnrollmentState {
-                        KAJ_ENROLLMENT_STATE_UNSPECIFIED = 0,
-                        KAJ_ENROLLMENT_STATE_PENDING = 1,
-                        KAJ_ENROLLMENT_STATE_COMPLETE = 2
+                    /** Partner enum. */
+                    enum Partner {
+                        PARTNER_UNSPECIFIED = 0,
+                        LOCAL_CONTROLS_BY_S3NS = 1
                     }
                 }
 
@@ -1549,6 +1653,1462 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestrictAllowedResourcesRequest. */
+                interface IRestrictAllowedResourcesRequest {
+
+                    /** RestrictAllowedResourcesRequest name */
+                    name?: (string|null);
+
+                    /** RestrictAllowedResourcesRequest restrictionType */
+                    restrictionType?: (google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType|keyof typeof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType|null);
+                }
+
+                /** Represents a RestrictAllowedResourcesRequest. */
+                class RestrictAllowedResourcesRequest implements IRestrictAllowedResourcesRequest {
+
+                    /**
+                     * Constructs a new RestrictAllowedResourcesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest);
+
+                    /** RestrictAllowedResourcesRequest name. */
+                    public name: string;
+
+                    /** RestrictAllowedResourcesRequest restrictionType. */
+                    public restrictionType: (google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType|keyof typeof google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType);
+
+                    /**
+                     * Creates a new RestrictAllowedResourcesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestrictAllowedResourcesRequest instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest): google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest;
+
+                    /**
+                     * Encodes the specified RestrictAllowedResourcesRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.verify|verify} messages.
+                     * @param message RestrictAllowedResourcesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestrictAllowedResourcesRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.verify|verify} messages.
+                     * @param message RestrictAllowedResourcesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestrictAllowedResourcesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestrictAllowedResourcesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest;
+
+                    /**
+                     * Decodes a RestrictAllowedResourcesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestrictAllowedResourcesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest;
+
+                    /**
+                     * Verifies a RestrictAllowedResourcesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestrictAllowedResourcesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestrictAllowedResourcesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest;
+
+                    /**
+                     * Creates a plain object from a RestrictAllowedResourcesRequest message. Also converts values to other types if specified.
+                     * @param message RestrictAllowedResourcesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestrictAllowedResourcesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestrictAllowedResourcesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RestrictAllowedResourcesRequest {
+
+                    /** RestrictionType enum. */
+                    enum RestrictionType {
+                        RESTRICTION_TYPE_UNSPECIFIED = 0,
+                        ALLOW_ALL_GCP_RESOURCES = 1,
+                        ALLOW_COMPLIANT_RESOURCES = 2
+                    }
+                }
+
+                /** Properties of a RestrictAllowedResourcesResponse. */
+                interface IRestrictAllowedResourcesResponse {
+                }
+
+                /** Represents a RestrictAllowedResourcesResponse. */
+                class RestrictAllowedResourcesResponse implements IRestrictAllowedResourcesResponse {
+
+                    /**
+                     * Constructs a new RestrictAllowedResourcesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesResponse);
+
+                    /**
+                     * Creates a new RestrictAllowedResourcesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestrictAllowedResourcesResponse instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesResponse): google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse;
+
+                    /**
+                     * Encodes the specified RestrictAllowedResourcesResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse.verify|verify} messages.
+                     * @param message RestrictAllowedResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestrictAllowedResourcesResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse.verify|verify} messages.
+                     * @param message RestrictAllowedResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IRestrictAllowedResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestrictAllowedResourcesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestrictAllowedResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse;
+
+                    /**
+                     * Decodes a RestrictAllowedResourcesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestrictAllowedResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse;
+
+                    /**
+                     * Verifies a RestrictAllowedResourcesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestrictAllowedResourcesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestrictAllowedResourcesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse;
+
+                    /**
+                     * Creates a plain object from a RestrictAllowedResourcesResponse message. Also converts values to other types if specified.
+                     * @param message RestrictAllowedResourcesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestrictAllowedResourcesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestrictAllowedResourcesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AcknowledgeViolationRequest. */
+                interface IAcknowledgeViolationRequest {
+
+                    /** AcknowledgeViolationRequest name */
+                    name?: (string|null);
+
+                    /** AcknowledgeViolationRequest comment */
+                    comment?: (string|null);
+
+                    /** AcknowledgeViolationRequest nonCompliantOrgPolicy */
+                    nonCompliantOrgPolicy?: (string|null);
+                }
+
+                /** Represents an AcknowledgeViolationRequest. */
+                class AcknowledgeViolationRequest implements IAcknowledgeViolationRequest {
+
+                    /**
+                     * Constructs a new AcknowledgeViolationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest);
+
+                    /** AcknowledgeViolationRequest name. */
+                    public name: string;
+
+                    /** AcknowledgeViolationRequest comment. */
+                    public comment: string;
+
+                    /** AcknowledgeViolationRequest nonCompliantOrgPolicy. */
+                    public nonCompliantOrgPolicy: string;
+
+                    /**
+                     * Creates a new AcknowledgeViolationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AcknowledgeViolationRequest instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest): google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest;
+
+                    /**
+                     * Encodes the specified AcknowledgeViolationRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest.verify|verify} messages.
+                     * @param message AcknowledgeViolationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AcknowledgeViolationRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest.verify|verify} messages.
+                     * @param message AcknowledgeViolationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IAcknowledgeViolationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AcknowledgeViolationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AcknowledgeViolationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest;
+
+                    /**
+                     * Decodes an AcknowledgeViolationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AcknowledgeViolationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest;
+
+                    /**
+                     * Verifies an AcknowledgeViolationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AcknowledgeViolationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AcknowledgeViolationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest;
+
+                    /**
+                     * Creates a plain object from an AcknowledgeViolationRequest message. Also converts values to other types if specified.
+                     * @param message AcknowledgeViolationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AcknowledgeViolationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AcknowledgeViolationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AcknowledgeViolationResponse. */
+                interface IAcknowledgeViolationResponse {
+                }
+
+                /** Represents an AcknowledgeViolationResponse. */
+                class AcknowledgeViolationResponse implements IAcknowledgeViolationResponse {
+
+                    /**
+                     * Constructs a new AcknowledgeViolationResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IAcknowledgeViolationResponse);
+
+                    /**
+                     * Creates a new AcknowledgeViolationResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AcknowledgeViolationResponse instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IAcknowledgeViolationResponse): google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse;
+
+                    /**
+                     * Encodes the specified AcknowledgeViolationResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse.verify|verify} messages.
+                     * @param message AcknowledgeViolationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IAcknowledgeViolationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AcknowledgeViolationResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse.verify|verify} messages.
+                     * @param message AcknowledgeViolationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IAcknowledgeViolationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AcknowledgeViolationResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AcknowledgeViolationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse;
+
+                    /**
+                     * Decodes an AcknowledgeViolationResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AcknowledgeViolationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse;
+
+                    /**
+                     * Verifies an AcknowledgeViolationResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AcknowledgeViolationResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AcknowledgeViolationResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse;
+
+                    /**
+                     * Creates a plain object from an AcknowledgeViolationResponse message. Also converts values to other types if specified.
+                     * @param message AcknowledgeViolationResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AcknowledgeViolationResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AcknowledgeViolationResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TimeWindow. */
+                interface ITimeWindow {
+
+                    /** TimeWindow startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TimeWindow endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a TimeWindow. */
+                class TimeWindow implements ITimeWindow {
+
+                    /**
+                     * Constructs a new TimeWindow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.ITimeWindow);
+
+                    /** TimeWindow startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TimeWindow endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new TimeWindow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TimeWindow instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.ITimeWindow): google.cloud.assuredworkloads.v1.TimeWindow;
+
+                    /**
+                     * Encodes the specified TimeWindow message. Does not implicitly {@link google.cloud.assuredworkloads.v1.TimeWindow.verify|verify} messages.
+                     * @param message TimeWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TimeWindow message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.TimeWindow.verify|verify} messages.
+                     * @param message TimeWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TimeWindow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TimeWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.TimeWindow;
+
+                    /**
+                     * Decodes a TimeWindow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TimeWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.TimeWindow;
+
+                    /**
+                     * Verifies a TimeWindow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TimeWindow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TimeWindow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.TimeWindow;
+
+                    /**
+                     * Creates a plain object from a TimeWindow message. Also converts values to other types if specified.
+                     * @param message TimeWindow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.TimeWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TimeWindow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TimeWindow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListViolationsRequest. */
+                interface IListViolationsRequest {
+
+                    /** ListViolationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListViolationsRequest interval */
+                    interval?: (google.cloud.assuredworkloads.v1.ITimeWindow|null);
+
+                    /** ListViolationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListViolationsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListViolationsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListViolationsRequest. */
+                class ListViolationsRequest implements IListViolationsRequest {
+
+                    /**
+                     * Constructs a new ListViolationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IListViolationsRequest);
+
+                    /** ListViolationsRequest parent. */
+                    public parent: string;
+
+                    /** ListViolationsRequest interval. */
+                    public interval?: (google.cloud.assuredworkloads.v1.ITimeWindow|null);
+
+                    /** ListViolationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListViolationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListViolationsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListViolationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListViolationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IListViolationsRequest): google.cloud.assuredworkloads.v1.ListViolationsRequest;
+
+                    /**
+                     * Encodes the specified ListViolationsRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.ListViolationsRequest.verify|verify} messages.
+                     * @param message ListViolationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IListViolationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListViolationsRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.ListViolationsRequest.verify|verify} messages.
+                     * @param message ListViolationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IListViolationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListViolationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListViolationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.ListViolationsRequest;
+
+                    /**
+                     * Decodes a ListViolationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListViolationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.ListViolationsRequest;
+
+                    /**
+                     * Verifies a ListViolationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListViolationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListViolationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.ListViolationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListViolationsRequest message. Also converts values to other types if specified.
+                     * @param message ListViolationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.ListViolationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListViolationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListViolationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListViolationsResponse. */
+                interface IListViolationsResponse {
+
+                    /** ListViolationsResponse violations */
+                    violations?: (google.cloud.assuredworkloads.v1.IViolation[]|null);
+
+                    /** ListViolationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListViolationsResponse. */
+                class ListViolationsResponse implements IListViolationsResponse {
+
+                    /**
+                     * Constructs a new ListViolationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IListViolationsResponse);
+
+                    /** ListViolationsResponse violations. */
+                    public violations: google.cloud.assuredworkloads.v1.IViolation[];
+
+                    /** ListViolationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListViolationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListViolationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IListViolationsResponse): google.cloud.assuredworkloads.v1.ListViolationsResponse;
+
+                    /**
+                     * Encodes the specified ListViolationsResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1.ListViolationsResponse.verify|verify} messages.
+                     * @param message ListViolationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IListViolationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListViolationsResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.ListViolationsResponse.verify|verify} messages.
+                     * @param message ListViolationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IListViolationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListViolationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListViolationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.ListViolationsResponse;
+
+                    /**
+                     * Decodes a ListViolationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListViolationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.ListViolationsResponse;
+
+                    /**
+                     * Verifies a ListViolationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListViolationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListViolationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.ListViolationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListViolationsResponse message. Also converts values to other types if specified.
+                     * @param message ListViolationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.ListViolationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListViolationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListViolationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetViolationRequest. */
+                interface IGetViolationRequest {
+
+                    /** GetViolationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetViolationRequest. */
+                class GetViolationRequest implements IGetViolationRequest {
+
+                    /**
+                     * Constructs a new GetViolationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IGetViolationRequest);
+
+                    /** GetViolationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetViolationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetViolationRequest instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IGetViolationRequest): google.cloud.assuredworkloads.v1.GetViolationRequest;
+
+                    /**
+                     * Encodes the specified GetViolationRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.GetViolationRequest.verify|verify} messages.
+                     * @param message GetViolationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IGetViolationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetViolationRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.GetViolationRequest.verify|verify} messages.
+                     * @param message GetViolationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IGetViolationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetViolationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetViolationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.GetViolationRequest;
+
+                    /**
+                     * Decodes a GetViolationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetViolationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.GetViolationRequest;
+
+                    /**
+                     * Verifies a GetViolationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetViolationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetViolationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.GetViolationRequest;
+
+                    /**
+                     * Creates a plain object from a GetViolationRequest message. Also converts values to other types if specified.
+                     * @param message GetViolationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.GetViolationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetViolationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetViolationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Violation. */
+                interface IViolation {
+
+                    /** Violation name */
+                    name?: (string|null);
+
+                    /** Violation description */
+                    description?: (string|null);
+
+                    /** Violation beginTime */
+                    beginTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation resolveTime */
+                    resolveTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation category */
+                    category?: (string|null);
+
+                    /** Violation state */
+                    state?: (google.cloud.assuredworkloads.v1.Violation.State|keyof typeof google.cloud.assuredworkloads.v1.Violation.State|null);
+
+                    /** Violation orgPolicyConstraint */
+                    orgPolicyConstraint?: (string|null);
+
+                    /** Violation auditLogLink */
+                    auditLogLink?: (string|null);
+
+                    /** Violation nonCompliantOrgPolicy */
+                    nonCompliantOrgPolicy?: (string|null);
+
+                    /** Violation remediation */
+                    remediation?: (google.cloud.assuredworkloads.v1.Violation.IRemediation|null);
+
+                    /** Violation acknowledged */
+                    acknowledged?: (boolean|null);
+
+                    /** Violation acknowledgementTime */
+                    acknowledgementTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a Violation. */
+                class Violation implements IViolation {
+
+                    /**
+                     * Constructs a new Violation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IViolation);
+
+                    /** Violation name. */
+                    public name: string;
+
+                    /** Violation description. */
+                    public description: string;
+
+                    /** Violation beginTime. */
+                    public beginTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation resolveTime. */
+                    public resolveTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation category. */
+                    public category: string;
+
+                    /** Violation state. */
+                    public state: (google.cloud.assuredworkloads.v1.Violation.State|keyof typeof google.cloud.assuredworkloads.v1.Violation.State);
+
+                    /** Violation orgPolicyConstraint. */
+                    public orgPolicyConstraint: string;
+
+                    /** Violation auditLogLink. */
+                    public auditLogLink: string;
+
+                    /** Violation nonCompliantOrgPolicy. */
+                    public nonCompliantOrgPolicy: string;
+
+                    /** Violation remediation. */
+                    public remediation?: (google.cloud.assuredworkloads.v1.Violation.IRemediation|null);
+
+                    /** Violation acknowledged. */
+                    public acknowledged: boolean;
+
+                    /** Violation acknowledgementTime. */
+                    public acknowledgementTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation _acknowledgementTime. */
+                    public _acknowledgementTime?: "acknowledgementTime";
+
+                    /**
+                     * Creates a new Violation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Violation instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IViolation): google.cloud.assuredworkloads.v1.Violation;
+
+                    /**
+                     * Encodes the specified Violation message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.verify|verify} messages.
+                     * @param message Violation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IViolation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Violation message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.verify|verify} messages.
+                     * @param message Violation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IViolation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Violation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Violation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.Violation;
+
+                    /**
+                     * Decodes a Violation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Violation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.Violation;
+
+                    /**
+                     * Verifies a Violation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Violation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Violation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.Violation;
+
+                    /**
+                     * Creates a plain object from a Violation message. Also converts values to other types if specified.
+                     * @param message Violation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.Violation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Violation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Violation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Violation {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RESOLVED = 2,
+                        UNRESOLVED = 3,
+                        EXCEPTION = 4
+                    }
+
+                    /** Properties of a Remediation. */
+                    interface IRemediation {
+
+                        /** Remediation instructions */
+                        instructions?: (google.cloud.assuredworkloads.v1.Violation.Remediation.IInstructions|null);
+
+                        /** Remediation compliantValues */
+                        compliantValues?: (string[]|null);
+
+                        /** Remediation remediationType */
+                        remediationType?: (google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType|keyof typeof google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType|null);
+                    }
+
+                    /** Represents a Remediation. */
+                    class Remediation implements IRemediation {
+
+                        /**
+                         * Constructs a new Remediation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.assuredworkloads.v1.Violation.IRemediation);
+
+                        /** Remediation instructions. */
+                        public instructions?: (google.cloud.assuredworkloads.v1.Violation.Remediation.IInstructions|null);
+
+                        /** Remediation compliantValues. */
+                        public compliantValues: string[];
+
+                        /** Remediation remediationType. */
+                        public remediationType: (google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType|keyof typeof google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType);
+
+                        /**
+                         * Creates a new Remediation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Remediation instance
+                         */
+                        public static create(properties?: google.cloud.assuredworkloads.v1.Violation.IRemediation): google.cloud.assuredworkloads.v1.Violation.Remediation;
+
+                        /**
+                         * Encodes the specified Remediation message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.verify|verify} messages.
+                         * @param message Remediation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.assuredworkloads.v1.Violation.IRemediation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Remediation message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.verify|verify} messages.
+                         * @param message Remediation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.assuredworkloads.v1.Violation.IRemediation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Remediation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Remediation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.Violation.Remediation;
+
+                        /**
+                         * Decodes a Remediation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Remediation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.Violation.Remediation;
+
+                        /**
+                         * Verifies a Remediation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Remediation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Remediation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.Violation.Remediation;
+
+                        /**
+                         * Creates a plain object from a Remediation message. Also converts values to other types if specified.
+                         * @param message Remediation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.assuredworkloads.v1.Violation.Remediation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Remediation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Remediation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Remediation {
+
+                        /** RemediationType enum. */
+                        enum RemediationType {
+                            REMEDIATION_TYPE_UNSPECIFIED = 0,
+                            REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION = 1,
+                            REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION = 2,
+                            REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION = 3,
+                            REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION = 4
+                        }
+
+                        /** Properties of an Instructions. */
+                        interface IInstructions {
+
+                            /** Instructions gcloudInstructions */
+                            gcloudInstructions?: (google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IGcloud|null);
+
+                            /** Instructions consoleInstructions */
+                            consoleInstructions?: (google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IConsole|null);
+                        }
+
+                        /** Represents an Instructions. */
+                        class Instructions implements IInstructions {
+
+                            /**
+                             * Constructs a new Instructions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.assuredworkloads.v1.Violation.Remediation.IInstructions);
+
+                            /** Instructions gcloudInstructions. */
+                            public gcloudInstructions?: (google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IGcloud|null);
+
+                            /** Instructions consoleInstructions. */
+                            public consoleInstructions?: (google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IConsole|null);
+
+                            /**
+                             * Creates a new Instructions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Instructions instance
+                             */
+                            public static create(properties?: google.cloud.assuredworkloads.v1.Violation.Remediation.IInstructions): google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions;
+
+                            /**
+                             * Encodes the specified Instructions message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.verify|verify} messages.
+                             * @param message Instructions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.assuredworkloads.v1.Violation.Remediation.IInstructions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Instructions message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.verify|verify} messages.
+                             * @param message Instructions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.assuredworkloads.v1.Violation.Remediation.IInstructions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Instructions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Instructions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions;
+
+                            /**
+                             * Decodes an Instructions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Instructions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions;
+
+                            /**
+                             * Verifies an Instructions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Instructions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Instructions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions;
+
+                            /**
+                             * Creates a plain object from an Instructions message. Also converts values to other types if specified.
+                             * @param message Instructions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Instructions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Instructions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Instructions {
+
+                            /** Properties of a Gcloud. */
+                            interface IGcloud {
+
+                                /** Gcloud gcloudCommands */
+                                gcloudCommands?: (string[]|null);
+
+                                /** Gcloud steps */
+                                steps?: (string[]|null);
+
+                                /** Gcloud additionalLinks */
+                                additionalLinks?: (string[]|null);
+                            }
+
+                            /** Represents a Gcloud. */
+                            class Gcloud implements IGcloud {
+
+                                /**
+                                 * Constructs a new Gcloud.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IGcloud);
+
+                                /** Gcloud gcloudCommands. */
+                                public gcloudCommands: string[];
+
+                                /** Gcloud steps. */
+                                public steps: string[];
+
+                                /** Gcloud additionalLinks. */
+                                public additionalLinks: string[];
+
+                                /**
+                                 * Creates a new Gcloud instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Gcloud instance
+                                 */
+                                public static create(properties?: google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IGcloud): google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud;
+
+                                /**
+                                 * Encodes the specified Gcloud message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud.verify|verify} messages.
+                                 * @param message Gcloud message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IGcloud, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Gcloud message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud.verify|verify} messages.
+                                 * @param message Gcloud message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IGcloud, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Gcloud message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Gcloud
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud;
+
+                                /**
+                                 * Decodes a Gcloud message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Gcloud
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud;
+
+                                /**
+                                 * Verifies a Gcloud message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Gcloud message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Gcloud
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud;
+
+                                /**
+                                 * Creates a plain object from a Gcloud message. Also converts values to other types if specified.
+                                 * @param message Gcloud
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Gcloud to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Gcloud
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a Console. */
+                            interface IConsole {
+
+                                /** Console consoleUris */
+                                consoleUris?: (string[]|null);
+
+                                /** Console steps */
+                                steps?: (string[]|null);
+
+                                /** Console additionalLinks */
+                                additionalLinks?: (string[]|null);
+                            }
+
+                            /** Represents a Console. */
+                            class Console implements IConsole {
+
+                                /**
+                                 * Constructs a new Console.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IConsole);
+
+                                /** Console consoleUris. */
+                                public consoleUris: string[];
+
+                                /** Console steps. */
+                                public steps: string[];
+
+                                /** Console additionalLinks. */
+                                public additionalLinks: string[];
+
+                                /**
+                                 * Creates a new Console instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Console instance
+                                 */
+                                public static create(properties?: google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IConsole): google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console;
+
+                                /**
+                                 * Encodes the specified Console message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console.verify|verify} messages.
+                                 * @param message Console message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IConsole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Console message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console.verify|verify} messages.
+                                 * @param message Console message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.IConsole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Console message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Console
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console;
+
+                                /**
+                                 * Decodes a Console message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Console
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console;
+
+                                /**
+                                 * Verifies a Console message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Console message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Console
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console;
+
+                                /**
+                                 * Creates a plain object from a Console message. Also converts values to other types if specified.
+                                 * @param message Console
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Console to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Console
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
                 }
             }
 

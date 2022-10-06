@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(workload, updateMask) {
-  // [START assuredworkloads_v1_generated_AssuredWorkloadsService_UpdateWorkload_async]
+function main(parent) {
+  // [START assuredworkloads_v1_generated_AssuredWorkloadsService_ListViolations_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,16 +29,28 @@ function main(workload, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The workload to update.
-   *  The workload's `name` field is used to identify the workload to be updated.
-   *  Format:
-   *  organizations/{org_id}/locations/{location_id}/workloads/{workload_id}
+   *  Required. The Workload name.
+   *  Format `organizations/{org_id}/locations/{location}/workloads/{workload}`.
    */
-  // const workload = {}
+  // const parent = 'abc123'
   /**
-   *  Required. The list of fields to be updated.
+   *  Optional. Specifies the time window for retrieving active Violations.
+   *  When specified, retrieves Violations that were active between start_time
+   *  and end_time.
    */
-  // const updateMask = {}
+  // const interval = {}
+  /**
+   *  Optional. Page size.
+   */
+  // const pageSize = 1234
+  /**
+   *  Optional. Page token returned from previous request.
+   */
+  // const pageToken = 'abc123'
+  /**
+   *  Optional. A custom filter for filtering by the Violations properties.
+   */
+  // const filter = 'abc123'
 
   // Imports the Assuredworkloads library
   const {AssuredWorkloadsServiceClient} = require('@google-cloud/assured-workloads').v1;
@@ -46,20 +58,21 @@ function main(workload, updateMask) {
   // Instantiates a client
   const assuredworkloadsClient = new AssuredWorkloadsServiceClient();
 
-  async function callUpdateWorkload() {
+  async function callListViolations() {
     // Construct request
     const request = {
-      workload,
-      updateMask,
+      parent,
     };
 
     // Run request
-    const response = await assuredworkloadsClient.updateWorkload(request);
-    console.log(response);
+    const iterable = await assuredworkloadsClient.listViolationsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callUpdateWorkload();
-  // [END assuredworkloads_v1_generated_AssuredWorkloadsService_UpdateWorkload_async]
+  callListViolations();
+  // [END assuredworkloads_v1_generated_AssuredWorkloadsService_ListViolations_async]
 }
 
 process.on('unhandledRejection', err => {
