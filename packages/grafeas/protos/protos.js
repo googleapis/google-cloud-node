@@ -15660,6 +15660,22 @@
                 return CVSS;
             })();
     
+            /**
+             * CVSSVersion enum.
+             * @name grafeas.v1.CVSSVersion
+             * @enum {number}
+             * @property {number} CVSS_VERSION_UNSPECIFIED=0 CVSS_VERSION_UNSPECIFIED value
+             * @property {number} CVSS_VERSION_2=1 CVSS_VERSION_2 value
+             * @property {number} CVSS_VERSION_3=2 CVSS_VERSION_3 value
+             */
+            v1.CVSSVersion = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "CVSS_VERSION_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "CVSS_VERSION_2"] = 1;
+                values[valuesById[2] = "CVSS_VERSION_3"] = 2;
+                return values;
+            })();
+    
             v1.DeploymentNote = (function() {
     
                 /**
@@ -16558,6 +16574,8 @@
                  * @interface IDiscoveryOccurrence
                  * @property {grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis|null} [continuousAnalysis] DiscoveryOccurrence continuousAnalysis
                  * @property {grafeas.v1.DiscoveryOccurrence.AnalysisStatus|null} [analysisStatus] DiscoveryOccurrence analysisStatus
+                 * @property {grafeas.v1.DiscoveryOccurrence.IAnalysisCompleted|null} [analysisCompleted] DiscoveryOccurrence analysisCompleted
+                 * @property {Array.<google.rpc.IStatus>|null} [analysisError] DiscoveryOccurrence analysisError
                  * @property {google.rpc.IStatus|null} [analysisStatusError] DiscoveryOccurrence analysisStatusError
                  * @property {string|null} [cpe] DiscoveryOccurrence cpe
                  * @property {google.protobuf.ITimestamp|null} [lastScanTime] DiscoveryOccurrence lastScanTime
@@ -16573,6 +16591,7 @@
                  * @param {grafeas.v1.IDiscoveryOccurrence=} [properties] Properties to set
                  */
                 function DiscoveryOccurrence(properties) {
+                    this.analysisError = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -16594,6 +16613,22 @@
                  * @instance
                  */
                 DiscoveryOccurrence.prototype.analysisStatus = 0;
+    
+                /**
+                 * DiscoveryOccurrence analysisCompleted.
+                 * @member {grafeas.v1.DiscoveryOccurrence.IAnalysisCompleted|null|undefined} analysisCompleted
+                 * @memberof grafeas.v1.DiscoveryOccurrence
+                 * @instance
+                 */
+                DiscoveryOccurrence.prototype.analysisCompleted = null;
+    
+                /**
+                 * DiscoveryOccurrence analysisError.
+                 * @member {Array.<google.rpc.IStatus>} analysisError
+                 * @memberof grafeas.v1.DiscoveryOccurrence
+                 * @instance
+                 */
+                DiscoveryOccurrence.prototype.analysisError = $util.emptyArray;
     
                 /**
                  * DiscoveryOccurrence analysisStatusError.
@@ -16663,6 +16698,11 @@
                         $root.google.protobuf.Timestamp.encode(message.lastScanTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     if (message.archiveTime != null && Object.hasOwnProperty.call(message, "archiveTime"))
                         $root.google.protobuf.Timestamp.encode(message.archiveTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    if (message.analysisCompleted != null && Object.hasOwnProperty.call(message, "analysisCompleted"))
+                        $root.grafeas.v1.DiscoveryOccurrence.AnalysisCompleted.encode(message.analysisCompleted, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    if (message.analysisError != null && message.analysisError.length)
+                        for (var i = 0; i < message.analysisError.length; ++i)
+                            $root.google.rpc.Status.encode(message.analysisError[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                     return writer;
                 };
     
@@ -16703,6 +16743,16 @@
                             }
                         case 2: {
                                 message.analysisStatus = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.analysisCompleted = $root.grafeas.v1.DiscoveryOccurrence.AnalysisCompleted.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 8: {
+                                if (!(message.analysisError && message.analysisError.length))
+                                    message.analysisError = [];
+                                message.analysisError.push($root.google.rpc.Status.decode(reader, reader.uint32()));
                                 break;
                             }
                         case 3: {
@@ -16773,10 +16823,25 @@
                         case 1:
                         case 2:
                         case 3:
+                        case 3:
                         case 4:
                         case 5:
                             break;
                         }
+                    if (message.analysisCompleted != null && message.hasOwnProperty("analysisCompleted")) {
+                        var error = $root.grafeas.v1.DiscoveryOccurrence.AnalysisCompleted.verify(message.analysisCompleted);
+                        if (error)
+                            return "analysisCompleted." + error;
+                    }
+                    if (message.analysisError != null && message.hasOwnProperty("analysisError")) {
+                        if (!Array.isArray(message.analysisError))
+                            return "analysisError: array expected";
+                        for (var i = 0; i < message.analysisError.length; ++i) {
+                            var error = $root.google.rpc.Status.verify(message.analysisError[i]);
+                            if (error)
+                                return "analysisError." + error;
+                        }
+                    }
                     if (message.analysisStatusError != null && message.hasOwnProperty("analysisStatusError")) {
                         var error = $root.google.rpc.Status.verify(message.analysisStatusError);
                         if (error)
@@ -16841,6 +16906,10 @@
                     case 3:
                         message.analysisStatus = 3;
                         break;
+                    case "COMPLETE":
+                    case 3:
+                        message.analysisStatus = 3;
+                        break;
                     case "FINISHED_FAILED":
                     case 4:
                         message.analysisStatus = 4;
@@ -16849,6 +16918,21 @@
                     case 5:
                         message.analysisStatus = 5;
                         break;
+                    }
+                    if (object.analysisCompleted != null) {
+                        if (typeof object.analysisCompleted !== "object")
+                            throw TypeError(".grafeas.v1.DiscoveryOccurrence.analysisCompleted: object expected");
+                        message.analysisCompleted = $root.grafeas.v1.DiscoveryOccurrence.AnalysisCompleted.fromObject(object.analysisCompleted);
+                    }
+                    if (object.analysisError) {
+                        if (!Array.isArray(object.analysisError))
+                            throw TypeError(".grafeas.v1.DiscoveryOccurrence.analysisError: array expected");
+                        message.analysisError = [];
+                        for (var i = 0; i < object.analysisError.length; ++i) {
+                            if (typeof object.analysisError[i] !== "object")
+                                throw TypeError(".grafeas.v1.DiscoveryOccurrence.analysisError: object expected");
+                            message.analysisError[i] = $root.google.rpc.Status.fromObject(object.analysisError[i]);
+                        }
                     }
                     if (object.analysisStatusError != null) {
                         if (typeof object.analysisStatusError !== "object")
@@ -16883,6 +16967,8 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults)
+                        object.analysisError = [];
                     if (options.defaults) {
                         object.continuousAnalysis = options.enums === String ? "CONTINUOUS_ANALYSIS_UNSPECIFIED" : 0;
                         object.analysisStatus = options.enums === String ? "ANALYSIS_STATUS_UNSPECIFIED" : 0;
@@ -16890,6 +16976,7 @@
                         object.cpe = "";
                         object.lastScanTime = null;
                         object.archiveTime = null;
+                        object.analysisCompleted = null;
                     }
                     if (message.continuousAnalysis != null && message.hasOwnProperty("continuousAnalysis"))
                         object.continuousAnalysis = options.enums === String ? $root.grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis[message.continuousAnalysis] : message.continuousAnalysis;
@@ -16903,6 +16990,13 @@
                         object.lastScanTime = $root.google.protobuf.Timestamp.toObject(message.lastScanTime, options);
                     if (message.archiveTime != null && message.hasOwnProperty("archiveTime"))
                         object.archiveTime = $root.google.protobuf.Timestamp.toObject(message.archiveTime, options);
+                    if (message.analysisCompleted != null && message.hasOwnProperty("analysisCompleted"))
+                        object.analysisCompleted = $root.grafeas.v1.DiscoveryOccurrence.AnalysisCompleted.toObject(message.analysisCompleted, options);
+                    if (message.analysisError && message.analysisError.length) {
+                        object.analysisError = [];
+                        for (var j = 0; j < message.analysisError.length; ++j)
+                            object.analysisError[j] = $root.google.rpc.Status.toObject(message.analysisError[j], options);
+                    }
                     return object;
                 };
     
@@ -16956,6 +17050,7 @@
                  * @property {number} PENDING=1 PENDING value
                  * @property {number} SCANNING=2 SCANNING value
                  * @property {number} FINISHED_SUCCESS=3 FINISHED_SUCCESS value
+                 * @property {number} COMPLETE=3 COMPLETE value
                  * @property {number} FINISHED_FAILED=4 FINISHED_FAILED value
                  * @property {number} FINISHED_UNSUPPORTED=5 FINISHED_UNSUPPORTED value
                  */
@@ -16965,9 +17060,229 @@
                     values[valuesById[1] = "PENDING"] = 1;
                     values[valuesById[2] = "SCANNING"] = 2;
                     values[valuesById[3] = "FINISHED_SUCCESS"] = 3;
+                    values["COMPLETE"] = 3;
                     values[valuesById[4] = "FINISHED_FAILED"] = 4;
                     values[valuesById[5] = "FINISHED_UNSUPPORTED"] = 5;
                     return values;
+                })();
+    
+                DiscoveryOccurrence.AnalysisCompleted = (function() {
+    
+                    /**
+                     * Properties of an AnalysisCompleted.
+                     * @memberof grafeas.v1.DiscoveryOccurrence
+                     * @interface IAnalysisCompleted
+                     * @property {Array.<string>|null} [analysisType] AnalysisCompleted analysisType
+                     */
+    
+                    /**
+                     * Constructs a new AnalysisCompleted.
+                     * @memberof grafeas.v1.DiscoveryOccurrence
+                     * @classdesc Represents an AnalysisCompleted.
+                     * @implements IAnalysisCompleted
+                     * @constructor
+                     * @param {grafeas.v1.DiscoveryOccurrence.IAnalysisCompleted=} [properties] Properties to set
+                     */
+                    function AnalysisCompleted(properties) {
+                        this.analysisType = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AnalysisCompleted analysisType.
+                     * @member {Array.<string>} analysisType
+                     * @memberof grafeas.v1.DiscoveryOccurrence.AnalysisCompleted
+                     * @instance
+                     */
+                    AnalysisCompleted.prototype.analysisType = $util.emptyArray;
+    
+                    /**
+                     * Creates a new AnalysisCompleted instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.DiscoveryOccurrence.AnalysisCompleted
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.IAnalysisCompleted=} [properties] Properties to set
+                     * @returns {grafeas.v1.DiscoveryOccurrence.AnalysisCompleted} AnalysisCompleted instance
+                     */
+                    AnalysisCompleted.create = function create(properties) {
+                        return new AnalysisCompleted(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AnalysisCompleted message. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.AnalysisCompleted.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.DiscoveryOccurrence.AnalysisCompleted
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.IAnalysisCompleted} message AnalysisCompleted message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AnalysisCompleted.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.analysisType != null && message.analysisType.length)
+                            for (var i = 0; i < message.analysisType.length; ++i)
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.analysisType[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AnalysisCompleted message, length delimited. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.AnalysisCompleted.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.DiscoveryOccurrence.AnalysisCompleted
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.IAnalysisCompleted} message AnalysisCompleted message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AnalysisCompleted.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AnalysisCompleted message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.DiscoveryOccurrence.AnalysisCompleted
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.DiscoveryOccurrence.AnalysisCompleted} AnalysisCompleted
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AnalysisCompleted.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.DiscoveryOccurrence.AnalysisCompleted();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.analysisType && message.analysisType.length))
+                                        message.analysisType = [];
+                                    message.analysisType.push(reader.string());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AnalysisCompleted message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.DiscoveryOccurrence.AnalysisCompleted
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.DiscoveryOccurrence.AnalysisCompleted} AnalysisCompleted
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AnalysisCompleted.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AnalysisCompleted message.
+                     * @function verify
+                     * @memberof grafeas.v1.DiscoveryOccurrence.AnalysisCompleted
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AnalysisCompleted.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.analysisType != null && message.hasOwnProperty("analysisType")) {
+                            if (!Array.isArray(message.analysisType))
+                                return "analysisType: array expected";
+                            for (var i = 0; i < message.analysisType.length; ++i)
+                                if (!$util.isString(message.analysisType[i]))
+                                    return "analysisType: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AnalysisCompleted message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.DiscoveryOccurrence.AnalysisCompleted
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.DiscoveryOccurrence.AnalysisCompleted} AnalysisCompleted
+                     */
+                    AnalysisCompleted.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.DiscoveryOccurrence.AnalysisCompleted)
+                            return object;
+                        var message = new $root.grafeas.v1.DiscoveryOccurrence.AnalysisCompleted();
+                        if (object.analysisType) {
+                            if (!Array.isArray(object.analysisType))
+                                throw TypeError(".grafeas.v1.DiscoveryOccurrence.AnalysisCompleted.analysisType: array expected");
+                            message.analysisType = [];
+                            for (var i = 0; i < object.analysisType.length; ++i)
+                                message.analysisType[i] = String(object.analysisType[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AnalysisCompleted message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.DiscoveryOccurrence.AnalysisCompleted
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.AnalysisCompleted} message AnalysisCompleted
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AnalysisCompleted.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.analysisType = [];
+                        if (message.analysisType && message.analysisType.length) {
+                            object.analysisType = [];
+                            for (var j = 0; j < message.analysisType.length; ++j)
+                                object.analysisType[j] = message.analysisType[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AnalysisCompleted to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.DiscoveryOccurrence.AnalysisCompleted
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AnalysisCompleted.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AnalysisCompleted
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.DiscoveryOccurrence.AnalysisCompleted
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AnalysisCompleted.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.DiscoveryOccurrence.AnalysisCompleted";
+                    };
+    
+                    return AnalysisCompleted;
                 })();
     
                 return DiscoveryOccurrence;
@@ -28988,6 +29303,7 @@
                  * @property {grafeas.v1.ICVSSv3|null} [cvssV3] VulnerabilityNote cvssV3
                  * @property {Array.<grafeas.v1.VulnerabilityNote.IWindowsDetail>|null} [windowsDetails] VulnerabilityNote windowsDetails
                  * @property {google.protobuf.ITimestamp|null} [sourceUpdateTime] VulnerabilityNote sourceUpdateTime
+                 * @property {grafeas.v1.CVSSVersion|null} [cvssVersion] VulnerabilityNote cvssVersion
                  */
     
                 /**
@@ -29056,6 +29372,14 @@
                 VulnerabilityNote.prototype.sourceUpdateTime = null;
     
                 /**
+                 * VulnerabilityNote cvssVersion.
+                 * @member {grafeas.v1.CVSSVersion} cvssVersion
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @instance
+                 */
+                VulnerabilityNote.prototype.cvssVersion = 0;
+    
+                /**
                  * Creates a new VulnerabilityNote instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.VulnerabilityNote
@@ -29093,6 +29417,8 @@
                             $root.grafeas.v1.VulnerabilityNote.WindowsDetail.encode(message.windowsDetails[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     if (message.sourceUpdateTime != null && Object.hasOwnProperty.call(message, "sourceUpdateTime"))
                         $root.google.protobuf.Timestamp.encode(message.sourceUpdateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    if (message.cvssVersion != null && Object.hasOwnProperty.call(message, "cvssVersion"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.cvssVersion);
                     return writer;
                 };
     
@@ -29153,6 +29479,10 @@
                             }
                         case 6: {
                                 message.sourceUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 7: {
+                                message.cvssVersion = reader.int32();
                                 break;
                             }
                         default:
@@ -29233,6 +29563,15 @@
                         if (error)
                             return "sourceUpdateTime." + error;
                     }
+                    if (message.cvssVersion != null && message.hasOwnProperty("cvssVersion"))
+                        switch (message.cvssVersion) {
+                        default:
+                            return "cvssVersion: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -29306,6 +29645,20 @@
                             throw TypeError(".grafeas.v1.VulnerabilityNote.sourceUpdateTime: object expected");
                         message.sourceUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.sourceUpdateTime);
                     }
+                    switch (object.cvssVersion) {
+                    case "CVSS_VERSION_UNSPECIFIED":
+                    case 0:
+                        message.cvssVersion = 0;
+                        break;
+                    case "CVSS_VERSION_2":
+                    case 1:
+                        message.cvssVersion = 1;
+                        break;
+                    case "CVSS_VERSION_3":
+                    case 2:
+                        message.cvssVersion = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -29331,6 +29684,7 @@
                         object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
                         object.cvssV3 = null;
                         object.sourceUpdateTime = null;
+                        object.cvssVersion = options.enums === String ? "CVSS_VERSION_UNSPECIFIED" : 0;
                     }
                     if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
                         object.cvssScore = options.json && !isFinite(message.cvssScore) ? String(message.cvssScore) : message.cvssScore;
@@ -29350,6 +29704,8 @@
                     }
                     if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
                         object.sourceUpdateTime = $root.google.protobuf.Timestamp.toObject(message.sourceUpdateTime, options);
+                    if (message.cvssVersion != null && message.hasOwnProperty("cvssVersion"))
+                        object.cvssVersion = options.enums === String ? $root.grafeas.v1.CVSSVersion[message.cvssVersion] : message.cvssVersion;
                     return object;
                 };
     
@@ -30443,6 +30799,7 @@
                  * @property {Array.<grafeas.v1.IRelatedUrl>|null} [relatedUrls] VulnerabilityOccurrence relatedUrls
                  * @property {grafeas.v1.Severity|null} [effectiveSeverity] VulnerabilityOccurrence effectiveSeverity
                  * @property {boolean|null} [fixAvailable] VulnerabilityOccurrence fixAvailable
+                 * @property {grafeas.v1.CVSSVersion|null} [cvssVersion] VulnerabilityOccurrence cvssVersion
                  */
     
                 /**
@@ -30543,6 +30900,14 @@
                 VulnerabilityOccurrence.prototype.fixAvailable = false;
     
                 /**
+                 * VulnerabilityOccurrence cvssVersion.
+                 * @member {grafeas.v1.CVSSVersion} cvssVersion
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.cvssVersion = 0;
+    
+                /**
                  * Creates a new VulnerabilityOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.VulnerabilityOccurrence
@@ -30588,6 +30953,8 @@
                         writer.uint32(/* id 9, wireType 0 =*/72).bool(message.fixAvailable);
                     if (message.cvssv3 != null && Object.hasOwnProperty.call(message, "cvssv3"))
                         $root.grafeas.v1.CVSS.encode(message.cvssv3, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                    if (message.cvssVersion != null && Object.hasOwnProperty.call(message, "cvssVersion"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.cvssVersion);
                     return writer;
                 };
     
@@ -30664,6 +31031,10 @@
                             }
                         case 9: {
                                 message.fixAvailable = reader.bool();
+                                break;
+                            }
+                        case 11: {
+                                message.cvssVersion = reader.int32();
                                 break;
                             }
                         default:
@@ -30763,6 +31134,15 @@
                     if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
                         if (typeof message.fixAvailable !== "boolean")
                             return "fixAvailable: boolean expected";
+                    if (message.cvssVersion != null && message.hasOwnProperty("cvssVersion"))
+                        switch (message.cvssVersion) {
+                        default:
+                            return "cvssVersion: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -30865,6 +31245,20 @@
                     }
                     if (object.fixAvailable != null)
                         message.fixAvailable = Boolean(object.fixAvailable);
+                    switch (object.cvssVersion) {
+                    case "CVSS_VERSION_UNSPECIFIED":
+                    case 0:
+                        message.cvssVersion = 0;
+                        break;
+                    case "CVSS_VERSION_2":
+                    case 1:
+                        message.cvssVersion = 1;
+                        break;
+                    case "CVSS_VERSION_3":
+                    case 2:
+                        message.cvssVersion = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -30894,6 +31288,7 @@
                         object.effectiveSeverity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
                         object.fixAvailable = false;
                         object.cvssv3 = null;
+                        object.cvssVersion = options.enums === String ? "CVSS_VERSION_UNSPECIFIED" : 0;
                     }
                     if (message.type != null && message.hasOwnProperty("type"))
                         object.type = message.type;
@@ -30921,6 +31316,8 @@
                         object.fixAvailable = message.fixAvailable;
                     if (message.cvssv3 != null && message.hasOwnProperty("cvssv3"))
                         object.cvssv3 = $root.grafeas.v1.CVSS.toObject(message.cvssv3, options);
+                    if (message.cvssVersion != null && message.hasOwnProperty("cvssVersion"))
+                        object.cvssVersion = options.enums === String ? $root.grafeas.v1.CVSSVersion[message.cvssVersion] : message.cvssVersion;
                     return object;
                 };
     

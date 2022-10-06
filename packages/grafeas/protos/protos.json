@@ -1178,6 +1178,13 @@
                 }
               }
             },
+            "CVSSVersion": {
+              "values": {
+                "CVSS_VERSION_UNSPECIFIED": 0,
+                "CVSS_VERSION_2": 1,
+                "CVSS_VERSION_3": 2
+              }
+            },
             "DeploymentNote": {
               "fields": {
                 "resourceUri": {
@@ -1248,6 +1255,15 @@
                   "type": "AnalysisStatus",
                   "id": 2
                 },
+                "analysisCompleted": {
+                  "type": "AnalysisCompleted",
+                  "id": 7
+                },
+                "analysisError": {
+                  "rule": "repeated",
+                  "type": "google.rpc.Status",
+                  "id": 8
+                },
                 "analysisStatusError": {
                   "type": "google.rpc.Status",
                   "id": 3
@@ -1277,13 +1293,26 @@
                   }
                 },
                 "AnalysisStatus": {
+                  "options": {
+                    "allow_alias": true
+                  },
                   "values": {
                     "ANALYSIS_STATUS_UNSPECIFIED": 0,
                     "PENDING": 1,
                     "SCANNING": 2,
                     "FINISHED_SUCCESS": 3,
+                    "COMPLETE": 3,
                     "FINISHED_FAILED": 4,
                     "FINISHED_UNSUPPORTED": 5
+                  }
+                },
+                "AnalysisCompleted": {
+                  "fields": {
+                    "analysisType": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 1
+                    }
                   }
                 }
               }
@@ -2518,6 +2547,10 @@
                 "sourceUpdateTime": {
                   "type": "google.protobuf.Timestamp",
                   "id": 6
+                },
+                "cvssVersion": {
+                  "type": "grafeas.v1.CVSSVersion",
+                  "id": 7
                 }
               },
               "nested": {
@@ -2661,6 +2694,10 @@
                 "fixAvailable": {
                   "type": "bool",
                   "id": 9
+                },
+                "cvssVersion": {
+                  "type": "grafeas.v1.CVSSVersion",
+                  "id": 11
                 }
               },
               "nested": {

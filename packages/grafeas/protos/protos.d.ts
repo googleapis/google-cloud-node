@@ -6107,6 +6107,13 @@ export namespace grafeas {
             }
         }
 
+        /** CVSSVersion enum. */
+        enum CVSSVersion {
+            CVSS_VERSION_UNSPECIFIED = 0,
+            CVSS_VERSION_2 = 1,
+            CVSS_VERSION_3 = 2
+        }
+
         /** Properties of a DeploymentNote. */
         interface IDeploymentNote {
 
@@ -6454,6 +6461,12 @@ export namespace grafeas {
             /** DiscoveryOccurrence analysisStatus */
             analysisStatus?: (grafeas.v1.DiscoveryOccurrence.AnalysisStatus|keyof typeof grafeas.v1.DiscoveryOccurrence.AnalysisStatus|null);
 
+            /** DiscoveryOccurrence analysisCompleted */
+            analysisCompleted?: (grafeas.v1.DiscoveryOccurrence.IAnalysisCompleted|null);
+
+            /** DiscoveryOccurrence analysisError */
+            analysisError?: (google.rpc.IStatus[]|null);
+
             /** DiscoveryOccurrence analysisStatusError */
             analysisStatusError?: (google.rpc.IStatus|null);
 
@@ -6481,6 +6494,12 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence analysisStatus. */
             public analysisStatus: (grafeas.v1.DiscoveryOccurrence.AnalysisStatus|keyof typeof grafeas.v1.DiscoveryOccurrence.AnalysisStatus);
+
+            /** DiscoveryOccurrence analysisCompleted. */
+            public analysisCompleted?: (grafeas.v1.DiscoveryOccurrence.IAnalysisCompleted|null);
+
+            /** DiscoveryOccurrence analysisError. */
+            public analysisError: google.rpc.IStatus[];
 
             /** DiscoveryOccurrence analysisStatusError. */
             public analysisStatusError?: (google.rpc.IStatus|null);
@@ -6587,8 +6606,106 @@ export namespace grafeas {
                 PENDING = 1,
                 SCANNING = 2,
                 FINISHED_SUCCESS = 3,
+                COMPLETE = 3,
                 FINISHED_FAILED = 4,
                 FINISHED_UNSUPPORTED = 5
+            }
+
+            /** Properties of an AnalysisCompleted. */
+            interface IAnalysisCompleted {
+
+                /** AnalysisCompleted analysisType */
+                analysisType?: (string[]|null);
+            }
+
+            /** Represents an AnalysisCompleted. */
+            class AnalysisCompleted implements IAnalysisCompleted {
+
+                /**
+                 * Constructs a new AnalysisCompleted.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.DiscoveryOccurrence.IAnalysisCompleted);
+
+                /** AnalysisCompleted analysisType. */
+                public analysisType: string[];
+
+                /**
+                 * Creates a new AnalysisCompleted instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AnalysisCompleted instance
+                 */
+                public static create(properties?: grafeas.v1.DiscoveryOccurrence.IAnalysisCompleted): grafeas.v1.DiscoveryOccurrence.AnalysisCompleted;
+
+                /**
+                 * Encodes the specified AnalysisCompleted message. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.AnalysisCompleted.verify|verify} messages.
+                 * @param message AnalysisCompleted message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.DiscoveryOccurrence.IAnalysisCompleted, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AnalysisCompleted message, length delimited. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.AnalysisCompleted.verify|verify} messages.
+                 * @param message AnalysisCompleted message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.DiscoveryOccurrence.IAnalysisCompleted, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AnalysisCompleted message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AnalysisCompleted
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.DiscoveryOccurrence.AnalysisCompleted;
+
+                /**
+                 * Decodes an AnalysisCompleted message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AnalysisCompleted
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.DiscoveryOccurrence.AnalysisCompleted;
+
+                /**
+                 * Verifies an AnalysisCompleted message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AnalysisCompleted message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AnalysisCompleted
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.DiscoveryOccurrence.AnalysisCompleted;
+
+                /**
+                 * Creates a plain object from an AnalysisCompleted message. Also converts values to other types if specified.
+                 * @param message AnalysisCompleted
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.DiscoveryOccurrence.AnalysisCompleted, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AnalysisCompleted to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AnalysisCompleted
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -11400,6 +11517,9 @@ export namespace grafeas {
 
             /** VulnerabilityNote sourceUpdateTime */
             sourceUpdateTime?: (google.protobuf.ITimestamp|null);
+
+            /** VulnerabilityNote cvssVersion */
+            cvssVersion?: (grafeas.v1.CVSSVersion|keyof typeof grafeas.v1.CVSSVersion|null);
         }
 
         /** Represents a VulnerabilityNote. */
@@ -11428,6 +11548,9 @@ export namespace grafeas {
 
             /** VulnerabilityNote sourceUpdateTime. */
             public sourceUpdateTime?: (google.protobuf.ITimestamp|null);
+
+            /** VulnerabilityNote cvssVersion. */
+            public cvssVersion: (grafeas.v1.CVSSVersion|keyof typeof grafeas.v1.CVSSVersion);
 
             /**
              * Creates a new VulnerabilityNote instance using the specified properties.
@@ -11938,6 +12061,9 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence fixAvailable */
             fixAvailable?: (boolean|null);
+
+            /** VulnerabilityOccurrence cvssVersion */
+            cvssVersion?: (grafeas.v1.CVSSVersion|keyof typeof grafeas.v1.CVSSVersion|null);
         }
 
         /** Represents a VulnerabilityOccurrence. */
@@ -11978,6 +12104,9 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence fixAvailable. */
             public fixAvailable: boolean;
+
+            /** VulnerabilityOccurrence cvssVersion. */
+            public cvssVersion: (grafeas.v1.CVSSVersion|keyof typeof grafeas.v1.CVSSVersion);
 
             /**
              * Creates a new VulnerabilityOccurrence instance using the specified properties.
