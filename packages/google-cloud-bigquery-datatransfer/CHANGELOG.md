@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [3.1.3](https://github.com/googleapis/nodejs-bigquery-data-transfer/compare/v3.1.2...v3.1.3) (2022-09-22)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#566](https://github.com/googleapis/nodejs-bigquery-data-transfer/issues/566)) ([75603cc](https://github.com/googleapis/nodejs-bigquery-data-transfer/commit/75603cc30c64778a51aec8af92487d4ff32f7ef8))
+
 ## [3.1.2](https://github.com/googleapis/nodejs-bigquery-data-transfer/compare/v3.1.1...v3.1.2) (2022-09-01)
 
 
