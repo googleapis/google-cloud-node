@@ -5867,7 +5867,15 @@
                       }
                     },
                     "CreateConversationDatasetOperationMetadata": {
-                      "fields": {}
+                      "fields": {
+                        "conversationDataset": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/ConversationDataset"
+                          }
+                        }
+                      }
                     },
                     "DeleteConversationDatasetOperationMetadata": {
                       "fields": {}

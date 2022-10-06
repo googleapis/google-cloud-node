@@ -19397,6 +19397,9 @@ export namespace google {
 
                 /** Properties of a CreateConversationDatasetOperationMetadata. */
                 interface ICreateConversationDatasetOperationMetadata {
+
+                    /** CreateConversationDatasetOperationMetadata conversationDataset */
+                    conversationDataset?: (string|null);
                 }
 
                 /** Represents a CreateConversationDatasetOperationMetadata. */
@@ -19407,6 +19410,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.dialogflow.v2.ICreateConversationDatasetOperationMetadata);
+
+                    /** CreateConversationDatasetOperationMetadata conversationDataset. */
+                    public conversationDataset: string;
 
                     /**
                      * Creates a new CreateConversationDatasetOperationMetadata instance using the specified properties.
