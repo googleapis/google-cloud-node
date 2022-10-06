@@ -15827,6 +15827,9 @@
                          * @property {string|null} [sessionId] SessionEvent sessionId
                          * @property {google.cloud.dataplex.v1.SessionEvent.EventType|null} [type] SessionEvent type
                          * @property {google.cloud.dataplex.v1.SessionEvent.IQueryDetail|null} [query] SessionEvent query
+                         * @property {boolean|null} [eventSucceeded] SessionEvent eventSucceeded
+                         * @property {boolean|null} [fastStartupEnabled] SessionEvent fastStartupEnabled
+                         * @property {google.protobuf.IDuration|null} [unassignedDuration] SessionEvent unassignedDuration
                          */
     
                         /**
@@ -15884,6 +15887,30 @@
                          */
                         SessionEvent.prototype.query = null;
     
+                        /**
+                         * SessionEvent eventSucceeded.
+                         * @member {boolean} eventSucceeded
+                         * @memberof google.cloud.dataplex.v1.SessionEvent
+                         * @instance
+                         */
+                        SessionEvent.prototype.eventSucceeded = false;
+    
+                        /**
+                         * SessionEvent fastStartupEnabled.
+                         * @member {boolean} fastStartupEnabled
+                         * @memberof google.cloud.dataplex.v1.SessionEvent
+                         * @instance
+                         */
+                        SessionEvent.prototype.fastStartupEnabled = false;
+    
+                        /**
+                         * SessionEvent unassignedDuration.
+                         * @member {google.protobuf.IDuration|null|undefined} unassignedDuration
+                         * @memberof google.cloud.dataplex.v1.SessionEvent
+                         * @instance
+                         */
+                        SessionEvent.prototype.unassignedDuration = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -15932,6 +15959,12 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.type);
                             if (message.query != null && Object.hasOwnProperty.call(message, "query"))
                                 $root.google.cloud.dataplex.v1.SessionEvent.QueryDetail.encode(message.query, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.eventSucceeded != null && Object.hasOwnProperty.call(message, "eventSucceeded"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.eventSucceeded);
+                            if (message.fastStartupEnabled != null && Object.hasOwnProperty.call(message, "fastStartupEnabled"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.fastStartupEnabled);
+                            if (message.unassignedDuration != null && Object.hasOwnProperty.call(message, "unassignedDuration"))
+                                $root.google.protobuf.Duration.encode(message.unassignedDuration, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -15984,6 +16017,18 @@
                                     }
                                 case 5: {
                                         message.query = $root.google.cloud.dataplex.v1.SessionEvent.QueryDetail.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.eventSucceeded = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.fastStartupEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.unassignedDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -16039,6 +16084,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.query != null && message.hasOwnProperty("query")) {
@@ -16048,6 +16094,17 @@
                                     if (error)
                                         return "query." + error;
                                 }
+                            }
+                            if (message.eventSucceeded != null && message.hasOwnProperty("eventSucceeded"))
+                                if (typeof message.eventSucceeded !== "boolean")
+                                    return "eventSucceeded: boolean expected";
+                            if (message.fastStartupEnabled != null && message.hasOwnProperty("fastStartupEnabled"))
+                                if (typeof message.fastStartupEnabled !== "boolean")
+                                    return "fastStartupEnabled: boolean expected";
+                            if (message.unassignedDuration != null && message.hasOwnProperty("unassignedDuration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.unassignedDuration);
+                                if (error)
+                                    return "unassignedDuration." + error;
                             }
                             return null;
                         };
@@ -16087,11 +16144,24 @@
                             case 3:
                                 message.type = 3;
                                 break;
+                            case "CREATE":
+                            case 4:
+                                message.type = 4;
+                                break;
                             }
                             if (object.query != null) {
                                 if (typeof object.query !== "object")
                                     throw TypeError(".google.cloud.dataplex.v1.SessionEvent.query: object expected");
                                 message.query = $root.google.cloud.dataplex.v1.SessionEvent.QueryDetail.fromObject(object.query);
+                            }
+                            if (object.eventSucceeded != null)
+                                message.eventSucceeded = Boolean(object.eventSucceeded);
+                            if (object.fastStartupEnabled != null)
+                                message.fastStartupEnabled = Boolean(object.fastStartupEnabled);
+                            if (object.unassignedDuration != null) {
+                                if (typeof object.unassignedDuration !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.SessionEvent.unassignedDuration: object expected");
+                                message.unassignedDuration = $root.google.protobuf.Duration.fromObject(object.unassignedDuration);
                             }
                             return message;
                         };
@@ -16114,6 +16184,9 @@
                                 object.userId = "";
                                 object.sessionId = "";
                                 object.type = options.enums === String ? "EVENT_TYPE_UNSPECIFIED" : 0;
+                                object.eventSucceeded = false;
+                                object.fastStartupEnabled = false;
+                                object.unassignedDuration = null;
                             }
                             if (message.message != null && message.hasOwnProperty("message"))
                                 object.message = message.message;
@@ -16128,6 +16201,12 @@
                                 if (options.oneofs)
                                     object.detail = "query";
                             }
+                            if (message.eventSucceeded != null && message.hasOwnProperty("eventSucceeded"))
+                                object.eventSucceeded = message.eventSucceeded;
+                            if (message.fastStartupEnabled != null && message.hasOwnProperty("fastStartupEnabled"))
+                                object.fastStartupEnabled = message.fastStartupEnabled;
+                            if (message.unassignedDuration != null && message.hasOwnProperty("unassignedDuration"))
+                                object.unassignedDuration = $root.google.protobuf.Duration.toObject(message.unassignedDuration, options);
                             return object;
                         };
     
@@ -16165,6 +16244,7 @@
                          * @property {number} START=1 START value
                          * @property {number} STOP=2 STOP value
                          * @property {number} QUERY=3 QUERY value
+                         * @property {number} CREATE=4 CREATE value
                          */
                         SessionEvent.EventType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -16172,6 +16252,7 @@
                             values[valuesById[1] = "START"] = 1;
                             values[valuesById[2] = "STOP"] = 2;
                             values[valuesById[3] = "QUERY"] = 3;
+                            values[valuesById[4] = "CREATE"] = 4;
                             return values;
                         })();
     
@@ -34547,6 +34628,7 @@
                          * @property {google.cloud.dataplex.v1.Task.IExecutionSpec|null} [executionSpec] Task executionSpec
                          * @property {google.cloud.dataplex.v1.Task.IExecutionStatus|null} [executionStatus] Task executionStatus
                          * @property {google.cloud.dataplex.v1.Task.ISparkTaskConfig|null} [spark] Task spark
+                         * @property {google.cloud.dataplex.v1.Task.INotebookTaskConfig|null} [notebook] Task notebook
                          */
     
                         /**
@@ -34661,17 +34743,25 @@
                          */
                         Task.prototype.spark = null;
     
+                        /**
+                         * Task notebook.
+                         * @member {google.cloud.dataplex.v1.Task.INotebookTaskConfig|null|undefined} notebook
+                         * @memberof google.cloud.dataplex.v1.Task
+                         * @instance
+                         */
+                        Task.prototype.notebook = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Task config.
-                         * @member {"spark"|undefined} config
+                         * @member {"spark"|"notebook"|undefined} config
                          * @memberof google.cloud.dataplex.v1.Task
                          * @instance
                          */
                         Object.defineProperty(Task.prototype, "config", {
-                            get: $util.oneOfGetter($oneOfFields = ["spark"]),
+                            get: $util.oneOfGetter($oneOfFields = ["spark", "notebook"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -34724,6 +34814,8 @@
                                 $root.google.cloud.dataplex.v1.Task.ExecutionStatus.encode(message.executionStatus, writer.uint32(/* id 201, wireType 2 =*/1610).fork()).ldelim();
                             if (message.spark != null && Object.hasOwnProperty.call(message, "spark"))
                                 $root.google.cloud.dataplex.v1.Task.SparkTaskConfig.encode(message.spark, writer.uint32(/* id 300, wireType 2 =*/2402).fork()).ldelim();
+                            if (message.notebook != null && Object.hasOwnProperty.call(message, "notebook"))
+                                $root.google.cloud.dataplex.v1.Task.NotebookTaskConfig.encode(message.notebook, writer.uint32(/* id 302, wireType 2 =*/2418).fork()).ldelim();
                             return writer;
                         };
     
@@ -34823,6 +34915,10 @@
                                     }
                                 case 300: {
                                         message.spark = $root.google.cloud.dataplex.v1.Task.SparkTaskConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 302: {
+                                        message.notebook = $root.google.cloud.dataplex.v1.Task.NotebookTaskConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -34925,6 +35021,16 @@
                                         return "spark." + error;
                                 }
                             }
+                            if (message.notebook != null && message.hasOwnProperty("notebook")) {
+                                if (properties.config === 1)
+                                    return "config: multiple values";
+                                properties.config = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.Task.NotebookTaskConfig.verify(message.notebook);
+                                    if (error)
+                                        return "notebook." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -35007,6 +35113,11 @@
                                     throw TypeError(".google.cloud.dataplex.v1.Task.spark: object expected");
                                 message.spark = $root.google.cloud.dataplex.v1.Task.SparkTaskConfig.fromObject(object.spark);
                             }
+                            if (object.notebook != null) {
+                                if (typeof object.notebook !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.Task.notebook: object expected");
+                                message.notebook = $root.google.cloud.dataplex.v1.Task.NotebookTaskConfig.fromObject(object.notebook);
+                            }
                             return message;
                         };
     
@@ -35067,6 +35178,11 @@
                                 object.spark = $root.google.cloud.dataplex.v1.Task.SparkTaskConfig.toObject(message.spark, options);
                                 if (options.oneofs)
                                     object.config = "spark";
+                            }
+                            if (message.notebook != null && message.hasOwnProperty("notebook")) {
+                                object.notebook = $root.google.cloud.dataplex.v1.Task.NotebookTaskConfig.toObject(message.notebook, options);
+                                if (options.oneofs)
+                                    object.config = "notebook";
                             }
                             return object;
                         };
@@ -37406,6 +37522,318 @@
                             };
     
                             return SparkTaskConfig;
+                        })();
+    
+                        Task.NotebookTaskConfig = (function() {
+    
+                            /**
+                             * Properties of a NotebookTaskConfig.
+                             * @memberof google.cloud.dataplex.v1.Task
+                             * @interface INotebookTaskConfig
+                             * @property {string|null} [notebook] NotebookTaskConfig notebook
+                             * @property {google.cloud.dataplex.v1.Task.IInfrastructureSpec|null} [infrastructureSpec] NotebookTaskConfig infrastructureSpec
+                             * @property {Array.<string>|null} [fileUris] NotebookTaskConfig fileUris
+                             * @property {Array.<string>|null} [archiveUris] NotebookTaskConfig archiveUris
+                             */
+    
+                            /**
+                             * Constructs a new NotebookTaskConfig.
+                             * @memberof google.cloud.dataplex.v1.Task
+                             * @classdesc Represents a NotebookTaskConfig.
+                             * @implements INotebookTaskConfig
+                             * @constructor
+                             * @param {google.cloud.dataplex.v1.Task.INotebookTaskConfig=} [properties] Properties to set
+                             */
+                            function NotebookTaskConfig(properties) {
+                                this.fileUris = [];
+                                this.archiveUris = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NotebookTaskConfig notebook.
+                             * @member {string} notebook
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @instance
+                             */
+                            NotebookTaskConfig.prototype.notebook = "";
+    
+                            /**
+                             * NotebookTaskConfig infrastructureSpec.
+                             * @member {google.cloud.dataplex.v1.Task.IInfrastructureSpec|null|undefined} infrastructureSpec
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @instance
+                             */
+                            NotebookTaskConfig.prototype.infrastructureSpec = null;
+    
+                            /**
+                             * NotebookTaskConfig fileUris.
+                             * @member {Array.<string>} fileUris
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @instance
+                             */
+                            NotebookTaskConfig.prototype.fileUris = $util.emptyArray;
+    
+                            /**
+                             * NotebookTaskConfig archiveUris.
+                             * @member {Array.<string>} archiveUris
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @instance
+                             */
+                            NotebookTaskConfig.prototype.archiveUris = $util.emptyArray;
+    
+                            /**
+                             * Creates a new NotebookTaskConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @static
+                             * @param {google.cloud.dataplex.v1.Task.INotebookTaskConfig=} [properties] Properties to set
+                             * @returns {google.cloud.dataplex.v1.Task.NotebookTaskConfig} NotebookTaskConfig instance
+                             */
+                            NotebookTaskConfig.create = function create(properties) {
+                                return new NotebookTaskConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NotebookTaskConfig message. Does not implicitly {@link google.cloud.dataplex.v1.Task.NotebookTaskConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @static
+                             * @param {google.cloud.dataplex.v1.Task.INotebookTaskConfig} message NotebookTaskConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NotebookTaskConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.infrastructureSpec != null && Object.hasOwnProperty.call(message, "infrastructureSpec"))
+                                    $root.google.cloud.dataplex.v1.Task.InfrastructureSpec.encode(message.infrastructureSpec, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.notebook != null && Object.hasOwnProperty.call(message, "notebook"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.notebook);
+                                if (message.fileUris != null && message.fileUris.length)
+                                    for (var i = 0; i < message.fileUris.length; ++i)
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.fileUris[i]);
+                                if (message.archiveUris != null && message.archiveUris.length)
+                                    for (var i = 0; i < message.archiveUris.length; ++i)
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.archiveUris[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NotebookTaskConfig message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Task.NotebookTaskConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @static
+                             * @param {google.cloud.dataplex.v1.Task.INotebookTaskConfig} message NotebookTaskConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NotebookTaskConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NotebookTaskConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataplex.v1.Task.NotebookTaskConfig} NotebookTaskConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NotebookTaskConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.Task.NotebookTaskConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 4: {
+                                            message.notebook = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.infrastructureSpec = $root.google.cloud.dataplex.v1.Task.InfrastructureSpec.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.fileUris && message.fileUris.length))
+                                                message.fileUris = [];
+                                            message.fileUris.push(reader.string());
+                                            break;
+                                        }
+                                    case 6: {
+                                            if (!(message.archiveUris && message.archiveUris.length))
+                                                message.archiveUris = [];
+                                            message.archiveUris.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NotebookTaskConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataplex.v1.Task.NotebookTaskConfig} NotebookTaskConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NotebookTaskConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NotebookTaskConfig message.
+                             * @function verify
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NotebookTaskConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.notebook != null && message.hasOwnProperty("notebook"))
+                                    if (!$util.isString(message.notebook))
+                                        return "notebook: string expected";
+                                if (message.infrastructureSpec != null && message.hasOwnProperty("infrastructureSpec")) {
+                                    var error = $root.google.cloud.dataplex.v1.Task.InfrastructureSpec.verify(message.infrastructureSpec);
+                                    if (error)
+                                        return "infrastructureSpec." + error;
+                                }
+                                if (message.fileUris != null && message.hasOwnProperty("fileUris")) {
+                                    if (!Array.isArray(message.fileUris))
+                                        return "fileUris: array expected";
+                                    for (var i = 0; i < message.fileUris.length; ++i)
+                                        if (!$util.isString(message.fileUris[i]))
+                                            return "fileUris: string[] expected";
+                                }
+                                if (message.archiveUris != null && message.hasOwnProperty("archiveUris")) {
+                                    if (!Array.isArray(message.archiveUris))
+                                        return "archiveUris: array expected";
+                                    for (var i = 0; i < message.archiveUris.length; ++i)
+                                        if (!$util.isString(message.archiveUris[i]))
+                                            return "archiveUris: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NotebookTaskConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataplex.v1.Task.NotebookTaskConfig} NotebookTaskConfig
+                             */
+                            NotebookTaskConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataplex.v1.Task.NotebookTaskConfig)
+                                    return object;
+                                var message = new $root.google.cloud.dataplex.v1.Task.NotebookTaskConfig();
+                                if (object.notebook != null)
+                                    message.notebook = String(object.notebook);
+                                if (object.infrastructureSpec != null) {
+                                    if (typeof object.infrastructureSpec !== "object")
+                                        throw TypeError(".google.cloud.dataplex.v1.Task.NotebookTaskConfig.infrastructureSpec: object expected");
+                                    message.infrastructureSpec = $root.google.cloud.dataplex.v1.Task.InfrastructureSpec.fromObject(object.infrastructureSpec);
+                                }
+                                if (object.fileUris) {
+                                    if (!Array.isArray(object.fileUris))
+                                        throw TypeError(".google.cloud.dataplex.v1.Task.NotebookTaskConfig.fileUris: array expected");
+                                    message.fileUris = [];
+                                    for (var i = 0; i < object.fileUris.length; ++i)
+                                        message.fileUris[i] = String(object.fileUris[i]);
+                                }
+                                if (object.archiveUris) {
+                                    if (!Array.isArray(object.archiveUris))
+                                        throw TypeError(".google.cloud.dataplex.v1.Task.NotebookTaskConfig.archiveUris: array expected");
+                                    message.archiveUris = [];
+                                    for (var i = 0; i < object.archiveUris.length; ++i)
+                                        message.archiveUris[i] = String(object.archiveUris[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NotebookTaskConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @static
+                             * @param {google.cloud.dataplex.v1.Task.NotebookTaskConfig} message NotebookTaskConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NotebookTaskConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.fileUris = [];
+                                    object.archiveUris = [];
+                                }
+                                if (options.defaults) {
+                                    object.infrastructureSpec = null;
+                                    object.notebook = "";
+                                }
+                                if (message.infrastructureSpec != null && message.hasOwnProperty("infrastructureSpec"))
+                                    object.infrastructureSpec = $root.google.cloud.dataplex.v1.Task.InfrastructureSpec.toObject(message.infrastructureSpec, options);
+                                if (message.notebook != null && message.hasOwnProperty("notebook"))
+                                    object.notebook = message.notebook;
+                                if (message.fileUris && message.fileUris.length) {
+                                    object.fileUris = [];
+                                    for (var j = 0; j < message.fileUris.length; ++j)
+                                        object.fileUris[j] = message.fileUris[j];
+                                }
+                                if (message.archiveUris && message.archiveUris.length) {
+                                    object.archiveUris = [];
+                                    for (var j = 0; j < message.archiveUris.length; ++j)
+                                        object.archiveUris[j] = message.archiveUris[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NotebookTaskConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NotebookTaskConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for NotebookTaskConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataplex.v1.Task.NotebookTaskConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NotebookTaskConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataplex.v1.Task.NotebookTaskConfig";
+                            };
+    
+                            return NotebookTaskConfig;
                         })();
     
                         Task.ExecutionStatus = (function() {

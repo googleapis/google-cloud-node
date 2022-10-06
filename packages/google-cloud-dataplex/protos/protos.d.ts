@@ -6208,6 +6208,15 @@ export namespace google {
 
                     /** SessionEvent query */
                     query?: (google.cloud.dataplex.v1.SessionEvent.IQueryDetail|null);
+
+                    /** SessionEvent eventSucceeded */
+                    eventSucceeded?: (boolean|null);
+
+                    /** SessionEvent fastStartupEnabled */
+                    fastStartupEnabled?: (boolean|null);
+
+                    /** SessionEvent unassignedDuration */
+                    unassignedDuration?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a SessionEvent. */
@@ -6233,6 +6242,15 @@ export namespace google {
 
                     /** SessionEvent query. */
                     public query?: (google.cloud.dataplex.v1.SessionEvent.IQueryDetail|null);
+
+                    /** SessionEvent eventSucceeded. */
+                    public eventSucceeded: boolean;
+
+                    /** SessionEvent fastStartupEnabled. */
+                    public fastStartupEnabled: boolean;
+
+                    /** SessionEvent unassignedDuration. */
+                    public unassignedDuration?: (google.protobuf.IDuration|null);
 
                     /** SessionEvent detail. */
                     public detail?: "query";
@@ -6322,7 +6340,8 @@ export namespace google {
                         EVENT_TYPE_UNSPECIFIED = 0,
                         START = 1,
                         STOP = 2,
-                        QUERY = 3
+                        QUERY = 3,
+                        CREATE = 4
                     }
 
                     /** Properties of a QueryDetail. */
@@ -14276,6 +14295,9 @@ export namespace google {
 
                     /** Task spark */
                     spark?: (google.cloud.dataplex.v1.Task.ISparkTaskConfig|null);
+
+                    /** Task notebook */
+                    notebook?: (google.cloud.dataplex.v1.Task.INotebookTaskConfig|null);
                 }
 
                 /** Represents a Task. */
@@ -14323,8 +14345,11 @@ export namespace google {
                     /** Task spark. */
                     public spark?: (google.cloud.dataplex.v1.Task.ISparkTaskConfig|null);
 
+                    /** Task notebook. */
+                    public notebook?: (google.cloud.dataplex.v1.Task.INotebookTaskConfig|null);
+
                     /** Task config. */
-                    public config?: "spark";
+                    public config?: ("spark"|"notebook");
 
                     /**
                      * Creates a new Task instance using the specified properties.
@@ -15248,6 +15273,121 @@ export namespace google {
 
                         /**
                          * Gets the default type url for SparkTaskConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a NotebookTaskConfig. */
+                    interface INotebookTaskConfig {
+
+                        /** NotebookTaskConfig notebook */
+                        notebook?: (string|null);
+
+                        /** NotebookTaskConfig infrastructureSpec */
+                        infrastructureSpec?: (google.cloud.dataplex.v1.Task.IInfrastructureSpec|null);
+
+                        /** NotebookTaskConfig fileUris */
+                        fileUris?: (string[]|null);
+
+                        /** NotebookTaskConfig archiveUris */
+                        archiveUris?: (string[]|null);
+                    }
+
+                    /** Represents a NotebookTaskConfig. */
+                    class NotebookTaskConfig implements INotebookTaskConfig {
+
+                        /**
+                         * Constructs a new NotebookTaskConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.Task.INotebookTaskConfig);
+
+                        /** NotebookTaskConfig notebook. */
+                        public notebook: string;
+
+                        /** NotebookTaskConfig infrastructureSpec. */
+                        public infrastructureSpec?: (google.cloud.dataplex.v1.Task.IInfrastructureSpec|null);
+
+                        /** NotebookTaskConfig fileUris. */
+                        public fileUris: string[];
+
+                        /** NotebookTaskConfig archiveUris. */
+                        public archiveUris: string[];
+
+                        /**
+                         * Creates a new NotebookTaskConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NotebookTaskConfig instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.Task.INotebookTaskConfig): google.cloud.dataplex.v1.Task.NotebookTaskConfig;
+
+                        /**
+                         * Encodes the specified NotebookTaskConfig message. Does not implicitly {@link google.cloud.dataplex.v1.Task.NotebookTaskConfig.verify|verify} messages.
+                         * @param message NotebookTaskConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.Task.INotebookTaskConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NotebookTaskConfig message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.Task.NotebookTaskConfig.verify|verify} messages.
+                         * @param message NotebookTaskConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.Task.INotebookTaskConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NotebookTaskConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NotebookTaskConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.Task.NotebookTaskConfig;
+
+                        /**
+                         * Decodes a NotebookTaskConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NotebookTaskConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.Task.NotebookTaskConfig;
+
+                        /**
+                         * Verifies a NotebookTaskConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NotebookTaskConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NotebookTaskConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.Task.NotebookTaskConfig;
+
+                        /**
+                         * Creates a plain object from a NotebookTaskConfig message. Also converts values to other types if specified.
+                         * @param message NotebookTaskConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.Task.NotebookTaskConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NotebookTaskConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NotebookTaskConfig
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

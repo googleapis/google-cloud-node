@@ -1900,6 +1900,18 @@
                         "query": {
                           "type": "QueryDetail",
                           "id": 5
+                        },
+                        "eventSucceeded": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "fastStartupEnabled": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "unassignedDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -1908,7 +1920,8 @@
                             "EVENT_TYPE_UNSPECIFIED": 0,
                             "START": 1,
                             "STOP": 2,
-                            "QUERY": 3
+                            "QUERY": 3,
+                            "CREATE": 4
                           }
                         },
                         "QueryDetail": {
@@ -4510,7 +4523,8 @@
                       "oneofs": {
                         "config": {
                           "oneof": [
-                            "spark"
+                            "spark",
+                            "notebook"
                           ]
                         }
                       },
@@ -4597,6 +4611,10 @@
                         "spark": {
                           "type": "SparkTaskConfig",
                           "id": 300
+                        },
+                        "notebook": {
+                          "type": "NotebookTaskConfig",
+                          "id": 302
                         }
                       },
                       "nested": {
@@ -4868,6 +4886,40 @@
                             },
                             "infrastructureSpec": {
                               "type": "InfrastructureSpec",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "NotebookTaskConfig": {
+                          "fields": {
+                            "notebook": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "infrastructureSpec": {
+                              "type": "InfrastructureSpec",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "fileUris": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "archiveUris": {
+                              "rule": "repeated",
+                              "type": "string",
                               "id": 6,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
