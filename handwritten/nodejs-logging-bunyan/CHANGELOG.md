@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [4.1.3](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.1.2...v4.1.3) (2022-10-10)
+
+
+### Bug Fixes
+
+* Skip parent request entry on cloud run ([#658](https://github.com/googleapis/nodejs-logging-bunyan/issues/658)) ([226972e](https://github.com/googleapis/nodejs-logging-bunyan/commit/226972e12aec94936f4d0b00277cbff05971726e))
+
 ## [4.1.2](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.1.1...v4.1.2) (2022-08-25)
 
 
