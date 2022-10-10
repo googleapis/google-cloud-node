@@ -36,6 +36,11 @@ export type Logger = ReturnType<typeof bunyan.createLogger>;
 
 export interface MiddlewareOptions extends types.Options {
   level?: types.LogLevel;
+  // Enable the same behavior when running in Cloud Run as when running in Cloud Functions or App Engine to not create a request log entry
+  // that all the request-specific logs ("app logs") will nest under. GAE and GCF generate the parent request log automatically. Cloud Run
+  // also does this, so it is best to also skip this entry for Cloud Run. But that is considered a breaking change so this config option is
+  // introduced to enable this same behavior for Cloud Run. This might become the default behavior in a future major version.
+  skipParentEntryForCloudRun?: boolean;
 }
 
 export interface MiddlewareReturnType {
@@ -75,8 +80,15 @@ export async function middleware(
   // parent request log entry that all the request-specific logs ("app logs")
   // will nest under. GAE and GCF generate the parent request logs
   // automatically.
+  // Cloud Run also generates the parent request log automatically, but skipping
+  // the parent request entry has to be explicity enabled until the next major
+  // release in which we can change the default behavior.
   let emitRequestLog;
-  if (env !== GCPEnv.APP_ENGINE && env !== GCPEnv.CLOUD_FUNCTIONS) {
+  if (
+    env !== GCPEnv.APP_ENGINE &&
+    env !== GCPEnv.CLOUD_FUNCTIONS &&
+    (env !== GCPEnv.CLOUD_RUN || !options.skipParentEntryForCloudRun)
+  ) {
     const loggingBunyanReq = new LoggingBunyan(options);
     const requestLogger = bunyan.createLogger({
       name: options.logName!,

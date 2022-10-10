@@ -248,6 +248,8 @@ decrease logging record loss upon execution termination - since all logs are wri
 would be picked up by the Cloud Logging Agent running in Google Cloud managed environment. 
 Note that there is also a `useMessageField` option which controls if "message" field is used to store 
 structured, non-text data inside `jsonPayload` field when `redirectToStdout` is set. By default `useMessageField` is always `true`.
+Set the `skipParentEntryForCloudRun` option to skip creating an entry for the request itself as Cloud Run already automatically creates
+such log entries. This might become the default behaviour in a next major version.
 
 ```js
 // Imports the Google Cloud client library for Bunyan

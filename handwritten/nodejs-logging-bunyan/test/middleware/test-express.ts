@@ -125,10 +125,15 @@ describe('middleware/express', () => {
     assert.strictEqual(passedProjectId, FAKE_PROJECT_ID);
   });
 
-  [GCPEnv.APP_ENGINE, GCPEnv.CLOUD_FUNCTIONS].forEach(env => {
+  [GCPEnv.APP_ENGINE, GCPEnv.CLOUD_FUNCTIONS, GCPEnv.CLOUD_RUN].forEach(env => {
     it(`should not generate the request logger on ${env}`, async () => {
       authEnvironment = env;
-      await middleware();
+      if (env === GCPEnv.CLOUD_RUN) {
+        // Cloud Run needs explicit option flag to enable this behavior until we can make breaking change in next major version
+        await middleware({skipParentEntryForCloudRun: true});
+      } else {
+        await middleware();
+      }
       assert.ok(passedOptions);
       assert.strictEqual(passedOptions.length, 1);
       // emitRequestLog parameter to makeChildLogger should be undefined.
