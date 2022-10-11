@@ -1552,6 +1552,13 @@
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 24
+                        },
+                        "modelSourceInfo": {
+                          "type": "ModelSourceInfo",
+                          "id": 38,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1680,6 +1687,24 @@
                         "containerPort": {
                           "type": "int32",
                           "id": 3
+                        }
+                      }
+                    },
+                    "ModelSourceInfo": {
+                      "fields": {
+                        "sourceType": {
+                          "type": "ModelSourceType",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "ModelSourceType": {
+                          "values": {
+                            "MODEL_SOURCE_TYPE_UNSPECIFIED": 0,
+                            "AUTOML": 1,
+                            "CUSTOM": 2,
+                            "BQML": 3
+                          }
                         }
                       }
                     },
@@ -19630,6 +19655,13 @@
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 24
+                        },
+                        "modelSourceInfo": {
+                          "type": "ModelSourceInfo",
+                          "id": 38,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -19758,6 +19790,24 @@
                         "containerPort": {
                           "type": "int32",
                           "id": 3
+                        }
+                      }
+                    },
+                    "ModelSourceInfo": {
+                      "fields": {
+                        "sourceType": {
+                          "type": "ModelSourceType",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "ModelSourceType": {
+                          "values": {
+                            "MODEL_SOURCE_TYPE_UNSPECIFIED": 0,
+                            "AUTOML": 1,
+                            "CUSTOM": 2,
+                            "BQML": 3
+                          }
                         }
                       }
                     },
