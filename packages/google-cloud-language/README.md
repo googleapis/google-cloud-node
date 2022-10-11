@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Natural Language: Node.js Client](https://github.com/googleapis/nodejs-language)
+# [Natural Language: Node.js Client](https://github.com/googleapis/google-cloud-node)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/language.svg)](https://www.npmjs.org/package/@google-cloud/language)
@@ -10,17 +10,15 @@
 
 
 
-[Cloud Natural Language API](https://cloud.google.com/natural-language/docs) provides natural
-language understanding technologies to developers, including sentiment analysis, entity
-analysis, and syntax analysis. This API is part of the larger Cloud Machine Learning API family.
+Google Cloud Natural Language API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-language/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
 
 * [Natural Language Node.js Client API Reference][client-docs]
 * [Natural Language Documentation][product-docs]
-* [github.com/googleapis/nodejs-language](https://github.com/googleapis/nodejs-language)
+* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -89,13 +87,24 @@ async function quickstart() {
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-language/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Analyze v1 | [source code](https://github.com/googleapis/nodejs-language/blob/main/samples/analyze.v1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/analyze.v1.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-language/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Set Endpoint | [source code](https://github.com/googleapis/nodejs-language/blob/main/samples/setEndpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/setEndpoint.js,samples/README.md) |
+| Language_service.analyze_entities | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.analyze_entities.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.analyze_entities.js,samples/README.md) |
+| Language_service.analyze_entity_sentiment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.analyze_entity_sentiment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.analyze_entity_sentiment.js,samples/README.md) |
+| Language_service.analyze_sentiment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.analyze_sentiment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.analyze_sentiment.js,samples/README.md) |
+| Language_service.analyze_syntax | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.analyze_syntax.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.analyze_syntax.js,samples/README.md) |
+| Language_service.annotate_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.annotate_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.annotate_text.js,samples/README.md) |
+| Language_service.classify_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1/language_service.classify_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1/language_service.classify_text.js,samples/README.md) |
+| Language_service.analyze_entities | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_entities.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_entities.js,samples/README.md) |
+| Language_service.analyze_entity_sentiment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_entity_sentiment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_entity_sentiment.js,samples/README.md) |
+| Language_service.analyze_sentiment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_sentiment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_sentiment.js,samples/README.md) |
+| Language_service.analyze_syntax | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_syntax.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.analyze_syntax.js,samples/README.md) |
+| Language_service.annotate_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.annotate_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.annotate_text.js,samples/README.md) |
+| Language_service.classify_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.classify_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.classify_text.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/quickstart.js,samples/README.md) |
+| Quickstart.test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/test/quickstart.test.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/test/quickstart.test.js,samples/README.md) |
 
 
 
@@ -145,7 +154,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-language/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -157,7 +166,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-language/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/language/latest
 [product-docs]: https://cloud.google.com/natural-language/docs/

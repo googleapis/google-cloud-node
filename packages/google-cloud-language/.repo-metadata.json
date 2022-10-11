@@ -11,7 +11,7 @@
   "distribution_name": "@google-cloud/language",
   "name_pretty": "Natural Language",
   "api_id": "language.googleapis.com",
-  "repo": "googleapis/nodejs-language",
+  "repo": "googleapis/google-cloud-node",
   "api_shortname": "language",
   "library_type": "GAPIC_AUTO"
 }
