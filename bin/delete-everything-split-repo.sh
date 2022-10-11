@@ -35,9 +35,9 @@ git checkout -b 'deleteMostOfLibrary'
 
 shopt -s extglob
 
-# Delete everything first that's not the samples, README.md, and git folder
-rm -rf !("samples"|"README.md"|".git") 
-rm -rf "/tmp/${SPLIT_REPO}/.[!.git]*"
+# Delete everything first that's not the samples, README.md, .kokoro folder, and git folder
+rm -rf !("samples"|"README.md"|".git"|".kokoro") 
+rm -rf "/tmp/${SPLIT_REPO}/.[!.git|!.kokoro]*"
 rm -rf "/tmp/${SPLIT_REPO}/.github"
 
 IGNORE_README_TXT="# Copyright 2022 Google LLC
