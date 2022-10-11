@@ -4,6 +4,47 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/language-v5.1.0...language-v6.0.0) (2022-10-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update library to use Node 12 (#666)
+
+### Features
+
+* Add support for V1 and V2 classification models for the V1Beta2 API ([#697](https://github.com/googleapis/google-cloud-node/issues/697)) ([00b7a24](https://github.com/googleapis/google-cloud-node/commit/00b7a2469114286da0a0c849e9bc90bb8dd4043e))
+* Turns on self-signed JWT feature flag ([#610](https://github.com/googleapis/google-cloud-node/issues/610)) ([43fb161](https://github.com/googleapis/google-cloud-node/commit/43fb1615f408f270275e17ff3298bd071b7475b6))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#688](https://github.com/googleapis/google-cloud-node/issues/688)) ([5028b0b](https://github.com/googleapis/google-cloud-node/commit/5028b0b97b94d57eb375a403abe3d02af6f21daf))
+* Better support for fallback mode ([#683](https://github.com/googleapis/google-cloud-node/issues/683)) ([b8b9fea](https://github.com/googleapis/google-cloud-node/commit/b8b9feafa016fa876b5343db1cb64b92d516d73c))
+* **build:** Migrate to main branch ([#614](https://github.com/googleapis/google-cloud-node/issues/614)) ([4d999f0](https://github.com/googleapis/google-cloud-node/commit/4d999f075750345ec03920898874bebccaa52a58))
+* Change import long to require ([#684](https://github.com/googleapis/google-cloud-node/issues/684)) ([eb3f9fb](https://github.com/googleapis/google-cloud-node/commit/eb3f9fb2f6c727a303ec85580c4fb48e2b4eb33a))
+* **deps:** Google-gax v2.17.0 with mTLS ([#595](https://github.com/googleapis/google-cloud-node/issues/595)) ([9ef8c5b](https://github.com/googleapis/google-cloud-node/commit/9ef8c5b2802de753fc349217ca274302946a35a4))
+* **deps:** Google-gax v2.17.1 ([#598](https://github.com/googleapis/google-cloud-node/issues/598)) ([01b8b58](https://github.com/googleapis/google-cloud-node/commit/01b8b5893a7a164a84dd02804f36da189091791b))
+* **deps:** Google-gax v2.24.1 ([#608](https://github.com/googleapis/google-cloud-node/issues/608)) ([bce0245](https://github.com/googleapis/google-cloud-node/commit/bce0245c601a6a2d883a7567f117cd0c61f7aaa0))
+* **deps:** Require google-gax v2.12.0 ([#569](https://github.com/googleapis/google-cloud-node/issues/569)) ([e9b29f4](https://github.com/googleapis/google-cloud-node/commit/e9b29f41fbe2681fcc6f97e496da3e4ee21d8203))
+* **deps:** Update dependency @google-cloud/automl to v3 ([#672](https://github.com/googleapis/google-cloud-node/issues/672)) ([bb5f186](https://github.com/googleapis/google-cloud-node/commit/bb5f1864759f821c8d99380651ce3da2f3bcf9ff))
+* **deps:** Update dependency @google-cloud/storage to v6 ([#668](https://github.com/googleapis/google-cloud-node/issues/668)) ([3f98669](https://github.com/googleapis/google-cloud-node/commit/3f98669f58fbd2720cb728c8524a455deabea702))
+* **deps:** Update dependency mathjs to v10 ([#630](https://github.com/googleapis/google-cloud-node/issues/630)) ([23d61bc](https://github.com/googleapis/google-cloud-node/commit/23d61bce9a332d522f7258fcb13e1fa7e39a00d0))
+* **deps:** Update dependency mathjs to v11 ([#679](https://github.com/googleapis/google-cloud-node/issues/679)) ([2c5c94a](https://github.com/googleapis/google-cloud-node/commit/2c5c94a66b4b5957bf13a4557f4b797e1abbbf84))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/google-cloud-node/issues/1553)) ([#687](https://github.com/googleapis/google-cloud-node/issues/687)) ([f350c9e](https://github.com/googleapis/google-cloud-node/commit/f350c9e970f9603f2edd3644b9422578f1408aa4))
+* **docs:** Describe fallback rest option ([#673](https://github.com/googleapis/google-cloud-node/issues/673)) ([278c22d](https://github.com/googleapis/google-cloud-node/commit/278c22da1c4ea0b3e72a11ce120909f7bcbcb959))
+* GoogleAdsError missing using generator version after 1.3.0 ([#579](https://github.com/googleapis/google-cloud-node/issues/579)) ([2d8c4a9](https://github.com/googleapis/google-cloud-node/commit/2d8c4a99e776206a0334506009cbb80892a3e9a9))
+* Make request optional in all cases ([#588](https://github.com/googleapis/google-cloud-node/issues/588)) ([873258e](https://github.com/googleapis/google-cloud-node/commit/873258eae4b121200de771ea5b60a4941dfbeb22))
+* Preserve default values in x-goog-request-params header ([#691](https://github.com/googleapis/google-cloud-node/issues/691)) ([d191045](https://github.com/googleapis/google-cloud-node/commit/d1910457bcd7064d63d33671b3a50fc9b3e93b87))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#600](https://github.com/googleapis/google-cloud-node/issues/600)) ([52770fa](https://github.com/googleapis/google-cloud-node/commit/52770fab24c54d097e51478f44b31f63f5e0970f))
+* use google-gax v3.3.0 ([f350c9e](https://github.com/googleapis/google-cloud-node/commit/f350c9e970f9603f2edd3644b9422578f1408aa4))
+* Use require() to load JSON protos ([#572](https://github.com/googleapis/google-cloud-node/issues/572)) ([f3ca270](https://github.com/googleapis/google-cloud-node/commit/f3ca270593e30bae2b6e3312e579b12cc8dd4921))
+
+
+### Build System
+
+* Update library to use Node 12 ([#666](https://github.com/googleapis/google-cloud-node/issues/666)) ([f06017d](https://github.com/googleapis/google-cloud-node/commit/f06017ddd469bf09c8db59188272000d3a009b4c))
+
 ## [5.1.0](https://github.com/googleapis/nodejs-language/compare/v5.0.2...v5.1.0) (2022-09-21)
 
 
