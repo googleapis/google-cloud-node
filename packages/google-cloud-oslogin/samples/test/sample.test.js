@@ -25,7 +25,7 @@ describe('sample tests', () => {
     const output = exec(
       'node quickstart users/kokoro-system-test@long-door-651.iam.gserviceaccount.com'
     );
-    console.log('it ran')
+    console.log('it ran');
     assert(output !== null);
   });
 });
