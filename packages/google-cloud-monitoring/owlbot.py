@@ -14,6 +14,29 @@
 
 """This script is used to synthesize generated parts of this library."""
 
+import synthtool as s
 import synthtool.languages.node as node
+import os
+
 
 node.owlbot_main(staging_excludes=["README.md", "package.json"])
+
+# --------------------------------------------------------------------------
+# Modify test configs
+# --------------------------------------------------------------------------
+
+# add shared environment variables to test configs
+s.move(
+    ".kokoro/common_env_vars.cfg",
+    ".kokoro/common.cfg",
+    merge=lambda src, dst, _, : f"{dst}\n{src}",
+)
+for path, subdirs, files in os.walk(f".kokoro/continuous"):
+    for name in files:
+        if name == "common.cfg":
+            file_path = os.path.join(path, name)
+            s.move(
+                ".kokoro/common_env_vars.cfg",
+                file_path,
+                merge=lambda src, dst, _, : f"{dst}\n{src}",
+            )
