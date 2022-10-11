@@ -80,6 +80,7 @@ const {OsLoginServiceClient} = require('@google-cloud/os-login').v1;
 const osloginClient = new OsLoginServiceClient();
 
 async function callGetLoginProfile() {
+  console.log('inside callgetLoginProfile')
   // Construct request
   const request = {
     name,
