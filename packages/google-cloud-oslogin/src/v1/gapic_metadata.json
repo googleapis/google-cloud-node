@@ -1,0 +1,83 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.oslogin.v1",
+  "libraryPackage": "@google-cloud/os-login",
+  "services": {
+    "OsLoginService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OsLoginServiceClient",
+          "rpcs": {
+            "DeletePosixAccount": {
+              "methods": [
+                "deletePosixAccount"
+              ]
+            },
+            "DeleteSshPublicKey": {
+              "methods": [
+                "deleteSshPublicKey"
+              ]
+            },
+            "GetLoginProfile": {
+              "methods": [
+                "getLoginProfile"
+              ]
+            },
+            "GetSshPublicKey": {
+              "methods": [
+                "getSshPublicKey"
+              ]
+            },
+            "ImportSshPublicKey": {
+              "methods": [
+                "importSshPublicKey"
+              ]
+            },
+            "UpdateSshPublicKey": {
+              "methods": [
+                "updateSshPublicKey"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OsLoginServiceClient",
+          "rpcs": {
+            "DeletePosixAccount": {
+              "methods": [
+                "deletePosixAccount"
+              ]
+            },
+            "DeleteSshPublicKey": {
+              "methods": [
+                "deleteSshPublicKey"
+              ]
+            },
+            "GetLoginProfile": {
+              "methods": [
+                "getLoginProfile"
+              ]
+            },
+            "GetSshPublicKey": {
+              "methods": [
+                "getSshPublicKey"
+              ]
+            },
+            "ImportSshPublicKey": {
+              "methods": [
+                "importSshPublicKey"
+              ]
+            },
+            "UpdateSshPublicKey": {
+              "methods": [
+                "updateSshPublicKey"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
