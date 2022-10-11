@@ -43,6 +43,7 @@ function main(name) {
   const osloginClient = new OsLoginServiceClient();
 
   async function callGetLoginProfile() {
+    console.log('inside callgetLoginProfile')
     // Construct request
     const request = {
       name,
