@@ -7,7 +7,7 @@
   "release_level": "stable",
   "language": "nodejs",
   "default_version": "v3",
-  "repo": "googleapis/nodejs-resource-manager",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/resource-manager",
   "api_id": "cloudresourcemanager.googleapis.com",
   "requires_billing": true,

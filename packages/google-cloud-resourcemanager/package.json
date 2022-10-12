@@ -36,9 +36,9 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
