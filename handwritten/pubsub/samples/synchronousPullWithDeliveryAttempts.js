@@ -70,7 +70,7 @@ function main(
       ackIds.push(message.ackId);
     }
 
-    // Acknowledge all of the messages. You could also ackknowledge
+    // Acknowledge all of the messages. You could also acknowledge
     // these individually, but this is more efficient.
     const ackRequest = {
       subscription: formattedSubscription,
