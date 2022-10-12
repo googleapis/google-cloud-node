@@ -1,0 +1,16 @@
+{
+  "name": "resource",
+  "name_pretty": "Google Cloud Resource Manager API",
+  "product_documentation": "https://cloud.google.com/resource-manager",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/resource-manager/latest",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559757",
+  "release_level": "stable",
+  "language": "nodejs",
+  "default_version": "v3",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/resource-manager",
+  "api_id": "cloudresourcemanager.googleapis.com",
+  "requires_billing": true,
+  "api_shortname": "cloudresourcemanager",
+  "library_type": "GAPIC_AUTO"
+}
