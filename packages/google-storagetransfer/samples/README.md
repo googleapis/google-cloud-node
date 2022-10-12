@@ -13,6 +13,7 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Aws-request](#aws-request)
+  * [Aws-s3-compatible-source-request](#aws-s3-compatible-source-request)
   * [Check-latest-transfer-operation](#check-latest-transfer-operation)
   * [Get-transfer-job-with-retries](#get-transfer-job-with-retries)
   * [Manifest-request](#manifest-request)
@@ -48,6 +49,23 @@ __Usage:__
 
 
 `node samples/aws-request.js`
+
+
+-----
+
+
+
+
+### Aws-s3-compatible-source-request
+
+View the [source code](https://github.com/googleapis/nodejs-storage-transfer/blob/main/samples/aws-s3-compatible-source-request.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage-transfer&page=editor&open_in_editor=samples/aws-s3-compatible-source-request.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/aws-s3-compatible-source-request.js`
 
 
 -----
