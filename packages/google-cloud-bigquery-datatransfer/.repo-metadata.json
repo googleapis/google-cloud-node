@@ -11,7 +11,7 @@
   "distribution_name": "@google-cloud/bigquery-data-transfer",
   "name_pretty": "Google BigQuery Data Transfer Service",
   "api_id": "bigquerydatatransfer.googleapis.com",
-  "repo": "googleapis/nodejs-bigquery-data-transfer",
+  "repo": "googleapis/google-cloud-node",
   "api_shortname": "bigquerydatatransfer",
   "library_type": "GAPIC_AUTO"
 }
