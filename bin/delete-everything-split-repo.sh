@@ -66,7 +66,7 @@ IGNORE_README_TXT="# Copyright 2022 Google LLC
 import synthtool.languages.node as node
 
 node.owlbot_main(templates_excludes=[
-README.md'
+'README.md'
 ])"
 
 OWLBOT_PY="/tmp/${SPLIT_REPO}/owlbot.py"
