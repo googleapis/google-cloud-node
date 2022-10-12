@@ -21,12 +21,6 @@ const {execSync} = require('child_process');
 const exec = cmd => execSync(cmd, {encoding: 'utf-8'});
 
 describe('resource samples', () => {
-  it('should run the quickstart', () => {
-    const stdout = exec('node listProjects');
-    assert.include(stdout, 'Projects:');
-    assert.include(stdout, process.env.GCLOUD_PROJECT);
-  });
-
   it('should list projects', () => {
     const stdout = exec('node quickstart');
     assert.match(stdout, /Projects:/);
