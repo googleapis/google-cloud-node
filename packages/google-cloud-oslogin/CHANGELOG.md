@@ -4,6 +4,39 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v4.0.2...os-login-v5.0.0) (2022-10-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update library to use Node 12 (#527)
+
+### Features
+
+* Turns on self-signed JWT feature flag ([#476](https://github.com/googleapis/google-cloud-node/issues/476)) ([9dbd4b7](https://github.com/googleapis/google-cloud-node/commit/9dbd4b7be00f690be1b6b90a1395e791a3f4d4b3))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#548](https://github.com/googleapis/google-cloud-node/issues/548)) ([392444e](https://github.com/googleapis/google-cloud-node/commit/392444ecf6a79b94382f44e1226e9c9111bd3f87))
+* Better support for fallback mode ([#543](https://github.com/googleapis/google-cloud-node/issues/543)) ([ae9f928](https://github.com/googleapis/google-cloud-node/commit/ae9f928a1d2a672ca380df047e53f823b49bdf8f))
+* **build:** Switch primary branch to main ([#480](https://github.com/googleapis/google-cloud-node/issues/480)) ([73ead12](https://github.com/googleapis/google-cloud-node/commit/73ead1227335844e920f8856369e19b3a8313baa))
+* Change import long to require ([#544](https://github.com/googleapis/google-cloud-node/issues/544)) ([fc700aa](https://github.com/googleapis/google-cloud-node/commit/fc700aa812ff19178d881ea6f9db78ee2df38d8a))
+* **deps:** Google-gax v2.17.0 with mTLS ([#462](https://github.com/googleapis/google-cloud-node/issues/462)) ([d045b0a](https://github.com/googleapis/google-cloud-node/commit/d045b0a8ea47f76ee4bcfd05c8c1e30dfd5728d6))
+* **deps:** Google-gax v2.17.1 ([#464](https://github.com/googleapis/google-cloud-node/issues/464)) ([6d9fe1f](https://github.com/googleapis/google-cloud-node/commit/6d9fe1fdaa5b223e4639927ce6d92fbfa7338c76))
+* **deps:** Google-gax v2.24.1 ([#474](https://github.com/googleapis/google-cloud-node/issues/474)) ([072c27f](https://github.com/googleapis/google-cloud-node/commit/072c27f1222f52455b4a6d9a5111a4a1d95bfad5))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/google-cloud-node/issues/1553)) ([#547](https://github.com/googleapis/google-cloud-node/issues/547)) ([ff7307d](https://github.com/googleapis/google-cloud-node/commit/ff7307d17789316c151b1f4cb31edbc2c25b8075))
+* **docs:** Describe fallback rest option ([#534](https://github.com/googleapis/google-cloud-node/issues/534)) ([5db6ea0](https://github.com/googleapis/google-cloud-node/commit/5db6ea0483863d9e8f352826933ec3245b419590))
+* Make request optional in all cases ([#458](https://github.com/googleapis/google-cloud-node/issues/458)) ([d474669](https://github.com/googleapis/google-cloud-node/commit/d474669c41c1b7ac806d110cb796d7b2a7542a5e))
+* Preserve default values in x-goog-request-params header ([#551](https://github.com/googleapis/google-cloud-node/issues/551)) ([06a0f0a](https://github.com/googleapis/google-cloud-node/commit/06a0f0a7a1ed34a6b41476e5f376d0881374b9a8))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#466](https://github.com/googleapis/google-cloud-node/issues/466)) ([eea617d](https://github.com/googleapis/google-cloud-node/commit/eea617de3501d80b8dc24726094f20e3e09ad320))
+* use google-gax v3.3.0 ([ff7307d](https://github.com/googleapis/google-cloud-node/commit/ff7307d17789316c151b1f4cb31edbc2c25b8075))
+
+
+### Build System
+
+* Update library to use Node 12 ([#527](https://github.com/googleapis/google-cloud-node/issues/527)) ([43c53e0](https://github.com/googleapis/google-cloud-node/commit/43c53e0a545e2c30a39f74178a569a24057c463b))
+
 ## [4.0.2](https://github.com/googleapis/nodejs-os-login/compare/v4.0.1...v4.0.2) (2022-09-16)
 
 

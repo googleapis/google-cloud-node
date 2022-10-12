@@ -4,6 +4,39 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v3.1.3...bigquery-data-transfer-v4.0.0) (2022-10-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update library to use Node 12 (#545)
+
+### Features
+
+* Support regapic LRO ([#550](https://github.com/googleapis/google-cloud-node/issues/550)) ([77f3ea7](https://github.com/googleapis/google-cloud-node/commit/77f3ea700716fbec5277a70e36750a0abd0ba665))
+* Turns on self-signed JWT feature flag ([#490](https://github.com/googleapis/google-cloud-node/issues/490)) ([da7afd1](https://github.com/googleapis/google-cloud-node/commit/da7afd18cdb88b5fee36138974e2e956f4098824))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#564](https://github.com/googleapis/google-cloud-node/issues/564)) ([593b7b3](https://github.com/googleapis/google-cloud-node/commit/593b7b3c2d88adc75f24784c1c7505a8d716fede))
+* Better support for fallback mode ([#558](https://github.com/googleapis/google-cloud-node/issues/558)) ([068a4e9](https://github.com/googleapis/google-cloud-node/commit/068a4e9fdf9f0631ce3b29302c0328ada763c398))
+* **build:** Migrate to using main branch ([#485](https://github.com/googleapis/google-cloud-node/issues/485)) ([510f798](https://github.com/googleapis/google-cloud-node/commit/510f7980292e28e075d41efce474081b6116b862))
+* Change import long to require ([#559](https://github.com/googleapis/google-cloud-node/issues/559)) ([d032f97](https://github.com/googleapis/google-cloud-node/commit/d032f97be02e9852ce3665c02226597de1c80ee7))
+* **deps:** Google-gax v2.17.0 with mTLS ([#472](https://github.com/googleapis/google-cloud-node/issues/472)) ([74f7d2a](https://github.com/googleapis/google-cloud-node/commit/74f7d2ac0fa41d7e0c62388542e8ebeba003d909))
+* **deps:** Google-gax v2.17.1 ([#475](https://github.com/googleapis/google-cloud-node/issues/475)) ([1ec52dd](https://github.com/googleapis/google-cloud-node/commit/1ec52dd3ea2f82d1ae1648f7f88ddce780e89808))
+* **deps:** Google-gax v2.24.1 ([#487](https://github.com/googleapis/google-cloud-node/issues/487)) ([94b3fbc](https://github.com/googleapis/google-cloud-node/commit/94b3fbcb77e0954fe921dcae93d984803567dd2d))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/google-cloud-node/issues/1553)) ([#563](https://github.com/googleapis/google-cloud-node/issues/563)) ([0c894f7](https://github.com/googleapis/google-cloud-node/commit/0c894f7798294dd33a2f7fecef9f5863d4f92cfb))
+* Make request optional in all cases ([#467](https://github.com/googleapis/google-cloud-node/issues/467)) ([c67a358](https://github.com/googleapis/google-cloud-node/commit/c67a3586283a1eed2a59000479cb0b34e28533f0))
+* Preserve default values in x-goog-request-params header ([#566](https://github.com/googleapis/google-cloud-node/issues/566)) ([0bc6564](https://github.com/googleapis/google-cloud-node/commit/0bc6564cac99577bf3c4533268237a877c7aeba5))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#477](https://github.com/googleapis/google-cloud-node/issues/477)) ([43ad8c9](https://github.com/googleapis/google-cloud-node/commit/43ad8c9be97df6dc87ab9992fb97b16217c3c767))
+* use google-gax v3.3.0 ([0c894f7](https://github.com/googleapis/google-cloud-node/commit/0c894f7798294dd33a2f7fecef9f5863d4f92cfb))
+
+
+### Build System
+
+* Update library to use Node 12 ([#545](https://github.com/googleapis/google-cloud-node/issues/545)) ([7bf23e9](https://github.com/googleapis/google-cloud-node/commit/7bf23e9dc61ea8f9fcd84599c90ca1552b3831dc))
+
 ## [3.1.3](https://github.com/googleapis/nodejs-bigquery-data-transfer/compare/v3.1.2...v3.1.3) (2022-09-22)
 
 
