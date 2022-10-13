@@ -18,6 +18,7 @@
   "packages/google-cloud-certificatemanager": "0.6.0",
   "packages/google-cloud-gkemulticloud": "0.1.2",
   "packages/google-cloud-language": "5.1.0",
+  "packages/google-cloud-memcache": "2.1.2",
   "packages/google-cloud-oslogin": "4.0.2",
   "packages/google-cloud-phishingprotection": "3.0.4",
   "packages/google-cloud-policytroubleshooter": "2.0.4",

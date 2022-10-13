@@ -18,6 +18,7 @@
     "packages/google-cloud-certificatemanager": {},
     "packages/google-cloud-gkemulticloud": {},
     "packages/google-cloud-language": {},
+    "packages/google-cloud-memcache": {},
     "packages/google-cloud-oslogin": {},
     "packages/google-cloud-phishingprotection": {},
     "packages/google-cloud-policytroubleshooter": {},
