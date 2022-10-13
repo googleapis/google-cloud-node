@@ -30,7 +30,7 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 describe('Quickstart', () => {
   let projectId;
   before(() => {
-    projectId = client.getProjectId();
+    projectId = await client.getProjectId();
   });
 
   it('should run quickstart', async () => {
