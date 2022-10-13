@@ -1,0 +1,16 @@
+{
+  "name": "dataplex",
+  "name_pretty": "Cloud Dataplex",
+  "product_documentation": "https://cloud.google.com/dataplex/",
+  "client_documentation": "https://cloud.google.com/dataplex",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/dataplex",
+  "api_id": "dataplex.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "dataplex"
+}
