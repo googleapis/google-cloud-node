@@ -6,7 +6,7 @@
   "issue_tracker": "",
   "release_level": "preview",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-phishing-protection",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/phishing-protection",
   "api_id": "phishingprotection.googleapis.com",
   "requires_billing": true,
