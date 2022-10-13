@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-exchange-v0.3.0...bigquery-data-exchange-v1.0.0) (2022-10-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* refresh current dataexchange/v1beta1/* directory to include recent change in protos. Removed common directory and use local enum Category fix!: refactor references to Category message docs: improve proto documentation.
+
+### Features
+
+* Initial generation of library ([#3](https://github.com/googleapis/google-cloud-node/issues/3)) ([0fe11fc](https://github.com/googleapis/google-cloud-node/commit/0fe11fc8a7e9b053fdbc3ff42131c4b87eb1478c))
+* Initial stub of library ([2e7c5bb](https://github.com/googleapis/google-cloud-node/commit/2e7c5bba350285dc5e6637460975de09e76199bc))
+* Support regapic LRO ([432a43a](https://github.com/googleapis/google-cloud-node/commit/432a43a3c63eaf3a45039b05dde24aa3b9d02d80))
+
+
+### Bug Fixes
+
+* Better support for fallback mode ([#19](https://github.com/googleapis/google-cloud-node/issues/19)) ([ed93f9d](https://github.com/googleapis/google-cloud-node/commit/ed93f9d16f6816fcd7087c291ecb814f455e81c6))
+* Change import long to require ([#20](https://github.com/googleapis/google-cloud-node/issues/20)) ([d2145bb](https://github.com/googleapis/google-cloud-node/commit/d2145bb1d362865e54cb6bdd00a255e53e4ce797))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/google-cloud-node/issues/1553)) ([#23](https://github.com/googleapis/google-cloud-node/issues/23)) ([671a516](https://github.com/googleapis/google-cloud-node/commit/671a516b8aedbcba6cde62080219cdea1e808d4d))
+* Preserve default values in x-goog-request-params header ([#24](https://github.com/googleapis/google-cloud-node/issues/24)) ([5a70b8e](https://github.com/googleapis/google-cloud-node/commit/5a70b8e0dd5ed869fad55fb577dff6444acbd541))
+* use google-gax v3.3.0 ([671a516](https://github.com/googleapis/google-cloud-node/commit/671a516b8aedbcba6cde62080219cdea1e808d4d))
+
 ## [0.3.0](https://github.com/googleapis/nodejs-bigquery-data-exchange/compare/v0.2.1...v0.3.0) (2022-09-26)
 
 
