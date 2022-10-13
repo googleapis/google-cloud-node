@@ -35,10 +35,7 @@ describe('Quickstart', () => {
     projectId = await recommender.getProjectId();
   });
   it('should run quickstart', async () => {
-    const stdout = execSync(
-      `node ./quickstart.js ${projectId}`,
-      {cwd}
-    );
+    const stdout = execSync(`node ./quickstart.js ${projectId}`, {cwd});
     expect(stdout).to.include('recommendations for');
   });
 });
