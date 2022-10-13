@@ -23,6 +23,7 @@
     "packages/google-cloud-redis": {},
     "packages/google-cloud-resourcemanager": {},
     "packages/google-cloud-security-publicca": {},
+    "packages/google-cloud-shell": {},
     "packages/google-devtools-artifactregistry": {},
     "packages/google-iam": {},
     "packages/google-maps-routing": {},
