@@ -29,13 +29,12 @@ describe('Sample Integration Tests', () => {
   let projectId;
   before(() => {
     projectId = memcacheClient.projectId();
-  })
+  });
   it('should run quickstart.js', async () => {
     const stdout = execSync(`node ./quickstart.js ${projectId}`, {
       cwd,
     });
-    
-    assert(stdout !== null)
+
+    assert(stdout !== null);
   });
 });
-

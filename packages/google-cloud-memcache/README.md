@@ -57,13 +57,62 @@ npm install @google-cloud/memcache
 ### Using the client library
 
 ```javascript
-// Imports the Google Cloud client library
-const {CloudMemcacheClient} = require('@google-cloud/memcache');
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The resource name of the instance location using the form:
+ *      `projects/{project_id}/locations/{location_id}`
+ *  where `location_id` refers to a GCP region
+ */
+// const parent = 'abc123'
+/**
+ *  The maximum number of items to return.
+ *  If not specified, a default value of 1000 will be used by the service.
+ *  Regardless of the page_size value, the response may include a partial list
+ *  and a caller should only rely on response's
+ *  next_page_token CloudMemcache.ListInstancesResponse.next_page_token 
+ *  to determine if there are more instances left to be queried.
+ */
+// const pageSize = 1234
+/**
+ *  The next_page_token value returned from a previous List request,
+ *  if any.
+ */
+// const pageToken = 'abc123'
+/**
+ *  List filter. For example, exclude all Memcached instances with name as
+ *  my-instance by specifying "name != my-instance".
+ */
+// const filter = 'abc123'
+/**
+ *  Sort results. Supported values are "name", "name desc" or "" (unsorted).
+ */
+// const orderBy = 'abc123'
 
-// Creates a client
-const cmc = new CloudMemcacheClient();
-console.info(cmc);
-// project = 'my-project'
+// Imports the Memcache library
+const {CloudMemcacheClient} = require('@google-cloud/memcache').v1;
+
+// Instantiates a client
+const memcacheClient = new CloudMemcacheClient();
+
+async function callListInstances() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await memcacheClient.listInstancesAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListInstances();
 
 ```
 
