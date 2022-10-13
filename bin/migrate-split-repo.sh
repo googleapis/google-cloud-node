@@ -43,5 +43,5 @@ ${SCRIPT_DIR}/migrate-git-history.sh \
   ".github/.OwlBot.yaml,samples/quickstart.js,samples/test/quickstart.js,samples/.eslintrc.yml,samples/test/sample.test.js,samples/test/quickstart.test.js,system-test/test/quickstart.test.js,system-test/test/quickstart.js,samples/README.md,samples/package.json,samples/generated"
 
 # run the script to update the split repo and either delete all the samples or just update the README
-${SCRIPT_DIR}/delete-everything-split-repo.sh "${SPLIT_REPO}" "${ARTIFACT_NAME}" "${PACKAGE_PATH}"
-${SCRIPT_DIR}/update-readme-only-split-repo.sh "${SPLIT_REPO}"" "${ARTIFACT_NAME}" "${PACKAGE_PATH}"
+${SCRIPT_DIR}/delete-everything-split-repo.sh "${SPLIT_REPO}" "${ARTIFACT_NAME}"
+${SCRIPT_DIR}/update-readme-only-split-repo.sh "${SPLIT_REPO}"" "${ARTIFACT_NAME}"
