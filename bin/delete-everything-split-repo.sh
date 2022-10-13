@@ -35,7 +35,7 @@ git checkout -b 'tryGrepSyntax'
 
 
 # Delete everything first that's not the samples, README.md, .kokoro folder, and git folder
-ls | grep -v 'samples\|README.md\|.git|.|..' | xargs rm -rf
+ls | grep -v 'samples\|README.md\|.git' | xargs rm -rf
 rm -rf "/tmp/${SPLIT_REPO}/.[!.git]*"
 rm -rf "/tmp/${SPLIT_REPO}/.github"
 rm -rf "/tmp/${SPLIT_REPO}/.kokoro"
