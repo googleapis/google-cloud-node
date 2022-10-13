@@ -15,7 +15,7 @@
 'use strict';
 
 async function main() {
-  // [START resource_quickstart]
+  // [START cloudresourcemanager_quickstart]
   // Imports the Google Cloud client library
   const {ProjectsClient} = require('@google-cloud/resource-manager');
 
@@ -31,7 +31,7 @@ async function main() {
     }
   }
   quickstart();
-  // [END resource_quickstart]
+  // [END cloudresourcemanager_quickstart]
 }
 
 main().catch(console.error);
