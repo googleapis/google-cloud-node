@@ -18,17 +18,24 @@
 const path = require('path');
 const {assert} = require('chai');
 const cp = require('child_process');
-const {describe, it} = require('mocha');
+const {describe, it, before} = require('mocha');
+const {
+  DashboardsServiceClient,
+} = require('@google-cloud/monitoring-dashboards');
 
+// Creates a client
+const ds = new DashboardsServiceClient();
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-const PROJECT_ID = process.env.GCLOUD_PROJECT;
-
 describe('Sample Integration Tests', () => {
+  let projectId;
+  before(async () => {
+    projectId = await ds.getProjectId();
+  });
   it('should run quickstart.js', async () => {
-    const stdout = execSync(`node ./quickstart.js projects/${PROJECT_ID}`, {
+    const stdout = execSync(`node ./quickstart.js projects/${projectId}`, {
       cwd,
     });
     // build should have exited with success status.
