@@ -22,15 +22,21 @@ const path = require('path');
 const cp = require('child_process');
 const {expect} = require('chai');
 const {describe, it} = require('mocha');
+const {RecommenderClient} = require('@google-cloud/recommender');
+const recommender = new RecommenderClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
+  let projectId;
+  before(async () => {
+    projectId = await recommender.getProjectId();
+  });
   it('should run quickstart', async () => {
     const stdout = execSync(
-      `node ./quickstart.js ${process.env.GCLOUD_PROJECT}`,
+      `node ./quickstart.js ${projectId}`,
       {cwd}
     );
     expect(stdout).to.include('recommendations for');
