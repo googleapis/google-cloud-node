@@ -31,9 +31,12 @@ describe('Sample Integration Tests', () => {
     projectId = memcacheClient.getProjectId();
   });
   it('should run quickstart.js', async () => {
-    const stdout = execSync(`node ./quickstart.js projects/${projectId}/locations/us-central1`, {
-      cwd,
-    });
+    const stdout = execSync(
+      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+      {
+        cwd,
+      }
+    );
 
     assert(stdout !== null);
   });
