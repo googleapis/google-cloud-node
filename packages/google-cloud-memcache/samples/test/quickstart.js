@@ -19,20 +19,24 @@ const path = require('path');
 // const {assert} = require('chai');
 const cp = require('child_process');
 const {describe, it} = require('mocha');
-
+const { assert } = require('console');
+const {CloudMemcacheClient} = require('@google-cloud/memcache').v1;
+const memcacheClient = new CloudMemcacheClient();
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-const PROJECT_ID = process.env.GCLOUD_PROJECT;
-
 describe('Sample Integration Tests', () => {
+  let projectId;
+  before(() => {
+    projectId = memcacheClient.projectId();
+  })
   it('should run quickstart.js', async () => {
-    const stdout = execSync(`node ./quickstart.js ${PROJECT_ID}`, {
+    const stdout = execSync(`node ./quickstart.js ${projectId}`, {
       cwd,
     });
-    // build should have exited with success status.
-    // assert.include(stdout, '...');
-    console.info(stdout);
+    
+    assert(stdout !== null)
   });
 });
+
