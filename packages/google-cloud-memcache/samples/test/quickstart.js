@@ -27,7 +27,7 @@ const cwd = path.join(__dirname, '..');
 
 describe('Sample Integration Tests', () => {
   let projectId;
-  before(() => {
+  before(async () => {
     projectId = await memcacheClient.getProjectId();
   });
   it('should run quickstart.js', async () => {
