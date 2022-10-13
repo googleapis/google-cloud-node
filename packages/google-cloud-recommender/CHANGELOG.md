@@ -1,5 +1,23 @@
 # Changelog
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/recommender-v5.0.2...recommender-v6.0.0) (2022-10-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update library to use Node 12 (#233)
+
+### Bug Fixes
+
+* Change import long to require ([#239](https://github.com/googleapis/google-cloud-node/issues/239)) ([26b772e](https://github.com/googleapis/google-cloud-node/commit/26b772e23e932e598e8bb0f1dad1401e2f66df85))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/google-cloud-node/issues/1553)) ([#242](https://github.com/googleapis/google-cloud-node/issues/242)) ([c57511e](https://github.com/googleapis/google-cloud-node/commit/c57511e6342d9a7c6736a1793c46fb9626c27101))
+* use google-gax v3.3.0 ([c57511e](https://github.com/googleapis/google-cloud-node/commit/c57511e6342d9a7c6736a1793c46fb9626c27101))
+
+
+### Build System
+
+* Update library to use Node 12 ([#233](https://github.com/googleapis/google-cloud-node/issues/233)) ([98d8495](https://github.com/googleapis/google-cloud-node/commit/98d8495a89e62b839005d8169544ab02e4e43f1c))
+
 ## [5.0.2](https://github.com/googleapis/nodejs-recommender/compare/v5.0.1...v5.0.2) (2022-08-27)
 
 
