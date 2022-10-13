@@ -27,16 +27,14 @@ const {
 const client = new ReservationServiceClient();
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const project = process.env.GCLOUD_PROJECT;
-
 describe('Quickstart', () => {
   let projectId;
   before(() => {
-    projectId = client.getProjectId();
+    projectId = await client.getProjectId();
   });
 
   it('should run quickstart', async () => {
-    const stdout = execSync(`node ./quickstart.js ${project}`);
+    const stdout = execSync(`node ./quickstart.js ${projectId}`);
     assert.match(stdout, /found [0-9]+ reservations/);
     assert.match(stdout, /found [0-9]+ commitments/);
   });
