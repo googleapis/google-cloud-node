@@ -38694,6 +38694,7 @@
                          * @property {string|null} [currencyCode] ResponseMetaData currencyCode
                          * @property {string|null} [timeZone] ResponseMetaData timeZone
                          * @property {string|null} [emptyReason] ResponseMetaData emptyReason
+                         * @property {boolean|null} [subjectToThresholding] ResponseMetaData subjectToThresholding
                          */
     
                         /**
@@ -38751,6 +38752,14 @@
                          */
                         ResponseMetaData.prototype.emptyReason = null;
     
+                        /**
+                         * ResponseMetaData subjectToThresholding.
+                         * @member {boolean|null|undefined} subjectToThresholding
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         */
+                        ResponseMetaData.prototype.subjectToThresholding = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -38799,6 +38808,17 @@
                         });
     
                         /**
+                         * ResponseMetaData _subjectToThresholding.
+                         * @member {"subjectToThresholding"|undefined} _subjectToThresholding
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         */
+                        Object.defineProperty(ResponseMetaData.prototype, "_subjectToThresholding", {
+                            get: $util.oneOfGetter($oneOfFields = ["subjectToThresholding"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new ResponseMetaData instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.data.v1beta.ResponseMetaData
@@ -38832,6 +38852,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.timeZone);
                             if (message.emptyReason != null && Object.hasOwnProperty.call(message, "emptyReason"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.emptyReason);
+                            if (message.subjectToThresholding != null && Object.hasOwnProperty.call(message, "subjectToThresholding"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.subjectToThresholding);
                             return writer;
                         };
     
@@ -38884,6 +38906,10 @@
                                     }
                                 case 7: {
                                         message.emptyReason = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.subjectToThresholding = reader.bool();
                                         break;
                                     }
                                 default:
@@ -38948,6 +38974,11 @@
                                 if (!$util.isString(message.emptyReason))
                                     return "emptyReason: string expected";
                             }
+                            if (message.subjectToThresholding != null && message.hasOwnProperty("subjectToThresholding")) {
+                                properties._subjectToThresholding = 1;
+                                if (typeof message.subjectToThresholding !== "boolean")
+                                    return "subjectToThresholding: boolean expected";
+                            }
                             return null;
                         };
     
@@ -38976,6 +39007,8 @@
                                 message.timeZone = String(object.timeZone);
                             if (object.emptyReason != null)
                                 message.emptyReason = String(object.emptyReason);
+                            if (object.subjectToThresholding != null)
+                                message.subjectToThresholding = Boolean(object.subjectToThresholding);
                             return message;
                         };
     
@@ -39015,6 +39048,11 @@
                                 object.emptyReason = message.emptyReason;
                                 if (options.oneofs)
                                     object._emptyReason = "emptyReason";
+                            }
+                            if (message.subjectToThresholding != null && message.hasOwnProperty("subjectToThresholding")) {
+                                object.subjectToThresholding = message.subjectToThresholding;
+                                if (options.oneofs)
+                                    object._subjectToThresholding = "subjectToThresholding";
                             }
                             return object;
                         };
@@ -41513,6 +41551,7 @@
                          * @property {google.analytics.data.v1beta.IQuotaStatus|null} [concurrentRequests] PropertyQuota concurrentRequests
                          * @property {google.analytics.data.v1beta.IQuotaStatus|null} [serverErrorsPerProjectPerHour] PropertyQuota serverErrorsPerProjectPerHour
                          * @property {google.analytics.data.v1beta.IQuotaStatus|null} [potentiallyThresholdedRequestsPerHour] PropertyQuota potentiallyThresholdedRequestsPerHour
+                         * @property {google.analytics.data.v1beta.IQuotaStatus|null} [tokensPerProjectPerHour] PropertyQuota tokensPerProjectPerHour
                          */
     
                         /**
@@ -41571,6 +41610,14 @@
                         PropertyQuota.prototype.potentiallyThresholdedRequestsPerHour = null;
     
                         /**
+                         * PropertyQuota tokensPerProjectPerHour.
+                         * @member {google.analytics.data.v1beta.IQuotaStatus|null|undefined} tokensPerProjectPerHour
+                         * @memberof google.analytics.data.v1beta.PropertyQuota
+                         * @instance
+                         */
+                        PropertyQuota.prototype.tokensPerProjectPerHour = null;
+    
+                        /**
                          * Creates a new PropertyQuota instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.data.v1beta.PropertyQuota
@@ -41604,6 +41651,8 @@
                                 $root.google.analytics.data.v1beta.QuotaStatus.encode(message.serverErrorsPerProjectPerHour, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.potentiallyThresholdedRequestsPerHour != null && Object.hasOwnProperty.call(message, "potentiallyThresholdedRequestsPerHour"))
                                 $root.google.analytics.data.v1beta.QuotaStatus.encode(message.potentiallyThresholdedRequestsPerHour, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.tokensPerProjectPerHour != null && Object.hasOwnProperty.call(message, "tokensPerProjectPerHour"))
+                                $root.google.analytics.data.v1beta.QuotaStatus.encode(message.tokensPerProjectPerHour, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -41656,6 +41705,10 @@
                                     }
                                 case 5: {
                                         message.potentiallyThresholdedRequestsPerHour = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.tokensPerProjectPerHour = $root.google.analytics.data.v1beta.QuotaStatus.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -41718,6 +41771,11 @@
                                 if (error)
                                     return "potentiallyThresholdedRequestsPerHour." + error;
                             }
+                            if (message.tokensPerProjectPerHour != null && message.hasOwnProperty("tokensPerProjectPerHour")) {
+                                var error = $root.google.analytics.data.v1beta.QuotaStatus.verify(message.tokensPerProjectPerHour);
+                                if (error)
+                                    return "tokensPerProjectPerHour." + error;
+                            }
                             return null;
                         };
     
@@ -41758,6 +41816,11 @@
                                     throw TypeError(".google.analytics.data.v1beta.PropertyQuota.potentiallyThresholdedRequestsPerHour: object expected");
                                 message.potentiallyThresholdedRequestsPerHour = $root.google.analytics.data.v1beta.QuotaStatus.fromObject(object.potentiallyThresholdedRequestsPerHour);
                             }
+                            if (object.tokensPerProjectPerHour != null) {
+                                if (typeof object.tokensPerProjectPerHour !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.PropertyQuota.tokensPerProjectPerHour: object expected");
+                                message.tokensPerProjectPerHour = $root.google.analytics.data.v1beta.QuotaStatus.fromObject(object.tokensPerProjectPerHour);
+                            }
                             return message;
                         };
     
@@ -41780,6 +41843,7 @@
                                 object.concurrentRequests = null;
                                 object.serverErrorsPerProjectPerHour = null;
                                 object.potentiallyThresholdedRequestsPerHour = null;
+                                object.tokensPerProjectPerHour = null;
                             }
                             if (message.tokensPerDay != null && message.hasOwnProperty("tokensPerDay"))
                                 object.tokensPerDay = $root.google.analytics.data.v1beta.QuotaStatus.toObject(message.tokensPerDay, options);
@@ -41791,6 +41855,8 @@
                                 object.serverErrorsPerProjectPerHour = $root.google.analytics.data.v1beta.QuotaStatus.toObject(message.serverErrorsPerProjectPerHour, options);
                             if (message.potentiallyThresholdedRequestsPerHour != null && message.hasOwnProperty("potentiallyThresholdedRequestsPerHour"))
                                 object.potentiallyThresholdedRequestsPerHour = $root.google.analytics.data.v1beta.QuotaStatus.toObject(message.potentiallyThresholdedRequestsPerHour, options);
+                            if (message.tokensPerProjectPerHour != null && message.hasOwnProperty("tokensPerProjectPerHour"))
+                                object.tokensPerProjectPerHour = $root.google.analytics.data.v1beta.QuotaStatus.toObject(message.tokensPerProjectPerHour, options);
                             return object;
                         };
     

@@ -62,8 +62,8 @@ function main() {
    */
   // const dimensionFilter = {}
   /**
-   *  The filter clause of metrics. Applied at post aggregation phase, similar to
-   *  SQL having-clause. Dimensions cannot be used in this filter.
+   *  The filter clause of metrics. Applied after aggregating the report's rows,
+   *  similar to SQL having-clause. Dimensions cannot be used in this filter.
    */
   // const metricFilter = {}
   /**

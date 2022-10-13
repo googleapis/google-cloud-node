@@ -45,14 +45,12 @@ function main() {
    */
   // const metrics = 1234
   /**
-   *  The filter clause of dimensions. Dimensions must be requested to be used in
-   *  this filter. Metrics cannot be used in this filter.
+   *  The filter clause of dimensions. Metrics cannot be used in this filter.
    */
   // const dimensionFilter = {}
   /**
    *  The filter clause of metrics. Applied at post aggregation phase, similar to
-   *  SQL having-clause. Metrics must be requested to be used in this filter.
-   *  Dimensions cannot be used in this filter.
+   *  SQL having-clause. Dimensions cannot be used in this filter.
    */
   // const metricFilter = {}
   /**

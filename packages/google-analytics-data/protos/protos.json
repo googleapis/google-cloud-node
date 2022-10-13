@@ -3269,6 +3269,11 @@
                           "oneof": [
                             "emptyReason"
                           ]
+                        },
+                        "_subjectToThresholding": {
+                          "oneof": [
+                            "subjectToThresholding"
+                          ]
                         }
                       },
                       "fields": {
@@ -3300,6 +3305,13 @@
                         "emptyReason": {
                           "type": "string",
                           "id": 7,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subjectToThresholding": {
+                          "type": "bool",
+                          "id": 8,
                           "options": {
                             "proto3_optional": true
                           }
@@ -3469,6 +3481,10 @@
                         "potentiallyThresholdedRequestsPerHour": {
                           "type": "QuotaStatus",
                           "id": 5
+                        },
+                        "tokensPerProjectPerHour": {
+                          "type": "QuotaStatus",
+                          "id": 6
                         }
                       }
                     },

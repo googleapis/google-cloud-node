@@ -14716,6 +14716,9 @@ export namespace google {
 
                     /** ResponseMetaData emptyReason */
                     emptyReason?: (string|null);
+
+                    /** ResponseMetaData subjectToThresholding */
+                    subjectToThresholding?: (boolean|null);
                 }
 
                 /** Represents a ResponseMetaData. */
@@ -14742,6 +14745,9 @@ export namespace google {
                     /** ResponseMetaData emptyReason. */
                     public emptyReason?: (string|null);
 
+                    /** ResponseMetaData subjectToThresholding. */
+                    public subjectToThresholding?: (boolean|null);
+
                     /** ResponseMetaData _schemaRestrictionResponse. */
                     public _schemaRestrictionResponse?: "schemaRestrictionResponse";
 
@@ -14753,6 +14759,9 @@ export namespace google {
 
                     /** ResponseMetaData _emptyReason. */
                     public _emptyReason?: "emptyReason";
+
+                    /** ResponseMetaData _subjectToThresholding. */
+                    public _subjectToThresholding?: "subjectToThresholding";
 
                     /**
                      * Creates a new ResponseMetaData instance using the specified properties.
@@ -15867,6 +15876,9 @@ export namespace google {
 
                     /** PropertyQuota potentiallyThresholdedRequestsPerHour */
                     potentiallyThresholdedRequestsPerHour?: (google.analytics.data.v1beta.IQuotaStatus|null);
+
+                    /** PropertyQuota tokensPerProjectPerHour */
+                    tokensPerProjectPerHour?: (google.analytics.data.v1beta.IQuotaStatus|null);
                 }
 
                 /** Represents a PropertyQuota. */
@@ -15892,6 +15904,9 @@ export namespace google {
 
                     /** PropertyQuota potentiallyThresholdedRequestsPerHour. */
                     public potentiallyThresholdedRequestsPerHour?: (google.analytics.data.v1beta.IQuotaStatus|null);
+
+                    /** PropertyQuota tokensPerProjectPerHour. */
+                    public tokensPerProjectPerHour?: (google.analytics.data.v1beta.IQuotaStatus|null);
 
                     /**
                      * Creates a new PropertyQuota instance using the specified properties.
