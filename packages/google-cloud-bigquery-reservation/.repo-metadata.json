@@ -1,6 +1,6 @@
 {
   "language": "nodejs",
-  "repo": "googleapis/nodejs-bigquery-reservation",
+  "repo": "googleapis/google-cloud-node",
   "name": "bigqueryreservation",
   "issue_tracker": "https://b.corp.google.com/savedsearches/559654",
   "default_version": "v1",
