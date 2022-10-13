@@ -94,6 +94,24 @@
                             }
                           ]
                         },
+                        "RetrieveLegacySecretKey": {
+                          "requestType": "RetrieveLegacySecretKeyRequest",
+                          "responseType": "RetrieveLegacySecretKeyResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{key=projects/*/keys/*}:retrieveLegacySecretKey",
+                            "(google.api.method_signature)": "key"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{key=projects/*/keys/*}:retrieveLegacySecretKey"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "key"
+                            }
+                          ]
+                        },
                         "GetKey": {
                           "requestType": "GetKeyRequest",
                           "responseType": "Key",
@@ -298,18 +316,56 @@
                             "CHARGEBACK": 1,
                             "CHARGEBACK_FRAUD": 8,
                             "CHARGEBACK_DISPUTE": 9,
+                            "REFUND": 10,
+                            "REFUND_FRAUD": 11,
+                            "TRANSACTION_ACCEPTED": 12,
+                            "TRANSACTION_DECLINED": 13,
                             "PAYMENT_HEURISTICS": 2,
                             "INITIATED_TWO_FACTOR": 7,
                             "PASSED_TWO_FACTOR": 3,
                             "FAILED_TWO_FACTOR": 4,
                             "CORRECT_PASSWORD": 5,
-                            "INCORRECT_PASSWORD": 6
+                            "INCORRECT_PASSWORD": 6,
+                            "SOCIAL_SPAM": 14
                           }
                         }
                       }
                     },
                     "AnnotateAssessmentResponse": {
                       "fields": {}
+                    },
+                    "PrivatePasswordLeakVerification": {
+                      "fields": {
+                        "lookupHashPrefix": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptedUserCredentialsHash": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptedLeakMatchPrefixes": {
+                          "rule": "repeated",
+                          "type": "bytes",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reencryptedUserCredentialsHash": {
+                          "type": "bytes",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
                     },
                     "Assessment": {
                       "options": {
@@ -480,39 +536,6 @@
                         }
                       }
                     },
-                    "PrivatePasswordLeakVerification": {
-                      "fields": {
-                        "lookupHashPrefix": {
-                          "type": "bytes",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "encryptedUserCredentialsHash": {
-                          "type": "bytes",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "encryptedLeakMatchPrefixes": {
-                          "rule": "repeated",
-                          "type": "bytes",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "reencryptedUserCredentialsHash": {
-                          "type": "bytes",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
                     "CreateKeyRequest": {
                       "fields": {
                         "parent": {
@@ -568,6 +591,18 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "RetrieveLegacySecretKeyRequest": {
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
+                          }
                         }
                       }
                     },
@@ -663,6 +698,14 @@
                           "rule": "repeated",
                           "type": "ChallengeMetrics",
                           "id": 3
+                        }
+                      }
+                    },
+                    "RetrieveLegacySecretKeyResponse": {
+                      "fields": {
+                        "legacySecretKey": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },

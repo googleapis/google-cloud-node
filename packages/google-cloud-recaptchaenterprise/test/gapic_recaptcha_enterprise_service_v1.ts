@@ -674,6 +674,155 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
     });
   });
 
+  describe('retrieveLegacySecretKey', () => {
+    it('invokes retrieveLegacySecretKey without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest',
+        ['key']
+      );
+      request.key = defaultValue1;
+      const expectedHeaderRequestParams = `key=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse()
+      );
+      client.innerApiCalls.retrieveLegacySecretKey =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.retrieveLegacySecretKey(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.retrieveLegacySecretKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retrieveLegacySecretKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes retrieveLegacySecretKey without error using callback', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest',
+        ['key']
+      );
+      request.key = defaultValue1;
+      const expectedHeaderRequestParams = `key=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse()
+      );
+      client.innerApiCalls.retrieveLegacySecretKey =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.retrieveLegacySecretKey(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.retrieveLegacySecretKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retrieveLegacySecretKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes retrieveLegacySecretKey with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest',
+        ['key']
+      );
+      request.key = defaultValue1;
+      const expectedHeaderRequestParams = `key=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.retrieveLegacySecretKey = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.retrieveLegacySecretKey(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.retrieveLegacySecretKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retrieveLegacySecretKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes retrieveLegacySecretKey with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest',
+        ['key']
+      );
+      request.key = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.retrieveLegacySecretKey(request),
+        expectedError
+      );
+    });
+  });
+
   describe('getKey', () => {
     it('invokes getKey without error', async () => {
       const client =

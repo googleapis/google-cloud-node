@@ -103,6 +103,20 @@ export namespace google {
                     public listKeys(request: google.cloud.recaptchaenterprise.v1.IListKeysRequest): Promise<google.cloud.recaptchaenterprise.v1.ListKeysResponse>;
 
                     /**
+                     * Calls RetrieveLegacySecretKey.
+                     * @param request RetrieveLegacySecretKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RetrieveLegacySecretKeyResponse
+                     */
+                    public retrieveLegacySecretKey(request: google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest, callback: google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.RetrieveLegacySecretKeyCallback): void;
+
+                    /**
+                     * Calls RetrieveLegacySecretKey.
+                     * @param request RetrieveLegacySecretKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retrieveLegacySecretKey(request: google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest): Promise<google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse>;
+
+                    /**
                      * Calls GetKey.
                      * @param request GetKeyRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Key
@@ -244,6 +258,13 @@ export namespace google {
                      * @param [response] ListKeysResponse
                      */
                     type ListKeysCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.ListKeysResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|retrieveLegacySecretKey}.
+                     * @param error Error, if any
+                     * @param [response] RetrieveLegacySecretKeyResponse
+                     */
+                    type RetrieveLegacySecretKeyCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|getKey}.
@@ -537,12 +558,17 @@ export namespace google {
                         CHARGEBACK = 1,
                         CHARGEBACK_FRAUD = 8,
                         CHARGEBACK_DISPUTE = 9,
+                        REFUND = 10,
+                        REFUND_FRAUD = 11,
+                        TRANSACTION_ACCEPTED = 12,
+                        TRANSACTION_DECLINED = 13,
                         PAYMENT_HEURISTICS = 2,
                         INITIATED_TWO_FACTOR = 7,
                         PASSED_TWO_FACTOR = 3,
                         FAILED_TWO_FACTOR = 4,
                         CORRECT_PASSWORD = 5,
-                        INCORRECT_PASSWORD = 6
+                        INCORRECT_PASSWORD = 6,
+                        SOCIAL_SPAM = 14
                     }
                 }
 
@@ -631,6 +657,121 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AnnotateAssessmentResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PrivatePasswordLeakVerification. */
+                interface IPrivatePasswordLeakVerification {
+
+                    /** PrivatePasswordLeakVerification lookupHashPrefix */
+                    lookupHashPrefix?: (Uint8Array|string|null);
+
+                    /** PrivatePasswordLeakVerification encryptedUserCredentialsHash */
+                    encryptedUserCredentialsHash?: (Uint8Array|string|null);
+
+                    /** PrivatePasswordLeakVerification encryptedLeakMatchPrefixes */
+                    encryptedLeakMatchPrefixes?: (Uint8Array[]|null);
+
+                    /** PrivatePasswordLeakVerification reencryptedUserCredentialsHash */
+                    reencryptedUserCredentialsHash?: (Uint8Array|string|null);
+                }
+
+                /** Represents a PrivatePasswordLeakVerification. */
+                class PrivatePasswordLeakVerification implements IPrivatePasswordLeakVerification {
+
+                    /**
+                     * Constructs a new PrivatePasswordLeakVerification.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification);
+
+                    /** PrivatePasswordLeakVerification lookupHashPrefix. */
+                    public lookupHashPrefix: (Uint8Array|string);
+
+                    /** PrivatePasswordLeakVerification encryptedUserCredentialsHash. */
+                    public encryptedUserCredentialsHash: (Uint8Array|string);
+
+                    /** PrivatePasswordLeakVerification encryptedLeakMatchPrefixes. */
+                    public encryptedLeakMatchPrefixes: Uint8Array[];
+
+                    /** PrivatePasswordLeakVerification reencryptedUserCredentialsHash. */
+                    public reencryptedUserCredentialsHash: (Uint8Array|string);
+
+                    /**
+                     * Creates a new PrivatePasswordLeakVerification instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PrivatePasswordLeakVerification instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification): google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification;
+
+                    /**
+                     * Encodes the specified PrivatePasswordLeakVerification message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.verify|verify} messages.
+                     * @param message PrivatePasswordLeakVerification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PrivatePasswordLeakVerification message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.verify|verify} messages.
+                     * @param message PrivatePasswordLeakVerification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PrivatePasswordLeakVerification message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PrivatePasswordLeakVerification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification;
+
+                    /**
+                     * Decodes a PrivatePasswordLeakVerification message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PrivatePasswordLeakVerification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification;
+
+                    /**
+                     * Verifies a PrivatePasswordLeakVerification message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PrivatePasswordLeakVerification message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PrivatePasswordLeakVerification
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification;
+
+                    /**
+                     * Creates a plain object from a PrivatePasswordLeakVerification message. Also converts values to other types if specified.
+                     * @param message PrivatePasswordLeakVerification
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PrivatePasswordLeakVerification to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PrivatePasswordLeakVerification
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -1251,121 +1392,6 @@ export namespace google {
                     }
                 }
 
-                /** Properties of a PrivatePasswordLeakVerification. */
-                interface IPrivatePasswordLeakVerification {
-
-                    /** PrivatePasswordLeakVerification lookupHashPrefix */
-                    lookupHashPrefix?: (Uint8Array|string|null);
-
-                    /** PrivatePasswordLeakVerification encryptedUserCredentialsHash */
-                    encryptedUserCredentialsHash?: (Uint8Array|string|null);
-
-                    /** PrivatePasswordLeakVerification encryptedLeakMatchPrefixes */
-                    encryptedLeakMatchPrefixes?: (Uint8Array[]|null);
-
-                    /** PrivatePasswordLeakVerification reencryptedUserCredentialsHash */
-                    reencryptedUserCredentialsHash?: (Uint8Array|string|null);
-                }
-
-                /** Represents a PrivatePasswordLeakVerification. */
-                class PrivatePasswordLeakVerification implements IPrivatePasswordLeakVerification {
-
-                    /**
-                     * Constructs a new PrivatePasswordLeakVerification.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification);
-
-                    /** PrivatePasswordLeakVerification lookupHashPrefix. */
-                    public lookupHashPrefix: (Uint8Array|string);
-
-                    /** PrivatePasswordLeakVerification encryptedUserCredentialsHash. */
-                    public encryptedUserCredentialsHash: (Uint8Array|string);
-
-                    /** PrivatePasswordLeakVerification encryptedLeakMatchPrefixes. */
-                    public encryptedLeakMatchPrefixes: Uint8Array[];
-
-                    /** PrivatePasswordLeakVerification reencryptedUserCredentialsHash. */
-                    public reencryptedUserCredentialsHash: (Uint8Array|string);
-
-                    /**
-                     * Creates a new PrivatePasswordLeakVerification instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns PrivatePasswordLeakVerification instance
-                     */
-                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification): google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification;
-
-                    /**
-                     * Encodes the specified PrivatePasswordLeakVerification message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.verify|verify} messages.
-                     * @param message PrivatePasswordLeakVerification message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified PrivatePasswordLeakVerification message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.verify|verify} messages.
-                     * @param message PrivatePasswordLeakVerification message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a PrivatePasswordLeakVerification message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns PrivatePasswordLeakVerification
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification;
-
-                    /**
-                     * Decodes a PrivatePasswordLeakVerification message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns PrivatePasswordLeakVerification
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification;
-
-                    /**
-                     * Verifies a PrivatePasswordLeakVerification message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a PrivatePasswordLeakVerification message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns PrivatePasswordLeakVerification
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification;
-
-                    /**
-                     * Creates a plain object from a PrivatePasswordLeakVerification message. Also converts values to other types if specified.
-                     * @param message PrivatePasswordLeakVerification
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this PrivatePasswordLeakVerification to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for PrivatePasswordLeakVerification
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of a CreateKeyRequest. */
                 interface ICreateKeyRequest {
 
@@ -1675,6 +1701,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListKeysResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrieveLegacySecretKeyRequest. */
+                interface IRetrieveLegacySecretKeyRequest {
+
+                    /** RetrieveLegacySecretKeyRequest key */
+                    key?: (string|null);
+                }
+
+                /** Represents a RetrieveLegacySecretKeyRequest. */
+                class RetrieveLegacySecretKeyRequest implements IRetrieveLegacySecretKeyRequest {
+
+                    /**
+                     * Constructs a new RetrieveLegacySecretKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest);
+
+                    /** RetrieveLegacySecretKeyRequest key. */
+                    public key: string;
+
+                    /**
+                     * Creates a new RetrieveLegacySecretKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveLegacySecretKeyRequest instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest): google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest;
+
+                    /**
+                     * Encodes the specified RetrieveLegacySecretKeyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest.verify|verify} messages.
+                     * @param message RetrieveLegacySecretKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveLegacySecretKeyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest.verify|verify} messages.
+                     * @param message RetrieveLegacySecretKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveLegacySecretKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveLegacySecretKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest;
+
+                    /**
+                     * Decodes a RetrieveLegacySecretKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveLegacySecretKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest;
+
+                    /**
+                     * Verifies a RetrieveLegacySecretKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveLegacySecretKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveLegacySecretKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest;
+
+                    /**
+                     * Creates a plain object from a RetrieveLegacySecretKeyRequest message. Also converts values to other types if specified.
+                     * @param message RetrieveLegacySecretKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveLegacySecretKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveLegacySecretKeyRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -2281,6 +2404,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Metrics
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrieveLegacySecretKeyResponse. */
+                interface IRetrieveLegacySecretKeyResponse {
+
+                    /** RetrieveLegacySecretKeyResponse legacySecretKey */
+                    legacySecretKey?: (string|null);
+                }
+
+                /** Represents a RetrieveLegacySecretKeyResponse. */
+                class RetrieveLegacySecretKeyResponse implements IRetrieveLegacySecretKeyResponse {
+
+                    /**
+                     * Constructs a new RetrieveLegacySecretKeyResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse);
+
+                    /** RetrieveLegacySecretKeyResponse legacySecretKey. */
+                    public legacySecretKey: string;
+
+                    /**
+                     * Creates a new RetrieveLegacySecretKeyResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveLegacySecretKeyResponse instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse): google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse;
+
+                    /**
+                     * Encodes the specified RetrieveLegacySecretKeyResponse message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse.verify|verify} messages.
+                     * @param message RetrieveLegacySecretKeyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveLegacySecretKeyResponse message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse.verify|verify} messages.
+                     * @param message RetrieveLegacySecretKeyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveLegacySecretKeyResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveLegacySecretKeyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse;
+
+                    /**
+                     * Decodes a RetrieveLegacySecretKeyResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveLegacySecretKeyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse;
+
+                    /**
+                     * Verifies a RetrieveLegacySecretKeyResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveLegacySecretKeyResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveLegacySecretKeyResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse;
+
+                    /**
+                     * Creates a plain object from a RetrieveLegacySecretKeyResponse message. Also converts values to other types if specified.
+                     * @param message RetrieveLegacySecretKeyResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveLegacySecretKeyResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrieveLegacySecretKeyResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

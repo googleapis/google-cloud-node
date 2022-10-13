@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroupMemberships_async]
+function main(key) {
+  // [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RetrieveLegacySecretKey_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,25 +29,10 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name for the related account group in the format
-   *  `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
+   *  Required. The public key name linked to the requested secret key in the format
+   *  "projects/{project}/keys/{key}".
    */
-  // const parent = 'abc123'
-  /**
-   *  Optional. The maximum number of accounts to return. The service might return fewer
-   *  than this value.
-   *  If unspecified, at most 50 accounts are returned.
-   *  The maximum value is 1000; values above 1000 are coerced to 1000.
-   */
-  // const pageSize = 1234
-  /**
-   *  Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
-   *  call.
-   *  When paginating, all other parameters provided to
-   *  `ListRelatedAccountGroupMemberships` must match the call that provided the
-   *  page token.
-   */
-  // const pageToken = 'abc123'
+  // const key = 'abc123'
 
   // Imports the Recaptchaenterprise library
   const {RecaptchaEnterpriseServiceClient} = require('@google-cloud/recaptcha-enterprise').v1;
@@ -55,21 +40,19 @@ function main(parent) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function callListRelatedAccountGroupMemberships() {
+  async function callRetrieveLegacySecretKey() {
     // Construct request
     const request = {
-      parent,
+      key,
     };
 
     // Run request
-    const iterable = await recaptchaenterpriseClient.listRelatedAccountGroupMembershipsAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await recaptchaenterpriseClient.retrieveLegacySecretKey(request);
+    console.log(response);
   }
 
-  callListRelatedAccountGroupMemberships();
-  // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroupMemberships_async]
+  callRetrieveLegacySecretKey();
+  // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RetrieveLegacySecretKey_async]
 }
 
 process.on('unhandledRejection', err => {

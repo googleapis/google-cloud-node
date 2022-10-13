@@ -25,6 +25,11 @@
                 "createKey"
               ]
             },
+            "RetrieveLegacySecretKey": {
+              "methods": [
+                "retrieveLegacySecretKey"
+              ]
+            },
             "GetKey": {
               "methods": [
                 "getKey"
@@ -96,6 +101,11 @@
             "CreateKey": {
               "methods": [
                 "createKey"
+              ]
+            },
+            "RetrieveLegacySecretKey": {
+              "methods": [
+                "retrieveLegacySecretKey"
               ]
             },
             "GetKey": {

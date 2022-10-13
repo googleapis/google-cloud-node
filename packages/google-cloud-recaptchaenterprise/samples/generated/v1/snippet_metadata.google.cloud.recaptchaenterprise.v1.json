@@ -66,7 +66,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -192,6 +192,46 @@
                 "method": {
                     "shortName": "ListKeys",
                     "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListKeys",
+                    "service": {
+                        "shortName": "RecaptchaEnterpriseService",
+                        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RetrieveLegacySecretKey_async",
+            "title": "RecaptchaEnterpriseService retrieveLegacySecretKey Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the secret key related to the specified public key. You must use the legacy secret key only in a 3rd party integration with legacy reCAPTCHA.",
+            "canonical": true,
+            "file": "recaptcha_enterprise_service.retrieve_legacy_secret_key.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RetrieveLegacySecretKey",
+                "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.RetrieveLegacySecretKey",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "key",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse",
+                "client": {
+                    "shortName": "RecaptchaEnterpriseServiceClient",
+                    "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+                },
+                "method": {
+                    "shortName": "RetrieveLegacySecretKey",
+                    "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.RetrieveLegacySecretKey",
                     "service": {
                         "shortName": "RecaptchaEnterpriseService",
                         "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
@@ -414,7 +454,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -455,7 +495,7 @@
             "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroupMemberships_async",
             "title": "RecaptchaEnterpriseService listRelatedAccountGroupMemberships Sample",
             "origin": "API_DEFINITION",
-            "description": " Get the memberships in a group of related accounts.",
+            "description": " Get memberships in a group of related accounts.",
             "canonical": true,
             "file": "recaptcha_enterprise_service.list_related_account_group_memberships.js",
             "language": "JAVASCRIPT",
@@ -510,7 +550,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 78,
                     "type": "FULL"
                 }
             ],

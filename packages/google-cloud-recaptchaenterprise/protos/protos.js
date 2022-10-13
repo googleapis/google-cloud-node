@@ -231,6 +231,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|retrieveLegacySecretKey}.
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @typedef RetrieveLegacySecretKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse} [response] RetrieveLegacySecretKeyResponse
+                         */
+    
+                        /**
+                         * Calls RetrieveLegacySecretKey.
+                         * @function retrieveLegacySecretKey
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest} request RetrieveLegacySecretKeyRequest message or plain object
+                         * @param {google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.RetrieveLegacySecretKeyCallback} callback Node-style callback called with the error, if any, and RetrieveLegacySecretKeyResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RecaptchaEnterpriseService.prototype.retrieveLegacySecretKey = function retrieveLegacySecretKey(request, callback) {
+                            return this.rpcCall(retrieveLegacySecretKey, $root.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest, $root.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse, request, callback);
+                        }, "name", { value: "RetrieveLegacySecretKey" });
+    
+                        /**
+                         * Calls RetrieveLegacySecretKey.
+                         * @function retrieveLegacySecretKey
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest} request RetrieveLegacySecretKeyRequest message or plain object
+                         * @returns {Promise<google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|getKey}.
                          * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
                          * @typedef GetKeyCallback
@@ -942,12 +975,17 @@
                                     case 1:
                                     case 8:
                                     case 9:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                    case 13:
                                     case 2:
                                     case 7:
                                     case 3:
                                     case 4:
                                     case 5:
                                     case 6:
+                                    case 14:
                                         break;
                                     }
                             }
@@ -1016,6 +1054,22 @@
                                     case 9:
                                         message.reasons[i] = 9;
                                         break;
+                                    case "REFUND":
+                                    case 10:
+                                        message.reasons[i] = 10;
+                                        break;
+                                    case "REFUND_FRAUD":
+                                    case 11:
+                                        message.reasons[i] = 11;
+                                        break;
+                                    case "TRANSACTION_ACCEPTED":
+                                    case 12:
+                                        message.reasons[i] = 12;
+                                        break;
+                                    case "TRANSACTION_DECLINED":
+                                    case 13:
+                                        message.reasons[i] = 13;
+                                        break;
                                     case "PAYMENT_HEURISTICS":
                                     case 2:
                                         message.reasons[i] = 2;
@@ -1039,6 +1093,10 @@
                                     case "INCORRECT_PASSWORD":
                                     case 6:
                                         message.reasons[i] = 6;
+                                        break;
+                                    case "SOCIAL_SPAM":
+                                    case 14:
+                                        message.reasons[i] = 14;
                                         break;
                                     }
                             }
@@ -1144,12 +1202,17 @@
                          * @property {number} CHARGEBACK=1 CHARGEBACK value
                          * @property {number} CHARGEBACK_FRAUD=8 CHARGEBACK_FRAUD value
                          * @property {number} CHARGEBACK_DISPUTE=9 CHARGEBACK_DISPUTE value
+                         * @property {number} REFUND=10 REFUND value
+                         * @property {number} REFUND_FRAUD=11 REFUND_FRAUD value
+                         * @property {number} TRANSACTION_ACCEPTED=12 TRANSACTION_ACCEPTED value
+                         * @property {number} TRANSACTION_DECLINED=13 TRANSACTION_DECLINED value
                          * @property {number} PAYMENT_HEURISTICS=2 PAYMENT_HEURISTICS value
                          * @property {number} INITIATED_TWO_FACTOR=7 INITIATED_TWO_FACTOR value
                          * @property {number} PASSED_TWO_FACTOR=3 PASSED_TWO_FACTOR value
                          * @property {number} FAILED_TWO_FACTOR=4 FAILED_TWO_FACTOR value
                          * @property {number} CORRECT_PASSWORD=5 CORRECT_PASSWORD value
                          * @property {number} INCORRECT_PASSWORD=6 INCORRECT_PASSWORD value
+                         * @property {number} SOCIAL_SPAM=14 SOCIAL_SPAM value
                          */
                         AnnotateAssessmentRequest.Reason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -1157,12 +1220,17 @@
                             values[valuesById[1] = "CHARGEBACK"] = 1;
                             values[valuesById[8] = "CHARGEBACK_FRAUD"] = 8;
                             values[valuesById[9] = "CHARGEBACK_DISPUTE"] = 9;
+                            values[valuesById[10] = "REFUND"] = 10;
+                            values[valuesById[11] = "REFUND_FRAUD"] = 11;
+                            values[valuesById[12] = "TRANSACTION_ACCEPTED"] = 12;
+                            values[valuesById[13] = "TRANSACTION_DECLINED"] = 13;
                             values[valuesById[2] = "PAYMENT_HEURISTICS"] = 2;
                             values[valuesById[7] = "INITIATED_TWO_FACTOR"] = 7;
                             values[valuesById[3] = "PASSED_TWO_FACTOR"] = 3;
                             values[valuesById[4] = "FAILED_TWO_FACTOR"] = 4;
                             values[valuesById[5] = "CORRECT_PASSWORD"] = 5;
                             values[valuesById[6] = "INCORRECT_PASSWORD"] = 6;
+                            values[valuesById[14] = "SOCIAL_SPAM"] = 14;
                             return values;
                         })();
     
@@ -1342,6 +1410,326 @@
                         };
     
                         return AnnotateAssessmentResponse;
+                    })();
+    
+                    v1.PrivatePasswordLeakVerification = (function() {
+    
+                        /**
+                         * Properties of a PrivatePasswordLeakVerification.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IPrivatePasswordLeakVerification
+                         * @property {Uint8Array|null} [lookupHashPrefix] PrivatePasswordLeakVerification lookupHashPrefix
+                         * @property {Uint8Array|null} [encryptedUserCredentialsHash] PrivatePasswordLeakVerification encryptedUserCredentialsHash
+                         * @property {Array.<Uint8Array>|null} [encryptedLeakMatchPrefixes] PrivatePasswordLeakVerification encryptedLeakMatchPrefixes
+                         * @property {Uint8Array|null} [reencryptedUserCredentialsHash] PrivatePasswordLeakVerification reencryptedUserCredentialsHash
+                         */
+    
+                        /**
+                         * Constructs a new PrivatePasswordLeakVerification.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a PrivatePasswordLeakVerification.
+                         * @implements IPrivatePasswordLeakVerification
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification=} [properties] Properties to set
+                         */
+                        function PrivatePasswordLeakVerification(properties) {
+                            this.encryptedLeakMatchPrefixes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PrivatePasswordLeakVerification lookupHashPrefix.
+                         * @member {Uint8Array} lookupHashPrefix
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @instance
+                         */
+                        PrivatePasswordLeakVerification.prototype.lookupHashPrefix = $util.newBuffer([]);
+    
+                        /**
+                         * PrivatePasswordLeakVerification encryptedUserCredentialsHash.
+                         * @member {Uint8Array} encryptedUserCredentialsHash
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @instance
+                         */
+                        PrivatePasswordLeakVerification.prototype.encryptedUserCredentialsHash = $util.newBuffer([]);
+    
+                        /**
+                         * PrivatePasswordLeakVerification encryptedLeakMatchPrefixes.
+                         * @member {Array.<Uint8Array>} encryptedLeakMatchPrefixes
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @instance
+                         */
+                        PrivatePasswordLeakVerification.prototype.encryptedLeakMatchPrefixes = $util.emptyArray;
+    
+                        /**
+                         * PrivatePasswordLeakVerification reencryptedUserCredentialsHash.
+                         * @member {Uint8Array} reencryptedUserCredentialsHash
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @instance
+                         */
+                        PrivatePasswordLeakVerification.prototype.reencryptedUserCredentialsHash = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new PrivatePasswordLeakVerification instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification} PrivatePasswordLeakVerification instance
+                         */
+                        PrivatePasswordLeakVerification.create = function create(properties) {
+                            return new PrivatePasswordLeakVerification(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PrivatePasswordLeakVerification message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification} message PrivatePasswordLeakVerification message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PrivatePasswordLeakVerification.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.lookupHashPrefix != null && Object.hasOwnProperty.call(message, "lookupHashPrefix"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.lookupHashPrefix);
+                            if (message.encryptedUserCredentialsHash != null && Object.hasOwnProperty.call(message, "encryptedUserCredentialsHash"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.encryptedUserCredentialsHash);
+                            if (message.encryptedLeakMatchPrefixes != null && message.encryptedLeakMatchPrefixes.length)
+                                for (var i = 0; i < message.encryptedLeakMatchPrefixes.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.encryptedLeakMatchPrefixes[i]);
+                            if (message.reencryptedUserCredentialsHash != null && Object.hasOwnProperty.call(message, "reencryptedUserCredentialsHash"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.reencryptedUserCredentialsHash);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PrivatePasswordLeakVerification message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification} message PrivatePasswordLeakVerification message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PrivatePasswordLeakVerification.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PrivatePasswordLeakVerification message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification} PrivatePasswordLeakVerification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PrivatePasswordLeakVerification.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.lookupHashPrefix = reader.bytes();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.encryptedUserCredentialsHash = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.encryptedLeakMatchPrefixes && message.encryptedLeakMatchPrefixes.length))
+                                            message.encryptedLeakMatchPrefixes = [];
+                                        message.encryptedLeakMatchPrefixes.push(reader.bytes());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.reencryptedUserCredentialsHash = reader.bytes();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PrivatePasswordLeakVerification message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification} PrivatePasswordLeakVerification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PrivatePasswordLeakVerification.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PrivatePasswordLeakVerification message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PrivatePasswordLeakVerification.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.lookupHashPrefix != null && message.hasOwnProperty("lookupHashPrefix"))
+                                if (!(message.lookupHashPrefix && typeof message.lookupHashPrefix.length === "number" || $util.isString(message.lookupHashPrefix)))
+                                    return "lookupHashPrefix: buffer expected";
+                            if (message.encryptedUserCredentialsHash != null && message.hasOwnProperty("encryptedUserCredentialsHash"))
+                                if (!(message.encryptedUserCredentialsHash && typeof message.encryptedUserCredentialsHash.length === "number" || $util.isString(message.encryptedUserCredentialsHash)))
+                                    return "encryptedUserCredentialsHash: buffer expected";
+                            if (message.encryptedLeakMatchPrefixes != null && message.hasOwnProperty("encryptedLeakMatchPrefixes")) {
+                                if (!Array.isArray(message.encryptedLeakMatchPrefixes))
+                                    return "encryptedLeakMatchPrefixes: array expected";
+                                for (var i = 0; i < message.encryptedLeakMatchPrefixes.length; ++i)
+                                    if (!(message.encryptedLeakMatchPrefixes[i] && typeof message.encryptedLeakMatchPrefixes[i].length === "number" || $util.isString(message.encryptedLeakMatchPrefixes[i])))
+                                        return "encryptedLeakMatchPrefixes: buffer[] expected";
+                            }
+                            if (message.reencryptedUserCredentialsHash != null && message.hasOwnProperty("reencryptedUserCredentialsHash"))
+                                if (!(message.reencryptedUserCredentialsHash && typeof message.reencryptedUserCredentialsHash.length === "number" || $util.isString(message.reencryptedUserCredentialsHash)))
+                                    return "reencryptedUserCredentialsHash: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PrivatePasswordLeakVerification message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification} PrivatePasswordLeakVerification
+                         */
+                        PrivatePasswordLeakVerification.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification();
+                            if (object.lookupHashPrefix != null)
+                                if (typeof object.lookupHashPrefix === "string")
+                                    $util.base64.decode(object.lookupHashPrefix, message.lookupHashPrefix = $util.newBuffer($util.base64.length(object.lookupHashPrefix)), 0);
+                                else if (object.lookupHashPrefix.length >= 0)
+                                    message.lookupHashPrefix = object.lookupHashPrefix;
+                            if (object.encryptedUserCredentialsHash != null)
+                                if (typeof object.encryptedUserCredentialsHash === "string")
+                                    $util.base64.decode(object.encryptedUserCredentialsHash, message.encryptedUserCredentialsHash = $util.newBuffer($util.base64.length(object.encryptedUserCredentialsHash)), 0);
+                                else if (object.encryptedUserCredentialsHash.length >= 0)
+                                    message.encryptedUserCredentialsHash = object.encryptedUserCredentialsHash;
+                            if (object.encryptedLeakMatchPrefixes) {
+                                if (!Array.isArray(object.encryptedLeakMatchPrefixes))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.encryptedLeakMatchPrefixes: array expected");
+                                message.encryptedLeakMatchPrefixes = [];
+                                for (var i = 0; i < object.encryptedLeakMatchPrefixes.length; ++i)
+                                    if (typeof object.encryptedLeakMatchPrefixes[i] === "string")
+                                        $util.base64.decode(object.encryptedLeakMatchPrefixes[i], message.encryptedLeakMatchPrefixes[i] = $util.newBuffer($util.base64.length(object.encryptedLeakMatchPrefixes[i])), 0);
+                                    else if (object.encryptedLeakMatchPrefixes[i].length >= 0)
+                                        message.encryptedLeakMatchPrefixes[i] = object.encryptedLeakMatchPrefixes[i];
+                            }
+                            if (object.reencryptedUserCredentialsHash != null)
+                                if (typeof object.reencryptedUserCredentialsHash === "string")
+                                    $util.base64.decode(object.reencryptedUserCredentialsHash, message.reencryptedUserCredentialsHash = $util.newBuffer($util.base64.length(object.reencryptedUserCredentialsHash)), 0);
+                                else if (object.reencryptedUserCredentialsHash.length >= 0)
+                                    message.reencryptedUserCredentialsHash = object.reencryptedUserCredentialsHash;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PrivatePasswordLeakVerification message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification} message PrivatePasswordLeakVerification
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PrivatePasswordLeakVerification.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.encryptedLeakMatchPrefixes = [];
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.lookupHashPrefix = "";
+                                else {
+                                    object.lookupHashPrefix = [];
+                                    if (options.bytes !== Array)
+                                        object.lookupHashPrefix = $util.newBuffer(object.lookupHashPrefix);
+                                }
+                                if (options.bytes === String)
+                                    object.encryptedUserCredentialsHash = "";
+                                else {
+                                    object.encryptedUserCredentialsHash = [];
+                                    if (options.bytes !== Array)
+                                        object.encryptedUserCredentialsHash = $util.newBuffer(object.encryptedUserCredentialsHash);
+                                }
+                                if (options.bytes === String)
+                                    object.reencryptedUserCredentialsHash = "";
+                                else {
+                                    object.reencryptedUserCredentialsHash = [];
+                                    if (options.bytes !== Array)
+                                        object.reencryptedUserCredentialsHash = $util.newBuffer(object.reencryptedUserCredentialsHash);
+                                }
+                            }
+                            if (message.lookupHashPrefix != null && message.hasOwnProperty("lookupHashPrefix"))
+                                object.lookupHashPrefix = options.bytes === String ? $util.base64.encode(message.lookupHashPrefix, 0, message.lookupHashPrefix.length) : options.bytes === Array ? Array.prototype.slice.call(message.lookupHashPrefix) : message.lookupHashPrefix;
+                            if (message.encryptedUserCredentialsHash != null && message.hasOwnProperty("encryptedUserCredentialsHash"))
+                                object.encryptedUserCredentialsHash = options.bytes === String ? $util.base64.encode(message.encryptedUserCredentialsHash, 0, message.encryptedUserCredentialsHash.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedUserCredentialsHash) : message.encryptedUserCredentialsHash;
+                            if (message.encryptedLeakMatchPrefixes && message.encryptedLeakMatchPrefixes.length) {
+                                object.encryptedLeakMatchPrefixes = [];
+                                for (var j = 0; j < message.encryptedLeakMatchPrefixes.length; ++j)
+                                    object.encryptedLeakMatchPrefixes[j] = options.bytes === String ? $util.base64.encode(message.encryptedLeakMatchPrefixes[j], 0, message.encryptedLeakMatchPrefixes[j].length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedLeakMatchPrefixes[j]) : message.encryptedLeakMatchPrefixes[j];
+                            }
+                            if (message.reencryptedUserCredentialsHash != null && message.hasOwnProperty("reencryptedUserCredentialsHash"))
+                                object.reencryptedUserCredentialsHash = options.bytes === String ? $util.base64.encode(message.reencryptedUserCredentialsHash, 0, message.reencryptedUserCredentialsHash.length) : options.bytes === Array ? Array.prototype.slice.call(message.reencryptedUserCredentialsHash) : message.reencryptedUserCredentialsHash;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PrivatePasswordLeakVerification to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PrivatePasswordLeakVerification.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PrivatePasswordLeakVerification
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PrivatePasswordLeakVerification.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification";
+                        };
+    
+                        return PrivatePasswordLeakVerification;
                     })();
     
                     v1.Assessment = (function() {
@@ -2964,326 +3352,6 @@
                         return AccountDefenderAssessment;
                     })();
     
-                    v1.PrivatePasswordLeakVerification = (function() {
-    
-                        /**
-                         * Properties of a PrivatePasswordLeakVerification.
-                         * @memberof google.cloud.recaptchaenterprise.v1
-                         * @interface IPrivatePasswordLeakVerification
-                         * @property {Uint8Array|null} [lookupHashPrefix] PrivatePasswordLeakVerification lookupHashPrefix
-                         * @property {Uint8Array|null} [encryptedUserCredentialsHash] PrivatePasswordLeakVerification encryptedUserCredentialsHash
-                         * @property {Array.<Uint8Array>|null} [encryptedLeakMatchPrefixes] PrivatePasswordLeakVerification encryptedLeakMatchPrefixes
-                         * @property {Uint8Array|null} [reencryptedUserCredentialsHash] PrivatePasswordLeakVerification reencryptedUserCredentialsHash
-                         */
-    
-                        /**
-                         * Constructs a new PrivatePasswordLeakVerification.
-                         * @memberof google.cloud.recaptchaenterprise.v1
-                         * @classdesc Represents a PrivatePasswordLeakVerification.
-                         * @implements IPrivatePasswordLeakVerification
-                         * @constructor
-                         * @param {google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification=} [properties] Properties to set
-                         */
-                        function PrivatePasswordLeakVerification(properties) {
-                            this.encryptedLeakMatchPrefixes = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * PrivatePasswordLeakVerification lookupHashPrefix.
-                         * @member {Uint8Array} lookupHashPrefix
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @instance
-                         */
-                        PrivatePasswordLeakVerification.prototype.lookupHashPrefix = $util.newBuffer([]);
-    
-                        /**
-                         * PrivatePasswordLeakVerification encryptedUserCredentialsHash.
-                         * @member {Uint8Array} encryptedUserCredentialsHash
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @instance
-                         */
-                        PrivatePasswordLeakVerification.prototype.encryptedUserCredentialsHash = $util.newBuffer([]);
-    
-                        /**
-                         * PrivatePasswordLeakVerification encryptedLeakMatchPrefixes.
-                         * @member {Array.<Uint8Array>} encryptedLeakMatchPrefixes
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @instance
-                         */
-                        PrivatePasswordLeakVerification.prototype.encryptedLeakMatchPrefixes = $util.emptyArray;
-    
-                        /**
-                         * PrivatePasswordLeakVerification reencryptedUserCredentialsHash.
-                         * @member {Uint8Array} reencryptedUserCredentialsHash
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @instance
-                         */
-                        PrivatePasswordLeakVerification.prototype.reencryptedUserCredentialsHash = $util.newBuffer([]);
-    
-                        /**
-                         * Creates a new PrivatePasswordLeakVerification instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @static
-                         * @param {google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification=} [properties] Properties to set
-                         * @returns {google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification} PrivatePasswordLeakVerification instance
-                         */
-                        PrivatePasswordLeakVerification.create = function create(properties) {
-                            return new PrivatePasswordLeakVerification(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified PrivatePasswordLeakVerification message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @static
-                         * @param {google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification} message PrivatePasswordLeakVerification message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PrivatePasswordLeakVerification.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.lookupHashPrefix != null && Object.hasOwnProperty.call(message, "lookupHashPrefix"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.lookupHashPrefix);
-                            if (message.encryptedUserCredentialsHash != null && Object.hasOwnProperty.call(message, "encryptedUserCredentialsHash"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.encryptedUserCredentialsHash);
-                            if (message.encryptedLeakMatchPrefixes != null && message.encryptedLeakMatchPrefixes.length)
-                                for (var i = 0; i < message.encryptedLeakMatchPrefixes.length; ++i)
-                                    writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.encryptedLeakMatchPrefixes[i]);
-                            if (message.reencryptedUserCredentialsHash != null && Object.hasOwnProperty.call(message, "reencryptedUserCredentialsHash"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.reencryptedUserCredentialsHash);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified PrivatePasswordLeakVerification message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @static
-                         * @param {google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification} message PrivatePasswordLeakVerification message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PrivatePasswordLeakVerification.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a PrivatePasswordLeakVerification message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification} PrivatePasswordLeakVerification
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PrivatePasswordLeakVerification.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.lookupHashPrefix = reader.bytes();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.encryptedUserCredentialsHash = reader.bytes();
-                                        break;
-                                    }
-                                case 3: {
-                                        if (!(message.encryptedLeakMatchPrefixes && message.encryptedLeakMatchPrefixes.length))
-                                            message.encryptedLeakMatchPrefixes = [];
-                                        message.encryptedLeakMatchPrefixes.push(reader.bytes());
-                                        break;
-                                    }
-                                case 4: {
-                                        message.reencryptedUserCredentialsHash = reader.bytes();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a PrivatePasswordLeakVerification message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification} PrivatePasswordLeakVerification
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PrivatePasswordLeakVerification.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a PrivatePasswordLeakVerification message.
-                         * @function verify
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        PrivatePasswordLeakVerification.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.lookupHashPrefix != null && message.hasOwnProperty("lookupHashPrefix"))
-                                if (!(message.lookupHashPrefix && typeof message.lookupHashPrefix.length === "number" || $util.isString(message.lookupHashPrefix)))
-                                    return "lookupHashPrefix: buffer expected";
-                            if (message.encryptedUserCredentialsHash != null && message.hasOwnProperty("encryptedUserCredentialsHash"))
-                                if (!(message.encryptedUserCredentialsHash && typeof message.encryptedUserCredentialsHash.length === "number" || $util.isString(message.encryptedUserCredentialsHash)))
-                                    return "encryptedUserCredentialsHash: buffer expected";
-                            if (message.encryptedLeakMatchPrefixes != null && message.hasOwnProperty("encryptedLeakMatchPrefixes")) {
-                                if (!Array.isArray(message.encryptedLeakMatchPrefixes))
-                                    return "encryptedLeakMatchPrefixes: array expected";
-                                for (var i = 0; i < message.encryptedLeakMatchPrefixes.length; ++i)
-                                    if (!(message.encryptedLeakMatchPrefixes[i] && typeof message.encryptedLeakMatchPrefixes[i].length === "number" || $util.isString(message.encryptedLeakMatchPrefixes[i])))
-                                        return "encryptedLeakMatchPrefixes: buffer[] expected";
-                            }
-                            if (message.reencryptedUserCredentialsHash != null && message.hasOwnProperty("reencryptedUserCredentialsHash"))
-                                if (!(message.reencryptedUserCredentialsHash && typeof message.reencryptedUserCredentialsHash.length === "number" || $util.isString(message.reencryptedUserCredentialsHash)))
-                                    return "reencryptedUserCredentialsHash: buffer expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a PrivatePasswordLeakVerification message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification} PrivatePasswordLeakVerification
-                         */
-                        PrivatePasswordLeakVerification.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification)
-                                return object;
-                            var message = new $root.google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification();
-                            if (object.lookupHashPrefix != null)
-                                if (typeof object.lookupHashPrefix === "string")
-                                    $util.base64.decode(object.lookupHashPrefix, message.lookupHashPrefix = $util.newBuffer($util.base64.length(object.lookupHashPrefix)), 0);
-                                else if (object.lookupHashPrefix.length >= 0)
-                                    message.lookupHashPrefix = object.lookupHashPrefix;
-                            if (object.encryptedUserCredentialsHash != null)
-                                if (typeof object.encryptedUserCredentialsHash === "string")
-                                    $util.base64.decode(object.encryptedUserCredentialsHash, message.encryptedUserCredentialsHash = $util.newBuffer($util.base64.length(object.encryptedUserCredentialsHash)), 0);
-                                else if (object.encryptedUserCredentialsHash.length >= 0)
-                                    message.encryptedUserCredentialsHash = object.encryptedUserCredentialsHash;
-                            if (object.encryptedLeakMatchPrefixes) {
-                                if (!Array.isArray(object.encryptedLeakMatchPrefixes))
-                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification.encryptedLeakMatchPrefixes: array expected");
-                                message.encryptedLeakMatchPrefixes = [];
-                                for (var i = 0; i < object.encryptedLeakMatchPrefixes.length; ++i)
-                                    if (typeof object.encryptedLeakMatchPrefixes[i] === "string")
-                                        $util.base64.decode(object.encryptedLeakMatchPrefixes[i], message.encryptedLeakMatchPrefixes[i] = $util.newBuffer($util.base64.length(object.encryptedLeakMatchPrefixes[i])), 0);
-                                    else if (object.encryptedLeakMatchPrefixes[i].length >= 0)
-                                        message.encryptedLeakMatchPrefixes[i] = object.encryptedLeakMatchPrefixes[i];
-                            }
-                            if (object.reencryptedUserCredentialsHash != null)
-                                if (typeof object.reencryptedUserCredentialsHash === "string")
-                                    $util.base64.decode(object.reencryptedUserCredentialsHash, message.reencryptedUserCredentialsHash = $util.newBuffer($util.base64.length(object.reencryptedUserCredentialsHash)), 0);
-                                else if (object.reencryptedUserCredentialsHash.length >= 0)
-                                    message.reencryptedUserCredentialsHash = object.reencryptedUserCredentialsHash;
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a PrivatePasswordLeakVerification message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @static
-                         * @param {google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification} message PrivatePasswordLeakVerification
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        PrivatePasswordLeakVerification.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.encryptedLeakMatchPrefixes = [];
-                            if (options.defaults) {
-                                if (options.bytes === String)
-                                    object.lookupHashPrefix = "";
-                                else {
-                                    object.lookupHashPrefix = [];
-                                    if (options.bytes !== Array)
-                                        object.lookupHashPrefix = $util.newBuffer(object.lookupHashPrefix);
-                                }
-                                if (options.bytes === String)
-                                    object.encryptedUserCredentialsHash = "";
-                                else {
-                                    object.encryptedUserCredentialsHash = [];
-                                    if (options.bytes !== Array)
-                                        object.encryptedUserCredentialsHash = $util.newBuffer(object.encryptedUserCredentialsHash);
-                                }
-                                if (options.bytes === String)
-                                    object.reencryptedUserCredentialsHash = "";
-                                else {
-                                    object.reencryptedUserCredentialsHash = [];
-                                    if (options.bytes !== Array)
-                                        object.reencryptedUserCredentialsHash = $util.newBuffer(object.reencryptedUserCredentialsHash);
-                                }
-                            }
-                            if (message.lookupHashPrefix != null && message.hasOwnProperty("lookupHashPrefix"))
-                                object.lookupHashPrefix = options.bytes === String ? $util.base64.encode(message.lookupHashPrefix, 0, message.lookupHashPrefix.length) : options.bytes === Array ? Array.prototype.slice.call(message.lookupHashPrefix) : message.lookupHashPrefix;
-                            if (message.encryptedUserCredentialsHash != null && message.hasOwnProperty("encryptedUserCredentialsHash"))
-                                object.encryptedUserCredentialsHash = options.bytes === String ? $util.base64.encode(message.encryptedUserCredentialsHash, 0, message.encryptedUserCredentialsHash.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedUserCredentialsHash) : message.encryptedUserCredentialsHash;
-                            if (message.encryptedLeakMatchPrefixes && message.encryptedLeakMatchPrefixes.length) {
-                                object.encryptedLeakMatchPrefixes = [];
-                                for (var j = 0; j < message.encryptedLeakMatchPrefixes.length; ++j)
-                                    object.encryptedLeakMatchPrefixes[j] = options.bytes === String ? $util.base64.encode(message.encryptedLeakMatchPrefixes[j], 0, message.encryptedLeakMatchPrefixes[j].length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedLeakMatchPrefixes[j]) : message.encryptedLeakMatchPrefixes[j];
-                            }
-                            if (message.reencryptedUserCredentialsHash != null && message.hasOwnProperty("reencryptedUserCredentialsHash"))
-                                object.reencryptedUserCredentialsHash = options.bytes === String ? $util.base64.encode(message.reencryptedUserCredentialsHash, 0, message.reencryptedUserCredentialsHash.length) : options.bytes === Array ? Array.prototype.slice.call(message.reencryptedUserCredentialsHash) : message.reencryptedUserCredentialsHash;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this PrivatePasswordLeakVerification to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        PrivatePasswordLeakVerification.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for PrivatePasswordLeakVerification
-                         * @function getTypeUrl
-                         * @memberof google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        PrivatePasswordLeakVerification.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification";
-                        };
-    
-                        return PrivatePasswordLeakVerification;
-                    })();
-    
                     v1.CreateKeyRequest = (function() {
     
                         /**
@@ -4012,6 +4080,209 @@
                         };
     
                         return ListKeysResponse;
+                    })();
+    
+                    v1.RetrieveLegacySecretKeyRequest = (function() {
+    
+                        /**
+                         * Properties of a RetrieveLegacySecretKeyRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IRetrieveLegacySecretKeyRequest
+                         * @property {string|null} [key] RetrieveLegacySecretKeyRequest key
+                         */
+    
+                        /**
+                         * Constructs a new RetrieveLegacySecretKeyRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a RetrieveLegacySecretKeyRequest.
+                         * @implements IRetrieveLegacySecretKeyRequest
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest=} [properties] Properties to set
+                         */
+                        function RetrieveLegacySecretKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrieveLegacySecretKeyRequest key.
+                         * @member {string} key
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest
+                         * @instance
+                         */
+                        RetrieveLegacySecretKeyRequest.prototype.key = "";
+    
+                        /**
+                         * Creates a new RetrieveLegacySecretKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest} RetrieveLegacySecretKeyRequest instance
+                         */
+                        RetrieveLegacySecretKeyRequest.create = function create(properties) {
+                            return new RetrieveLegacySecretKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveLegacySecretKeyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest} message RetrieveLegacySecretKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveLegacySecretKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveLegacySecretKeyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest} message RetrieveLegacySecretKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveLegacySecretKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrieveLegacySecretKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest} RetrieveLegacySecretKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveLegacySecretKeyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.key = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrieveLegacySecretKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest} RetrieveLegacySecretKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveLegacySecretKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrieveLegacySecretKeyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrieveLegacySecretKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                if (!$util.isString(message.key))
+                                    return "key: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrieveLegacySecretKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest} RetrieveLegacySecretKeyRequest
+                         */
+                        RetrieveLegacySecretKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest();
+                            if (object.key != null)
+                                message.key = String(object.key);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrieveLegacySecretKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest} message RetrieveLegacySecretKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrieveLegacySecretKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.key = "";
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                object.key = message.key;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrieveLegacySecretKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrieveLegacySecretKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RetrieveLegacySecretKeyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RetrieveLegacySecretKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest";
+                        };
+    
+                        return RetrieveLegacySecretKeyRequest;
                     })();
     
                     v1.GetKeyRequest = (function() {
@@ -5383,6 +5654,209 @@
                         };
     
                         return Metrics;
+                    })();
+    
+                    v1.RetrieveLegacySecretKeyResponse = (function() {
+    
+                        /**
+                         * Properties of a RetrieveLegacySecretKeyResponse.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IRetrieveLegacySecretKeyResponse
+                         * @property {string|null} [legacySecretKey] RetrieveLegacySecretKeyResponse legacySecretKey
+                         */
+    
+                        /**
+                         * Constructs a new RetrieveLegacySecretKeyResponse.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a RetrieveLegacySecretKeyResponse.
+                         * @implements IRetrieveLegacySecretKeyResponse
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse=} [properties] Properties to set
+                         */
+                        function RetrieveLegacySecretKeyResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrieveLegacySecretKeyResponse legacySecretKey.
+                         * @member {string} legacySecretKey
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse
+                         * @instance
+                         */
+                        RetrieveLegacySecretKeyResponse.prototype.legacySecretKey = "";
+    
+                        /**
+                         * Creates a new RetrieveLegacySecretKeyResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse} RetrieveLegacySecretKeyResponse instance
+                         */
+                        RetrieveLegacySecretKeyResponse.create = function create(properties) {
+                            return new RetrieveLegacySecretKeyResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveLegacySecretKeyResponse message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse} message RetrieveLegacySecretKeyResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveLegacySecretKeyResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.legacySecretKey != null && Object.hasOwnProperty.call(message, "legacySecretKey"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.legacySecretKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveLegacySecretKeyResponse message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyResponse} message RetrieveLegacySecretKeyResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveLegacySecretKeyResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrieveLegacySecretKeyResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse} RetrieveLegacySecretKeyResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveLegacySecretKeyResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.legacySecretKey = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrieveLegacySecretKeyResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse} RetrieveLegacySecretKeyResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveLegacySecretKeyResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrieveLegacySecretKeyResponse message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrieveLegacySecretKeyResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.legacySecretKey != null && message.hasOwnProperty("legacySecretKey"))
+                                if (!$util.isString(message.legacySecretKey))
+                                    return "legacySecretKey: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrieveLegacySecretKeyResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse} RetrieveLegacySecretKeyResponse
+                         */
+                        RetrieveLegacySecretKeyResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse();
+                            if (object.legacySecretKey != null)
+                                message.legacySecretKey = String(object.legacySecretKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrieveLegacySecretKeyResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse} message RetrieveLegacySecretKeyResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrieveLegacySecretKeyResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.legacySecretKey = "";
+                            if (message.legacySecretKey != null && message.hasOwnProperty("legacySecretKey"))
+                                object.legacySecretKey = message.legacySecretKey;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrieveLegacySecretKeyResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrieveLegacySecretKeyResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RetrieveLegacySecretKeyResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RetrieveLegacySecretKeyResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse";
+                        };
+    
+                        return RetrieveLegacySecretKeyResponse;
                     })();
     
                     v1.Key = (function() {
