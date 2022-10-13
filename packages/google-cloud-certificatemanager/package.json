@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/certificate-manager",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "description": "certificatemanager client for Node.js",
   "repository": "googleapis/nodejs-certificate-manager",
   "license": "Apache-2.0",
