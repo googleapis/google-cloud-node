@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/recommender/v1/insight.proto",
+  "../../protos/google/cloud/recommender/v1/recommendation.proto",
+  "../../protos/google/cloud/recommender/v1/recommender_service.proto"
+]

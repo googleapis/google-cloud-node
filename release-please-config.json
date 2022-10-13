@@ -14,6 +14,7 @@
     "packages/google-cloud-language": {},
     "packages/google-cloud-oslogin": {},
     "packages/google-cloud-phishingprotection": {},
+    "packages/google-cloud-recommender": {},
     "packages/google-cloud-redis": {},
     "packages/google-cloud-resourcemanager": {},
     "packages/google-cloud-security-publicca": {},
