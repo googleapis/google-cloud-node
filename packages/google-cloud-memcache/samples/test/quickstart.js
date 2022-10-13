@@ -16,10 +16,9 @@
 'use strict';
 
 const path = require('path');
-// const {assert} = require('chai');
+const {assert} = require('chai');
 const cp = require('child_process');
 const {before, describe, it} = require('mocha');
-const { assert } = require('console');
 const {CloudMemcacheClient} = require('@google-cloud/memcache').v1;
 const memcacheClient = new CloudMemcacheClient();
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
