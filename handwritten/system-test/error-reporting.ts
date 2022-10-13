@@ -383,15 +383,21 @@ describe('Expected Behavior', () => {
     env.sterilizeProcess();
   });
 
-  it('Should callback with an error with a configuration that cannot report errors', done => {
+  it('Should not call auth and should callback with an error in a configuration that cannot report errors', done => {
     env.sterilizeProcess().setKeyFilename().setProjectId();
+    const scope = nock('https://www.googleapis.com:443')
+      .post('/oauth2/v4/token')
+      .reply(400);
     process.env.NODE_ENV = 'null';
     const logger = createLogger({logLevel: 5, reportMode: 'production'});
     const client = new RequestHandler(
       new Configuration(undefined, logger),
       logger
     );
+
     client.sendError({} as ErrorMessage, (err, response) => {
+      assert.strictEqual(scope.isDone(), false);
+      nock.cleanAll();
       assert(err instanceof Error);
       assert.strictEqual(err!.message, ERROR_STRING);
       assert.strictEqual(response, null);
