@@ -20,8 +20,8 @@
     "lint": "gts check",
     "predocs-test": "npm run docs",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "system-test": "npm run compile && c8 mocha build/system-test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "test": "c8 mocha build/test",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"

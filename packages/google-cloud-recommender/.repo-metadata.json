@@ -1,6 +1,6 @@
 {
   "language": "nodejs",
-  "repo": "googleapis/nodejs-recommender",
+  "repo": "googleapis/google-cloud-node",
   "name": "recommender",
   "issue_tracker": "",
   "default_version": "v1",
