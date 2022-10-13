@@ -1,0 +1,16 @@
+{
+  "api_id": "monitoring.googleapis.com",
+  "name": "monitoring-dashboards",
+  "language": "nodejs",
+  "product_documentation": "https://cloud.google.com/monitoring/docs",
+  "distribution_name": "@google-cloud/monitoring-dashboards",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559785",
+  "name_pretty": "Monitoring Dashboards",
+  "default_version": "v1",
+  "release_level": "stable",
+  "repo": "googleapis/nodejs-monitoring-dashboards",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/monitoring-dashboards/latest",
+  "requires_billing": true,
+  "api_shortname": "monitoring",
+  "library_type": "GAPIC_AUTO"
+}
