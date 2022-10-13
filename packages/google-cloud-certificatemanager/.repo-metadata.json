@@ -1,0 +1,16 @@
+{
+  "name": "certificatemanager",
+  "name_pretty": "Certificate Manager",
+  "product_documentation": "https://cloud.google.com/certificate-manager/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/certificate-manager/latest",
+  "issue_tracker": "https://github.com/googleapis/nodejs-certificate-manager/issues",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-certificate-manager",
+  "distribution_name": "@google-cloud/certificate-manager",
+  "api_id": "certificatemanager.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "api_shortname": "certificatemanager",
+  "library_type": "GAPIC_AUTO"
+}
