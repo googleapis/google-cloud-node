@@ -18,7 +18,7 @@
 const path = require('path');
 // const {assert} = require('chai');
 const cp = require('child_process');
-const {describe, it} = require('mocha');
+const {before, describe, it} = require('mocha');
 const { assert } = require('console');
 const {CloudMemcacheClient} = require('@google-cloud/memcache').v1;
 const memcacheClient = new CloudMemcacheClient();
