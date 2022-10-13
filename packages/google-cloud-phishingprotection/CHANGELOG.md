@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/phishing-protection-v3.0.4...phishing-protection-v4.0.0) (2022-10-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update library to use Node 12 (#386)
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#407](https://github.com/googleapis/google-cloud-node/issues/407)) ([5360b24](https://github.com/googleapis/google-cloud-node/commit/5360b24d0cae6351446c257079d7f49a9c17cce1))
+* Better support for fallback mode ([#402](https://github.com/googleapis/google-cloud-node/issues/402)) ([fc54595](https://github.com/googleapis/google-cloud-node/commit/fc5459502718a0fc4f9d71bc8d43bebbe5b7be06))
+* Change import long to require ([#403](https://github.com/googleapis/google-cloud-node/issues/403)) ([b9cdbe6](https://github.com/googleapis/google-cloud-node/commit/b9cdbe6c44261216aae2199e87ec0bbc6f56a3de))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/google-cloud-node/issues/1553)) ([#406](https://github.com/googleapis/google-cloud-node/issues/406)) ([e4c9f02](https://github.com/googleapis/google-cloud-node/commit/e4c9f020be8c1d5a7b6f9f63df52809c0885aa99))
+* **docs:** Describe fallback rest option ([#392](https://github.com/googleapis/google-cloud-node/issues/392)) ([98129a8](https://github.com/googleapis/google-cloud-node/commit/98129a89c139b6fefc176162d3b11e5fdcf8ffc2))
+* Preserve default values in x-goog-request-params header ([#411](https://github.com/googleapis/google-cloud-node/issues/411)) ([21305c8](https://github.com/googleapis/google-cloud-node/commit/21305c8eab7fee963f92d0a5df94aad1b862e80e))
+* use google-gax v3.3.0 ([e4c9f02](https://github.com/googleapis/google-cloud-node/commit/e4c9f020be8c1d5a7b6f9f63df52809c0885aa99))
+
+
+### Build System
+
+* Update library to use Node 12 ([#386](https://github.com/googleapis/google-cloud-node/issues/386)) ([c660c95](https://github.com/googleapis/google-cloud-node/commit/c660c958c8756726f3f1ea254dc5078282035e14))
+
 ## [3.0.4](https://github.com/googleapis/nodejs-phishing-protection/compare/v3.0.3...v3.0.4) (2022-09-22)
 
 

@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v4.0.2...os-login-v5.0.0) (2022-10-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update library to use Node 12 (#527)
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#548](https://github.com/googleapis/google-cloud-node/issues/548)) ([392444e](https://github.com/googleapis/google-cloud-node/commit/392444ecf6a79b94382f44e1226e9c9111bd3f87))
+* Better support for fallback mode ([#543](https://github.com/googleapis/google-cloud-node/issues/543)) ([ae9f928](https://github.com/googleapis/google-cloud-node/commit/ae9f928a1d2a672ca380df047e53f823b49bdf8f))
+* **build:** Switch primary branch to main ([#480](https://github.com/googleapis/google-cloud-node/issues/480)) ([73ead12](https://github.com/googleapis/google-cloud-node/commit/73ead1227335844e920f8856369e19b3a8313baa))
+* Change import long to require ([#544](https://github.com/googleapis/google-cloud-node/issues/544)) ([fc700aa](https://github.com/googleapis/google-cloud-node/commit/fc700aa812ff19178d881ea6f9db78ee2df38d8a))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/google-cloud-node/issues/1553)) ([#547](https://github.com/googleapis/google-cloud-node/issues/547)) ([ff7307d](https://github.com/googleapis/google-cloud-node/commit/ff7307d17789316c151b1f4cb31edbc2c25b8075))
+* **docs:** Describe fallback rest option ([#534](https://github.com/googleapis/google-cloud-node/issues/534)) ([5db6ea0](https://github.com/googleapis/google-cloud-node/commit/5db6ea0483863d9e8f352826933ec3245b419590))
+* Preserve default values in x-goog-request-params header ([#551](https://github.com/googleapis/google-cloud-node/issues/551)) ([06a0f0a](https://github.com/googleapis/google-cloud-node/commit/06a0f0a7a1ed34a6b41476e5f376d0881374b9a8))
+* use google-gax v3.3.0 ([ff7307d](https://github.com/googleapis/google-cloud-node/commit/ff7307d17789316c151b1f4cb31edbc2c25b8075))
+
+
+### Build System
+
+* Update library to use Node 12 ([#527](https://github.com/googleapis/google-cloud-node/issues/527)) ([43c53e0](https://github.com/googleapis/google-cloud-node/commit/43c53e0a545e2c30a39f74178a569a24057c463b))
+
 ## [4.0.2](https://github.com/googleapis/nodejs-os-login/compare/v4.0.1...v4.0.2) (2022-09-16)
 
 
