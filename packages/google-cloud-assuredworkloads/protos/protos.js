@@ -2260,6 +2260,7 @@
                                 case 8:
                                 case 9:
                                 case 10:
+                                case 11:
                                 case 12:
                                     break;
                                 }
@@ -2404,6 +2405,10 @@
                             case "ITAR":
                             case 10:
                                 message.complianceRegime = 10;
+                                break;
+                            case "AU_REGIONS_AND_US_SUPPORT":
+                            case 11:
+                                message.complianceRegime = 11;
                                 break;
                             case "ASSURED_WORKLOADS_FOR_PARTNERS":
                             case 12:
@@ -2896,6 +2901,7 @@
                          * @property {number} EU_REGIONS_AND_SUPPORT=8 EU_REGIONS_AND_SUPPORT value
                          * @property {number} CA_REGIONS_AND_SUPPORT=9 CA_REGIONS_AND_SUPPORT value
                          * @property {number} ITAR=10 ITAR value
+                         * @property {number} AU_REGIONS_AND_US_SUPPORT=11 AU_REGIONS_AND_US_SUPPORT value
                          * @property {number} ASSURED_WORKLOADS_FOR_PARTNERS=12 ASSURED_WORKLOADS_FOR_PARTNERS value
                          */
                         Workload.ComplianceRegime = (function() {
@@ -2911,6 +2917,7 @@
                             values[valuesById[8] = "EU_REGIONS_AND_SUPPORT"] = 8;
                             values[valuesById[9] = "CA_REGIONS_AND_SUPPORT"] = 9;
                             values[valuesById[10] = "ITAR"] = 10;
+                            values[valuesById[11] = "AU_REGIONS_AND_US_SUPPORT"] = 11;
                             values[valuesById[12] = "ASSURED_WORKLOADS_FOR_PARTNERS"] = 12;
                             return values;
                         })();
@@ -4018,6 +4025,7 @@
                                 case 8:
                                 case 9:
                                 case 10:
+                                case 11:
                                 case 12:
                                     break;
                                 }
@@ -4089,6 +4097,10 @@
                             case "ITAR":
                             case 10:
                                 message.complianceRegime = 10;
+                                break;
+                            case "AU_REGIONS_AND_US_SUPPORT":
+                            case 11:
+                                message.complianceRegime = 11;
                                 break;
                             case "ASSURED_WORKLOADS_FOR_PARTNERS":
                             case 12:
@@ -6026,6 +6038,7 @@
                          * @property {google.cloud.assuredworkloads.v1.Violation.IRemediation|null} [remediation] Violation remediation
                          * @property {boolean|null} [acknowledged] Violation acknowledged
                          * @property {google.protobuf.ITimestamp|null} [acknowledgementTime] Violation acknowledgementTime
+                         * @property {string|null} [exceptionAuditLogLink] Violation exceptionAuditLogLink
                          */
     
                         /**
@@ -6147,6 +6160,14 @@
                          */
                         Violation.prototype.acknowledgementTime = null;
     
+                        /**
+                         * Violation exceptionAuditLogLink.
+                         * @member {string} exceptionAuditLogLink
+                         * @memberof google.cloud.assuredworkloads.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.exceptionAuditLogLink = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -6211,6 +6232,8 @@
                                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.acknowledged);
                             if (message.acknowledgementTime != null && Object.hasOwnProperty.call(message, "acknowledgementTime"))
                                 $root.google.protobuf.Timestamp.encode(message.acknowledgementTime, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.exceptionAuditLogLink != null && Object.hasOwnProperty.call(message, "exceptionAuditLogLink"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.exceptionAuditLogLink);
                             return writer;
                         };
     
@@ -6295,6 +6318,10 @@
                                     }
                                 case 15: {
                                         message.acknowledgementTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.exceptionAuditLogLink = reader.string();
                                         break;
                                     }
                                 default:
@@ -6392,6 +6419,9 @@
                                         return "acknowledgementTime." + error;
                                 }
                             }
+                            if (message.exceptionAuditLogLink != null && message.hasOwnProperty("exceptionAuditLogLink"))
+                                if (!$util.isString(message.exceptionAuditLogLink))
+                                    return "exceptionAuditLogLink: string expected";
                             return null;
                         };
     
@@ -6464,6 +6494,8 @@
                                     throw TypeError(".google.cloud.assuredworkloads.v1.Violation.acknowledgementTime: object expected");
                                 message.acknowledgementTime = $root.google.protobuf.Timestamp.fromObject(object.acknowledgementTime);
                             }
+                            if (object.exceptionAuditLogLink != null)
+                                message.exceptionAuditLogLink = String(object.exceptionAuditLogLink);
                             return message;
                         };
     
@@ -6493,6 +6525,7 @@
                                 object.nonCompliantOrgPolicy = "";
                                 object.remediation = null;
                                 object.acknowledged = false;
+                                object.exceptionAuditLogLink = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -6523,6 +6556,8 @@
                                 if (options.oneofs)
                                     object._acknowledgementTime = "acknowledgementTime";
                             }
+                            if (message.exceptionAuditLogLink != null && message.hasOwnProperty("exceptionAuditLogLink"))
+                                object.exceptionAuditLogLink = message.exceptionAuditLogLink;
                             return object;
                         };
     

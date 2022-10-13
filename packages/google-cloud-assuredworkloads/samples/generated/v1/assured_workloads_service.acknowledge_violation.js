@@ -39,7 +39,8 @@ function main(name, comment) {
    */
   // const comment = 'abc123'
   /**
-   *  Optional. Name of the OrgPolicy which was modified with non-compliant change and
+   *  Optional. This field is deprecated and will be removed in future version of the API.
+   *  Name of the OrgPolicy which was modified with non-compliant change and
    *  resulted in this violation.
    *  Format:
    *  projects/{project_number}/policies/{constraint_name}

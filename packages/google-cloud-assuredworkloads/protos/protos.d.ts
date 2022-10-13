@@ -1186,6 +1186,7 @@ export namespace google {
                         EU_REGIONS_AND_SUPPORT = 8,
                         CA_REGIONS_AND_SUPPORT = 9,
                         ITAR = 10,
+                        AU_REGIONS_AND_US_SUPPORT = 11,
                         ASSURED_WORKLOADS_FOR_PARTNERS = 12
                     }
 
@@ -2524,6 +2525,9 @@ export namespace google {
 
                     /** Violation acknowledgementTime */
                     acknowledgementTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation exceptionAuditLogLink */
+                    exceptionAuditLogLink?: (string|null);
                 }
 
                 /** Represents a Violation. */
@@ -2573,6 +2577,9 @@ export namespace google {
 
                     /** Violation acknowledgementTime. */
                     public acknowledgementTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation exceptionAuditLogLink. */
+                    public exceptionAuditLogLink: string;
 
                     /** Violation _acknowledgementTime. */
                     public _acknowledgementTime?: "acknowledgementTime";

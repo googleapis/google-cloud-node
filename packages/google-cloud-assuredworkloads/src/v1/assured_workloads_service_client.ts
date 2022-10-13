@@ -721,7 +721,7 @@ export class AssuredWorkloadsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the Workload to fetch. This is the workloads's
+   *   Required. The resource name of the Workload to fetch. This is the workload's
    *   relative path in the API, formatted as
    *   "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
    *   For example,
@@ -914,7 +914,8 @@ export class AssuredWorkloadsServiceClient {
    * @param {string} request.comment
    *   Required. Business justification explaining the need for violation acknowledgement
    * @param {string} [request.nonCompliantOrgPolicy]
-   *   Optional. Name of the OrgPolicy which was modified with non-compliant change and
+   *   Optional. This field is deprecated and will be removed in future version of the API.
+   *   Name of the OrgPolicy which was modified with non-compliant change and
    *   resulted in this violation.
    *   Format:
    *   projects/{project_number}/policies/{constraint_name}

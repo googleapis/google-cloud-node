@@ -446,6 +446,7 @@
                             "EU_REGIONS_AND_SUPPORT": 8,
                             "CA_REGIONS_AND_SUPPORT": 9,
                             "ITAR": 10,
+                            "AU_REGIONS_AND_US_SUPPORT": 11,
                             "ASSURED_WORKLOADS_FOR_PARTNERS": 12
                           }
                         },
@@ -624,6 +625,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -812,6 +814,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "exceptionAuditLogLink": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       },

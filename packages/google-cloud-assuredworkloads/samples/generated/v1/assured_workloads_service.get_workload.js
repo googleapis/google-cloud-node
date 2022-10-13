@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Workload to fetch. This is the workloads's
+   *  Required. The resource name of the Workload to fetch. This is the workload's
    *  relative path in the API, formatted as
    *  "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
    *  For example,
