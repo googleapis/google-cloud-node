@@ -1,0 +1,107 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.memcache.v1beta2",
+  "libraryPackage": "@google-cloud/memcache",
+  "services": {
+    "CloudMemcache": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudMemcacheClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "UpdateParameters": {
+              "methods": [
+                "updateParameters"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "ApplyParameters": {
+              "methods": [
+                "applyParameters"
+              ]
+            },
+            "ApplySoftwareUpdate": {
+              "methods": [
+                "applySoftwareUpdate"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudMemcacheClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "UpdateParameters": {
+              "methods": [
+                "updateParameters"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "ApplyParameters": {
+              "methods": [
+                "applyParameters"
+              ]
+            },
+            "ApplySoftwareUpdate": {
+              "methods": [
+                "applySoftwareUpdate"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
