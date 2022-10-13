@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [IAM Policy Troubleshooter API: Node.js Samples](https://github.com/googleapis/nodejs-policy-troubleshooter)
+# [IAM Policy Troubleshooter API: Node.js Samples](https://github.com/googleapis/google-cloud-node)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
@@ -12,12 +12,14 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Iam_checker.troubleshoot_iam_policy](#iam_checker.troubleshoot_iam_policy)
+  * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/nodejs-policy-troubleshooter#using-the-client-library).
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -29,16 +31,50 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Quickstart
+### Iam_checker.troubleshoot_iam_policy
 
-View the [source code](https://github.com/googleapis/nodejs-policy-troubleshooter/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter/samples/generated/v1/iam_checker.troubleshoot_iam_policy.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-policy-troubleshooter&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter/samples/generated/v1/iam_checker.troubleshoot_iam_policy.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node packages/google-cloud-policytroubleshooter/samples/generated/v1/iam_checker.troubleshoot_iam_policy.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter/samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-policytroubleshooter/samples/quickstart.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter/samples/test/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter/samples/test/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-policytroubleshooter/samples/test/quickstart.js`
 
 
 
@@ -46,5 +82,5 @@ __Usage:__
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-policy-troubleshooter&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
 [product-docs]: https://cloud.google.com/iam/docs/troubleshooting-access#rest-api/
