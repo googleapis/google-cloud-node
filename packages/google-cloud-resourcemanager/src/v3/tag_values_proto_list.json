@@ -1,0 +1,8 @@
+[
+  "../../protos/google/cloud/resourcemanager/v3/folders.proto",
+  "../../protos/google/cloud/resourcemanager/v3/organizations.proto",
+  "../../protos/google/cloud/resourcemanager/v3/projects.proto",
+  "../../protos/google/cloud/resourcemanager/v3/tag_bindings.proto",
+  "../../protos/google/cloud/resourcemanager/v3/tag_keys.proto",
+  "../../protos/google/cloud/resourcemanager/v3/tag_values.proto"
+]
