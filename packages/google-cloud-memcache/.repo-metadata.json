@@ -2,7 +2,7 @@
   "language": "nodejs",
   "requires_billing": true,
   "product_documentation": "https://cloud.google.com/memorystore/docs/memcached",
-  "repo": "googleapis/nodejs-memcache",
+  "repo": "googleapis/google-cloud-node",
   "default_version": "v1",
   "name_pretty": "Memorystore for Memcached",
   "release_level": "stable",
