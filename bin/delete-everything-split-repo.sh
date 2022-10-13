@@ -31,7 +31,7 @@ git clone "git@github.com:googleapis/${SPLIT_REPO}.git" "/tmp/${SPLIT_REPO}"
 
 cd "/tmp/${SPLIT_REPO}"
 
-git checkout -b 'tryGrepSyntax'
+git checkout -b 'deleteMostOfLibrary'
 
 
 # Delete everything first that's not the samples, README.md, .kokoro folder, and git folder
@@ -159,7 +159,7 @@ echo -e "**_THIS REPOSITORY IS DEPRECATED. ALL OF ITS CONTENT AND HISTORY HAS BE
 git add .
 git commit -m 'build: update README for deprecation notice and delete all files except samples'
 
-git push -f --set-upstream origin tryGrepSyntax
+git push -f --set-upstream origin deleteMostOfLibrary
 
 # create pull request
 if gh --help > /dev/null
