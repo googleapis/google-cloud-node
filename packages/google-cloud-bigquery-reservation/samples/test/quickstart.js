@@ -21,7 +21,9 @@
 const {assert} = require('chai');
 const cp = require('child_process');
 const {before, describe, it} = require('mocha');
-const {ReservationServiceClient} = require('@google-cloud/bigquery-reservation');
+const {
+  ReservationServiceClient,
+} = require('@google-cloud/bigquery-reservation');
 const client = new ReservationServiceClient();
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -32,7 +34,7 @@ describe('Quickstart', () => {
   before(() => {
     projectId = client.getProjectId();
   });
-  
+
   it('should run quickstart', async () => {
     const stdout = execSync(`node ./quickstart.js ${project}`);
     assert.match(stdout, /found [0-9]+ reservations/);
