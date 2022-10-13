@@ -20,5 +20,6 @@
   "packages/google-devtools-artifactregistry": "2.0.0",
   "packages/google-iam": "0.2.0",
   "packages/google-maps-routing": "0.1.1",
+  "packages/google-monitoring-dashboard": "2.7.0",
   "packages/typeless-sample-bot": "1.0.0"
 }
