@@ -20,6 +20,7 @@
     "packages/google-devtools-artifactregistry": {},
     "packages/google-iam": {},
     "packages/google-maps-routing": {},
+    "packages/google-monitoring-dashboard": {},
     "packages/typeless-sample-bot": {}
   },
   "plugins": [
