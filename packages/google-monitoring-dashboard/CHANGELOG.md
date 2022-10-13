@@ -1,5 +1,33 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v2.7.0...monitoring-dashboards-v3.0.0) (2022-10-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update library to use Node 12 (#270)
+
+### Features
+
+* Sync public protos with latests public api state. This adds support for collapsible groups, filters, labels, drilldowns, logs panels and tables ([#257](https://github.com/googleapis/google-cloud-node/issues/257)) ([45747a8](https://github.com/googleapis/google-cloud-node/commit/45747a861682a93508157c268a989e116ba1aaf7))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#294](https://github.com/googleapis/google-cloud-node/issues/294)) ([19798e2](https://github.com/googleapis/google-cloud-node/commit/19798e2f7692df1d116a63d77e102d35192bb11a))
+* Better support for fallback mode ([#289](https://github.com/googleapis/google-cloud-node/issues/289)) ([f168eb3](https://github.com/googleapis/google-cloud-node/commit/f168eb38b5fb70e74290f78241f8d6ec4234d8c1))
+* Change import long to require ([#290](https://github.com/googleapis/google-cloud-node/issues/290)) ([953d497](https://github.com/googleapis/google-cloud-node/commit/953d497b240b0d86781bc585befd21c77494d206))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/google-cloud-node/issues/1553)) ([#293](https://github.com/googleapis/google-cloud-node/issues/293)) ([1b4c34e](https://github.com/googleapis/google-cloud-node/commit/1b4c34e918e0dbf6326cd32719bf08875280b87e))
+* **docs:** Describe fallback rest option ([#281](https://github.com/googleapis/google-cloud-node/issues/281)) ([ca2f7dc](https://github.com/googleapis/google-cloud-node/commit/ca2f7dcc79cd587b8fc1b83e7e75aadb30e1a947))
+* Preserve default values in x-goog-request-params header ([#296](https://github.com/googleapis/google-cloud-node/issues/296)) ([b3ece57](https://github.com/googleapis/google-cloud-node/commit/b3ece57ba65adb1d559ce7804f98f331d2c7a428))
+* Samples test ([8311347](https://github.com/googleapis/google-cloud-node/commit/83113476faf791e74411419f8d4e0772df30fbf0))
+* use google-gax v3.3.0 ([1b4c34e](https://github.com/googleapis/google-cloud-node/commit/1b4c34e918e0dbf6326cd32719bf08875280b87e))
+
+
+### Build System
+
+* Update library to use Node 12 ([#270](https://github.com/googleapis/google-cloud-node/issues/270)) ([6421150](https://github.com/googleapis/google-cloud-node/commit/6421150d9a507b46abec61e06ee7a5eef8817633))
+
 ## [2.7.0](https://github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.6.1...v2.7.0) (2022-04-08)
 
 
