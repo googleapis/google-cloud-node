@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## [3.0.4](https://github.com/googleapis/nodejs-error-reporting/compare/v3.0.3...v3.0.4) (2022-10-13)
+
+
+### Bug Fixes
+
+* Do not try and authenticate when error reporting is disabled ([#676](https://github.com/googleapis/nodejs-error-reporting/issues/676)) ([c9cef5a](https://github.com/googleapis/nodejs-error-reporting/commit/c9cef5afa32f18175a41a7994a5813b451214ce8))
+
 ## [3.0.3](https://github.com/googleapis/nodejs-error-reporting/compare/v3.0.2...v3.0.3) (2022-08-28)
 
 
