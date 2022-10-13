@@ -21,7 +21,7 @@
 const path = require('path');
 const cp = require('child_process');
 const {expect} = require('chai');
-const {describe, it} = require('mocha');
+const {before, describe, it} = require('mocha');
 const {RecommenderClient} = require('@google-cloud/recommender');
 const recommender = new RecommenderClient();
 
