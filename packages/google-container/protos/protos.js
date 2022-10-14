@@ -5997,6 +5997,7 @@
                      * @property {google.container.v1.IConfigConnectorConfig|null} [configConnectorConfig] AddonsConfig configConnectorConfig
                      * @property {google.container.v1.IGcePersistentDiskCsiDriverConfig|null} [gcePersistentDiskCsiDriverConfig] AddonsConfig gcePersistentDiskCsiDriverConfig
                      * @property {google.container.v1.IGcpFilestoreCsiDriverConfig|null} [gcpFilestoreCsiDriverConfig] AddonsConfig gcpFilestoreCsiDriverConfig
+                     * @property {google.container.v1.IGkeBackupAgentConfig|null} [gkeBackupAgentConfig] AddonsConfig gkeBackupAgentConfig
                      */
     
                     /**
@@ -6087,6 +6088,14 @@
                     AddonsConfig.prototype.gcpFilestoreCsiDriverConfig = null;
     
                     /**
+                     * AddonsConfig gkeBackupAgentConfig.
+                     * @member {google.container.v1.IGkeBackupAgentConfig|null|undefined} gkeBackupAgentConfig
+                     * @memberof google.container.v1.AddonsConfig
+                     * @instance
+                     */
+                    AddonsConfig.prototype.gkeBackupAgentConfig = null;
+    
+                    /**
                      * Creates a new AddonsConfig instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.AddonsConfig
@@ -6128,6 +6137,8 @@
                             $root.google.container.v1.GcePersistentDiskCsiDriverConfig.encode(message.gcePersistentDiskCsiDriverConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                         if (message.gcpFilestoreCsiDriverConfig != null && Object.hasOwnProperty.call(message, "gcpFilestoreCsiDriverConfig"))
                             $root.google.container.v1.GcpFilestoreCsiDriverConfig.encode(message.gcpFilestoreCsiDriverConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                        if (message.gkeBackupAgentConfig != null && Object.hasOwnProperty.call(message, "gkeBackupAgentConfig"))
+                            $root.google.container.v1.GkeBackupAgentConfig.encode(message.gkeBackupAgentConfig, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                         return writer;
                     };
     
@@ -6196,6 +6207,10 @@
                                 }
                             case 14: {
                                     message.gcpFilestoreCsiDriverConfig = $root.google.container.v1.GcpFilestoreCsiDriverConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 16: {
+                                    message.gkeBackupAgentConfig = $root.google.container.v1.GkeBackupAgentConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -6278,6 +6293,11 @@
                             if (error)
                                 return "gcpFilestoreCsiDriverConfig." + error;
                         }
+                        if (message.gkeBackupAgentConfig != null && message.hasOwnProperty("gkeBackupAgentConfig")) {
+                            var error = $root.google.container.v1.GkeBackupAgentConfig.verify(message.gkeBackupAgentConfig);
+                            if (error)
+                                return "gkeBackupAgentConfig." + error;
+                        }
                         return null;
                     };
     
@@ -6338,6 +6358,11 @@
                                 throw TypeError(".google.container.v1.AddonsConfig.gcpFilestoreCsiDriverConfig: object expected");
                             message.gcpFilestoreCsiDriverConfig = $root.google.container.v1.GcpFilestoreCsiDriverConfig.fromObject(object.gcpFilestoreCsiDriverConfig);
                         }
+                        if (object.gkeBackupAgentConfig != null) {
+                            if (typeof object.gkeBackupAgentConfig !== "object")
+                                throw TypeError(".google.container.v1.AddonsConfig.gkeBackupAgentConfig: object expected");
+                            message.gkeBackupAgentConfig = $root.google.container.v1.GkeBackupAgentConfig.fromObject(object.gkeBackupAgentConfig);
+                        }
                         return message;
                     };
     
@@ -6364,6 +6389,7 @@
                             object.configConnectorConfig = null;
                             object.gcePersistentDiskCsiDriverConfig = null;
                             object.gcpFilestoreCsiDriverConfig = null;
+                            object.gkeBackupAgentConfig = null;
                         }
                         if (message.httpLoadBalancing != null && message.hasOwnProperty("httpLoadBalancing"))
                             object.httpLoadBalancing = $root.google.container.v1.HttpLoadBalancing.toObject(message.httpLoadBalancing, options);
@@ -6383,6 +6409,8 @@
                             object.gcePersistentDiskCsiDriverConfig = $root.google.container.v1.GcePersistentDiskCsiDriverConfig.toObject(message.gcePersistentDiskCsiDriverConfig, options);
                         if (message.gcpFilestoreCsiDriverConfig != null && message.hasOwnProperty("gcpFilestoreCsiDriverConfig"))
                             object.gcpFilestoreCsiDriverConfig = $root.google.container.v1.GcpFilestoreCsiDriverConfig.toObject(message.gcpFilestoreCsiDriverConfig, options);
+                        if (message.gkeBackupAgentConfig != null && message.hasOwnProperty("gkeBackupAgentConfig"))
+                            object.gkeBackupAgentConfig = $root.google.container.v1.GkeBackupAgentConfig.toObject(message.gkeBackupAgentConfig, options);
                         return object;
                     };
     
@@ -9077,6 +9105,209 @@
                     return GcpFilestoreCsiDriverConfig;
                 })();
     
+                v1.GkeBackupAgentConfig = (function() {
+    
+                    /**
+                     * Properties of a GkeBackupAgentConfig.
+                     * @memberof google.container.v1
+                     * @interface IGkeBackupAgentConfig
+                     * @property {boolean|null} [enabled] GkeBackupAgentConfig enabled
+                     */
+    
+                    /**
+                     * Constructs a new GkeBackupAgentConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a GkeBackupAgentConfig.
+                     * @implements IGkeBackupAgentConfig
+                     * @constructor
+                     * @param {google.container.v1.IGkeBackupAgentConfig=} [properties] Properties to set
+                     */
+                    function GkeBackupAgentConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GkeBackupAgentConfig enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1.GkeBackupAgentConfig
+                     * @instance
+                     */
+                    GkeBackupAgentConfig.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new GkeBackupAgentConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.GkeBackupAgentConfig
+                     * @static
+                     * @param {google.container.v1.IGkeBackupAgentConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.GkeBackupAgentConfig} GkeBackupAgentConfig instance
+                     */
+                    GkeBackupAgentConfig.create = function create(properties) {
+                        return new GkeBackupAgentConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GkeBackupAgentConfig message. Does not implicitly {@link google.container.v1.GkeBackupAgentConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.GkeBackupAgentConfig
+                     * @static
+                     * @param {google.container.v1.IGkeBackupAgentConfig} message GkeBackupAgentConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GkeBackupAgentConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GkeBackupAgentConfig message, length delimited. Does not implicitly {@link google.container.v1.GkeBackupAgentConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.GkeBackupAgentConfig
+                     * @static
+                     * @param {google.container.v1.IGkeBackupAgentConfig} message GkeBackupAgentConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GkeBackupAgentConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GkeBackupAgentConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.GkeBackupAgentConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.GkeBackupAgentConfig} GkeBackupAgentConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GkeBackupAgentConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.GkeBackupAgentConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.enabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GkeBackupAgentConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.GkeBackupAgentConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.GkeBackupAgentConfig} GkeBackupAgentConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GkeBackupAgentConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GkeBackupAgentConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.GkeBackupAgentConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GkeBackupAgentConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GkeBackupAgentConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.GkeBackupAgentConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.GkeBackupAgentConfig} GkeBackupAgentConfig
+                     */
+                    GkeBackupAgentConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.GkeBackupAgentConfig)
+                            return object;
+                        var message = new $root.google.container.v1.GkeBackupAgentConfig();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GkeBackupAgentConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.GkeBackupAgentConfig
+                     * @static
+                     * @param {google.container.v1.GkeBackupAgentConfig} message GkeBackupAgentConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GkeBackupAgentConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GkeBackupAgentConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.GkeBackupAgentConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GkeBackupAgentConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GkeBackupAgentConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1.GkeBackupAgentConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GkeBackupAgentConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1.GkeBackupAgentConfig";
+                    };
+    
+                    return GkeBackupAgentConfig;
+                })();
+    
                 v1.MasterAuthorizedNetworksConfig = (function() {
     
                     /**
@@ -10289,6 +10520,8 @@
                      * @property {string|null} [servicesIpv4CidrBlock] IPAllocationPolicy servicesIpv4CidrBlock
                      * @property {string|null} [tpuIpv4CidrBlock] IPAllocationPolicy tpuIpv4CidrBlock
                      * @property {boolean|null} [useRoutes] IPAllocationPolicy useRoutes
+                     * @property {google.container.v1.StackType|null} [stackType] IPAllocationPolicy stackType
+                     * @property {google.container.v1.IPv6AccessType|null} [ipv6AccessType] IPAllocationPolicy ipv6AccessType
                      */
     
                     /**
@@ -10411,6 +10644,22 @@
                     IPAllocationPolicy.prototype.useRoutes = false;
     
                     /**
+                     * IPAllocationPolicy stackType.
+                     * @member {google.container.v1.StackType} stackType
+                     * @memberof google.container.v1.IPAllocationPolicy
+                     * @instance
+                     */
+                    IPAllocationPolicy.prototype.stackType = 0;
+    
+                    /**
+                     * IPAllocationPolicy ipv6AccessType.
+                     * @member {google.container.v1.IPv6AccessType} ipv6AccessType
+                     * @memberof google.container.v1.IPAllocationPolicy
+                     * @instance
+                     */
+                    IPAllocationPolicy.prototype.ipv6AccessType = 0;
+    
+                    /**
                      * Creates a new IPAllocationPolicy instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.IPAllocationPolicy
@@ -10460,6 +10709,10 @@
                             writer.uint32(/* id 13, wireType 2 =*/106).string(message.tpuIpv4CidrBlock);
                         if (message.useRoutes != null && Object.hasOwnProperty.call(message, "useRoutes"))
                             writer.uint32(/* id 15, wireType 0 =*/120).bool(message.useRoutes);
+                        if (message.stackType != null && Object.hasOwnProperty.call(message, "stackType"))
+                            writer.uint32(/* id 16, wireType 0 =*/128).int32(message.stackType);
+                        if (message.ipv6AccessType != null && Object.hasOwnProperty.call(message, "ipv6AccessType"))
+                            writer.uint32(/* id 17, wireType 0 =*/136).int32(message.ipv6AccessType);
                         return writer;
                     };
     
@@ -10546,6 +10799,14 @@
                                     message.useRoutes = reader.bool();
                                     break;
                                 }
+                            case 16: {
+                                    message.stackType = reader.int32();
+                                    break;
+                                }
+                            case 17: {
+                                    message.ipv6AccessType = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -10620,6 +10881,24 @@
                         if (message.useRoutes != null && message.hasOwnProperty("useRoutes"))
                             if (typeof message.useRoutes !== "boolean")
                                 return "useRoutes: boolean expected";
+                        if (message.stackType != null && message.hasOwnProperty("stackType"))
+                            switch (message.stackType) {
+                            default:
+                                return "stackType: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.ipv6AccessType != null && message.hasOwnProperty("ipv6AccessType"))
+                            switch (message.ipv6AccessType) {
+                            default:
+                                return "ipv6AccessType: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -10661,6 +10940,34 @@
                             message.tpuIpv4CidrBlock = String(object.tpuIpv4CidrBlock);
                         if (object.useRoutes != null)
                             message.useRoutes = Boolean(object.useRoutes);
+                        switch (object.stackType) {
+                        case "STACK_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.stackType = 0;
+                            break;
+                        case "IPV4":
+                        case 1:
+                            message.stackType = 1;
+                            break;
+                        case "IPV4_IPV6":
+                        case 2:
+                            message.stackType = 2;
+                            break;
+                        }
+                        switch (object.ipv6AccessType) {
+                        case "IPV6_ACCESS_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.ipv6AccessType = 0;
+                            break;
+                        case "INTERNAL":
+                        case 1:
+                            message.ipv6AccessType = 1;
+                            break;
+                        case "EXTERNAL":
+                        case 2:
+                            message.ipv6AccessType = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -10691,6 +10998,8 @@
                             object.servicesIpv4CidrBlock = "";
                             object.tpuIpv4CidrBlock = "";
                             object.useRoutes = false;
+                            object.stackType = options.enums === String ? "STACK_TYPE_UNSPECIFIED" : 0;
+                            object.ipv6AccessType = options.enums === String ? "IPV6_ACCESS_TYPE_UNSPECIFIED" : 0;
                         }
                         if (message.useIpAliases != null && message.hasOwnProperty("useIpAliases"))
                             object.useIpAliases = message.useIpAliases;
@@ -10718,6 +11027,10 @@
                             object.tpuIpv4CidrBlock = message.tpuIpv4CidrBlock;
                         if (message.useRoutes != null && message.hasOwnProperty("useRoutes"))
                             object.useRoutes = message.useRoutes;
+                        if (message.stackType != null && message.hasOwnProperty("stackType"))
+                            object.stackType = options.enums === String ? $root.google.container.v1.StackType[message.stackType] : message.stackType;
+                        if (message.ipv6AccessType != null && message.hasOwnProperty("ipv6AccessType"))
+                            object.ipv6AccessType = options.enums === String ? $root.google.container.v1.IPv6AccessType[message.ipv6AccessType] : message.ipv6AccessType;
                         return object;
                     };
     
@@ -10790,6 +11103,7 @@
                      * @property {google.container.v1.IReleaseChannel|null} [releaseChannel] Cluster releaseChannel
                      * @property {google.container.v1.IWorkloadIdentityConfig|null} [workloadIdentityConfig] Cluster workloadIdentityConfig
                      * @property {google.container.v1.IMeshCertificates|null} [meshCertificates] Cluster meshCertificates
+                     * @property {google.container.v1.ICostManagementConfig|null} [costManagementConfig] Cluster costManagementConfig
                      * @property {google.container.v1.INotificationConfig|null} [notificationConfig] Cluster notificationConfig
                      * @property {google.container.v1.IConfidentialNodes|null} [confidentialNodes] Cluster confidentialNodes
                      * @property {google.container.v1.IIdentityServiceConfig|null} [identityServiceConfig] Cluster identityServiceConfig
@@ -11110,6 +11424,14 @@
                      * @instance
                      */
                     Cluster.prototype.meshCertificates = null;
+    
+                    /**
+                     * Cluster costManagementConfig.
+                     * @member {google.container.v1.ICostManagementConfig|null|undefined} costManagementConfig
+                     * @memberof google.container.v1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.costManagementConfig = null;
     
                     /**
                      * Cluster notificationConfig.
@@ -11434,6 +11756,8 @@
                             $root.google.container.v1.ReleaseChannel.encode(message.releaseChannel, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
                         if (message.workloadIdentityConfig != null && Object.hasOwnProperty.call(message, "workloadIdentityConfig"))
                             $root.google.container.v1.WorkloadIdentityConfig.encode(message.workloadIdentityConfig, writer.uint32(/* id 43, wireType 2 =*/346).fork()).ldelim();
+                        if (message.costManagementConfig != null && Object.hasOwnProperty.call(message, "costManagementConfig"))
+                            $root.google.container.v1.CostManagementConfig.encode(message.costManagementConfig, writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
                         if (message.notificationConfig != null && Object.hasOwnProperty.call(message, "notificationConfig"))
                             $root.google.container.v1.NotificationConfig.encode(message.notificationConfig, writer.uint32(/* id 49, wireType 2 =*/394).fork()).ldelim();
                         if (message.confidentialNodes != null && Object.hasOwnProperty.call(message, "confidentialNodes"))
@@ -11683,6 +12007,10 @@
                                 }
                             case 67: {
                                     message.meshCertificates = $root.google.container.v1.MeshCertificates.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 45: {
+                                    message.costManagementConfig = $root.google.container.v1.CostManagementConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 49: {
@@ -11992,6 +12320,11 @@
                             if (error)
                                 return "meshCertificates." + error;
                         }
+                        if (message.costManagementConfig != null && message.hasOwnProperty("costManagementConfig")) {
+                            var error = $root.google.container.v1.CostManagementConfig.verify(message.costManagementConfig);
+                            if (error)
+                                return "costManagementConfig." + error;
+                        }
                         if (message.notificationConfig != null && message.hasOwnProperty("notificationConfig")) {
                             var error = $root.google.container.v1.NotificationConfig.verify(message.notificationConfig);
                             if (error)
@@ -12276,6 +12609,11 @@
                                 throw TypeError(".google.container.v1.Cluster.meshCertificates: object expected");
                             message.meshCertificates = $root.google.container.v1.MeshCertificates.fromObject(object.meshCertificates);
                         }
+                        if (object.costManagementConfig != null) {
+                            if (typeof object.costManagementConfig !== "object")
+                                throw TypeError(".google.container.v1.Cluster.costManagementConfig: object expected");
+                            message.costManagementConfig = $root.google.container.v1.CostManagementConfig.fromObject(object.costManagementConfig);
+                        }
                         if (object.notificationConfig != null) {
                             if (typeof object.notificationConfig !== "object")
                                 throw TypeError(".google.container.v1.Cluster.notificationConfig: object expected");
@@ -12450,6 +12788,7 @@
                             object.shieldedNodes = null;
                             object.releaseChannel = null;
                             object.workloadIdentityConfig = null;
+                            object.costManagementConfig = null;
                             object.notificationConfig = null;
                             object.confidentialNodes = null;
                             object.identityServiceConfig = null;
@@ -12552,6 +12891,8 @@
                             object.releaseChannel = $root.google.container.v1.ReleaseChannel.toObject(message.releaseChannel, options);
                         if (message.workloadIdentityConfig != null && message.hasOwnProperty("workloadIdentityConfig"))
                             object.workloadIdentityConfig = $root.google.container.v1.WorkloadIdentityConfig.toObject(message.workloadIdentityConfig, options);
+                        if (message.costManagementConfig != null && message.hasOwnProperty("costManagementConfig"))
+                            object.costManagementConfig = $root.google.container.v1.CostManagementConfig.toObject(message.costManagementConfig, options);
                         if (message.notificationConfig != null && message.hasOwnProperty("notificationConfig"))
                             object.notificationConfig = $root.google.container.v1.NotificationConfig.toObject(message.notificationConfig, options);
                         if (message.confidentialNodes != null && message.hasOwnProperty("confidentialNodes"))
@@ -13341,6 +13682,7 @@
                      * @property {google.container.v1.IWorkloadIdentityConfig|null} [desiredWorkloadIdentityConfig] ClusterUpdate desiredWorkloadIdentityConfig
                      * @property {google.container.v1.IMeshCertificates|null} [desiredMeshCertificates] ClusterUpdate desiredMeshCertificates
                      * @property {google.container.v1.IShieldedNodes|null} [desiredShieldedNodes] ClusterUpdate desiredShieldedNodes
+                     * @property {google.container.v1.ICostManagementConfig|null} [desiredCostManagementConfig] ClusterUpdate desiredCostManagementConfig
                      * @property {google.container.v1.IDNSConfig|null} [desiredDnsConfig] ClusterUpdate desiredDnsConfig
                      * @property {google.container.v1.INodePoolAutoscaling|null} [desiredNodePoolAutoscaling] ClusterUpdate desiredNodePoolAutoscaling
                      * @property {Array.<string>|null} [desiredLocations] ClusterUpdate desiredLocations
@@ -13456,6 +13798,14 @@
                      * @instance
                      */
                     ClusterUpdate.prototype.desiredShieldedNodes = null;
+    
+                    /**
+                     * ClusterUpdate desiredCostManagementConfig.
+                     * @member {google.container.v1.ICostManagementConfig|null|undefined} desiredCostManagementConfig
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredCostManagementConfig = null;
     
                     /**
                      * ClusterUpdate desiredDnsConfig.
@@ -13732,6 +14082,8 @@
                             $root.google.container.v1.WorkloadIdentityConfig.encode(message.desiredWorkloadIdentityConfig, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                         if (message.desiredShieldedNodes != null && Object.hasOwnProperty.call(message, "desiredShieldedNodes"))
                             $root.google.container.v1.ShieldedNodes.encode(message.desiredShieldedNodes, writer.uint32(/* id 48, wireType 2 =*/386).fork()).ldelim();
+                        if (message.desiredCostManagementConfig != null && Object.hasOwnProperty.call(message, "desiredCostManagementConfig"))
+                            $root.google.container.v1.CostManagementConfig.encode(message.desiredCostManagementConfig, writer.uint32(/* id 49, wireType 2 =*/394).fork()).ldelim();
                         if (message.desiredDatapathProvider != null && Object.hasOwnProperty.call(message, "desiredDatapathProvider"))
                             writer.uint32(/* id 50, wireType 0 =*/400).int32(message.desiredDatapathProvider);
                         if (message.desiredPrivateIpv6GoogleAccess != null && Object.hasOwnProperty.call(message, "desiredPrivateIpv6GoogleAccess"))
@@ -13828,6 +14180,10 @@
                                 }
                             case 48: {
                                     message.desiredShieldedNodes = $root.google.container.v1.ShieldedNodes.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 49: {
+                                    message.desiredCostManagementConfig = $root.google.container.v1.CostManagementConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 53: {
@@ -14007,6 +14363,11 @@
                             var error = $root.google.container.v1.ShieldedNodes.verify(message.desiredShieldedNodes);
                             if (error)
                                 return "desiredShieldedNodes." + error;
+                        }
+                        if (message.desiredCostManagementConfig != null && message.hasOwnProperty("desiredCostManagementConfig")) {
+                            var error = $root.google.container.v1.CostManagementConfig.verify(message.desiredCostManagementConfig);
+                            if (error)
+                                return "desiredCostManagementConfig." + error;
                         }
                         if (message.desiredDnsConfig != null && message.hasOwnProperty("desiredDnsConfig")) {
                             var error = $root.google.container.v1.DNSConfig.verify(message.desiredDnsConfig);
@@ -14192,6 +14553,11 @@
                             if (typeof object.desiredShieldedNodes !== "object")
                                 throw TypeError(".google.container.v1.ClusterUpdate.desiredShieldedNodes: object expected");
                             message.desiredShieldedNodes = $root.google.container.v1.ShieldedNodes.fromObject(object.desiredShieldedNodes);
+                        }
+                        if (object.desiredCostManagementConfig != null) {
+                            if (typeof object.desiredCostManagementConfig !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredCostManagementConfig: object expected");
+                            message.desiredCostManagementConfig = $root.google.container.v1.CostManagementConfig.fromObject(object.desiredCostManagementConfig);
                         }
                         if (object.desiredDnsConfig != null) {
                             if (typeof object.desiredDnsConfig !== "object")
@@ -14380,6 +14746,7 @@
                             object.desiredDatabaseEncryption = null;
                             object.desiredWorkloadIdentityConfig = null;
                             object.desiredShieldedNodes = null;
+                            object.desiredCostManagementConfig = null;
                             object.desiredDatapathProvider = options.enums === String ? "DATAPATH_PROVIDER_UNSPECIFIED" : 0;
                             object.desiredPrivateIpv6GoogleAccess = options.enums === String ? "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED" : 0;
                             object.desiredDnsConfig = null;
@@ -14440,6 +14807,8 @@
                             object.desiredWorkloadIdentityConfig = $root.google.container.v1.WorkloadIdentityConfig.toObject(message.desiredWorkloadIdentityConfig, options);
                         if (message.desiredShieldedNodes != null && message.hasOwnProperty("desiredShieldedNodes"))
                             object.desiredShieldedNodes = $root.google.container.v1.ShieldedNodes.toObject(message.desiredShieldedNodes, options);
+                        if (message.desiredCostManagementConfig != null && message.hasOwnProperty("desiredCostManagementConfig"))
+                            object.desiredCostManagementConfig = $root.google.container.v1.CostManagementConfig.toObject(message.desiredCostManagementConfig, options);
                         if (message.desiredDatapathProvider != null && message.hasOwnProperty("desiredDatapathProvider"))
                             object.desiredDatapathProvider = options.enums === String ? $root.google.container.v1.DatapathProvider[message.desiredDatapathProvider] : message.desiredDatapathProvider;
                         if (message.desiredPrivateIpv6GoogleAccess != null && message.hasOwnProperty("desiredPrivateIpv6GoogleAccess"))
@@ -36122,6 +36491,209 @@
                     return ReleaseChannel;
                 })();
     
+                v1.CostManagementConfig = (function() {
+    
+                    /**
+                     * Properties of a CostManagementConfig.
+                     * @memberof google.container.v1
+                     * @interface ICostManagementConfig
+                     * @property {boolean|null} [enabled] CostManagementConfig enabled
+                     */
+    
+                    /**
+                     * Constructs a new CostManagementConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a CostManagementConfig.
+                     * @implements ICostManagementConfig
+                     * @constructor
+                     * @param {google.container.v1.ICostManagementConfig=} [properties] Properties to set
+                     */
+                    function CostManagementConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CostManagementConfig enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1.CostManagementConfig
+                     * @instance
+                     */
+                    CostManagementConfig.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new CostManagementConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.CostManagementConfig
+                     * @static
+                     * @param {google.container.v1.ICostManagementConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.CostManagementConfig} CostManagementConfig instance
+                     */
+                    CostManagementConfig.create = function create(properties) {
+                        return new CostManagementConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CostManagementConfig message. Does not implicitly {@link google.container.v1.CostManagementConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.CostManagementConfig
+                     * @static
+                     * @param {google.container.v1.ICostManagementConfig} message CostManagementConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CostManagementConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CostManagementConfig message, length delimited. Does not implicitly {@link google.container.v1.CostManagementConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.CostManagementConfig
+                     * @static
+                     * @param {google.container.v1.ICostManagementConfig} message CostManagementConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CostManagementConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CostManagementConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.CostManagementConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.CostManagementConfig} CostManagementConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CostManagementConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.CostManagementConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.enabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CostManagementConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.CostManagementConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.CostManagementConfig} CostManagementConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CostManagementConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CostManagementConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.CostManagementConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CostManagementConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CostManagementConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.CostManagementConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.CostManagementConfig} CostManagementConfig
+                     */
+                    CostManagementConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.CostManagementConfig)
+                            return object;
+                        var message = new $root.google.container.v1.CostManagementConfig();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CostManagementConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.CostManagementConfig
+                     * @static
+                     * @param {google.container.v1.CostManagementConfig} message CostManagementConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CostManagementConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CostManagementConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.CostManagementConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CostManagementConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CostManagementConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1.CostManagementConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CostManagementConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1.CostManagementConfig";
+                    };
+    
+                    return CostManagementConfig;
+                })();
+    
                 v1.IntraNodeVisibilityConfig = (function() {
     
                     /**
@@ -44481,6 +45053,38 @@
                     };
     
                     return ManagedPrometheusConfig;
+                })();
+    
+                /**
+                 * StackType enum.
+                 * @name google.container.v1.StackType
+                 * @enum {number}
+                 * @property {number} STACK_TYPE_UNSPECIFIED=0 STACK_TYPE_UNSPECIFIED value
+                 * @property {number} IPV4=1 IPV4 value
+                 * @property {number} IPV4_IPV6=2 IPV4_IPV6 value
+                 */
+                v1.StackType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STACK_TYPE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "IPV4"] = 1;
+                    values[valuesById[2] = "IPV4_IPV6"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * IPv6AccessType enum.
+                 * @name google.container.v1.IPv6AccessType
+                 * @enum {number}
+                 * @property {number} IPV6_ACCESS_TYPE_UNSPECIFIED=0 IPV6_ACCESS_TYPE_UNSPECIFIED value
+                 * @property {number} INTERNAL=1 INTERNAL value
+                 * @property {number} EXTERNAL=2 EXTERNAL value
+                 */
+                v1.IPv6AccessType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "IPV6_ACCESS_TYPE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "INTERNAL"] = 1;
+                    values[valuesById[2] = "EXTERNAL"] = 2;
+                    return values;
                 })();
     
                 return v1;

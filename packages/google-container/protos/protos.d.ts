@@ -2631,6 +2631,9 @@ export namespace google {
 
                 /** AddonsConfig gcpFilestoreCsiDriverConfig */
                 gcpFilestoreCsiDriverConfig?: (google.container.v1.IGcpFilestoreCsiDriverConfig|null);
+
+                /** AddonsConfig gkeBackupAgentConfig */
+                gkeBackupAgentConfig?: (google.container.v1.IGkeBackupAgentConfig|null);
             }
 
             /** Represents an AddonsConfig. */
@@ -2668,6 +2671,9 @@ export namespace google {
 
                 /** AddonsConfig gcpFilestoreCsiDriverConfig. */
                 public gcpFilestoreCsiDriverConfig?: (google.container.v1.IGcpFilestoreCsiDriverConfig|null);
+
+                /** AddonsConfig gkeBackupAgentConfig. */
+                public gkeBackupAgentConfig?: (google.container.v1.IGkeBackupAgentConfig|null);
 
                 /**
                  * Creates a new AddonsConfig instance using the specified properties.
@@ -3969,6 +3975,103 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a GkeBackupAgentConfig. */
+            interface IGkeBackupAgentConfig {
+
+                /** GkeBackupAgentConfig enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a GkeBackupAgentConfig. */
+            class GkeBackupAgentConfig implements IGkeBackupAgentConfig {
+
+                /**
+                 * Constructs a new GkeBackupAgentConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IGkeBackupAgentConfig);
+
+                /** GkeBackupAgentConfig enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Creates a new GkeBackupAgentConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GkeBackupAgentConfig instance
+                 */
+                public static create(properties?: google.container.v1.IGkeBackupAgentConfig): google.container.v1.GkeBackupAgentConfig;
+
+                /**
+                 * Encodes the specified GkeBackupAgentConfig message. Does not implicitly {@link google.container.v1.GkeBackupAgentConfig.verify|verify} messages.
+                 * @param message GkeBackupAgentConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IGkeBackupAgentConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GkeBackupAgentConfig message, length delimited. Does not implicitly {@link google.container.v1.GkeBackupAgentConfig.verify|verify} messages.
+                 * @param message GkeBackupAgentConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IGkeBackupAgentConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GkeBackupAgentConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GkeBackupAgentConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.GkeBackupAgentConfig;
+
+                /**
+                 * Decodes a GkeBackupAgentConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GkeBackupAgentConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.GkeBackupAgentConfig;
+
+                /**
+                 * Verifies a GkeBackupAgentConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GkeBackupAgentConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GkeBackupAgentConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.GkeBackupAgentConfig;
+
+                /**
+                 * Creates a plain object from a GkeBackupAgentConfig message. Also converts values to other types if specified.
+                 * @param message GkeBackupAgentConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.GkeBackupAgentConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GkeBackupAgentConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GkeBackupAgentConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a MasterAuthorizedNetworksConfig. */
             interface IMasterAuthorizedNetworksConfig {
 
@@ -4541,6 +4644,12 @@ export namespace google {
 
                 /** IPAllocationPolicy useRoutes */
                 useRoutes?: (boolean|null);
+
+                /** IPAllocationPolicy stackType */
+                stackType?: (google.container.v1.StackType|keyof typeof google.container.v1.StackType|null);
+
+                /** IPAllocationPolicy ipv6AccessType */
+                ipv6AccessType?: (google.container.v1.IPv6AccessType|keyof typeof google.container.v1.IPv6AccessType|null);
             }
 
             /** Represents a IPAllocationPolicy. */
@@ -4590,6 +4699,12 @@ export namespace google {
 
                 /** IPAllocationPolicy useRoutes. */
                 public useRoutes: boolean;
+
+                /** IPAllocationPolicy stackType. */
+                public stackType: (google.container.v1.StackType|keyof typeof google.container.v1.StackType);
+
+                /** IPAllocationPolicy ipv6AccessType. */
+                public ipv6AccessType: (google.container.v1.IPv6AccessType|keyof typeof google.container.v1.IPv6AccessType);
 
                 /**
                  * Creates a new IPAllocationPolicy instance using the specified properties.
@@ -4773,6 +4888,9 @@ export namespace google {
 
                 /** Cluster meshCertificates */
                 meshCertificates?: (google.container.v1.IMeshCertificates|null);
+
+                /** Cluster costManagementConfig */
+                costManagementConfig?: (google.container.v1.ICostManagementConfig|null);
 
                 /** Cluster notificationConfig */
                 notificationConfig?: (google.container.v1.INotificationConfig|null);
@@ -4966,6 +5084,9 @@ export namespace google {
 
                 /** Cluster meshCertificates. */
                 public meshCertificates?: (google.container.v1.IMeshCertificates|null);
+
+                /** Cluster costManagementConfig. */
+                public costManagementConfig?: (google.container.v1.ICostManagementConfig|null);
 
                 /** Cluster notificationConfig. */
                 public notificationConfig?: (google.container.v1.INotificationConfig|null);
@@ -5470,6 +5591,9 @@ export namespace google {
                 /** ClusterUpdate desiredShieldedNodes */
                 desiredShieldedNodes?: (google.container.v1.IShieldedNodes|null);
 
+                /** ClusterUpdate desiredCostManagementConfig */
+                desiredCostManagementConfig?: (google.container.v1.ICostManagementConfig|null);
+
                 /** ClusterUpdate desiredDnsConfig */
                 desiredDnsConfig?: (google.container.v1.IDNSConfig|null);
 
@@ -5584,6 +5708,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredShieldedNodes. */
                 public desiredShieldedNodes?: (google.container.v1.IShieldedNodes|null);
+
+                /** ClusterUpdate desiredCostManagementConfig. */
+                public desiredCostManagementConfig?: (google.container.v1.ICostManagementConfig|null);
 
                 /** ClusterUpdate desiredDnsConfig. */
                 public desiredDnsConfig?: (google.container.v1.IDNSConfig|null);
@@ -14078,6 +14205,103 @@ export namespace google {
                 }
             }
 
+            /** Properties of a CostManagementConfig. */
+            interface ICostManagementConfig {
+
+                /** CostManagementConfig enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a CostManagementConfig. */
+            class CostManagementConfig implements ICostManagementConfig {
+
+                /**
+                 * Constructs a new CostManagementConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.ICostManagementConfig);
+
+                /** CostManagementConfig enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Creates a new CostManagementConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CostManagementConfig instance
+                 */
+                public static create(properties?: google.container.v1.ICostManagementConfig): google.container.v1.CostManagementConfig;
+
+                /**
+                 * Encodes the specified CostManagementConfig message. Does not implicitly {@link google.container.v1.CostManagementConfig.verify|verify} messages.
+                 * @param message CostManagementConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.ICostManagementConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CostManagementConfig message, length delimited. Does not implicitly {@link google.container.v1.CostManagementConfig.verify|verify} messages.
+                 * @param message CostManagementConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.ICostManagementConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CostManagementConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CostManagementConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.CostManagementConfig;
+
+                /**
+                 * Decodes a CostManagementConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CostManagementConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.CostManagementConfig;
+
+                /**
+                 * Verifies a CostManagementConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CostManagementConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CostManagementConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.CostManagementConfig;
+
+                /**
+                 * Creates a plain object from a CostManagementConfig message. Also converts values to other types if specified.
+                 * @param message CostManagementConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.CostManagementConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CostManagementConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CostManagementConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of an IntraNodeVisibilityConfig. */
             interface IIntraNodeVisibilityConfig {
 
@@ -17697,6 +17921,20 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** StackType enum. */
+            enum StackType {
+                STACK_TYPE_UNSPECIFIED = 0,
+                IPV4 = 1,
+                IPV4_IPV6 = 2
+            }
+
+            /** IPv6AccessType enum. */
+            enum IPv6AccessType {
+                IPV6_ACCESS_TYPE_UNSPECIFIED = 0,
+                INTERNAL = 1,
+                EXTERNAL = 2
             }
         }
     }

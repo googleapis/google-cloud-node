@@ -1290,6 +1290,10 @@
                     "gcpFilestoreCsiDriverConfig": {
                       "type": "GcpFilestoreCsiDriverConfig",
                       "id": 14
+                    },
+                    "gkeBackupAgentConfig": {
+                      "type": "GkeBackupAgentConfig",
+                      "id": 16
                     }
                   }
                 },
@@ -1423,6 +1427,14 @@
                   }
                 },
                 "GcpFilestoreCsiDriverConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "GkeBackupAgentConfig": {
                   "fields": {
                     "enabled": {
                       "type": "bool",
@@ -1571,6 +1583,14 @@
                     "useRoutes": {
                       "type": "bool",
                       "id": 15
+                    },
+                    "stackType": {
+                      "type": "StackType",
+                      "id": 16
+                    },
+                    "ipv6AccessType": {
+                      "type": "IPv6AccessType",
+                      "id": 17
                     }
                   }
                 },
@@ -1727,6 +1747,10 @@
                     "meshCertificates": {
                       "type": "MeshCertificates",
                       "id": 67
+                    },
+                    "costManagementConfig": {
+                      "type": "CostManagementConfig",
+                      "id": 45
                     },
                     "notificationConfig": {
                       "type": "NotificationConfig",
@@ -1939,6 +1963,10 @@
                     "desiredShieldedNodes": {
                       "type": "ShieldedNodes",
                       "id": 48
+                    },
+                    "desiredCostManagementConfig": {
+                      "type": "CostManagementConfig",
+                      "id": 49
                     },
                     "desiredDnsConfig": {
                       "type": "DNSConfig",
@@ -4206,6 +4234,14 @@
                     }
                   }
                 },
+                "CostManagementConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
                 "IntraNodeVisibilityConfig": {
                   "fields": {
                     "enabled": {
@@ -4732,6 +4768,20 @@
                       "type": "bool",
                       "id": 1
                     }
+                  }
+                },
+                "StackType": {
+                  "values": {
+                    "STACK_TYPE_UNSPECIFIED": 0,
+                    "IPV4": 1,
+                    "IPV4_IPV6": 2
+                  }
+                },
+                "IPv6AccessType": {
+                  "values": {
+                    "IPV6_ACCESS_TYPE_UNSPECIFIED": 0,
+                    "INTERNAL": 1,
+                    "EXTERNAL": 2
                   }
                 }
               }
