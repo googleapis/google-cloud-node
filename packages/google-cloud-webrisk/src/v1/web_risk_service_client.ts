@@ -327,7 +327,9 @@ export class WebRiskServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.webrisk.v1.ThreatType} request.threatType
-   *   Required. The threat list to update. Only a single ThreatType should be specified.
+   *   Required. The threat list to update. Only a single ThreatType should be specified
+   *   per request. If you want to handle multiple ThreatTypes, you must make one
+   *   request per ThreatType.
    * @param {Buffer} request.versionToken
    *   The current version token of the client for the requested list (the
    *   client version that was received from the last successful diff).
@@ -513,6 +515,8 @@ export class WebRiskServiceClient {
    * @param {Buffer} request.hashPrefix
    *   A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
    *   hash. For JSON requests, this field is base64-encoded.
+   *   Note that if this parameter is provided by a URI, it must be encoded using
+   *   the web safe base64 variant (RFC 4648).
    * @param {number[]} request.threatTypes
    *   Required. The ThreatLists to search in. Multiple ThreatLists may be specified.
    * @param {object} [options]
@@ -595,7 +599,8 @@ export class WebRiskServiceClient {
    * content, the site will be added to the [Google's Social Engineering
    * lists](https://support.google.com/webmasters/answer/6350487/) in order to
    * protect users that could get exposed to this threat in the future. Only
-   * projects with CREATE_SUBMISSION_USERS visibility can use this method.
+   * allowlisted projects can use this method during Early Access. Please reach
+   * out to Sales or your customer engineer to obtain access.
    *
    * @param {Object} request
    *   The request object that will be sent.

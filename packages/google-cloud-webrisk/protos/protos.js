@@ -402,6 +402,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.versionToken != null && message.hasOwnProperty("versionToken"))
@@ -443,6 +444,10 @@
                             case "UNWANTED_SOFTWARE":
                             case 3:
                                 message.threatType = 3;
+                                break;
+                            case "SOCIAL_ENGINEERING_EXTENDED_COVERAGE":
+                            case 4:
+                                message.threatType = 4;
                                 break;
                             }
                             if (object.versionToken != null)
@@ -1178,6 +1183,22 @@
                             return typeUrlPrefix + "/google.cloud.webrisk.v1.ComputeThreatListDiffResponse";
                         };
     
+                        /**
+                         * ResponseType enum.
+                         * @name google.cloud.webrisk.v1.ComputeThreatListDiffResponse.ResponseType
+                         * @enum {number}
+                         * @property {number} RESPONSE_TYPE_UNSPECIFIED=0 RESPONSE_TYPE_UNSPECIFIED value
+                         * @property {number} DIFF=1 DIFF value
+                         * @property {number} RESET=2 RESET value
+                         */
+                        ComputeThreatListDiffResponse.ResponseType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RESPONSE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DIFF"] = 1;
+                            values[valuesById[2] = "RESET"] = 2;
+                            return values;
+                        })();
+    
                         ComputeThreatListDiffResponse.Checksum = (function() {
     
                             /**
@@ -1390,22 +1411,6 @@
                             return Checksum;
                         })();
     
-                        /**
-                         * ResponseType enum.
-                         * @name google.cloud.webrisk.v1.ComputeThreatListDiffResponse.ResponseType
-                         * @enum {number}
-                         * @property {number} RESPONSE_TYPE_UNSPECIFIED=0 RESPONSE_TYPE_UNSPECIFIED value
-                         * @property {number} DIFF=1 DIFF value
-                         * @property {number} RESET=2 RESET value
-                         */
-                        ComputeThreatListDiffResponse.ResponseType = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "RESPONSE_TYPE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "DIFF"] = 1;
-                            values[valuesById[2] = "RESET"] = 2;
-                            return values;
-                        })();
-    
                         return ComputeThreatListDiffResponse;
                     })();
     
@@ -1581,6 +1586,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                         break;
                                     }
                             }
@@ -1623,6 +1629,10 @@
                                     case "UNWANTED_SOFTWARE":
                                     case 3:
                                         message.threatTypes[i] = 3;
+                                        break;
+                                    case "SOCIAL_ENGINEERING_EXTENDED_COVERAGE":
+                                    case 4:
+                                        message.threatTypes[i] = 4;
                                         break;
                                     }
                             }
@@ -2059,6 +2069,7 @@
                                         case 1:
                                         case 2:
                                         case 3:
+                                        case 4:
                                             break;
                                         }
                                 }
@@ -2104,6 +2115,10 @@
                                         case "UNWANTED_SOFTWARE":
                                         case 3:
                                             message.threatTypes[i] = 3;
+                                            break;
+                                        case "SOCIAL_ENGINEERING_EXTENDED_COVERAGE":
+                                        case 4:
+                                            message.threatTypes[i] = 4;
                                             break;
                                         }
                                 }
@@ -2346,6 +2361,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                         break;
                                     }
                             }
@@ -2391,6 +2407,10 @@
                                     case "UNWANTED_SOFTWARE":
                                     case 3:
                                         message.threatTypes[i] = 3;
+                                        break;
+                                    case "SOCIAL_ENGINEERING_EXTENDED_COVERAGE":
+                                    case 4:
+                                        message.threatTypes[i] = 4;
                                         break;
                                     }
                             }
@@ -2893,6 +2913,7 @@
                                         case 1:
                                         case 2:
                                         case 3:
+                                        case 4:
                                             break;
                                         }
                                 }
@@ -2941,6 +2962,10 @@
                                         case "UNWANTED_SOFTWARE":
                                         case 3:
                                             message.threatTypes[i] = 3;
+                                            break;
+                                        case "SOCIAL_ENGINEERING_EXTENDED_COVERAGE":
+                                        case 4:
+                                            message.threatTypes[i] = 4;
                                             break;
                                         }
                                 }
@@ -3024,6 +3049,42 @@
                         })();
     
                         return SearchHashesResponse;
+                    })();
+    
+                    /**
+                     * ThreatType enum.
+                     * @name google.cloud.webrisk.v1.ThreatType
+                     * @enum {number}
+                     * @property {number} THREAT_TYPE_UNSPECIFIED=0 THREAT_TYPE_UNSPECIFIED value
+                     * @property {number} MALWARE=1 MALWARE value
+                     * @property {number} SOCIAL_ENGINEERING=2 SOCIAL_ENGINEERING value
+                     * @property {number} UNWANTED_SOFTWARE=3 UNWANTED_SOFTWARE value
+                     * @property {number} SOCIAL_ENGINEERING_EXTENDED_COVERAGE=4 SOCIAL_ENGINEERING_EXTENDED_COVERAGE value
+                     */
+                    v1.ThreatType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "THREAT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MALWARE"] = 1;
+                        values[valuesById[2] = "SOCIAL_ENGINEERING"] = 2;
+                        values[valuesById[3] = "UNWANTED_SOFTWARE"] = 3;
+                        values[valuesById[4] = "SOCIAL_ENGINEERING_EXTENDED_COVERAGE"] = 4;
+                        return values;
+                    })();
+    
+                    /**
+                     * CompressionType enum.
+                     * @name google.cloud.webrisk.v1.CompressionType
+                     * @enum {number}
+                     * @property {number} COMPRESSION_TYPE_UNSPECIFIED=0 COMPRESSION_TYPE_UNSPECIFIED value
+                     * @property {number} RAW=1 RAW value
+                     * @property {number} RICE=2 RICE value
+                     */
+                    v1.CompressionType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "COMPRESSION_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "RAW"] = 1;
+                        values[valuesById[2] = "RICE"] = 2;
+                        return values;
                     })();
     
                     v1.ThreatEntryAdditions = (function() {
@@ -3514,40 +3575,6 @@
                         };
     
                         return ThreatEntryRemovals;
-                    })();
-    
-                    /**
-                     * ThreatType enum.
-                     * @name google.cloud.webrisk.v1.ThreatType
-                     * @enum {number}
-                     * @property {number} THREAT_TYPE_UNSPECIFIED=0 THREAT_TYPE_UNSPECIFIED value
-                     * @property {number} MALWARE=1 MALWARE value
-                     * @property {number} SOCIAL_ENGINEERING=2 SOCIAL_ENGINEERING value
-                     * @property {number} UNWANTED_SOFTWARE=3 UNWANTED_SOFTWARE value
-                     */
-                    v1.ThreatType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "THREAT_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "MALWARE"] = 1;
-                        values[valuesById[2] = "SOCIAL_ENGINEERING"] = 2;
-                        values[valuesById[3] = "UNWANTED_SOFTWARE"] = 3;
-                        return values;
-                    })();
-    
-                    /**
-                     * CompressionType enum.
-                     * @name google.cloud.webrisk.v1.CompressionType
-                     * @enum {number}
-                     * @property {number} COMPRESSION_TYPE_UNSPECIFIED=0 COMPRESSION_TYPE_UNSPECIFIED value
-                     * @property {number} RAW=1 RAW value
-                     * @property {number} RICE=2 RICE value
-                     */
-                    v1.CompressionType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "COMPRESSION_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "RAW"] = 1;
-                        values[valuesById[2] = "RICE"] = 2;
-                        return values;
                     })();
     
                     v1.RawIndices = (function() {

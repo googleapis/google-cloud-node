@@ -484,6 +484,13 @@ export namespace google {
 
                 namespace ComputeThreatListDiffResponse {
 
+                    /** ResponseType enum. */
+                    enum ResponseType {
+                        RESPONSE_TYPE_UNSPECIFIED = 0,
+                        DIFF = 1,
+                        RESET = 2
+                    }
+
                     /** Properties of a Checksum. */
                     interface IChecksum {
 
@@ -579,13 +586,6 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** ResponseType enum. */
-                    enum ResponseType {
-                        RESPONSE_TYPE_UNSPECIFIED = 0,
-                        DIFF = 1,
-                        RESET = 2
                     }
                 }
 
@@ -1213,6 +1213,22 @@ export namespace google {
                     }
                 }
 
+                /** ThreatType enum. */
+                enum ThreatType {
+                    THREAT_TYPE_UNSPECIFIED = 0,
+                    MALWARE = 1,
+                    SOCIAL_ENGINEERING = 2,
+                    UNWANTED_SOFTWARE = 3,
+                    SOCIAL_ENGINEERING_EXTENDED_COVERAGE = 4
+                }
+
+                /** CompressionType enum. */
+                enum CompressionType {
+                    COMPRESSION_TYPE_UNSPECIFIED = 0,
+                    RAW = 1,
+                    RICE = 2
+                }
+
                 /** Properties of a ThreatEntryAdditions. */
                 interface IThreatEntryAdditions {
 
@@ -1417,21 +1433,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** ThreatType enum. */
-                enum ThreatType {
-                    THREAT_TYPE_UNSPECIFIED = 0,
-                    MALWARE = 1,
-                    SOCIAL_ENGINEERING = 2,
-                    UNWANTED_SOFTWARE = 3
-                }
-
-                /** CompressionType enum. */
-                enum CompressionType {
-                    COMPRESSION_TYPE_UNSPECIFIED = 0,
-                    RAW = 1,
-                    RICE = 2
                 }
 
                 /** Properties of a RawIndices. */

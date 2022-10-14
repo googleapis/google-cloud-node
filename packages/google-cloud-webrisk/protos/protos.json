@@ -169,19 +169,19 @@
                         }
                       },
                       "nested": {
+                        "ResponseType": {
+                          "values": {
+                            "RESPONSE_TYPE_UNSPECIFIED": 0,
+                            "DIFF": 1,
+                            "RESET": 2
+                          }
+                        },
                         "Checksum": {
                           "fields": {
                             "sha256": {
                               "type": "bytes",
                               "id": 1
                             }
-                          }
-                        },
-                        "ResponseType": {
-                          "values": {
-                            "RESPONSE_TYPE_UNSPECIFIED": 0,
-                            "DIFF": 1,
-                            "RESET": 2
                           }
                         }
                       }
@@ -276,6 +276,22 @@
                         }
                       }
                     },
+                    "ThreatType": {
+                      "values": {
+                        "THREAT_TYPE_UNSPECIFIED": 0,
+                        "MALWARE": 1,
+                        "SOCIAL_ENGINEERING": 2,
+                        "UNWANTED_SOFTWARE": 3,
+                        "SOCIAL_ENGINEERING_EXTENDED_COVERAGE": 4
+                      }
+                    },
+                    "CompressionType": {
+                      "values": {
+                        "COMPRESSION_TYPE_UNSPECIFIED": 0,
+                        "RAW": 1,
+                        "RICE": 2
+                      }
+                    },
                     "ThreatEntryAdditions": {
                       "fields": {
                         "rawHashes": {
@@ -299,21 +315,6 @@
                           "type": "RiceDeltaEncoding",
                           "id": 2
                         }
-                      }
-                    },
-                    "ThreatType": {
-                      "values": {
-                        "THREAT_TYPE_UNSPECIFIED": 0,
-                        "MALWARE": 1,
-                        "SOCIAL_ENGINEERING": 2,
-                        "UNWANTED_SOFTWARE": 3
-                      }
-                    },
-                    "CompressionType": {
-                      "values": {
-                        "COMPRESSION_TYPE_UNSPECIFIED": 0,
-                        "RAW": 1,
-                        "RICE": 2
                       }
                     },
                     "RawIndices": {

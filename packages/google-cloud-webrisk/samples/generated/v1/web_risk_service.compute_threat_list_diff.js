@@ -29,7 +29,9 @@ function main(threatType, constraints) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The threat list to update. Only a single ThreatType should be specified.
+   *  Required. The threat list to update. Only a single ThreatType should be specified
+   *  per request. If you want to handle multiple ThreatTypes, you must make one
+   *  request per ThreatType.
    */
   // const threatType = {}
   /**
