@@ -1,0 +1,17 @@
+{
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "name": "recommender",
+  "issue_tracker": "",
+  "default_version": "v1",
+  "api_id": "recommender.googleapis.com",
+  "distribution_name": "@google-cloud/recommender",
+  "requires_billing": true,
+  "product_documentation": "https://cloud.google.com/recommender/docs",
+  "codeowner_team": "@googleapis/ml-apis",
+  "name_pretty": "Recommender",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/recommender/latest",
+  "release_level": "stable",
+  "api_shortname": "recommender",
+  "library_type": "GAPIC_AUTO"
+}
