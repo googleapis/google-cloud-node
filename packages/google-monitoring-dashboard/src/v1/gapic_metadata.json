@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.monitoring.dashboard.v1",
+  "libraryPackage": "@google-cloud/monitoring-dashboards",
+  "services": {
+    "DashboardsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DashboardsServiceClient",
+          "rpcs": {
+            "CreateDashboard": {
+              "methods": [
+                "createDashboard"
+              ]
+            },
+            "GetDashboard": {
+              "methods": [
+                "getDashboard"
+              ]
+            },
+            "DeleteDashboard": {
+              "methods": [
+                "deleteDashboard"
+              ]
+            },
+            "UpdateDashboard": {
+              "methods": [
+                "updateDashboard"
+              ]
+            },
+            "ListDashboards": {
+              "methods": [
+                "listDashboards",
+                "listDashboardsStream",
+                "listDashboardsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DashboardsServiceClient",
+          "rpcs": {
+            "CreateDashboard": {
+              "methods": [
+                "createDashboard"
+              ]
+            },
+            "GetDashboard": {
+              "methods": [
+                "getDashboard"
+              ]
+            },
+            "DeleteDashboard": {
+              "methods": [
+                "deleteDashboard"
+              ]
+            },
+            "UpdateDashboard": {
+              "methods": [
+                "updateDashboard"
+              ]
+            },
+            "ListDashboards": {
+              "methods": [
+                "listDashboards",
+                "listDashboardsStream",
+                "listDashboardsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
