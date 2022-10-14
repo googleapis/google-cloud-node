@@ -1,6 +1,0 @@
-[
-  "../../protos/google/cloud/batch/v1/batch.proto",
-  "../../protos/google/cloud/batch/v1/job.proto",
-  "../../protos/google/cloud/batch/v1/task.proto",
-  "../../protos/google/cloud/batch/v1/volume.proto"
-]
