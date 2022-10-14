@@ -29,11 +29,7 @@
     "packages/google-cloud-shell": {},
     "packages/google-devtools-artifactregistry": {},
     "packages/google-iam": {},
-    "packages/typeless-sample-bot": {},
-    "packages/google-cloud-bigquery-datapolicies": {},
-    "packages/google-cloud-bigquery-analyticshub": {},
-    "packages/google-maps-routing": {},
-    "packages/google-cloud-discoveryengine": {}
+    "packages/google-cloud-discoveryengine": {},
     "packages/google-maps-routing": {},
     "packages/google-monitoring-dashboard": {},
     "packages/typeless-sample-bot": {}
