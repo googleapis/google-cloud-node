@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.3.0](https://github.com/googleapis/nodejs-cloud-container/compare/v4.2.0...v4.3.0) (2022-10-14)
+
+
+### Features
+
+* Launch GKE Cost Allocations configuration to the v1 GKE API ([#577](https://github.com/googleapis/nodejs-cloud-container/issues/577)) ([b45ac9f](https://github.com/googleapis/nodejs-cloud-container/commit/b45ac9fb6cff9a634ea62b2c9e6998c57bf837ef))
+
 ## [4.2.0](https://github.com/googleapis/nodejs-cloud-container/compare/v4.1.3...v4.2.0) (2022-09-22)
 
 
