@@ -1,14 +1,14 @@
 {
   "name": "addressvalidation",
-  "name_pretty": "",
-  "product_documentation": "",
+  "name_pretty": "Address Validation API",
+  "product_documentation": "https://mapsplatform.google.com/maps-products/address-validation/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/addressvalidation/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "release_level": "beta",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/addressvalidation",
-  "api_id": "google.maps.addressvalidation.v1",
+  "api_id": "addressvalidation.googleapis.com",
   "default_version": "v1",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO"
