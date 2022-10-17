@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/nodejs-analytics-data/compare/v3.0.3...v3.1.0) (2022-10-13)
+
+
+### Features
+
+* Add `subject_to_thresholding` field to `ResponseMetadata` type ([#265](https://github.com/googleapis/nodejs-analytics-data/issues/265)) ([410f0e0](https://github.com/googleapis/nodejs-analytics-data/commit/410f0e099fa5aa305e5120031b848dda99499e45))
+
 ## [3.0.3](https://github.com/googleapis/nodejs-analytics-data/compare/v3.0.2...v3.0.3) (2022-09-22)
 
 
