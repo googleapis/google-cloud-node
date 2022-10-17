@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [3.1.2](https://github.com/googleapis/nodejs-automl/compare/v3.1.1...v3.1.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#634](https://github.com/googleapis/nodejs-automl/issues/634)) ([1949bf9](https://github.com/googleapis/nodejs-automl/commit/1949bf9a26b63b4eefd13f5c6164691db46a0df2))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-automl/compare/v3.1.0...v3.1.1) (2022-09-01)
 
 
