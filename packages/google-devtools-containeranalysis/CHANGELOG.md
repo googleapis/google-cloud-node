@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [4.4.0](https://github.com/googleapis/nodejs-containeranalysis/compare/v4.3.0...v4.4.0) (2022-10-06)
+
+
+### Features
+
+* Add new analysis status and cvss version fields ([#443](https://github.com/googleapis/nodejs-containeranalysis/issues/443)) ([2b4db8e](https://github.com/googleapis/nodejs-containeranalysis/commit/2b4db8ee9859823e32de8256853429adf88cf207))
+
 ## [4.3.0](https://github.com/googleapis/nodejs-containeranalysis/compare/v4.2.0...v4.3.0) (2022-09-22)
 
 
