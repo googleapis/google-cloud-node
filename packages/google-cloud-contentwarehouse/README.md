@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,6 +53,58 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/contentwarehouse
 ```
 
+
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The parent, which owns this collection of document.
+ *  Format: projects/{project_number}/locations/{location}.
+ */
+// const parent = 'abc123'
+/**
+ *  The maximum number of rule sets to return. The service may return
+ *  fewer than this value.
+ *  If unspecified, at most 50 rule sets will be returned.
+ *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+ */
+// const pageSize = 1234
+/**
+ *  A page token, received from a previous `ListRuleSets` call.
+ *  Provide this to retrieve the subsequent page.
+ *  When paginating, all other parameters provided to `ListRuleSets`
+ *  must match the call that provided the page token.
+ */
+// const pageToken = 'abc123'
+
+// Imports the Contentwarehouse library
+const {RuleSetServiceClient} = require('@google-cloud/contentwarehouse').v1;
+
+// Instantiates a client
+const contentwarehouseClient = new RuleSetServiceClient();
+
+async function callListRuleSets() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await contentwarehouseClient.listRuleSetsAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListRuleSets();
+
+```
 
 
 
@@ -88,6 +140,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Synonym_set_service.get_synonym_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.get_synonym_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.get_synonym_set.js,samples/README.md) |
 | Synonym_set_service.list_synonym_sets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.list_synonym_sets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.list_synonym_sets.js,samples/README.md) |
 | Synonym_set_service.update_synonym_set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.update_synonym_set.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.update_synonym_set.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/quickstart.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/test/quickstart.js,samples/README.md) |
 
 
