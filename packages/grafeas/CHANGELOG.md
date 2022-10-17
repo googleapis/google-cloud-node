@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/nodejs-grafeas/compare/v4.1.2...v4.2.0) (2022-10-06)
+
+
+### Features
+
+* Add new analysis status and cvss version fields ([#370](https://github.com/googleapis/nodejs-grafeas/issues/370)) ([96d287a](https://github.com/googleapis/nodejs-grafeas/commit/96d287ac6e62709a06aec118306f4c9f1b42f5d6))
+
 ## [4.1.2](https://github.com/googleapis/nodejs-grafeas/compare/v4.1.1...v4.1.2) (2022-09-22)
 
 
