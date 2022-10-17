@@ -5146,7 +5146,10 @@
                         },
                         "estimatedPrevalence": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       }
                     },
