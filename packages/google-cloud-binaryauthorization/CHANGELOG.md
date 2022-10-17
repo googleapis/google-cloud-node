@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-binary-authorization/compare/v2.0.0...v2.1.0) (2022-10-06)
+
+
+### Features
+
+* Add new analysis status and cvss version fields ([#187](https://github.com/googleapis/nodejs-binary-authorization/issues/187)) ([d461de8](https://github.com/googleapis/nodejs-binary-authorization/commit/d461de86c3abc5db180ae32ea4e6063f3c00df25))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#177](https://github.com/googleapis/nodejs-binary-authorization/issues/177)) ([6ef4a52](https://github.com/googleapis/nodejs-binary-authorization/commit/6ef4a520c1bb49fca8159324dbf41af10931357e))
+* Better support for fallback mode ([#170](https://github.com/googleapis/nodejs-binary-authorization/issues/170)) ([fa2e0b5](https://github.com/googleapis/nodejs-binary-authorization/commit/fa2e0b5991a80e912c65f896bdc0c2670b2a349d))
+* Change import long to require ([#172](https://github.com/googleapis/nodejs-binary-authorization/issues/172)) ([6327374](https://github.com/googleapis/nodejs-binary-authorization/commit/6327374ea12b05cc4d752b059e4d9a098174f45b))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-binary-authorization/issues/1553)) ([#176](https://github.com/googleapis/nodejs-binary-authorization/issues/176)) ([1a53ab4](https://github.com/googleapis/nodejs-binary-authorization/commit/1a53ab4d1bb04f4759494973a3297c3dcf295833))
+* Preserve default values in x-goog-request-params header ([#180](https://github.com/googleapis/nodejs-binary-authorization/issues/180)) ([80b0dcf](https://github.com/googleapis/nodejs-binary-authorization/commit/80b0dcf989b20f874e0912af641fdc12419887f2))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-binary-authorization/issues/1546)) ([#175](https://github.com/googleapis/nodejs-binary-authorization/issues/175)) ([f412b6e](https://github.com/googleapis/nodejs-binary-authorization/commit/f412b6e8349aab08d3d5d985cd38f91750c1f030))
+* use google-gax v3.3.0 ([1a53ab4](https://github.com/googleapis/nodejs-binary-authorization/commit/1a53ab4d1bb04f4759494973a3297c3dcf295833))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-binary-authorization/compare/v1.5.1...v2.0.0) (2022-06-30)
 
 
