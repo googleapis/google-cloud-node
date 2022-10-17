@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/nodejs-recaptcha-enterprise/compare/v3.0.4...v3.1.0) (2022-10-13)
+
+
+### Features
+
+* Add RetrieveLegacySecretKey method ([#411](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/411)) ([2e8fa59](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/2e8fa599b514e9e666bd04d009dd503318c205e4))
+
 ## [3.0.4](https://github.com/googleapis/nodejs-recaptcha-enterprise/compare/v3.0.3...v3.0.4) (2022-09-22)
 
 
