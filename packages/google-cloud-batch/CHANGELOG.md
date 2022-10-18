@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.1.2...batch-v0.2.0) (2022-10-18)
+
+
+### Features
+
+* Enable install_gpu_drivers flag in v1 proto ([37c3db1](https://github.com/googleapis/google-cloud-node/commit/37c3db12dea1c18ba1d3d40f346cf7460fe9b3cb))
+
 ## [0.1.2](https://github.com/googleapis/google-cloud-node/compare/batch-v0.1.1...batch-v0.1.2) (2022-09-28)
 
 

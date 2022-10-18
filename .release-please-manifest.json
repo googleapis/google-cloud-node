@@ -1,7 +1,7 @@
 {
   "packages/gapic-node-templating": "0.0.0",
   "packages/google-api-apikeys": "0.1.1",
-  "packages/google-cloud-batch": "0.1.2",
+  "packages/google-cloud-batch": "0.2.0",
   "packages/google-cloud-beyondcorp-appconnections": "0.2.1",
   "packages/google-cloud-beyondcorp-appconnectors": "0.3.1",
   "packages/google-cloud-beyondcorp-appgateways": "0.2.1",
