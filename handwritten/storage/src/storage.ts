@@ -664,8 +664,12 @@ export class Storage extends Service {
 
     options = Object.assign({}, options, {apiEndpoint});
 
-    // Note: EMULATOR_HOST is an experimental configuration variable. Use apiEndpoint instead.
-    const baseUrl = EMULATOR_HOST || `${options.apiEndpoint}/storage/v1`;
+    // Note: EMULATOR_HOST, if present and not overridden, has been applied to
+    // `options` at this point. Also, this uses string concatenation because the
+    // endpoint may contain a base path, and any trailing slash on that will
+    // have been removed, so using the two-arg URL constructor for relative path
+    // resolution won't work.
+    const baseUrl = new URL(options.apiEndpoint + '/storage/v1').href;
 
     const config = {
       apiEndpoint: options.apiEndpoint!,

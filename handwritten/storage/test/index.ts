@@ -435,27 +435,33 @@ describe('Storage', () => {
         delete process.env.STORAGE_EMULATOR_HOST;
       });
 
-      it('should set baseUrl to env var STORAGE_EMULATOR_HOST', () => {
+      it('should set baseUrl to env var STORAGE_EMULATOR_HOST plus standard path', () => {
         const storage = new Storage({
           projectId: PROJECT_ID,
         });
 
         const calledWith = storage.calledWith_[0];
-        assert.strictEqual(calledWith.baseUrl, EMULATOR_HOST);
+        assert.strictEqual(calledWith.baseUrl, EMULATOR_HOST + '/storage/v1');
         assert.strictEqual(
           calledWith.apiEndpoint,
           'https://internal.benchmark.com/path'
         );
       });
 
-      it('should be overriden by apiEndpoint', () => {
+      it('should be overridden by apiEndpoint', () => {
         const storage = new Storage({
           projectId: PROJECT_ID,
           apiEndpoint: 'https://some.api.com',
         });
 
         const calledWith = storage.calledWith_[0];
-        assert.strictEqual(calledWith.baseUrl, EMULATOR_HOST);
+        // NOTE: this used to assert partially the opposite of what the test
+        // says: it checked that baseUrl was _not_ overridden, but apiEndpoint
+        // was.
+        assert.strictEqual(
+          calledWith.baseUrl,
+          'https://some.api.com/storage/v1'
+        );
         assert.strictEqual(calledWith.apiEndpoint, 'https://some.api.com');
       });
 
@@ -468,7 +474,13 @@ describe('Storage', () => {
         });
 
         const calledWith = storage.calledWith_[0];
-        assert.strictEqual(calledWith.baseUrl, EMULATOR_HOST);
+        // NOTE: this used to assert partially the opposite of what the test
+        // says: it checked that baseUrl was _not_ overridden, but apiEndpoint
+        // was.
+        assert.strictEqual(
+          calledWith.baseUrl,
+          'https://internal.benchmark.com/path/storage/v1'
+        );
         assert.strictEqual(
           calledWith.apiEndpoint,
           'https://internal.benchmark.com/path'
