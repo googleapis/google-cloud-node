@@ -7,13 +7,37 @@
     "packages/google-cloud-beyondcorp-appgateways": {},
     "packages/google-cloud-beyondcorp-clientconnectorservices": {},
     "packages/google-cloud-beyondcorp-clientgateways": {},
+    "packages/google-cloud-bigquery-analyticshub": {},
+    "packages/google-cloud-bigquery-dataexchange": {},
+    "packages/google-cloud-bigquery-datapolicies": {},
+    "packages/google-cloud-bigquery-datatransfer": {},
+    "packages/google-cloud-bigquery-reservation": {},
+    "packages/google-cloud-gkeconnect-gateway": {},
+    "packages/google-cloud-deploy": {},
+    "packages/google-cloud-dataplex": {},
+    "packages/google-cloud-certificatemanager": {},
     "packages/google-cloud-gkemulticloud": {},
+    "packages/google-cloud-language": {},
+    "packages/google-cloud-memcache": {},
+    "packages/google-cloud-oslogin": {},
+    "packages/google-cloud-phishingprotection": {},
+    "packages/google-cloud-policytroubleshooter": {},
+    "packages/google-cloud-recommender": {},
     "packages/google-cloud-redis": {},
+    "packages/google-cloud-resourcemanager": {},
     "packages/google-cloud-security-publicca": {},
+    "packages/google-cloud-shell": {},
     "packages/google-devtools-artifactregistry": {},
     "packages/google-iam": {},
-    "packages/typeless-sample-bot": {},
-    "packages/google-cloud-bigquery-analyticshub": {}
+    "packages/google-maps-routing": {},
+    "packages/google-monitoring-dashboard": {},
+    "packages/typeless-sample-bot": {}
   },
-  "release-type": "node"
+  "plugins": [
+    {
+      "type": "sentence-case"
+    }
+  ],
+  "release-type": "node",
+  "initial-version": "0.1.0"
 }

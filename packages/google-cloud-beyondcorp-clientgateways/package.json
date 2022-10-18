@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/clientgateways",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "BeyondCorp API client for Node.js",
   "repository": "googleapis/google-cloud-node",
   "license": "Apache-2.0",

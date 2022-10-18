@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/appgateways-v0.2.0...appgateways-v0.2.1) (2022-09-28)
+
+
+### Bug Fixes
+
+* preserve default values in x-goog-request-params header ([#3353](https://github.com/googleapis/google-cloud-node/issues/3353)) ([da99ad5](https://github.com/googleapis/google-cloud-node/commit/da99ad57f592a504750d57fdb1c7423734fec069))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/appgateways-v0.1.0...appgateways-v0.2.0) (2022-08-29)
 
 
