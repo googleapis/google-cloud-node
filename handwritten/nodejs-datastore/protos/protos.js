@@ -6263,6 +6263,6860 @@
                  */
                 var v1 = {};
     
+                v1.AggregationResult = (function() {
+    
+                    /**
+                     * Properties of an AggregationResult.
+                     * @memberof google.datastore.v1
+                     * @interface IAggregationResult
+                     * @property {Object.<string,google.datastore.v1.IValue>|null} [aggregateProperties] AggregationResult aggregateProperties
+                     */
+    
+                    /**
+                     * Constructs a new AggregationResult.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents an AggregationResult.
+                     * @implements IAggregationResult
+                     * @constructor
+                     * @param {google.datastore.v1.IAggregationResult=} [properties] Properties to set
+                     */
+                    function AggregationResult(properties) {
+                        this.aggregateProperties = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AggregationResult aggregateProperties.
+                     * @member {Object.<string,google.datastore.v1.IValue>} aggregateProperties
+                     * @memberof google.datastore.v1.AggregationResult
+                     * @instance
+                     */
+                    AggregationResult.prototype.aggregateProperties = $util.emptyObject;
+    
+                    /**
+                     * Creates a new AggregationResult instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.AggregationResult
+                     * @static
+                     * @param {google.datastore.v1.IAggregationResult=} [properties] Properties to set
+                     * @returns {google.datastore.v1.AggregationResult} AggregationResult instance
+                     */
+                    AggregationResult.create = function create(properties) {
+                        return new AggregationResult(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AggregationResult message. Does not implicitly {@link google.datastore.v1.AggregationResult.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.AggregationResult
+                     * @static
+                     * @param {google.datastore.v1.IAggregationResult} message AggregationResult message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AggregationResult.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.aggregateProperties != null && Object.hasOwnProperty.call(message, "aggregateProperties"))
+                            for (var keys = Object.keys(message.aggregateProperties), i = 0; i < keys.length; ++i) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                $root.google.datastore.v1.Value.encode(message.aggregateProperties[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                            }
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AggregationResult message, length delimited. Does not implicitly {@link google.datastore.v1.AggregationResult.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.AggregationResult
+                     * @static
+                     * @param {google.datastore.v1.IAggregationResult} message AggregationResult message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AggregationResult.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AggregationResult message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.AggregationResult
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.AggregationResult} AggregationResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AggregationResult.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.AggregationResult(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 2: {
+                                    if (message.aggregateProperties === $util.emptyObject)
+                                        message.aggregateProperties = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.datastore.v1.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.aggregateProperties[key] = value;
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AggregationResult message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.AggregationResult
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.AggregationResult} AggregationResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AggregationResult.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AggregationResult message.
+                     * @function verify
+                     * @memberof google.datastore.v1.AggregationResult
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AggregationResult.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.aggregateProperties != null && message.hasOwnProperty("aggregateProperties")) {
+                            if (!$util.isObject(message.aggregateProperties))
+                                return "aggregateProperties: object expected";
+                            var key = Object.keys(message.aggregateProperties);
+                            for (var i = 0; i < key.length; ++i) {
+                                var error = $root.google.datastore.v1.Value.verify(message.aggregateProperties[key[i]]);
+                                if (error)
+                                    return "aggregateProperties." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AggregationResult message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.AggregationResult
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.AggregationResult} AggregationResult
+                     */
+                    AggregationResult.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.AggregationResult)
+                            return object;
+                        var message = new $root.google.datastore.v1.AggregationResult();
+                        if (object.aggregateProperties) {
+                            if (typeof object.aggregateProperties !== "object")
+                                throw TypeError(".google.datastore.v1.AggregationResult.aggregateProperties: object expected");
+                            message.aggregateProperties = {};
+                            for (var keys = Object.keys(object.aggregateProperties), i = 0; i < keys.length; ++i) {
+                                if (typeof object.aggregateProperties[keys[i]] !== "object")
+                                    throw TypeError(".google.datastore.v1.AggregationResult.aggregateProperties: object expected");
+                                message.aggregateProperties[keys[i]] = $root.google.datastore.v1.Value.fromObject(object.aggregateProperties[keys[i]]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AggregationResult message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.AggregationResult
+                     * @static
+                     * @param {google.datastore.v1.AggregationResult} message AggregationResult
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AggregationResult.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.aggregateProperties = {};
+                        var keys2;
+                        if (message.aggregateProperties && (keys2 = Object.keys(message.aggregateProperties)).length) {
+                            object.aggregateProperties = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.aggregateProperties[keys2[j]] = $root.google.datastore.v1.Value.toObject(message.aggregateProperties[keys2[j]], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AggregationResult to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.AggregationResult
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AggregationResult.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AggregationResult
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.AggregationResult
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AggregationResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.AggregationResult";
+                    };
+    
+                    return AggregationResult;
+                })();
+    
+                v1.AggregationResultBatch = (function() {
+    
+                    /**
+                     * Properties of an AggregationResultBatch.
+                     * @memberof google.datastore.v1
+                     * @interface IAggregationResultBatch
+                     * @property {Array.<google.datastore.v1.IAggregationResult>|null} [aggregationResults] AggregationResultBatch aggregationResults
+                     * @property {google.datastore.v1.QueryResultBatch.MoreResultsType|null} [moreResults] AggregationResultBatch moreResults
+                     * @property {google.protobuf.ITimestamp|null} [readTime] AggregationResultBatch readTime
+                     */
+    
+                    /**
+                     * Constructs a new AggregationResultBatch.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents an AggregationResultBatch.
+                     * @implements IAggregationResultBatch
+                     * @constructor
+                     * @param {google.datastore.v1.IAggregationResultBatch=} [properties] Properties to set
+                     */
+                    function AggregationResultBatch(properties) {
+                        this.aggregationResults = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AggregationResultBatch aggregationResults.
+                     * @member {Array.<google.datastore.v1.IAggregationResult>} aggregationResults
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @instance
+                     */
+                    AggregationResultBatch.prototype.aggregationResults = $util.emptyArray;
+    
+                    /**
+                     * AggregationResultBatch moreResults.
+                     * @member {google.datastore.v1.QueryResultBatch.MoreResultsType} moreResults
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @instance
+                     */
+                    AggregationResultBatch.prototype.moreResults = 0;
+    
+                    /**
+                     * AggregationResultBatch readTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} readTime
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @instance
+                     */
+                    AggregationResultBatch.prototype.readTime = null;
+    
+                    /**
+                     * Creates a new AggregationResultBatch instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @static
+                     * @param {google.datastore.v1.IAggregationResultBatch=} [properties] Properties to set
+                     * @returns {google.datastore.v1.AggregationResultBatch} AggregationResultBatch instance
+                     */
+                    AggregationResultBatch.create = function create(properties) {
+                        return new AggregationResultBatch(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AggregationResultBatch message. Does not implicitly {@link google.datastore.v1.AggregationResultBatch.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @static
+                     * @param {google.datastore.v1.IAggregationResultBatch} message AggregationResultBatch message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AggregationResultBatch.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.aggregationResults != null && message.aggregationResults.length)
+                            for (var i = 0; i < message.aggregationResults.length; ++i)
+                                $root.google.datastore.v1.AggregationResult.encode(message.aggregationResults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.moreResults != null && Object.hasOwnProperty.call(message, "moreResults"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.moreResults);
+                        if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
+                            $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AggregationResultBatch message, length delimited. Does not implicitly {@link google.datastore.v1.AggregationResultBatch.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @static
+                     * @param {google.datastore.v1.IAggregationResultBatch} message AggregationResultBatch message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AggregationResultBatch.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AggregationResultBatch message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.AggregationResultBatch} AggregationResultBatch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AggregationResultBatch.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.AggregationResultBatch();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.aggregationResults && message.aggregationResults.length))
+                                        message.aggregationResults = [];
+                                    message.aggregationResults.push($root.google.datastore.v1.AggregationResult.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.moreResults = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AggregationResultBatch message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.AggregationResultBatch} AggregationResultBatch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AggregationResultBatch.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AggregationResultBatch message.
+                     * @function verify
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AggregationResultBatch.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.aggregationResults != null && message.hasOwnProperty("aggregationResults")) {
+                            if (!Array.isArray(message.aggregationResults))
+                                return "aggregationResults: array expected";
+                            for (var i = 0; i < message.aggregationResults.length; ++i) {
+                                var error = $root.google.datastore.v1.AggregationResult.verify(message.aggregationResults[i]);
+                                if (error)
+                                    return "aggregationResults." + error;
+                            }
+                        }
+                        if (message.moreResults != null && message.hasOwnProperty("moreResults"))
+                            switch (message.moreResults) {
+                            default:
+                                return "moreResults: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 4:
+                            case 3:
+                                break;
+                            }
+                        if (message.readTime != null && message.hasOwnProperty("readTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.readTime);
+                            if (error)
+                                return "readTime." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AggregationResultBatch message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.AggregationResultBatch} AggregationResultBatch
+                     */
+                    AggregationResultBatch.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.AggregationResultBatch)
+                            return object;
+                        var message = new $root.google.datastore.v1.AggregationResultBatch();
+                        if (object.aggregationResults) {
+                            if (!Array.isArray(object.aggregationResults))
+                                throw TypeError(".google.datastore.v1.AggregationResultBatch.aggregationResults: array expected");
+                            message.aggregationResults = [];
+                            for (var i = 0; i < object.aggregationResults.length; ++i) {
+                                if (typeof object.aggregationResults[i] !== "object")
+                                    throw TypeError(".google.datastore.v1.AggregationResultBatch.aggregationResults: object expected");
+                                message.aggregationResults[i] = $root.google.datastore.v1.AggregationResult.fromObject(object.aggregationResults[i]);
+                            }
+                        }
+                        switch (object.moreResults) {
+                        case "MORE_RESULTS_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.moreResults = 0;
+                            break;
+                        case "NOT_FINISHED":
+                        case 1:
+                            message.moreResults = 1;
+                            break;
+                        case "MORE_RESULTS_AFTER_LIMIT":
+                        case 2:
+                            message.moreResults = 2;
+                            break;
+                        case "MORE_RESULTS_AFTER_CURSOR":
+                        case 4:
+                            message.moreResults = 4;
+                            break;
+                        case "NO_MORE_RESULTS":
+                        case 3:
+                            message.moreResults = 3;
+                            break;
+                        }
+                        if (object.readTime != null) {
+                            if (typeof object.readTime !== "object")
+                                throw TypeError(".google.datastore.v1.AggregationResultBatch.readTime: object expected");
+                            message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AggregationResultBatch message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @static
+                     * @param {google.datastore.v1.AggregationResultBatch} message AggregationResultBatch
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AggregationResultBatch.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.aggregationResults = [];
+                        if (options.defaults) {
+                            object.moreResults = options.enums === String ? "MORE_RESULTS_TYPE_UNSPECIFIED" : 0;
+                            object.readTime = null;
+                        }
+                        if (message.aggregationResults && message.aggregationResults.length) {
+                            object.aggregationResults = [];
+                            for (var j = 0; j < message.aggregationResults.length; ++j)
+                                object.aggregationResults[j] = $root.google.datastore.v1.AggregationResult.toObject(message.aggregationResults[j], options);
+                        }
+                        if (message.moreResults != null && message.hasOwnProperty("moreResults"))
+                            object.moreResults = options.enums === String ? $root.google.datastore.v1.QueryResultBatch.MoreResultsType[message.moreResults] : message.moreResults;
+                        if (message.readTime != null && message.hasOwnProperty("readTime"))
+                            object.readTime = $root.google.protobuf.Timestamp.toObject(message.readTime, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AggregationResultBatch to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AggregationResultBatch.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AggregationResultBatch
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.AggregationResultBatch
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AggregationResultBatch.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.AggregationResultBatch";
+                    };
+    
+                    return AggregationResultBatch;
+                })();
+    
+                v1.PartitionId = (function() {
+    
+                    /**
+                     * Properties of a PartitionId.
+                     * @memberof google.datastore.v1
+                     * @interface IPartitionId
+                     * @property {string|null} [projectId] PartitionId projectId
+                     * @property {string|null} [databaseId] PartitionId databaseId
+                     * @property {string|null} [namespaceId] PartitionId namespaceId
+                     */
+    
+                    /**
+                     * Constructs a new PartitionId.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a PartitionId.
+                     * @implements IPartitionId
+                     * @constructor
+                     * @param {google.datastore.v1.IPartitionId=} [properties] Properties to set
+                     */
+                    function PartitionId(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PartitionId projectId.
+                     * @member {string} projectId
+                     * @memberof google.datastore.v1.PartitionId
+                     * @instance
+                     */
+                    PartitionId.prototype.projectId = "";
+    
+                    /**
+                     * PartitionId databaseId.
+                     * @member {string} databaseId
+                     * @memberof google.datastore.v1.PartitionId
+                     * @instance
+                     */
+                    PartitionId.prototype.databaseId = "";
+    
+                    /**
+                     * PartitionId namespaceId.
+                     * @member {string} namespaceId
+                     * @memberof google.datastore.v1.PartitionId
+                     * @instance
+                     */
+                    PartitionId.prototype.namespaceId = "";
+    
+                    /**
+                     * Creates a new PartitionId instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.PartitionId
+                     * @static
+                     * @param {google.datastore.v1.IPartitionId=} [properties] Properties to set
+                     * @returns {google.datastore.v1.PartitionId} PartitionId instance
+                     */
+                    PartitionId.create = function create(properties) {
+                        return new PartitionId(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PartitionId message. Does not implicitly {@link google.datastore.v1.PartitionId.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.PartitionId
+                     * @static
+                     * @param {google.datastore.v1.IPartitionId} message PartitionId message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PartitionId.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
+                        if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.databaseId);
+                        if (message.namespaceId != null && Object.hasOwnProperty.call(message, "namespaceId"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.namespaceId);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PartitionId message, length delimited. Does not implicitly {@link google.datastore.v1.PartitionId.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.PartitionId
+                     * @static
+                     * @param {google.datastore.v1.IPartitionId} message PartitionId message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PartitionId.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PartitionId message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.PartitionId
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.PartitionId} PartitionId
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PartitionId.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.PartitionId();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 2: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.databaseId = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.namespaceId = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PartitionId message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.PartitionId
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.PartitionId} PartitionId
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PartitionId.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PartitionId message.
+                     * @function verify
+                     * @memberof google.datastore.v1.PartitionId
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PartitionId.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.projectId != null && message.hasOwnProperty("projectId"))
+                            if (!$util.isString(message.projectId))
+                                return "projectId: string expected";
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            if (!$util.isString(message.databaseId))
+                                return "databaseId: string expected";
+                        if (message.namespaceId != null && message.hasOwnProperty("namespaceId"))
+                            if (!$util.isString(message.namespaceId))
+                                return "namespaceId: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PartitionId message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.PartitionId
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.PartitionId} PartitionId
+                     */
+                    PartitionId.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.PartitionId)
+                            return object;
+                        var message = new $root.google.datastore.v1.PartitionId();
+                        if (object.projectId != null)
+                            message.projectId = String(object.projectId);
+                        if (object.databaseId != null)
+                            message.databaseId = String(object.databaseId);
+                        if (object.namespaceId != null)
+                            message.namespaceId = String(object.namespaceId);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PartitionId message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.PartitionId
+                     * @static
+                     * @param {google.datastore.v1.PartitionId} message PartitionId
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PartitionId.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.projectId = "";
+                            object.databaseId = "";
+                            object.namespaceId = "";
+                        }
+                        if (message.projectId != null && message.hasOwnProperty("projectId"))
+                            object.projectId = message.projectId;
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            object.databaseId = message.databaseId;
+                        if (message.namespaceId != null && message.hasOwnProperty("namespaceId"))
+                            object.namespaceId = message.namespaceId;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PartitionId to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.PartitionId
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PartitionId.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PartitionId
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.PartitionId
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PartitionId.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.PartitionId";
+                    };
+    
+                    return PartitionId;
+                })();
+    
+                v1.Key = (function() {
+    
+                    /**
+                     * Properties of a Key.
+                     * @memberof google.datastore.v1
+                     * @interface IKey
+                     * @property {google.datastore.v1.IPartitionId|null} [partitionId] Key partitionId
+                     * @property {Array.<google.datastore.v1.Key.IPathElement>|null} [path] Key path
+                     */
+    
+                    /**
+                     * Constructs a new Key.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a Key.
+                     * @implements IKey
+                     * @constructor
+                     * @param {google.datastore.v1.IKey=} [properties] Properties to set
+                     */
+                    function Key(properties) {
+                        this.path = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Key partitionId.
+                     * @member {google.datastore.v1.IPartitionId|null|undefined} partitionId
+                     * @memberof google.datastore.v1.Key
+                     * @instance
+                     */
+                    Key.prototype.partitionId = null;
+    
+                    /**
+                     * Key path.
+                     * @member {Array.<google.datastore.v1.Key.IPathElement>} path
+                     * @memberof google.datastore.v1.Key
+                     * @instance
+                     */
+                    Key.prototype.path = $util.emptyArray;
+    
+                    /**
+                     * Creates a new Key instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.Key
+                     * @static
+                     * @param {google.datastore.v1.IKey=} [properties] Properties to set
+                     * @returns {google.datastore.v1.Key} Key instance
+                     */
+                    Key.create = function create(properties) {
+                        return new Key(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Key message. Does not implicitly {@link google.datastore.v1.Key.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.Key
+                     * @static
+                     * @param {google.datastore.v1.IKey} message Key message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Key.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.partitionId != null && Object.hasOwnProperty.call(message, "partitionId"))
+                            $root.google.datastore.v1.PartitionId.encode(message.partitionId, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.path != null && message.path.length)
+                            for (var i = 0; i < message.path.length; ++i)
+                                $root.google.datastore.v1.Key.PathElement.encode(message.path[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Key message, length delimited. Does not implicitly {@link google.datastore.v1.Key.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.Key
+                     * @static
+                     * @param {google.datastore.v1.IKey} message Key message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Key.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Key message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.Key
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.Key} Key
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Key.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Key();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.partitionId = $root.google.datastore.v1.PartitionId.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.path && message.path.length))
+                                        message.path = [];
+                                    message.path.push($root.google.datastore.v1.Key.PathElement.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Key message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.Key
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.Key} Key
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Key.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Key message.
+                     * @function verify
+                     * @memberof google.datastore.v1.Key
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Key.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.partitionId != null && message.hasOwnProperty("partitionId")) {
+                            var error = $root.google.datastore.v1.PartitionId.verify(message.partitionId);
+                            if (error)
+                                return "partitionId." + error;
+                        }
+                        if (message.path != null && message.hasOwnProperty("path")) {
+                            if (!Array.isArray(message.path))
+                                return "path: array expected";
+                            for (var i = 0; i < message.path.length; ++i) {
+                                var error = $root.google.datastore.v1.Key.PathElement.verify(message.path[i]);
+                                if (error)
+                                    return "path." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Key message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.Key
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.Key} Key
+                     */
+                    Key.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.Key)
+                            return object;
+                        var message = new $root.google.datastore.v1.Key();
+                        if (object.partitionId != null) {
+                            if (typeof object.partitionId !== "object")
+                                throw TypeError(".google.datastore.v1.Key.partitionId: object expected");
+                            message.partitionId = $root.google.datastore.v1.PartitionId.fromObject(object.partitionId);
+                        }
+                        if (object.path) {
+                            if (!Array.isArray(object.path))
+                                throw TypeError(".google.datastore.v1.Key.path: array expected");
+                            message.path = [];
+                            for (var i = 0; i < object.path.length; ++i) {
+                                if (typeof object.path[i] !== "object")
+                                    throw TypeError(".google.datastore.v1.Key.path: object expected");
+                                message.path[i] = $root.google.datastore.v1.Key.PathElement.fromObject(object.path[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Key message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.Key
+                     * @static
+                     * @param {google.datastore.v1.Key} message Key
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Key.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.path = [];
+                        if (options.defaults)
+                            object.partitionId = null;
+                        if (message.partitionId != null && message.hasOwnProperty("partitionId"))
+                            object.partitionId = $root.google.datastore.v1.PartitionId.toObject(message.partitionId, options);
+                        if (message.path && message.path.length) {
+                            object.path = [];
+                            for (var j = 0; j < message.path.length; ++j)
+                                object.path[j] = $root.google.datastore.v1.Key.PathElement.toObject(message.path[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Key to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.Key
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Key.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Key
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.Key
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Key.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.Key";
+                    };
+    
+                    Key.PathElement = (function() {
+    
+                        /**
+                         * Properties of a PathElement.
+                         * @memberof google.datastore.v1.Key
+                         * @interface IPathElement
+                         * @property {string|null} [kind] PathElement kind
+                         * @property {number|Long|null} [id] PathElement id
+                         * @property {string|null} [name] PathElement name
+                         */
+    
+                        /**
+                         * Constructs a new PathElement.
+                         * @memberof google.datastore.v1.Key
+                         * @classdesc Represents a PathElement.
+                         * @implements IPathElement
+                         * @constructor
+                         * @param {google.datastore.v1.Key.IPathElement=} [properties] Properties to set
+                         */
+                        function PathElement(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PathElement kind.
+                         * @member {string} kind
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @instance
+                         */
+                        PathElement.prototype.kind = "";
+    
+                        /**
+                         * PathElement id.
+                         * @member {number|Long|null|undefined} id
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @instance
+                         */
+                        PathElement.prototype.id = null;
+    
+                        /**
+                         * PathElement name.
+                         * @member {string|null|undefined} name
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @instance
+                         */
+                        PathElement.prototype.name = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * PathElement idType.
+                         * @member {"id"|"name"|undefined} idType
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @instance
+                         */
+                        Object.defineProperty(PathElement.prototype, "idType", {
+                            get: $util.oneOfGetter($oneOfFields = ["id", "name"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new PathElement instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @static
+                         * @param {google.datastore.v1.Key.IPathElement=} [properties] Properties to set
+                         * @returns {google.datastore.v1.Key.PathElement} PathElement instance
+                         */
+                        PathElement.create = function create(properties) {
+                            return new PathElement(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PathElement message. Does not implicitly {@link google.datastore.v1.Key.PathElement.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @static
+                         * @param {google.datastore.v1.Key.IPathElement} message PathElement message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PathElement.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kind);
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.id);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PathElement message, length delimited. Does not implicitly {@link google.datastore.v1.Key.PathElement.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @static
+                         * @param {google.datastore.v1.Key.IPathElement} message PathElement message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PathElement.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PathElement message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.v1.Key.PathElement} PathElement
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PathElement.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Key.PathElement();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.kind = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.id = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PathElement message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.v1.Key.PathElement} PathElement
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PathElement.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PathElement message.
+                         * @function verify
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PathElement.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                if (!$util.isString(message.kind))
+                                    return "kind: string expected";
+                            if (message.id != null && message.hasOwnProperty("id")) {
+                                properties.idType = 1;
+                                if (!$util.isInteger(message.id) && !(message.id && $util.isInteger(message.id.low) && $util.isInteger(message.id.high)))
+                                    return "id: integer|Long expected";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name")) {
+                                if (properties.idType === 1)
+                                    return "idType: multiple values";
+                                properties.idType = 1;
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PathElement message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.v1.Key.PathElement} PathElement
+                         */
+                        PathElement.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.v1.Key.PathElement)
+                                return object;
+                            var message = new $root.google.datastore.v1.Key.PathElement();
+                            if (object.kind != null)
+                                message.kind = String(object.kind);
+                            if (object.id != null)
+                                if ($util.Long)
+                                    (message.id = $util.Long.fromValue(object.id)).unsigned = false;
+                                else if (typeof object.id === "string")
+                                    message.id = parseInt(object.id, 10);
+                                else if (typeof object.id === "number")
+                                    message.id = object.id;
+                                else if (typeof object.id === "object")
+                                    message.id = new $util.LongBits(object.id.low >>> 0, object.id.high >>> 0).toNumber();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PathElement message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @static
+                         * @param {google.datastore.v1.Key.PathElement} message PathElement
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PathElement.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.kind = "";
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                object.kind = message.kind;
+                            if (message.id != null && message.hasOwnProperty("id")) {
+                                if (typeof message.id === "number")
+                                    object.id = options.longs === String ? String(message.id) : message.id;
+                                else
+                                    object.id = options.longs === String ? $util.Long.prototype.toString.call(message.id) : options.longs === Number ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toNumber() : message.id;
+                                if (options.oneofs)
+                                    object.idType = "id";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name")) {
+                                object.name = message.name;
+                                if (options.oneofs)
+                                    object.idType = "name";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PathElement to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PathElement.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PathElement
+                         * @function getTypeUrl
+                         * @memberof google.datastore.v1.Key.PathElement
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PathElement.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.datastore.v1.Key.PathElement";
+                        };
+    
+                        return PathElement;
+                    })();
+    
+                    return Key;
+                })();
+    
+                v1.ArrayValue = (function() {
+    
+                    /**
+                     * Properties of an ArrayValue.
+                     * @memberof google.datastore.v1
+                     * @interface IArrayValue
+                     * @property {Array.<google.datastore.v1.IValue>|null} [values] ArrayValue values
+                     */
+    
+                    /**
+                     * Constructs a new ArrayValue.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents an ArrayValue.
+                     * @implements IArrayValue
+                     * @constructor
+                     * @param {google.datastore.v1.IArrayValue=} [properties] Properties to set
+                     */
+                    function ArrayValue(properties) {
+                        this.values = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ArrayValue values.
+                     * @member {Array.<google.datastore.v1.IValue>} values
+                     * @memberof google.datastore.v1.ArrayValue
+                     * @instance
+                     */
+                    ArrayValue.prototype.values = $util.emptyArray;
+    
+                    /**
+                     * Creates a new ArrayValue instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.ArrayValue
+                     * @static
+                     * @param {google.datastore.v1.IArrayValue=} [properties] Properties to set
+                     * @returns {google.datastore.v1.ArrayValue} ArrayValue instance
+                     */
+                    ArrayValue.create = function create(properties) {
+                        return new ArrayValue(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ArrayValue message. Does not implicitly {@link google.datastore.v1.ArrayValue.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.ArrayValue
+                     * @static
+                     * @param {google.datastore.v1.IArrayValue} message ArrayValue message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ArrayValue.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.values != null && message.values.length)
+                            for (var i = 0; i < message.values.length; ++i)
+                                $root.google.datastore.v1.Value.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ArrayValue message, length delimited. Does not implicitly {@link google.datastore.v1.ArrayValue.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.ArrayValue
+                     * @static
+                     * @param {google.datastore.v1.IArrayValue} message ArrayValue message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ArrayValue.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ArrayValue message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.ArrayValue
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.ArrayValue} ArrayValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ArrayValue.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.ArrayValue();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.values && message.values.length))
+                                        message.values = [];
+                                    message.values.push($root.google.datastore.v1.Value.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ArrayValue message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.ArrayValue
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.ArrayValue} ArrayValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ArrayValue.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ArrayValue message.
+                     * @function verify
+                     * @memberof google.datastore.v1.ArrayValue
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ArrayValue.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.values != null && message.hasOwnProperty("values")) {
+                            if (!Array.isArray(message.values))
+                                return "values: array expected";
+                            for (var i = 0; i < message.values.length; ++i) {
+                                var error = $root.google.datastore.v1.Value.verify(message.values[i]);
+                                if (error)
+                                    return "values." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ArrayValue message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.ArrayValue
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.ArrayValue} ArrayValue
+                     */
+                    ArrayValue.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.ArrayValue)
+                            return object;
+                        var message = new $root.google.datastore.v1.ArrayValue();
+                        if (object.values) {
+                            if (!Array.isArray(object.values))
+                                throw TypeError(".google.datastore.v1.ArrayValue.values: array expected");
+                            message.values = [];
+                            for (var i = 0; i < object.values.length; ++i) {
+                                if (typeof object.values[i] !== "object")
+                                    throw TypeError(".google.datastore.v1.ArrayValue.values: object expected");
+                                message.values[i] = $root.google.datastore.v1.Value.fromObject(object.values[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ArrayValue message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.ArrayValue
+                     * @static
+                     * @param {google.datastore.v1.ArrayValue} message ArrayValue
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ArrayValue.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.values = [];
+                        if (message.values && message.values.length) {
+                            object.values = [];
+                            for (var j = 0; j < message.values.length; ++j)
+                                object.values[j] = $root.google.datastore.v1.Value.toObject(message.values[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ArrayValue to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.ArrayValue
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ArrayValue.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ArrayValue
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.ArrayValue
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ArrayValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.ArrayValue";
+                    };
+    
+                    return ArrayValue;
+                })();
+    
+                v1.Value = (function() {
+    
+                    /**
+                     * Properties of a Value.
+                     * @memberof google.datastore.v1
+                     * @interface IValue
+                     * @property {google.protobuf.NullValue|null} [nullValue] Value nullValue
+                     * @property {boolean|null} [booleanValue] Value booleanValue
+                     * @property {number|Long|null} [integerValue] Value integerValue
+                     * @property {number|null} [doubleValue] Value doubleValue
+                     * @property {google.protobuf.ITimestamp|null} [timestampValue] Value timestampValue
+                     * @property {google.datastore.v1.IKey|null} [keyValue] Value keyValue
+                     * @property {string|null} [stringValue] Value stringValue
+                     * @property {Uint8Array|null} [blobValue] Value blobValue
+                     * @property {google.type.ILatLng|null} [geoPointValue] Value geoPointValue
+                     * @property {google.datastore.v1.IEntity|null} [entityValue] Value entityValue
+                     * @property {google.datastore.v1.IArrayValue|null} [arrayValue] Value arrayValue
+                     * @property {number|null} [meaning] Value meaning
+                     * @property {boolean|null} [excludeFromIndexes] Value excludeFromIndexes
+                     */
+    
+                    /**
+                     * Constructs a new Value.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a Value.
+                     * @implements IValue
+                     * @constructor
+                     * @param {google.datastore.v1.IValue=} [properties] Properties to set
+                     */
+                    function Value(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Value nullValue.
+                     * @member {google.protobuf.NullValue|null|undefined} nullValue
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.nullValue = null;
+    
+                    /**
+                     * Value booleanValue.
+                     * @member {boolean|null|undefined} booleanValue
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.booleanValue = null;
+    
+                    /**
+                     * Value integerValue.
+                     * @member {number|Long|null|undefined} integerValue
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.integerValue = null;
+    
+                    /**
+                     * Value doubleValue.
+                     * @member {number|null|undefined} doubleValue
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.doubleValue = null;
+    
+                    /**
+                     * Value timestampValue.
+                     * @member {google.protobuf.ITimestamp|null|undefined} timestampValue
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.timestampValue = null;
+    
+                    /**
+                     * Value keyValue.
+                     * @member {google.datastore.v1.IKey|null|undefined} keyValue
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.keyValue = null;
+    
+                    /**
+                     * Value stringValue.
+                     * @member {string|null|undefined} stringValue
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.stringValue = null;
+    
+                    /**
+                     * Value blobValue.
+                     * @member {Uint8Array|null|undefined} blobValue
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.blobValue = null;
+    
+                    /**
+                     * Value geoPointValue.
+                     * @member {google.type.ILatLng|null|undefined} geoPointValue
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.geoPointValue = null;
+    
+                    /**
+                     * Value entityValue.
+                     * @member {google.datastore.v1.IEntity|null|undefined} entityValue
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.entityValue = null;
+    
+                    /**
+                     * Value arrayValue.
+                     * @member {google.datastore.v1.IArrayValue|null|undefined} arrayValue
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.arrayValue = null;
+    
+                    /**
+                     * Value meaning.
+                     * @member {number} meaning
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.meaning = 0;
+    
+                    /**
+                     * Value excludeFromIndexes.
+                     * @member {boolean} excludeFromIndexes
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Value.prototype.excludeFromIndexes = false;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * Value valueType.
+                     * @member {"nullValue"|"booleanValue"|"integerValue"|"doubleValue"|"timestampValue"|"keyValue"|"stringValue"|"blobValue"|"geoPointValue"|"entityValue"|"arrayValue"|undefined} valueType
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     */
+                    Object.defineProperty(Value.prototype, "valueType", {
+                        get: $util.oneOfGetter($oneOfFields = ["nullValue", "booleanValue", "integerValue", "doubleValue", "timestampValue", "keyValue", "stringValue", "blobValue", "geoPointValue", "entityValue", "arrayValue"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new Value instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.Value
+                     * @static
+                     * @param {google.datastore.v1.IValue=} [properties] Properties to set
+                     * @returns {google.datastore.v1.Value} Value instance
+                     */
+                    Value.create = function create(properties) {
+                        return new Value(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Value message. Does not implicitly {@link google.datastore.v1.Value.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.Value
+                     * @static
+                     * @param {google.datastore.v1.IValue} message Value message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Value.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.booleanValue != null && Object.hasOwnProperty.call(message, "booleanValue"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.booleanValue);
+                        if (message.integerValue != null && Object.hasOwnProperty.call(message, "integerValue"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int64(message.integerValue);
+                        if (message.doubleValue != null && Object.hasOwnProperty.call(message, "doubleValue"))
+                            writer.uint32(/* id 3, wireType 1 =*/25).double(message.doubleValue);
+                        if (message.keyValue != null && Object.hasOwnProperty.call(message, "keyValue"))
+                            $root.google.datastore.v1.Key.encode(message.keyValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.entityValue != null && Object.hasOwnProperty.call(message, "entityValue"))
+                            $root.google.datastore.v1.Entity.encode(message.entityValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.geoPointValue != null && Object.hasOwnProperty.call(message, "geoPointValue"))
+                            $root.google.type.LatLng.encode(message.geoPointValue, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        if (message.arrayValue != null && Object.hasOwnProperty.call(message, "arrayValue"))
+                            $root.google.datastore.v1.ArrayValue.encode(message.arrayValue, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                        if (message.timestampValue != null && Object.hasOwnProperty.call(message, "timestampValue"))
+                            $root.google.protobuf.Timestamp.encode(message.timestampValue, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                        if (message.nullValue != null && Object.hasOwnProperty.call(message, "nullValue"))
+                            writer.uint32(/* id 11, wireType 0 =*/88).int32(message.nullValue);
+                        if (message.meaning != null && Object.hasOwnProperty.call(message, "meaning"))
+                            writer.uint32(/* id 14, wireType 0 =*/112).int32(message.meaning);
+                        if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
+                            writer.uint32(/* id 17, wireType 2 =*/138).string(message.stringValue);
+                        if (message.blobValue != null && Object.hasOwnProperty.call(message, "blobValue"))
+                            writer.uint32(/* id 18, wireType 2 =*/146).bytes(message.blobValue);
+                        if (message.excludeFromIndexes != null && Object.hasOwnProperty.call(message, "excludeFromIndexes"))
+                            writer.uint32(/* id 19, wireType 0 =*/152).bool(message.excludeFromIndexes);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Value message, length delimited. Does not implicitly {@link google.datastore.v1.Value.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.Value
+                     * @static
+                     * @param {google.datastore.v1.IValue} message Value message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Value.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Value message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.Value
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.Value} Value
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Value.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Value();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 11: {
+                                    message.nullValue = reader.int32();
+                                    break;
+                                }
+                            case 1: {
+                                    message.booleanValue = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.integerValue = reader.int64();
+                                    break;
+                                }
+                            case 3: {
+                                    message.doubleValue = reader.double();
+                                    break;
+                                }
+                            case 10: {
+                                    message.timestampValue = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.keyValue = $root.google.datastore.v1.Key.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 17: {
+                                    message.stringValue = reader.string();
+                                    break;
+                                }
+                            case 18: {
+                                    message.blobValue = reader.bytes();
+                                    break;
+                                }
+                            case 8: {
+                                    message.geoPointValue = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 6: {
+                                    message.entityValue = $root.google.datastore.v1.Entity.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 9: {
+                                    message.arrayValue = $root.google.datastore.v1.ArrayValue.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 14: {
+                                    message.meaning = reader.int32();
+                                    break;
+                                }
+                            case 19: {
+                                    message.excludeFromIndexes = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Value message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.Value
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.Value} Value
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Value.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Value message.
+                     * @function verify
+                     * @memberof google.datastore.v1.Value
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Value.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
+                            properties.valueType = 1;
+                            switch (message.nullValue) {
+                            default:
+                                return "nullValue: enum value expected";
+                            case 0:
+                                break;
+                            }
+                        }
+                        if (message.booleanValue != null && message.hasOwnProperty("booleanValue")) {
+                            if (properties.valueType === 1)
+                                return "valueType: multiple values";
+                            properties.valueType = 1;
+                            if (typeof message.booleanValue !== "boolean")
+                                return "booleanValue: boolean expected";
+                        }
+                        if (message.integerValue != null && message.hasOwnProperty("integerValue")) {
+                            if (properties.valueType === 1)
+                                return "valueType: multiple values";
+                            properties.valueType = 1;
+                            if (!$util.isInteger(message.integerValue) && !(message.integerValue && $util.isInteger(message.integerValue.low) && $util.isInteger(message.integerValue.high)))
+                                return "integerValue: integer|Long expected";
+                        }
+                        if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
+                            if (properties.valueType === 1)
+                                return "valueType: multiple values";
+                            properties.valueType = 1;
+                            if (typeof message.doubleValue !== "number")
+                                return "doubleValue: number expected";
+                        }
+                        if (message.timestampValue != null && message.hasOwnProperty("timestampValue")) {
+                            if (properties.valueType === 1)
+                                return "valueType: multiple values";
+                            properties.valueType = 1;
+                            {
+                                var error = $root.google.protobuf.Timestamp.verify(message.timestampValue);
+                                if (error)
+                                    return "timestampValue." + error;
+                            }
+                        }
+                        if (message.keyValue != null && message.hasOwnProperty("keyValue")) {
+                            if (properties.valueType === 1)
+                                return "valueType: multiple values";
+                            properties.valueType = 1;
+                            {
+                                var error = $root.google.datastore.v1.Key.verify(message.keyValue);
+                                if (error)
+                                    return "keyValue." + error;
+                            }
+                        }
+                        if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                            if (properties.valueType === 1)
+                                return "valueType: multiple values";
+                            properties.valueType = 1;
+                            if (!$util.isString(message.stringValue))
+                                return "stringValue: string expected";
+                        }
+                        if (message.blobValue != null && message.hasOwnProperty("blobValue")) {
+                            if (properties.valueType === 1)
+                                return "valueType: multiple values";
+                            properties.valueType = 1;
+                            if (!(message.blobValue && typeof message.blobValue.length === "number" || $util.isString(message.blobValue)))
+                                return "blobValue: buffer expected";
+                        }
+                        if (message.geoPointValue != null && message.hasOwnProperty("geoPointValue")) {
+                            if (properties.valueType === 1)
+                                return "valueType: multiple values";
+                            properties.valueType = 1;
+                            {
+                                var error = $root.google.type.LatLng.verify(message.geoPointValue);
+                                if (error)
+                                    return "geoPointValue." + error;
+                            }
+                        }
+                        if (message.entityValue != null && message.hasOwnProperty("entityValue")) {
+                            if (properties.valueType === 1)
+                                return "valueType: multiple values";
+                            properties.valueType = 1;
+                            {
+                                var error = $root.google.datastore.v1.Entity.verify(message.entityValue);
+                                if (error)
+                                    return "entityValue." + error;
+                            }
+                        }
+                        if (message.arrayValue != null && message.hasOwnProperty("arrayValue")) {
+                            if (properties.valueType === 1)
+                                return "valueType: multiple values";
+                            properties.valueType = 1;
+                            {
+                                var error = $root.google.datastore.v1.ArrayValue.verify(message.arrayValue);
+                                if (error)
+                                    return "arrayValue." + error;
+                            }
+                        }
+                        if (message.meaning != null && message.hasOwnProperty("meaning"))
+                            if (!$util.isInteger(message.meaning))
+                                return "meaning: integer expected";
+                        if (message.excludeFromIndexes != null && message.hasOwnProperty("excludeFromIndexes"))
+                            if (typeof message.excludeFromIndexes !== "boolean")
+                                return "excludeFromIndexes: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Value message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.Value
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.Value} Value
+                     */
+                    Value.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.Value)
+                            return object;
+                        var message = new $root.google.datastore.v1.Value();
+                        switch (object.nullValue) {
+                        case "NULL_VALUE":
+                        case 0:
+                            message.nullValue = 0;
+                            break;
+                        }
+                        if (object.booleanValue != null)
+                            message.booleanValue = Boolean(object.booleanValue);
+                        if (object.integerValue != null)
+                            if ($util.Long)
+                                (message.integerValue = $util.Long.fromValue(object.integerValue)).unsigned = false;
+                            else if (typeof object.integerValue === "string")
+                                message.integerValue = parseInt(object.integerValue, 10);
+                            else if (typeof object.integerValue === "number")
+                                message.integerValue = object.integerValue;
+                            else if (typeof object.integerValue === "object")
+                                message.integerValue = new $util.LongBits(object.integerValue.low >>> 0, object.integerValue.high >>> 0).toNumber();
+                        if (object.doubleValue != null)
+                            message.doubleValue = Number(object.doubleValue);
+                        if (object.timestampValue != null) {
+                            if (typeof object.timestampValue !== "object")
+                                throw TypeError(".google.datastore.v1.Value.timestampValue: object expected");
+                            message.timestampValue = $root.google.protobuf.Timestamp.fromObject(object.timestampValue);
+                        }
+                        if (object.keyValue != null) {
+                            if (typeof object.keyValue !== "object")
+                                throw TypeError(".google.datastore.v1.Value.keyValue: object expected");
+                            message.keyValue = $root.google.datastore.v1.Key.fromObject(object.keyValue);
+                        }
+                        if (object.stringValue != null)
+                            message.stringValue = String(object.stringValue);
+                        if (object.blobValue != null)
+                            if (typeof object.blobValue === "string")
+                                $util.base64.decode(object.blobValue, message.blobValue = $util.newBuffer($util.base64.length(object.blobValue)), 0);
+                            else if (object.blobValue.length >= 0)
+                                message.blobValue = object.blobValue;
+                        if (object.geoPointValue != null) {
+                            if (typeof object.geoPointValue !== "object")
+                                throw TypeError(".google.datastore.v1.Value.geoPointValue: object expected");
+                            message.geoPointValue = $root.google.type.LatLng.fromObject(object.geoPointValue);
+                        }
+                        if (object.entityValue != null) {
+                            if (typeof object.entityValue !== "object")
+                                throw TypeError(".google.datastore.v1.Value.entityValue: object expected");
+                            message.entityValue = $root.google.datastore.v1.Entity.fromObject(object.entityValue);
+                        }
+                        if (object.arrayValue != null) {
+                            if (typeof object.arrayValue !== "object")
+                                throw TypeError(".google.datastore.v1.Value.arrayValue: object expected");
+                            message.arrayValue = $root.google.datastore.v1.ArrayValue.fromObject(object.arrayValue);
+                        }
+                        if (object.meaning != null)
+                            message.meaning = object.meaning | 0;
+                        if (object.excludeFromIndexes != null)
+                            message.excludeFromIndexes = Boolean(object.excludeFromIndexes);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Value message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.Value
+                     * @static
+                     * @param {google.datastore.v1.Value} message Value
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Value.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.meaning = 0;
+                            object.excludeFromIndexes = false;
+                        }
+                        if (message.booleanValue != null && message.hasOwnProperty("booleanValue")) {
+                            object.booleanValue = message.booleanValue;
+                            if (options.oneofs)
+                                object.valueType = "booleanValue";
+                        }
+                        if (message.integerValue != null && message.hasOwnProperty("integerValue")) {
+                            if (typeof message.integerValue === "number")
+                                object.integerValue = options.longs === String ? String(message.integerValue) : message.integerValue;
+                            else
+                                object.integerValue = options.longs === String ? $util.Long.prototype.toString.call(message.integerValue) : options.longs === Number ? new $util.LongBits(message.integerValue.low >>> 0, message.integerValue.high >>> 0).toNumber() : message.integerValue;
+                            if (options.oneofs)
+                                object.valueType = "integerValue";
+                        }
+                        if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
+                            object.doubleValue = options.json && !isFinite(message.doubleValue) ? String(message.doubleValue) : message.doubleValue;
+                            if (options.oneofs)
+                                object.valueType = "doubleValue";
+                        }
+                        if (message.keyValue != null && message.hasOwnProperty("keyValue")) {
+                            object.keyValue = $root.google.datastore.v1.Key.toObject(message.keyValue, options);
+                            if (options.oneofs)
+                                object.valueType = "keyValue";
+                        }
+                        if (message.entityValue != null && message.hasOwnProperty("entityValue")) {
+                            object.entityValue = $root.google.datastore.v1.Entity.toObject(message.entityValue, options);
+                            if (options.oneofs)
+                                object.valueType = "entityValue";
+                        }
+                        if (message.geoPointValue != null && message.hasOwnProperty("geoPointValue")) {
+                            object.geoPointValue = $root.google.type.LatLng.toObject(message.geoPointValue, options);
+                            if (options.oneofs)
+                                object.valueType = "geoPointValue";
+                        }
+                        if (message.arrayValue != null && message.hasOwnProperty("arrayValue")) {
+                            object.arrayValue = $root.google.datastore.v1.ArrayValue.toObject(message.arrayValue, options);
+                            if (options.oneofs)
+                                object.valueType = "arrayValue";
+                        }
+                        if (message.timestampValue != null && message.hasOwnProperty("timestampValue")) {
+                            object.timestampValue = $root.google.protobuf.Timestamp.toObject(message.timestampValue, options);
+                            if (options.oneofs)
+                                object.valueType = "timestampValue";
+                        }
+                        if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
+                            object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
+                            if (options.oneofs)
+                                object.valueType = "nullValue";
+                        }
+                        if (message.meaning != null && message.hasOwnProperty("meaning"))
+                            object.meaning = message.meaning;
+                        if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                            object.stringValue = message.stringValue;
+                            if (options.oneofs)
+                                object.valueType = "stringValue";
+                        }
+                        if (message.blobValue != null && message.hasOwnProperty("blobValue")) {
+                            object.blobValue = options.bytes === String ? $util.base64.encode(message.blobValue, 0, message.blobValue.length) : options.bytes === Array ? Array.prototype.slice.call(message.blobValue) : message.blobValue;
+                            if (options.oneofs)
+                                object.valueType = "blobValue";
+                        }
+                        if (message.excludeFromIndexes != null && message.hasOwnProperty("excludeFromIndexes"))
+                            object.excludeFromIndexes = message.excludeFromIndexes;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Value to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.Value
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Value.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Value
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.Value
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.Value";
+                    };
+    
+                    return Value;
+                })();
+    
+                v1.Entity = (function() {
+    
+                    /**
+                     * Properties of an Entity.
+                     * @memberof google.datastore.v1
+                     * @interface IEntity
+                     * @property {google.datastore.v1.IKey|null} [key] Entity key
+                     * @property {Object.<string,google.datastore.v1.IValue>|null} [properties] Entity properties
+                     */
+    
+                    /**
+                     * Constructs a new Entity.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents an Entity.
+                     * @implements IEntity
+                     * @constructor
+                     * @param {google.datastore.v1.IEntity=} [properties] Properties to set
+                     */
+                    function Entity(properties) {
+                        this.properties = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Entity key.
+                     * @member {google.datastore.v1.IKey|null|undefined} key
+                     * @memberof google.datastore.v1.Entity
+                     * @instance
+                     */
+                    Entity.prototype.key = null;
+    
+                    /**
+                     * Entity properties.
+                     * @member {Object.<string,google.datastore.v1.IValue>} properties
+                     * @memberof google.datastore.v1.Entity
+                     * @instance
+                     */
+                    Entity.prototype.properties = $util.emptyObject;
+    
+                    /**
+                     * Creates a new Entity instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.Entity
+                     * @static
+                     * @param {google.datastore.v1.IEntity=} [properties] Properties to set
+                     * @returns {google.datastore.v1.Entity} Entity instance
+                     */
+                    Entity.create = function create(properties) {
+                        return new Entity(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Entity message. Does not implicitly {@link google.datastore.v1.Entity.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.Entity
+                     * @static
+                     * @param {google.datastore.v1.IEntity} message Entity message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Entity.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                            $root.google.datastore.v1.Key.encode(message.key, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.properties != null && Object.hasOwnProperty.call(message, "properties"))
+                            for (var keys = Object.keys(message.properties), i = 0; i < keys.length; ++i) {
+                                writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                $root.google.datastore.v1.Value.encode(message.properties[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                            }
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Entity message, length delimited. Does not implicitly {@link google.datastore.v1.Entity.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.Entity
+                     * @static
+                     * @param {google.datastore.v1.IEntity} message Entity message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Entity.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Entity message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.Entity
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.Entity} Entity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Entity.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Entity(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.key = $root.google.datastore.v1.Key.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    if (message.properties === $util.emptyObject)
+                                        message.properties = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.datastore.v1.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Entity message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.Entity
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.Entity} Entity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Entity.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Entity message.
+                     * @function verify
+                     * @memberof google.datastore.v1.Entity
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Entity.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.key != null && message.hasOwnProperty("key")) {
+                            var error = $root.google.datastore.v1.Key.verify(message.key);
+                            if (error)
+                                return "key." + error;
+                        }
+                        if (message.properties != null && message.hasOwnProperty("properties")) {
+                            if (!$util.isObject(message.properties))
+                                return "properties: object expected";
+                            var key = Object.keys(message.properties);
+                            for (var i = 0; i < key.length; ++i) {
+                                var error = $root.google.datastore.v1.Value.verify(message.properties[key[i]]);
+                                if (error)
+                                    return "properties." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Entity message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.Entity
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.Entity} Entity
+                     */
+                    Entity.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.Entity)
+                            return object;
+                        var message = new $root.google.datastore.v1.Entity();
+                        if (object.key != null) {
+                            if (typeof object.key !== "object")
+                                throw TypeError(".google.datastore.v1.Entity.key: object expected");
+                            message.key = $root.google.datastore.v1.Key.fromObject(object.key);
+                        }
+                        if (object.properties) {
+                            if (typeof object.properties !== "object")
+                                throw TypeError(".google.datastore.v1.Entity.properties: object expected");
+                            message.properties = {};
+                            for (var keys = Object.keys(object.properties), i = 0; i < keys.length; ++i) {
+                                if (typeof object.properties[keys[i]] !== "object")
+                                    throw TypeError(".google.datastore.v1.Entity.properties: object expected");
+                                message.properties[keys[i]] = $root.google.datastore.v1.Value.fromObject(object.properties[keys[i]]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Entity message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.Entity
+                     * @static
+                     * @param {google.datastore.v1.Entity} message Entity
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Entity.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.properties = {};
+                        if (options.defaults)
+                            object.key = null;
+                        if (message.key != null && message.hasOwnProperty("key"))
+                            object.key = $root.google.datastore.v1.Key.toObject(message.key, options);
+                        var keys2;
+                        if (message.properties && (keys2 = Object.keys(message.properties)).length) {
+                            object.properties = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.properties[keys2[j]] = $root.google.datastore.v1.Value.toObject(message.properties[keys2[j]], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Entity to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.Entity
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Entity.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Entity
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.Entity
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Entity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.Entity";
+                    };
+    
+                    return Entity;
+                })();
+    
+                v1.EntityResult = (function() {
+    
+                    /**
+                     * Properties of an EntityResult.
+                     * @memberof google.datastore.v1
+                     * @interface IEntityResult
+                     * @property {google.datastore.v1.IEntity|null} [entity] EntityResult entity
+                     * @property {number|Long|null} [version] EntityResult version
+                     * @property {google.protobuf.ITimestamp|null} [updateTime] EntityResult updateTime
+                     * @property {Uint8Array|null} [cursor] EntityResult cursor
+                     */
+    
+                    /**
+                     * Constructs a new EntityResult.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents an EntityResult.
+                     * @implements IEntityResult
+                     * @constructor
+                     * @param {google.datastore.v1.IEntityResult=} [properties] Properties to set
+                     */
+                    function EntityResult(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * EntityResult entity.
+                     * @member {google.datastore.v1.IEntity|null|undefined} entity
+                     * @memberof google.datastore.v1.EntityResult
+                     * @instance
+                     */
+                    EntityResult.prototype.entity = null;
+    
+                    /**
+                     * EntityResult version.
+                     * @member {number|Long} version
+                     * @memberof google.datastore.v1.EntityResult
+                     * @instance
+                     */
+                    EntityResult.prototype.version = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * EntityResult updateTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                     * @memberof google.datastore.v1.EntityResult
+                     * @instance
+                     */
+                    EntityResult.prototype.updateTime = null;
+    
+                    /**
+                     * EntityResult cursor.
+                     * @member {Uint8Array} cursor
+                     * @memberof google.datastore.v1.EntityResult
+                     * @instance
+                     */
+                    EntityResult.prototype.cursor = $util.newBuffer([]);
+    
+                    /**
+                     * Creates a new EntityResult instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.EntityResult
+                     * @static
+                     * @param {google.datastore.v1.IEntityResult=} [properties] Properties to set
+                     * @returns {google.datastore.v1.EntityResult} EntityResult instance
+                     */
+                    EntityResult.create = function create(properties) {
+                        return new EntityResult(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified EntityResult message. Does not implicitly {@link google.datastore.v1.EntityResult.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.EntityResult
+                     * @static
+                     * @param {google.datastore.v1.IEntityResult} message EntityResult message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EntityResult.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.entity != null && Object.hasOwnProperty.call(message, "entity"))
+                            $root.google.datastore.v1.Entity.encode(message.entity, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.cursor != null && Object.hasOwnProperty.call(message, "cursor"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.cursor);
+                        if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int64(message.version);
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                            $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified EntityResult message, length delimited. Does not implicitly {@link google.datastore.v1.EntityResult.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.EntityResult
+                     * @static
+                     * @param {google.datastore.v1.IEntityResult} message EntityResult message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EntityResult.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an EntityResult message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.EntityResult
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.EntityResult} EntityResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EntityResult.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.EntityResult();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.entity = $root.google.datastore.v1.Entity.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.version = reader.int64();
+                                    break;
+                                }
+                            case 5: {
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.cursor = reader.bytes();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an EntityResult message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.EntityResult
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.EntityResult} EntityResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EntityResult.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an EntityResult message.
+                     * @function verify
+                     * @memberof google.datastore.v1.EntityResult
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    EntityResult.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.entity != null && message.hasOwnProperty("entity")) {
+                            var error = $root.google.datastore.v1.Entity.verify(message.entity);
+                            if (error)
+                                return "entity." + error;
+                        }
+                        if (message.version != null && message.hasOwnProperty("version"))
+                            if (!$util.isInteger(message.version) && !(message.version && $util.isInteger(message.version.low) && $util.isInteger(message.version.high)))
+                                return "version: integer|Long expected";
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                            if (error)
+                                return "updateTime." + error;
+                        }
+                        if (message.cursor != null && message.hasOwnProperty("cursor"))
+                            if (!(message.cursor && typeof message.cursor.length === "number" || $util.isString(message.cursor)))
+                                return "cursor: buffer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an EntityResult message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.EntityResult
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.EntityResult} EntityResult
+                     */
+                    EntityResult.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.EntityResult)
+                            return object;
+                        var message = new $root.google.datastore.v1.EntityResult();
+                        if (object.entity != null) {
+                            if (typeof object.entity !== "object")
+                                throw TypeError(".google.datastore.v1.EntityResult.entity: object expected");
+                            message.entity = $root.google.datastore.v1.Entity.fromObject(object.entity);
+                        }
+                        if (object.version != null)
+                            if ($util.Long)
+                                (message.version = $util.Long.fromValue(object.version)).unsigned = false;
+                            else if (typeof object.version === "string")
+                                message.version = parseInt(object.version, 10);
+                            else if (typeof object.version === "number")
+                                message.version = object.version;
+                            else if (typeof object.version === "object")
+                                message.version = new $util.LongBits(object.version.low >>> 0, object.version.high >>> 0).toNumber();
+                        if (object.updateTime != null) {
+                            if (typeof object.updateTime !== "object")
+                                throw TypeError(".google.datastore.v1.EntityResult.updateTime: object expected");
+                            message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                        }
+                        if (object.cursor != null)
+                            if (typeof object.cursor === "string")
+                                $util.base64.decode(object.cursor, message.cursor = $util.newBuffer($util.base64.length(object.cursor)), 0);
+                            else if (object.cursor.length >= 0)
+                                message.cursor = object.cursor;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an EntityResult message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.EntityResult
+                     * @static
+                     * @param {google.datastore.v1.EntityResult} message EntityResult
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    EntityResult.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.entity = null;
+                            if (options.bytes === String)
+                                object.cursor = "";
+                            else {
+                                object.cursor = [];
+                                if (options.bytes !== Array)
+                                    object.cursor = $util.newBuffer(object.cursor);
+                            }
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.version = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.version = options.longs === String ? "0" : 0;
+                            object.updateTime = null;
+                        }
+                        if (message.entity != null && message.hasOwnProperty("entity"))
+                            object.entity = $root.google.datastore.v1.Entity.toObject(message.entity, options);
+                        if (message.cursor != null && message.hasOwnProperty("cursor"))
+                            object.cursor = options.bytes === String ? $util.base64.encode(message.cursor, 0, message.cursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.cursor) : message.cursor;
+                        if (message.version != null && message.hasOwnProperty("version"))
+                            if (typeof message.version === "number")
+                                object.version = options.longs === String ? String(message.version) : message.version;
+                            else
+                                object.version = options.longs === String ? $util.Long.prototype.toString.call(message.version) : options.longs === Number ? new $util.LongBits(message.version.low >>> 0, message.version.high >>> 0).toNumber() : message.version;
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this EntityResult to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.EntityResult
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    EntityResult.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EntityResult
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.EntityResult
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EntityResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.EntityResult";
+                    };
+    
+                    /**
+                     * ResultType enum.
+                     * @name google.datastore.v1.EntityResult.ResultType
+                     * @enum {number}
+                     * @property {number} RESULT_TYPE_UNSPECIFIED=0 RESULT_TYPE_UNSPECIFIED value
+                     * @property {number} FULL=1 FULL value
+                     * @property {number} PROJECTION=2 PROJECTION value
+                     * @property {number} KEY_ONLY=3 KEY_ONLY value
+                     */
+                    EntityResult.ResultType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "RESULT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "FULL"] = 1;
+                        values[valuesById[2] = "PROJECTION"] = 2;
+                        values[valuesById[3] = "KEY_ONLY"] = 3;
+                        return values;
+                    })();
+    
+                    return EntityResult;
+                })();
+    
+                v1.Query = (function() {
+    
+                    /**
+                     * Properties of a Query.
+                     * @memberof google.datastore.v1
+                     * @interface IQuery
+                     * @property {Array.<google.datastore.v1.IProjection>|null} [projection] Query projection
+                     * @property {Array.<google.datastore.v1.IKindExpression>|null} [kind] Query kind
+                     * @property {google.datastore.v1.IFilter|null} [filter] Query filter
+                     * @property {Array.<google.datastore.v1.IPropertyOrder>|null} [order] Query order
+                     * @property {Array.<google.datastore.v1.IPropertyReference>|null} [distinctOn] Query distinctOn
+                     * @property {Uint8Array|null} [startCursor] Query startCursor
+                     * @property {Uint8Array|null} [endCursor] Query endCursor
+                     * @property {number|null} [offset] Query offset
+                     * @property {google.protobuf.IInt32Value|null} [limit] Query limit
+                     */
+    
+                    /**
+                     * Constructs a new Query.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a Query.
+                     * @implements IQuery
+                     * @constructor
+                     * @param {google.datastore.v1.IQuery=} [properties] Properties to set
+                     */
+                    function Query(properties) {
+                        this.projection = [];
+                        this.kind = [];
+                        this.order = [];
+                        this.distinctOn = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Query projection.
+                     * @member {Array.<google.datastore.v1.IProjection>} projection
+                     * @memberof google.datastore.v1.Query
+                     * @instance
+                     */
+                    Query.prototype.projection = $util.emptyArray;
+    
+                    /**
+                     * Query kind.
+                     * @member {Array.<google.datastore.v1.IKindExpression>} kind
+                     * @memberof google.datastore.v1.Query
+                     * @instance
+                     */
+                    Query.prototype.kind = $util.emptyArray;
+    
+                    /**
+                     * Query filter.
+                     * @member {google.datastore.v1.IFilter|null|undefined} filter
+                     * @memberof google.datastore.v1.Query
+                     * @instance
+                     */
+                    Query.prototype.filter = null;
+    
+                    /**
+                     * Query order.
+                     * @member {Array.<google.datastore.v1.IPropertyOrder>} order
+                     * @memberof google.datastore.v1.Query
+                     * @instance
+                     */
+                    Query.prototype.order = $util.emptyArray;
+    
+                    /**
+                     * Query distinctOn.
+                     * @member {Array.<google.datastore.v1.IPropertyReference>} distinctOn
+                     * @memberof google.datastore.v1.Query
+                     * @instance
+                     */
+                    Query.prototype.distinctOn = $util.emptyArray;
+    
+                    /**
+                     * Query startCursor.
+                     * @member {Uint8Array} startCursor
+                     * @memberof google.datastore.v1.Query
+                     * @instance
+                     */
+                    Query.prototype.startCursor = $util.newBuffer([]);
+    
+                    /**
+                     * Query endCursor.
+                     * @member {Uint8Array} endCursor
+                     * @memberof google.datastore.v1.Query
+                     * @instance
+                     */
+                    Query.prototype.endCursor = $util.newBuffer([]);
+    
+                    /**
+                     * Query offset.
+                     * @member {number} offset
+                     * @memberof google.datastore.v1.Query
+                     * @instance
+                     */
+                    Query.prototype.offset = 0;
+    
+                    /**
+                     * Query limit.
+                     * @member {google.protobuf.IInt32Value|null|undefined} limit
+                     * @memberof google.datastore.v1.Query
+                     * @instance
+                     */
+                    Query.prototype.limit = null;
+    
+                    /**
+                     * Creates a new Query instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.Query
+                     * @static
+                     * @param {google.datastore.v1.IQuery=} [properties] Properties to set
+                     * @returns {google.datastore.v1.Query} Query instance
+                     */
+                    Query.create = function create(properties) {
+                        return new Query(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Query message. Does not implicitly {@link google.datastore.v1.Query.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.Query
+                     * @static
+                     * @param {google.datastore.v1.IQuery} message Query message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Query.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.projection != null && message.projection.length)
+                            for (var i = 0; i < message.projection.length; ++i)
+                                $root.google.datastore.v1.Projection.encode(message.projection[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.kind != null && message.kind.length)
+                            for (var i = 0; i < message.kind.length; ++i)
+                                $root.google.datastore.v1.KindExpression.encode(message.kind[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                            $root.google.datastore.v1.Filter.encode(message.filter, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.order != null && message.order.length)
+                            for (var i = 0; i < message.order.length; ++i)
+                                $root.google.datastore.v1.PropertyOrder.encode(message.order[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.distinctOn != null && message.distinctOn.length)
+                            for (var i = 0; i < message.distinctOn.length; ++i)
+                                $root.google.datastore.v1.PropertyReference.encode(message.distinctOn[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.startCursor != null && Object.hasOwnProperty.call(message, "startCursor"))
+                            writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.startCursor);
+                        if (message.endCursor != null && Object.hasOwnProperty.call(message, "endCursor"))
+                            writer.uint32(/* id 8, wireType 2 =*/66).bytes(message.endCursor);
+                        if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
+                            writer.uint32(/* id 10, wireType 0 =*/80).int32(message.offset);
+                        if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
+                            $root.google.protobuf.Int32Value.encode(message.limit, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Query message, length delimited. Does not implicitly {@link google.datastore.v1.Query.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.Query
+                     * @static
+                     * @param {google.datastore.v1.IQuery} message Query message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Query.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Query message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.Query
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.Query} Query
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Query.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Query();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 2: {
+                                    if (!(message.projection && message.projection.length))
+                                        message.projection = [];
+                                    message.projection.push($root.google.datastore.v1.Projection.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.kind && message.kind.length))
+                                        message.kind = [];
+                                    message.kind.push($root.google.datastore.v1.KindExpression.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 4: {
+                                    message.filter = $root.google.datastore.v1.Filter.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    if (!(message.order && message.order.length))
+                                        message.order = [];
+                                    message.order.push($root.google.datastore.v1.PropertyOrder.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.distinctOn && message.distinctOn.length))
+                                        message.distinctOn = [];
+                                    message.distinctOn.push($root.google.datastore.v1.PropertyReference.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 7: {
+                                    message.startCursor = reader.bytes();
+                                    break;
+                                }
+                            case 8: {
+                                    message.endCursor = reader.bytes();
+                                    break;
+                                }
+                            case 10: {
+                                    message.offset = reader.int32();
+                                    break;
+                                }
+                            case 12: {
+                                    message.limit = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Query message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.Query
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.Query} Query
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Query.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Query message.
+                     * @function verify
+                     * @memberof google.datastore.v1.Query
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Query.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.projection != null && message.hasOwnProperty("projection")) {
+                            if (!Array.isArray(message.projection))
+                                return "projection: array expected";
+                            for (var i = 0; i < message.projection.length; ++i) {
+                                var error = $root.google.datastore.v1.Projection.verify(message.projection[i]);
+                                if (error)
+                                    return "projection." + error;
+                            }
+                        }
+                        if (message.kind != null && message.hasOwnProperty("kind")) {
+                            if (!Array.isArray(message.kind))
+                                return "kind: array expected";
+                            for (var i = 0; i < message.kind.length; ++i) {
+                                var error = $root.google.datastore.v1.KindExpression.verify(message.kind[i]);
+                                if (error)
+                                    return "kind." + error;
+                            }
+                        }
+                        if (message.filter != null && message.hasOwnProperty("filter")) {
+                            var error = $root.google.datastore.v1.Filter.verify(message.filter);
+                            if (error)
+                                return "filter." + error;
+                        }
+                        if (message.order != null && message.hasOwnProperty("order")) {
+                            if (!Array.isArray(message.order))
+                                return "order: array expected";
+                            for (var i = 0; i < message.order.length; ++i) {
+                                var error = $root.google.datastore.v1.PropertyOrder.verify(message.order[i]);
+                                if (error)
+                                    return "order." + error;
+                            }
+                        }
+                        if (message.distinctOn != null && message.hasOwnProperty("distinctOn")) {
+                            if (!Array.isArray(message.distinctOn))
+                                return "distinctOn: array expected";
+                            for (var i = 0; i < message.distinctOn.length; ++i) {
+                                var error = $root.google.datastore.v1.PropertyReference.verify(message.distinctOn[i]);
+                                if (error)
+                                    return "distinctOn." + error;
+                            }
+                        }
+                        if (message.startCursor != null && message.hasOwnProperty("startCursor"))
+                            if (!(message.startCursor && typeof message.startCursor.length === "number" || $util.isString(message.startCursor)))
+                                return "startCursor: buffer expected";
+                        if (message.endCursor != null && message.hasOwnProperty("endCursor"))
+                            if (!(message.endCursor && typeof message.endCursor.length === "number" || $util.isString(message.endCursor)))
+                                return "endCursor: buffer expected";
+                        if (message.offset != null && message.hasOwnProperty("offset"))
+                            if (!$util.isInteger(message.offset))
+                                return "offset: integer expected";
+                        if (message.limit != null && message.hasOwnProperty("limit")) {
+                            var error = $root.google.protobuf.Int32Value.verify(message.limit);
+                            if (error)
+                                return "limit." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Query message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.Query
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.Query} Query
+                     */
+                    Query.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.Query)
+                            return object;
+                        var message = new $root.google.datastore.v1.Query();
+                        if (object.projection) {
+                            if (!Array.isArray(object.projection))
+                                throw TypeError(".google.datastore.v1.Query.projection: array expected");
+                            message.projection = [];
+                            for (var i = 0; i < object.projection.length; ++i) {
+                                if (typeof object.projection[i] !== "object")
+                                    throw TypeError(".google.datastore.v1.Query.projection: object expected");
+                                message.projection[i] = $root.google.datastore.v1.Projection.fromObject(object.projection[i]);
+                            }
+                        }
+                        if (object.kind) {
+                            if (!Array.isArray(object.kind))
+                                throw TypeError(".google.datastore.v1.Query.kind: array expected");
+                            message.kind = [];
+                            for (var i = 0; i < object.kind.length; ++i) {
+                                if (typeof object.kind[i] !== "object")
+                                    throw TypeError(".google.datastore.v1.Query.kind: object expected");
+                                message.kind[i] = $root.google.datastore.v1.KindExpression.fromObject(object.kind[i]);
+                            }
+                        }
+                        if (object.filter != null) {
+                            if (typeof object.filter !== "object")
+                                throw TypeError(".google.datastore.v1.Query.filter: object expected");
+                            message.filter = $root.google.datastore.v1.Filter.fromObject(object.filter);
+                        }
+                        if (object.order) {
+                            if (!Array.isArray(object.order))
+                                throw TypeError(".google.datastore.v1.Query.order: array expected");
+                            message.order = [];
+                            for (var i = 0; i < object.order.length; ++i) {
+                                if (typeof object.order[i] !== "object")
+                                    throw TypeError(".google.datastore.v1.Query.order: object expected");
+                                message.order[i] = $root.google.datastore.v1.PropertyOrder.fromObject(object.order[i]);
+                            }
+                        }
+                        if (object.distinctOn) {
+                            if (!Array.isArray(object.distinctOn))
+                                throw TypeError(".google.datastore.v1.Query.distinctOn: array expected");
+                            message.distinctOn = [];
+                            for (var i = 0; i < object.distinctOn.length; ++i) {
+                                if (typeof object.distinctOn[i] !== "object")
+                                    throw TypeError(".google.datastore.v1.Query.distinctOn: object expected");
+                                message.distinctOn[i] = $root.google.datastore.v1.PropertyReference.fromObject(object.distinctOn[i]);
+                            }
+                        }
+                        if (object.startCursor != null)
+                            if (typeof object.startCursor === "string")
+                                $util.base64.decode(object.startCursor, message.startCursor = $util.newBuffer($util.base64.length(object.startCursor)), 0);
+                            else if (object.startCursor.length >= 0)
+                                message.startCursor = object.startCursor;
+                        if (object.endCursor != null)
+                            if (typeof object.endCursor === "string")
+                                $util.base64.decode(object.endCursor, message.endCursor = $util.newBuffer($util.base64.length(object.endCursor)), 0);
+                            else if (object.endCursor.length >= 0)
+                                message.endCursor = object.endCursor;
+                        if (object.offset != null)
+                            message.offset = object.offset | 0;
+                        if (object.limit != null) {
+                            if (typeof object.limit !== "object")
+                                throw TypeError(".google.datastore.v1.Query.limit: object expected");
+                            message.limit = $root.google.protobuf.Int32Value.fromObject(object.limit);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Query message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.Query
+                     * @static
+                     * @param {google.datastore.v1.Query} message Query
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Query.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.projection = [];
+                            object.kind = [];
+                            object.order = [];
+                            object.distinctOn = [];
+                        }
+                        if (options.defaults) {
+                            object.filter = null;
+                            if (options.bytes === String)
+                                object.startCursor = "";
+                            else {
+                                object.startCursor = [];
+                                if (options.bytes !== Array)
+                                    object.startCursor = $util.newBuffer(object.startCursor);
+                            }
+                            if (options.bytes === String)
+                                object.endCursor = "";
+                            else {
+                                object.endCursor = [];
+                                if (options.bytes !== Array)
+                                    object.endCursor = $util.newBuffer(object.endCursor);
+                            }
+                            object.offset = 0;
+                            object.limit = null;
+                        }
+                        if (message.projection && message.projection.length) {
+                            object.projection = [];
+                            for (var j = 0; j < message.projection.length; ++j)
+                                object.projection[j] = $root.google.datastore.v1.Projection.toObject(message.projection[j], options);
+                        }
+                        if (message.kind && message.kind.length) {
+                            object.kind = [];
+                            for (var j = 0; j < message.kind.length; ++j)
+                                object.kind[j] = $root.google.datastore.v1.KindExpression.toObject(message.kind[j], options);
+                        }
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            object.filter = $root.google.datastore.v1.Filter.toObject(message.filter, options);
+                        if (message.order && message.order.length) {
+                            object.order = [];
+                            for (var j = 0; j < message.order.length; ++j)
+                                object.order[j] = $root.google.datastore.v1.PropertyOrder.toObject(message.order[j], options);
+                        }
+                        if (message.distinctOn && message.distinctOn.length) {
+                            object.distinctOn = [];
+                            for (var j = 0; j < message.distinctOn.length; ++j)
+                                object.distinctOn[j] = $root.google.datastore.v1.PropertyReference.toObject(message.distinctOn[j], options);
+                        }
+                        if (message.startCursor != null && message.hasOwnProperty("startCursor"))
+                            object.startCursor = options.bytes === String ? $util.base64.encode(message.startCursor, 0, message.startCursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.startCursor) : message.startCursor;
+                        if (message.endCursor != null && message.hasOwnProperty("endCursor"))
+                            object.endCursor = options.bytes === String ? $util.base64.encode(message.endCursor, 0, message.endCursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.endCursor) : message.endCursor;
+                        if (message.offset != null && message.hasOwnProperty("offset"))
+                            object.offset = message.offset;
+                        if (message.limit != null && message.hasOwnProperty("limit"))
+                            object.limit = $root.google.protobuf.Int32Value.toObject(message.limit, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Query to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.Query
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Query.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Query
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.Query
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Query.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.Query";
+                    };
+    
+                    return Query;
+                })();
+    
+                v1.AggregationQuery = (function() {
+    
+                    /**
+                     * Properties of an AggregationQuery.
+                     * @memberof google.datastore.v1
+                     * @interface IAggregationQuery
+                     * @property {google.datastore.v1.IQuery|null} [nestedQuery] AggregationQuery nestedQuery
+                     * @property {Array.<google.datastore.v1.AggregationQuery.IAggregation>|null} [aggregations] AggregationQuery aggregations
+                     */
+    
+                    /**
+                     * Constructs a new AggregationQuery.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents an AggregationQuery.
+                     * @implements IAggregationQuery
+                     * @constructor
+                     * @param {google.datastore.v1.IAggregationQuery=} [properties] Properties to set
+                     */
+                    function AggregationQuery(properties) {
+                        this.aggregations = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AggregationQuery nestedQuery.
+                     * @member {google.datastore.v1.IQuery|null|undefined} nestedQuery
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @instance
+                     */
+                    AggregationQuery.prototype.nestedQuery = null;
+    
+                    /**
+                     * AggregationQuery aggregations.
+                     * @member {Array.<google.datastore.v1.AggregationQuery.IAggregation>} aggregations
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @instance
+                     */
+                    AggregationQuery.prototype.aggregations = $util.emptyArray;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * AggregationQuery queryType.
+                     * @member {"nestedQuery"|undefined} queryType
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @instance
+                     */
+                    Object.defineProperty(AggregationQuery.prototype, "queryType", {
+                        get: $util.oneOfGetter($oneOfFields = ["nestedQuery"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new AggregationQuery instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @static
+                     * @param {google.datastore.v1.IAggregationQuery=} [properties] Properties to set
+                     * @returns {google.datastore.v1.AggregationQuery} AggregationQuery instance
+                     */
+                    AggregationQuery.create = function create(properties) {
+                        return new AggregationQuery(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AggregationQuery message. Does not implicitly {@link google.datastore.v1.AggregationQuery.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @static
+                     * @param {google.datastore.v1.IAggregationQuery} message AggregationQuery message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AggregationQuery.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.nestedQuery != null && Object.hasOwnProperty.call(message, "nestedQuery"))
+                            $root.google.datastore.v1.Query.encode(message.nestedQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.aggregations != null && message.aggregations.length)
+                            for (var i = 0; i < message.aggregations.length; ++i)
+                                $root.google.datastore.v1.AggregationQuery.Aggregation.encode(message.aggregations[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AggregationQuery message, length delimited. Does not implicitly {@link google.datastore.v1.AggregationQuery.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @static
+                     * @param {google.datastore.v1.IAggregationQuery} message AggregationQuery message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AggregationQuery.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AggregationQuery message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.AggregationQuery} AggregationQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AggregationQuery.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.AggregationQuery();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.nestedQuery = $root.google.datastore.v1.Query.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.aggregations && message.aggregations.length))
+                                        message.aggregations = [];
+                                    message.aggregations.push($root.google.datastore.v1.AggregationQuery.Aggregation.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AggregationQuery message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.AggregationQuery} AggregationQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AggregationQuery.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AggregationQuery message.
+                     * @function verify
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AggregationQuery.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.nestedQuery != null && message.hasOwnProperty("nestedQuery")) {
+                            properties.queryType = 1;
+                            {
+                                var error = $root.google.datastore.v1.Query.verify(message.nestedQuery);
+                                if (error)
+                                    return "nestedQuery." + error;
+                            }
+                        }
+                        if (message.aggregations != null && message.hasOwnProperty("aggregations")) {
+                            if (!Array.isArray(message.aggregations))
+                                return "aggregations: array expected";
+                            for (var i = 0; i < message.aggregations.length; ++i) {
+                                var error = $root.google.datastore.v1.AggregationQuery.Aggregation.verify(message.aggregations[i]);
+                                if (error)
+                                    return "aggregations." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AggregationQuery message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.AggregationQuery} AggregationQuery
+                     */
+                    AggregationQuery.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.AggregationQuery)
+                            return object;
+                        var message = new $root.google.datastore.v1.AggregationQuery();
+                        if (object.nestedQuery != null) {
+                            if (typeof object.nestedQuery !== "object")
+                                throw TypeError(".google.datastore.v1.AggregationQuery.nestedQuery: object expected");
+                            message.nestedQuery = $root.google.datastore.v1.Query.fromObject(object.nestedQuery);
+                        }
+                        if (object.aggregations) {
+                            if (!Array.isArray(object.aggregations))
+                                throw TypeError(".google.datastore.v1.AggregationQuery.aggregations: array expected");
+                            message.aggregations = [];
+                            for (var i = 0; i < object.aggregations.length; ++i) {
+                                if (typeof object.aggregations[i] !== "object")
+                                    throw TypeError(".google.datastore.v1.AggregationQuery.aggregations: object expected");
+                                message.aggregations[i] = $root.google.datastore.v1.AggregationQuery.Aggregation.fromObject(object.aggregations[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AggregationQuery message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @static
+                     * @param {google.datastore.v1.AggregationQuery} message AggregationQuery
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AggregationQuery.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.aggregations = [];
+                        if (message.nestedQuery != null && message.hasOwnProperty("nestedQuery")) {
+                            object.nestedQuery = $root.google.datastore.v1.Query.toObject(message.nestedQuery, options);
+                            if (options.oneofs)
+                                object.queryType = "nestedQuery";
+                        }
+                        if (message.aggregations && message.aggregations.length) {
+                            object.aggregations = [];
+                            for (var j = 0; j < message.aggregations.length; ++j)
+                                object.aggregations[j] = $root.google.datastore.v1.AggregationQuery.Aggregation.toObject(message.aggregations[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AggregationQuery to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AggregationQuery.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AggregationQuery
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.AggregationQuery
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AggregationQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.AggregationQuery";
+                    };
+    
+                    AggregationQuery.Aggregation = (function() {
+    
+                        /**
+                         * Properties of an Aggregation.
+                         * @memberof google.datastore.v1.AggregationQuery
+                         * @interface IAggregation
+                         * @property {google.datastore.v1.AggregationQuery.Aggregation.ICount|null} [count] Aggregation count
+                         * @property {string|null} [alias] Aggregation alias
+                         */
+    
+                        /**
+                         * Constructs a new Aggregation.
+                         * @memberof google.datastore.v1.AggregationQuery
+                         * @classdesc Represents an Aggregation.
+                         * @implements IAggregation
+                         * @constructor
+                         * @param {google.datastore.v1.AggregationQuery.IAggregation=} [properties] Properties to set
+                         */
+                        function Aggregation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Aggregation count.
+                         * @member {google.datastore.v1.AggregationQuery.Aggregation.ICount|null|undefined} count
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @instance
+                         */
+                        Aggregation.prototype.count = null;
+    
+                        /**
+                         * Aggregation alias.
+                         * @member {string} alias
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @instance
+                         */
+                        Aggregation.prototype.alias = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Aggregation operator.
+                         * @member {"count"|undefined} operator
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @instance
+                         */
+                        Object.defineProperty(Aggregation.prototype, "operator", {
+                            get: $util.oneOfGetter($oneOfFields = ["count"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Aggregation instance using the specified properties.
+                         * @function create
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @static
+                         * @param {google.datastore.v1.AggregationQuery.IAggregation=} [properties] Properties to set
+                         * @returns {google.datastore.v1.AggregationQuery.Aggregation} Aggregation instance
+                         */
+                        Aggregation.create = function create(properties) {
+                            return new Aggregation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Aggregation message. Does not implicitly {@link google.datastore.v1.AggregationQuery.Aggregation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @static
+                         * @param {google.datastore.v1.AggregationQuery.IAggregation} message Aggregation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Aggregation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                $root.google.datastore.v1.AggregationQuery.Aggregation.Count.encode(message.count, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.alias != null && Object.hasOwnProperty.call(message, "alias"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.alias);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Aggregation message, length delimited. Does not implicitly {@link google.datastore.v1.AggregationQuery.Aggregation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @static
+                         * @param {google.datastore.v1.AggregationQuery.IAggregation} message Aggregation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Aggregation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Aggregation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.datastore.v1.AggregationQuery.Aggregation} Aggregation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Aggregation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.AggregationQuery.Aggregation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.count = $root.google.datastore.v1.AggregationQuery.Aggregation.Count.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.alias = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Aggregation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.datastore.v1.AggregationQuery.Aggregation} Aggregation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Aggregation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Aggregation message.
+                         * @function verify
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Aggregation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.count != null && message.hasOwnProperty("count")) {
+                                properties.operator = 1;
+                                {
+                                    var error = $root.google.datastore.v1.AggregationQuery.Aggregation.Count.verify(message.count);
+                                    if (error)
+                                        return "count." + error;
+                                }
+                            }
+                            if (message.alias != null && message.hasOwnProperty("alias"))
+                                if (!$util.isString(message.alias))
+                                    return "alias: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Aggregation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.datastore.v1.AggregationQuery.Aggregation} Aggregation
+                         */
+                        Aggregation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.datastore.v1.AggregationQuery.Aggregation)
+                                return object;
+                            var message = new $root.google.datastore.v1.AggregationQuery.Aggregation();
+                            if (object.count != null) {
+                                if (typeof object.count !== "object")
+                                    throw TypeError(".google.datastore.v1.AggregationQuery.Aggregation.count: object expected");
+                                message.count = $root.google.datastore.v1.AggregationQuery.Aggregation.Count.fromObject(object.count);
+                            }
+                            if (object.alias != null)
+                                message.alias = String(object.alias);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Aggregation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @static
+                         * @param {google.datastore.v1.AggregationQuery.Aggregation} message Aggregation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Aggregation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.alias = "";
+                            if (message.count != null && message.hasOwnProperty("count")) {
+                                object.count = $root.google.datastore.v1.AggregationQuery.Aggregation.Count.toObject(message.count, options);
+                                if (options.oneofs)
+                                    object.operator = "count";
+                            }
+                            if (message.alias != null && message.hasOwnProperty("alias"))
+                                object.alias = message.alias;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Aggregation to JSON.
+                         * @function toJSON
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Aggregation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Aggregation
+                         * @function getTypeUrl
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Aggregation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.datastore.v1.AggregationQuery.Aggregation";
+                        };
+    
+                        Aggregation.Count = (function() {
+    
+                            /**
+                             * Properties of a Count.
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                             * @interface ICount
+                             * @property {google.protobuf.IInt64Value|null} [upTo] Count upTo
+                             */
+    
+                            /**
+                             * Constructs a new Count.
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                             * @classdesc Represents a Count.
+                             * @implements ICount
+                             * @constructor
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.ICount=} [properties] Properties to set
+                             */
+                            function Count(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Count upTo.
+                             * @member {google.protobuf.IInt64Value|null|undefined} upTo
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Count
+                             * @instance
+                             */
+                            Count.prototype.upTo = null;
+    
+                            /**
+                             * Creates a new Count instance using the specified properties.
+                             * @function create
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Count
+                             * @static
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.ICount=} [properties] Properties to set
+                             * @returns {google.datastore.v1.AggregationQuery.Aggregation.Count} Count instance
+                             */
+                            Count.create = function create(properties) {
+                                return new Count(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Count message. Does not implicitly {@link google.datastore.v1.AggregationQuery.Aggregation.Count.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Count
+                             * @static
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.ICount} message Count message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Count.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.upTo != null && Object.hasOwnProperty.call(message, "upTo"))
+                                    $root.google.protobuf.Int64Value.encode(message.upTo, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Count message, length delimited. Does not implicitly {@link google.datastore.v1.AggregationQuery.Aggregation.Count.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Count
+                             * @static
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.ICount} message Count message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Count.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Count message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Count
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.datastore.v1.AggregationQuery.Aggregation.Count} Count
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Count.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.AggregationQuery.Aggregation.Count();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.upTo = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Count message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Count
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.datastore.v1.AggregationQuery.Aggregation.Count} Count
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Count.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Count message.
+                             * @function verify
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Count
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Count.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.upTo != null && message.hasOwnProperty("upTo")) {
+                                    var error = $root.google.protobuf.Int64Value.verify(message.upTo);
+                                    if (error)
+                                        return "upTo." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Count message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Count
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.datastore.v1.AggregationQuery.Aggregation.Count} Count
+                             */
+                            Count.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.datastore.v1.AggregationQuery.Aggregation.Count)
+                                    return object;
+                                var message = new $root.google.datastore.v1.AggregationQuery.Aggregation.Count();
+                                if (object.upTo != null) {
+                                    if (typeof object.upTo !== "object")
+                                        throw TypeError(".google.datastore.v1.AggregationQuery.Aggregation.Count.upTo: object expected");
+                                    message.upTo = $root.google.protobuf.Int64Value.fromObject(object.upTo);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Count message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Count
+                             * @static
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.Count} message Count
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Count.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.upTo = null;
+                                if (message.upTo != null && message.hasOwnProperty("upTo"))
+                                    object.upTo = $root.google.protobuf.Int64Value.toObject(message.upTo, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Count to JSON.
+                             * @function toJSON
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Count
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Count.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Count
+                             * @function getTypeUrl
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Count
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Count.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.datastore.v1.AggregationQuery.Aggregation.Count";
+                            };
+    
+                            return Count;
+                        })();
+    
+                        return Aggregation;
+                    })();
+    
+                    return AggregationQuery;
+                })();
+    
+                v1.KindExpression = (function() {
+    
+                    /**
+                     * Properties of a KindExpression.
+                     * @memberof google.datastore.v1
+                     * @interface IKindExpression
+                     * @property {string|null} [name] KindExpression name
+                     */
+    
+                    /**
+                     * Constructs a new KindExpression.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a KindExpression.
+                     * @implements IKindExpression
+                     * @constructor
+                     * @param {google.datastore.v1.IKindExpression=} [properties] Properties to set
+                     */
+                    function KindExpression(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * KindExpression name.
+                     * @member {string} name
+                     * @memberof google.datastore.v1.KindExpression
+                     * @instance
+                     */
+                    KindExpression.prototype.name = "";
+    
+                    /**
+                     * Creates a new KindExpression instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.KindExpression
+                     * @static
+                     * @param {google.datastore.v1.IKindExpression=} [properties] Properties to set
+                     * @returns {google.datastore.v1.KindExpression} KindExpression instance
+                     */
+                    KindExpression.create = function create(properties) {
+                        return new KindExpression(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified KindExpression message. Does not implicitly {@link google.datastore.v1.KindExpression.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.KindExpression
+                     * @static
+                     * @param {google.datastore.v1.IKindExpression} message KindExpression message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    KindExpression.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified KindExpression message, length delimited. Does not implicitly {@link google.datastore.v1.KindExpression.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.KindExpression
+                     * @static
+                     * @param {google.datastore.v1.IKindExpression} message KindExpression message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    KindExpression.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a KindExpression message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.KindExpression
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.KindExpression} KindExpression
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    KindExpression.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.KindExpression();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a KindExpression message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.KindExpression
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.KindExpression} KindExpression
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    KindExpression.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a KindExpression message.
+                     * @function verify
+                     * @memberof google.datastore.v1.KindExpression
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    KindExpression.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a KindExpression message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.KindExpression
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.KindExpression} KindExpression
+                     */
+                    KindExpression.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.KindExpression)
+                            return object;
+                        var message = new $root.google.datastore.v1.KindExpression();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a KindExpression message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.KindExpression
+                     * @static
+                     * @param {google.datastore.v1.KindExpression} message KindExpression
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    KindExpression.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this KindExpression to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.KindExpression
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    KindExpression.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for KindExpression
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.KindExpression
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    KindExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.KindExpression";
+                    };
+    
+                    return KindExpression;
+                })();
+    
+                v1.PropertyReference = (function() {
+    
+                    /**
+                     * Properties of a PropertyReference.
+                     * @memberof google.datastore.v1
+                     * @interface IPropertyReference
+                     * @property {string|null} [name] PropertyReference name
+                     */
+    
+                    /**
+                     * Constructs a new PropertyReference.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a PropertyReference.
+                     * @implements IPropertyReference
+                     * @constructor
+                     * @param {google.datastore.v1.IPropertyReference=} [properties] Properties to set
+                     */
+                    function PropertyReference(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PropertyReference name.
+                     * @member {string} name
+                     * @memberof google.datastore.v1.PropertyReference
+                     * @instance
+                     */
+                    PropertyReference.prototype.name = "";
+    
+                    /**
+                     * Creates a new PropertyReference instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.PropertyReference
+                     * @static
+                     * @param {google.datastore.v1.IPropertyReference=} [properties] Properties to set
+                     * @returns {google.datastore.v1.PropertyReference} PropertyReference instance
+                     */
+                    PropertyReference.create = function create(properties) {
+                        return new PropertyReference(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PropertyReference message. Does not implicitly {@link google.datastore.v1.PropertyReference.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.PropertyReference
+                     * @static
+                     * @param {google.datastore.v1.IPropertyReference} message PropertyReference message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PropertyReference.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PropertyReference message, length delimited. Does not implicitly {@link google.datastore.v1.PropertyReference.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.PropertyReference
+                     * @static
+                     * @param {google.datastore.v1.IPropertyReference} message PropertyReference message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PropertyReference.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PropertyReference message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.PropertyReference
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.PropertyReference} PropertyReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PropertyReference.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.PropertyReference();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 2: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PropertyReference message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.PropertyReference
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.PropertyReference} PropertyReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PropertyReference.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PropertyReference message.
+                     * @function verify
+                     * @memberof google.datastore.v1.PropertyReference
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PropertyReference.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PropertyReference message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.PropertyReference
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.PropertyReference} PropertyReference
+                     */
+                    PropertyReference.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.PropertyReference)
+                            return object;
+                        var message = new $root.google.datastore.v1.PropertyReference();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PropertyReference message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.PropertyReference
+                     * @static
+                     * @param {google.datastore.v1.PropertyReference} message PropertyReference
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PropertyReference.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PropertyReference to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.PropertyReference
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PropertyReference.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PropertyReference
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.PropertyReference
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PropertyReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.PropertyReference";
+                    };
+    
+                    return PropertyReference;
+                })();
+    
+                v1.Projection = (function() {
+    
+                    /**
+                     * Properties of a Projection.
+                     * @memberof google.datastore.v1
+                     * @interface IProjection
+                     * @property {google.datastore.v1.IPropertyReference|null} [property] Projection property
+                     */
+    
+                    /**
+                     * Constructs a new Projection.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a Projection.
+                     * @implements IProjection
+                     * @constructor
+                     * @param {google.datastore.v1.IProjection=} [properties] Properties to set
+                     */
+                    function Projection(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Projection property.
+                     * @member {google.datastore.v1.IPropertyReference|null|undefined} property
+                     * @memberof google.datastore.v1.Projection
+                     * @instance
+                     */
+                    Projection.prototype.property = null;
+    
+                    /**
+                     * Creates a new Projection instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.Projection
+                     * @static
+                     * @param {google.datastore.v1.IProjection=} [properties] Properties to set
+                     * @returns {google.datastore.v1.Projection} Projection instance
+                     */
+                    Projection.create = function create(properties) {
+                        return new Projection(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Projection message. Does not implicitly {@link google.datastore.v1.Projection.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.Projection
+                     * @static
+                     * @param {google.datastore.v1.IProjection} message Projection message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Projection.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                            $root.google.datastore.v1.PropertyReference.encode(message.property, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Projection message, length delimited. Does not implicitly {@link google.datastore.v1.Projection.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.Projection
+                     * @static
+                     * @param {google.datastore.v1.IProjection} message Projection message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Projection.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Projection message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.Projection
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.Projection} Projection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Projection.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Projection();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.property = $root.google.datastore.v1.PropertyReference.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Projection message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.Projection
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.Projection} Projection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Projection.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Projection message.
+                     * @function verify
+                     * @memberof google.datastore.v1.Projection
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Projection.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.property != null && message.hasOwnProperty("property")) {
+                            var error = $root.google.datastore.v1.PropertyReference.verify(message.property);
+                            if (error)
+                                return "property." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Projection message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.Projection
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.Projection} Projection
+                     */
+                    Projection.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.Projection)
+                            return object;
+                        var message = new $root.google.datastore.v1.Projection();
+                        if (object.property != null) {
+                            if (typeof object.property !== "object")
+                                throw TypeError(".google.datastore.v1.Projection.property: object expected");
+                            message.property = $root.google.datastore.v1.PropertyReference.fromObject(object.property);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Projection message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.Projection
+                     * @static
+                     * @param {google.datastore.v1.Projection} message Projection
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Projection.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.property = null;
+                        if (message.property != null && message.hasOwnProperty("property"))
+                            object.property = $root.google.datastore.v1.PropertyReference.toObject(message.property, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Projection to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.Projection
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Projection.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Projection
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.Projection
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Projection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.Projection";
+                    };
+    
+                    return Projection;
+                })();
+    
+                v1.PropertyOrder = (function() {
+    
+                    /**
+                     * Properties of a PropertyOrder.
+                     * @memberof google.datastore.v1
+                     * @interface IPropertyOrder
+                     * @property {google.datastore.v1.IPropertyReference|null} [property] PropertyOrder property
+                     * @property {google.datastore.v1.PropertyOrder.Direction|null} [direction] PropertyOrder direction
+                     */
+    
+                    /**
+                     * Constructs a new PropertyOrder.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a PropertyOrder.
+                     * @implements IPropertyOrder
+                     * @constructor
+                     * @param {google.datastore.v1.IPropertyOrder=} [properties] Properties to set
+                     */
+                    function PropertyOrder(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PropertyOrder property.
+                     * @member {google.datastore.v1.IPropertyReference|null|undefined} property
+                     * @memberof google.datastore.v1.PropertyOrder
+                     * @instance
+                     */
+                    PropertyOrder.prototype.property = null;
+    
+                    /**
+                     * PropertyOrder direction.
+                     * @member {google.datastore.v1.PropertyOrder.Direction} direction
+                     * @memberof google.datastore.v1.PropertyOrder
+                     * @instance
+                     */
+                    PropertyOrder.prototype.direction = 0;
+    
+                    /**
+                     * Creates a new PropertyOrder instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.PropertyOrder
+                     * @static
+                     * @param {google.datastore.v1.IPropertyOrder=} [properties] Properties to set
+                     * @returns {google.datastore.v1.PropertyOrder} PropertyOrder instance
+                     */
+                    PropertyOrder.create = function create(properties) {
+                        return new PropertyOrder(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PropertyOrder message. Does not implicitly {@link google.datastore.v1.PropertyOrder.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.PropertyOrder
+                     * @static
+                     * @param {google.datastore.v1.IPropertyOrder} message PropertyOrder message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PropertyOrder.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                            $root.google.datastore.v1.PropertyReference.encode(message.property, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.direction != null && Object.hasOwnProperty.call(message, "direction"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.direction);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PropertyOrder message, length delimited. Does not implicitly {@link google.datastore.v1.PropertyOrder.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.PropertyOrder
+                     * @static
+                     * @param {google.datastore.v1.IPropertyOrder} message PropertyOrder message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PropertyOrder.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PropertyOrder message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.PropertyOrder
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.PropertyOrder} PropertyOrder
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PropertyOrder.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.PropertyOrder();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.property = $root.google.datastore.v1.PropertyReference.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.direction = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PropertyOrder message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.PropertyOrder
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.PropertyOrder} PropertyOrder
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PropertyOrder.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PropertyOrder message.
+                     * @function verify
+                     * @memberof google.datastore.v1.PropertyOrder
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PropertyOrder.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.property != null && message.hasOwnProperty("property")) {
+                            var error = $root.google.datastore.v1.PropertyReference.verify(message.property);
+                            if (error)
+                                return "property." + error;
+                        }
+                        if (message.direction != null && message.hasOwnProperty("direction"))
+                            switch (message.direction) {
+                            default:
+                                return "direction: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PropertyOrder message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.PropertyOrder
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.PropertyOrder} PropertyOrder
+                     */
+                    PropertyOrder.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.PropertyOrder)
+                            return object;
+                        var message = new $root.google.datastore.v1.PropertyOrder();
+                        if (object.property != null) {
+                            if (typeof object.property !== "object")
+                                throw TypeError(".google.datastore.v1.PropertyOrder.property: object expected");
+                            message.property = $root.google.datastore.v1.PropertyReference.fromObject(object.property);
+                        }
+                        switch (object.direction) {
+                        case "DIRECTION_UNSPECIFIED":
+                        case 0:
+                            message.direction = 0;
+                            break;
+                        case "ASCENDING":
+                        case 1:
+                            message.direction = 1;
+                            break;
+                        case "DESCENDING":
+                        case 2:
+                            message.direction = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PropertyOrder message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.PropertyOrder
+                     * @static
+                     * @param {google.datastore.v1.PropertyOrder} message PropertyOrder
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PropertyOrder.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.property = null;
+                            object.direction = options.enums === String ? "DIRECTION_UNSPECIFIED" : 0;
+                        }
+                        if (message.property != null && message.hasOwnProperty("property"))
+                            object.property = $root.google.datastore.v1.PropertyReference.toObject(message.property, options);
+                        if (message.direction != null && message.hasOwnProperty("direction"))
+                            object.direction = options.enums === String ? $root.google.datastore.v1.PropertyOrder.Direction[message.direction] : message.direction;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PropertyOrder to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.PropertyOrder
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PropertyOrder.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PropertyOrder
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.PropertyOrder
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PropertyOrder.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.PropertyOrder";
+                    };
+    
+                    /**
+                     * Direction enum.
+                     * @name google.datastore.v1.PropertyOrder.Direction
+                     * @enum {number}
+                     * @property {number} DIRECTION_UNSPECIFIED=0 DIRECTION_UNSPECIFIED value
+                     * @property {number} ASCENDING=1 ASCENDING value
+                     * @property {number} DESCENDING=2 DESCENDING value
+                     */
+                    PropertyOrder.Direction = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DIRECTION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ASCENDING"] = 1;
+                        values[valuesById[2] = "DESCENDING"] = 2;
+                        return values;
+                    })();
+    
+                    return PropertyOrder;
+                })();
+    
+                v1.Filter = (function() {
+    
+                    /**
+                     * Properties of a Filter.
+                     * @memberof google.datastore.v1
+                     * @interface IFilter
+                     * @property {google.datastore.v1.ICompositeFilter|null} [compositeFilter] Filter compositeFilter
+                     * @property {google.datastore.v1.IPropertyFilter|null} [propertyFilter] Filter propertyFilter
+                     */
+    
+                    /**
+                     * Constructs a new Filter.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a Filter.
+                     * @implements IFilter
+                     * @constructor
+                     * @param {google.datastore.v1.IFilter=} [properties] Properties to set
+                     */
+                    function Filter(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Filter compositeFilter.
+                     * @member {google.datastore.v1.ICompositeFilter|null|undefined} compositeFilter
+                     * @memberof google.datastore.v1.Filter
+                     * @instance
+                     */
+                    Filter.prototype.compositeFilter = null;
+    
+                    /**
+                     * Filter propertyFilter.
+                     * @member {google.datastore.v1.IPropertyFilter|null|undefined} propertyFilter
+                     * @memberof google.datastore.v1.Filter
+                     * @instance
+                     */
+                    Filter.prototype.propertyFilter = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * Filter filterType.
+                     * @member {"compositeFilter"|"propertyFilter"|undefined} filterType
+                     * @memberof google.datastore.v1.Filter
+                     * @instance
+                     */
+                    Object.defineProperty(Filter.prototype, "filterType", {
+                        get: $util.oneOfGetter($oneOfFields = ["compositeFilter", "propertyFilter"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new Filter instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.Filter
+                     * @static
+                     * @param {google.datastore.v1.IFilter=} [properties] Properties to set
+                     * @returns {google.datastore.v1.Filter} Filter instance
+                     */
+                    Filter.create = function create(properties) {
+                        return new Filter(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Filter message. Does not implicitly {@link google.datastore.v1.Filter.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.Filter
+                     * @static
+                     * @param {google.datastore.v1.IFilter} message Filter message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Filter.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.compositeFilter != null && Object.hasOwnProperty.call(message, "compositeFilter"))
+                            $root.google.datastore.v1.CompositeFilter.encode(message.compositeFilter, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.propertyFilter != null && Object.hasOwnProperty.call(message, "propertyFilter"))
+                            $root.google.datastore.v1.PropertyFilter.encode(message.propertyFilter, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.datastore.v1.Filter.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.Filter
+                     * @static
+                     * @param {google.datastore.v1.IFilter} message Filter message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Filter.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Filter message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.Filter
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.Filter} Filter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Filter.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Filter();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.compositeFilter = $root.google.datastore.v1.CompositeFilter.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.propertyFilter = $root.google.datastore.v1.PropertyFilter.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Filter message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.Filter
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.Filter} Filter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Filter.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Filter message.
+                     * @function verify
+                     * @memberof google.datastore.v1.Filter
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Filter.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.compositeFilter != null && message.hasOwnProperty("compositeFilter")) {
+                            properties.filterType = 1;
+                            {
+                                var error = $root.google.datastore.v1.CompositeFilter.verify(message.compositeFilter);
+                                if (error)
+                                    return "compositeFilter." + error;
+                            }
+                        }
+                        if (message.propertyFilter != null && message.hasOwnProperty("propertyFilter")) {
+                            if (properties.filterType === 1)
+                                return "filterType: multiple values";
+                            properties.filterType = 1;
+                            {
+                                var error = $root.google.datastore.v1.PropertyFilter.verify(message.propertyFilter);
+                                if (error)
+                                    return "propertyFilter." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Filter message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.Filter
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.Filter} Filter
+                     */
+                    Filter.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.Filter)
+                            return object;
+                        var message = new $root.google.datastore.v1.Filter();
+                        if (object.compositeFilter != null) {
+                            if (typeof object.compositeFilter !== "object")
+                                throw TypeError(".google.datastore.v1.Filter.compositeFilter: object expected");
+                            message.compositeFilter = $root.google.datastore.v1.CompositeFilter.fromObject(object.compositeFilter);
+                        }
+                        if (object.propertyFilter != null) {
+                            if (typeof object.propertyFilter !== "object")
+                                throw TypeError(".google.datastore.v1.Filter.propertyFilter: object expected");
+                            message.propertyFilter = $root.google.datastore.v1.PropertyFilter.fromObject(object.propertyFilter);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Filter message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.Filter
+                     * @static
+                     * @param {google.datastore.v1.Filter} message Filter
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Filter.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.compositeFilter != null && message.hasOwnProperty("compositeFilter")) {
+                            object.compositeFilter = $root.google.datastore.v1.CompositeFilter.toObject(message.compositeFilter, options);
+                            if (options.oneofs)
+                                object.filterType = "compositeFilter";
+                        }
+                        if (message.propertyFilter != null && message.hasOwnProperty("propertyFilter")) {
+                            object.propertyFilter = $root.google.datastore.v1.PropertyFilter.toObject(message.propertyFilter, options);
+                            if (options.oneofs)
+                                object.filterType = "propertyFilter";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Filter to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.Filter
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Filter.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Filter
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.Filter
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Filter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.Filter";
+                    };
+    
+                    return Filter;
+                })();
+    
+                v1.CompositeFilter = (function() {
+    
+                    /**
+                     * Properties of a CompositeFilter.
+                     * @memberof google.datastore.v1
+                     * @interface ICompositeFilter
+                     * @property {google.datastore.v1.CompositeFilter.Operator|null} [op] CompositeFilter op
+                     * @property {Array.<google.datastore.v1.IFilter>|null} [filters] CompositeFilter filters
+                     */
+    
+                    /**
+                     * Constructs a new CompositeFilter.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a CompositeFilter.
+                     * @implements ICompositeFilter
+                     * @constructor
+                     * @param {google.datastore.v1.ICompositeFilter=} [properties] Properties to set
+                     */
+                    function CompositeFilter(properties) {
+                        this.filters = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CompositeFilter op.
+                     * @member {google.datastore.v1.CompositeFilter.Operator} op
+                     * @memberof google.datastore.v1.CompositeFilter
+                     * @instance
+                     */
+                    CompositeFilter.prototype.op = 0;
+    
+                    /**
+                     * CompositeFilter filters.
+                     * @member {Array.<google.datastore.v1.IFilter>} filters
+                     * @memberof google.datastore.v1.CompositeFilter
+                     * @instance
+                     */
+                    CompositeFilter.prototype.filters = $util.emptyArray;
+    
+                    /**
+                     * Creates a new CompositeFilter instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.CompositeFilter
+                     * @static
+                     * @param {google.datastore.v1.ICompositeFilter=} [properties] Properties to set
+                     * @returns {google.datastore.v1.CompositeFilter} CompositeFilter instance
+                     */
+                    CompositeFilter.create = function create(properties) {
+                        return new CompositeFilter(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CompositeFilter message. Does not implicitly {@link google.datastore.v1.CompositeFilter.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.CompositeFilter
+                     * @static
+                     * @param {google.datastore.v1.ICompositeFilter} message CompositeFilter message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CompositeFilter.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.op != null && Object.hasOwnProperty.call(message, "op"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.op);
+                        if (message.filters != null && message.filters.length)
+                            for (var i = 0; i < message.filters.length; ++i)
+                                $root.google.datastore.v1.Filter.encode(message.filters[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CompositeFilter message, length delimited. Does not implicitly {@link google.datastore.v1.CompositeFilter.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.CompositeFilter
+                     * @static
+                     * @param {google.datastore.v1.ICompositeFilter} message CompositeFilter message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CompositeFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CompositeFilter message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.CompositeFilter
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.CompositeFilter} CompositeFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CompositeFilter.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.CompositeFilter();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.op = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.filters && message.filters.length))
+                                        message.filters = [];
+                                    message.filters.push($root.google.datastore.v1.Filter.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CompositeFilter message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.CompositeFilter
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.CompositeFilter} CompositeFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CompositeFilter.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CompositeFilter message.
+                     * @function verify
+                     * @memberof google.datastore.v1.CompositeFilter
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CompositeFilter.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.op != null && message.hasOwnProperty("op"))
+                            switch (message.op) {
+                            default:
+                                return "op: enum value expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                        if (message.filters != null && message.hasOwnProperty("filters")) {
+                            if (!Array.isArray(message.filters))
+                                return "filters: array expected";
+                            for (var i = 0; i < message.filters.length; ++i) {
+                                var error = $root.google.datastore.v1.Filter.verify(message.filters[i]);
+                                if (error)
+                                    return "filters." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CompositeFilter message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.CompositeFilter
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.CompositeFilter} CompositeFilter
+                     */
+                    CompositeFilter.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.CompositeFilter)
+                            return object;
+                        var message = new $root.google.datastore.v1.CompositeFilter();
+                        switch (object.op) {
+                        case "OPERATOR_UNSPECIFIED":
+                        case 0:
+                            message.op = 0;
+                            break;
+                        case "AND":
+                        case 1:
+                            message.op = 1;
+                            break;
+                        }
+                        if (object.filters) {
+                            if (!Array.isArray(object.filters))
+                                throw TypeError(".google.datastore.v1.CompositeFilter.filters: array expected");
+                            message.filters = [];
+                            for (var i = 0; i < object.filters.length; ++i) {
+                                if (typeof object.filters[i] !== "object")
+                                    throw TypeError(".google.datastore.v1.CompositeFilter.filters: object expected");
+                                message.filters[i] = $root.google.datastore.v1.Filter.fromObject(object.filters[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CompositeFilter message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.CompositeFilter
+                     * @static
+                     * @param {google.datastore.v1.CompositeFilter} message CompositeFilter
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CompositeFilter.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.filters = [];
+                        if (options.defaults)
+                            object.op = options.enums === String ? "OPERATOR_UNSPECIFIED" : 0;
+                        if (message.op != null && message.hasOwnProperty("op"))
+                            object.op = options.enums === String ? $root.google.datastore.v1.CompositeFilter.Operator[message.op] : message.op;
+                        if (message.filters && message.filters.length) {
+                            object.filters = [];
+                            for (var j = 0; j < message.filters.length; ++j)
+                                object.filters[j] = $root.google.datastore.v1.Filter.toObject(message.filters[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CompositeFilter to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.CompositeFilter
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CompositeFilter.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CompositeFilter
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.CompositeFilter
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CompositeFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.CompositeFilter";
+                    };
+    
+                    /**
+                     * Operator enum.
+                     * @name google.datastore.v1.CompositeFilter.Operator
+                     * @enum {number}
+                     * @property {number} OPERATOR_UNSPECIFIED=0 OPERATOR_UNSPECIFIED value
+                     * @property {number} AND=1 AND value
+                     */
+                    CompositeFilter.Operator = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "OPERATOR_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "AND"] = 1;
+                        return values;
+                    })();
+    
+                    return CompositeFilter;
+                })();
+    
+                v1.PropertyFilter = (function() {
+    
+                    /**
+                     * Properties of a PropertyFilter.
+                     * @memberof google.datastore.v1
+                     * @interface IPropertyFilter
+                     * @property {google.datastore.v1.IPropertyReference|null} [property] PropertyFilter property
+                     * @property {google.datastore.v1.PropertyFilter.Operator|null} [op] PropertyFilter op
+                     * @property {google.datastore.v1.IValue|null} [value] PropertyFilter value
+                     */
+    
+                    /**
+                     * Constructs a new PropertyFilter.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a PropertyFilter.
+                     * @implements IPropertyFilter
+                     * @constructor
+                     * @param {google.datastore.v1.IPropertyFilter=} [properties] Properties to set
+                     */
+                    function PropertyFilter(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PropertyFilter property.
+                     * @member {google.datastore.v1.IPropertyReference|null|undefined} property
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @instance
+                     */
+                    PropertyFilter.prototype.property = null;
+    
+                    /**
+                     * PropertyFilter op.
+                     * @member {google.datastore.v1.PropertyFilter.Operator} op
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @instance
+                     */
+                    PropertyFilter.prototype.op = 0;
+    
+                    /**
+                     * PropertyFilter value.
+                     * @member {google.datastore.v1.IValue|null|undefined} value
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @instance
+                     */
+                    PropertyFilter.prototype.value = null;
+    
+                    /**
+                     * Creates a new PropertyFilter instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @static
+                     * @param {google.datastore.v1.IPropertyFilter=} [properties] Properties to set
+                     * @returns {google.datastore.v1.PropertyFilter} PropertyFilter instance
+                     */
+                    PropertyFilter.create = function create(properties) {
+                        return new PropertyFilter(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PropertyFilter message. Does not implicitly {@link google.datastore.v1.PropertyFilter.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @static
+                     * @param {google.datastore.v1.IPropertyFilter} message PropertyFilter message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PropertyFilter.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                            $root.google.datastore.v1.PropertyReference.encode(message.property, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.op != null && Object.hasOwnProperty.call(message, "op"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.op);
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                            $root.google.datastore.v1.Value.encode(message.value, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PropertyFilter message, length delimited. Does not implicitly {@link google.datastore.v1.PropertyFilter.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @static
+                     * @param {google.datastore.v1.IPropertyFilter} message PropertyFilter message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PropertyFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PropertyFilter message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.PropertyFilter} PropertyFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PropertyFilter.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.PropertyFilter();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.property = $root.google.datastore.v1.PropertyReference.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.op = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.value = $root.google.datastore.v1.Value.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PropertyFilter message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.PropertyFilter} PropertyFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PropertyFilter.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PropertyFilter message.
+                     * @function verify
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PropertyFilter.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.property != null && message.hasOwnProperty("property")) {
+                            var error = $root.google.datastore.v1.PropertyReference.verify(message.property);
+                            if (error)
+                                return "property." + error;
+                        }
+                        if (message.op != null && message.hasOwnProperty("op"))
+                            switch (message.op) {
+                            default:
+                                return "op: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                            case 9:
+                            case 11:
+                            case 13:
+                                break;
+                            }
+                        if (message.value != null && message.hasOwnProperty("value")) {
+                            var error = $root.google.datastore.v1.Value.verify(message.value);
+                            if (error)
+                                return "value." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PropertyFilter message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.PropertyFilter} PropertyFilter
+                     */
+                    PropertyFilter.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.PropertyFilter)
+                            return object;
+                        var message = new $root.google.datastore.v1.PropertyFilter();
+                        if (object.property != null) {
+                            if (typeof object.property !== "object")
+                                throw TypeError(".google.datastore.v1.PropertyFilter.property: object expected");
+                            message.property = $root.google.datastore.v1.PropertyReference.fromObject(object.property);
+                        }
+                        switch (object.op) {
+                        case "OPERATOR_UNSPECIFIED":
+                        case 0:
+                            message.op = 0;
+                            break;
+                        case "LESS_THAN":
+                        case 1:
+                            message.op = 1;
+                            break;
+                        case "LESS_THAN_OR_EQUAL":
+                        case 2:
+                            message.op = 2;
+                            break;
+                        case "GREATER_THAN":
+                        case 3:
+                            message.op = 3;
+                            break;
+                        case "GREATER_THAN_OR_EQUAL":
+                        case 4:
+                            message.op = 4;
+                            break;
+                        case "EQUAL":
+                        case 5:
+                            message.op = 5;
+                            break;
+                        case "IN":
+                        case 6:
+                            message.op = 6;
+                            break;
+                        case "NOT_EQUAL":
+                        case 9:
+                            message.op = 9;
+                            break;
+                        case "HAS_ANCESTOR":
+                        case 11:
+                            message.op = 11;
+                            break;
+                        case "NOT_IN":
+                        case 13:
+                            message.op = 13;
+                            break;
+                        }
+                        if (object.value != null) {
+                            if (typeof object.value !== "object")
+                                throw TypeError(".google.datastore.v1.PropertyFilter.value: object expected");
+                            message.value = $root.google.datastore.v1.Value.fromObject(object.value);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PropertyFilter message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @static
+                     * @param {google.datastore.v1.PropertyFilter} message PropertyFilter
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PropertyFilter.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.property = null;
+                            object.op = options.enums === String ? "OPERATOR_UNSPECIFIED" : 0;
+                            object.value = null;
+                        }
+                        if (message.property != null && message.hasOwnProperty("property"))
+                            object.property = $root.google.datastore.v1.PropertyReference.toObject(message.property, options);
+                        if (message.op != null && message.hasOwnProperty("op"))
+                            object.op = options.enums === String ? $root.google.datastore.v1.PropertyFilter.Operator[message.op] : message.op;
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            object.value = $root.google.datastore.v1.Value.toObject(message.value, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PropertyFilter to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PropertyFilter.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PropertyFilter
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.PropertyFilter
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PropertyFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.PropertyFilter";
+                    };
+    
+                    /**
+                     * Operator enum.
+                     * @name google.datastore.v1.PropertyFilter.Operator
+                     * @enum {number}
+                     * @property {number} OPERATOR_UNSPECIFIED=0 OPERATOR_UNSPECIFIED value
+                     * @property {number} LESS_THAN=1 LESS_THAN value
+                     * @property {number} LESS_THAN_OR_EQUAL=2 LESS_THAN_OR_EQUAL value
+                     * @property {number} GREATER_THAN=3 GREATER_THAN value
+                     * @property {number} GREATER_THAN_OR_EQUAL=4 GREATER_THAN_OR_EQUAL value
+                     * @property {number} EQUAL=5 EQUAL value
+                     * @property {number} IN=6 IN value
+                     * @property {number} NOT_EQUAL=9 NOT_EQUAL value
+                     * @property {number} HAS_ANCESTOR=11 HAS_ANCESTOR value
+                     * @property {number} NOT_IN=13 NOT_IN value
+                     */
+                    PropertyFilter.Operator = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "OPERATOR_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "LESS_THAN"] = 1;
+                        values[valuesById[2] = "LESS_THAN_OR_EQUAL"] = 2;
+                        values[valuesById[3] = "GREATER_THAN"] = 3;
+                        values[valuesById[4] = "GREATER_THAN_OR_EQUAL"] = 4;
+                        values[valuesById[5] = "EQUAL"] = 5;
+                        values[valuesById[6] = "IN"] = 6;
+                        values[valuesById[9] = "NOT_EQUAL"] = 9;
+                        values[valuesById[11] = "HAS_ANCESTOR"] = 11;
+                        values[valuesById[13] = "NOT_IN"] = 13;
+                        return values;
+                    })();
+    
+                    return PropertyFilter;
+                })();
+    
+                v1.GqlQuery = (function() {
+    
+                    /**
+                     * Properties of a GqlQuery.
+                     * @memberof google.datastore.v1
+                     * @interface IGqlQuery
+                     * @property {string|null} [queryString] GqlQuery queryString
+                     * @property {boolean|null} [allowLiterals] GqlQuery allowLiterals
+                     * @property {Object.<string,google.datastore.v1.IGqlQueryParameter>|null} [namedBindings] GqlQuery namedBindings
+                     * @property {Array.<google.datastore.v1.IGqlQueryParameter>|null} [positionalBindings] GqlQuery positionalBindings
+                     */
+    
+                    /**
+                     * Constructs a new GqlQuery.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a GqlQuery.
+                     * @implements IGqlQuery
+                     * @constructor
+                     * @param {google.datastore.v1.IGqlQuery=} [properties] Properties to set
+                     */
+                    function GqlQuery(properties) {
+                        this.namedBindings = {};
+                        this.positionalBindings = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GqlQuery queryString.
+                     * @member {string} queryString
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @instance
+                     */
+                    GqlQuery.prototype.queryString = "";
+    
+                    /**
+                     * GqlQuery allowLiterals.
+                     * @member {boolean} allowLiterals
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @instance
+                     */
+                    GqlQuery.prototype.allowLiterals = false;
+    
+                    /**
+                     * GqlQuery namedBindings.
+                     * @member {Object.<string,google.datastore.v1.IGqlQueryParameter>} namedBindings
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @instance
+                     */
+                    GqlQuery.prototype.namedBindings = $util.emptyObject;
+    
+                    /**
+                     * GqlQuery positionalBindings.
+                     * @member {Array.<google.datastore.v1.IGqlQueryParameter>} positionalBindings
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @instance
+                     */
+                    GqlQuery.prototype.positionalBindings = $util.emptyArray;
+    
+                    /**
+                     * Creates a new GqlQuery instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @static
+                     * @param {google.datastore.v1.IGqlQuery=} [properties] Properties to set
+                     * @returns {google.datastore.v1.GqlQuery} GqlQuery instance
+                     */
+                    GqlQuery.create = function create(properties) {
+                        return new GqlQuery(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GqlQuery message. Does not implicitly {@link google.datastore.v1.GqlQuery.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @static
+                     * @param {google.datastore.v1.IGqlQuery} message GqlQuery message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GqlQuery.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.queryString != null && Object.hasOwnProperty.call(message, "queryString"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.queryString);
+                        if (message.allowLiterals != null && Object.hasOwnProperty.call(message, "allowLiterals"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allowLiterals);
+                        if (message.positionalBindings != null && message.positionalBindings.length)
+                            for (var i = 0; i < message.positionalBindings.length; ++i)
+                                $root.google.datastore.v1.GqlQueryParameter.encode(message.positionalBindings[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.namedBindings != null && Object.hasOwnProperty.call(message, "namedBindings"))
+                            for (var keys = Object.keys(message.namedBindings), i = 0; i < keys.length; ++i) {
+                                writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                $root.google.datastore.v1.GqlQueryParameter.encode(message.namedBindings[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                            }
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GqlQuery message, length delimited. Does not implicitly {@link google.datastore.v1.GqlQuery.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @static
+                     * @param {google.datastore.v1.IGqlQuery} message GqlQuery message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GqlQuery.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GqlQuery message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.GqlQuery} GqlQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GqlQuery.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.GqlQuery(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.queryString = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.allowLiterals = reader.bool();
+                                    break;
+                                }
+                            case 5: {
+                                    if (message.namedBindings === $util.emptyObject)
+                                        message.namedBindings = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.datastore.v1.GqlQueryParameter.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.namedBindings[key] = value;
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.positionalBindings && message.positionalBindings.length))
+                                        message.positionalBindings = [];
+                                    message.positionalBindings.push($root.google.datastore.v1.GqlQueryParameter.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GqlQuery message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.GqlQuery} GqlQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GqlQuery.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GqlQuery message.
+                     * @function verify
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GqlQuery.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.queryString != null && message.hasOwnProperty("queryString"))
+                            if (!$util.isString(message.queryString))
+                                return "queryString: string expected";
+                        if (message.allowLiterals != null && message.hasOwnProperty("allowLiterals"))
+                            if (typeof message.allowLiterals !== "boolean")
+                                return "allowLiterals: boolean expected";
+                        if (message.namedBindings != null && message.hasOwnProperty("namedBindings")) {
+                            if (!$util.isObject(message.namedBindings))
+                                return "namedBindings: object expected";
+                            var key = Object.keys(message.namedBindings);
+                            for (var i = 0; i < key.length; ++i) {
+                                var error = $root.google.datastore.v1.GqlQueryParameter.verify(message.namedBindings[key[i]]);
+                                if (error)
+                                    return "namedBindings." + error;
+                            }
+                        }
+                        if (message.positionalBindings != null && message.hasOwnProperty("positionalBindings")) {
+                            if (!Array.isArray(message.positionalBindings))
+                                return "positionalBindings: array expected";
+                            for (var i = 0; i < message.positionalBindings.length; ++i) {
+                                var error = $root.google.datastore.v1.GqlQueryParameter.verify(message.positionalBindings[i]);
+                                if (error)
+                                    return "positionalBindings." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GqlQuery message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.GqlQuery} GqlQuery
+                     */
+                    GqlQuery.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.GqlQuery)
+                            return object;
+                        var message = new $root.google.datastore.v1.GqlQuery();
+                        if (object.queryString != null)
+                            message.queryString = String(object.queryString);
+                        if (object.allowLiterals != null)
+                            message.allowLiterals = Boolean(object.allowLiterals);
+                        if (object.namedBindings) {
+                            if (typeof object.namedBindings !== "object")
+                                throw TypeError(".google.datastore.v1.GqlQuery.namedBindings: object expected");
+                            message.namedBindings = {};
+                            for (var keys = Object.keys(object.namedBindings), i = 0; i < keys.length; ++i) {
+                                if (typeof object.namedBindings[keys[i]] !== "object")
+                                    throw TypeError(".google.datastore.v1.GqlQuery.namedBindings: object expected");
+                                message.namedBindings[keys[i]] = $root.google.datastore.v1.GqlQueryParameter.fromObject(object.namedBindings[keys[i]]);
+                            }
+                        }
+                        if (object.positionalBindings) {
+                            if (!Array.isArray(object.positionalBindings))
+                                throw TypeError(".google.datastore.v1.GqlQuery.positionalBindings: array expected");
+                            message.positionalBindings = [];
+                            for (var i = 0; i < object.positionalBindings.length; ++i) {
+                                if (typeof object.positionalBindings[i] !== "object")
+                                    throw TypeError(".google.datastore.v1.GqlQuery.positionalBindings: object expected");
+                                message.positionalBindings[i] = $root.google.datastore.v1.GqlQueryParameter.fromObject(object.positionalBindings[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GqlQuery message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @static
+                     * @param {google.datastore.v1.GqlQuery} message GqlQuery
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GqlQuery.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.positionalBindings = [];
+                        if (options.objects || options.defaults)
+                            object.namedBindings = {};
+                        if (options.defaults) {
+                            object.queryString = "";
+                            object.allowLiterals = false;
+                        }
+                        if (message.queryString != null && message.hasOwnProperty("queryString"))
+                            object.queryString = message.queryString;
+                        if (message.allowLiterals != null && message.hasOwnProperty("allowLiterals"))
+                            object.allowLiterals = message.allowLiterals;
+                        if (message.positionalBindings && message.positionalBindings.length) {
+                            object.positionalBindings = [];
+                            for (var j = 0; j < message.positionalBindings.length; ++j)
+                                object.positionalBindings[j] = $root.google.datastore.v1.GqlQueryParameter.toObject(message.positionalBindings[j], options);
+                        }
+                        var keys2;
+                        if (message.namedBindings && (keys2 = Object.keys(message.namedBindings)).length) {
+                            object.namedBindings = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.namedBindings[keys2[j]] = $root.google.datastore.v1.GqlQueryParameter.toObject(message.namedBindings[keys2[j]], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GqlQuery to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GqlQuery.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GqlQuery
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.GqlQuery
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GqlQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.GqlQuery";
+                    };
+    
+                    return GqlQuery;
+                })();
+    
+                v1.GqlQueryParameter = (function() {
+    
+                    /**
+                     * Properties of a GqlQueryParameter.
+                     * @memberof google.datastore.v1
+                     * @interface IGqlQueryParameter
+                     * @property {google.datastore.v1.IValue|null} [value] GqlQueryParameter value
+                     * @property {Uint8Array|null} [cursor] GqlQueryParameter cursor
+                     */
+    
+                    /**
+                     * Constructs a new GqlQueryParameter.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a GqlQueryParameter.
+                     * @implements IGqlQueryParameter
+                     * @constructor
+                     * @param {google.datastore.v1.IGqlQueryParameter=} [properties] Properties to set
+                     */
+                    function GqlQueryParameter(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GqlQueryParameter value.
+                     * @member {google.datastore.v1.IValue|null|undefined} value
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @instance
+                     */
+                    GqlQueryParameter.prototype.value = null;
+    
+                    /**
+                     * GqlQueryParameter cursor.
+                     * @member {Uint8Array|null|undefined} cursor
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @instance
+                     */
+                    GqlQueryParameter.prototype.cursor = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * GqlQueryParameter parameterType.
+                     * @member {"value"|"cursor"|undefined} parameterType
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @instance
+                     */
+                    Object.defineProperty(GqlQueryParameter.prototype, "parameterType", {
+                        get: $util.oneOfGetter($oneOfFields = ["value", "cursor"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new GqlQueryParameter instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @static
+                     * @param {google.datastore.v1.IGqlQueryParameter=} [properties] Properties to set
+                     * @returns {google.datastore.v1.GqlQueryParameter} GqlQueryParameter instance
+                     */
+                    GqlQueryParameter.create = function create(properties) {
+                        return new GqlQueryParameter(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GqlQueryParameter message. Does not implicitly {@link google.datastore.v1.GqlQueryParameter.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @static
+                     * @param {google.datastore.v1.IGqlQueryParameter} message GqlQueryParameter message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GqlQueryParameter.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                            $root.google.datastore.v1.Value.encode(message.value, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.cursor != null && Object.hasOwnProperty.call(message, "cursor"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.cursor);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GqlQueryParameter message, length delimited. Does not implicitly {@link google.datastore.v1.GqlQueryParameter.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @static
+                     * @param {google.datastore.v1.IGqlQueryParameter} message GqlQueryParameter message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GqlQueryParameter.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GqlQueryParameter message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.GqlQueryParameter} GqlQueryParameter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GqlQueryParameter.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.GqlQueryParameter();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 2: {
+                                    message.value = $root.google.datastore.v1.Value.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.cursor = reader.bytes();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GqlQueryParameter message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.GqlQueryParameter} GqlQueryParameter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GqlQueryParameter.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GqlQueryParameter message.
+                     * @function verify
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GqlQueryParameter.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.value != null && message.hasOwnProperty("value")) {
+                            properties.parameterType = 1;
+                            {
+                                var error = $root.google.datastore.v1.Value.verify(message.value);
+                                if (error)
+                                    return "value." + error;
+                            }
+                        }
+                        if (message.cursor != null && message.hasOwnProperty("cursor")) {
+                            if (properties.parameterType === 1)
+                                return "parameterType: multiple values";
+                            properties.parameterType = 1;
+                            if (!(message.cursor && typeof message.cursor.length === "number" || $util.isString(message.cursor)))
+                                return "cursor: buffer expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GqlQueryParameter message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.GqlQueryParameter} GqlQueryParameter
+                     */
+                    GqlQueryParameter.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.GqlQueryParameter)
+                            return object;
+                        var message = new $root.google.datastore.v1.GqlQueryParameter();
+                        if (object.value != null) {
+                            if (typeof object.value !== "object")
+                                throw TypeError(".google.datastore.v1.GqlQueryParameter.value: object expected");
+                            message.value = $root.google.datastore.v1.Value.fromObject(object.value);
+                        }
+                        if (object.cursor != null)
+                            if (typeof object.cursor === "string")
+                                $util.base64.decode(object.cursor, message.cursor = $util.newBuffer($util.base64.length(object.cursor)), 0);
+                            else if (object.cursor.length >= 0)
+                                message.cursor = object.cursor;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GqlQueryParameter message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @static
+                     * @param {google.datastore.v1.GqlQueryParameter} message GqlQueryParameter
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GqlQueryParameter.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.value != null && message.hasOwnProperty("value")) {
+                            object.value = $root.google.datastore.v1.Value.toObject(message.value, options);
+                            if (options.oneofs)
+                                object.parameterType = "value";
+                        }
+                        if (message.cursor != null && message.hasOwnProperty("cursor")) {
+                            object.cursor = options.bytes === String ? $util.base64.encode(message.cursor, 0, message.cursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.cursor) : message.cursor;
+                            if (options.oneofs)
+                                object.parameterType = "cursor";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GqlQueryParameter to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GqlQueryParameter.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GqlQueryParameter
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.GqlQueryParameter
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GqlQueryParameter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.GqlQueryParameter";
+                    };
+    
+                    return GqlQueryParameter;
+                })();
+    
+                v1.QueryResultBatch = (function() {
+    
+                    /**
+                     * Properties of a QueryResultBatch.
+                     * @memberof google.datastore.v1
+                     * @interface IQueryResultBatch
+                     * @property {number|null} [skippedResults] QueryResultBatch skippedResults
+                     * @property {Uint8Array|null} [skippedCursor] QueryResultBatch skippedCursor
+                     * @property {google.datastore.v1.EntityResult.ResultType|null} [entityResultType] QueryResultBatch entityResultType
+                     * @property {Array.<google.datastore.v1.IEntityResult>|null} [entityResults] QueryResultBatch entityResults
+                     * @property {Uint8Array|null} [endCursor] QueryResultBatch endCursor
+                     * @property {google.datastore.v1.QueryResultBatch.MoreResultsType|null} [moreResults] QueryResultBatch moreResults
+                     * @property {number|Long|null} [snapshotVersion] QueryResultBatch snapshotVersion
+                     * @property {google.protobuf.ITimestamp|null} [readTime] QueryResultBatch readTime
+                     */
+    
+                    /**
+                     * Constructs a new QueryResultBatch.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a QueryResultBatch.
+                     * @implements IQueryResultBatch
+                     * @constructor
+                     * @param {google.datastore.v1.IQueryResultBatch=} [properties] Properties to set
+                     */
+                    function QueryResultBatch(properties) {
+                        this.entityResults = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryResultBatch skippedResults.
+                     * @member {number} skippedResults
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @instance
+                     */
+                    QueryResultBatch.prototype.skippedResults = 0;
+    
+                    /**
+                     * QueryResultBatch skippedCursor.
+                     * @member {Uint8Array} skippedCursor
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @instance
+                     */
+                    QueryResultBatch.prototype.skippedCursor = $util.newBuffer([]);
+    
+                    /**
+                     * QueryResultBatch entityResultType.
+                     * @member {google.datastore.v1.EntityResult.ResultType} entityResultType
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @instance
+                     */
+                    QueryResultBatch.prototype.entityResultType = 0;
+    
+                    /**
+                     * QueryResultBatch entityResults.
+                     * @member {Array.<google.datastore.v1.IEntityResult>} entityResults
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @instance
+                     */
+                    QueryResultBatch.prototype.entityResults = $util.emptyArray;
+    
+                    /**
+                     * QueryResultBatch endCursor.
+                     * @member {Uint8Array} endCursor
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @instance
+                     */
+                    QueryResultBatch.prototype.endCursor = $util.newBuffer([]);
+    
+                    /**
+                     * QueryResultBatch moreResults.
+                     * @member {google.datastore.v1.QueryResultBatch.MoreResultsType} moreResults
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @instance
+                     */
+                    QueryResultBatch.prototype.moreResults = 0;
+    
+                    /**
+                     * QueryResultBatch snapshotVersion.
+                     * @member {number|Long} snapshotVersion
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @instance
+                     */
+                    QueryResultBatch.prototype.snapshotVersion = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * QueryResultBatch readTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} readTime
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @instance
+                     */
+                    QueryResultBatch.prototype.readTime = null;
+    
+                    /**
+                     * Creates a new QueryResultBatch instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @static
+                     * @param {google.datastore.v1.IQueryResultBatch=} [properties] Properties to set
+                     * @returns {google.datastore.v1.QueryResultBatch} QueryResultBatch instance
+                     */
+                    QueryResultBatch.create = function create(properties) {
+                        return new QueryResultBatch(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified QueryResultBatch message. Does not implicitly {@link google.datastore.v1.QueryResultBatch.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @static
+                     * @param {google.datastore.v1.IQueryResultBatch} message QueryResultBatch message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryResultBatch.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.entityResultType != null && Object.hasOwnProperty.call(message, "entityResultType"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.entityResultType);
+                        if (message.entityResults != null && message.entityResults.length)
+                            for (var i = 0; i < message.entityResults.length; ++i)
+                                $root.google.datastore.v1.EntityResult.encode(message.entityResults[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.skippedCursor != null && Object.hasOwnProperty.call(message, "skippedCursor"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.skippedCursor);
+                        if (message.endCursor != null && Object.hasOwnProperty.call(message, "endCursor"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.endCursor);
+                        if (message.moreResults != null && Object.hasOwnProperty.call(message, "moreResults"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.moreResults);
+                        if (message.skippedResults != null && Object.hasOwnProperty.call(message, "skippedResults"))
+                            writer.uint32(/* id 6, wireType 0 =*/48).int32(message.skippedResults);
+                        if (message.snapshotVersion != null && Object.hasOwnProperty.call(message, "snapshotVersion"))
+                            writer.uint32(/* id 7, wireType 0 =*/56).int64(message.snapshotVersion);
+                        if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
+                            $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryResultBatch message, length delimited. Does not implicitly {@link google.datastore.v1.QueryResultBatch.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @static
+                     * @param {google.datastore.v1.IQueryResultBatch} message QueryResultBatch message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryResultBatch.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryResultBatch message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.QueryResultBatch} QueryResultBatch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryResultBatch.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.QueryResultBatch();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 6: {
+                                    message.skippedResults = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.skippedCursor = reader.bytes();
+                                    break;
+                                }
+                            case 1: {
+                                    message.entityResultType = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.entityResults && message.entityResults.length))
+                                        message.entityResults = [];
+                                    message.entityResults.push($root.google.datastore.v1.EntityResult.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 4: {
+                                    message.endCursor = reader.bytes();
+                                    break;
+                                }
+                            case 5: {
+                                    message.moreResults = reader.int32();
+                                    break;
+                                }
+                            case 7: {
+                                    message.snapshotVersion = reader.int64();
+                                    break;
+                                }
+                            case 8: {
+                                    message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryResultBatch message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.QueryResultBatch} QueryResultBatch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryResultBatch.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryResultBatch message.
+                     * @function verify
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryResultBatch.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.skippedResults != null && message.hasOwnProperty("skippedResults"))
+                            if (!$util.isInteger(message.skippedResults))
+                                return "skippedResults: integer expected";
+                        if (message.skippedCursor != null && message.hasOwnProperty("skippedCursor"))
+                            if (!(message.skippedCursor && typeof message.skippedCursor.length === "number" || $util.isString(message.skippedCursor)))
+                                return "skippedCursor: buffer expected";
+                        if (message.entityResultType != null && message.hasOwnProperty("entityResultType"))
+                            switch (message.entityResultType) {
+                            default:
+                                return "entityResultType: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        if (message.entityResults != null && message.hasOwnProperty("entityResults")) {
+                            if (!Array.isArray(message.entityResults))
+                                return "entityResults: array expected";
+                            for (var i = 0; i < message.entityResults.length; ++i) {
+                                var error = $root.google.datastore.v1.EntityResult.verify(message.entityResults[i]);
+                                if (error)
+                                    return "entityResults." + error;
+                            }
+                        }
+                        if (message.endCursor != null && message.hasOwnProperty("endCursor"))
+                            if (!(message.endCursor && typeof message.endCursor.length === "number" || $util.isString(message.endCursor)))
+                                return "endCursor: buffer expected";
+                        if (message.moreResults != null && message.hasOwnProperty("moreResults"))
+                            switch (message.moreResults) {
+                            default:
+                                return "moreResults: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 4:
+                            case 3:
+                                break;
+                            }
+                        if (message.snapshotVersion != null && message.hasOwnProperty("snapshotVersion"))
+                            if (!$util.isInteger(message.snapshotVersion) && !(message.snapshotVersion && $util.isInteger(message.snapshotVersion.low) && $util.isInteger(message.snapshotVersion.high)))
+                                return "snapshotVersion: integer|Long expected";
+                        if (message.readTime != null && message.hasOwnProperty("readTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.readTime);
+                            if (error)
+                                return "readTime." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryResultBatch message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.QueryResultBatch} QueryResultBatch
+                     */
+                    QueryResultBatch.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.QueryResultBatch)
+                            return object;
+                        var message = new $root.google.datastore.v1.QueryResultBatch();
+                        if (object.skippedResults != null)
+                            message.skippedResults = object.skippedResults | 0;
+                        if (object.skippedCursor != null)
+                            if (typeof object.skippedCursor === "string")
+                                $util.base64.decode(object.skippedCursor, message.skippedCursor = $util.newBuffer($util.base64.length(object.skippedCursor)), 0);
+                            else if (object.skippedCursor.length >= 0)
+                                message.skippedCursor = object.skippedCursor;
+                        switch (object.entityResultType) {
+                        case "RESULT_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.entityResultType = 0;
+                            break;
+                        case "FULL":
+                        case 1:
+                            message.entityResultType = 1;
+                            break;
+                        case "PROJECTION":
+                        case 2:
+                            message.entityResultType = 2;
+                            break;
+                        case "KEY_ONLY":
+                        case 3:
+                            message.entityResultType = 3;
+                            break;
+                        }
+                        if (object.entityResults) {
+                            if (!Array.isArray(object.entityResults))
+                                throw TypeError(".google.datastore.v1.QueryResultBatch.entityResults: array expected");
+                            message.entityResults = [];
+                            for (var i = 0; i < object.entityResults.length; ++i) {
+                                if (typeof object.entityResults[i] !== "object")
+                                    throw TypeError(".google.datastore.v1.QueryResultBatch.entityResults: object expected");
+                                message.entityResults[i] = $root.google.datastore.v1.EntityResult.fromObject(object.entityResults[i]);
+                            }
+                        }
+                        if (object.endCursor != null)
+                            if (typeof object.endCursor === "string")
+                                $util.base64.decode(object.endCursor, message.endCursor = $util.newBuffer($util.base64.length(object.endCursor)), 0);
+                            else if (object.endCursor.length >= 0)
+                                message.endCursor = object.endCursor;
+                        switch (object.moreResults) {
+                        case "MORE_RESULTS_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.moreResults = 0;
+                            break;
+                        case "NOT_FINISHED":
+                        case 1:
+                            message.moreResults = 1;
+                            break;
+                        case "MORE_RESULTS_AFTER_LIMIT":
+                        case 2:
+                            message.moreResults = 2;
+                            break;
+                        case "MORE_RESULTS_AFTER_CURSOR":
+                        case 4:
+                            message.moreResults = 4;
+                            break;
+                        case "NO_MORE_RESULTS":
+                        case 3:
+                            message.moreResults = 3;
+                            break;
+                        }
+                        if (object.snapshotVersion != null)
+                            if ($util.Long)
+                                (message.snapshotVersion = $util.Long.fromValue(object.snapshotVersion)).unsigned = false;
+                            else if (typeof object.snapshotVersion === "string")
+                                message.snapshotVersion = parseInt(object.snapshotVersion, 10);
+                            else if (typeof object.snapshotVersion === "number")
+                                message.snapshotVersion = object.snapshotVersion;
+                            else if (typeof object.snapshotVersion === "object")
+                                message.snapshotVersion = new $util.LongBits(object.snapshotVersion.low >>> 0, object.snapshotVersion.high >>> 0).toNumber();
+                        if (object.readTime != null) {
+                            if (typeof object.readTime !== "object")
+                                throw TypeError(".google.datastore.v1.QueryResultBatch.readTime: object expected");
+                            message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryResultBatch message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @static
+                     * @param {google.datastore.v1.QueryResultBatch} message QueryResultBatch
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryResultBatch.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.entityResults = [];
+                        if (options.defaults) {
+                            object.entityResultType = options.enums === String ? "RESULT_TYPE_UNSPECIFIED" : 0;
+                            if (options.bytes === String)
+                                object.skippedCursor = "";
+                            else {
+                                object.skippedCursor = [];
+                                if (options.bytes !== Array)
+                                    object.skippedCursor = $util.newBuffer(object.skippedCursor);
+                            }
+                            if (options.bytes === String)
+                                object.endCursor = "";
+                            else {
+                                object.endCursor = [];
+                                if (options.bytes !== Array)
+                                    object.endCursor = $util.newBuffer(object.endCursor);
+                            }
+                            object.moreResults = options.enums === String ? "MORE_RESULTS_TYPE_UNSPECIFIED" : 0;
+                            object.skippedResults = 0;
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.snapshotVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.snapshotVersion = options.longs === String ? "0" : 0;
+                            object.readTime = null;
+                        }
+                        if (message.entityResultType != null && message.hasOwnProperty("entityResultType"))
+                            object.entityResultType = options.enums === String ? $root.google.datastore.v1.EntityResult.ResultType[message.entityResultType] : message.entityResultType;
+                        if (message.entityResults && message.entityResults.length) {
+                            object.entityResults = [];
+                            for (var j = 0; j < message.entityResults.length; ++j)
+                                object.entityResults[j] = $root.google.datastore.v1.EntityResult.toObject(message.entityResults[j], options);
+                        }
+                        if (message.skippedCursor != null && message.hasOwnProperty("skippedCursor"))
+                            object.skippedCursor = options.bytes === String ? $util.base64.encode(message.skippedCursor, 0, message.skippedCursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.skippedCursor) : message.skippedCursor;
+                        if (message.endCursor != null && message.hasOwnProperty("endCursor"))
+                            object.endCursor = options.bytes === String ? $util.base64.encode(message.endCursor, 0, message.endCursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.endCursor) : message.endCursor;
+                        if (message.moreResults != null && message.hasOwnProperty("moreResults"))
+                            object.moreResults = options.enums === String ? $root.google.datastore.v1.QueryResultBatch.MoreResultsType[message.moreResults] : message.moreResults;
+                        if (message.skippedResults != null && message.hasOwnProperty("skippedResults"))
+                            object.skippedResults = message.skippedResults;
+                        if (message.snapshotVersion != null && message.hasOwnProperty("snapshotVersion"))
+                            if (typeof message.snapshotVersion === "number")
+                                object.snapshotVersion = options.longs === String ? String(message.snapshotVersion) : message.snapshotVersion;
+                            else
+                                object.snapshotVersion = options.longs === String ? $util.Long.prototype.toString.call(message.snapshotVersion) : options.longs === Number ? new $util.LongBits(message.snapshotVersion.low >>> 0, message.snapshotVersion.high >>> 0).toNumber() : message.snapshotVersion;
+                        if (message.readTime != null && message.hasOwnProperty("readTime"))
+                            object.readTime = $root.google.protobuf.Timestamp.toObject(message.readTime, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryResultBatch to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryResultBatch.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for QueryResultBatch
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.QueryResultBatch
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    QueryResultBatch.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.QueryResultBatch";
+                    };
+    
+                    /**
+                     * MoreResultsType enum.
+                     * @name google.datastore.v1.QueryResultBatch.MoreResultsType
+                     * @enum {number}
+                     * @property {number} MORE_RESULTS_TYPE_UNSPECIFIED=0 MORE_RESULTS_TYPE_UNSPECIFIED value
+                     * @property {number} NOT_FINISHED=1 NOT_FINISHED value
+                     * @property {number} MORE_RESULTS_AFTER_LIMIT=2 MORE_RESULTS_AFTER_LIMIT value
+                     * @property {number} MORE_RESULTS_AFTER_CURSOR=4 MORE_RESULTS_AFTER_CURSOR value
+                     * @property {number} NO_MORE_RESULTS=3 NO_MORE_RESULTS value
+                     */
+                    QueryResultBatch.MoreResultsType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MORE_RESULTS_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NOT_FINISHED"] = 1;
+                        values[valuesById[2] = "MORE_RESULTS_AFTER_LIMIT"] = 2;
+                        values[valuesById[4] = "MORE_RESULTS_AFTER_CURSOR"] = 4;
+                        values[valuesById[3] = "NO_MORE_RESULTS"] = 3;
+                        return values;
+                    })();
+    
+                    return QueryResultBatch;
+                })();
+    
                 v1.Datastore = (function() {
     
                     /**
@@ -6358,6 +13212,39 @@
                      * @instance
                      * @param {google.datastore.v1.IRunQueryRequest} request RunQueryRequest message or plain object
                      * @returns {Promise<google.datastore.v1.RunQueryResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.datastore.v1.Datastore|runAggregationQuery}.
+                     * @memberof google.datastore.v1.Datastore
+                     * @typedef RunAggregationQueryCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.datastore.v1.RunAggregationQueryResponse} [response] RunAggregationQueryResponse
+                     */
+    
+                    /**
+                     * Calls RunAggregationQuery.
+                     * @function runAggregationQuery
+                     * @memberof google.datastore.v1.Datastore
+                     * @instance
+                     * @param {google.datastore.v1.IRunAggregationQueryRequest} request RunAggregationQueryRequest message or plain object
+                     * @param {google.datastore.v1.Datastore.RunAggregationQueryCallback} callback Node-style callback called with the error, if any, and RunAggregationQueryResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Datastore.prototype.runAggregationQuery = function runAggregationQuery(request, callback) {
+                        return this.rpcCall(runAggregationQuery, $root.google.datastore.v1.RunAggregationQueryRequest, $root.google.datastore.v1.RunAggregationQueryResponse, request, callback);
+                    }, "name", { value: "RunAggregationQuery" });
+    
+                    /**
+                     * Calls RunAggregationQuery.
+                     * @function runAggregationQuery
+                     * @memberof google.datastore.v1.Datastore
+                     * @instance
+                     * @param {google.datastore.v1.IRunAggregationQueryRequest} request RunAggregationQueryRequest message or plain object
+                     * @returns {Promise<google.datastore.v1.RunAggregationQueryResponse>} Promise
                      * @variation 2
                      */
     
@@ -7772,6 +14659,609 @@
                     };
     
                     return RunQueryResponse;
+                })();
+    
+                v1.RunAggregationQueryRequest = (function() {
+    
+                    /**
+                     * Properties of a RunAggregationQueryRequest.
+                     * @memberof google.datastore.v1
+                     * @interface IRunAggregationQueryRequest
+                     * @property {string|null} [projectId] RunAggregationQueryRequest projectId
+                     * @property {string|null} [databaseId] RunAggregationQueryRequest databaseId
+                     * @property {google.datastore.v1.IPartitionId|null} [partitionId] RunAggregationQueryRequest partitionId
+                     * @property {google.datastore.v1.IReadOptions|null} [readOptions] RunAggregationQueryRequest readOptions
+                     * @property {google.datastore.v1.IAggregationQuery|null} [aggregationQuery] RunAggregationQueryRequest aggregationQuery
+                     * @property {google.datastore.v1.IGqlQuery|null} [gqlQuery] RunAggregationQueryRequest gqlQuery
+                     */
+    
+                    /**
+                     * Constructs a new RunAggregationQueryRequest.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a RunAggregationQueryRequest.
+                     * @implements IRunAggregationQueryRequest
+                     * @constructor
+                     * @param {google.datastore.v1.IRunAggregationQueryRequest=} [properties] Properties to set
+                     */
+                    function RunAggregationQueryRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * RunAggregationQueryRequest projectId.
+                     * @member {string} projectId
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @instance
+                     */
+                    RunAggregationQueryRequest.prototype.projectId = "";
+    
+                    /**
+                     * RunAggregationQueryRequest databaseId.
+                     * @member {string} databaseId
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @instance
+                     */
+                    RunAggregationQueryRequest.prototype.databaseId = "";
+    
+                    /**
+                     * RunAggregationQueryRequest partitionId.
+                     * @member {google.datastore.v1.IPartitionId|null|undefined} partitionId
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @instance
+                     */
+                    RunAggregationQueryRequest.prototype.partitionId = null;
+    
+                    /**
+                     * RunAggregationQueryRequest readOptions.
+                     * @member {google.datastore.v1.IReadOptions|null|undefined} readOptions
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @instance
+                     */
+                    RunAggregationQueryRequest.prototype.readOptions = null;
+    
+                    /**
+                     * RunAggregationQueryRequest aggregationQuery.
+                     * @member {google.datastore.v1.IAggregationQuery|null|undefined} aggregationQuery
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @instance
+                     */
+                    RunAggregationQueryRequest.prototype.aggregationQuery = null;
+    
+                    /**
+                     * RunAggregationQueryRequest gqlQuery.
+                     * @member {google.datastore.v1.IGqlQuery|null|undefined} gqlQuery
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @instance
+                     */
+                    RunAggregationQueryRequest.prototype.gqlQuery = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * RunAggregationQueryRequest queryType.
+                     * @member {"aggregationQuery"|"gqlQuery"|undefined} queryType
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @instance
+                     */
+                    Object.defineProperty(RunAggregationQueryRequest.prototype, "queryType", {
+                        get: $util.oneOfGetter($oneOfFields = ["aggregationQuery", "gqlQuery"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new RunAggregationQueryRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @static
+                     * @param {google.datastore.v1.IRunAggregationQueryRequest=} [properties] Properties to set
+                     * @returns {google.datastore.v1.RunAggregationQueryRequest} RunAggregationQueryRequest instance
+                     */
+                    RunAggregationQueryRequest.create = function create(properties) {
+                        return new RunAggregationQueryRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified RunAggregationQueryRequest message. Does not implicitly {@link google.datastore.v1.RunAggregationQueryRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @static
+                     * @param {google.datastore.v1.IRunAggregationQueryRequest} message RunAggregationQueryRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RunAggregationQueryRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.readOptions != null && Object.hasOwnProperty.call(message, "readOptions"))
+                            $root.google.datastore.v1.ReadOptions.encode(message.readOptions, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.partitionId != null && Object.hasOwnProperty.call(message, "partitionId"))
+                            $root.google.datastore.v1.PartitionId.encode(message.partitionId, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.aggregationQuery != null && Object.hasOwnProperty.call(message, "aggregationQuery"))
+                            $root.google.datastore.v1.AggregationQuery.encode(message.aggregationQuery, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.gqlQuery != null && Object.hasOwnProperty.call(message, "gqlQuery"))
+                            $root.google.datastore.v1.GqlQuery.encode(message.gqlQuery, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
+                        if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.databaseId);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified RunAggregationQueryRequest message, length delimited. Does not implicitly {@link google.datastore.v1.RunAggregationQueryRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @static
+                     * @param {google.datastore.v1.IRunAggregationQueryRequest} message RunAggregationQueryRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RunAggregationQueryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a RunAggregationQueryRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.RunAggregationQueryRequest} RunAggregationQueryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RunAggregationQueryRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.RunAggregationQueryRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 8: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            case 9: {
+                                    message.databaseId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.partitionId = $root.google.datastore.v1.PartitionId.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 1: {
+                                    message.readOptions = $root.google.datastore.v1.ReadOptions.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.aggregationQuery = $root.google.datastore.v1.AggregationQuery.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 7: {
+                                    message.gqlQuery = $root.google.datastore.v1.GqlQuery.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a RunAggregationQueryRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.RunAggregationQueryRequest} RunAggregationQueryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RunAggregationQueryRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a RunAggregationQueryRequest message.
+                     * @function verify
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    RunAggregationQueryRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.projectId != null && message.hasOwnProperty("projectId"))
+                            if (!$util.isString(message.projectId))
+                                return "projectId: string expected";
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            if (!$util.isString(message.databaseId))
+                                return "databaseId: string expected";
+                        if (message.partitionId != null && message.hasOwnProperty("partitionId")) {
+                            var error = $root.google.datastore.v1.PartitionId.verify(message.partitionId);
+                            if (error)
+                                return "partitionId." + error;
+                        }
+                        if (message.readOptions != null && message.hasOwnProperty("readOptions")) {
+                            var error = $root.google.datastore.v1.ReadOptions.verify(message.readOptions);
+                            if (error)
+                                return "readOptions." + error;
+                        }
+                        if (message.aggregationQuery != null && message.hasOwnProperty("aggregationQuery")) {
+                            properties.queryType = 1;
+                            {
+                                var error = $root.google.datastore.v1.AggregationQuery.verify(message.aggregationQuery);
+                                if (error)
+                                    return "aggregationQuery." + error;
+                            }
+                        }
+                        if (message.gqlQuery != null && message.hasOwnProperty("gqlQuery")) {
+                            if (properties.queryType === 1)
+                                return "queryType: multiple values";
+                            properties.queryType = 1;
+                            {
+                                var error = $root.google.datastore.v1.GqlQuery.verify(message.gqlQuery);
+                                if (error)
+                                    return "gqlQuery." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a RunAggregationQueryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.RunAggregationQueryRequest} RunAggregationQueryRequest
+                     */
+                    RunAggregationQueryRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.RunAggregationQueryRequest)
+                            return object;
+                        var message = new $root.google.datastore.v1.RunAggregationQueryRequest();
+                        if (object.projectId != null)
+                            message.projectId = String(object.projectId);
+                        if (object.databaseId != null)
+                            message.databaseId = String(object.databaseId);
+                        if (object.partitionId != null) {
+                            if (typeof object.partitionId !== "object")
+                                throw TypeError(".google.datastore.v1.RunAggregationQueryRequest.partitionId: object expected");
+                            message.partitionId = $root.google.datastore.v1.PartitionId.fromObject(object.partitionId);
+                        }
+                        if (object.readOptions != null) {
+                            if (typeof object.readOptions !== "object")
+                                throw TypeError(".google.datastore.v1.RunAggregationQueryRequest.readOptions: object expected");
+                            message.readOptions = $root.google.datastore.v1.ReadOptions.fromObject(object.readOptions);
+                        }
+                        if (object.aggregationQuery != null) {
+                            if (typeof object.aggregationQuery !== "object")
+                                throw TypeError(".google.datastore.v1.RunAggregationQueryRequest.aggregationQuery: object expected");
+                            message.aggregationQuery = $root.google.datastore.v1.AggregationQuery.fromObject(object.aggregationQuery);
+                        }
+                        if (object.gqlQuery != null) {
+                            if (typeof object.gqlQuery !== "object")
+                                throw TypeError(".google.datastore.v1.RunAggregationQueryRequest.gqlQuery: object expected");
+                            message.gqlQuery = $root.google.datastore.v1.GqlQuery.fromObject(object.gqlQuery);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a RunAggregationQueryRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @static
+                     * @param {google.datastore.v1.RunAggregationQueryRequest} message RunAggregationQueryRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    RunAggregationQueryRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.readOptions = null;
+                            object.partitionId = null;
+                            object.projectId = "";
+                            object.databaseId = "";
+                        }
+                        if (message.readOptions != null && message.hasOwnProperty("readOptions"))
+                            object.readOptions = $root.google.datastore.v1.ReadOptions.toObject(message.readOptions, options);
+                        if (message.partitionId != null && message.hasOwnProperty("partitionId"))
+                            object.partitionId = $root.google.datastore.v1.PartitionId.toObject(message.partitionId, options);
+                        if (message.aggregationQuery != null && message.hasOwnProperty("aggregationQuery")) {
+                            object.aggregationQuery = $root.google.datastore.v1.AggregationQuery.toObject(message.aggregationQuery, options);
+                            if (options.oneofs)
+                                object.queryType = "aggregationQuery";
+                        }
+                        if (message.gqlQuery != null && message.hasOwnProperty("gqlQuery")) {
+                            object.gqlQuery = $root.google.datastore.v1.GqlQuery.toObject(message.gqlQuery, options);
+                            if (options.oneofs)
+                                object.queryType = "gqlQuery";
+                        }
+                        if (message.projectId != null && message.hasOwnProperty("projectId"))
+                            object.projectId = message.projectId;
+                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                            object.databaseId = message.databaseId;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this RunAggregationQueryRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    RunAggregationQueryRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for RunAggregationQueryRequest
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    RunAggregationQueryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.RunAggregationQueryRequest";
+                    };
+    
+                    return RunAggregationQueryRequest;
+                })();
+    
+                v1.RunAggregationQueryResponse = (function() {
+    
+                    /**
+                     * Properties of a RunAggregationQueryResponse.
+                     * @memberof google.datastore.v1
+                     * @interface IRunAggregationQueryResponse
+                     * @property {google.datastore.v1.IAggregationResultBatch|null} [batch] RunAggregationQueryResponse batch
+                     * @property {google.datastore.v1.IAggregationQuery|null} [query] RunAggregationQueryResponse query
+                     */
+    
+                    /**
+                     * Constructs a new RunAggregationQueryResponse.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a RunAggregationQueryResponse.
+                     * @implements IRunAggregationQueryResponse
+                     * @constructor
+                     * @param {google.datastore.v1.IRunAggregationQueryResponse=} [properties] Properties to set
+                     */
+                    function RunAggregationQueryResponse(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * RunAggregationQueryResponse batch.
+                     * @member {google.datastore.v1.IAggregationResultBatch|null|undefined} batch
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @instance
+                     */
+                    RunAggregationQueryResponse.prototype.batch = null;
+    
+                    /**
+                     * RunAggregationQueryResponse query.
+                     * @member {google.datastore.v1.IAggregationQuery|null|undefined} query
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @instance
+                     */
+                    RunAggregationQueryResponse.prototype.query = null;
+    
+                    /**
+                     * Creates a new RunAggregationQueryResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @static
+                     * @param {google.datastore.v1.IRunAggregationQueryResponse=} [properties] Properties to set
+                     * @returns {google.datastore.v1.RunAggregationQueryResponse} RunAggregationQueryResponse instance
+                     */
+                    RunAggregationQueryResponse.create = function create(properties) {
+                        return new RunAggregationQueryResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified RunAggregationQueryResponse message. Does not implicitly {@link google.datastore.v1.RunAggregationQueryResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @static
+                     * @param {google.datastore.v1.IRunAggregationQueryResponse} message RunAggregationQueryResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RunAggregationQueryResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.batch != null && Object.hasOwnProperty.call(message, "batch"))
+                            $root.google.datastore.v1.AggregationResultBatch.encode(message.batch, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                            $root.google.datastore.v1.AggregationQuery.encode(message.query, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified RunAggregationQueryResponse message, length delimited. Does not implicitly {@link google.datastore.v1.RunAggregationQueryResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @static
+                     * @param {google.datastore.v1.IRunAggregationQueryResponse} message RunAggregationQueryResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RunAggregationQueryResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a RunAggregationQueryResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.RunAggregationQueryResponse} RunAggregationQueryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RunAggregationQueryResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.RunAggregationQueryResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.batch = $root.google.datastore.v1.AggregationResultBatch.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.query = $root.google.datastore.v1.AggregationQuery.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a RunAggregationQueryResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.RunAggregationQueryResponse} RunAggregationQueryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RunAggregationQueryResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a RunAggregationQueryResponse message.
+                     * @function verify
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    RunAggregationQueryResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.batch != null && message.hasOwnProperty("batch")) {
+                            var error = $root.google.datastore.v1.AggregationResultBatch.verify(message.batch);
+                            if (error)
+                                return "batch." + error;
+                        }
+                        if (message.query != null && message.hasOwnProperty("query")) {
+                            var error = $root.google.datastore.v1.AggregationQuery.verify(message.query);
+                            if (error)
+                                return "query." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a RunAggregationQueryResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.RunAggregationQueryResponse} RunAggregationQueryResponse
+                     */
+                    RunAggregationQueryResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.RunAggregationQueryResponse)
+                            return object;
+                        var message = new $root.google.datastore.v1.RunAggregationQueryResponse();
+                        if (object.batch != null) {
+                            if (typeof object.batch !== "object")
+                                throw TypeError(".google.datastore.v1.RunAggregationQueryResponse.batch: object expected");
+                            message.batch = $root.google.datastore.v1.AggregationResultBatch.fromObject(object.batch);
+                        }
+                        if (object.query != null) {
+                            if (typeof object.query !== "object")
+                                throw TypeError(".google.datastore.v1.RunAggregationQueryResponse.query: object expected");
+                            message.query = $root.google.datastore.v1.AggregationQuery.fromObject(object.query);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a RunAggregationQueryResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @static
+                     * @param {google.datastore.v1.RunAggregationQueryResponse} message RunAggregationQueryResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    RunAggregationQueryResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.batch = null;
+                            object.query = null;
+                        }
+                        if (message.batch != null && message.hasOwnProperty("batch"))
+                            object.batch = $root.google.datastore.v1.AggregationResultBatch.toObject(message.batch, options);
+                        if (message.query != null && message.hasOwnProperty("query"))
+                            object.query = $root.google.datastore.v1.AggregationQuery.toObject(message.query, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this RunAggregationQueryResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    RunAggregationQueryResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for RunAggregationQueryResponse
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    RunAggregationQueryResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.RunAggregationQueryResponse";
+                    };
+    
+                    return RunAggregationQueryResponse;
                 })();
     
                 v1.BeginTransactionRequest = (function() {
@@ -11983,5579 +19473,6 @@
                     })();
     
                     return TransactionOptions;
-                })();
-    
-                v1.PartitionId = (function() {
-    
-                    /**
-                     * Properties of a PartitionId.
-                     * @memberof google.datastore.v1
-                     * @interface IPartitionId
-                     * @property {string|null} [projectId] PartitionId projectId
-                     * @property {string|null} [databaseId] PartitionId databaseId
-                     * @property {string|null} [namespaceId] PartitionId namespaceId
-                     */
-    
-                    /**
-                     * Constructs a new PartitionId.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a PartitionId.
-                     * @implements IPartitionId
-                     * @constructor
-                     * @param {google.datastore.v1.IPartitionId=} [properties] Properties to set
-                     */
-                    function PartitionId(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * PartitionId projectId.
-                     * @member {string} projectId
-                     * @memberof google.datastore.v1.PartitionId
-                     * @instance
-                     */
-                    PartitionId.prototype.projectId = "";
-    
-                    /**
-                     * PartitionId databaseId.
-                     * @member {string} databaseId
-                     * @memberof google.datastore.v1.PartitionId
-                     * @instance
-                     */
-                    PartitionId.prototype.databaseId = "";
-    
-                    /**
-                     * PartitionId namespaceId.
-                     * @member {string} namespaceId
-                     * @memberof google.datastore.v1.PartitionId
-                     * @instance
-                     */
-                    PartitionId.prototype.namespaceId = "";
-    
-                    /**
-                     * Creates a new PartitionId instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.PartitionId
-                     * @static
-                     * @param {google.datastore.v1.IPartitionId=} [properties] Properties to set
-                     * @returns {google.datastore.v1.PartitionId} PartitionId instance
-                     */
-                    PartitionId.create = function create(properties) {
-                        return new PartitionId(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified PartitionId message. Does not implicitly {@link google.datastore.v1.PartitionId.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.PartitionId
-                     * @static
-                     * @param {google.datastore.v1.IPartitionId} message PartitionId message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    PartitionId.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
-                        if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.databaseId);
-                        if (message.namespaceId != null && Object.hasOwnProperty.call(message, "namespaceId"))
-                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.namespaceId);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified PartitionId message, length delimited. Does not implicitly {@link google.datastore.v1.PartitionId.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.PartitionId
-                     * @static
-                     * @param {google.datastore.v1.IPartitionId} message PartitionId message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    PartitionId.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a PartitionId message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.PartitionId
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.PartitionId} PartitionId
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    PartitionId.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.PartitionId();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 2: {
-                                    message.projectId = reader.string();
-                                    break;
-                                }
-                            case 3: {
-                                    message.databaseId = reader.string();
-                                    break;
-                                }
-                            case 4: {
-                                    message.namespaceId = reader.string();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a PartitionId message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.PartitionId
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.PartitionId} PartitionId
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    PartitionId.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a PartitionId message.
-                     * @function verify
-                     * @memberof google.datastore.v1.PartitionId
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    PartitionId.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.projectId != null && message.hasOwnProperty("projectId"))
-                            if (!$util.isString(message.projectId))
-                                return "projectId: string expected";
-                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
-                            if (!$util.isString(message.databaseId))
-                                return "databaseId: string expected";
-                        if (message.namespaceId != null && message.hasOwnProperty("namespaceId"))
-                            if (!$util.isString(message.namespaceId))
-                                return "namespaceId: string expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a PartitionId message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.PartitionId
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.PartitionId} PartitionId
-                     */
-                    PartitionId.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.PartitionId)
-                            return object;
-                        var message = new $root.google.datastore.v1.PartitionId();
-                        if (object.projectId != null)
-                            message.projectId = String(object.projectId);
-                        if (object.databaseId != null)
-                            message.databaseId = String(object.databaseId);
-                        if (object.namespaceId != null)
-                            message.namespaceId = String(object.namespaceId);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a PartitionId message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.PartitionId
-                     * @static
-                     * @param {google.datastore.v1.PartitionId} message PartitionId
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    PartitionId.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.projectId = "";
-                            object.databaseId = "";
-                            object.namespaceId = "";
-                        }
-                        if (message.projectId != null && message.hasOwnProperty("projectId"))
-                            object.projectId = message.projectId;
-                        if (message.databaseId != null && message.hasOwnProperty("databaseId"))
-                            object.databaseId = message.databaseId;
-                        if (message.namespaceId != null && message.hasOwnProperty("namespaceId"))
-                            object.namespaceId = message.namespaceId;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this PartitionId to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.PartitionId
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    PartitionId.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for PartitionId
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.PartitionId
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    PartitionId.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.PartitionId";
-                    };
-    
-                    return PartitionId;
-                })();
-    
-                v1.Key = (function() {
-    
-                    /**
-                     * Properties of a Key.
-                     * @memberof google.datastore.v1
-                     * @interface IKey
-                     * @property {google.datastore.v1.IPartitionId|null} [partitionId] Key partitionId
-                     * @property {Array.<google.datastore.v1.Key.IPathElement>|null} [path] Key path
-                     */
-    
-                    /**
-                     * Constructs a new Key.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a Key.
-                     * @implements IKey
-                     * @constructor
-                     * @param {google.datastore.v1.IKey=} [properties] Properties to set
-                     */
-                    function Key(properties) {
-                        this.path = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Key partitionId.
-                     * @member {google.datastore.v1.IPartitionId|null|undefined} partitionId
-                     * @memberof google.datastore.v1.Key
-                     * @instance
-                     */
-                    Key.prototype.partitionId = null;
-    
-                    /**
-                     * Key path.
-                     * @member {Array.<google.datastore.v1.Key.IPathElement>} path
-                     * @memberof google.datastore.v1.Key
-                     * @instance
-                     */
-                    Key.prototype.path = $util.emptyArray;
-    
-                    /**
-                     * Creates a new Key instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.Key
-                     * @static
-                     * @param {google.datastore.v1.IKey=} [properties] Properties to set
-                     * @returns {google.datastore.v1.Key} Key instance
-                     */
-                    Key.create = function create(properties) {
-                        return new Key(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Key message. Does not implicitly {@link google.datastore.v1.Key.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.Key
-                     * @static
-                     * @param {google.datastore.v1.IKey} message Key message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Key.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.partitionId != null && Object.hasOwnProperty.call(message, "partitionId"))
-                            $root.google.datastore.v1.PartitionId.encode(message.partitionId, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.path != null && message.path.length)
-                            for (var i = 0; i < message.path.length; ++i)
-                                $root.google.datastore.v1.Key.PathElement.encode(message.path[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Key message, length delimited. Does not implicitly {@link google.datastore.v1.Key.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.Key
-                     * @static
-                     * @param {google.datastore.v1.IKey} message Key message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Key.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a Key message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.Key
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.Key} Key
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Key.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Key();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.partitionId = $root.google.datastore.v1.PartitionId.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 2: {
-                                    if (!(message.path && message.path.length))
-                                        message.path = [];
-                                    message.path.push($root.google.datastore.v1.Key.PathElement.decode(reader, reader.uint32()));
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a Key message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.Key
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.Key} Key
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Key.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a Key message.
-                     * @function verify
-                     * @memberof google.datastore.v1.Key
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Key.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.partitionId != null && message.hasOwnProperty("partitionId")) {
-                            var error = $root.google.datastore.v1.PartitionId.verify(message.partitionId);
-                            if (error)
-                                return "partitionId." + error;
-                        }
-                        if (message.path != null && message.hasOwnProperty("path")) {
-                            if (!Array.isArray(message.path))
-                                return "path: array expected";
-                            for (var i = 0; i < message.path.length; ++i) {
-                                var error = $root.google.datastore.v1.Key.PathElement.verify(message.path[i]);
-                                if (error)
-                                    return "path." + error;
-                            }
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a Key message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.Key
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.Key} Key
-                     */
-                    Key.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.Key)
-                            return object;
-                        var message = new $root.google.datastore.v1.Key();
-                        if (object.partitionId != null) {
-                            if (typeof object.partitionId !== "object")
-                                throw TypeError(".google.datastore.v1.Key.partitionId: object expected");
-                            message.partitionId = $root.google.datastore.v1.PartitionId.fromObject(object.partitionId);
-                        }
-                        if (object.path) {
-                            if (!Array.isArray(object.path))
-                                throw TypeError(".google.datastore.v1.Key.path: array expected");
-                            message.path = [];
-                            for (var i = 0; i < object.path.length; ++i) {
-                                if (typeof object.path[i] !== "object")
-                                    throw TypeError(".google.datastore.v1.Key.path: object expected");
-                                message.path[i] = $root.google.datastore.v1.Key.PathElement.fromObject(object.path[i]);
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a Key message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.Key
-                     * @static
-                     * @param {google.datastore.v1.Key} message Key
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Key.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults)
-                            object.path = [];
-                        if (options.defaults)
-                            object.partitionId = null;
-                        if (message.partitionId != null && message.hasOwnProperty("partitionId"))
-                            object.partitionId = $root.google.datastore.v1.PartitionId.toObject(message.partitionId, options);
-                        if (message.path && message.path.length) {
-                            object.path = [];
-                            for (var j = 0; j < message.path.length; ++j)
-                                object.path[j] = $root.google.datastore.v1.Key.PathElement.toObject(message.path[j], options);
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Key to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.Key
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Key.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for Key
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.Key
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    Key.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.Key";
-                    };
-    
-                    Key.PathElement = (function() {
-    
-                        /**
-                         * Properties of a PathElement.
-                         * @memberof google.datastore.v1.Key
-                         * @interface IPathElement
-                         * @property {string|null} [kind] PathElement kind
-                         * @property {number|Long|null} [id] PathElement id
-                         * @property {string|null} [name] PathElement name
-                         */
-    
-                        /**
-                         * Constructs a new PathElement.
-                         * @memberof google.datastore.v1.Key
-                         * @classdesc Represents a PathElement.
-                         * @implements IPathElement
-                         * @constructor
-                         * @param {google.datastore.v1.Key.IPathElement=} [properties] Properties to set
-                         */
-                        function PathElement(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * PathElement kind.
-                         * @member {string} kind
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @instance
-                         */
-                        PathElement.prototype.kind = "";
-    
-                        /**
-                         * PathElement id.
-                         * @member {number|Long|null|undefined} id
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @instance
-                         */
-                        PathElement.prototype.id = null;
-    
-                        /**
-                         * PathElement name.
-                         * @member {string|null|undefined} name
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @instance
-                         */
-                        PathElement.prototype.name = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * PathElement idType.
-                         * @member {"id"|"name"|undefined} idType
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @instance
-                         */
-                        Object.defineProperty(PathElement.prototype, "idType", {
-                            get: $util.oneOfGetter($oneOfFields = ["id", "name"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new PathElement instance using the specified properties.
-                         * @function create
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @static
-                         * @param {google.datastore.v1.Key.IPathElement=} [properties] Properties to set
-                         * @returns {google.datastore.v1.Key.PathElement} PathElement instance
-                         */
-                        PathElement.create = function create(properties) {
-                            return new PathElement(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified PathElement message. Does not implicitly {@link google.datastore.v1.Key.PathElement.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @static
-                         * @param {google.datastore.v1.Key.IPathElement} message PathElement message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PathElement.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kind);
-                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.id);
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified PathElement message, length delimited. Does not implicitly {@link google.datastore.v1.Key.PathElement.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @static
-                         * @param {google.datastore.v1.Key.IPathElement} message PathElement message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PathElement.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a PathElement message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.datastore.v1.Key.PathElement} PathElement
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PathElement.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Key.PathElement();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.kind = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.id = reader.int64();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a PathElement message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.datastore.v1.Key.PathElement} PathElement
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PathElement.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a PathElement message.
-                         * @function verify
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        PathElement.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.kind != null && message.hasOwnProperty("kind"))
-                                if (!$util.isString(message.kind))
-                                    return "kind: string expected";
-                            if (message.id != null && message.hasOwnProperty("id")) {
-                                properties.idType = 1;
-                                if (!$util.isInteger(message.id) && !(message.id && $util.isInteger(message.id.low) && $util.isInteger(message.id.high)))
-                                    return "id: integer|Long expected";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name")) {
-                                if (properties.idType === 1)
-                                    return "idType: multiple values";
-                                properties.idType = 1;
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a PathElement message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.datastore.v1.Key.PathElement} PathElement
-                         */
-                        PathElement.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.datastore.v1.Key.PathElement)
-                                return object;
-                            var message = new $root.google.datastore.v1.Key.PathElement();
-                            if (object.kind != null)
-                                message.kind = String(object.kind);
-                            if (object.id != null)
-                                if ($util.Long)
-                                    (message.id = $util.Long.fromValue(object.id)).unsigned = false;
-                                else if (typeof object.id === "string")
-                                    message.id = parseInt(object.id, 10);
-                                else if (typeof object.id === "number")
-                                    message.id = object.id;
-                                else if (typeof object.id === "object")
-                                    message.id = new $util.LongBits(object.id.low >>> 0, object.id.high >>> 0).toNumber();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a PathElement message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @static
-                         * @param {google.datastore.v1.Key.PathElement} message PathElement
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        PathElement.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.kind = "";
-                            if (message.kind != null && message.hasOwnProperty("kind"))
-                                object.kind = message.kind;
-                            if (message.id != null && message.hasOwnProperty("id")) {
-                                if (typeof message.id === "number")
-                                    object.id = options.longs === String ? String(message.id) : message.id;
-                                else
-                                    object.id = options.longs === String ? $util.Long.prototype.toString.call(message.id) : options.longs === Number ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toNumber() : message.id;
-                                if (options.oneofs)
-                                    object.idType = "id";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name")) {
-                                object.name = message.name;
-                                if (options.oneofs)
-                                    object.idType = "name";
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this PathElement to JSON.
-                         * @function toJSON
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        PathElement.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for PathElement
-                         * @function getTypeUrl
-                         * @memberof google.datastore.v1.Key.PathElement
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        PathElement.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.datastore.v1.Key.PathElement";
-                        };
-    
-                        return PathElement;
-                    })();
-    
-                    return Key;
-                })();
-    
-                v1.ArrayValue = (function() {
-    
-                    /**
-                     * Properties of an ArrayValue.
-                     * @memberof google.datastore.v1
-                     * @interface IArrayValue
-                     * @property {Array.<google.datastore.v1.IValue>|null} [values] ArrayValue values
-                     */
-    
-                    /**
-                     * Constructs a new ArrayValue.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents an ArrayValue.
-                     * @implements IArrayValue
-                     * @constructor
-                     * @param {google.datastore.v1.IArrayValue=} [properties] Properties to set
-                     */
-                    function ArrayValue(properties) {
-                        this.values = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * ArrayValue values.
-                     * @member {Array.<google.datastore.v1.IValue>} values
-                     * @memberof google.datastore.v1.ArrayValue
-                     * @instance
-                     */
-                    ArrayValue.prototype.values = $util.emptyArray;
-    
-                    /**
-                     * Creates a new ArrayValue instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.ArrayValue
-                     * @static
-                     * @param {google.datastore.v1.IArrayValue=} [properties] Properties to set
-                     * @returns {google.datastore.v1.ArrayValue} ArrayValue instance
-                     */
-                    ArrayValue.create = function create(properties) {
-                        return new ArrayValue(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified ArrayValue message. Does not implicitly {@link google.datastore.v1.ArrayValue.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.ArrayValue
-                     * @static
-                     * @param {google.datastore.v1.IArrayValue} message ArrayValue message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ArrayValue.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.values != null && message.values.length)
-                            for (var i = 0; i < message.values.length; ++i)
-                                $root.google.datastore.v1.Value.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified ArrayValue message, length delimited. Does not implicitly {@link google.datastore.v1.ArrayValue.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.ArrayValue
-                     * @static
-                     * @param {google.datastore.v1.IArrayValue} message ArrayValue message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ArrayValue.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an ArrayValue message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.ArrayValue
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.ArrayValue} ArrayValue
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ArrayValue.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.ArrayValue();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    if (!(message.values && message.values.length))
-                                        message.values = [];
-                                    message.values.push($root.google.datastore.v1.Value.decode(reader, reader.uint32()));
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an ArrayValue message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.ArrayValue
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.ArrayValue} ArrayValue
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ArrayValue.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an ArrayValue message.
-                     * @function verify
-                     * @memberof google.datastore.v1.ArrayValue
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    ArrayValue.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.values != null && message.hasOwnProperty("values")) {
-                            if (!Array.isArray(message.values))
-                                return "values: array expected";
-                            for (var i = 0; i < message.values.length; ++i) {
-                                var error = $root.google.datastore.v1.Value.verify(message.values[i]);
-                                if (error)
-                                    return "values." + error;
-                            }
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an ArrayValue message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.ArrayValue
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.ArrayValue} ArrayValue
-                     */
-                    ArrayValue.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.ArrayValue)
-                            return object;
-                        var message = new $root.google.datastore.v1.ArrayValue();
-                        if (object.values) {
-                            if (!Array.isArray(object.values))
-                                throw TypeError(".google.datastore.v1.ArrayValue.values: array expected");
-                            message.values = [];
-                            for (var i = 0; i < object.values.length; ++i) {
-                                if (typeof object.values[i] !== "object")
-                                    throw TypeError(".google.datastore.v1.ArrayValue.values: object expected");
-                                message.values[i] = $root.google.datastore.v1.Value.fromObject(object.values[i]);
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an ArrayValue message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.ArrayValue
-                     * @static
-                     * @param {google.datastore.v1.ArrayValue} message ArrayValue
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    ArrayValue.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults)
-                            object.values = [];
-                        if (message.values && message.values.length) {
-                            object.values = [];
-                            for (var j = 0; j < message.values.length; ++j)
-                                object.values[j] = $root.google.datastore.v1.Value.toObject(message.values[j], options);
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this ArrayValue to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.ArrayValue
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    ArrayValue.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for ArrayValue
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.ArrayValue
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    ArrayValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.ArrayValue";
-                    };
-    
-                    return ArrayValue;
-                })();
-    
-                v1.Value = (function() {
-    
-                    /**
-                     * Properties of a Value.
-                     * @memberof google.datastore.v1
-                     * @interface IValue
-                     * @property {google.protobuf.NullValue|null} [nullValue] Value nullValue
-                     * @property {boolean|null} [booleanValue] Value booleanValue
-                     * @property {number|Long|null} [integerValue] Value integerValue
-                     * @property {number|null} [doubleValue] Value doubleValue
-                     * @property {google.protobuf.ITimestamp|null} [timestampValue] Value timestampValue
-                     * @property {google.datastore.v1.IKey|null} [keyValue] Value keyValue
-                     * @property {string|null} [stringValue] Value stringValue
-                     * @property {Uint8Array|null} [blobValue] Value blobValue
-                     * @property {google.type.ILatLng|null} [geoPointValue] Value geoPointValue
-                     * @property {google.datastore.v1.IEntity|null} [entityValue] Value entityValue
-                     * @property {google.datastore.v1.IArrayValue|null} [arrayValue] Value arrayValue
-                     * @property {number|null} [meaning] Value meaning
-                     * @property {boolean|null} [excludeFromIndexes] Value excludeFromIndexes
-                     */
-    
-                    /**
-                     * Constructs a new Value.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a Value.
-                     * @implements IValue
-                     * @constructor
-                     * @param {google.datastore.v1.IValue=} [properties] Properties to set
-                     */
-                    function Value(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Value nullValue.
-                     * @member {google.protobuf.NullValue|null|undefined} nullValue
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.nullValue = null;
-    
-                    /**
-                     * Value booleanValue.
-                     * @member {boolean|null|undefined} booleanValue
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.booleanValue = null;
-    
-                    /**
-                     * Value integerValue.
-                     * @member {number|Long|null|undefined} integerValue
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.integerValue = null;
-    
-                    /**
-                     * Value doubleValue.
-                     * @member {number|null|undefined} doubleValue
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.doubleValue = null;
-    
-                    /**
-                     * Value timestampValue.
-                     * @member {google.protobuf.ITimestamp|null|undefined} timestampValue
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.timestampValue = null;
-    
-                    /**
-                     * Value keyValue.
-                     * @member {google.datastore.v1.IKey|null|undefined} keyValue
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.keyValue = null;
-    
-                    /**
-                     * Value stringValue.
-                     * @member {string|null|undefined} stringValue
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.stringValue = null;
-    
-                    /**
-                     * Value blobValue.
-                     * @member {Uint8Array|null|undefined} blobValue
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.blobValue = null;
-    
-                    /**
-                     * Value geoPointValue.
-                     * @member {google.type.ILatLng|null|undefined} geoPointValue
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.geoPointValue = null;
-    
-                    /**
-                     * Value entityValue.
-                     * @member {google.datastore.v1.IEntity|null|undefined} entityValue
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.entityValue = null;
-    
-                    /**
-                     * Value arrayValue.
-                     * @member {google.datastore.v1.IArrayValue|null|undefined} arrayValue
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.arrayValue = null;
-    
-                    /**
-                     * Value meaning.
-                     * @member {number} meaning
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.meaning = 0;
-    
-                    /**
-                     * Value excludeFromIndexes.
-                     * @member {boolean} excludeFromIndexes
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Value.prototype.excludeFromIndexes = false;
-    
-                    // OneOf field names bound to virtual getters and setters
-                    var $oneOfFields;
-    
-                    /**
-                     * Value valueType.
-                     * @member {"nullValue"|"booleanValue"|"integerValue"|"doubleValue"|"timestampValue"|"keyValue"|"stringValue"|"blobValue"|"geoPointValue"|"entityValue"|"arrayValue"|undefined} valueType
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     */
-                    Object.defineProperty(Value.prototype, "valueType", {
-                        get: $util.oneOfGetter($oneOfFields = ["nullValue", "booleanValue", "integerValue", "doubleValue", "timestampValue", "keyValue", "stringValue", "blobValue", "geoPointValue", "entityValue", "arrayValue"]),
-                        set: $util.oneOfSetter($oneOfFields)
-                    });
-    
-                    /**
-                     * Creates a new Value instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.Value
-                     * @static
-                     * @param {google.datastore.v1.IValue=} [properties] Properties to set
-                     * @returns {google.datastore.v1.Value} Value instance
-                     */
-                    Value.create = function create(properties) {
-                        return new Value(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Value message. Does not implicitly {@link google.datastore.v1.Value.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.Value
-                     * @static
-                     * @param {google.datastore.v1.IValue} message Value message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Value.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.booleanValue != null && Object.hasOwnProperty.call(message, "booleanValue"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.booleanValue);
-                        if (message.integerValue != null && Object.hasOwnProperty.call(message, "integerValue"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int64(message.integerValue);
-                        if (message.doubleValue != null && Object.hasOwnProperty.call(message, "doubleValue"))
-                            writer.uint32(/* id 3, wireType 1 =*/25).double(message.doubleValue);
-                        if (message.keyValue != null && Object.hasOwnProperty.call(message, "keyValue"))
-                            $root.google.datastore.v1.Key.encode(message.keyValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                        if (message.entityValue != null && Object.hasOwnProperty.call(message, "entityValue"))
-                            $root.google.datastore.v1.Entity.encode(message.entityValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                        if (message.geoPointValue != null && Object.hasOwnProperty.call(message, "geoPointValue"))
-                            $root.google.type.LatLng.encode(message.geoPointValue, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                        if (message.arrayValue != null && Object.hasOwnProperty.call(message, "arrayValue"))
-                            $root.google.datastore.v1.ArrayValue.encode(message.arrayValue, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-                        if (message.timestampValue != null && Object.hasOwnProperty.call(message, "timestampValue"))
-                            $root.google.protobuf.Timestamp.encode(message.timestampValue, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-                        if (message.nullValue != null && Object.hasOwnProperty.call(message, "nullValue"))
-                            writer.uint32(/* id 11, wireType 0 =*/88).int32(message.nullValue);
-                        if (message.meaning != null && Object.hasOwnProperty.call(message, "meaning"))
-                            writer.uint32(/* id 14, wireType 0 =*/112).int32(message.meaning);
-                        if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
-                            writer.uint32(/* id 17, wireType 2 =*/138).string(message.stringValue);
-                        if (message.blobValue != null && Object.hasOwnProperty.call(message, "blobValue"))
-                            writer.uint32(/* id 18, wireType 2 =*/146).bytes(message.blobValue);
-                        if (message.excludeFromIndexes != null && Object.hasOwnProperty.call(message, "excludeFromIndexes"))
-                            writer.uint32(/* id 19, wireType 0 =*/152).bool(message.excludeFromIndexes);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Value message, length delimited. Does not implicitly {@link google.datastore.v1.Value.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.Value
-                     * @static
-                     * @param {google.datastore.v1.IValue} message Value message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Value.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a Value message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.Value
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.Value} Value
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Value.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Value();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 11: {
-                                    message.nullValue = reader.int32();
-                                    break;
-                                }
-                            case 1: {
-                                    message.booleanValue = reader.bool();
-                                    break;
-                                }
-                            case 2: {
-                                    message.integerValue = reader.int64();
-                                    break;
-                                }
-                            case 3: {
-                                    message.doubleValue = reader.double();
-                                    break;
-                                }
-                            case 10: {
-                                    message.timestampValue = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 5: {
-                                    message.keyValue = $root.google.datastore.v1.Key.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 17: {
-                                    message.stringValue = reader.string();
-                                    break;
-                                }
-                            case 18: {
-                                    message.blobValue = reader.bytes();
-                                    break;
-                                }
-                            case 8: {
-                                    message.geoPointValue = $root.google.type.LatLng.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 6: {
-                                    message.entityValue = $root.google.datastore.v1.Entity.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 9: {
-                                    message.arrayValue = $root.google.datastore.v1.ArrayValue.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 14: {
-                                    message.meaning = reader.int32();
-                                    break;
-                                }
-                            case 19: {
-                                    message.excludeFromIndexes = reader.bool();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a Value message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.Value
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.Value} Value
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Value.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a Value message.
-                     * @function verify
-                     * @memberof google.datastore.v1.Value
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Value.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        var properties = {};
-                        if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
-                            properties.valueType = 1;
-                            switch (message.nullValue) {
-                            default:
-                                return "nullValue: enum value expected";
-                            case 0:
-                                break;
-                            }
-                        }
-                        if (message.booleanValue != null && message.hasOwnProperty("booleanValue")) {
-                            if (properties.valueType === 1)
-                                return "valueType: multiple values";
-                            properties.valueType = 1;
-                            if (typeof message.booleanValue !== "boolean")
-                                return "booleanValue: boolean expected";
-                        }
-                        if (message.integerValue != null && message.hasOwnProperty("integerValue")) {
-                            if (properties.valueType === 1)
-                                return "valueType: multiple values";
-                            properties.valueType = 1;
-                            if (!$util.isInteger(message.integerValue) && !(message.integerValue && $util.isInteger(message.integerValue.low) && $util.isInteger(message.integerValue.high)))
-                                return "integerValue: integer|Long expected";
-                        }
-                        if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
-                            if (properties.valueType === 1)
-                                return "valueType: multiple values";
-                            properties.valueType = 1;
-                            if (typeof message.doubleValue !== "number")
-                                return "doubleValue: number expected";
-                        }
-                        if (message.timestampValue != null && message.hasOwnProperty("timestampValue")) {
-                            if (properties.valueType === 1)
-                                return "valueType: multiple values";
-                            properties.valueType = 1;
-                            {
-                                var error = $root.google.protobuf.Timestamp.verify(message.timestampValue);
-                                if (error)
-                                    return "timestampValue." + error;
-                            }
-                        }
-                        if (message.keyValue != null && message.hasOwnProperty("keyValue")) {
-                            if (properties.valueType === 1)
-                                return "valueType: multiple values";
-                            properties.valueType = 1;
-                            {
-                                var error = $root.google.datastore.v1.Key.verify(message.keyValue);
-                                if (error)
-                                    return "keyValue." + error;
-                            }
-                        }
-                        if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
-                            if (properties.valueType === 1)
-                                return "valueType: multiple values";
-                            properties.valueType = 1;
-                            if (!$util.isString(message.stringValue))
-                                return "stringValue: string expected";
-                        }
-                        if (message.blobValue != null && message.hasOwnProperty("blobValue")) {
-                            if (properties.valueType === 1)
-                                return "valueType: multiple values";
-                            properties.valueType = 1;
-                            if (!(message.blobValue && typeof message.blobValue.length === "number" || $util.isString(message.blobValue)))
-                                return "blobValue: buffer expected";
-                        }
-                        if (message.geoPointValue != null && message.hasOwnProperty("geoPointValue")) {
-                            if (properties.valueType === 1)
-                                return "valueType: multiple values";
-                            properties.valueType = 1;
-                            {
-                                var error = $root.google.type.LatLng.verify(message.geoPointValue);
-                                if (error)
-                                    return "geoPointValue." + error;
-                            }
-                        }
-                        if (message.entityValue != null && message.hasOwnProperty("entityValue")) {
-                            if (properties.valueType === 1)
-                                return "valueType: multiple values";
-                            properties.valueType = 1;
-                            {
-                                var error = $root.google.datastore.v1.Entity.verify(message.entityValue);
-                                if (error)
-                                    return "entityValue." + error;
-                            }
-                        }
-                        if (message.arrayValue != null && message.hasOwnProperty("arrayValue")) {
-                            if (properties.valueType === 1)
-                                return "valueType: multiple values";
-                            properties.valueType = 1;
-                            {
-                                var error = $root.google.datastore.v1.ArrayValue.verify(message.arrayValue);
-                                if (error)
-                                    return "arrayValue." + error;
-                            }
-                        }
-                        if (message.meaning != null && message.hasOwnProperty("meaning"))
-                            if (!$util.isInteger(message.meaning))
-                                return "meaning: integer expected";
-                        if (message.excludeFromIndexes != null && message.hasOwnProperty("excludeFromIndexes"))
-                            if (typeof message.excludeFromIndexes !== "boolean")
-                                return "excludeFromIndexes: boolean expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a Value message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.Value
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.Value} Value
-                     */
-                    Value.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.Value)
-                            return object;
-                        var message = new $root.google.datastore.v1.Value();
-                        switch (object.nullValue) {
-                        case "NULL_VALUE":
-                        case 0:
-                            message.nullValue = 0;
-                            break;
-                        }
-                        if (object.booleanValue != null)
-                            message.booleanValue = Boolean(object.booleanValue);
-                        if (object.integerValue != null)
-                            if ($util.Long)
-                                (message.integerValue = $util.Long.fromValue(object.integerValue)).unsigned = false;
-                            else if (typeof object.integerValue === "string")
-                                message.integerValue = parseInt(object.integerValue, 10);
-                            else if (typeof object.integerValue === "number")
-                                message.integerValue = object.integerValue;
-                            else if (typeof object.integerValue === "object")
-                                message.integerValue = new $util.LongBits(object.integerValue.low >>> 0, object.integerValue.high >>> 0).toNumber();
-                        if (object.doubleValue != null)
-                            message.doubleValue = Number(object.doubleValue);
-                        if (object.timestampValue != null) {
-                            if (typeof object.timestampValue !== "object")
-                                throw TypeError(".google.datastore.v1.Value.timestampValue: object expected");
-                            message.timestampValue = $root.google.protobuf.Timestamp.fromObject(object.timestampValue);
-                        }
-                        if (object.keyValue != null) {
-                            if (typeof object.keyValue !== "object")
-                                throw TypeError(".google.datastore.v1.Value.keyValue: object expected");
-                            message.keyValue = $root.google.datastore.v1.Key.fromObject(object.keyValue);
-                        }
-                        if (object.stringValue != null)
-                            message.stringValue = String(object.stringValue);
-                        if (object.blobValue != null)
-                            if (typeof object.blobValue === "string")
-                                $util.base64.decode(object.blobValue, message.blobValue = $util.newBuffer($util.base64.length(object.blobValue)), 0);
-                            else if (object.blobValue.length >= 0)
-                                message.blobValue = object.blobValue;
-                        if (object.geoPointValue != null) {
-                            if (typeof object.geoPointValue !== "object")
-                                throw TypeError(".google.datastore.v1.Value.geoPointValue: object expected");
-                            message.geoPointValue = $root.google.type.LatLng.fromObject(object.geoPointValue);
-                        }
-                        if (object.entityValue != null) {
-                            if (typeof object.entityValue !== "object")
-                                throw TypeError(".google.datastore.v1.Value.entityValue: object expected");
-                            message.entityValue = $root.google.datastore.v1.Entity.fromObject(object.entityValue);
-                        }
-                        if (object.arrayValue != null) {
-                            if (typeof object.arrayValue !== "object")
-                                throw TypeError(".google.datastore.v1.Value.arrayValue: object expected");
-                            message.arrayValue = $root.google.datastore.v1.ArrayValue.fromObject(object.arrayValue);
-                        }
-                        if (object.meaning != null)
-                            message.meaning = object.meaning | 0;
-                        if (object.excludeFromIndexes != null)
-                            message.excludeFromIndexes = Boolean(object.excludeFromIndexes);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a Value message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.Value
-                     * @static
-                     * @param {google.datastore.v1.Value} message Value
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Value.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.meaning = 0;
-                            object.excludeFromIndexes = false;
-                        }
-                        if (message.booleanValue != null && message.hasOwnProperty("booleanValue")) {
-                            object.booleanValue = message.booleanValue;
-                            if (options.oneofs)
-                                object.valueType = "booleanValue";
-                        }
-                        if (message.integerValue != null && message.hasOwnProperty("integerValue")) {
-                            if (typeof message.integerValue === "number")
-                                object.integerValue = options.longs === String ? String(message.integerValue) : message.integerValue;
-                            else
-                                object.integerValue = options.longs === String ? $util.Long.prototype.toString.call(message.integerValue) : options.longs === Number ? new $util.LongBits(message.integerValue.low >>> 0, message.integerValue.high >>> 0).toNumber() : message.integerValue;
-                            if (options.oneofs)
-                                object.valueType = "integerValue";
-                        }
-                        if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
-                            object.doubleValue = options.json && !isFinite(message.doubleValue) ? String(message.doubleValue) : message.doubleValue;
-                            if (options.oneofs)
-                                object.valueType = "doubleValue";
-                        }
-                        if (message.keyValue != null && message.hasOwnProperty("keyValue")) {
-                            object.keyValue = $root.google.datastore.v1.Key.toObject(message.keyValue, options);
-                            if (options.oneofs)
-                                object.valueType = "keyValue";
-                        }
-                        if (message.entityValue != null && message.hasOwnProperty("entityValue")) {
-                            object.entityValue = $root.google.datastore.v1.Entity.toObject(message.entityValue, options);
-                            if (options.oneofs)
-                                object.valueType = "entityValue";
-                        }
-                        if (message.geoPointValue != null && message.hasOwnProperty("geoPointValue")) {
-                            object.geoPointValue = $root.google.type.LatLng.toObject(message.geoPointValue, options);
-                            if (options.oneofs)
-                                object.valueType = "geoPointValue";
-                        }
-                        if (message.arrayValue != null && message.hasOwnProperty("arrayValue")) {
-                            object.arrayValue = $root.google.datastore.v1.ArrayValue.toObject(message.arrayValue, options);
-                            if (options.oneofs)
-                                object.valueType = "arrayValue";
-                        }
-                        if (message.timestampValue != null && message.hasOwnProperty("timestampValue")) {
-                            object.timestampValue = $root.google.protobuf.Timestamp.toObject(message.timestampValue, options);
-                            if (options.oneofs)
-                                object.valueType = "timestampValue";
-                        }
-                        if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
-                            object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
-                            if (options.oneofs)
-                                object.valueType = "nullValue";
-                        }
-                        if (message.meaning != null && message.hasOwnProperty("meaning"))
-                            object.meaning = message.meaning;
-                        if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
-                            object.stringValue = message.stringValue;
-                            if (options.oneofs)
-                                object.valueType = "stringValue";
-                        }
-                        if (message.blobValue != null && message.hasOwnProperty("blobValue")) {
-                            object.blobValue = options.bytes === String ? $util.base64.encode(message.blobValue, 0, message.blobValue.length) : options.bytes === Array ? Array.prototype.slice.call(message.blobValue) : message.blobValue;
-                            if (options.oneofs)
-                                object.valueType = "blobValue";
-                        }
-                        if (message.excludeFromIndexes != null && message.hasOwnProperty("excludeFromIndexes"))
-                            object.excludeFromIndexes = message.excludeFromIndexes;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Value to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.Value
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Value.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for Value
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.Value
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.Value";
-                    };
-    
-                    return Value;
-                })();
-    
-                v1.Entity = (function() {
-    
-                    /**
-                     * Properties of an Entity.
-                     * @memberof google.datastore.v1
-                     * @interface IEntity
-                     * @property {google.datastore.v1.IKey|null} [key] Entity key
-                     * @property {Object.<string,google.datastore.v1.IValue>|null} [properties] Entity properties
-                     */
-    
-                    /**
-                     * Constructs a new Entity.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents an Entity.
-                     * @implements IEntity
-                     * @constructor
-                     * @param {google.datastore.v1.IEntity=} [properties] Properties to set
-                     */
-                    function Entity(properties) {
-                        this.properties = {};
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Entity key.
-                     * @member {google.datastore.v1.IKey|null|undefined} key
-                     * @memberof google.datastore.v1.Entity
-                     * @instance
-                     */
-                    Entity.prototype.key = null;
-    
-                    /**
-                     * Entity properties.
-                     * @member {Object.<string,google.datastore.v1.IValue>} properties
-                     * @memberof google.datastore.v1.Entity
-                     * @instance
-                     */
-                    Entity.prototype.properties = $util.emptyObject;
-    
-                    /**
-                     * Creates a new Entity instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.Entity
-                     * @static
-                     * @param {google.datastore.v1.IEntity=} [properties] Properties to set
-                     * @returns {google.datastore.v1.Entity} Entity instance
-                     */
-                    Entity.create = function create(properties) {
-                        return new Entity(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Entity message. Does not implicitly {@link google.datastore.v1.Entity.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.Entity
-                     * @static
-                     * @param {google.datastore.v1.IEntity} message Entity message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Entity.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.key != null && Object.hasOwnProperty.call(message, "key"))
-                            $root.google.datastore.v1.Key.encode(message.key, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.properties != null && Object.hasOwnProperty.call(message, "properties"))
-                            for (var keys = Object.keys(message.properties), i = 0; i < keys.length; ++i) {
-                                writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                                $root.google.datastore.v1.Value.encode(message.properties[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
-                            }
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Entity message, length delimited. Does not implicitly {@link google.datastore.v1.Entity.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.Entity
-                     * @static
-                     * @param {google.datastore.v1.IEntity} message Entity message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Entity.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an Entity message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.Entity
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.Entity} Entity
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Entity.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Entity(), key, value;
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.key = $root.google.datastore.v1.Key.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 3: {
-                                    if (message.properties === $util.emptyObject)
-                                        message.properties = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = null;
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = $root.google.datastore.v1.Value.decode(reader, reader.uint32());
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
-                                    }
-                                    message.properties[key] = value;
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an Entity message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.Entity
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.Entity} Entity
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Entity.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an Entity message.
-                     * @function verify
-                     * @memberof google.datastore.v1.Entity
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Entity.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.key != null && message.hasOwnProperty("key")) {
-                            var error = $root.google.datastore.v1.Key.verify(message.key);
-                            if (error)
-                                return "key." + error;
-                        }
-                        if (message.properties != null && message.hasOwnProperty("properties")) {
-                            if (!$util.isObject(message.properties))
-                                return "properties: object expected";
-                            var key = Object.keys(message.properties);
-                            for (var i = 0; i < key.length; ++i) {
-                                var error = $root.google.datastore.v1.Value.verify(message.properties[key[i]]);
-                                if (error)
-                                    return "properties." + error;
-                            }
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an Entity message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.Entity
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.Entity} Entity
-                     */
-                    Entity.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.Entity)
-                            return object;
-                        var message = new $root.google.datastore.v1.Entity();
-                        if (object.key != null) {
-                            if (typeof object.key !== "object")
-                                throw TypeError(".google.datastore.v1.Entity.key: object expected");
-                            message.key = $root.google.datastore.v1.Key.fromObject(object.key);
-                        }
-                        if (object.properties) {
-                            if (typeof object.properties !== "object")
-                                throw TypeError(".google.datastore.v1.Entity.properties: object expected");
-                            message.properties = {};
-                            for (var keys = Object.keys(object.properties), i = 0; i < keys.length; ++i) {
-                                if (typeof object.properties[keys[i]] !== "object")
-                                    throw TypeError(".google.datastore.v1.Entity.properties: object expected");
-                                message.properties[keys[i]] = $root.google.datastore.v1.Value.fromObject(object.properties[keys[i]]);
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an Entity message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.Entity
-                     * @static
-                     * @param {google.datastore.v1.Entity} message Entity
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Entity.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.objects || options.defaults)
-                            object.properties = {};
-                        if (options.defaults)
-                            object.key = null;
-                        if (message.key != null && message.hasOwnProperty("key"))
-                            object.key = $root.google.datastore.v1.Key.toObject(message.key, options);
-                        var keys2;
-                        if (message.properties && (keys2 = Object.keys(message.properties)).length) {
-                            object.properties = {};
-                            for (var j = 0; j < keys2.length; ++j)
-                                object.properties[keys2[j]] = $root.google.datastore.v1.Value.toObject(message.properties[keys2[j]], options);
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Entity to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.Entity
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Entity.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for Entity
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.Entity
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    Entity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.Entity";
-                    };
-    
-                    return Entity;
-                })();
-    
-                v1.EntityResult = (function() {
-    
-                    /**
-                     * Properties of an EntityResult.
-                     * @memberof google.datastore.v1
-                     * @interface IEntityResult
-                     * @property {google.datastore.v1.IEntity|null} [entity] EntityResult entity
-                     * @property {number|Long|null} [version] EntityResult version
-                     * @property {google.protobuf.ITimestamp|null} [updateTime] EntityResult updateTime
-                     * @property {Uint8Array|null} [cursor] EntityResult cursor
-                     */
-    
-                    /**
-                     * Constructs a new EntityResult.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents an EntityResult.
-                     * @implements IEntityResult
-                     * @constructor
-                     * @param {google.datastore.v1.IEntityResult=} [properties] Properties to set
-                     */
-                    function EntityResult(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * EntityResult entity.
-                     * @member {google.datastore.v1.IEntity|null|undefined} entity
-                     * @memberof google.datastore.v1.EntityResult
-                     * @instance
-                     */
-                    EntityResult.prototype.entity = null;
-    
-                    /**
-                     * EntityResult version.
-                     * @member {number|Long} version
-                     * @memberof google.datastore.v1.EntityResult
-                     * @instance
-                     */
-                    EntityResult.prototype.version = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                    /**
-                     * EntityResult updateTime.
-                     * @member {google.protobuf.ITimestamp|null|undefined} updateTime
-                     * @memberof google.datastore.v1.EntityResult
-                     * @instance
-                     */
-                    EntityResult.prototype.updateTime = null;
-    
-                    /**
-                     * EntityResult cursor.
-                     * @member {Uint8Array} cursor
-                     * @memberof google.datastore.v1.EntityResult
-                     * @instance
-                     */
-                    EntityResult.prototype.cursor = $util.newBuffer([]);
-    
-                    /**
-                     * Creates a new EntityResult instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.EntityResult
-                     * @static
-                     * @param {google.datastore.v1.IEntityResult=} [properties] Properties to set
-                     * @returns {google.datastore.v1.EntityResult} EntityResult instance
-                     */
-                    EntityResult.create = function create(properties) {
-                        return new EntityResult(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified EntityResult message. Does not implicitly {@link google.datastore.v1.EntityResult.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.EntityResult
-                     * @static
-                     * @param {google.datastore.v1.IEntityResult} message EntityResult message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    EntityResult.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.entity != null && Object.hasOwnProperty.call(message, "entity"))
-                            $root.google.datastore.v1.Entity.encode(message.entity, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.cursor != null && Object.hasOwnProperty.call(message, "cursor"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.cursor);
-                        if (message.version != null && Object.hasOwnProperty.call(message, "version"))
-                            writer.uint32(/* id 4, wireType 0 =*/32).int64(message.version);
-                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
-                            $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified EntityResult message, length delimited. Does not implicitly {@link google.datastore.v1.EntityResult.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.EntityResult
-                     * @static
-                     * @param {google.datastore.v1.IEntityResult} message EntityResult message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    EntityResult.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an EntityResult message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.EntityResult
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.EntityResult} EntityResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    EntityResult.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.EntityResult();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.entity = $root.google.datastore.v1.Entity.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 4: {
-                                    message.version = reader.int64();
-                                    break;
-                                }
-                            case 5: {
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 3: {
-                                    message.cursor = reader.bytes();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an EntityResult message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.EntityResult
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.EntityResult} EntityResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    EntityResult.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an EntityResult message.
-                     * @function verify
-                     * @memberof google.datastore.v1.EntityResult
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    EntityResult.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.entity != null && message.hasOwnProperty("entity")) {
-                            var error = $root.google.datastore.v1.Entity.verify(message.entity);
-                            if (error)
-                                return "entity." + error;
-                        }
-                        if (message.version != null && message.hasOwnProperty("version"))
-                            if (!$util.isInteger(message.version) && !(message.version && $util.isInteger(message.version.low) && $util.isInteger(message.version.high)))
-                                return "version: integer|Long expected";
-                        if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
-                            if (error)
-                                return "updateTime." + error;
-                        }
-                        if (message.cursor != null && message.hasOwnProperty("cursor"))
-                            if (!(message.cursor && typeof message.cursor.length === "number" || $util.isString(message.cursor)))
-                                return "cursor: buffer expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an EntityResult message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.EntityResult
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.EntityResult} EntityResult
-                     */
-                    EntityResult.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.EntityResult)
-                            return object;
-                        var message = new $root.google.datastore.v1.EntityResult();
-                        if (object.entity != null) {
-                            if (typeof object.entity !== "object")
-                                throw TypeError(".google.datastore.v1.EntityResult.entity: object expected");
-                            message.entity = $root.google.datastore.v1.Entity.fromObject(object.entity);
-                        }
-                        if (object.version != null)
-                            if ($util.Long)
-                                (message.version = $util.Long.fromValue(object.version)).unsigned = false;
-                            else if (typeof object.version === "string")
-                                message.version = parseInt(object.version, 10);
-                            else if (typeof object.version === "number")
-                                message.version = object.version;
-                            else if (typeof object.version === "object")
-                                message.version = new $util.LongBits(object.version.low >>> 0, object.version.high >>> 0).toNumber();
-                        if (object.updateTime != null) {
-                            if (typeof object.updateTime !== "object")
-                                throw TypeError(".google.datastore.v1.EntityResult.updateTime: object expected");
-                            message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
-                        }
-                        if (object.cursor != null)
-                            if (typeof object.cursor === "string")
-                                $util.base64.decode(object.cursor, message.cursor = $util.newBuffer($util.base64.length(object.cursor)), 0);
-                            else if (object.cursor.length >= 0)
-                                message.cursor = object.cursor;
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an EntityResult message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.EntityResult
-                     * @static
-                     * @param {google.datastore.v1.EntityResult} message EntityResult
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    EntityResult.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.entity = null;
-                            if (options.bytes === String)
-                                object.cursor = "";
-                            else {
-                                object.cursor = [];
-                                if (options.bytes !== Array)
-                                    object.cursor = $util.newBuffer(object.cursor);
-                            }
-                            if ($util.Long) {
-                                var long = new $util.Long(0, 0, false);
-                                object.version = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                            } else
-                                object.version = options.longs === String ? "0" : 0;
-                            object.updateTime = null;
-                        }
-                        if (message.entity != null && message.hasOwnProperty("entity"))
-                            object.entity = $root.google.datastore.v1.Entity.toObject(message.entity, options);
-                        if (message.cursor != null && message.hasOwnProperty("cursor"))
-                            object.cursor = options.bytes === String ? $util.base64.encode(message.cursor, 0, message.cursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.cursor) : message.cursor;
-                        if (message.version != null && message.hasOwnProperty("version"))
-                            if (typeof message.version === "number")
-                                object.version = options.longs === String ? String(message.version) : message.version;
-                            else
-                                object.version = options.longs === String ? $util.Long.prototype.toString.call(message.version) : options.longs === Number ? new $util.LongBits(message.version.low >>> 0, message.version.high >>> 0).toNumber() : message.version;
-                        if (message.updateTime != null && message.hasOwnProperty("updateTime"))
-                            object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this EntityResult to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.EntityResult
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    EntityResult.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for EntityResult
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.EntityResult
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    EntityResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.EntityResult";
-                    };
-    
-                    /**
-                     * ResultType enum.
-                     * @name google.datastore.v1.EntityResult.ResultType
-                     * @enum {number}
-                     * @property {number} RESULT_TYPE_UNSPECIFIED=0 RESULT_TYPE_UNSPECIFIED value
-                     * @property {number} FULL=1 FULL value
-                     * @property {number} PROJECTION=2 PROJECTION value
-                     * @property {number} KEY_ONLY=3 KEY_ONLY value
-                     */
-                    EntityResult.ResultType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "RESULT_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "FULL"] = 1;
-                        values[valuesById[2] = "PROJECTION"] = 2;
-                        values[valuesById[3] = "KEY_ONLY"] = 3;
-                        return values;
-                    })();
-    
-                    return EntityResult;
-                })();
-    
-                v1.Query = (function() {
-    
-                    /**
-                     * Properties of a Query.
-                     * @memberof google.datastore.v1
-                     * @interface IQuery
-                     * @property {Array.<google.datastore.v1.IProjection>|null} [projection] Query projection
-                     * @property {Array.<google.datastore.v1.IKindExpression>|null} [kind] Query kind
-                     * @property {google.datastore.v1.IFilter|null} [filter] Query filter
-                     * @property {Array.<google.datastore.v1.IPropertyOrder>|null} [order] Query order
-                     * @property {Array.<google.datastore.v1.IPropertyReference>|null} [distinctOn] Query distinctOn
-                     * @property {Uint8Array|null} [startCursor] Query startCursor
-                     * @property {Uint8Array|null} [endCursor] Query endCursor
-                     * @property {number|null} [offset] Query offset
-                     * @property {google.protobuf.IInt32Value|null} [limit] Query limit
-                     */
-    
-                    /**
-                     * Constructs a new Query.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a Query.
-                     * @implements IQuery
-                     * @constructor
-                     * @param {google.datastore.v1.IQuery=} [properties] Properties to set
-                     */
-                    function Query(properties) {
-                        this.projection = [];
-                        this.kind = [];
-                        this.order = [];
-                        this.distinctOn = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Query projection.
-                     * @member {Array.<google.datastore.v1.IProjection>} projection
-                     * @memberof google.datastore.v1.Query
-                     * @instance
-                     */
-                    Query.prototype.projection = $util.emptyArray;
-    
-                    /**
-                     * Query kind.
-                     * @member {Array.<google.datastore.v1.IKindExpression>} kind
-                     * @memberof google.datastore.v1.Query
-                     * @instance
-                     */
-                    Query.prototype.kind = $util.emptyArray;
-    
-                    /**
-                     * Query filter.
-                     * @member {google.datastore.v1.IFilter|null|undefined} filter
-                     * @memberof google.datastore.v1.Query
-                     * @instance
-                     */
-                    Query.prototype.filter = null;
-    
-                    /**
-                     * Query order.
-                     * @member {Array.<google.datastore.v1.IPropertyOrder>} order
-                     * @memberof google.datastore.v1.Query
-                     * @instance
-                     */
-                    Query.prototype.order = $util.emptyArray;
-    
-                    /**
-                     * Query distinctOn.
-                     * @member {Array.<google.datastore.v1.IPropertyReference>} distinctOn
-                     * @memberof google.datastore.v1.Query
-                     * @instance
-                     */
-                    Query.prototype.distinctOn = $util.emptyArray;
-    
-                    /**
-                     * Query startCursor.
-                     * @member {Uint8Array} startCursor
-                     * @memberof google.datastore.v1.Query
-                     * @instance
-                     */
-                    Query.prototype.startCursor = $util.newBuffer([]);
-    
-                    /**
-                     * Query endCursor.
-                     * @member {Uint8Array} endCursor
-                     * @memberof google.datastore.v1.Query
-                     * @instance
-                     */
-                    Query.prototype.endCursor = $util.newBuffer([]);
-    
-                    /**
-                     * Query offset.
-                     * @member {number} offset
-                     * @memberof google.datastore.v1.Query
-                     * @instance
-                     */
-                    Query.prototype.offset = 0;
-    
-                    /**
-                     * Query limit.
-                     * @member {google.protobuf.IInt32Value|null|undefined} limit
-                     * @memberof google.datastore.v1.Query
-                     * @instance
-                     */
-                    Query.prototype.limit = null;
-    
-                    /**
-                     * Creates a new Query instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.Query
-                     * @static
-                     * @param {google.datastore.v1.IQuery=} [properties] Properties to set
-                     * @returns {google.datastore.v1.Query} Query instance
-                     */
-                    Query.create = function create(properties) {
-                        return new Query(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Query message. Does not implicitly {@link google.datastore.v1.Query.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.Query
-                     * @static
-                     * @param {google.datastore.v1.IQuery} message Query message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Query.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.projection != null && message.projection.length)
-                            for (var i = 0; i < message.projection.length; ++i)
-                                $root.google.datastore.v1.Projection.encode(message.projection[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        if (message.kind != null && message.kind.length)
-                            for (var i = 0; i < message.kind.length; ++i)
-                                $root.google.datastore.v1.KindExpression.encode(message.kind[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
-                            $root.google.datastore.v1.Filter.encode(message.filter, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                        if (message.order != null && message.order.length)
-                            for (var i = 0; i < message.order.length; ++i)
-                                $root.google.datastore.v1.PropertyOrder.encode(message.order[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                        if (message.distinctOn != null && message.distinctOn.length)
-                            for (var i = 0; i < message.distinctOn.length; ++i)
-                                $root.google.datastore.v1.PropertyReference.encode(message.distinctOn[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                        if (message.startCursor != null && Object.hasOwnProperty.call(message, "startCursor"))
-                            writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.startCursor);
-                        if (message.endCursor != null && Object.hasOwnProperty.call(message, "endCursor"))
-                            writer.uint32(/* id 8, wireType 2 =*/66).bytes(message.endCursor);
-                        if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
-                            writer.uint32(/* id 10, wireType 0 =*/80).int32(message.offset);
-                        if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
-                            $root.google.protobuf.Int32Value.encode(message.limit, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Query message, length delimited. Does not implicitly {@link google.datastore.v1.Query.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.Query
-                     * @static
-                     * @param {google.datastore.v1.IQuery} message Query message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Query.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a Query message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.Query
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.Query} Query
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Query.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Query();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 2: {
-                                    if (!(message.projection && message.projection.length))
-                                        message.projection = [];
-                                    message.projection.push($root.google.datastore.v1.Projection.decode(reader, reader.uint32()));
-                                    break;
-                                }
-                            case 3: {
-                                    if (!(message.kind && message.kind.length))
-                                        message.kind = [];
-                                    message.kind.push($root.google.datastore.v1.KindExpression.decode(reader, reader.uint32()));
-                                    break;
-                                }
-                            case 4: {
-                                    message.filter = $root.google.datastore.v1.Filter.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 5: {
-                                    if (!(message.order && message.order.length))
-                                        message.order = [];
-                                    message.order.push($root.google.datastore.v1.PropertyOrder.decode(reader, reader.uint32()));
-                                    break;
-                                }
-                            case 6: {
-                                    if (!(message.distinctOn && message.distinctOn.length))
-                                        message.distinctOn = [];
-                                    message.distinctOn.push($root.google.datastore.v1.PropertyReference.decode(reader, reader.uint32()));
-                                    break;
-                                }
-                            case 7: {
-                                    message.startCursor = reader.bytes();
-                                    break;
-                                }
-                            case 8: {
-                                    message.endCursor = reader.bytes();
-                                    break;
-                                }
-                            case 10: {
-                                    message.offset = reader.int32();
-                                    break;
-                                }
-                            case 12: {
-                                    message.limit = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a Query message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.Query
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.Query} Query
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Query.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a Query message.
-                     * @function verify
-                     * @memberof google.datastore.v1.Query
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Query.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.projection != null && message.hasOwnProperty("projection")) {
-                            if (!Array.isArray(message.projection))
-                                return "projection: array expected";
-                            for (var i = 0; i < message.projection.length; ++i) {
-                                var error = $root.google.datastore.v1.Projection.verify(message.projection[i]);
-                                if (error)
-                                    return "projection." + error;
-                            }
-                        }
-                        if (message.kind != null && message.hasOwnProperty("kind")) {
-                            if (!Array.isArray(message.kind))
-                                return "kind: array expected";
-                            for (var i = 0; i < message.kind.length; ++i) {
-                                var error = $root.google.datastore.v1.KindExpression.verify(message.kind[i]);
-                                if (error)
-                                    return "kind." + error;
-                            }
-                        }
-                        if (message.filter != null && message.hasOwnProperty("filter")) {
-                            var error = $root.google.datastore.v1.Filter.verify(message.filter);
-                            if (error)
-                                return "filter." + error;
-                        }
-                        if (message.order != null && message.hasOwnProperty("order")) {
-                            if (!Array.isArray(message.order))
-                                return "order: array expected";
-                            for (var i = 0; i < message.order.length; ++i) {
-                                var error = $root.google.datastore.v1.PropertyOrder.verify(message.order[i]);
-                                if (error)
-                                    return "order." + error;
-                            }
-                        }
-                        if (message.distinctOn != null && message.hasOwnProperty("distinctOn")) {
-                            if (!Array.isArray(message.distinctOn))
-                                return "distinctOn: array expected";
-                            for (var i = 0; i < message.distinctOn.length; ++i) {
-                                var error = $root.google.datastore.v1.PropertyReference.verify(message.distinctOn[i]);
-                                if (error)
-                                    return "distinctOn." + error;
-                            }
-                        }
-                        if (message.startCursor != null && message.hasOwnProperty("startCursor"))
-                            if (!(message.startCursor && typeof message.startCursor.length === "number" || $util.isString(message.startCursor)))
-                                return "startCursor: buffer expected";
-                        if (message.endCursor != null && message.hasOwnProperty("endCursor"))
-                            if (!(message.endCursor && typeof message.endCursor.length === "number" || $util.isString(message.endCursor)))
-                                return "endCursor: buffer expected";
-                        if (message.offset != null && message.hasOwnProperty("offset"))
-                            if (!$util.isInteger(message.offset))
-                                return "offset: integer expected";
-                        if (message.limit != null && message.hasOwnProperty("limit")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.limit);
-                            if (error)
-                                return "limit." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a Query message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.Query
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.Query} Query
-                     */
-                    Query.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.Query)
-                            return object;
-                        var message = new $root.google.datastore.v1.Query();
-                        if (object.projection) {
-                            if (!Array.isArray(object.projection))
-                                throw TypeError(".google.datastore.v1.Query.projection: array expected");
-                            message.projection = [];
-                            for (var i = 0; i < object.projection.length; ++i) {
-                                if (typeof object.projection[i] !== "object")
-                                    throw TypeError(".google.datastore.v1.Query.projection: object expected");
-                                message.projection[i] = $root.google.datastore.v1.Projection.fromObject(object.projection[i]);
-                            }
-                        }
-                        if (object.kind) {
-                            if (!Array.isArray(object.kind))
-                                throw TypeError(".google.datastore.v1.Query.kind: array expected");
-                            message.kind = [];
-                            for (var i = 0; i < object.kind.length; ++i) {
-                                if (typeof object.kind[i] !== "object")
-                                    throw TypeError(".google.datastore.v1.Query.kind: object expected");
-                                message.kind[i] = $root.google.datastore.v1.KindExpression.fromObject(object.kind[i]);
-                            }
-                        }
-                        if (object.filter != null) {
-                            if (typeof object.filter !== "object")
-                                throw TypeError(".google.datastore.v1.Query.filter: object expected");
-                            message.filter = $root.google.datastore.v1.Filter.fromObject(object.filter);
-                        }
-                        if (object.order) {
-                            if (!Array.isArray(object.order))
-                                throw TypeError(".google.datastore.v1.Query.order: array expected");
-                            message.order = [];
-                            for (var i = 0; i < object.order.length; ++i) {
-                                if (typeof object.order[i] !== "object")
-                                    throw TypeError(".google.datastore.v1.Query.order: object expected");
-                                message.order[i] = $root.google.datastore.v1.PropertyOrder.fromObject(object.order[i]);
-                            }
-                        }
-                        if (object.distinctOn) {
-                            if (!Array.isArray(object.distinctOn))
-                                throw TypeError(".google.datastore.v1.Query.distinctOn: array expected");
-                            message.distinctOn = [];
-                            for (var i = 0; i < object.distinctOn.length; ++i) {
-                                if (typeof object.distinctOn[i] !== "object")
-                                    throw TypeError(".google.datastore.v1.Query.distinctOn: object expected");
-                                message.distinctOn[i] = $root.google.datastore.v1.PropertyReference.fromObject(object.distinctOn[i]);
-                            }
-                        }
-                        if (object.startCursor != null)
-                            if (typeof object.startCursor === "string")
-                                $util.base64.decode(object.startCursor, message.startCursor = $util.newBuffer($util.base64.length(object.startCursor)), 0);
-                            else if (object.startCursor.length >= 0)
-                                message.startCursor = object.startCursor;
-                        if (object.endCursor != null)
-                            if (typeof object.endCursor === "string")
-                                $util.base64.decode(object.endCursor, message.endCursor = $util.newBuffer($util.base64.length(object.endCursor)), 0);
-                            else if (object.endCursor.length >= 0)
-                                message.endCursor = object.endCursor;
-                        if (object.offset != null)
-                            message.offset = object.offset | 0;
-                        if (object.limit != null) {
-                            if (typeof object.limit !== "object")
-                                throw TypeError(".google.datastore.v1.Query.limit: object expected");
-                            message.limit = $root.google.protobuf.Int32Value.fromObject(object.limit);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a Query message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.Query
-                     * @static
-                     * @param {google.datastore.v1.Query} message Query
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Query.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults) {
-                            object.projection = [];
-                            object.kind = [];
-                            object.order = [];
-                            object.distinctOn = [];
-                        }
-                        if (options.defaults) {
-                            object.filter = null;
-                            if (options.bytes === String)
-                                object.startCursor = "";
-                            else {
-                                object.startCursor = [];
-                                if (options.bytes !== Array)
-                                    object.startCursor = $util.newBuffer(object.startCursor);
-                            }
-                            if (options.bytes === String)
-                                object.endCursor = "";
-                            else {
-                                object.endCursor = [];
-                                if (options.bytes !== Array)
-                                    object.endCursor = $util.newBuffer(object.endCursor);
-                            }
-                            object.offset = 0;
-                            object.limit = null;
-                        }
-                        if (message.projection && message.projection.length) {
-                            object.projection = [];
-                            for (var j = 0; j < message.projection.length; ++j)
-                                object.projection[j] = $root.google.datastore.v1.Projection.toObject(message.projection[j], options);
-                        }
-                        if (message.kind && message.kind.length) {
-                            object.kind = [];
-                            for (var j = 0; j < message.kind.length; ++j)
-                                object.kind[j] = $root.google.datastore.v1.KindExpression.toObject(message.kind[j], options);
-                        }
-                        if (message.filter != null && message.hasOwnProperty("filter"))
-                            object.filter = $root.google.datastore.v1.Filter.toObject(message.filter, options);
-                        if (message.order && message.order.length) {
-                            object.order = [];
-                            for (var j = 0; j < message.order.length; ++j)
-                                object.order[j] = $root.google.datastore.v1.PropertyOrder.toObject(message.order[j], options);
-                        }
-                        if (message.distinctOn && message.distinctOn.length) {
-                            object.distinctOn = [];
-                            for (var j = 0; j < message.distinctOn.length; ++j)
-                                object.distinctOn[j] = $root.google.datastore.v1.PropertyReference.toObject(message.distinctOn[j], options);
-                        }
-                        if (message.startCursor != null && message.hasOwnProperty("startCursor"))
-                            object.startCursor = options.bytes === String ? $util.base64.encode(message.startCursor, 0, message.startCursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.startCursor) : message.startCursor;
-                        if (message.endCursor != null && message.hasOwnProperty("endCursor"))
-                            object.endCursor = options.bytes === String ? $util.base64.encode(message.endCursor, 0, message.endCursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.endCursor) : message.endCursor;
-                        if (message.offset != null && message.hasOwnProperty("offset"))
-                            object.offset = message.offset;
-                        if (message.limit != null && message.hasOwnProperty("limit"))
-                            object.limit = $root.google.protobuf.Int32Value.toObject(message.limit, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Query to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.Query
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Query.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for Query
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.Query
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    Query.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.Query";
-                    };
-    
-                    return Query;
-                })();
-    
-                v1.KindExpression = (function() {
-    
-                    /**
-                     * Properties of a KindExpression.
-                     * @memberof google.datastore.v1
-                     * @interface IKindExpression
-                     * @property {string|null} [name] KindExpression name
-                     */
-    
-                    /**
-                     * Constructs a new KindExpression.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a KindExpression.
-                     * @implements IKindExpression
-                     * @constructor
-                     * @param {google.datastore.v1.IKindExpression=} [properties] Properties to set
-                     */
-                    function KindExpression(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * KindExpression name.
-                     * @member {string} name
-                     * @memberof google.datastore.v1.KindExpression
-                     * @instance
-                     */
-                    KindExpression.prototype.name = "";
-    
-                    /**
-                     * Creates a new KindExpression instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.KindExpression
-                     * @static
-                     * @param {google.datastore.v1.IKindExpression=} [properties] Properties to set
-                     * @returns {google.datastore.v1.KindExpression} KindExpression instance
-                     */
-                    KindExpression.create = function create(properties) {
-                        return new KindExpression(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified KindExpression message. Does not implicitly {@link google.datastore.v1.KindExpression.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.KindExpression
-                     * @static
-                     * @param {google.datastore.v1.IKindExpression} message KindExpression message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    KindExpression.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified KindExpression message, length delimited. Does not implicitly {@link google.datastore.v1.KindExpression.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.KindExpression
-                     * @static
-                     * @param {google.datastore.v1.IKindExpression} message KindExpression message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    KindExpression.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a KindExpression message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.KindExpression
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.KindExpression} KindExpression
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    KindExpression.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.KindExpression();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.name = reader.string();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a KindExpression message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.KindExpression
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.KindExpression} KindExpression
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    KindExpression.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a KindExpression message.
-                     * @function verify
-                     * @memberof google.datastore.v1.KindExpression
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    KindExpression.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            if (!$util.isString(message.name))
-                                return "name: string expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a KindExpression message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.KindExpression
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.KindExpression} KindExpression
-                     */
-                    KindExpression.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.KindExpression)
-                            return object;
-                        var message = new $root.google.datastore.v1.KindExpression();
-                        if (object.name != null)
-                            message.name = String(object.name);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a KindExpression message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.KindExpression
-                     * @static
-                     * @param {google.datastore.v1.KindExpression} message KindExpression
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    KindExpression.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults)
-                            object.name = "";
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            object.name = message.name;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this KindExpression to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.KindExpression
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    KindExpression.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for KindExpression
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.KindExpression
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    KindExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.KindExpression";
-                    };
-    
-                    return KindExpression;
-                })();
-    
-                v1.PropertyReference = (function() {
-    
-                    /**
-                     * Properties of a PropertyReference.
-                     * @memberof google.datastore.v1
-                     * @interface IPropertyReference
-                     * @property {string|null} [name] PropertyReference name
-                     */
-    
-                    /**
-                     * Constructs a new PropertyReference.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a PropertyReference.
-                     * @implements IPropertyReference
-                     * @constructor
-                     * @param {google.datastore.v1.IPropertyReference=} [properties] Properties to set
-                     */
-                    function PropertyReference(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * PropertyReference name.
-                     * @member {string} name
-                     * @memberof google.datastore.v1.PropertyReference
-                     * @instance
-                     */
-                    PropertyReference.prototype.name = "";
-    
-                    /**
-                     * Creates a new PropertyReference instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.PropertyReference
-                     * @static
-                     * @param {google.datastore.v1.IPropertyReference=} [properties] Properties to set
-                     * @returns {google.datastore.v1.PropertyReference} PropertyReference instance
-                     */
-                    PropertyReference.create = function create(properties) {
-                        return new PropertyReference(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified PropertyReference message. Does not implicitly {@link google.datastore.v1.PropertyReference.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.PropertyReference
-                     * @static
-                     * @param {google.datastore.v1.IPropertyReference} message PropertyReference message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    PropertyReference.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified PropertyReference message, length delimited. Does not implicitly {@link google.datastore.v1.PropertyReference.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.PropertyReference
-                     * @static
-                     * @param {google.datastore.v1.IPropertyReference} message PropertyReference message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    PropertyReference.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a PropertyReference message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.PropertyReference
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.PropertyReference} PropertyReference
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    PropertyReference.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.PropertyReference();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 2: {
-                                    message.name = reader.string();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a PropertyReference message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.PropertyReference
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.PropertyReference} PropertyReference
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    PropertyReference.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a PropertyReference message.
-                     * @function verify
-                     * @memberof google.datastore.v1.PropertyReference
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    PropertyReference.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            if (!$util.isString(message.name))
-                                return "name: string expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a PropertyReference message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.PropertyReference
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.PropertyReference} PropertyReference
-                     */
-                    PropertyReference.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.PropertyReference)
-                            return object;
-                        var message = new $root.google.datastore.v1.PropertyReference();
-                        if (object.name != null)
-                            message.name = String(object.name);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a PropertyReference message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.PropertyReference
-                     * @static
-                     * @param {google.datastore.v1.PropertyReference} message PropertyReference
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    PropertyReference.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults)
-                            object.name = "";
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            object.name = message.name;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this PropertyReference to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.PropertyReference
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    PropertyReference.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for PropertyReference
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.PropertyReference
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    PropertyReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.PropertyReference";
-                    };
-    
-                    return PropertyReference;
-                })();
-    
-                v1.Projection = (function() {
-    
-                    /**
-                     * Properties of a Projection.
-                     * @memberof google.datastore.v1
-                     * @interface IProjection
-                     * @property {google.datastore.v1.IPropertyReference|null} [property] Projection property
-                     */
-    
-                    /**
-                     * Constructs a new Projection.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a Projection.
-                     * @implements IProjection
-                     * @constructor
-                     * @param {google.datastore.v1.IProjection=} [properties] Properties to set
-                     */
-                    function Projection(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Projection property.
-                     * @member {google.datastore.v1.IPropertyReference|null|undefined} property
-                     * @memberof google.datastore.v1.Projection
-                     * @instance
-                     */
-                    Projection.prototype.property = null;
-    
-                    /**
-                     * Creates a new Projection instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.Projection
-                     * @static
-                     * @param {google.datastore.v1.IProjection=} [properties] Properties to set
-                     * @returns {google.datastore.v1.Projection} Projection instance
-                     */
-                    Projection.create = function create(properties) {
-                        return new Projection(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Projection message. Does not implicitly {@link google.datastore.v1.Projection.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.Projection
-                     * @static
-                     * @param {google.datastore.v1.IProjection} message Projection message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Projection.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.property != null && Object.hasOwnProperty.call(message, "property"))
-                            $root.google.datastore.v1.PropertyReference.encode(message.property, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Projection message, length delimited. Does not implicitly {@link google.datastore.v1.Projection.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.Projection
-                     * @static
-                     * @param {google.datastore.v1.IProjection} message Projection message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Projection.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a Projection message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.Projection
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.Projection} Projection
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Projection.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Projection();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.property = $root.google.datastore.v1.PropertyReference.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a Projection message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.Projection
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.Projection} Projection
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Projection.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a Projection message.
-                     * @function verify
-                     * @memberof google.datastore.v1.Projection
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Projection.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.property != null && message.hasOwnProperty("property")) {
-                            var error = $root.google.datastore.v1.PropertyReference.verify(message.property);
-                            if (error)
-                                return "property." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a Projection message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.Projection
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.Projection} Projection
-                     */
-                    Projection.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.Projection)
-                            return object;
-                        var message = new $root.google.datastore.v1.Projection();
-                        if (object.property != null) {
-                            if (typeof object.property !== "object")
-                                throw TypeError(".google.datastore.v1.Projection.property: object expected");
-                            message.property = $root.google.datastore.v1.PropertyReference.fromObject(object.property);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a Projection message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.Projection
-                     * @static
-                     * @param {google.datastore.v1.Projection} message Projection
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Projection.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults)
-                            object.property = null;
-                        if (message.property != null && message.hasOwnProperty("property"))
-                            object.property = $root.google.datastore.v1.PropertyReference.toObject(message.property, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Projection to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.Projection
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Projection.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for Projection
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.Projection
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    Projection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.Projection";
-                    };
-    
-                    return Projection;
-                })();
-    
-                v1.PropertyOrder = (function() {
-    
-                    /**
-                     * Properties of a PropertyOrder.
-                     * @memberof google.datastore.v1
-                     * @interface IPropertyOrder
-                     * @property {google.datastore.v1.IPropertyReference|null} [property] PropertyOrder property
-                     * @property {google.datastore.v1.PropertyOrder.Direction|null} [direction] PropertyOrder direction
-                     */
-    
-                    /**
-                     * Constructs a new PropertyOrder.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a PropertyOrder.
-                     * @implements IPropertyOrder
-                     * @constructor
-                     * @param {google.datastore.v1.IPropertyOrder=} [properties] Properties to set
-                     */
-                    function PropertyOrder(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * PropertyOrder property.
-                     * @member {google.datastore.v1.IPropertyReference|null|undefined} property
-                     * @memberof google.datastore.v1.PropertyOrder
-                     * @instance
-                     */
-                    PropertyOrder.prototype.property = null;
-    
-                    /**
-                     * PropertyOrder direction.
-                     * @member {google.datastore.v1.PropertyOrder.Direction} direction
-                     * @memberof google.datastore.v1.PropertyOrder
-                     * @instance
-                     */
-                    PropertyOrder.prototype.direction = 0;
-    
-                    /**
-                     * Creates a new PropertyOrder instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.PropertyOrder
-                     * @static
-                     * @param {google.datastore.v1.IPropertyOrder=} [properties] Properties to set
-                     * @returns {google.datastore.v1.PropertyOrder} PropertyOrder instance
-                     */
-                    PropertyOrder.create = function create(properties) {
-                        return new PropertyOrder(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified PropertyOrder message. Does not implicitly {@link google.datastore.v1.PropertyOrder.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.PropertyOrder
-                     * @static
-                     * @param {google.datastore.v1.IPropertyOrder} message PropertyOrder message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    PropertyOrder.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.property != null && Object.hasOwnProperty.call(message, "property"))
-                            $root.google.datastore.v1.PropertyReference.encode(message.property, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.direction != null && Object.hasOwnProperty.call(message, "direction"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.direction);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified PropertyOrder message, length delimited. Does not implicitly {@link google.datastore.v1.PropertyOrder.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.PropertyOrder
-                     * @static
-                     * @param {google.datastore.v1.IPropertyOrder} message PropertyOrder message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    PropertyOrder.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a PropertyOrder message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.PropertyOrder
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.PropertyOrder} PropertyOrder
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    PropertyOrder.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.PropertyOrder();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.property = $root.google.datastore.v1.PropertyReference.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 2: {
-                                    message.direction = reader.int32();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a PropertyOrder message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.PropertyOrder
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.PropertyOrder} PropertyOrder
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    PropertyOrder.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a PropertyOrder message.
-                     * @function verify
-                     * @memberof google.datastore.v1.PropertyOrder
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    PropertyOrder.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.property != null && message.hasOwnProperty("property")) {
-                            var error = $root.google.datastore.v1.PropertyReference.verify(message.property);
-                            if (error)
-                                return "property." + error;
-                        }
-                        if (message.direction != null && message.hasOwnProperty("direction"))
-                            switch (message.direction) {
-                            default:
-                                return "direction: enum value expected";
-                            case 0:
-                            case 1:
-                            case 2:
-                                break;
-                            }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a PropertyOrder message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.PropertyOrder
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.PropertyOrder} PropertyOrder
-                     */
-                    PropertyOrder.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.PropertyOrder)
-                            return object;
-                        var message = new $root.google.datastore.v1.PropertyOrder();
-                        if (object.property != null) {
-                            if (typeof object.property !== "object")
-                                throw TypeError(".google.datastore.v1.PropertyOrder.property: object expected");
-                            message.property = $root.google.datastore.v1.PropertyReference.fromObject(object.property);
-                        }
-                        switch (object.direction) {
-                        case "DIRECTION_UNSPECIFIED":
-                        case 0:
-                            message.direction = 0;
-                            break;
-                        case "ASCENDING":
-                        case 1:
-                            message.direction = 1;
-                            break;
-                        case "DESCENDING":
-                        case 2:
-                            message.direction = 2;
-                            break;
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a PropertyOrder message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.PropertyOrder
-                     * @static
-                     * @param {google.datastore.v1.PropertyOrder} message PropertyOrder
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    PropertyOrder.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.property = null;
-                            object.direction = options.enums === String ? "DIRECTION_UNSPECIFIED" : 0;
-                        }
-                        if (message.property != null && message.hasOwnProperty("property"))
-                            object.property = $root.google.datastore.v1.PropertyReference.toObject(message.property, options);
-                        if (message.direction != null && message.hasOwnProperty("direction"))
-                            object.direction = options.enums === String ? $root.google.datastore.v1.PropertyOrder.Direction[message.direction] : message.direction;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this PropertyOrder to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.PropertyOrder
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    PropertyOrder.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for PropertyOrder
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.PropertyOrder
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    PropertyOrder.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.PropertyOrder";
-                    };
-    
-                    /**
-                     * Direction enum.
-                     * @name google.datastore.v1.PropertyOrder.Direction
-                     * @enum {number}
-                     * @property {number} DIRECTION_UNSPECIFIED=0 DIRECTION_UNSPECIFIED value
-                     * @property {number} ASCENDING=1 ASCENDING value
-                     * @property {number} DESCENDING=2 DESCENDING value
-                     */
-                    PropertyOrder.Direction = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "DIRECTION_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "ASCENDING"] = 1;
-                        values[valuesById[2] = "DESCENDING"] = 2;
-                        return values;
-                    })();
-    
-                    return PropertyOrder;
-                })();
-    
-                v1.Filter = (function() {
-    
-                    /**
-                     * Properties of a Filter.
-                     * @memberof google.datastore.v1
-                     * @interface IFilter
-                     * @property {google.datastore.v1.ICompositeFilter|null} [compositeFilter] Filter compositeFilter
-                     * @property {google.datastore.v1.IPropertyFilter|null} [propertyFilter] Filter propertyFilter
-                     */
-    
-                    /**
-                     * Constructs a new Filter.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a Filter.
-                     * @implements IFilter
-                     * @constructor
-                     * @param {google.datastore.v1.IFilter=} [properties] Properties to set
-                     */
-                    function Filter(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Filter compositeFilter.
-                     * @member {google.datastore.v1.ICompositeFilter|null|undefined} compositeFilter
-                     * @memberof google.datastore.v1.Filter
-                     * @instance
-                     */
-                    Filter.prototype.compositeFilter = null;
-    
-                    /**
-                     * Filter propertyFilter.
-                     * @member {google.datastore.v1.IPropertyFilter|null|undefined} propertyFilter
-                     * @memberof google.datastore.v1.Filter
-                     * @instance
-                     */
-                    Filter.prototype.propertyFilter = null;
-    
-                    // OneOf field names bound to virtual getters and setters
-                    var $oneOfFields;
-    
-                    /**
-                     * Filter filterType.
-                     * @member {"compositeFilter"|"propertyFilter"|undefined} filterType
-                     * @memberof google.datastore.v1.Filter
-                     * @instance
-                     */
-                    Object.defineProperty(Filter.prototype, "filterType", {
-                        get: $util.oneOfGetter($oneOfFields = ["compositeFilter", "propertyFilter"]),
-                        set: $util.oneOfSetter($oneOfFields)
-                    });
-    
-                    /**
-                     * Creates a new Filter instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.Filter
-                     * @static
-                     * @param {google.datastore.v1.IFilter=} [properties] Properties to set
-                     * @returns {google.datastore.v1.Filter} Filter instance
-                     */
-                    Filter.create = function create(properties) {
-                        return new Filter(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Filter message. Does not implicitly {@link google.datastore.v1.Filter.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.Filter
-                     * @static
-                     * @param {google.datastore.v1.IFilter} message Filter message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Filter.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.compositeFilter != null && Object.hasOwnProperty.call(message, "compositeFilter"))
-                            $root.google.datastore.v1.CompositeFilter.encode(message.compositeFilter, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.propertyFilter != null && Object.hasOwnProperty.call(message, "propertyFilter"))
-                            $root.google.datastore.v1.PropertyFilter.encode(message.propertyFilter, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.datastore.v1.Filter.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.Filter
-                     * @static
-                     * @param {google.datastore.v1.IFilter} message Filter message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Filter.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a Filter message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.Filter
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.Filter} Filter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Filter.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.Filter();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.compositeFilter = $root.google.datastore.v1.CompositeFilter.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 2: {
-                                    message.propertyFilter = $root.google.datastore.v1.PropertyFilter.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a Filter message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.Filter
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.Filter} Filter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Filter.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a Filter message.
-                     * @function verify
-                     * @memberof google.datastore.v1.Filter
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Filter.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        var properties = {};
-                        if (message.compositeFilter != null && message.hasOwnProperty("compositeFilter")) {
-                            properties.filterType = 1;
-                            {
-                                var error = $root.google.datastore.v1.CompositeFilter.verify(message.compositeFilter);
-                                if (error)
-                                    return "compositeFilter." + error;
-                            }
-                        }
-                        if (message.propertyFilter != null && message.hasOwnProperty("propertyFilter")) {
-                            if (properties.filterType === 1)
-                                return "filterType: multiple values";
-                            properties.filterType = 1;
-                            {
-                                var error = $root.google.datastore.v1.PropertyFilter.verify(message.propertyFilter);
-                                if (error)
-                                    return "propertyFilter." + error;
-                            }
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a Filter message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.Filter
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.Filter} Filter
-                     */
-                    Filter.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.Filter)
-                            return object;
-                        var message = new $root.google.datastore.v1.Filter();
-                        if (object.compositeFilter != null) {
-                            if (typeof object.compositeFilter !== "object")
-                                throw TypeError(".google.datastore.v1.Filter.compositeFilter: object expected");
-                            message.compositeFilter = $root.google.datastore.v1.CompositeFilter.fromObject(object.compositeFilter);
-                        }
-                        if (object.propertyFilter != null) {
-                            if (typeof object.propertyFilter !== "object")
-                                throw TypeError(".google.datastore.v1.Filter.propertyFilter: object expected");
-                            message.propertyFilter = $root.google.datastore.v1.PropertyFilter.fromObject(object.propertyFilter);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a Filter message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.Filter
-                     * @static
-                     * @param {google.datastore.v1.Filter} message Filter
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Filter.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (message.compositeFilter != null && message.hasOwnProperty("compositeFilter")) {
-                            object.compositeFilter = $root.google.datastore.v1.CompositeFilter.toObject(message.compositeFilter, options);
-                            if (options.oneofs)
-                                object.filterType = "compositeFilter";
-                        }
-                        if (message.propertyFilter != null && message.hasOwnProperty("propertyFilter")) {
-                            object.propertyFilter = $root.google.datastore.v1.PropertyFilter.toObject(message.propertyFilter, options);
-                            if (options.oneofs)
-                                object.filterType = "propertyFilter";
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Filter to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.Filter
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Filter.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for Filter
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.Filter
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    Filter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.Filter";
-                    };
-    
-                    return Filter;
-                })();
-    
-                v1.CompositeFilter = (function() {
-    
-                    /**
-                     * Properties of a CompositeFilter.
-                     * @memberof google.datastore.v1
-                     * @interface ICompositeFilter
-                     * @property {google.datastore.v1.CompositeFilter.Operator|null} [op] CompositeFilter op
-                     * @property {Array.<google.datastore.v1.IFilter>|null} [filters] CompositeFilter filters
-                     */
-    
-                    /**
-                     * Constructs a new CompositeFilter.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a CompositeFilter.
-                     * @implements ICompositeFilter
-                     * @constructor
-                     * @param {google.datastore.v1.ICompositeFilter=} [properties] Properties to set
-                     */
-                    function CompositeFilter(properties) {
-                        this.filters = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * CompositeFilter op.
-                     * @member {google.datastore.v1.CompositeFilter.Operator} op
-                     * @memberof google.datastore.v1.CompositeFilter
-                     * @instance
-                     */
-                    CompositeFilter.prototype.op = 0;
-    
-                    /**
-                     * CompositeFilter filters.
-                     * @member {Array.<google.datastore.v1.IFilter>} filters
-                     * @memberof google.datastore.v1.CompositeFilter
-                     * @instance
-                     */
-                    CompositeFilter.prototype.filters = $util.emptyArray;
-    
-                    /**
-                     * Creates a new CompositeFilter instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.CompositeFilter
-                     * @static
-                     * @param {google.datastore.v1.ICompositeFilter=} [properties] Properties to set
-                     * @returns {google.datastore.v1.CompositeFilter} CompositeFilter instance
-                     */
-                    CompositeFilter.create = function create(properties) {
-                        return new CompositeFilter(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified CompositeFilter message. Does not implicitly {@link google.datastore.v1.CompositeFilter.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.CompositeFilter
-                     * @static
-                     * @param {google.datastore.v1.ICompositeFilter} message CompositeFilter message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    CompositeFilter.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.op != null && Object.hasOwnProperty.call(message, "op"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.op);
-                        if (message.filters != null && message.filters.length)
-                            for (var i = 0; i < message.filters.length; ++i)
-                                $root.google.datastore.v1.Filter.encode(message.filters[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified CompositeFilter message, length delimited. Does not implicitly {@link google.datastore.v1.CompositeFilter.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.CompositeFilter
-                     * @static
-                     * @param {google.datastore.v1.ICompositeFilter} message CompositeFilter message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    CompositeFilter.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a CompositeFilter message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.CompositeFilter
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.CompositeFilter} CompositeFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    CompositeFilter.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.CompositeFilter();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.op = reader.int32();
-                                    break;
-                                }
-                            case 2: {
-                                    if (!(message.filters && message.filters.length))
-                                        message.filters = [];
-                                    message.filters.push($root.google.datastore.v1.Filter.decode(reader, reader.uint32()));
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a CompositeFilter message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.CompositeFilter
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.CompositeFilter} CompositeFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    CompositeFilter.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a CompositeFilter message.
-                     * @function verify
-                     * @memberof google.datastore.v1.CompositeFilter
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    CompositeFilter.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.op != null && message.hasOwnProperty("op"))
-                            switch (message.op) {
-                            default:
-                                return "op: enum value expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                        if (message.filters != null && message.hasOwnProperty("filters")) {
-                            if (!Array.isArray(message.filters))
-                                return "filters: array expected";
-                            for (var i = 0; i < message.filters.length; ++i) {
-                                var error = $root.google.datastore.v1.Filter.verify(message.filters[i]);
-                                if (error)
-                                    return "filters." + error;
-                            }
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a CompositeFilter message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.CompositeFilter
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.CompositeFilter} CompositeFilter
-                     */
-                    CompositeFilter.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.CompositeFilter)
-                            return object;
-                        var message = new $root.google.datastore.v1.CompositeFilter();
-                        switch (object.op) {
-                        case "OPERATOR_UNSPECIFIED":
-                        case 0:
-                            message.op = 0;
-                            break;
-                        case "AND":
-                        case 1:
-                            message.op = 1;
-                            break;
-                        }
-                        if (object.filters) {
-                            if (!Array.isArray(object.filters))
-                                throw TypeError(".google.datastore.v1.CompositeFilter.filters: array expected");
-                            message.filters = [];
-                            for (var i = 0; i < object.filters.length; ++i) {
-                                if (typeof object.filters[i] !== "object")
-                                    throw TypeError(".google.datastore.v1.CompositeFilter.filters: object expected");
-                                message.filters[i] = $root.google.datastore.v1.Filter.fromObject(object.filters[i]);
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a CompositeFilter message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.CompositeFilter
-                     * @static
-                     * @param {google.datastore.v1.CompositeFilter} message CompositeFilter
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    CompositeFilter.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults)
-                            object.filters = [];
-                        if (options.defaults)
-                            object.op = options.enums === String ? "OPERATOR_UNSPECIFIED" : 0;
-                        if (message.op != null && message.hasOwnProperty("op"))
-                            object.op = options.enums === String ? $root.google.datastore.v1.CompositeFilter.Operator[message.op] : message.op;
-                        if (message.filters && message.filters.length) {
-                            object.filters = [];
-                            for (var j = 0; j < message.filters.length; ++j)
-                                object.filters[j] = $root.google.datastore.v1.Filter.toObject(message.filters[j], options);
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this CompositeFilter to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.CompositeFilter
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    CompositeFilter.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for CompositeFilter
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.CompositeFilter
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    CompositeFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.CompositeFilter";
-                    };
-    
-                    /**
-                     * Operator enum.
-                     * @name google.datastore.v1.CompositeFilter.Operator
-                     * @enum {number}
-                     * @property {number} OPERATOR_UNSPECIFIED=0 OPERATOR_UNSPECIFIED value
-                     * @property {number} AND=1 AND value
-                     */
-                    CompositeFilter.Operator = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "OPERATOR_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "AND"] = 1;
-                        return values;
-                    })();
-    
-                    return CompositeFilter;
-                })();
-    
-                v1.PropertyFilter = (function() {
-    
-                    /**
-                     * Properties of a PropertyFilter.
-                     * @memberof google.datastore.v1
-                     * @interface IPropertyFilter
-                     * @property {google.datastore.v1.IPropertyReference|null} [property] PropertyFilter property
-                     * @property {google.datastore.v1.PropertyFilter.Operator|null} [op] PropertyFilter op
-                     * @property {google.datastore.v1.IValue|null} [value] PropertyFilter value
-                     */
-    
-                    /**
-                     * Constructs a new PropertyFilter.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a PropertyFilter.
-                     * @implements IPropertyFilter
-                     * @constructor
-                     * @param {google.datastore.v1.IPropertyFilter=} [properties] Properties to set
-                     */
-                    function PropertyFilter(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * PropertyFilter property.
-                     * @member {google.datastore.v1.IPropertyReference|null|undefined} property
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @instance
-                     */
-                    PropertyFilter.prototype.property = null;
-    
-                    /**
-                     * PropertyFilter op.
-                     * @member {google.datastore.v1.PropertyFilter.Operator} op
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @instance
-                     */
-                    PropertyFilter.prototype.op = 0;
-    
-                    /**
-                     * PropertyFilter value.
-                     * @member {google.datastore.v1.IValue|null|undefined} value
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @instance
-                     */
-                    PropertyFilter.prototype.value = null;
-    
-                    /**
-                     * Creates a new PropertyFilter instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @static
-                     * @param {google.datastore.v1.IPropertyFilter=} [properties] Properties to set
-                     * @returns {google.datastore.v1.PropertyFilter} PropertyFilter instance
-                     */
-                    PropertyFilter.create = function create(properties) {
-                        return new PropertyFilter(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified PropertyFilter message. Does not implicitly {@link google.datastore.v1.PropertyFilter.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @static
-                     * @param {google.datastore.v1.IPropertyFilter} message PropertyFilter message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    PropertyFilter.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.property != null && Object.hasOwnProperty.call(message, "property"))
-                            $root.google.datastore.v1.PropertyReference.encode(message.property, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.op != null && Object.hasOwnProperty.call(message, "op"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.op);
-                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                            $root.google.datastore.v1.Value.encode(message.value, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified PropertyFilter message, length delimited. Does not implicitly {@link google.datastore.v1.PropertyFilter.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @static
-                     * @param {google.datastore.v1.IPropertyFilter} message PropertyFilter message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    PropertyFilter.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a PropertyFilter message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.PropertyFilter} PropertyFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    PropertyFilter.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.PropertyFilter();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.property = $root.google.datastore.v1.PropertyReference.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 2: {
-                                    message.op = reader.int32();
-                                    break;
-                                }
-                            case 3: {
-                                    message.value = $root.google.datastore.v1.Value.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a PropertyFilter message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.PropertyFilter} PropertyFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    PropertyFilter.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a PropertyFilter message.
-                     * @function verify
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    PropertyFilter.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.property != null && message.hasOwnProperty("property")) {
-                            var error = $root.google.datastore.v1.PropertyReference.verify(message.property);
-                            if (error)
-                                return "property." + error;
-                        }
-                        if (message.op != null && message.hasOwnProperty("op"))
-                            switch (message.op) {
-                            default:
-                                return "op: enum value expected";
-                            case 0:
-                            case 1:
-                            case 2:
-                            case 3:
-                            case 4:
-                            case 5:
-                            case 6:
-                            case 9:
-                            case 11:
-                            case 13:
-                                break;
-                            }
-                        if (message.value != null && message.hasOwnProperty("value")) {
-                            var error = $root.google.datastore.v1.Value.verify(message.value);
-                            if (error)
-                                return "value." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a PropertyFilter message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.PropertyFilter} PropertyFilter
-                     */
-                    PropertyFilter.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.PropertyFilter)
-                            return object;
-                        var message = new $root.google.datastore.v1.PropertyFilter();
-                        if (object.property != null) {
-                            if (typeof object.property !== "object")
-                                throw TypeError(".google.datastore.v1.PropertyFilter.property: object expected");
-                            message.property = $root.google.datastore.v1.PropertyReference.fromObject(object.property);
-                        }
-                        switch (object.op) {
-                        case "OPERATOR_UNSPECIFIED":
-                        case 0:
-                            message.op = 0;
-                            break;
-                        case "LESS_THAN":
-                        case 1:
-                            message.op = 1;
-                            break;
-                        case "LESS_THAN_OR_EQUAL":
-                        case 2:
-                            message.op = 2;
-                            break;
-                        case "GREATER_THAN":
-                        case 3:
-                            message.op = 3;
-                            break;
-                        case "GREATER_THAN_OR_EQUAL":
-                        case 4:
-                            message.op = 4;
-                            break;
-                        case "EQUAL":
-                        case 5:
-                            message.op = 5;
-                            break;
-                        case "IN":
-                        case 6:
-                            message.op = 6;
-                            break;
-                        case "NOT_EQUAL":
-                        case 9:
-                            message.op = 9;
-                            break;
-                        case "HAS_ANCESTOR":
-                        case 11:
-                            message.op = 11;
-                            break;
-                        case "NOT_IN":
-                        case 13:
-                            message.op = 13;
-                            break;
-                        }
-                        if (object.value != null) {
-                            if (typeof object.value !== "object")
-                                throw TypeError(".google.datastore.v1.PropertyFilter.value: object expected");
-                            message.value = $root.google.datastore.v1.Value.fromObject(object.value);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a PropertyFilter message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @static
-                     * @param {google.datastore.v1.PropertyFilter} message PropertyFilter
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    PropertyFilter.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.property = null;
-                            object.op = options.enums === String ? "OPERATOR_UNSPECIFIED" : 0;
-                            object.value = null;
-                        }
-                        if (message.property != null && message.hasOwnProperty("property"))
-                            object.property = $root.google.datastore.v1.PropertyReference.toObject(message.property, options);
-                        if (message.op != null && message.hasOwnProperty("op"))
-                            object.op = options.enums === String ? $root.google.datastore.v1.PropertyFilter.Operator[message.op] : message.op;
-                        if (message.value != null && message.hasOwnProperty("value"))
-                            object.value = $root.google.datastore.v1.Value.toObject(message.value, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this PropertyFilter to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    PropertyFilter.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for PropertyFilter
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.PropertyFilter
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    PropertyFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.PropertyFilter";
-                    };
-    
-                    /**
-                     * Operator enum.
-                     * @name google.datastore.v1.PropertyFilter.Operator
-                     * @enum {number}
-                     * @property {number} OPERATOR_UNSPECIFIED=0 OPERATOR_UNSPECIFIED value
-                     * @property {number} LESS_THAN=1 LESS_THAN value
-                     * @property {number} LESS_THAN_OR_EQUAL=2 LESS_THAN_OR_EQUAL value
-                     * @property {number} GREATER_THAN=3 GREATER_THAN value
-                     * @property {number} GREATER_THAN_OR_EQUAL=4 GREATER_THAN_OR_EQUAL value
-                     * @property {number} EQUAL=5 EQUAL value
-                     * @property {number} IN=6 IN value
-                     * @property {number} NOT_EQUAL=9 NOT_EQUAL value
-                     * @property {number} HAS_ANCESTOR=11 HAS_ANCESTOR value
-                     * @property {number} NOT_IN=13 NOT_IN value
-                     */
-                    PropertyFilter.Operator = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "OPERATOR_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "LESS_THAN"] = 1;
-                        values[valuesById[2] = "LESS_THAN_OR_EQUAL"] = 2;
-                        values[valuesById[3] = "GREATER_THAN"] = 3;
-                        values[valuesById[4] = "GREATER_THAN_OR_EQUAL"] = 4;
-                        values[valuesById[5] = "EQUAL"] = 5;
-                        values[valuesById[6] = "IN"] = 6;
-                        values[valuesById[9] = "NOT_EQUAL"] = 9;
-                        values[valuesById[11] = "HAS_ANCESTOR"] = 11;
-                        values[valuesById[13] = "NOT_IN"] = 13;
-                        return values;
-                    })();
-    
-                    return PropertyFilter;
-                })();
-    
-                v1.GqlQuery = (function() {
-    
-                    /**
-                     * Properties of a GqlQuery.
-                     * @memberof google.datastore.v1
-                     * @interface IGqlQuery
-                     * @property {string|null} [queryString] GqlQuery queryString
-                     * @property {boolean|null} [allowLiterals] GqlQuery allowLiterals
-                     * @property {Object.<string,google.datastore.v1.IGqlQueryParameter>|null} [namedBindings] GqlQuery namedBindings
-                     * @property {Array.<google.datastore.v1.IGqlQueryParameter>|null} [positionalBindings] GqlQuery positionalBindings
-                     */
-    
-                    /**
-                     * Constructs a new GqlQuery.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a GqlQuery.
-                     * @implements IGqlQuery
-                     * @constructor
-                     * @param {google.datastore.v1.IGqlQuery=} [properties] Properties to set
-                     */
-                    function GqlQuery(properties) {
-                        this.namedBindings = {};
-                        this.positionalBindings = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * GqlQuery queryString.
-                     * @member {string} queryString
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @instance
-                     */
-                    GqlQuery.prototype.queryString = "";
-    
-                    /**
-                     * GqlQuery allowLiterals.
-                     * @member {boolean} allowLiterals
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @instance
-                     */
-                    GqlQuery.prototype.allowLiterals = false;
-    
-                    /**
-                     * GqlQuery namedBindings.
-                     * @member {Object.<string,google.datastore.v1.IGqlQueryParameter>} namedBindings
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @instance
-                     */
-                    GqlQuery.prototype.namedBindings = $util.emptyObject;
-    
-                    /**
-                     * GqlQuery positionalBindings.
-                     * @member {Array.<google.datastore.v1.IGqlQueryParameter>} positionalBindings
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @instance
-                     */
-                    GqlQuery.prototype.positionalBindings = $util.emptyArray;
-    
-                    /**
-                     * Creates a new GqlQuery instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @static
-                     * @param {google.datastore.v1.IGqlQuery=} [properties] Properties to set
-                     * @returns {google.datastore.v1.GqlQuery} GqlQuery instance
-                     */
-                    GqlQuery.create = function create(properties) {
-                        return new GqlQuery(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified GqlQuery message. Does not implicitly {@link google.datastore.v1.GqlQuery.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @static
-                     * @param {google.datastore.v1.IGqlQuery} message GqlQuery message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GqlQuery.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.queryString != null && Object.hasOwnProperty.call(message, "queryString"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.queryString);
-                        if (message.allowLiterals != null && Object.hasOwnProperty.call(message, "allowLiterals"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allowLiterals);
-                        if (message.positionalBindings != null && message.positionalBindings.length)
-                            for (var i = 0; i < message.positionalBindings.length; ++i)
-                                $root.google.datastore.v1.GqlQueryParameter.encode(message.positionalBindings[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                        if (message.namedBindings != null && Object.hasOwnProperty.call(message, "namedBindings"))
-                            for (var keys = Object.keys(message.namedBindings), i = 0; i < keys.length; ++i) {
-                                writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                                $root.google.datastore.v1.GqlQueryParameter.encode(message.namedBindings[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
-                            }
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified GqlQuery message, length delimited. Does not implicitly {@link google.datastore.v1.GqlQuery.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @static
-                     * @param {google.datastore.v1.IGqlQuery} message GqlQuery message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GqlQuery.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a GqlQuery message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.GqlQuery} GqlQuery
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GqlQuery.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.GqlQuery(), key, value;
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.queryString = reader.string();
-                                    break;
-                                }
-                            case 2: {
-                                    message.allowLiterals = reader.bool();
-                                    break;
-                                }
-                            case 5: {
-                                    if (message.namedBindings === $util.emptyObject)
-                                        message.namedBindings = {};
-                                    var end2 = reader.uint32() + reader.pos;
-                                    key = "";
-                                    value = null;
-                                    while (reader.pos < end2) {
-                                        var tag2 = reader.uint32();
-                                        switch (tag2 >>> 3) {
-                                        case 1:
-                                            key = reader.string();
-                                            break;
-                                        case 2:
-                                            value = $root.google.datastore.v1.GqlQueryParameter.decode(reader, reader.uint32());
-                                            break;
-                                        default:
-                                            reader.skipType(tag2 & 7);
-                                            break;
-                                        }
-                                    }
-                                    message.namedBindings[key] = value;
-                                    break;
-                                }
-                            case 4: {
-                                    if (!(message.positionalBindings && message.positionalBindings.length))
-                                        message.positionalBindings = [];
-                                    message.positionalBindings.push($root.google.datastore.v1.GqlQueryParameter.decode(reader, reader.uint32()));
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a GqlQuery message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.GqlQuery} GqlQuery
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GqlQuery.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a GqlQuery message.
-                     * @function verify
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    GqlQuery.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.queryString != null && message.hasOwnProperty("queryString"))
-                            if (!$util.isString(message.queryString))
-                                return "queryString: string expected";
-                        if (message.allowLiterals != null && message.hasOwnProperty("allowLiterals"))
-                            if (typeof message.allowLiterals !== "boolean")
-                                return "allowLiterals: boolean expected";
-                        if (message.namedBindings != null && message.hasOwnProperty("namedBindings")) {
-                            if (!$util.isObject(message.namedBindings))
-                                return "namedBindings: object expected";
-                            var key = Object.keys(message.namedBindings);
-                            for (var i = 0; i < key.length; ++i) {
-                                var error = $root.google.datastore.v1.GqlQueryParameter.verify(message.namedBindings[key[i]]);
-                                if (error)
-                                    return "namedBindings." + error;
-                            }
-                        }
-                        if (message.positionalBindings != null && message.hasOwnProperty("positionalBindings")) {
-                            if (!Array.isArray(message.positionalBindings))
-                                return "positionalBindings: array expected";
-                            for (var i = 0; i < message.positionalBindings.length; ++i) {
-                                var error = $root.google.datastore.v1.GqlQueryParameter.verify(message.positionalBindings[i]);
-                                if (error)
-                                    return "positionalBindings." + error;
-                            }
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a GqlQuery message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.GqlQuery} GqlQuery
-                     */
-                    GqlQuery.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.GqlQuery)
-                            return object;
-                        var message = new $root.google.datastore.v1.GqlQuery();
-                        if (object.queryString != null)
-                            message.queryString = String(object.queryString);
-                        if (object.allowLiterals != null)
-                            message.allowLiterals = Boolean(object.allowLiterals);
-                        if (object.namedBindings) {
-                            if (typeof object.namedBindings !== "object")
-                                throw TypeError(".google.datastore.v1.GqlQuery.namedBindings: object expected");
-                            message.namedBindings = {};
-                            for (var keys = Object.keys(object.namedBindings), i = 0; i < keys.length; ++i) {
-                                if (typeof object.namedBindings[keys[i]] !== "object")
-                                    throw TypeError(".google.datastore.v1.GqlQuery.namedBindings: object expected");
-                                message.namedBindings[keys[i]] = $root.google.datastore.v1.GqlQueryParameter.fromObject(object.namedBindings[keys[i]]);
-                            }
-                        }
-                        if (object.positionalBindings) {
-                            if (!Array.isArray(object.positionalBindings))
-                                throw TypeError(".google.datastore.v1.GqlQuery.positionalBindings: array expected");
-                            message.positionalBindings = [];
-                            for (var i = 0; i < object.positionalBindings.length; ++i) {
-                                if (typeof object.positionalBindings[i] !== "object")
-                                    throw TypeError(".google.datastore.v1.GqlQuery.positionalBindings: object expected");
-                                message.positionalBindings[i] = $root.google.datastore.v1.GqlQueryParameter.fromObject(object.positionalBindings[i]);
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a GqlQuery message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @static
-                     * @param {google.datastore.v1.GqlQuery} message GqlQuery
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    GqlQuery.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults)
-                            object.positionalBindings = [];
-                        if (options.objects || options.defaults)
-                            object.namedBindings = {};
-                        if (options.defaults) {
-                            object.queryString = "";
-                            object.allowLiterals = false;
-                        }
-                        if (message.queryString != null && message.hasOwnProperty("queryString"))
-                            object.queryString = message.queryString;
-                        if (message.allowLiterals != null && message.hasOwnProperty("allowLiterals"))
-                            object.allowLiterals = message.allowLiterals;
-                        if (message.positionalBindings && message.positionalBindings.length) {
-                            object.positionalBindings = [];
-                            for (var j = 0; j < message.positionalBindings.length; ++j)
-                                object.positionalBindings[j] = $root.google.datastore.v1.GqlQueryParameter.toObject(message.positionalBindings[j], options);
-                        }
-                        var keys2;
-                        if (message.namedBindings && (keys2 = Object.keys(message.namedBindings)).length) {
-                            object.namedBindings = {};
-                            for (var j = 0; j < keys2.length; ++j)
-                                object.namedBindings[keys2[j]] = $root.google.datastore.v1.GqlQueryParameter.toObject(message.namedBindings[keys2[j]], options);
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this GqlQuery to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    GqlQuery.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for GqlQuery
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.GqlQuery
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    GqlQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.GqlQuery";
-                    };
-    
-                    return GqlQuery;
-                })();
-    
-                v1.GqlQueryParameter = (function() {
-    
-                    /**
-                     * Properties of a GqlQueryParameter.
-                     * @memberof google.datastore.v1
-                     * @interface IGqlQueryParameter
-                     * @property {google.datastore.v1.IValue|null} [value] GqlQueryParameter value
-                     * @property {Uint8Array|null} [cursor] GqlQueryParameter cursor
-                     */
-    
-                    /**
-                     * Constructs a new GqlQueryParameter.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a GqlQueryParameter.
-                     * @implements IGqlQueryParameter
-                     * @constructor
-                     * @param {google.datastore.v1.IGqlQueryParameter=} [properties] Properties to set
-                     */
-                    function GqlQueryParameter(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * GqlQueryParameter value.
-                     * @member {google.datastore.v1.IValue|null|undefined} value
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @instance
-                     */
-                    GqlQueryParameter.prototype.value = null;
-    
-                    /**
-                     * GqlQueryParameter cursor.
-                     * @member {Uint8Array|null|undefined} cursor
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @instance
-                     */
-                    GqlQueryParameter.prototype.cursor = null;
-    
-                    // OneOf field names bound to virtual getters and setters
-                    var $oneOfFields;
-    
-                    /**
-                     * GqlQueryParameter parameterType.
-                     * @member {"value"|"cursor"|undefined} parameterType
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @instance
-                     */
-                    Object.defineProperty(GqlQueryParameter.prototype, "parameterType", {
-                        get: $util.oneOfGetter($oneOfFields = ["value", "cursor"]),
-                        set: $util.oneOfSetter($oneOfFields)
-                    });
-    
-                    /**
-                     * Creates a new GqlQueryParameter instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @static
-                     * @param {google.datastore.v1.IGqlQueryParameter=} [properties] Properties to set
-                     * @returns {google.datastore.v1.GqlQueryParameter} GqlQueryParameter instance
-                     */
-                    GqlQueryParameter.create = function create(properties) {
-                        return new GqlQueryParameter(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified GqlQueryParameter message. Does not implicitly {@link google.datastore.v1.GqlQueryParameter.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @static
-                     * @param {google.datastore.v1.IGqlQueryParameter} message GqlQueryParameter message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GqlQueryParameter.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                            $root.google.datastore.v1.Value.encode(message.value, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        if (message.cursor != null && Object.hasOwnProperty.call(message, "cursor"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.cursor);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified GqlQueryParameter message, length delimited. Does not implicitly {@link google.datastore.v1.GqlQueryParameter.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @static
-                     * @param {google.datastore.v1.IGqlQueryParameter} message GqlQueryParameter message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GqlQueryParameter.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a GqlQueryParameter message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.GqlQueryParameter} GqlQueryParameter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GqlQueryParameter.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.GqlQueryParameter();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 2: {
-                                    message.value = $root.google.datastore.v1.Value.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 3: {
-                                    message.cursor = reader.bytes();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a GqlQueryParameter message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.GqlQueryParameter} GqlQueryParameter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GqlQueryParameter.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a GqlQueryParameter message.
-                     * @function verify
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    GqlQueryParameter.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        var properties = {};
-                        if (message.value != null && message.hasOwnProperty("value")) {
-                            properties.parameterType = 1;
-                            {
-                                var error = $root.google.datastore.v1.Value.verify(message.value);
-                                if (error)
-                                    return "value." + error;
-                            }
-                        }
-                        if (message.cursor != null && message.hasOwnProperty("cursor")) {
-                            if (properties.parameterType === 1)
-                                return "parameterType: multiple values";
-                            properties.parameterType = 1;
-                            if (!(message.cursor && typeof message.cursor.length === "number" || $util.isString(message.cursor)))
-                                return "cursor: buffer expected";
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a GqlQueryParameter message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.GqlQueryParameter} GqlQueryParameter
-                     */
-                    GqlQueryParameter.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.GqlQueryParameter)
-                            return object;
-                        var message = new $root.google.datastore.v1.GqlQueryParameter();
-                        if (object.value != null) {
-                            if (typeof object.value !== "object")
-                                throw TypeError(".google.datastore.v1.GqlQueryParameter.value: object expected");
-                            message.value = $root.google.datastore.v1.Value.fromObject(object.value);
-                        }
-                        if (object.cursor != null)
-                            if (typeof object.cursor === "string")
-                                $util.base64.decode(object.cursor, message.cursor = $util.newBuffer($util.base64.length(object.cursor)), 0);
-                            else if (object.cursor.length >= 0)
-                                message.cursor = object.cursor;
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a GqlQueryParameter message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @static
-                     * @param {google.datastore.v1.GqlQueryParameter} message GqlQueryParameter
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    GqlQueryParameter.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (message.value != null && message.hasOwnProperty("value")) {
-                            object.value = $root.google.datastore.v1.Value.toObject(message.value, options);
-                            if (options.oneofs)
-                                object.parameterType = "value";
-                        }
-                        if (message.cursor != null && message.hasOwnProperty("cursor")) {
-                            object.cursor = options.bytes === String ? $util.base64.encode(message.cursor, 0, message.cursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.cursor) : message.cursor;
-                            if (options.oneofs)
-                                object.parameterType = "cursor";
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this GqlQueryParameter to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    GqlQueryParameter.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for GqlQueryParameter
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.GqlQueryParameter
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    GqlQueryParameter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.GqlQueryParameter";
-                    };
-    
-                    return GqlQueryParameter;
-                })();
-    
-                v1.QueryResultBatch = (function() {
-    
-                    /**
-                     * Properties of a QueryResultBatch.
-                     * @memberof google.datastore.v1
-                     * @interface IQueryResultBatch
-                     * @property {number|null} [skippedResults] QueryResultBatch skippedResults
-                     * @property {Uint8Array|null} [skippedCursor] QueryResultBatch skippedCursor
-                     * @property {google.datastore.v1.EntityResult.ResultType|null} [entityResultType] QueryResultBatch entityResultType
-                     * @property {Array.<google.datastore.v1.IEntityResult>|null} [entityResults] QueryResultBatch entityResults
-                     * @property {Uint8Array|null} [endCursor] QueryResultBatch endCursor
-                     * @property {google.datastore.v1.QueryResultBatch.MoreResultsType|null} [moreResults] QueryResultBatch moreResults
-                     * @property {number|Long|null} [snapshotVersion] QueryResultBatch snapshotVersion
-                     * @property {google.protobuf.ITimestamp|null} [readTime] QueryResultBatch readTime
-                     */
-    
-                    /**
-                     * Constructs a new QueryResultBatch.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a QueryResultBatch.
-                     * @implements IQueryResultBatch
-                     * @constructor
-                     * @param {google.datastore.v1.IQueryResultBatch=} [properties] Properties to set
-                     */
-                    function QueryResultBatch(properties) {
-                        this.entityResults = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * QueryResultBatch skippedResults.
-                     * @member {number} skippedResults
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @instance
-                     */
-                    QueryResultBatch.prototype.skippedResults = 0;
-    
-                    /**
-                     * QueryResultBatch skippedCursor.
-                     * @member {Uint8Array} skippedCursor
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @instance
-                     */
-                    QueryResultBatch.prototype.skippedCursor = $util.newBuffer([]);
-    
-                    /**
-                     * QueryResultBatch entityResultType.
-                     * @member {google.datastore.v1.EntityResult.ResultType} entityResultType
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @instance
-                     */
-                    QueryResultBatch.prototype.entityResultType = 0;
-    
-                    /**
-                     * QueryResultBatch entityResults.
-                     * @member {Array.<google.datastore.v1.IEntityResult>} entityResults
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @instance
-                     */
-                    QueryResultBatch.prototype.entityResults = $util.emptyArray;
-    
-                    /**
-                     * QueryResultBatch endCursor.
-                     * @member {Uint8Array} endCursor
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @instance
-                     */
-                    QueryResultBatch.prototype.endCursor = $util.newBuffer([]);
-    
-                    /**
-                     * QueryResultBatch moreResults.
-                     * @member {google.datastore.v1.QueryResultBatch.MoreResultsType} moreResults
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @instance
-                     */
-                    QueryResultBatch.prototype.moreResults = 0;
-    
-                    /**
-                     * QueryResultBatch snapshotVersion.
-                     * @member {number|Long} snapshotVersion
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @instance
-                     */
-                    QueryResultBatch.prototype.snapshotVersion = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                    /**
-                     * QueryResultBatch readTime.
-                     * @member {google.protobuf.ITimestamp|null|undefined} readTime
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @instance
-                     */
-                    QueryResultBatch.prototype.readTime = null;
-    
-                    /**
-                     * Creates a new QueryResultBatch instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @static
-                     * @param {google.datastore.v1.IQueryResultBatch=} [properties] Properties to set
-                     * @returns {google.datastore.v1.QueryResultBatch} QueryResultBatch instance
-                     */
-                    QueryResultBatch.create = function create(properties) {
-                        return new QueryResultBatch(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified QueryResultBatch message. Does not implicitly {@link google.datastore.v1.QueryResultBatch.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @static
-                     * @param {google.datastore.v1.IQueryResultBatch} message QueryResultBatch message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    QueryResultBatch.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.entityResultType != null && Object.hasOwnProperty.call(message, "entityResultType"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.entityResultType);
-                        if (message.entityResults != null && message.entityResults.length)
-                            for (var i = 0; i < message.entityResults.length; ++i)
-                                $root.google.datastore.v1.EntityResult.encode(message.entityResults[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        if (message.skippedCursor != null && Object.hasOwnProperty.call(message, "skippedCursor"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.skippedCursor);
-                        if (message.endCursor != null && Object.hasOwnProperty.call(message, "endCursor"))
-                            writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.endCursor);
-                        if (message.moreResults != null && Object.hasOwnProperty.call(message, "moreResults"))
-                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.moreResults);
-                        if (message.skippedResults != null && Object.hasOwnProperty.call(message, "skippedResults"))
-                            writer.uint32(/* id 6, wireType 0 =*/48).int32(message.skippedResults);
-                        if (message.snapshotVersion != null && Object.hasOwnProperty.call(message, "snapshotVersion"))
-                            writer.uint32(/* id 7, wireType 0 =*/56).int64(message.snapshotVersion);
-                        if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
-                            $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified QueryResultBatch message, length delimited. Does not implicitly {@link google.datastore.v1.QueryResultBatch.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @static
-                     * @param {google.datastore.v1.IQueryResultBatch} message QueryResultBatch message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    QueryResultBatch.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a QueryResultBatch message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.QueryResultBatch} QueryResultBatch
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    QueryResultBatch.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.QueryResultBatch();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 6: {
-                                    message.skippedResults = reader.int32();
-                                    break;
-                                }
-                            case 3: {
-                                    message.skippedCursor = reader.bytes();
-                                    break;
-                                }
-                            case 1: {
-                                    message.entityResultType = reader.int32();
-                                    break;
-                                }
-                            case 2: {
-                                    if (!(message.entityResults && message.entityResults.length))
-                                        message.entityResults = [];
-                                    message.entityResults.push($root.google.datastore.v1.EntityResult.decode(reader, reader.uint32()));
-                                    break;
-                                }
-                            case 4: {
-                                    message.endCursor = reader.bytes();
-                                    break;
-                                }
-                            case 5: {
-                                    message.moreResults = reader.int32();
-                                    break;
-                                }
-                            case 7: {
-                                    message.snapshotVersion = reader.int64();
-                                    break;
-                                }
-                            case 8: {
-                                    message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a QueryResultBatch message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.QueryResultBatch} QueryResultBatch
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    QueryResultBatch.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a QueryResultBatch message.
-                     * @function verify
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    QueryResultBatch.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.skippedResults != null && message.hasOwnProperty("skippedResults"))
-                            if (!$util.isInteger(message.skippedResults))
-                                return "skippedResults: integer expected";
-                        if (message.skippedCursor != null && message.hasOwnProperty("skippedCursor"))
-                            if (!(message.skippedCursor && typeof message.skippedCursor.length === "number" || $util.isString(message.skippedCursor)))
-                                return "skippedCursor: buffer expected";
-                        if (message.entityResultType != null && message.hasOwnProperty("entityResultType"))
-                            switch (message.entityResultType) {
-                            default:
-                                return "entityResultType: enum value expected";
-                            case 0:
-                            case 1:
-                            case 2:
-                            case 3:
-                                break;
-                            }
-                        if (message.entityResults != null && message.hasOwnProperty("entityResults")) {
-                            if (!Array.isArray(message.entityResults))
-                                return "entityResults: array expected";
-                            for (var i = 0; i < message.entityResults.length; ++i) {
-                                var error = $root.google.datastore.v1.EntityResult.verify(message.entityResults[i]);
-                                if (error)
-                                    return "entityResults." + error;
-                            }
-                        }
-                        if (message.endCursor != null && message.hasOwnProperty("endCursor"))
-                            if (!(message.endCursor && typeof message.endCursor.length === "number" || $util.isString(message.endCursor)))
-                                return "endCursor: buffer expected";
-                        if (message.moreResults != null && message.hasOwnProperty("moreResults"))
-                            switch (message.moreResults) {
-                            default:
-                                return "moreResults: enum value expected";
-                            case 0:
-                            case 1:
-                            case 2:
-                            case 4:
-                            case 3:
-                                break;
-                            }
-                        if (message.snapshotVersion != null && message.hasOwnProperty("snapshotVersion"))
-                            if (!$util.isInteger(message.snapshotVersion) && !(message.snapshotVersion && $util.isInteger(message.snapshotVersion.low) && $util.isInteger(message.snapshotVersion.high)))
-                                return "snapshotVersion: integer|Long expected";
-                        if (message.readTime != null && message.hasOwnProperty("readTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.readTime);
-                            if (error)
-                                return "readTime." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a QueryResultBatch message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.QueryResultBatch} QueryResultBatch
-                     */
-                    QueryResultBatch.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.QueryResultBatch)
-                            return object;
-                        var message = new $root.google.datastore.v1.QueryResultBatch();
-                        if (object.skippedResults != null)
-                            message.skippedResults = object.skippedResults | 0;
-                        if (object.skippedCursor != null)
-                            if (typeof object.skippedCursor === "string")
-                                $util.base64.decode(object.skippedCursor, message.skippedCursor = $util.newBuffer($util.base64.length(object.skippedCursor)), 0);
-                            else if (object.skippedCursor.length >= 0)
-                                message.skippedCursor = object.skippedCursor;
-                        switch (object.entityResultType) {
-                        case "RESULT_TYPE_UNSPECIFIED":
-                        case 0:
-                            message.entityResultType = 0;
-                            break;
-                        case "FULL":
-                        case 1:
-                            message.entityResultType = 1;
-                            break;
-                        case "PROJECTION":
-                        case 2:
-                            message.entityResultType = 2;
-                            break;
-                        case "KEY_ONLY":
-                        case 3:
-                            message.entityResultType = 3;
-                            break;
-                        }
-                        if (object.entityResults) {
-                            if (!Array.isArray(object.entityResults))
-                                throw TypeError(".google.datastore.v1.QueryResultBatch.entityResults: array expected");
-                            message.entityResults = [];
-                            for (var i = 0; i < object.entityResults.length; ++i) {
-                                if (typeof object.entityResults[i] !== "object")
-                                    throw TypeError(".google.datastore.v1.QueryResultBatch.entityResults: object expected");
-                                message.entityResults[i] = $root.google.datastore.v1.EntityResult.fromObject(object.entityResults[i]);
-                            }
-                        }
-                        if (object.endCursor != null)
-                            if (typeof object.endCursor === "string")
-                                $util.base64.decode(object.endCursor, message.endCursor = $util.newBuffer($util.base64.length(object.endCursor)), 0);
-                            else if (object.endCursor.length >= 0)
-                                message.endCursor = object.endCursor;
-                        switch (object.moreResults) {
-                        case "MORE_RESULTS_TYPE_UNSPECIFIED":
-                        case 0:
-                            message.moreResults = 0;
-                            break;
-                        case "NOT_FINISHED":
-                        case 1:
-                            message.moreResults = 1;
-                            break;
-                        case "MORE_RESULTS_AFTER_LIMIT":
-                        case 2:
-                            message.moreResults = 2;
-                            break;
-                        case "MORE_RESULTS_AFTER_CURSOR":
-                        case 4:
-                            message.moreResults = 4;
-                            break;
-                        case "NO_MORE_RESULTS":
-                        case 3:
-                            message.moreResults = 3;
-                            break;
-                        }
-                        if (object.snapshotVersion != null)
-                            if ($util.Long)
-                                (message.snapshotVersion = $util.Long.fromValue(object.snapshotVersion)).unsigned = false;
-                            else if (typeof object.snapshotVersion === "string")
-                                message.snapshotVersion = parseInt(object.snapshotVersion, 10);
-                            else if (typeof object.snapshotVersion === "number")
-                                message.snapshotVersion = object.snapshotVersion;
-                            else if (typeof object.snapshotVersion === "object")
-                                message.snapshotVersion = new $util.LongBits(object.snapshotVersion.low >>> 0, object.snapshotVersion.high >>> 0).toNumber();
-                        if (object.readTime != null) {
-                            if (typeof object.readTime !== "object")
-                                throw TypeError(".google.datastore.v1.QueryResultBatch.readTime: object expected");
-                            message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a QueryResultBatch message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @static
-                     * @param {google.datastore.v1.QueryResultBatch} message QueryResultBatch
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    QueryResultBatch.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults)
-                            object.entityResults = [];
-                        if (options.defaults) {
-                            object.entityResultType = options.enums === String ? "RESULT_TYPE_UNSPECIFIED" : 0;
-                            if (options.bytes === String)
-                                object.skippedCursor = "";
-                            else {
-                                object.skippedCursor = [];
-                                if (options.bytes !== Array)
-                                    object.skippedCursor = $util.newBuffer(object.skippedCursor);
-                            }
-                            if (options.bytes === String)
-                                object.endCursor = "";
-                            else {
-                                object.endCursor = [];
-                                if (options.bytes !== Array)
-                                    object.endCursor = $util.newBuffer(object.endCursor);
-                            }
-                            object.moreResults = options.enums === String ? "MORE_RESULTS_TYPE_UNSPECIFIED" : 0;
-                            object.skippedResults = 0;
-                            if ($util.Long) {
-                                var long = new $util.Long(0, 0, false);
-                                object.snapshotVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                            } else
-                                object.snapshotVersion = options.longs === String ? "0" : 0;
-                            object.readTime = null;
-                        }
-                        if (message.entityResultType != null && message.hasOwnProperty("entityResultType"))
-                            object.entityResultType = options.enums === String ? $root.google.datastore.v1.EntityResult.ResultType[message.entityResultType] : message.entityResultType;
-                        if (message.entityResults && message.entityResults.length) {
-                            object.entityResults = [];
-                            for (var j = 0; j < message.entityResults.length; ++j)
-                                object.entityResults[j] = $root.google.datastore.v1.EntityResult.toObject(message.entityResults[j], options);
-                        }
-                        if (message.skippedCursor != null && message.hasOwnProperty("skippedCursor"))
-                            object.skippedCursor = options.bytes === String ? $util.base64.encode(message.skippedCursor, 0, message.skippedCursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.skippedCursor) : message.skippedCursor;
-                        if (message.endCursor != null && message.hasOwnProperty("endCursor"))
-                            object.endCursor = options.bytes === String ? $util.base64.encode(message.endCursor, 0, message.endCursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.endCursor) : message.endCursor;
-                        if (message.moreResults != null && message.hasOwnProperty("moreResults"))
-                            object.moreResults = options.enums === String ? $root.google.datastore.v1.QueryResultBatch.MoreResultsType[message.moreResults] : message.moreResults;
-                        if (message.skippedResults != null && message.hasOwnProperty("skippedResults"))
-                            object.skippedResults = message.skippedResults;
-                        if (message.snapshotVersion != null && message.hasOwnProperty("snapshotVersion"))
-                            if (typeof message.snapshotVersion === "number")
-                                object.snapshotVersion = options.longs === String ? String(message.snapshotVersion) : message.snapshotVersion;
-                            else
-                                object.snapshotVersion = options.longs === String ? $util.Long.prototype.toString.call(message.snapshotVersion) : options.longs === Number ? new $util.LongBits(message.snapshotVersion.low >>> 0, message.snapshotVersion.high >>> 0).toNumber() : message.snapshotVersion;
-                        if (message.readTime != null && message.hasOwnProperty("readTime"))
-                            object.readTime = $root.google.protobuf.Timestamp.toObject(message.readTime, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this QueryResultBatch to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    QueryResultBatch.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for QueryResultBatch
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.QueryResultBatch
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    QueryResultBatch.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.QueryResultBatch";
-                    };
-    
-                    /**
-                     * MoreResultsType enum.
-                     * @name google.datastore.v1.QueryResultBatch.MoreResultsType
-                     * @enum {number}
-                     * @property {number} MORE_RESULTS_TYPE_UNSPECIFIED=0 MORE_RESULTS_TYPE_UNSPECIFIED value
-                     * @property {number} NOT_FINISHED=1 NOT_FINISHED value
-                     * @property {number} MORE_RESULTS_AFTER_LIMIT=2 MORE_RESULTS_AFTER_LIMIT value
-                     * @property {number} MORE_RESULTS_AFTER_CURSOR=4 MORE_RESULTS_AFTER_CURSOR value
-                     * @property {number} NO_MORE_RESULTS=3 NO_MORE_RESULTS value
-                     */
-                    QueryResultBatch.MoreResultsType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "MORE_RESULTS_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "NOT_FINISHED"] = 1;
-                        values[valuesById[2] = "MORE_RESULTS_AFTER_LIMIT"] = 2;
-                        values[valuesById[4] = "MORE_RESULTS_AFTER_CURSOR"] = 4;
-                        values[valuesById[3] = "NO_MORE_RESULTS"] = 3;
-                        return values;
-                    })();
-    
-                    return QueryResultBatch;
                 })();
     
                 return v1;

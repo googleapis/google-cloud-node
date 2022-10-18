@@ -613,12 +613,530 @@
                 "csharp_namespace": "Google.Cloud.Datastore.V1",
                 "go_package": "google.golang.org/genproto/googleapis/datastore/v1;datastore",
                 "java_multiple_files": true,
-                "java_outer_classname": "QueryProto",
+                "java_outer_classname": "DatastoreProto",
                 "java_package": "com.google.datastore.v1",
                 "php_namespace": "Google\\Cloud\\Datastore\\V1",
                 "ruby_package": "Google::Cloud::Datastore::V1"
               },
               "nested": {
+                "AggregationResult": {
+                  "fields": {
+                    "aggregateProperties": {
+                      "keyType": "string",
+                      "type": "Value",
+                      "id": 2
+                    }
+                  }
+                },
+                "AggregationResultBatch": {
+                  "fields": {
+                    "aggregationResults": {
+                      "rule": "repeated",
+                      "type": "AggregationResult",
+                      "id": 1
+                    },
+                    "moreResults": {
+                      "type": "QueryResultBatch.MoreResultsType",
+                      "id": 2
+                    },
+                    "readTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 3
+                    }
+                  }
+                },
+                "PartitionId": {
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "databaseId": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "namespaceId": {
+                      "type": "string",
+                      "id": 4
+                    }
+                  }
+                },
+                "Key": {
+                  "fields": {
+                    "partitionId": {
+                      "type": "PartitionId",
+                      "id": 1
+                    },
+                    "path": {
+                      "rule": "repeated",
+                      "type": "PathElement",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "PathElement": {
+                      "oneofs": {
+                        "idType": {
+                          "oneof": [
+                            "id",
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "kind": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "id": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
+                "ArrayValue": {
+                  "fields": {
+                    "values": {
+                      "rule": "repeated",
+                      "type": "Value",
+                      "id": 1
+                    }
+                  }
+                },
+                "Value": {
+                  "oneofs": {
+                    "valueType": {
+                      "oneof": [
+                        "nullValue",
+                        "booleanValue",
+                        "integerValue",
+                        "doubleValue",
+                        "timestampValue",
+                        "keyValue",
+                        "stringValue",
+                        "blobValue",
+                        "geoPointValue",
+                        "entityValue",
+                        "arrayValue"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "nullValue": {
+                      "type": "google.protobuf.NullValue",
+                      "id": 11
+                    },
+                    "booleanValue": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "integerValue": {
+                      "type": "int64",
+                      "id": 2
+                    },
+                    "doubleValue": {
+                      "type": "double",
+                      "id": 3
+                    },
+                    "timestampValue": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 10
+                    },
+                    "keyValue": {
+                      "type": "Key",
+                      "id": 5
+                    },
+                    "stringValue": {
+                      "type": "string",
+                      "id": 17
+                    },
+                    "blobValue": {
+                      "type": "bytes",
+                      "id": 18
+                    },
+                    "geoPointValue": {
+                      "type": "google.type.LatLng",
+                      "id": 8
+                    },
+                    "entityValue": {
+                      "type": "Entity",
+                      "id": 6
+                    },
+                    "arrayValue": {
+                      "type": "ArrayValue",
+                      "id": 9
+                    },
+                    "meaning": {
+                      "type": "int32",
+                      "id": 14
+                    },
+                    "excludeFromIndexes": {
+                      "type": "bool",
+                      "id": 19
+                    }
+                  }
+                },
+                "Entity": {
+                  "fields": {
+                    "key": {
+                      "type": "Key",
+                      "id": 1
+                    },
+                    "properties": {
+                      "keyType": "string",
+                      "type": "Value",
+                      "id": 3
+                    }
+                  }
+                },
+                "EntityResult": {
+                  "fields": {
+                    "entity": {
+                      "type": "Entity",
+                      "id": 1
+                    },
+                    "version": {
+                      "type": "int64",
+                      "id": 4
+                    },
+                    "updateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 5
+                    },
+                    "cursor": {
+                      "type": "bytes",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "ResultType": {
+                      "values": {
+                        "RESULT_TYPE_UNSPECIFIED": 0,
+                        "FULL": 1,
+                        "PROJECTION": 2,
+                        "KEY_ONLY": 3
+                      }
+                    }
+                  }
+                },
+                "Query": {
+                  "fields": {
+                    "projection": {
+                      "rule": "repeated",
+                      "type": "Projection",
+                      "id": 2
+                    },
+                    "kind": {
+                      "rule": "repeated",
+                      "type": "KindExpression",
+                      "id": 3
+                    },
+                    "filter": {
+                      "type": "Filter",
+                      "id": 4
+                    },
+                    "order": {
+                      "rule": "repeated",
+                      "type": "PropertyOrder",
+                      "id": 5
+                    },
+                    "distinctOn": {
+                      "rule": "repeated",
+                      "type": "PropertyReference",
+                      "id": 6
+                    },
+                    "startCursor": {
+                      "type": "bytes",
+                      "id": 7
+                    },
+                    "endCursor": {
+                      "type": "bytes",
+                      "id": 8
+                    },
+                    "offset": {
+                      "type": "int32",
+                      "id": 10
+                    },
+                    "limit": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 12
+                    }
+                  }
+                },
+                "AggregationQuery": {
+                  "oneofs": {
+                    "queryType": {
+                      "oneof": [
+                        "nestedQuery"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "nestedQuery": {
+                      "type": "Query",
+                      "id": 1
+                    },
+                    "aggregations": {
+                      "rule": "repeated",
+                      "type": "Aggregation",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Aggregation": {
+                      "oneofs": {
+                        "operator": {
+                          "oneof": [
+                            "count"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "count": {
+                          "type": "Count",
+                          "id": 1
+                        },
+                        "alias": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Count": {
+                          "fields": {
+                            "upTo": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "KindExpression": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "PropertyReference": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "Projection": {
+                  "fields": {
+                    "property": {
+                      "type": "PropertyReference",
+                      "id": 1
+                    }
+                  }
+                },
+                "PropertyOrder": {
+                  "fields": {
+                    "property": {
+                      "type": "PropertyReference",
+                      "id": 1
+                    },
+                    "direction": {
+                      "type": "Direction",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Direction": {
+                      "values": {
+                        "DIRECTION_UNSPECIFIED": 0,
+                        "ASCENDING": 1,
+                        "DESCENDING": 2
+                      }
+                    }
+                  }
+                },
+                "Filter": {
+                  "oneofs": {
+                    "filterType": {
+                      "oneof": [
+                        "compositeFilter",
+                        "propertyFilter"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "compositeFilter": {
+                      "type": "CompositeFilter",
+                      "id": 1
+                    },
+                    "propertyFilter": {
+                      "type": "PropertyFilter",
+                      "id": 2
+                    }
+                  }
+                },
+                "CompositeFilter": {
+                  "fields": {
+                    "op": {
+                      "type": "Operator",
+                      "id": 1
+                    },
+                    "filters": {
+                      "rule": "repeated",
+                      "type": "Filter",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Operator": {
+                      "values": {
+                        "OPERATOR_UNSPECIFIED": 0,
+                        "AND": 1
+                      }
+                    }
+                  }
+                },
+                "PropertyFilter": {
+                  "fields": {
+                    "property": {
+                      "type": "PropertyReference",
+                      "id": 1
+                    },
+                    "op": {
+                      "type": "Operator",
+                      "id": 2
+                    },
+                    "value": {
+                      "type": "Value",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "Operator": {
+                      "values": {
+                        "OPERATOR_UNSPECIFIED": 0,
+                        "LESS_THAN": 1,
+                        "LESS_THAN_OR_EQUAL": 2,
+                        "GREATER_THAN": 3,
+                        "GREATER_THAN_OR_EQUAL": 4,
+                        "EQUAL": 5,
+                        "IN": 6,
+                        "NOT_EQUAL": 9,
+                        "HAS_ANCESTOR": 11,
+                        "NOT_IN": 13
+                      }
+                    }
+                  }
+                },
+                "GqlQuery": {
+                  "fields": {
+                    "queryString": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "allowLiterals": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "namedBindings": {
+                      "keyType": "string",
+                      "type": "GqlQueryParameter",
+                      "id": 5
+                    },
+                    "positionalBindings": {
+                      "rule": "repeated",
+                      "type": "GqlQueryParameter",
+                      "id": 4
+                    }
+                  }
+                },
+                "GqlQueryParameter": {
+                  "oneofs": {
+                    "parameterType": {
+                      "oneof": [
+                        "value",
+                        "cursor"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "value": {
+                      "type": "Value",
+                      "id": 2
+                    },
+                    "cursor": {
+                      "type": "bytes",
+                      "id": 3
+                    }
+                  }
+                },
+                "QueryResultBatch": {
+                  "fields": {
+                    "skippedResults": {
+                      "type": "int32",
+                      "id": 6
+                    },
+                    "skippedCursor": {
+                      "type": "bytes",
+                      "id": 3
+                    },
+                    "entityResultType": {
+                      "type": "EntityResult.ResultType",
+                      "id": 1
+                    },
+                    "entityResults": {
+                      "rule": "repeated",
+                      "type": "EntityResult",
+                      "id": 2
+                    },
+                    "endCursor": {
+                      "type": "bytes",
+                      "id": 4
+                    },
+                    "moreResults": {
+                      "type": "MoreResultsType",
+                      "id": 5
+                    },
+                    "snapshotVersion": {
+                      "type": "int64",
+                      "id": 7
+                    },
+                    "readTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 8
+                    }
+                  },
+                  "nested": {
+                    "MoreResultsType": {
+                      "values": {
+                        "MORE_RESULTS_TYPE_UNSPECIFIED": 0,
+                        "NOT_FINISHED": 1,
+                        "MORE_RESULTS_AFTER_LIMIT": 2,
+                        "MORE_RESULTS_AFTER_CURSOR": 4,
+                        "NO_MORE_RESULTS": 3
+                      }
+                    }
+                  }
+                },
                 "Datastore": {
                   "options": {
                     "(google.api.default_host)": "datastore.googleapis.com",
@@ -656,6 +1174,22 @@
                         {
                           "(google.api.http)": {
                             "post": "/v1/projects/{project_id}:runQuery",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
+                    "RunAggregationQuery": {
+                      "requestType": "RunAggregationQueryRequest",
+                      "responseType": "RunAggregationQueryResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/projects/{project_id}:runAggregationQuery",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/projects/{project_id}:runAggregationQuery",
                             "body": "*"
                           }
                         }
@@ -863,6 +1397,57 @@
                     },
                     "query": {
                       "type": "Query",
+                      "id": 2
+                    }
+                  }
+                },
+                "RunAggregationQueryRequest": {
+                  "oneofs": {
+                    "queryType": {
+                      "oneof": [
+                        "aggregationQuery",
+                        "gqlQuery"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "databaseId": {
+                      "type": "string",
+                      "id": 9
+                    },
+                    "partitionId": {
+                      "type": "PartitionId",
+                      "id": 2
+                    },
+                    "readOptions": {
+                      "type": "ReadOptions",
+                      "id": 1
+                    },
+                    "aggregationQuery": {
+                      "type": "AggregationQuery",
+                      "id": 3
+                    },
+                    "gqlQuery": {
+                      "type": "GqlQuery",
+                      "id": 7
+                    }
+                  }
+                },
+                "RunAggregationQueryResponse": {
+                  "fields": {
+                    "batch": {
+                      "type": "AggregationResultBatch",
+                      "id": 1
+                    },
+                    "query": {
+                      "type": "AggregationQuery",
                       "id": 2
                     }
                   }
@@ -1170,438 +1755,6 @@
                           "type": "google.protobuf.Timestamp",
                           "id": 1
                         }
-                      }
-                    }
-                  }
-                },
-                "PartitionId": {
-                  "fields": {
-                    "projectId": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "databaseId": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "namespaceId": {
-                      "type": "string",
-                      "id": 4
-                    }
-                  }
-                },
-                "Key": {
-                  "fields": {
-                    "partitionId": {
-                      "type": "PartitionId",
-                      "id": 1
-                    },
-                    "path": {
-                      "rule": "repeated",
-                      "type": "PathElement",
-                      "id": 2
-                    }
-                  },
-                  "nested": {
-                    "PathElement": {
-                      "oneofs": {
-                        "idType": {
-                          "oneof": [
-                            "id",
-                            "name"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "kind": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "id": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    }
-                  }
-                },
-                "ArrayValue": {
-                  "fields": {
-                    "values": {
-                      "rule": "repeated",
-                      "type": "Value",
-                      "id": 1
-                    }
-                  }
-                },
-                "Value": {
-                  "oneofs": {
-                    "valueType": {
-                      "oneof": [
-                        "nullValue",
-                        "booleanValue",
-                        "integerValue",
-                        "doubleValue",
-                        "timestampValue",
-                        "keyValue",
-                        "stringValue",
-                        "blobValue",
-                        "geoPointValue",
-                        "entityValue",
-                        "arrayValue"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "nullValue": {
-                      "type": "google.protobuf.NullValue",
-                      "id": 11
-                    },
-                    "booleanValue": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "integerValue": {
-                      "type": "int64",
-                      "id": 2
-                    },
-                    "doubleValue": {
-                      "type": "double",
-                      "id": 3
-                    },
-                    "timestampValue": {
-                      "type": "google.protobuf.Timestamp",
-                      "id": 10
-                    },
-                    "keyValue": {
-                      "type": "Key",
-                      "id": 5
-                    },
-                    "stringValue": {
-                      "type": "string",
-                      "id": 17
-                    },
-                    "blobValue": {
-                      "type": "bytes",
-                      "id": 18
-                    },
-                    "geoPointValue": {
-                      "type": "google.type.LatLng",
-                      "id": 8
-                    },
-                    "entityValue": {
-                      "type": "Entity",
-                      "id": 6
-                    },
-                    "arrayValue": {
-                      "type": "ArrayValue",
-                      "id": 9
-                    },
-                    "meaning": {
-                      "type": "int32",
-                      "id": 14
-                    },
-                    "excludeFromIndexes": {
-                      "type": "bool",
-                      "id": 19
-                    }
-                  }
-                },
-                "Entity": {
-                  "fields": {
-                    "key": {
-                      "type": "Key",
-                      "id": 1
-                    },
-                    "properties": {
-                      "keyType": "string",
-                      "type": "Value",
-                      "id": 3
-                    }
-                  }
-                },
-                "EntityResult": {
-                  "fields": {
-                    "entity": {
-                      "type": "Entity",
-                      "id": 1
-                    },
-                    "version": {
-                      "type": "int64",
-                      "id": 4
-                    },
-                    "updateTime": {
-                      "type": "google.protobuf.Timestamp",
-                      "id": 5
-                    },
-                    "cursor": {
-                      "type": "bytes",
-                      "id": 3
-                    }
-                  },
-                  "nested": {
-                    "ResultType": {
-                      "values": {
-                        "RESULT_TYPE_UNSPECIFIED": 0,
-                        "FULL": 1,
-                        "PROJECTION": 2,
-                        "KEY_ONLY": 3
-                      }
-                    }
-                  }
-                },
-                "Query": {
-                  "fields": {
-                    "projection": {
-                      "rule": "repeated",
-                      "type": "Projection",
-                      "id": 2
-                    },
-                    "kind": {
-                      "rule": "repeated",
-                      "type": "KindExpression",
-                      "id": 3
-                    },
-                    "filter": {
-                      "type": "Filter",
-                      "id": 4
-                    },
-                    "order": {
-                      "rule": "repeated",
-                      "type": "PropertyOrder",
-                      "id": 5
-                    },
-                    "distinctOn": {
-                      "rule": "repeated",
-                      "type": "PropertyReference",
-                      "id": 6
-                    },
-                    "startCursor": {
-                      "type": "bytes",
-                      "id": 7
-                    },
-                    "endCursor": {
-                      "type": "bytes",
-                      "id": 8
-                    },
-                    "offset": {
-                      "type": "int32",
-                      "id": 10
-                    },
-                    "limit": {
-                      "type": "google.protobuf.Int32Value",
-                      "id": 12
-                    }
-                  }
-                },
-                "KindExpression": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                },
-                "PropertyReference": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 2
-                    }
-                  }
-                },
-                "Projection": {
-                  "fields": {
-                    "property": {
-                      "type": "PropertyReference",
-                      "id": 1
-                    }
-                  }
-                },
-                "PropertyOrder": {
-                  "fields": {
-                    "property": {
-                      "type": "PropertyReference",
-                      "id": 1
-                    },
-                    "direction": {
-                      "type": "Direction",
-                      "id": 2
-                    }
-                  },
-                  "nested": {
-                    "Direction": {
-                      "values": {
-                        "DIRECTION_UNSPECIFIED": 0,
-                        "ASCENDING": 1,
-                        "DESCENDING": 2
-                      }
-                    }
-                  }
-                },
-                "Filter": {
-                  "oneofs": {
-                    "filterType": {
-                      "oneof": [
-                        "compositeFilter",
-                        "propertyFilter"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "compositeFilter": {
-                      "type": "CompositeFilter",
-                      "id": 1
-                    },
-                    "propertyFilter": {
-                      "type": "PropertyFilter",
-                      "id": 2
-                    }
-                  }
-                },
-                "CompositeFilter": {
-                  "fields": {
-                    "op": {
-                      "type": "Operator",
-                      "id": 1
-                    },
-                    "filters": {
-                      "rule": "repeated",
-                      "type": "Filter",
-                      "id": 2
-                    }
-                  },
-                  "nested": {
-                    "Operator": {
-                      "values": {
-                        "OPERATOR_UNSPECIFIED": 0,
-                        "AND": 1
-                      }
-                    }
-                  }
-                },
-                "PropertyFilter": {
-                  "fields": {
-                    "property": {
-                      "type": "PropertyReference",
-                      "id": 1
-                    },
-                    "op": {
-                      "type": "Operator",
-                      "id": 2
-                    },
-                    "value": {
-                      "type": "Value",
-                      "id": 3
-                    }
-                  },
-                  "nested": {
-                    "Operator": {
-                      "values": {
-                        "OPERATOR_UNSPECIFIED": 0,
-                        "LESS_THAN": 1,
-                        "LESS_THAN_OR_EQUAL": 2,
-                        "GREATER_THAN": 3,
-                        "GREATER_THAN_OR_EQUAL": 4,
-                        "EQUAL": 5,
-                        "IN": 6,
-                        "NOT_EQUAL": 9,
-                        "HAS_ANCESTOR": 11,
-                        "NOT_IN": 13
-                      }
-                    }
-                  }
-                },
-                "GqlQuery": {
-                  "fields": {
-                    "queryString": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "allowLiterals": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "namedBindings": {
-                      "keyType": "string",
-                      "type": "GqlQueryParameter",
-                      "id": 5
-                    },
-                    "positionalBindings": {
-                      "rule": "repeated",
-                      "type": "GqlQueryParameter",
-                      "id": 4
-                    }
-                  }
-                },
-                "GqlQueryParameter": {
-                  "oneofs": {
-                    "parameterType": {
-                      "oneof": [
-                        "value",
-                        "cursor"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "value": {
-                      "type": "Value",
-                      "id": 2
-                    },
-                    "cursor": {
-                      "type": "bytes",
-                      "id": 3
-                    }
-                  }
-                },
-                "QueryResultBatch": {
-                  "fields": {
-                    "skippedResults": {
-                      "type": "int32",
-                      "id": 6
-                    },
-                    "skippedCursor": {
-                      "type": "bytes",
-                      "id": 3
-                    },
-                    "entityResultType": {
-                      "type": "EntityResult.ResultType",
-                      "id": 1
-                    },
-                    "entityResults": {
-                      "rule": "repeated",
-                      "type": "EntityResult",
-                      "id": 2
-                    },
-                    "endCursor": {
-                      "type": "bytes",
-                      "id": 4
-                    },
-                    "moreResults": {
-                      "type": "MoreResultsType",
-                      "id": 5
-                    },
-                    "snapshotVersion": {
-                      "type": "int64",
-                      "id": 7
-                    },
-                    "readTime": {
-                      "type": "google.protobuf.Timestamp",
-                      "id": 8
-                    }
-                  },
-                  "nested": {
-                    "MoreResultsType": {
-                      "values": {
-                        "MORE_RESULTS_TYPE_UNSPECIFIED": 0,
-                        "NOT_FINISHED": 1,
-                        "MORE_RESULTS_AFTER_LIMIT": 2,
-                        "MORE_RESULTS_AFTER_CURSOR": 4,
-                        "NO_MORE_RESULTS": 3
                       }
                     }
                   }
