@@ -252,9 +252,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.GetDataExchangeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataExchangeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.GetDataExchangeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -284,9 +285,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.GetDataExchangeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataExchangeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.GetDataExchangeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -332,9 +334,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.GetDataExchangeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataExchangeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.GetDataExchangeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -364,9 +367,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.GetDataExchangeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataExchangeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.GetDataExchangeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -386,9 +390,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.CreateDataExchangeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDataExchangeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.CreateDataExchangeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -419,9 +424,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.CreateDataExchangeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDataExchangeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.CreateDataExchangeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -467,9 +473,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.CreateDataExchangeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDataExchangeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.CreateDataExchangeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -499,9 +506,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.CreateDataExchangeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDataExchangeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.CreateDataExchangeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -522,10 +530,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
         new protos.google.cloud.bigquery.analyticshub.v1.UpdateDataExchangeRequest()
       );
       request.dataExchange ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDataExchangeRequest', [
-        'dataExchange',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.UpdateDataExchangeRequest',
+        ['dataExchange', 'name']
+      );
       request.dataExchange.name = defaultValue1;
       const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -557,10 +565,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
         new protos.google.cloud.bigquery.analyticshub.v1.UpdateDataExchangeRequest()
       );
       request.dataExchange ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDataExchangeRequest', [
-        'dataExchange',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.UpdateDataExchangeRequest',
+        ['dataExchange', 'name']
+      );
       request.dataExchange.name = defaultValue1;
       const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -607,10 +615,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
         new protos.google.cloud.bigquery.analyticshub.v1.UpdateDataExchangeRequest()
       );
       request.dataExchange ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDataExchangeRequest', [
-        'dataExchange',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.UpdateDataExchangeRequest',
+        ['dataExchange', 'name']
+      );
       request.dataExchange.name = defaultValue1;
       const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -641,10 +649,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
         new protos.google.cloud.bigquery.analyticshub.v1.UpdateDataExchangeRequest()
       );
       request.dataExchange ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDataExchangeRequest', [
-        'dataExchange',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.UpdateDataExchangeRequest',
+        ['dataExchange', 'name']
+      );
       request.dataExchange.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -664,9 +672,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DeleteDataExchangeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDataExchangeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.DeleteDataExchangeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -697,9 +706,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DeleteDataExchangeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDataExchangeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.DeleteDataExchangeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -745,9 +755,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DeleteDataExchangeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDataExchangeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.DeleteDataExchangeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -777,9 +788,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DeleteDataExchangeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDataExchangeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.DeleteDataExchangeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -799,7 +811,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.GetListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetListingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.GetListingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -829,7 +844,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.GetListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetListingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.GetListingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -875,7 +893,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.GetListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetListingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.GetListingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -905,7 +926,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.GetListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetListingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.GetListingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -925,9 +949,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.CreateListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateListingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.CreateListingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -957,9 +982,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.CreateListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateListingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.CreateListingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1005,9 +1031,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.CreateListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateListingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.CreateListingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1037,9 +1064,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.CreateListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateListingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.CreateListingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1060,10 +1088,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
         new protos.google.cloud.bigquery.analyticshub.v1.UpdateListingRequest()
       );
       request.listing ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateListingRequest', [
-        'listing',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.UpdateListingRequest',
+        ['listing', 'name']
+      );
       request.listing.name = defaultValue1;
       const expectedHeaderRequestParams = `listing.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1094,10 +1122,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
         new protos.google.cloud.bigquery.analyticshub.v1.UpdateListingRequest()
       );
       request.listing ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateListingRequest', [
-        'listing',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.UpdateListingRequest',
+        ['listing', 'name']
+      );
       request.listing.name = defaultValue1;
       const expectedHeaderRequestParams = `listing.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1144,10 +1172,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
         new protos.google.cloud.bigquery.analyticshub.v1.UpdateListingRequest()
       );
       request.listing ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateListingRequest', [
-        'listing',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.UpdateListingRequest',
+        ['listing', 'name']
+      );
       request.listing.name = defaultValue1;
       const expectedHeaderRequestParams = `listing.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1178,10 +1206,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
         new protos.google.cloud.bigquery.analyticshub.v1.UpdateListingRequest()
       );
       request.listing ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateListingRequest', [
-        'listing',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.UpdateListingRequest',
+        ['listing', 'name']
+      );
       request.listing.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1201,9 +1229,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DeleteListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteListingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.DeleteListingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1233,9 +1262,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DeleteListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteListingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.DeleteListingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1281,9 +1311,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DeleteListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteListingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.DeleteListingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1313,9 +1344,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DeleteListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteListingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.DeleteListingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1335,9 +1367,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubscribeListingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1367,9 +1400,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubscribeListingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1415,9 +1449,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubscribeListingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1447,9 +1482,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubscribeListingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1469,9 +1505,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1501,9 +1538,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1549,9 +1587,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1581,9 +1620,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1603,9 +1643,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1635,9 +1676,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1683,9 +1725,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1715,9 +1758,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1737,9 +1781,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1770,9 +1815,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1818,9 +1864,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1850,9 +1897,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1872,9 +1920,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1912,9 +1961,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1970,9 +2020,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2002,9 +2053,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2066,9 +2118,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2119,9 +2172,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2170,9 +2224,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListDataExchangesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2214,9 +2269,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
-        'organization',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest',
+        ['organization']
+      );
       request.organization = defaultValue1;
       const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedResponse = [
@@ -2255,9 +2311,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
-        'organization',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest',
+        ['organization']
+      );
       request.organization = defaultValue1;
       const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedResponse = [
@@ -2313,9 +2370,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
-        'organization',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest',
+        ['organization']
+      );
       request.organization = defaultValue1;
       const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2345,9 +2403,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
-        'organization',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest',
+        ['organization']
+      );
       request.organization = defaultValue1;
       const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedResponse = [
@@ -2409,9 +2468,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
-        'organization',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest',
+        ['organization']
+      );
       request.organization = defaultValue1;
       const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2462,9 +2522,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
-        'organization',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest',
+        ['organization']
+      );
       request.organization = defaultValue1;
       const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedResponse = [
@@ -2513,9 +2574,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
-        'organization',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesRequest',
+        ['organization']
+      );
       request.organization = defaultValue1;
       const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2557,9 +2619,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListListingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListListingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2597,9 +2660,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListListingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListListingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2655,9 +2719,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListListingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListListingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2687,9 +2752,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListListingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListListingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2749,9 +2815,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListListingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListListingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2802,9 +2869,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListListingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListListingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2853,9 +2921,10 @@ describe('v1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.ListListingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.analyticshub.v1.ListListingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
