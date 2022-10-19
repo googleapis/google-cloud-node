@@ -18,9 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {UserEventServiceClient} =
-  require('@google-cloud/discoveryengine').v1beta;
-const discoveryengineClient = new UserEventServiceClient();
+const {DocumentServiceClient} = require('@google-cloud/discoveryengine').v1beta;
+const discoveryengineClient = new DocumentServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -35,7 +34,7 @@ describe('Quickstart', () => {
 
   it('should run quickstart', async () => {
     const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+      `node ./quickstart.js projects/${projectId}/locations/global/dataStores/default_data_store/branches/0`,
       {cwd}
     );
     assert(output !== null);
