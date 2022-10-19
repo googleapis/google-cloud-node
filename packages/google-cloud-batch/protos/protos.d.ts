@@ -2017,6 +2017,9 @@ export namespace google {
                     /** AllocationPolicy instances */
                     instances?: (google.cloud.batch.v1.AllocationPolicy.IInstancePolicyOrTemplate[]|null);
 
+                    /** AllocationPolicy serviceAccount */
+                    serviceAccount?: (google.cloud.batch.v1.IServiceAccount|null);
+
                     /** AllocationPolicy labels */
                     labels?: ({ [k: string]: string }|null);
 
@@ -2038,6 +2041,9 @@ export namespace google {
 
                     /** AllocationPolicy instances. */
                     public instances: google.cloud.batch.v1.AllocationPolicy.IInstancePolicyOrTemplate[];
+
+                    /** AllocationPolicy serviceAccount. */
+                    public serviceAccount?: (google.cloud.batch.v1.IServiceAccount|null);
 
                     /** AllocationPolicy labels. */
                     public labels: { [k: string]: string };
@@ -2696,6 +2702,9 @@ export namespace google {
 
                         /** InstancePolicyOrTemplate instanceTemplate */
                         instanceTemplate?: (string|null);
+
+                        /** InstancePolicyOrTemplate installGpuDrivers */
+                        installGpuDrivers?: (boolean|null);
                     }
 
                     /** Represents an InstancePolicyOrTemplate. */
@@ -2712,6 +2721,9 @@ export namespace google {
 
                         /** InstancePolicyOrTemplate instanceTemplate. */
                         public instanceTemplate?: (string|null);
+
+                        /** InstancePolicyOrTemplate installGpuDrivers. */
+                        public installGpuDrivers: boolean;
 
                         /** InstancePolicyOrTemplate policyTemplate. */
                         public policyTemplate?: ("policy"|"instanceTemplate");
@@ -3142,6 +3154,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for TaskGroup
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ServiceAccount. */
+                interface IServiceAccount {
+
+                    /** ServiceAccount email */
+                    email?: (string|null);
+                }
+
+                /** Represents a ServiceAccount. */
+                class ServiceAccount implements IServiceAccount {
+
+                    /**
+                     * Constructs a new ServiceAccount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1.IServiceAccount);
+
+                    /** ServiceAccount email. */
+                    public email: string;
+
+                    /**
+                     * Creates a new ServiceAccount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceAccount instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1.IServiceAccount): google.cloud.batch.v1.ServiceAccount;
+
+                    /**
+                     * Encodes the specified ServiceAccount message. Does not implicitly {@link google.cloud.batch.v1.ServiceAccount.verify|verify} messages.
+                     * @param message ServiceAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1.IServiceAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceAccount message, length delimited. Does not implicitly {@link google.cloud.batch.v1.ServiceAccount.verify|verify} messages.
+                     * @param message ServiceAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1.IServiceAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceAccount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1.ServiceAccount;
+
+                    /**
+                     * Decodes a ServiceAccount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1.ServiceAccount;
+
+                    /**
+                     * Verifies a ServiceAccount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceAccount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceAccount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1.ServiceAccount;
+
+                    /**
+                     * Creates a plain object from a ServiceAccount message. Also converts values to other types if specified.
+                     * @param message ServiceAccount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1.ServiceAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceAccount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServiceAccount
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
