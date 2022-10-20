@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [5.1.7](https://github.com/googleapis/nodejs-logging-winston/compare/v5.1.6...v5.1.7) (2022-10-19)
+
+
+### Bug Fixes
+
+* Default callback is not called upon error ([#750](https://github.com/googleapis/nodejs-logging-winston/issues/750)) ([737dc6c](https://github.com/googleapis/nodejs-logging-winston/commit/737dc6c66c0fd51a37d9953d06fba9f4473d99f7))
+
 ## [5.1.6](https://github.com/googleapis/nodejs-logging-winston/compare/v5.1.5...v5.1.6) (2022-10-13)
 
 
