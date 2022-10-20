@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.5.4](https://github.com/googleapis/nodejs-storage/compare/v6.5.3...v6.5.4) (2022-10-20)
+
+
+### Bug Fixes
+
+* Revert STORAGE_EMULATOR_HOST handling ([#2089](https://github.com/googleapis/nodejs-storage/issues/2089)) ([48dce65](https://github.com/googleapis/nodejs-storage/commit/48dce654064470f7496d160d87b696ab5cfd65d4))
+
 ## [6.5.3](https://github.com/googleapis/nodejs-storage/compare/v6.5.2...v6.5.3) (2022-10-18)
 
 
