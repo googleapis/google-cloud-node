@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -54,6 +54,60 @@ npm install @google-cloud/storageinsights
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. Parent value for ListReportConfigsRequest
+ */
+// const parent = 'abc123'
+/**
+ *  Requested page size. Server may return fewer items than requested.
+ *  If unspecified, server will pick an appropriate default.
+ */
+// const pageSize = 1234
+/**
+ *  A token identifying a page of results the server should return.
+ */
+// const pageToken = 'abc123'
+/**
+ *  Filtering results
+ */
+// const filter = 'abc123'
+/**
+ *  Hint for how to order the results
+ */
+// const orderBy = 'abc123'
+
+// Imports the Storageinsights library
+const {StorageInsightsClient} = require('@google-cloud/storageinsights').v1;
+
+// Instantiates a client
+const storageinsightsClient = new StorageInsightsClient();
+
+async function callListReportConfigs() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await storageinsightsClient.listReportConfigsAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListReportConfigs();
+
+```
+
 
 
 ## Samples
@@ -69,6 +123,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Storage_insights.list_report_configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.list_report_configs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.list_report_configs.js,samples/README.md) |
 | Storage_insights.list_report_details | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.list_report_details.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.list_report_details.js,samples/README.md) |
 | Storage_insights.update_report_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.update_report_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.update_report_config.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/quickstart.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/test/quickstart.js,samples/README.md) |
 
 

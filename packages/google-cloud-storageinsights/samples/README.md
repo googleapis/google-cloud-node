@@ -20,6 +20,7 @@
   * [Storage_insights.list_report_details](#storage_insights.list_report_details)
   * [Storage_insights.update_report_config](#storage_insights.update_report_config)
   * [Quickstart](#quickstart)
+  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -148,6 +149,23 @@ __Usage:__
 
 
 `node packages/google-cloud-storageinsights/samples/generated/v1/storage_insights.update_report_config.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-storageinsights/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-storageinsights/samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-storageinsights/samples/quickstart.js`
 
 
 -----
