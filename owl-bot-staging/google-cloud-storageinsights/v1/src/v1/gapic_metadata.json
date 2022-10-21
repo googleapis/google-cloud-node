@@ -1,0 +1,101 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.storageinsights.v1",
+  "libraryPackage": "@google-cloud/storageinsights",
+  "services": {
+    "StorageInsights": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "StorageInsightsClient",
+          "rpcs": {
+            "GetReportConfig": {
+              "methods": [
+                "getReportConfig"
+              ]
+            },
+            "CreateReportConfig": {
+              "methods": [
+                "createReportConfig"
+              ]
+            },
+            "UpdateReportConfig": {
+              "methods": [
+                "updateReportConfig"
+              ]
+            },
+            "DeleteReportConfig": {
+              "methods": [
+                "deleteReportConfig"
+              ]
+            },
+            "GetReportDetail": {
+              "methods": [
+                "getReportDetail"
+              ]
+            },
+            "ListReportConfigs": {
+              "methods": [
+                "listReportConfigs",
+                "listReportConfigsStream",
+                "listReportConfigsAsync"
+              ]
+            },
+            "ListReportDetails": {
+              "methods": [
+                "listReportDetails",
+                "listReportDetailsStream",
+                "listReportDetailsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "StorageInsightsClient",
+          "rpcs": {
+            "GetReportConfig": {
+              "methods": [
+                "getReportConfig"
+              ]
+            },
+            "CreateReportConfig": {
+              "methods": [
+                "createReportConfig"
+              ]
+            },
+            "UpdateReportConfig": {
+              "methods": [
+                "updateReportConfig"
+              ]
+            },
+            "DeleteReportConfig": {
+              "methods": [
+                "deleteReportConfig"
+              ]
+            },
+            "GetReportDetail": {
+              "methods": [
+                "getReportDetail"
+              ]
+            },
+            "ListReportConfigs": {
+              "methods": [
+                "listReportConfigs",
+                "listReportConfigsStream",
+                "listReportConfigsAsync"
+              ]
+            },
+            "ListReportDetails": {
+              "methods": [
+                "listReportDetails",
+                "listReportDetailsStream",
+                "listReportDetailsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
