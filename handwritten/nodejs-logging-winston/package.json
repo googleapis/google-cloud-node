@@ -60,7 +60,7 @@
     "@google-cloud/common": "^4.0.0",
     "@types/lodash.mapvalues": "^4.6.6",
     "@types/mocha": "^9.0.0",
-    "@types/node": "^16.0.0",
+    "@types/node": "^18.0.0",
     "@types/proxyquire": "^1.3.28",
     "@types/triple-beam": "^1.3.0",
     "@types/uuid": "^8.0.0",
