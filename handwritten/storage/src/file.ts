@@ -1530,12 +1530,15 @@ class File extends ServiceObject<File> {
         }
 
         const handoffStream = new PassThrough({
-          final: async cb => {
+          final: cb => {
             // Preserving `onComplete`'s ability to
             // destroy `throughStream` before pipeline
             // attempts to.
-            await onComplete(null);
-            cb();
+            onComplete(null)
+              .then(() => {
+                cb();
+              })
+              .catch(cb);
           },
         });
 
