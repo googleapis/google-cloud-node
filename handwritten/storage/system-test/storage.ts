@@ -2698,14 +2698,7 @@ describe('storage', () => {
 
         before(async () => {
           // get a CRC32C value from the file
-          crc32c = await new Promise((resolve, reject) => {
-            const crc32c = new CRC32C();
-
-            fs.createReadStream(filePath)
-              .on('data', (d: Buffer) => crc32c.update(d))
-              .on('end', () => resolve(crc32c.toString()))
-              .on('error', reject);
-          });
+          crc32c = (await CRC32C.fromFile(filePath)).toString();
         });
 
         async function uploadAndVerify(

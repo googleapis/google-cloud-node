@@ -20,6 +20,9 @@ import {
   CRC32C_EXCEPTION_MESSAGES,
 } from '../src';
 import * as assert from 'assert';
+import {join} from 'path';
+import {tmpdir} from 'os';
+import * as fs from 'fs';
 
 const KNOWN_INPUT_TO_CRC32C = {
   /** empty string (i.e. nothing to 'update') */
@@ -495,6 +498,31 @@ describe('CRC32C', () => {
             assert.throws(() => CRC32C.from(number), expectedError);
           }
         });
+      });
+    });
+
+    describe('.fromFile', () => {
+      let tempFilePath: string;
+
+      beforeEach(async () => {
+        tempFilePath = join(tmpdir(), 'test.crc32c.fromFile');
+      });
+
+      after(async () => {
+        try {
+          await fs.promises.unlink(tempFilePath);
+        } catch (e) {
+          // errors are fine
+        }
+      });
+
+      it('should generate a valid `crc32c` via a file path', async () => {
+        for (const [key, expected] of Object.entries(KNOWN_INPUT_TO_CRC32C)) {
+          await fs.promises.writeFile(tempFilePath, key);
+
+          const crc32c = await CRC32C.fromFile(tempFilePath);
+          assert.equal(crc32c.toString(), expected);
+        }
       });
     });
   });
