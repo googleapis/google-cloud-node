@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.6.0](https://github.com/googleapis/nodejs-storage/compare/v6.5.4...v6.6.0) (2022-10-25)
+
+
+### Features
+
+* **crc32c:** Convenient Method For Reading Files ([#2095](https://github.com/googleapis/nodejs-storage/issues/2095)) ([2145c81](https://github.com/googleapis/nodejs-storage/commit/2145c8177f3659fb5f193045866fbcd1220aaeaf))
+
+
+### Bug Fixes
+
+* Remove async from final function which causes double invocation … ([#2094](https://github.com/googleapis/nodejs-storage/issues/2094)) ([1a3df98](https://github.com/googleapis/nodejs-storage/commit/1a3df985e9096229bc2909921b4974680e12be2a))
+
 ## [6.5.4](https://github.com/googleapis/nodejs-storage/compare/v6.5.3...v6.5.4) (2022-10-20)
 
 
