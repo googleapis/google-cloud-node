@@ -40,7 +40,7 @@ function main(updateMask, listing) {
   // const listing = {}
 
   // Imports the Analyticshub library
-  const {AnalyticsHubServiceClient} = require('@google-cloud/analyticshub').v1;
+  const {AnalyticsHubServiceClient} = require('@google-cloud/bigquery-analyticshub').v1;
 
   // Instantiates a client
   const analyticshubClient = new AnalyticsHubServiceClient();
