@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,10 +14,10 @@
 // limitations under the License.
 
 import yargs from 'yargs';
-import loggers from '../loggers.js';
-import {createLoggers} from '../loggers.js';
+import loggers from './loggers.js';
+import {createLoggers} from './loggers.js';
 import util from 'node:util';
-import {symbols} from '../symbols.js';
+import {symbols} from './symbols.js';
 import {
   filterByContents,
   findSamples,
@@ -24,7 +25,7 @@ import {
   writeSamples,
   waitForAllSamples,
   fromArray,
-} from '../samples.js';
+} from './samples.js';
 import url from 'node:url';
 
 let returnValue = 0;
@@ -181,16 +182,4 @@ export async function main(args: string[]): Promise<number> {
   }
 
   return returnValue;
-}
-
-// Only activate our command line mode if this is the "main" module.
-if (import.meta.url === url.pathToFileURL(process.argv[1]).href) {
-  main(process.argv.slice(2))
-    .then(e => process.exit(e))
-    .catch((e: Error) => {
-      console.error(
-        `Top level exception: ${e.toString()} ${e.stack?.toString()}`
-      );
-      process.exit(1);
-    });
 }
