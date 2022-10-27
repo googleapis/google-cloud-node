@@ -32,7 +32,8 @@
     "packages/google-maps-routing": {},
     "packages/google-monitoring-dashboard": {},
     "packages/typeless-sample-bot": {},
-    "packages/google-cloud-discoveryengine": {}
+    "packages/google-cloud-discoveryengine": {},
+    "packages/google-cloud-contentwarehouse": {}
   },
   "plugins": [
     {
