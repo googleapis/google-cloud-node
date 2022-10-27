@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.0.0...typeless-sample-bot-v1.0.1) (2022-10-27)
+
+
+### Bug Fixes
+
+* Typeless bot updates for a fully functioning packaged version ([#3461](https://github.com/googleapis/google-cloud-node/issues/3461)) ([8e93229](https://github.com/googleapis/google-cloud-node/commit/8e9322948123465f7a0c5edbb226697505ac7b5e))
+
 ## 1.0.0 (2022-08-25)
 
 
