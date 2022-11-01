@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [5.1.8](https://github.com/googleapis/nodejs-logging-winston/compare/v5.1.7...v5.1.8) (2022-11-01)
+
+
+### Bug Fixes
+
+* Prevent instrumentation crash and fix the system test ([#756](https://github.com/googleapis/nodejs-logging-winston/issues/756)) ([fdb6b26](https://github.com/googleapis/nodejs-logging-winston/commit/fdb6b26c2ed61158b0ee45f0419f788191047e1b))
+
 ## [5.1.7](https://github.com/googleapis/nodejs-logging-winston/compare/v5.1.6...v5.1.7) (2022-10-19)
 
 
