@@ -89,6 +89,11 @@ export const LOGGING_SPAN_KEY = 'logging.googleapis.com/spanId';
  */
 export const LOGGING_SAMPLED_KEY = 'logging.googleapis.com/trace_sampled';
 
+/**
+ * Default library version to be used if version retrieval fails
+ */
+export const NODEJS_WINSTON_DEFAULT_LIBRARY_VERSION = 'unknown';
+
 // The variable to hold cached library version
 let libraryVersion: string;
 
@@ -352,11 +357,15 @@ export function getNodejsLibraryVersion() {
   if (libraryVersion) {
     return libraryVersion;
   }
-  libraryVersion = require(path.resolve(
-    __dirname,
-    '../../',
-    'package.json'
-  )).version;
+  try {
+    libraryVersion = require(path.resolve(
+      __dirname,
+      '../../',
+      'package.json'
+    )).version;
+  } catch (err) {
+    libraryVersion = NODEJS_WINSTON_DEFAULT_LIBRARY_VERSION;
+  }
   return libraryVersion;
 }
 
