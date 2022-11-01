@@ -14715,6 +14715,7 @@
                          * Properties of a Route.
                          * @memberof google.maps.routing.v2
                          * @interface IRoute
+                         * @property {Array.<google.maps.routing.v2.RouteLabel>|null} [routeLabels] Route routeLabels
                          * @property {Array.<google.maps.routing.v2.IRouteLeg>|null} [legs] Route legs
                          * @property {number|null} [distanceMeters] Route distanceMeters
                          * @property {google.protobuf.IDuration|null} [duration] Route duration
@@ -14724,6 +14725,7 @@
                          * @property {Array.<string>|null} [warnings] Route warnings
                          * @property {google.geo.type.IViewport|null} [viewport] Route viewport
                          * @property {google.maps.routing.v2.IRouteTravelAdvisory|null} [travelAdvisory] Route travelAdvisory
+                         * @property {string|null} [routeToken] Route routeToken
                          */
     
                         /**
@@ -14735,6 +14737,7 @@
                          * @param {google.maps.routing.v2.IRoute=} [properties] Properties to set
                          */
                         function Route(properties) {
+                            this.routeLabels = [];
                             this.legs = [];
                             this.warnings = [];
                             if (properties)
@@ -14742,6 +14745,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * Route routeLabels.
+                         * @member {Array.<google.maps.routing.v2.RouteLabel>} routeLabels
+                         * @memberof google.maps.routing.v2.Route
+                         * @instance
+                         */
+                        Route.prototype.routeLabels = $util.emptyArray;
     
                         /**
                          * Route legs.
@@ -14816,6 +14827,14 @@
                         Route.prototype.travelAdvisory = null;
     
                         /**
+                         * Route routeToken.
+                         * @member {string} routeToken
+                         * @memberof google.maps.routing.v2.Route
+                         * @instance
+                         */
+                        Route.prototype.routeToken = "";
+    
+                        /**
                          * Creates a new Route instance using the specified properties.
                          * @function create
                          * @memberof google.maps.routing.v2.Route
@@ -14859,6 +14878,14 @@
                                 $root.google.geo.type.Viewport.encode(message.viewport, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.travelAdvisory != null && Object.hasOwnProperty.call(message, "travelAdvisory"))
                                 $root.google.maps.routing.v2.RouteTravelAdvisory.encode(message.travelAdvisory, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.routeToken != null && Object.hasOwnProperty.call(message, "routeToken"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.routeToken);
+                            if (message.routeLabels != null && message.routeLabels.length) {
+                                writer.uint32(/* id 13, wireType 2 =*/106).fork();
+                                for (var i = 0; i < message.routeLabels.length; ++i)
+                                    writer.int32(message.routeLabels[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -14893,6 +14920,17 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 13: {
+                                        if (!(message.routeLabels && message.routeLabels.length))
+                                            message.routeLabels = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.routeLabels.push(reader.int32());
+                                        } else
+                                            message.routeLabels.push(reader.int32());
+                                        break;
+                                    }
                                 case 1: {
                                         if (!(message.legs && message.legs.length))
                                             message.legs = [];
@@ -14933,6 +14971,10 @@
                                         message.travelAdvisory = $root.google.maps.routing.v2.RouteTravelAdvisory.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 12: {
+                                        message.routeToken = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14968,6 +15010,20 @@
                         Route.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.routeLabels != null && message.hasOwnProperty("routeLabels")) {
+                                if (!Array.isArray(message.routeLabels))
+                                    return "routeLabels: array expected";
+                                for (var i = 0; i < message.routeLabels.length; ++i)
+                                    switch (message.routeLabels[i]) {
+                                    default:
+                                        return "routeLabels: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
                             if (message.legs != null && message.hasOwnProperty("legs")) {
                                 if (!Array.isArray(message.legs))
                                     return "legs: array expected";
@@ -15015,6 +15071,9 @@
                                 if (error)
                                     return "travelAdvisory." + error;
                             }
+                            if (message.routeToken != null && message.hasOwnProperty("routeToken"))
+                                if (!$util.isString(message.routeToken))
+                                    return "routeToken: string expected";
                             return null;
                         };
     
@@ -15030,6 +15089,31 @@
                             if (object instanceof $root.google.maps.routing.v2.Route)
                                 return object;
                             var message = new $root.google.maps.routing.v2.Route();
+                            if (object.routeLabels) {
+                                if (!Array.isArray(object.routeLabels))
+                                    throw TypeError(".google.maps.routing.v2.Route.routeLabels: array expected");
+                                message.routeLabels = [];
+                                for (var i = 0; i < object.routeLabels.length; ++i)
+                                    switch (object.routeLabels[i]) {
+                                    default:
+                                    case "ROUTE_LABEL_UNSPECIFIED":
+                                    case 0:
+                                        message.routeLabels[i] = 0;
+                                        break;
+                                    case "DEFAULT_ROUTE":
+                                    case 1:
+                                        message.routeLabels[i] = 1;
+                                        break;
+                                    case "DEFAULT_ROUTE_ALTERNATE":
+                                    case 2:
+                                        message.routeLabels[i] = 2;
+                                        break;
+                                    case "FUEL_EFFICIENT":
+                                    case 3:
+                                        message.routeLabels[i] = 3;
+                                        break;
+                                    }
+                            }
                             if (object.legs) {
                                 if (!Array.isArray(object.legs))
                                     throw TypeError(".google.maps.routing.v2.Route.legs: array expected");
@@ -15076,6 +15160,8 @@
                                     throw TypeError(".google.maps.routing.v2.Route.travelAdvisory: object expected");
                                 message.travelAdvisory = $root.google.maps.routing.v2.RouteTravelAdvisory.fromObject(object.travelAdvisory);
                             }
+                            if (object.routeToken != null)
+                                message.routeToken = String(object.routeToken);
                             return message;
                         };
     
@@ -15095,6 +15181,7 @@
                             if (options.arrays || options.defaults) {
                                 object.legs = [];
                                 object.warnings = [];
+                                object.routeLabels = [];
                             }
                             if (options.defaults) {
                                 object.distanceMeters = 0;
@@ -15104,6 +15191,7 @@
                                 object.description = "";
                                 object.viewport = null;
                                 object.travelAdvisory = null;
+                                object.routeToken = "";
                             }
                             if (message.legs && message.legs.length) {
                                 object.legs = [];
@@ -15129,6 +15217,13 @@
                                 object.viewport = $root.google.geo.type.Viewport.toObject(message.viewport, options);
                             if (message.travelAdvisory != null && message.hasOwnProperty("travelAdvisory"))
                                 object.travelAdvisory = $root.google.maps.routing.v2.RouteTravelAdvisory.toObject(message.travelAdvisory, options);
+                            if (message.routeToken != null && message.hasOwnProperty("routeToken"))
+                                object.routeToken = message.routeToken;
+                            if (message.routeLabels && message.routeLabels.length) {
+                                object.routeLabels = [];
+                                for (var j = 0; j < message.routeLabels.length; ++j)
+                                    object.routeLabels[j] = options.enums === String ? $root.google.maps.routing.v2.RouteLabel[message.routeLabels[j]] : message.routeLabels[j];
+                            }
                             return object;
                         };
     
@@ -15169,6 +15264,7 @@
                          * @interface IRouteTravelAdvisory
                          * @property {google.maps.routing.v2.ITollInfo|null} [tollInfo] RouteTravelAdvisory tollInfo
                          * @property {Array.<google.maps.routing.v2.ISpeedReadingInterval>|null} [speedReadingIntervals] RouteTravelAdvisory speedReadingIntervals
+                         * @property {number|Long|null} [fuelConsumptionMicroliters] RouteTravelAdvisory fuelConsumptionMicroliters
                          */
     
                         /**
@@ -15204,6 +15300,14 @@
                         RouteTravelAdvisory.prototype.speedReadingIntervals = $util.emptyArray;
     
                         /**
+                         * RouteTravelAdvisory fuelConsumptionMicroliters.
+                         * @member {number|Long} fuelConsumptionMicroliters
+                         * @memberof google.maps.routing.v2.RouteTravelAdvisory
+                         * @instance
+                         */
+                        RouteTravelAdvisory.prototype.fuelConsumptionMicroliters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
                          * Creates a new RouteTravelAdvisory instance using the specified properties.
                          * @function create
                          * @memberof google.maps.routing.v2.RouteTravelAdvisory
@@ -15232,6 +15336,8 @@
                             if (message.speedReadingIntervals != null && message.speedReadingIntervals.length)
                                 for (var i = 0; i < message.speedReadingIntervals.length; ++i)
                                     $root.google.maps.routing.v2.SpeedReadingInterval.encode(message.speedReadingIntervals[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.fuelConsumptionMicroliters != null && Object.hasOwnProperty.call(message, "fuelConsumptionMicroliters"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.fuelConsumptionMicroliters);
                             return writer;
                         };
     
@@ -15274,6 +15380,10 @@
                                         if (!(message.speedReadingIntervals && message.speedReadingIntervals.length))
                                             message.speedReadingIntervals = [];
                                         message.speedReadingIntervals.push($root.google.maps.routing.v2.SpeedReadingInterval.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.fuelConsumptionMicroliters = reader.int64();
                                         break;
                                     }
                                 default:
@@ -15325,6 +15435,9 @@
                                         return "speedReadingIntervals." + error;
                                 }
                             }
+                            if (message.fuelConsumptionMicroliters != null && message.hasOwnProperty("fuelConsumptionMicroliters"))
+                                if (!$util.isInteger(message.fuelConsumptionMicroliters) && !(message.fuelConsumptionMicroliters && $util.isInteger(message.fuelConsumptionMicroliters.low) && $util.isInteger(message.fuelConsumptionMicroliters.high)))
+                                    return "fuelConsumptionMicroliters: integer|Long expected";
                             return null;
                         };
     
@@ -15355,6 +15468,15 @@
                                     message.speedReadingIntervals[i] = $root.google.maps.routing.v2.SpeedReadingInterval.fromObject(object.speedReadingIntervals[i]);
                                 }
                             }
+                            if (object.fuelConsumptionMicroliters != null)
+                                if ($util.Long)
+                                    (message.fuelConsumptionMicroliters = $util.Long.fromValue(object.fuelConsumptionMicroliters)).unsigned = false;
+                                else if (typeof object.fuelConsumptionMicroliters === "string")
+                                    message.fuelConsumptionMicroliters = parseInt(object.fuelConsumptionMicroliters, 10);
+                                else if (typeof object.fuelConsumptionMicroliters === "number")
+                                    message.fuelConsumptionMicroliters = object.fuelConsumptionMicroliters;
+                                else if (typeof object.fuelConsumptionMicroliters === "object")
+                                    message.fuelConsumptionMicroliters = new $util.LongBits(object.fuelConsumptionMicroliters.low >>> 0, object.fuelConsumptionMicroliters.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -15373,8 +15495,14 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.speedReadingIntervals = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.tollInfo = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.fuelConsumptionMicroliters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.fuelConsumptionMicroliters = options.longs === String ? "0" : 0;
+                            }
                             if (message.tollInfo != null && message.hasOwnProperty("tollInfo"))
                                 object.tollInfo = $root.google.maps.routing.v2.TollInfo.toObject(message.tollInfo, options);
                             if (message.speedReadingIntervals && message.speedReadingIntervals.length) {
@@ -15382,6 +15510,11 @@
                                 for (var j = 0; j < message.speedReadingIntervals.length; ++j)
                                     object.speedReadingIntervals[j] = $root.google.maps.routing.v2.SpeedReadingInterval.toObject(message.speedReadingIntervals[j], options);
                             }
+                            if (message.fuelConsumptionMicroliters != null && message.hasOwnProperty("fuelConsumptionMicroliters"))
+                                if (typeof message.fuelConsumptionMicroliters === "number")
+                                    object.fuelConsumptionMicroliters = options.longs === String ? String(message.fuelConsumptionMicroliters) : message.fuelConsumptionMicroliters;
+                                else
+                                    object.fuelConsumptionMicroliters = options.longs === String ? $util.Long.prototype.toString.call(message.fuelConsumptionMicroliters) : options.longs === Number ? new $util.LongBits(message.fuelConsumptionMicroliters.low >>> 0, message.fuelConsumptionMicroliters.high >>> 0).toNumber() : message.fuelConsumptionMicroliters;
                             return object;
                         };
     
@@ -16678,6 +16811,24 @@
                         };
     
                         return RouteLegStep;
+                    })();
+    
+                    /**
+                     * RouteLabel enum.
+                     * @name google.maps.routing.v2.RouteLabel
+                     * @enum {number}
+                     * @property {number} ROUTE_LABEL_UNSPECIFIED=0 ROUTE_LABEL_UNSPECIFIED value
+                     * @property {number} DEFAULT_ROUTE=1 DEFAULT_ROUTE value
+                     * @property {number} DEFAULT_ROUTE_ALTERNATE=2 DEFAULT_ROUTE_ALTERNATE value
+                     * @property {number} FUEL_EFFICIENT=3 FUEL_EFFICIENT value
+                     */
+                    v2.RouteLabel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ROUTE_LABEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DEFAULT_ROUTE"] = 1;
+                        values[valuesById[2] = "DEFAULT_ROUTE_ALTERNATE"] = 2;
+                        values[valuesById[3] = "FUEL_EFFICIENT"] = 3;
+                        return values;
                     })();
     
                     v2.SpeedReadingInterval = (function() {
@@ -18375,6 +18526,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -18408,6 +18560,10 @@
                             case "HYBRID":
                             case 3:
                                 message.emissionType = 3;
+                                break;
+                            case "DIESEL":
+                            case 4:
+                                message.emissionType = 4;
                                 break;
                             }
                             return message;
@@ -18470,6 +18626,7 @@
                      * @property {number} GASOLINE=1 GASOLINE value
                      * @property {number} ELECTRIC=2 ELECTRIC value
                      * @property {number} HYBRID=3 HYBRID value
+                     * @property {number} DIESEL=4 DIESEL value
                      */
                     v2.VehicleEmissionType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -18477,6 +18634,7 @@
                         values[valuesById[1] = "GASOLINE"] = 1;
                         values[valuesById[2] = "ELECTRIC"] = 2;
                         values[valuesById[3] = "HYBRID"] = 3;
+                        values[valuesById[4] = "DIESEL"] = 4;
                         return values;
                     })();
     
@@ -18619,6 +18777,7 @@
                          * @property {google.maps.routing.v2.IRouteModifiers|null} [routeModifiers] ComputeRoutesRequest routeModifiers
                          * @property {string|null} [languageCode] ComputeRoutesRequest languageCode
                          * @property {google.maps.routing.v2.Units|null} [units] ComputeRoutesRequest units
+                         * @property {Array.<google.maps.routing.v2.ComputeRoutesRequest.ReferenceRoute>|null} [requestedReferenceRoutes] ComputeRoutesRequest requestedReferenceRoutes
                          */
     
                         /**
@@ -18631,6 +18790,7 @@
                          */
                         function ComputeRoutesRequest(properties) {
                             this.intermediates = [];
+                            this.requestedReferenceRoutes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -18734,6 +18894,14 @@
                         ComputeRoutesRequest.prototype.units = 0;
     
                         /**
+                         * ComputeRoutesRequest requestedReferenceRoutes.
+                         * @member {Array.<google.maps.routing.v2.ComputeRoutesRequest.ReferenceRoute>} requestedReferenceRoutes
+                         * @memberof google.maps.routing.v2.ComputeRoutesRequest
+                         * @instance
+                         */
+                        ComputeRoutesRequest.prototype.requestedReferenceRoutes = $util.emptyArray;
+    
+                        /**
                          * Creates a new ComputeRoutesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.routing.v2.ComputeRoutesRequest
@@ -18782,6 +18950,12 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).int32(message.units);
                             if (message.polylineEncoding != null && Object.hasOwnProperty.call(message, "polylineEncoding"))
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.polylineEncoding);
+                            if (message.requestedReferenceRoutes != null && message.requestedReferenceRoutes.length) {
+                                writer.uint32(/* id 14, wireType 2 =*/114).fork();
+                                for (var i = 0; i < message.requestedReferenceRoutes.length; ++i)
+                                    writer.int32(message.requestedReferenceRoutes[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -18864,6 +19038,17 @@
                                     }
                                 case 11: {
                                         message.units = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.requestedReferenceRoutes && message.requestedReferenceRoutes.length))
+                                            message.requestedReferenceRoutes = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.requestedReferenceRoutes.push(reader.int32());
+                                        } else
+                                            message.requestedReferenceRoutes.push(reader.int32());
                                         break;
                                     }
                                 default:
@@ -18984,6 +19169,18 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.requestedReferenceRoutes != null && message.hasOwnProperty("requestedReferenceRoutes")) {
+                                if (!Array.isArray(message.requestedReferenceRoutes))
+                                    return "requestedReferenceRoutes: array expected";
+                                for (var i = 0; i < message.requestedReferenceRoutes.length; ++i)
+                                    switch (message.requestedReferenceRoutes[i]) {
+                                    default:
+                                        return "requestedReferenceRoutes: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
                             return null;
                         };
     
@@ -19115,6 +19312,23 @@
                                 message.units = 2;
                                 break;
                             }
+                            if (object.requestedReferenceRoutes) {
+                                if (!Array.isArray(object.requestedReferenceRoutes))
+                                    throw TypeError(".google.maps.routing.v2.ComputeRoutesRequest.requestedReferenceRoutes: array expected");
+                                message.requestedReferenceRoutes = [];
+                                for (var i = 0; i < object.requestedReferenceRoutes.length; ++i)
+                                    switch (object.requestedReferenceRoutes[i]) {
+                                    default:
+                                    case "REFERENCE_ROUTE_UNSPECIFIED":
+                                    case 0:
+                                        message.requestedReferenceRoutes[i] = 0;
+                                        break;
+                                    case "FUEL_EFFICIENT":
+                                    case 1:
+                                        message.requestedReferenceRoutes[i] = 1;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -19131,8 +19345,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.intermediates = [];
+                                object.requestedReferenceRoutes = [];
+                            }
                             if (options.defaults) {
                                 object.origin = null;
                                 object.destination = null;
@@ -19173,6 +19389,11 @@
                                 object.units = options.enums === String ? $root.google.maps.routing.v2.Units[message.units] : message.units;
                             if (message.polylineEncoding != null && message.hasOwnProperty("polylineEncoding"))
                                 object.polylineEncoding = options.enums === String ? $root.google.maps.routing.v2.PolylineEncoding[message.polylineEncoding] : message.polylineEncoding;
+                            if (message.requestedReferenceRoutes && message.requestedReferenceRoutes.length) {
+                                object.requestedReferenceRoutes = [];
+                                for (var j = 0; j < message.requestedReferenceRoutes.length; ++j)
+                                    object.requestedReferenceRoutes[j] = options.enums === String ? $root.google.maps.routing.v2.ComputeRoutesRequest.ReferenceRoute[message.requestedReferenceRoutes[j]] : message.requestedReferenceRoutes[j];
+                            }
                             return object;
                         };
     
@@ -19201,6 +19422,20 @@
                             }
                             return typeUrlPrefix + "/google.maps.routing.v2.ComputeRoutesRequest";
                         };
+    
+                        /**
+                         * ReferenceRoute enum.
+                         * @name google.maps.routing.v2.ComputeRoutesRequest.ReferenceRoute
+                         * @enum {number}
+                         * @property {number} REFERENCE_ROUTE_UNSPECIFIED=0 REFERENCE_ROUTE_UNSPECIFIED value
+                         * @property {number} FUEL_EFFICIENT=1 FUEL_EFFICIENT value
+                         */
+                        ComputeRoutesRequest.ReferenceRoute = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REFERENCE_ROUTE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FUEL_EFFICIENT"] = 1;
+                            return values;
+                        })();
     
                         return ComputeRoutesRequest;
                     })();

@@ -5671,6 +5671,9 @@ export namespace google {
                 /** Properties of a Route. */
                 interface IRoute {
 
+                    /** Route routeLabels */
+                    routeLabels?: (google.maps.routing.v2.RouteLabel[]|null);
+
                     /** Route legs */
                     legs?: (google.maps.routing.v2.IRouteLeg[]|null);
 
@@ -5697,6 +5700,9 @@ export namespace google {
 
                     /** Route travelAdvisory */
                     travelAdvisory?: (google.maps.routing.v2.IRouteTravelAdvisory|null);
+
+                    /** Route routeToken */
+                    routeToken?: (string|null);
                 }
 
                 /** Represents a Route. */
@@ -5707,6 +5713,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.maps.routing.v2.IRoute);
+
+                    /** Route routeLabels. */
+                    public routeLabels: google.maps.routing.v2.RouteLabel[];
 
                     /** Route legs. */
                     public legs: google.maps.routing.v2.IRouteLeg[];
@@ -5734,6 +5743,9 @@ export namespace google {
 
                     /** Route travelAdvisory. */
                     public travelAdvisory?: (google.maps.routing.v2.IRouteTravelAdvisory|null);
+
+                    /** Route routeToken. */
+                    public routeToken: string;
 
                     /**
                      * Creates a new Route instance using the specified properties.
@@ -5821,6 +5833,9 @@ export namespace google {
 
                     /** RouteTravelAdvisory speedReadingIntervals */
                     speedReadingIntervals?: (google.maps.routing.v2.ISpeedReadingInterval[]|null);
+
+                    /** RouteTravelAdvisory fuelConsumptionMicroliters */
+                    fuelConsumptionMicroliters?: (number|Long|string|null);
                 }
 
                 /** Represents a RouteTravelAdvisory. */
@@ -5837,6 +5852,9 @@ export namespace google {
 
                     /** RouteTravelAdvisory speedReadingIntervals. */
                     public speedReadingIntervals: google.maps.routing.v2.ISpeedReadingInterval[];
+
+                    /** RouteTravelAdvisory fuelConsumptionMicroliters. */
+                    public fuelConsumptionMicroliters: (number|Long|string);
 
                     /**
                      * Creates a new RouteTravelAdvisory instance using the specified properties.
@@ -6388,6 +6406,14 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** RouteLabel enum. */
+                enum RouteLabel {
+                    ROUTE_LABEL_UNSPECIFIED = 0,
+                    DEFAULT_ROUTE = 1,
+                    DEFAULT_ROUTE_ALTERNATE = 2,
+                    FUEL_EFFICIENT = 3
+                }
+
                 /** Properties of a SpeedReadingInterval. */
                 interface ISpeedReadingInterval {
 
@@ -6936,7 +6962,8 @@ export namespace google {
                     VEHICLE_EMISSION_TYPE_UNSPECIFIED = 0,
                     GASOLINE = 1,
                     ELECTRIC = 2,
-                    HYBRID = 3
+                    HYBRID = 3,
+                    DIESEL = 4
                 }
 
                 /** RouteTravelMode enum. */
@@ -7052,6 +7079,9 @@ export namespace google {
 
                     /** ComputeRoutesRequest units */
                     units?: (google.maps.routing.v2.Units|keyof typeof google.maps.routing.v2.Units|null);
+
+                    /** ComputeRoutesRequest requestedReferenceRoutes */
+                    requestedReferenceRoutes?: (google.maps.routing.v2.ComputeRoutesRequest.ReferenceRoute[]|null);
                 }
 
                 /** Represents a ComputeRoutesRequest. */
@@ -7098,6 +7128,9 @@ export namespace google {
 
                     /** ComputeRoutesRequest units. */
                     public units: (google.maps.routing.v2.Units|keyof typeof google.maps.routing.v2.Units);
+
+                    /** ComputeRoutesRequest requestedReferenceRoutes. */
+                    public requestedReferenceRoutes: google.maps.routing.v2.ComputeRoutesRequest.ReferenceRoute[];
 
                     /**
                      * Creates a new ComputeRoutesRequest instance using the specified properties.
@@ -7175,6 +7208,15 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ComputeRoutesRequest {
+
+                    /** ReferenceRoute enum. */
+                    enum ReferenceRoute {
+                        REFERENCE_ROUTE_UNSPECIFIED = 0,
+                        FUEL_EFFICIENT = 1
+                    }
                 }
 
                 /** Properties of a ComputeRoutesResponse. */
