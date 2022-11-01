@@ -70,6 +70,11 @@ export const LOGGING_SPAN_KEY = 'logging.googleapis.com/spanId';
  */
 export const LOGGING_SAMPLED_KEY = 'logging.googleapis.com/trace_sampled';
 
+/**
+ * Default library version to be used if version retrieval fails
+ */
+export const NODEJS_BUNYAN_DEFAULT_LIBRARY_VERSION = 'unknown';
+
 // The variable to hold cached library version
 let libraryVersion: string;
 
@@ -479,11 +484,15 @@ export class LoggingBunyan extends Writable {
     if (libraryVersion) {
       return libraryVersion;
     }
-    libraryVersion = require(path.resolve(
-      __dirname,
-      '../../',
-      'package.json'
-    )).version;
+    try {
+      libraryVersion = require(path.resolve(
+        __dirname,
+        '../../',
+        'package.json'
+      )).version;
+    } catch (err) {
+      libraryVersion = NODEJS_BUNYAN_DEFAULT_LIBRARY_VERSION;
+    }
     return libraryVersion;
   }
 }
