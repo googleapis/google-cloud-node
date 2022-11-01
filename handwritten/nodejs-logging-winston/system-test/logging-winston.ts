@@ -185,8 +185,8 @@ describe('LoggingWinston', function () {
             entry.data[instrumentation.DIAGNOSTIC_INFO_KEY][
               instrumentation.INSTRUMENTATION_SOURCE_KEY
             ];
-          assert.equal(info[0].name, 'nodejs');
-          assert.equal(info[1].name, 'nodejs-winston');
+          assert.equal(info[0].name, 'nodejs-winston');
+          assert.equal(info[1].name, 'nodejs');
         } else {
           const data = entry.data as {message: string};
           assert.strictEqual(data.message, `   ${MESSAGE}`);
