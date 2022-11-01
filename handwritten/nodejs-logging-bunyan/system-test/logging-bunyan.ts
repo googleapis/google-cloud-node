@@ -91,9 +91,9 @@ describe('LoggingBunyan', function () {
         const info = (entry.data as any)[instrumentation.DIAGNOSTIC_INFO_KEY][
           instrumentation.INSTRUMENTATION_SOURCE_KEY
         ];
-        assert.equal(info[0].name, 'nodejs');
+        assert.equal(info[0].name, 'nodejs-bunyan');
         assert.ok(info[0].version.includes('.'));
-        assert.equal(info[1].name, 'nodejs-bunyan');
+        assert.equal(info[1].name, 'nodejs');
         assert.ok(info[1].version.includes('.'));
         isDiagnosticPresent = true;
       } else {
