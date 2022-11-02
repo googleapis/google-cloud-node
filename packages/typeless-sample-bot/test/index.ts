@@ -16,7 +16,7 @@ import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import snapshot from 'snap-shot-it';
 import * as samples from '../src/samples.js';
-import * as main from '../src/bin/samples-ts-to-js.js';
+import * as main from '../src/app.js';
 import {readFile, rm, stat} from 'node:fs/promises';
 import * as url from 'node:url';
 import * as path from 'node:path';

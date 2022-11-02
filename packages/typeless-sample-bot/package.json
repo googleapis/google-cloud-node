@@ -1,23 +1,25 @@
 {
   "name": "@google-cloud/typeless-sample-bot",
   "description": "Google Cloud GitHub bot that converts TypeScript snippets into JavaScript",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=14.0.0"
   },
   "repository": "googleapis/google-cloud-node",
-  "main": "node build/src/bin/samples-ts-to-js.js",
+  "bin": "./build/src/bin/typeless-sample-bot.js",
+  "main": "./build/src/app.js",
   "type": "module",
   "files": [
     "build/src"
   ],
   "scripts": {
-    "compile": "tsc",
+    "compile": "tsc -p .",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
     "test": "c8 mocha build/test --recursive",
     "snapshots-update": "SNAPSHOT_UPDATE=1 npm test",
-    "pretest": "npm run compile",
     "samples-test": "echo no system tests yet 🙀",
     "system-test": "echo no system tests yet 🙀",
     "lint": "gts check",

@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 118,
+                    "end": 127,
                     "type": "FULL"
                 }
             ],
@@ -78,6 +78,10 @@
                     {
                         "name": "units",
                         "type": ".google.maps.routing.v2.Units"
+                    },
+                    {
+                        "name": "requested_reference_routes",
+                        "type": "TYPE_ENUM[]"
                     }
                 ],
                 "resultType": ".google.maps.routing.v2.ComputeRoutesResponse",
