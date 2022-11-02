@@ -166,7 +166,9 @@ async function processMetadata (repoMetadata) {
           validateStatus: () => true
         });
       } catch (err) {
-        remoteUrlExists = false;
+        if (err.status) === 404 {
+          remoteUrlExists = false;
+        }
       }
 
       if (!remoteUrlExists) {
