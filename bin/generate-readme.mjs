@@ -47,8 +47,7 @@ function checkpoint (message, success = true) {
  * Write the combined metadata to `libraries.json` in this repository.
  */
 async function downloadRepoMetadata () {
-  const repos = ['googleapis/google-cloud-node']
-  //await getRepos();
+  const repos = await getRepos();
   checkpoint(`Discovered ${repos.length} node.js repos with metadata`);
   const repoMetadata = {};
   let urlsAndRepos = [];
