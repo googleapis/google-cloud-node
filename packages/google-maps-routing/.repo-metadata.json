@@ -8,7 +8,7 @@
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@googlemaps/routing",
-  "api_id": "google.maps.routing.v2",
+  "api_id": "routes.googleapis.com",
   "default_version": "v2",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO"
