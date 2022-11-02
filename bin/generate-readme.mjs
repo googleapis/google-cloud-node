@@ -47,7 +47,8 @@ function checkpoint (message, success = true) {
  * Write the combined metadata to `libraries.json` in this repository.
  */
 async function downloadRepoMetadata () {
-  const repos = await getRepos();
+  const repos = ['googleapis/google-cloud-node']
+  //await getRepos();
   checkpoint(`Discovered ${repos.length} node.js repos with metadata`);
   const repoMetadata = {};
   let urlsAndRepos = [];
@@ -152,13 +153,23 @@ async function processMetadata (repoMetadata) {
         supportDocsUrl = 'https://cloud.google.com/stackdriver/docs/getting-support';
       }
 
+      if (!supportDocsUrl.match(/https/)) {
+        supportDocsUrl = `https://${supportDocsUrl}`
+      }
+      
+      let res;
+      let remoteUrlExists = true;
       // if URL doesn't exist, fall back to the generic docs page
-      const res = await request({
-        url: supportDocsUrl,
-        method: 'HEAD',
-        validateStatus: () => true
-      });
-      const remoteUrlExists = res.status !== 404;
+      try {
+        res = await request({
+          url: supportDocsUrl,
+          method: 'HEAD',
+          validateStatus: () => true
+        });
+      } catch (err) {
+        remoteUrlExists = false;
+      }
+
       if (!remoteUrlExists) {
         supportDocsUrl = metadata.product_documentation;
       }
