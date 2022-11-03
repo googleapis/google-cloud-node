@@ -1054,6 +1054,25 @@ describe('storage', () => {
       assert.strictEqual(metadata.storageClass, 'COLDLINE');
     });
 
+    it('should allow enabling & disabling autoclass', async () => {
+      const [bucket] = await storage.createBucket(generateName(), {
+        autoclass: {
+          enabled: true,
+        },
+      });
+      let [metadata] = await bucket.getMetadata();
+      const timestampEnabled = metadata.autoclass.toggleTime;
+      assert.strictEqual(metadata.autoclass.enabled, true);
+      [metadata] = await bucket.setMetadata({
+        autoclass: {
+          enabled: false,
+        },
+      });
+      const timestampDisabled = metadata.autoclass.toggleTime;
+      assert.strictEqual(metadata.autoclass.enabled, false);
+      assert.strictEqual(timestampDisabled > timestampEnabled, true);
+    });
+
     describe('locationType', () => {
       const types = ['multi-region', 'region', 'dual-region'];
 

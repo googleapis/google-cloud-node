@@ -106,8 +106,13 @@ export interface CustomPlacementConfig {
   dataLocations?: string[];
 }
 
+export interface AutoclassConfig {
+  enabled?: boolean;
+}
+
 export interface CreateBucketRequest {
   archive?: boolean;
+  autoclass?: AutoclassConfig;
   coldline?: boolean;
   cors?: Cors[];
   customPlacementConfig?: CustomPlacementConfig;
@@ -809,6 +814,8 @@ export class Storage extends Service {
    *
    * @typedef {object} CreateBucketRequest
    * @property {boolean} [archive=false] Specify the storage class as Archive.
+   * @property {object} [autoclass.enabled=false] Specify whether Autoclass is
+   *     enabled for the bucket.
    * @property {boolean} [coldline=false] Specify the storage class as Coldline.
    * @property {Cors[]} [cors=[]] Specify the CORS configuration to use.
    * @property {CustomPlacementConfig} [customPlacementConfig={}] Specify the bucket's regions for dual-region buckets.

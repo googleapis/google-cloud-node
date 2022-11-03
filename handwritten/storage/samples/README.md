@@ -66,6 +66,7 @@ objects to users via direct download.
   * [Generate V4 Read Signed Url](#generate-v4-read-signed-url)
   * [Generate V4 Signed Policy](#generate-v4-signed-policy)
   * [Generate V4 Upload Signed Url](#generate-v4-upload-signed-url)
+  * [Get Autoclass](#get-autoclass)
   * [Get Default Event Based Hold](#get-default-event-based-hold)
   * [Get Metadata](#get-metadata)
   * [Get Metadata Notifications](#get-metadata-notifications)
@@ -109,6 +110,7 @@ objects to users via direct download.
   * [Remove Retention Policy](#remove-retention-policy)
   * [Rename File](#rename-file)
   * [Rotate Encryption Key](#rotate-encryption-key)
+  * [Set Autoclass](#set-autoclass)
   * [Set Client Endpoint](#set-client-endpoint)
   * [Set Event Based Hold](#set-event-based-hold)
   * [Set Public Access Prevention Enforced](#set-public-access-prevention-enforced)
@@ -991,6 +993,23 @@ __Usage:__
 
 
 
+### Get Autoclass
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/getAutoclass.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/getAutoclass.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/getAutoclass.js`
+
+
+-----
+
+
+
+
 ### Get Default Event Based Hold
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/getDefaultEventBasedHold.js).
@@ -1739,6 +1758,23 @@ __Usage:__
 
 
 `node samples/rotateEncryptionKey.js`
+
+
+-----
+
+
+
+
+### Set Autoclass
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/setAutoclass.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/setAutoclass.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/setAutoclass.js`
 
 
 -----
