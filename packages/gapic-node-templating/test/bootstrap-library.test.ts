@@ -55,8 +55,7 @@ describe('tests running build trigger', () => {
       monoRepoName: MONO_REPO_NAME,
       'folder-name': DESTINATION_FOLDER,
       folderName: DESTINATION_FOLDER,
-      'service-config-path': 
-        './test/fixtures/serviceConfig.yaml',
+      'service-config-path': './test/fixtures/serviceConfig.yaml',
       serviceConfigPath: './test/fixtures/serviceConfig.yaml',
       _: [],
       $0: 'foo',

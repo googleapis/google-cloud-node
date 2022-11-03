@@ -13,10 +13,7 @@
 // limitations under the License.
 
 import yargs = require('yargs');
-import {
-  compileVars,
-  getDistributionName,
-} from '../get-bootstrap-template-vars';
+import {compileVars, getDistributionName} from '../get-bootstrap-template-vars';
 import {compileTemplates} from '../templating';
 import * as path from 'path';
 import {Octokit} from '@octokit/rest';
@@ -37,17 +34,16 @@ export interface CliArgs {
   'service-config-path': string;
 }
 
-
 export interface ServiceConfig {
-  name: string,
-  title: string,
-  apis: {name: string}[],
+  name: string;
+  title: string;
+  apis: {name: string}[];
   publishing: {
     api_short_name: string;
     github_label: string;
     documentation_uri: string;
     launch_stage: string;
-  }
+  };
 }
 
 export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
@@ -79,7 +75,7 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
         describe: 'name of directory of the package',
         type: 'string',
         demand: true,
-      })
+      });
   },
   async handler(argv: CliArgs) {
     const octokit = new Octokit();
@@ -89,12 +85,14 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
       cp.execSync
     );
 
-    const serviceConfig = yaml.load(fs.readFileSync(argv['service-config-path'], 'utf8')) as ServiceConfig
+    const serviceConfig = yaml.load(
+      fs.readFileSync(argv['service-config-path'], 'utf8')
+    ) as ServiceConfig;
 
     const bootstrapVars = await compileVars(
       argv,
       serviceConfig,
-      distributionName,
+      distributionName
     );
 
     await compileTemplates(

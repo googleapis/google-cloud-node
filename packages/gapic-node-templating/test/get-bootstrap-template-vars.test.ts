@@ -23,7 +23,7 @@ import {
   getServiceName,
   getVersion,
 } from '../src/get-bootstrap-template-vars';
-import {ServiceConfig} from '../src/commands/bootstrap-library'
+import {ServiceConfig} from '../src/commands/bootstrap-library';
 import {
   API_ID,
   DESTINATION_FOLDER,
@@ -72,20 +72,20 @@ describe('get bootstrap template vars', () => {
             'destination-folder': DESTINATION_FOLDER,
             'mono-repo-name': MONO_REPO_NAME,
             'folder-name': DESTINATION_FOLDER,
-            'service-config-path': `${DESTINATION_FOLDER}/interContainerVars.json`
+            'service-config-path': `${DESTINATION_FOLDER}/interContainerVars.json`,
           },
-          { title: 'Key Management Service',
+          {
+            title: 'Key Management Service',
             name: 'kms.googleapis.com',
-            apis: [
-              {name: 'KeyManagementService'},
-            ],
+            apis: [{name: 'KeyManagementService'}],
             publishing: {
               api_short_name: 'kms',
               github_label: 'kms_prefix',
               documentation_uri: 'https://cloud.google.com/kms',
               launch_stage: 'beta',
-          }},
-          '@google-cloud/kms',
+            },
+          },
+          '@google-cloud/kms'
         ),
         {
           name: 'kms',
@@ -100,7 +100,7 @@ describe('get bootstrap template vars', () => {
           version: 'v1',
           serviceName: 'KeyManagementService',
           hostName: 'kms.googleapis.com',
-          folderName: DESTINATION_FOLDER
+          folderName: DESTINATION_FOLDER,
         }
       );
     });
@@ -129,7 +129,9 @@ describe('get bootstrap template vars', () => {
 
   describe('get service name', () => {
     it('should get the service name', async () => {
-      const serviceConfig = yaml.load(fs.readFileSync('./test/fixtures/serviceConfig.yaml', 'utf8')) as ServiceConfig
+      const serviceConfig = yaml.load(
+        fs.readFileSync('./test/fixtures/serviceConfig.yaml', 'utf8')
+      ) as ServiceConfig;
       const serviceName = getServiceName(serviceConfig);
 
       assert.deepStrictEqual(serviceName, 'KeyManagementService');

@@ -94,7 +94,7 @@ export async function getDistributionName(
 export async function compileVars(
   argv: CliArgs,
   serviceConfig: ServiceConfig,
-  distributionName: string,
+  distributionName: string
 ): Promise<TemplateVars> {
   return {
     name: serviceConfig.publishing.api_short_name,
@@ -115,7 +115,7 @@ export async function compileVars(
 
 export function getServiceName(serviceConfig: ServiceConfig) {
   let serviceName = '';
-  for (const api of (serviceConfig)?.apis) {
+  for (const api of serviceConfig?.apis) {
     if (api.name.endsWith('Service')) {
       serviceName = api.name.split('.')[api.name.split('.').length - 1];
     }

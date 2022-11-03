@@ -58,7 +58,7 @@ describe('tests for templates', () => {
       version: 'v1',
       serviceName: 'KeyManagementService',
       hostName: 'kms.googleapis.com',
-      folderName: 'google-cloud-keymanagement'
+      folderName: 'google-cloud-keymanagement',
     });
 
     snapshot(readFileSync(join(templateDirWrite, '.OwlBot.yaml'), 'utf8'));
@@ -75,16 +75,21 @@ describe('tests for templates', () => {
       )
     );
     snapshot(readFileSync(join(templateDirWrite, 'LICENSE'), 'utf8'));
-    const packageJson = JSON.parse(readFileSync(
-      join(templateDirWrite, 'package.json'),
-      'utf8'
-    ));
+    const packageJson = JSON.parse(
+      readFileSync(join(templateDirWrite, 'package.json'), 'utf8')
+    );
 
     assert.ok(packageJson.name, '@google-cloud/kms');
     assert.ok(packageJson.repository, 'googleapis/google-cloud-node');
     assert.ok(packageJson.main, 'build/src/index.js');
-    assert.ok(packageJson.description, 'Key Management Service client for Node.js');
-    assert.ok(packageJson.homepage, `googleapis/google-cloud-node/packages/google-cloud-keymanagement`)
+    assert.ok(
+      packageJson.description,
+      'Key Management Service client for Node.js'
+    );
+    assert.ok(
+      packageJson.homepage,
+      'googleapis/google-cloud-node/packages/google-cloud-keymanagement'
+    );
 
     assert.deepStrictEqual(
       readdirSync(templateDirRead),
