@@ -19,7 +19,7 @@ const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
 const {Client} = require('@google-cloud/addressvalidation').v1;
-const addressvalidationClient = new Client();
+const addressvalidationClient = new AddressValidationClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
