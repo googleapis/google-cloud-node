@@ -528,6 +528,12 @@
                                 return object;
                             var message = new $root.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyResponse();
                             switch (object.access) {
+                            default:
+                                if (typeof object.access === "number") {
+                                    message.access = object.access;
+                                    break;
+                                }
+                                break;
                             case "ACCESS_STATE_UNSPECIFIED":
                             case 0:
                                 message.access = 0;
@@ -580,7 +586,7 @@
                             if (options.defaults)
                                 object.access = options.enums === String ? "ACCESS_STATE_UNSPECIFIED" : 0;
                             if (message.access != null && message.hasOwnProperty("access"))
-                                object.access = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.AccessState[message.access] : message.access;
+                                object.access = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.AccessState[message.access] === undefined ? message.access : $root.google.cloud.policytroubleshooter.v1.AccessState[message.access] : message.access;
                             if (message.explainedPolicies && message.explainedPolicies.length) {
                                 object.explainedPolicies = [];
                                 for (var j = 0; j < message.explainedPolicies.length; ++j)
@@ -1116,6 +1122,12 @@
                                 return object;
                             var message = new $root.google.cloud.policytroubleshooter.v1.ExplainedPolicy();
                             switch (object.access) {
+                            default:
+                                if (typeof object.access === "number") {
+                                    message.access = object.access;
+                                    break;
+                                }
+                                break;
                             case "ACCESS_STATE_UNSPECIFIED":
                             case 0:
                                 message.access = 0;
@@ -1155,6 +1167,12 @@
                                 }
                             }
                             switch (object.relevance) {
+                            default:
+                                if (typeof object.relevance === "number") {
+                                    message.relevance = object.relevance;
+                                    break;
+                                }
+                                break;
                             case "HEURISTIC_RELEVANCE_UNSPECIFIED":
                             case 0:
                                 message.relevance = 0;
@@ -1193,7 +1211,7 @@
                                 object.relevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
                             }
                             if (message.access != null && message.hasOwnProperty("access"))
-                                object.access = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.AccessState[message.access] : message.access;
+                                object.access = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.AccessState[message.access] === undefined ? message.access : $root.google.cloud.policytroubleshooter.v1.AccessState[message.access] : message.access;
                             if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
                                 object.fullResourceName = message.fullResourceName;
                             if (message.policy != null && message.hasOwnProperty("policy"))
@@ -1204,7 +1222,7 @@
                                     object.bindingExplanations[j] = $root.google.cloud.policytroubleshooter.v1.BindingExplanation.toObject(message.bindingExplanations[j], options);
                             }
                             if (message.relevance != null && message.hasOwnProperty("relevance"))
-                                object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.HeuristicRelevance[message.relevance] : message.relevance;
+                                object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.v1.HeuristicRelevance[message.relevance] : message.relevance;
                             return object;
                         };
     
@@ -1554,6 +1572,12 @@
                                 return object;
                             var message = new $root.google.cloud.policytroubleshooter.v1.BindingExplanation();
                             switch (object.access) {
+                            default:
+                                if (typeof object.access === "number") {
+                                    message.access = object.access;
+                                    break;
+                                }
+                                break;
                             case "ACCESS_STATE_UNSPECIFIED":
                             case 0:
                                 message.access = 0;
@@ -1578,6 +1602,12 @@
                             if (object.role != null)
                                 message.role = String(object.role);
                             switch (object.rolePermission) {
+                            default:
+                                if (typeof object.rolePermission === "number") {
+                                    message.rolePermission = object.rolePermission;
+                                    break;
+                                }
+                                break;
                             case "ROLE_PERMISSION_UNSPECIFIED":
                             case 0:
                                 message.rolePermission = 0;
@@ -1596,6 +1626,12 @@
                                 break;
                             }
                             switch (object.rolePermissionRelevance) {
+                            default:
+                                if (typeof object.rolePermissionRelevance === "number") {
+                                    message.rolePermissionRelevance = object.rolePermissionRelevance;
+                                    break;
+                                }
+                                break;
                             case "HEURISTIC_RELEVANCE_UNSPECIFIED":
                             case 0:
                                 message.rolePermissionRelevance = 0;
@@ -1620,6 +1656,12 @@
                                 }
                             }
                             switch (object.relevance) {
+                            default:
+                                if (typeof object.relevance === "number") {
+                                    message.relevance = object.relevance;
+                                    break;
+                                }
+                                break;
                             case "HEURISTIC_RELEVANCE_UNSPECIFIED":
                             case 0:
                                 message.relevance = 0;
@@ -1665,13 +1707,13 @@
                                 object.condition = null;
                             }
                             if (message.access != null && message.hasOwnProperty("access"))
-                                object.access = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.AccessState[message.access] : message.access;
+                                object.access = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.AccessState[message.access] === undefined ? message.access : $root.google.cloud.policytroubleshooter.v1.AccessState[message.access] : message.access;
                             if (message.role != null && message.hasOwnProperty("role"))
                                 object.role = message.role;
                             if (message.rolePermission != null && message.hasOwnProperty("rolePermission"))
-                                object.rolePermission = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.BindingExplanation.RolePermission[message.rolePermission] : message.rolePermission;
+                                object.rolePermission = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.BindingExplanation.RolePermission[message.rolePermission] === undefined ? message.rolePermission : $root.google.cloud.policytroubleshooter.v1.BindingExplanation.RolePermission[message.rolePermission] : message.rolePermission;
                             if (message.rolePermissionRelevance != null && message.hasOwnProperty("rolePermissionRelevance"))
-                                object.rolePermissionRelevance = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.HeuristicRelevance[message.rolePermissionRelevance] : message.rolePermissionRelevance;
+                                object.rolePermissionRelevance = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.HeuristicRelevance[message.rolePermissionRelevance] === undefined ? message.rolePermissionRelevance : $root.google.cloud.policytroubleshooter.v1.HeuristicRelevance[message.rolePermissionRelevance] : message.rolePermissionRelevance;
                             var keys2;
                             if (message.memberships && (keys2 = Object.keys(message.memberships)).length) {
                                 object.memberships = {};
@@ -1679,7 +1721,7 @@
                                     object.memberships[keys2[j]] = $root.google.cloud.policytroubleshooter.v1.BindingExplanation.AnnotatedMembership.toObject(message.memberships[keys2[j]], options);
                             }
                             if (message.relevance != null && message.hasOwnProperty("relevance"))
-                                object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.HeuristicRelevance[message.relevance] : message.relevance;
+                                object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.v1.HeuristicRelevance[message.relevance] : message.relevance;
                             if (message.condition != null && message.hasOwnProperty("condition"))
                                 object.condition = $root.google.type.Expr.toObject(message.condition, options);
                             return object;
@@ -1893,6 +1935,12 @@
                                     return object;
                                 var message = new $root.google.cloud.policytroubleshooter.v1.BindingExplanation.AnnotatedMembership();
                                 switch (object.membership) {
+                                default:
+                                    if (typeof object.membership === "number") {
+                                        message.membership = object.membership;
+                                        break;
+                                    }
+                                    break;
                                 case "MEMBERSHIP_UNSPECIFIED":
                                 case 0:
                                     message.membership = 0;
@@ -1915,6 +1963,12 @@
                                     break;
                                 }
                                 switch (object.relevance) {
+                                default:
+                                    if (typeof object.relevance === "number") {
+                                        message.relevance = object.relevance;
+                                        break;
+                                    }
+                                    break;
                                 case "HEURISTIC_RELEVANCE_UNSPECIFIED":
                                 case 0:
                                     message.relevance = 0;
@@ -1949,9 +2003,9 @@
                                     object.relevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
                                 }
                                 if (message.membership != null && message.hasOwnProperty("membership"))
-                                    object.membership = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.BindingExplanation.Membership[message.membership] : message.membership;
+                                    object.membership = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.BindingExplanation.Membership[message.membership] === undefined ? message.membership : $root.google.cloud.policytroubleshooter.v1.BindingExplanation.Membership[message.membership] : message.membership;
                                 if (message.relevance != null && message.hasOwnProperty("relevance"))
-                                    object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.HeuristicRelevance[message.relevance] : message.relevance;
+                                    object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.v1.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.v1.HeuristicRelevance[message.relevance] : message.relevance;
                                 return object;
                             };
     
@@ -5588,6 +5642,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -5602,6 +5662,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -5728,9 +5794,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -8049,6 +8115,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -8145,7 +8217,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -8894,6 +8966,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -8910,6 +8988,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -8948,6 +9032,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -9012,7 +9100,7 @@
                         object.unverifiedLazy = false;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -9020,7 +9108,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -9033,7 +9121,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     return object;
                 };
@@ -10388,6 +10476,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -10451,7 +10545,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -12204,6 +12298,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -12253,7 +12353,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -13355,6 +13455,12 @@
                             return object;
                         var message = new $root.google.iam.v1.AuditLogConfig();
                         switch (object.logType) {
+                        default:
+                            if (typeof object.logType === "number") {
+                                message.logType = object.logType;
+                                break;
+                            }
+                            break;
                         case "LOG_TYPE_UNSPECIFIED":
                         case 0:
                             message.logType = 0;
@@ -13400,7 +13506,7 @@
                         if (options.defaults)
                             object.logType = options.enums === String ? "LOG_TYPE_UNSPECIFIED" : 0;
                         if (message.logType != null && message.hasOwnProperty("logType"))
-                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
+                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] === undefined ? message.logType : $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
                         if (message.exemptedMembers && message.exemptedMembers.length) {
                             object.exemptedMembers = [];
                             for (var j = 0; j < message.exemptedMembers.length; ++j)
@@ -13937,6 +14043,12 @@
                             return object;
                         var message = new $root.google.iam.v1.BindingDelta();
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "ACTION_UNSPECIFIED":
                         case 0:
                             message.action = 0;
@@ -13982,7 +14094,7 @@
                             object.condition = null;
                         }
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
                         if (message.role != null && message.hasOwnProperty("role"))
                             object.role = message.role;
                         if (message.member != null && message.hasOwnProperty("member"))
@@ -14247,6 +14359,12 @@
                             return object;
                         var message = new $root.google.iam.v1.AuditConfigDelta();
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "ACTION_UNSPECIFIED":
                         case 0:
                             message.action = 0;
@@ -14289,7 +14407,7 @@
                             object.logType = "";
                         }
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
                         if (message.service != null && message.hasOwnProperty("service"))
                             object.service = message.service;
                         if (message.exemptedMember != null && message.hasOwnProperty("exemptedMember"))

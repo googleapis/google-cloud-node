@@ -316,6 +316,12 @@
                             if (object.packageName != null)
                                 message.packageName = String(object.packageName);
                             switch (object.packageType) {
+                            default:
+                                if (typeof object.packageType === "number") {
+                                    message.packageType = object.packageType;
+                                    break;
+                                }
+                                break;
                             case "PACKAGE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.packageType = 0;
@@ -373,7 +379,7 @@
                             if (message.packageName != null && message.hasOwnProperty("packageName"))
                                 object.packageName = message.packageName;
                             if (message.packageType != null && message.hasOwnProperty("packageType"))
-                                object.packageType = options.enums === String ? $root.google.devtools.artifactregistry.v1.AptArtifact.PackageType[message.packageType] : message.packageType;
+                                object.packageType = options.enums === String ? $root.google.devtools.artifactregistry.v1.AptArtifact.PackageType[message.packageType] === undefined ? message.packageType : $root.google.devtools.artifactregistry.v1.AptArtifact.PackageType[message.packageType] : message.packageType;
                             if (message.architecture != null && message.hasOwnProperty("architecture"))
                                 object.architecture = message.architecture;
                             if (message.component != null && message.hasOwnProperty("component"))
@@ -2880,6 +2886,12 @@
                                 return object;
                             var message = new $root.google.devtools.artifactregistry.v1.Hash();
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "HASH_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -2925,7 +2937,7 @@
                                 }
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.devtools.artifactregistry.v1.Hash.HashType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.devtools.artifactregistry.v1.Hash.HashType[message.type] === undefined ? message.type : $root.google.devtools.artifactregistry.v1.Hash.HashType[message.type] : message.type;
                             if (message.value != null && message.hasOwnProperty("value"))
                                 object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
                             return object;
@@ -5618,6 +5630,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.format) {
+                            default:
+                                if (typeof object.format === "number") {
+                                    message.format = object.format;
+                                    break;
+                                }
+                                break;
                             case "FORMAT_UNSPECIFIED":
                             case 0:
                                 message.format = 0;
@@ -5697,7 +5715,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.format != null && message.hasOwnProperty("format"))
-                                object.format = options.enums === String ? $root.google.devtools.artifactregistry.v1.Repository.Format[message.format] : message.format;
+                                object.format = options.enums === String ? $root.google.devtools.artifactregistry.v1.Repository.Format[message.format] === undefined ? message.format : $root.google.devtools.artifactregistry.v1.Repository.Format[message.format] : message.format;
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             var keys2;
@@ -5922,6 +5940,12 @@
                                 if (object.allowSnapshotOverwrites != null)
                                     message.allowSnapshotOverwrites = Boolean(object.allowSnapshotOverwrites);
                                 switch (object.versionPolicy) {
+                                default:
+                                    if (typeof object.versionPolicy === "number") {
+                                        message.versionPolicy = object.versionPolicy;
+                                        break;
+                                    }
+                                    break;
                                 case "VERSION_POLICY_UNSPECIFIED":
                                 case 0:
                                     message.versionPolicy = 0;
@@ -5958,7 +5982,7 @@
                                 if (message.allowSnapshotOverwrites != null && message.hasOwnProperty("allowSnapshotOverwrites"))
                                     object.allowSnapshotOverwrites = message.allowSnapshotOverwrites;
                                 if (message.versionPolicy != null && message.hasOwnProperty("versionPolicy"))
-                                    object.versionPolicy = options.enums === String ? $root.google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.VersionPolicy[message.versionPolicy] : message.versionPolicy;
+                                    object.versionPolicy = options.enums === String ? $root.google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.VersionPolicy[message.versionPolicy] === undefined ? message.versionPolicy : $root.google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig.VersionPolicy[message.versionPolicy] : message.versionPolicy;
                                 return object;
                             };
     
@@ -8708,6 +8732,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.legacyRedirectionState) {
+                            default:
+                                if (typeof object.legacyRedirectionState === "number") {
+                                    message.legacyRedirectionState = object.legacyRedirectionState;
+                                    break;
+                                }
+                                break;
                             case "REDIRECTION_STATE_UNSPECIFIED":
                             case 0:
                                 message.legacyRedirectionState = 0;
@@ -8748,7 +8778,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.legacyRedirectionState != null && message.hasOwnProperty("legacyRedirectionState"))
-                                object.legacyRedirectionState = options.enums === String ? $root.google.devtools.artifactregistry.v1.ProjectSettings.RedirectionState[message.legacyRedirectionState] : message.legacyRedirectionState;
+                                object.legacyRedirectionState = options.enums === String ? $root.google.devtools.artifactregistry.v1.ProjectSettings.RedirectionState[message.legacyRedirectionState] === undefined ? message.legacyRedirectionState : $root.google.devtools.artifactregistry.v1.ProjectSettings.RedirectionState[message.legacyRedirectionState] : message.legacyRedirectionState;
                             return object;
                         };
     
@@ -11491,6 +11521,12 @@
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "VERSION_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -11536,7 +11572,7 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.devtools.artifactregistry.v1.VersionView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.devtools.artifactregistry.v1.VersionView[message.view] === undefined ? message.view : $root.google.devtools.artifactregistry.v1.VersionView[message.view] : message.view;
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
                             return object;
@@ -11995,6 +12031,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "VERSION_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -12031,7 +12073,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.devtools.artifactregistry.v1.VersionView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.devtools.artifactregistry.v1.VersionView[message.view] === undefined ? message.view : $root.google.devtools.artifactregistry.v1.VersionView[message.view] : message.view;
                             return object;
                         };
     
@@ -12505,6 +12547,12 @@
                             if (object.packageName != null)
                                 message.packageName = String(object.packageName);
                             switch (object.packageType) {
+                            default:
+                                if (typeof object.packageType === "number") {
+                                    message.packageType = object.packageType;
+                                    break;
+                                }
+                                break;
                             case "PACKAGE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.packageType = 0;
@@ -12547,7 +12595,7 @@
                             if (message.packageName != null && message.hasOwnProperty("packageName"))
                                 object.packageName = message.packageName;
                             if (message.packageType != null && message.hasOwnProperty("packageType"))
-                                object.packageType = options.enums === String ? $root.google.devtools.artifactregistry.v1.YumArtifact.PackageType[message.packageType] : message.packageType;
+                                object.packageType = options.enums === String ? $root.google.devtools.artifactregistry.v1.YumArtifact.PackageType[message.packageType] === undefined ? message.packageType : $root.google.devtools.artifactregistry.v1.YumArtifact.PackageType[message.packageType] : message.packageType;
                             if (message.architecture != null && message.hasOwnProperty("architecture"))
                                 object.architecture = message.architecture;
                             return object;
@@ -14054,6 +14102,12 @@
                             if (object.packageName != null)
                                 message.packageName = String(object.packageName);
                             switch (object.packageType) {
+                            default:
+                                if (typeof object.packageType === "number") {
+                                    message.packageType = object.packageType;
+                                    break;
+                                }
+                                break;
                             case "PACKAGE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.packageType = 0;
@@ -14111,7 +14165,7 @@
                             if (message.packageName != null && message.hasOwnProperty("packageName"))
                                 object.packageName = message.packageName;
                             if (message.packageType != null && message.hasOwnProperty("packageType"))
-                                object.packageType = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.AptArtifact.PackageType[message.packageType] : message.packageType;
+                                object.packageType = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.AptArtifact.PackageType[message.packageType] === undefined ? message.packageType : $root.google.devtools.artifactregistry.v1beta2.AptArtifact.PackageType[message.packageType] : message.packageType;
                             if (message.architecture != null && message.hasOwnProperty("architecture"))
                                 object.architecture = message.architecture;
                             if (message.component != null && message.hasOwnProperty("component"))
@@ -15534,6 +15588,12 @@
                                 return object;
                             var message = new $root.google.devtools.artifactregistry.v1beta2.Hash();
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "HASH_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -15579,7 +15639,7 @@
                                 }
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.Hash.HashType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.Hash.HashType[message.type] === undefined ? message.type : $root.google.devtools.artifactregistry.v1beta2.Hash.HashType[message.type] : message.type;
                             if (message.value != null && message.hasOwnProperty("value"))
                                 object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
                             return object;
@@ -18249,6 +18309,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.format) {
+                            default:
+                                if (typeof object.format === "number") {
+                                    message.format = object.format;
+                                    break;
+                                }
+                                break;
                             case "FORMAT_UNSPECIFIED":
                             case 0:
                                 message.format = 0;
@@ -18328,7 +18394,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.format != null && message.hasOwnProperty("format"))
-                                object.format = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.Repository.Format[message.format] : message.format;
+                                object.format = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.Repository.Format[message.format] === undefined ? message.format : $root.google.devtools.artifactregistry.v1beta2.Repository.Format[message.format] : message.format;
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             var keys2;
@@ -18553,6 +18619,12 @@
                                 if (object.allowSnapshotOverwrites != null)
                                     message.allowSnapshotOverwrites = Boolean(object.allowSnapshotOverwrites);
                                 switch (object.versionPolicy) {
+                                default:
+                                    if (typeof object.versionPolicy === "number") {
+                                        message.versionPolicy = object.versionPolicy;
+                                        break;
+                                    }
+                                    break;
                                 case "VERSION_POLICY_UNSPECIFIED":
                                 case 0:
                                     message.versionPolicy = 0;
@@ -18589,7 +18661,7 @@
                                 if (message.allowSnapshotOverwrites != null && message.hasOwnProperty("allowSnapshotOverwrites"))
                                     object.allowSnapshotOverwrites = message.allowSnapshotOverwrites;
                                 if (message.versionPolicy != null && message.hasOwnProperty("versionPolicy"))
-                                    object.versionPolicy = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.Repository.MavenRepositoryConfig.VersionPolicy[message.versionPolicy] : message.versionPolicy;
+                                    object.versionPolicy = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.Repository.MavenRepositoryConfig.VersionPolicy[message.versionPolicy] === undefined ? message.versionPolicy : $root.google.devtools.artifactregistry.v1beta2.Repository.MavenRepositoryConfig.VersionPolicy[message.versionPolicy] : message.versionPolicy;
                                 return object;
                             };
     
@@ -21273,6 +21345,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.legacyRedirectionState) {
+                            default:
+                                if (typeof object.legacyRedirectionState === "number") {
+                                    message.legacyRedirectionState = object.legacyRedirectionState;
+                                    break;
+                                }
+                                break;
                             case "REDIRECTION_STATE_UNSPECIFIED":
                             case 0:
                                 message.legacyRedirectionState = 0;
@@ -21313,7 +21391,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.legacyRedirectionState != null && message.hasOwnProperty("legacyRedirectionState"))
-                                object.legacyRedirectionState = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.ProjectSettings.RedirectionState[message.legacyRedirectionState] : message.legacyRedirectionState;
+                                object.legacyRedirectionState = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.ProjectSettings.RedirectionState[message.legacyRedirectionState] === undefined ? message.legacyRedirectionState : $root.google.devtools.artifactregistry.v1beta2.ProjectSettings.RedirectionState[message.legacyRedirectionState] : message.legacyRedirectionState;
                             return object;
                         };
     
@@ -24056,6 +24134,12 @@
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "VERSION_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -24101,7 +24185,7 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.VersionView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.VersionView[message.view] === undefined ? message.view : $root.google.devtools.artifactregistry.v1beta2.VersionView[message.view] : message.view;
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
                             return object;
@@ -24560,6 +24644,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "VERSION_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -24596,7 +24686,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.VersionView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.VersionView[message.view] === undefined ? message.view : $root.google.devtools.artifactregistry.v1beta2.VersionView[message.view] : message.view;
                             return object;
                         };
     
@@ -25070,6 +25160,12 @@
                             if (object.packageName != null)
                                 message.packageName = String(object.packageName);
                             switch (object.packageType) {
+                            default:
+                                if (typeof object.packageType === "number") {
+                                    message.packageType = object.packageType;
+                                    break;
+                                }
+                                break;
                             case "PACKAGE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.packageType = 0;
@@ -25112,7 +25208,7 @@
                             if (message.packageName != null && message.hasOwnProperty("packageName"))
                                 object.packageName = message.packageName;
                             if (message.packageType != null && message.hasOwnProperty("packageType"))
-                                object.packageType = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.YumArtifact.PackageType[message.packageType] : message.packageType;
+                                object.packageType = options.enums === String ? $root.google.devtools.artifactregistry.v1beta2.YumArtifact.PackageType[message.packageType] === undefined ? message.packageType : $root.google.devtools.artifactregistry.v1beta2.YumArtifact.PackageType[message.packageType] : message.packageType;
                             if (message.architecture != null && message.hasOwnProperty("architecture"))
                                 object.architecture = message.architecture;
                             return object;
@@ -26705,6 +26801,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -26729,6 +26831,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -26776,7 +26882,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -26784,7 +26890,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -30558,6 +30664,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -30572,6 +30684,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -30698,9 +30816,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -33047,6 +33165,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -33155,7 +33279,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -33957,6 +34081,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -33973,6 +34103,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -34011,6 +34147,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -34081,7 +34221,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -34089,7 +34229,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -34102,7 +34242,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -35479,6 +35619,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -35548,7 +35694,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -37303,6 +37449,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -37352,7 +37504,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -38632,6 +38784,12 @@
                         return object;
                     var message = new $root.google.protobuf.Value();
                     switch (object.nullValue) {
+                    default:
+                        if (typeof object.nullValue === "number") {
+                            message.nullValue = object.nullValue;
+                            break;
+                        }
+                        break;
                     case "NULL_VALUE":
                     case 0:
                         message.nullValue = 0;
@@ -38670,7 +38828,7 @@
                         options = {};
                     var object = {};
                     if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
-                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
+                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] === undefined ? message.nullValue : $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
                         if (options.oneofs)
                             object.kind = "nullValue";
                     }
@@ -42008,6 +42166,12 @@
                             return object;
                         var message = new $root.google.iam.v1.AuditLogConfig();
                         switch (object.logType) {
+                        default:
+                            if (typeof object.logType === "number") {
+                                message.logType = object.logType;
+                                break;
+                            }
+                            break;
                         case "LOG_TYPE_UNSPECIFIED":
                         case 0:
                             message.logType = 0;
@@ -42053,7 +42217,7 @@
                         if (options.defaults)
                             object.logType = options.enums === String ? "LOG_TYPE_UNSPECIFIED" : 0;
                         if (message.logType != null && message.hasOwnProperty("logType"))
-                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
+                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] === undefined ? message.logType : $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
                         if (message.exemptedMembers && message.exemptedMembers.length) {
                             object.exemptedMembers = [];
                             for (var j = 0; j < message.exemptedMembers.length; ++j)
@@ -42590,6 +42754,12 @@
                             return object;
                         var message = new $root.google.iam.v1.BindingDelta();
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "ACTION_UNSPECIFIED":
                         case 0:
                             message.action = 0;
@@ -42635,7 +42805,7 @@
                             object.condition = null;
                         }
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
                         if (message.role != null && message.hasOwnProperty("role"))
                             object.role = message.role;
                         if (message.member != null && message.hasOwnProperty("member"))
@@ -42900,6 +43070,12 @@
                             return object;
                         var message = new $root.google.iam.v1.AuditConfigDelta();
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "ACTION_UNSPECIFIED":
                         case 0:
                             message.action = 0;
@@ -42942,7 +43118,7 @@
                             object.logType = "";
                         }
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
                         if (message.service != null && message.hasOwnProperty("service"))
                             object.service = message.service;
                         if (message.exemptedMember != null && message.hasOwnProperty("exemptedMember"))
