@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.7.0](https://github.com/googleapis/nodejs-storage/compare/v6.6.0...v6.7.0) (2022-11-03)
+
+
+### Features
+
+* Support autoclass ([#2078](https://github.com/googleapis/nodejs-storage/issues/2078)) ([7e83580](https://github.com/googleapis/nodejs-storage/commit/7e8358008467dd2d77702734e05f54bc06c9ca5b))
+
 ## [6.6.0](https://github.com/googleapis/nodejs-storage/compare/v6.5.4...v6.6.0) (2022-10-25)
 
 
