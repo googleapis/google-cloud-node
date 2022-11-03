@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [3.1.4](https://github.com/googleapis/google-cloud-node/compare/redis-v3.1.3...redis-v3.1.4) (2022-11-03)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#3478](https://github.com/googleapis/google-cloud-node/issues/3478)) ([09305e0](https://github.com/googleapis/google-cloud-node/commit/09305e06548b89dc17bb3d3167e2d1e69588caa4))
+
 ## [3.1.3](https://github.com/googleapis/nodejs-redis/compare/v3.1.2...v3.1.3) (2022-09-14)
 
 

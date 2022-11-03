@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.0.2...typeless-sample-bot-v1.0.3) (2022-11-03)
+
+
+### Bug Fixes
+
+* Explicitly provide path to babel plugins ([#3482](https://github.com/googleapis/google-cloud-node/issues/3482)) ([6d34a3d](https://github.com/googleapis/google-cloud-node/commit/6d34a3d99725bd2d8b90c449e27e1b6d694c8def))
+
 ## [1.0.2](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.0.1...typeless-sample-bot-v1.0.2) (2022-10-28)
 
 

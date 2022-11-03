@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/dataplex-v2.2.0...dataplex-v2.2.1) (2022-11-03)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#3478](https://github.com/googleapis/google-cloud-node/issues/3478)) ([09305e0](https://github.com/googleapis/google-cloud-node/commit/09305e06548b89dc17bb3d3167e2d1e69588caa4))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-dataplex/compare/v2.1.1...v2.2.0) (2022-09-21)
 
 

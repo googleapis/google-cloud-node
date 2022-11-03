@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [3.0.5](https://github.com/googleapis/google-cloud-node/compare/phishing-protection-v3.0.4...phishing-protection-v3.0.5) (2022-11-03)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#3478](https://github.com/googleapis/google-cloud-node/issues/3478)) ([09305e0](https://github.com/googleapis/google-cloud-node/commit/09305e06548b89dc17bb3d3167e2d1e69588caa4))
+
 ## [3.0.4](https://github.com/googleapis/nodejs-phishing-protection/compare/v3.0.3...v3.0.4) (2022-09-22)
 
 
