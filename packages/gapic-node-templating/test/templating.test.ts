@@ -22,7 +22,6 @@ import {mkdirSync, readdirSync, readFileSync} from 'fs';
 // eslint-disable-next-line node/no-unpublished-import
 import snapshot from 'snap-shot-it';
 import * as assert from 'assert';
-import { DESTINATION_FOLDER } from './bootstrap-library.test';
 
 describe('tests for templates', () => {
   let templateDirRead: string;
@@ -59,7 +58,7 @@ describe('tests for templates', () => {
       version: 'v1',
       serviceName: 'KeyManagementService',
       hostName: 'kms.googleapis.com',
-      folderName: DESTINATION_FOLDER
+      folderName: 'google-cloud-keymanagement'
     });
 
     snapshot(readFileSync(join(templateDirWrite, '.OwlBot.yaml'), 'utf8'));
@@ -85,7 +84,7 @@ describe('tests for templates', () => {
     assert.ok(packageJson.repository, 'googleapis/google-cloud-node');
     assert.ok(packageJson.main, 'build/src/index.js');
     assert.ok(packageJson.description, 'Key Management Service client for Node.js');
-    assert.ok(packageJson.homepage, `googleapis/google-cloud-node/packages/${DESTINATION_FOLDER}`)
+    assert.ok(packageJson.homepage, `googleapis/google-cloud-node/packages/google-cloud-keymanagement`)
 
     assert.deepStrictEqual(
       readdirSync(templateDirRead),

@@ -14,7 +14,6 @@
     "src/*.ts",
     "src/**/*.ts",
     "test/*.ts",
-    "test/fixtures/*.yaml",
     "test/**/*.ts",
     "system-test/*.ts"
   ]

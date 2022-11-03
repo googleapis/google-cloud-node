@@ -20,7 +20,6 @@ import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as vars from '../src/get-bootstrap-template-vars';
 import * as templates from '../src/templating';
-import { join } from 'path';
 
 export const API_ID = 'google.cloud.kms.v1';
 export const DESTINATION_FOLDER = './temp';
