@@ -80,10 +80,24 @@ export async function* filterByContents(
 
 // Instead of a babelrc, this is used so that we can get more control over
 // the transform process.
+//
+// The heavy path manipulation is required here to work around a problem
+// with finding Babel plugins on the path when running the bot from
+// outside its own tree. Babel will attempt to resolve plugins to
+// the most proximate node_modules, which will be the package being
+// operated upon, not us.
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ptPath = path.join(
+  __dirname,
+  '..',
+  '..',
+  'node_modules',
+  '@babel',
+  'preset-typescript'
+);
 const itrPath = path.join(__dirname, 'import-to-require');
 const babelConfig = {
-  presets: [['@babel/preset-typescript', {}]],
+  presets: [[ptPath, {}]],
   plugins: [[itrPath]],
   parserOpts: {} as babel.ParserOptions,
   generatorOpts: {
