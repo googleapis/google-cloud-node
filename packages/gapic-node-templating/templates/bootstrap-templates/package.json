@@ -10,6 +10,7 @@
     "build/src",
     "build/protos"
   ],
+  "homepage": "googleapis/{{monoRepoName}}/packages/{{folderName}}",
   "keywords": [
     "google apis client",
     "google api client",

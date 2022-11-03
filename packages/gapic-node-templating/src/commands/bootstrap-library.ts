@@ -16,14 +16,13 @@ import yargs = require('yargs');
 import {
   compileVars,
   getDistributionName,
-  getDriftMetadata,
-  getServiceName,
 } from '../get-bootstrap-template-vars';
 import {compileTemplates} from '../templating';
 import * as path from 'path';
-import {Storage} from '@google-cloud/storage';
 import {Octokit} from '@octokit/rest';
 import * as cp from 'child_process';
+import * as fs from 'fs';
+import yaml from 'js-yaml';
 
 const BOOTSTRAP_TEMPLATES_PATH = path.resolve(
   __dirname,
@@ -34,6 +33,21 @@ export interface CliArgs {
   'api-id': string;
   'mono-repo-name': string;
   'destination-folder': string;
+  'folder-name': string;
+  'service-config-path': string;
+}
+
+
+export interface ServiceConfig {
+  name: string,
+  title: string,
+  apis: {name: string}[],
+  publishing: {
+    api_short_name: string;
+    github_label: string;
+    documentation_uri: string;
+    launch_stage: string;
+  }
 }
 
 export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
@@ -55,7 +69,17 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
         describe: 'where to copy over the files',
         type: 'string',
         demand: true,
-      });
+      })
+      .option('folder-name', {
+        describe: 'name of directory of the package',
+        type: 'string',
+        demand: true,
+      })
+      .option('service-config-path', {
+        describe: 'name of directory of the package',
+        type: 'string',
+        demand: true,
+      })
   },
   async handler(argv: CliArgs) {
     const octokit = new Octokit();
@@ -64,13 +88,13 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
       argv['api-id'],
       cp.execSync
     );
-    const serviceName = await getServiceName(octokit, argv['api-id']);
-    const driftMetadata = await getDriftMetadata(argv, new Storage());
+
+    const serviceConfig = yaml.load(fs.readFileSync(argv['service-config-path'], 'utf8')) as ServiceConfig
+
     const bootstrapVars = await compileVars(
       argv,
-      driftMetadata,
+      serviceConfig,
       distributionName,
-      serviceName
     );
 
     await compileTemplates(

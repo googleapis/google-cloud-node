@@ -12,13 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {CliArgs} from './commands/bootstrap-library';
-import {Storage} from '@google-cloud/storage';
+import {CliArgs, ServiceConfig} from './commands/bootstrap-library';
 import {Octokit} from '@octokit/rest';
 import {join} from 'path';
 import ChildProcess from 'child_process';
 import {writeFileSync} from 'fs';
-import yaml from 'js-yaml';
 
 const LANGUAGE = 'nodejs';
 
@@ -28,12 +26,6 @@ export interface GHFile {
 
 export interface GHDir {
   name: string;
-}
-
-export interface ServiceYaml {
-  apis: {
-    name: string;
-  }[];
 }
 
 function isFile(file: GHFile | GHDir[]): file is GHFile {
@@ -62,62 +54,10 @@ export interface TemplateVars {
   version: string;
   // service name of the api
   serviceName: string;
-}
-
-export interface DriftApi {
-  // API name as it shows in path
-  api_shortname: string;
-  // API name pretty
-  display_name: string;
-  // URL to get docs from
-  docs_root_url: string;
-  // Launch stage of API
-  launch_stage: string;
-}
-export interface DriftMetadata {
-  // API name as it shows in path
-  apiShortName: string;
-  // API name pretty
-  displayName: string;
-  // URL to get docs from
-  docsRootUrl: string;
-  // Launch stage of API
-  launchStage: string;
-}
-
-export async function getDriftMetadata(
-  argv: CliArgs,
-  storageClient: Storage
-): Promise<DriftMetadata> {
-  const bucket = 'devrel-prod-settings';
-  const file = 'apis.json';
-  const contents = await storageClient.bucket(bucket)?.file(file)?.download();
-  if (!contents) {
-    throw new Error('apis.json downloaded from Cloud Storage was empty');
-  }
-  const apis = JSON.parse(contents.toString()).apis;
-  return getApiInfo(apis, argv['api-id']);
-}
-
-export function getApiInfo(apis: DriftApi[], apiId: string): DriftMetadata {
-  const shortName = apiId.split('.')[apiId.split('.').length - 2];
-  for (const api of apis) {
-    if (api.api_shortname?.includes(shortName)) {
-      return {
-        apiShortName: shortName,
-        displayName: api.display_name,
-        docsRootUrl: api.docs_root_url,
-        launchStage: api.launch_stage,
-      };
-    }
-  }
-
-  return {
-    apiShortName: shortName,
-    displayName: '',
-    docsRootUrl: '',
-    launchStage: '',
-  };
+  // hostname of the api (googleapis.com)
+  hostName: string;
+  // folder name in google-cloud-node for API
+  folderName: string;
 }
 
 export async function getDistributionName(
@@ -151,60 +91,15 @@ export async function getDistributionName(
   return packageName;
 }
 
-export async function getServiceName(octokit: Octokit, apiId: string) {
-  let path = apiId.toString().replace(/\./g, '/');
-
-  const dir = (
-    await octokit.rest.repos.getContent({
-      owner: 'googleapis',
-      repo: 'googleapis',
-      path: `${path}`,
-    })
-  ).data as GHDir[];
-
-  for (const file of dir) {
-    if (file.name.endsWith('.yaml') && !file.name.includes('gapic')) {
-      path = `${path}/${file.name}`;
-    }
-  }
-
-  console.log(path);
-
-  const yamlFile = (
-    await octokit.rest.repos.getContent({
-      owner: 'googleapis',
-      repo: 'googleapis',
-      path,
-    })
-  ).data;
-
-  let parsedYaml;
-  if (isFile(yamlFile as any)) {
-    parsedYaml = yaml.load(
-      Buffer.from((yamlFile as any).content, 'base64').toString('utf8')
-    );
-  }
-
-  let serviceName = '';
-  for (const api of (parsedYaml as ServiceYaml)?.apis) {
-    if (api.name.endsWith('Service')) {
-      serviceName = api.name.split('.')[api.name.split('.').length - 1];
-    }
-  }
-
-  return serviceName;
-}
-
 export async function compileVars(
   argv: CliArgs,
-  driftMetadata: DriftMetadata,
+  serviceConfig: ServiceConfig,
   distributionName: string,
-  serviceName: string
 ): Promise<TemplateVars> {
   return {
-    name: driftMetadata.apiShortName,
-    namePretty: driftMetadata.displayName,
-    productDocumentation: driftMetadata.docsRootUrl,
+    name: serviceConfig.publishing.api_short_name,
+    namePretty: serviceConfig.title,
+    productDocumentation: serviceConfig.publishing.documentation_uri,
     language: LANGUAGE,
     distributionName,
     monoRepoName: argv['mono-repo-name'],
@@ -212,8 +107,21 @@ export async function compileVars(
     apiPath: getApiPath(argv['api-id']),
     apiPathDashes: getApiPathWithDashes(argv['api-id']),
     version: getVersion(argv['api-id']),
-    serviceName,
+    serviceName: getServiceName(serviceConfig),
+    hostName: serviceConfig.name,
+    folderName: argv['folder-name'],
   };
+}
+
+export function getServiceName(serviceConfig: ServiceConfig) {
+  let serviceName = '';
+  for (const api of (serviceConfig)?.apis) {
+    if (api.name.endsWith('Service')) {
+      serviceName = api.name.split('.')[api.name.split('.').length - 1];
+    }
+  }
+
+  return serviceName;
 }
 
 export function getApiPath(apiId: string) {

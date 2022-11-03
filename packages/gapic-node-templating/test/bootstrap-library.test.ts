@@ -20,6 +20,7 @@ import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as vars from '../src/get-bootstrap-template-vars';
 import * as templates from '../src/templating';
+import { join } from 'path';
 
 export const API_ID = 'google.cloud.kms.v1';
 export const DESTINATION_FOLDER = './temp';
@@ -34,19 +35,15 @@ describe('tests running build trigger', () => {
   let getDistributionNameStub: sinon.SinonStub;
   let getServiceNameStub: sinon.SinonStub;
   beforeEach(() => {
-    getDriftMetadataStub = sinon.stub(vars, 'getDriftMetadata');
     compileVarsStub = sinon.stub(vars, 'compileVars');
     compileTemplatesStub = sinon.stub(templates, 'compileTemplates');
     getDistributionNameStub = sinon.stub(vars, 'getDistributionName');
-    getServiceNameStub = sinon.stub(vars, 'getServiceName');
   });
 
   afterEach(() => {
-    getDriftMetadataStub.restore();
     compileVarsStub.restore();
     compileTemplatesStub.restore();
     getDistributionNameStub.restore();
-    getServiceNameStub.restore();
   });
 
   it('it should get correct variable names', async () => {
@@ -57,14 +54,17 @@ describe('tests running build trigger', () => {
       destinationFolder: DESTINATION_FOLDER,
       'mono-repo-name': MONO_REPO_NAME,
       monoRepoName: MONO_REPO_NAME,
+      'folder-name': DESTINATION_FOLDER,
+      folderName: DESTINATION_FOLDER,
+      'service-config-path': 
+        './test/fixtures/serviceConfig.yaml',
+      serviceConfigPath: './test/fixtures/serviceConfig.yaml',
       _: [],
       $0: 'foo',
     });
 
     assert.ok(getDistributionNameStub.calledOnce);
-    assert.ok(getDriftMetadataStub.calledOnce);
     assert.ok(compileVarsStub.calledOnce);
     assert.ok(compileTemplatesStub.calledOnce);
-    assert.ok(getServiceNameStub.calledOnce);
   });
 });
