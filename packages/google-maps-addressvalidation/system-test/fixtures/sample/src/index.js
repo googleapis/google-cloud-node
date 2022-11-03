@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const AddressValidationClient = v1.AddressValidationClient;
-type AddressValidationClient = v1.AddressValidationClient;
-export {v1, AddressValidationClient};
-export default {v1, AddressValidationClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const addressvalidation = require('@google-cloud/addressvalidation');
+
+function main() {
+  const addressValidationClient =
+    new addressvalidation.AddressValidationClient();
+}
+
+main();
