@@ -1,0 +1,16 @@
+{
+  "name": "searchads360",
+  "name_pretty": "",
+  "product_documentation": "",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/searchads360/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "",
+  "api_id": "google.ads.searchads360.v0",
+  "default_version": "v0",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}
+
