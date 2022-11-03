@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(address) {
@@ -51,7 +49,7 @@ function main(address) {
    *  example if the changes the user makes after the initial validation need to
    *  be re-validated), then each followup request must populate this field with
    *  the
-   *  response_id google.maps.addressvalidation.v1.ValidateAddressResponse.response_id 
+   *  response_id google.maps.addressvalidation.v1.ValidateAddressResponse.response_id
    *  from the very first response in the validation sequence.
    */
   // const previousResponseId = 'abc123'
@@ -71,7 +69,8 @@ function main(address) {
   // const enableUspsCass = true
 
   // Imports the Addressvalidation library
-  const {AddressValidationClient} = require('@google-cloud/addressvalidation').v1;
+  const {AddressValidationClient} =
+    require('@google-cloud/addressvalidation').v1;
 
   // Instantiates a client
   const addressvalidationClient = new AddressValidationClient();
