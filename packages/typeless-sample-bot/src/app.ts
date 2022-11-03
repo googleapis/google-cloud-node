@@ -26,7 +26,6 @@ import {
   waitForAllSamples,
   fromArray,
 } from './samples.js';
-import url from 'node:url';
 
 let returnValue = 0;
 
