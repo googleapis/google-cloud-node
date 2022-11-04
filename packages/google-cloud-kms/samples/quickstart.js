@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent) {
@@ -37,9 +35,9 @@ function main(parent) {
   /**
    *  Optional. Optional limit on the number of
    *  CryptoKeyVersions google.cloud.kms.v1.CryptoKeyVersion  to include in the
-   *  response. Further CryptoKeyVersions google.cloud.kms.v1.CryptoKeyVersion 
+   *  response. Further CryptoKeyVersions google.cloud.kms.v1.CryptoKeyVersion
    *  can subsequently be obtained by including the
-   *  ListCryptoKeyVersionsResponse.next_page_token google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token 
+   *  ListCryptoKeyVersionsResponse.next_page_token google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token
    *  in a subsequent request. If unspecified, the server will pick an
    *  appropriate default.
    */
@@ -83,7 +81,7 @@ function main(parent) {
     // Run request
     const iterable = await kmsClient.listCryptoKeyVersionsAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 

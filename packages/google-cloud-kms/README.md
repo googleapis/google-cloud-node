@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,6 +53,78 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/kms
 ```
 
+
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The resource name of the
+ *  CryptoKey google.cloud.kms.v1.CryptoKey  to list, in the format
+ *  `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
+ */
+// const parent = 'abc123'
+/**
+ *  Optional. Optional limit on the number of
+ *  CryptoKeyVersions google.cloud.kms.v1.CryptoKeyVersion  to include in the
+ *  response. Further CryptoKeyVersions google.cloud.kms.v1.CryptoKeyVersion 
+ *  can subsequently be obtained by including the
+ *  ListCryptoKeyVersionsResponse.next_page_token google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token 
+ *  in a subsequent request. If unspecified, the server will pick an
+ *  appropriate default.
+ */
+// const pageSize = 1234
+/**
+ *  Optional. Optional pagination token, returned earlier via
+ *  ListCryptoKeyVersionsResponse.next_page_token google.cloud.kms.v1.ListCryptoKeyVersionsResponse.next_page_token.
+ */
+// const pageToken = 'abc123'
+/**
+ *  The fields to include in the response.
+ */
+// const view = {}
+/**
+ *  Optional. Only include resources that match the filter in the response. For
+ *  more information, see
+ *  Sorting and filtering list
+ *  results (https://cloud.google.com/kms/docs/sorting-and-filtering).
+ */
+// const filter = 'abc123'
+/**
+ *  Optional. Specify how the results should be sorted. If not specified, the
+ *  results will be sorted in the default order. For more information, see
+ *  Sorting and filtering list
+ *  results (https://cloud.google.com/kms/docs/sorting-and-filtering).
+ */
+// const orderBy = 'abc123'
+
+// Imports the Kms library
+const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;
+
+// Instantiates a client
+const kmsClient = new KeyManagementServiceClient();
+
+async function callListCryptoKeyVersions() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await kmsClient.listCryptoKeyVersionsAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListCryptoKeyVersions();
+
+```
 
 
 
@@ -92,6 +164,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Key_management_service.update_crypto_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key.js,samples/README.md) |
 | Key_management_service.update_crypto_key_primary_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key_primary_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key_primary_version.js,samples/README.md) |
 | Key_management_service.update_crypto_key_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key_version.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/quickstart.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/test/quickstart.js,samples/README.md) |
 
 
