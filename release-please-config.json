@@ -33,7 +33,8 @@
     "packages/google-monitoring-dashboard": {},
     "packages/typeless-sample-bot": {},
     "packages/google-cloud-discoveryengine": {},
-    "packages/google-cloud-contentwarehouse": {}
+    "packages/google-cloud-contentwarehouse": {},
+    "packages/google-cloud-kms": {}
   },
   "plugins": [
     {
