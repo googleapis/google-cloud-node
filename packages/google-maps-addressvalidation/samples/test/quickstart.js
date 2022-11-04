@@ -33,11 +33,8 @@ describe('Quickstart', () => {
   });
 
   it('should run quickstart', async () => {
-    const output = execSync(
-      `node ./quickstart.js`,
-      {cwd}
-    );
-    console.log(output)
+    const output = execSync('node ./quickstart.js', {cwd});
+    console.log(output);
     assert(output !== null);
   });
 });
