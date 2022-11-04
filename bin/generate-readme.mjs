@@ -152,7 +152,7 @@ async function processMetadata (repoMetadata) {
         supportDocsUrl = 'https://cloud.google.com/stackdriver/docs/getting-support';
       }
 
-      if (!supportDocsUrl.match(/https/)) {
+      if (!supportDocsUrl.match(/^https/)) {
         supportDocsUrl = `https://${supportDocsUrl}`
       }
       
