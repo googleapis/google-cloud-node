@@ -2,7 +2,11 @@
   "name": "{{distributionName}}",
   "version": "0.0.0",
   "description": "{{namePretty}} client for Node.js",
-  "repository": "googleapis/{{monoRepoName}}",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node",
+    "directory": "packages/{{folderName}}"
+  },
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
@@ -10,7 +14,7 @@
     "build/src",
     "build/protos"
   ],
-  "homepage": "googleapis/{{monoRepoName}}/packages/{{folderName}}",
+  "homepage": "https://github.com/googleapis/{{monoRepoName}}/tree/main/packages/{{folderName}}",
   "keywords": [
     "google apis client",
     "google api client",
