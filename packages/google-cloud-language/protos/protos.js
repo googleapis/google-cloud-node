@@ -530,6 +530,12 @@
                                 return object;
                             var message = new $root.google.cloud.language.v1.Document();
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -570,7 +576,7 @@
                                 object.language = "";
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.language.v1.Document.Type[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.language.v1.Document.Type[message.type] === undefined ? message.type : $root.google.cloud.language.v1.Document.Type[message.type] : message.type;
                             if (message.content != null && message.hasOwnProperty("content")) {
                                 object.content = message.content;
                                 if (options.oneofs)
@@ -1182,6 +1188,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "UNKNOWN":
                             case 0:
                                 message.type = 0;
@@ -1288,7 +1300,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.language.v1.Entity.Type[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.language.v1.Entity.Type[message.type] === undefined ? message.type : $root.google.cloud.language.v1.Entity.Type[message.type] : message.type;
                             var keys2;
                             if (message.metadata && (keys2 = Object.keys(message.metadata)).length) {
                                 object.metadata = {};
@@ -2353,6 +2365,12 @@
                                 return object;
                             var message = new $root.google.cloud.language.v1.PartOfSpeech();
                             switch (object.tag) {
+                            default:
+                                if (typeof object.tag === "number") {
+                                    message.tag = object.tag;
+                                    break;
+                                }
+                                break;
                             case "UNKNOWN":
                             case 0:
                                 message.tag = 0;
@@ -2411,6 +2429,12 @@
                                 break;
                             }
                             switch (object.aspect) {
+                            default:
+                                if (typeof object.aspect === "number") {
+                                    message.aspect = object.aspect;
+                                    break;
+                                }
+                                break;
                             case "ASPECT_UNKNOWN":
                             case 0:
                                 message.aspect = 0;
@@ -2429,6 +2453,12 @@
                                 break;
                             }
                             switch (object["case"]) {
+                            default:
+                                if (typeof object["case"] === "number") {
+                                    message["case"] = object["case"];
+                                    break;
+                                }
+                                break;
                             case "CASE_UNKNOWN":
                             case 0:
                                 message["case"] = 0;
@@ -2491,6 +2521,12 @@
                                 break;
                             }
                             switch (object.form) {
+                            default:
+                                if (typeof object.form === "number") {
+                                    message.form = object.form;
+                                    break;
+                                }
+                                break;
                             case "FORM_UNKNOWN":
                             case 0:
                                 message.form = 0;
@@ -2541,6 +2577,12 @@
                                 break;
                             }
                             switch (object.gender) {
+                            default:
+                                if (typeof object.gender === "number") {
+                                    message.gender = object.gender;
+                                    break;
+                                }
+                                break;
                             case "GENDER_UNKNOWN":
                             case 0:
                                 message.gender = 0;
@@ -2559,6 +2601,12 @@
                                 break;
                             }
                             switch (object.mood) {
+                            default:
+                                if (typeof object.mood === "number") {
+                                    message.mood = object.mood;
+                                    break;
+                                }
+                                break;
                             case "MOOD_UNKNOWN":
                             case 0:
                                 message.mood = 0;
@@ -2589,6 +2637,12 @@
                                 break;
                             }
                             switch (object.number) {
+                            default:
+                                if (typeof object.number === "number") {
+                                    message.number = object.number;
+                                    break;
+                                }
+                                break;
                             case "NUMBER_UNKNOWN":
                             case 0:
                                 message.number = 0;
@@ -2607,6 +2661,12 @@
                                 break;
                             }
                             switch (object.person) {
+                            default:
+                                if (typeof object.person === "number") {
+                                    message.person = object.person;
+                                    break;
+                                }
+                                break;
                             case "PERSON_UNKNOWN":
                             case 0:
                                 message.person = 0;
@@ -2629,6 +2689,12 @@
                                 break;
                             }
                             switch (object.proper) {
+                            default:
+                                if (typeof object.proper === "number") {
+                                    message.proper = object.proper;
+                                    break;
+                                }
+                                break;
                             case "PROPER_UNKNOWN":
                             case 0:
                                 message.proper = 0;
@@ -2643,6 +2709,12 @@
                                 break;
                             }
                             switch (object.reciprocity) {
+                            default:
+                                if (typeof object.reciprocity === "number") {
+                                    message.reciprocity = object.reciprocity;
+                                    break;
+                                }
+                                break;
                             case "RECIPROCITY_UNKNOWN":
                             case 0:
                                 message.reciprocity = 0;
@@ -2657,6 +2729,12 @@
                                 break;
                             }
                             switch (object.tense) {
+                            default:
+                                if (typeof object.tense === "number") {
+                                    message.tense = object.tense;
+                                    break;
+                                }
+                                break;
                             case "TENSE_UNKNOWN":
                             case 0:
                                 message.tense = 0;
@@ -2687,6 +2765,12 @@
                                 break;
                             }
                             switch (object.voice) {
+                            default:
+                                if (typeof object.voice === "number") {
+                                    message.voice = object.voice;
+                                    break;
+                                }
+                                break;
                             case "VOICE_UNKNOWN":
                             case 0:
                                 message.voice = 0;
@@ -2735,29 +2819,29 @@
                                 object.voice = options.enums === String ? "VOICE_UNKNOWN" : 0;
                             }
                             if (message.tag != null && message.hasOwnProperty("tag"))
-                                object.tag = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Tag[message.tag] : message.tag;
+                                object.tag = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Tag[message.tag] === undefined ? message.tag : $root.google.cloud.language.v1.PartOfSpeech.Tag[message.tag] : message.tag;
                             if (message.aspect != null && message.hasOwnProperty("aspect"))
-                                object.aspect = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Aspect[message.aspect] : message.aspect;
+                                object.aspect = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Aspect[message.aspect] === undefined ? message.aspect : $root.google.cloud.language.v1.PartOfSpeech.Aspect[message.aspect] : message.aspect;
                             if (message["case"] != null && message.hasOwnProperty("case"))
-                                object["case"] = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Case[message["case"]] : message["case"];
+                                object["case"] = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Case[message["case"]] === undefined ? message["case"] : $root.google.cloud.language.v1.PartOfSpeech.Case[message["case"]] : message["case"];
                             if (message.form != null && message.hasOwnProperty("form"))
-                                object.form = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Form[message.form] : message.form;
+                                object.form = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Form[message.form] === undefined ? message.form : $root.google.cloud.language.v1.PartOfSpeech.Form[message.form] : message.form;
                             if (message.gender != null && message.hasOwnProperty("gender"))
-                                object.gender = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Gender[message.gender] : message.gender;
+                                object.gender = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Gender[message.gender] === undefined ? message.gender : $root.google.cloud.language.v1.PartOfSpeech.Gender[message.gender] : message.gender;
                             if (message.mood != null && message.hasOwnProperty("mood"))
-                                object.mood = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Mood[message.mood] : message.mood;
+                                object.mood = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Mood[message.mood] === undefined ? message.mood : $root.google.cloud.language.v1.PartOfSpeech.Mood[message.mood] : message.mood;
                             if (message.number != null && message.hasOwnProperty("number"))
-                                object.number = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Number[message.number] : message.number;
+                                object.number = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Number[message.number] === undefined ? message.number : $root.google.cloud.language.v1.PartOfSpeech.Number[message.number] : message.number;
                             if (message.person != null && message.hasOwnProperty("person"))
-                                object.person = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Person[message.person] : message.person;
+                                object.person = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Person[message.person] === undefined ? message.person : $root.google.cloud.language.v1.PartOfSpeech.Person[message.person] : message.person;
                             if (message.proper != null && message.hasOwnProperty("proper"))
-                                object.proper = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Proper[message.proper] : message.proper;
+                                object.proper = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Proper[message.proper] === undefined ? message.proper : $root.google.cloud.language.v1.PartOfSpeech.Proper[message.proper] : message.proper;
                             if (message.reciprocity != null && message.hasOwnProperty("reciprocity"))
-                                object.reciprocity = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Reciprocity[message.reciprocity] : message.reciprocity;
+                                object.reciprocity = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Reciprocity[message.reciprocity] === undefined ? message.reciprocity : $root.google.cloud.language.v1.PartOfSpeech.Reciprocity[message.reciprocity] : message.reciprocity;
                             if (message.tense != null && message.hasOwnProperty("tense"))
-                                object.tense = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Tense[message.tense] : message.tense;
+                                object.tense = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Tense[message.tense] === undefined ? message.tense : $root.google.cloud.language.v1.PartOfSpeech.Tense[message.tense] : message.tense;
                             if (message.voice != null && message.hasOwnProperty("voice"))
-                                object.voice = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Voice[message.voice] : message.voice;
+                                object.voice = options.enums === String ? $root.google.cloud.language.v1.PartOfSpeech.Voice[message.voice] === undefined ? message.voice : $root.google.cloud.language.v1.PartOfSpeech.Voice[message.voice] : message.voice;
                             return object;
                         };
     
@@ -3330,6 +3414,12 @@
                             if (object.headTokenIndex != null)
                                 message.headTokenIndex = object.headTokenIndex | 0;
                             switch (object.label) {
+                            default:
+                                if (typeof object.label === "number") {
+                                    message.label = object.label;
+                                    break;
+                                }
+                                break;
                             case "UNKNOWN":
                             case 0:
                                 message.label = 0;
@@ -3686,7 +3776,7 @@
                             if (message.headTokenIndex != null && message.hasOwnProperty("headTokenIndex"))
                                 object.headTokenIndex = message.headTokenIndex;
                             if (message.label != null && message.hasOwnProperty("label"))
-                                object.label = options.enums === String ? $root.google.cloud.language.v1.DependencyEdge.Label[message.label] : message.label;
+                                object.label = options.enums === String ? $root.google.cloud.language.v1.DependencyEdge.Label[message.label] === undefined ? message.label : $root.google.cloud.language.v1.DependencyEdge.Label[message.label] : message.label;
                             return object;
                         };
     
@@ -4096,6 +4186,12 @@
                                 message.text = $root.google.cloud.language.v1.TextSpan.fromObject(object.text);
                             }
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNKNOWN":
                             case 0:
                                 message.type = 0;
@@ -4138,7 +4234,7 @@
                             if (message.text != null && message.hasOwnProperty("text"))
                                 object.text = $root.google.cloud.language.v1.TextSpan.toObject(message.text, options);
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.language.v1.EntityMention.Type[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.language.v1.EntityMention.Type[message.type] === undefined ? message.type : $root.google.cloud.language.v1.EntityMention.Type[message.type] : message.type;
                             if (message.sentiment != null && message.hasOwnProperty("sentiment"))
                                 object.sentiment = $root.google.cloud.language.v1.Sentiment.toObject(message.sentiment, options);
                             return object;
@@ -5233,6 +5329,12 @@
                                     return object;
                                 var message = new $root.google.cloud.language.v1.ClassificationModelOptions.V2Model();
                                 switch (object.contentCategoriesVersion) {
+                                default:
+                                    if (typeof object.contentCategoriesVersion === "number") {
+                                        message.contentCategoriesVersion = object.contentCategoriesVersion;
+                                        break;
+                                    }
+                                    break;
                                 case "CONTENT_CATEGORIES_VERSION_UNSPECIFIED":
                                 case 0:
                                     message.contentCategoriesVersion = 0;
@@ -5265,7 +5367,7 @@
                                 if (options.defaults)
                                     object.contentCategoriesVersion = options.enums === String ? "CONTENT_CATEGORIES_VERSION_UNSPECIFIED" : 0;
                                 if (message.contentCategoriesVersion != null && message.hasOwnProperty("contentCategoriesVersion"))
-                                    object.contentCategoriesVersion = options.enums === String ? $root.google.cloud.language.v1.ClassificationModelOptions.V2Model.ContentCategoriesVersion[message.contentCategoriesVersion] : message.contentCategoriesVersion;
+                                    object.contentCategoriesVersion = options.enums === String ? $root.google.cloud.language.v1.ClassificationModelOptions.V2Model.ContentCategoriesVersion[message.contentCategoriesVersion] === undefined ? message.contentCategoriesVersion : $root.google.cloud.language.v1.ClassificationModelOptions.V2Model.ContentCategoriesVersion[message.contentCategoriesVersion] : message.contentCategoriesVersion;
                                 return object;
                             };
     
@@ -5499,6 +5601,12 @@
                                 message.document = $root.google.cloud.language.v1.Document.fromObject(object.document);
                             }
                             switch (object.encodingType) {
+                            default:
+                                if (typeof object.encodingType === "number") {
+                                    message.encodingType = object.encodingType;
+                                    break;
+                                }
+                                break;
                             case "NONE":
                             case 0:
                                 message.encodingType = 0;
@@ -5539,7 +5647,7 @@
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.language.v1.Document.toObject(message.document, options);
                             if (message.encodingType != null && message.hasOwnProperty("encodingType"))
-                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1.EncodingType[message.encodingType] : message.encodingType;
+                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1.EncodingType[message.encodingType] === undefined ? message.encodingType : $root.google.cloud.language.v1.EncodingType[message.encodingType] : message.encodingType;
                             return object;
                         };
     
@@ -6031,6 +6139,12 @@
                                 message.document = $root.google.cloud.language.v1.Document.fromObject(object.document);
                             }
                             switch (object.encodingType) {
+                            default:
+                                if (typeof object.encodingType === "number") {
+                                    message.encodingType = object.encodingType;
+                                    break;
+                                }
+                                break;
                             case "NONE":
                             case 0:
                                 message.encodingType = 0;
@@ -6071,7 +6185,7 @@
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.language.v1.Document.toObject(message.document, options);
                             if (message.encodingType != null && message.hasOwnProperty("encodingType"))
-                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1.EncodingType[message.encodingType] : message.encodingType;
+                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1.EncodingType[message.encodingType] === undefined ? message.encodingType : $root.google.cloud.language.v1.EncodingType[message.encodingType] : message.encodingType;
                             return object;
                         };
     
@@ -6534,6 +6648,12 @@
                                 message.document = $root.google.cloud.language.v1.Document.fromObject(object.document);
                             }
                             switch (object.encodingType) {
+                            default:
+                                if (typeof object.encodingType === "number") {
+                                    message.encodingType = object.encodingType;
+                                    break;
+                                }
+                                break;
                             case "NONE":
                             case 0:
                                 message.encodingType = 0;
@@ -6574,7 +6694,7 @@
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.language.v1.Document.toObject(message.document, options);
                             if (message.encodingType != null && message.hasOwnProperty("encodingType"))
-                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1.EncodingType[message.encodingType] : message.encodingType;
+                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1.EncodingType[message.encodingType] === undefined ? message.encodingType : $root.google.cloud.language.v1.EncodingType[message.encodingType] : message.encodingType;
                             return object;
                         };
     
@@ -7037,6 +7157,12 @@
                                 message.document = $root.google.cloud.language.v1.Document.fromObject(object.document);
                             }
                             switch (object.encodingType) {
+                            default:
+                                if (typeof object.encodingType === "number") {
+                                    message.encodingType = object.encodingType;
+                                    break;
+                                }
+                                break;
                             case "NONE":
                             case 0:
                                 message.encodingType = 0;
@@ -7077,7 +7203,7 @@
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.language.v1.Document.toObject(message.document, options);
                             if (message.encodingType != null && message.hasOwnProperty("encodingType"))
-                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1.EncodingType[message.encodingType] : message.encodingType;
+                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1.EncodingType[message.encodingType] === undefined ? message.encodingType : $root.google.cloud.language.v1.EncodingType[message.encodingType] : message.encodingType;
                             return object;
                         };
     
@@ -8071,6 +8197,12 @@
                                 message.features = $root.google.cloud.language.v1.AnnotateTextRequest.Features.fromObject(object.features);
                             }
                             switch (object.encodingType) {
+                            default:
+                                if (typeof object.encodingType === "number") {
+                                    message.encodingType = object.encodingType;
+                                    break;
+                                }
+                                break;
                             case "NONE":
                             case 0:
                                 message.encodingType = 0;
@@ -8114,7 +8246,7 @@
                             if (message.features != null && message.hasOwnProperty("features"))
                                 object.features = $root.google.cloud.language.v1.AnnotateTextRequest.Features.toObject(message.features, options);
                             if (message.encodingType != null && message.hasOwnProperty("encodingType"))
-                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1.EncodingType[message.encodingType] : message.encodingType;
+                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1.EncodingType[message.encodingType] === undefined ? message.encodingType : $root.google.cloud.language.v1.EncodingType[message.encodingType] : message.encodingType;
                             return object;
                         };
     
@@ -9399,6 +9531,12 @@
                                 return object;
                             var message = new $root.google.cloud.language.v1beta2.Document();
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -9421,6 +9559,12 @@
                             if (object.referenceWebUri != null)
                                 message.referenceWebUri = String(object.referenceWebUri);
                             switch (object.boilerplateHandling) {
+                            default:
+                                if (typeof object.boilerplateHandling === "number") {
+                                    message.boilerplateHandling = object.boilerplateHandling;
+                                    break;
+                                }
+                                break;
                             case "BOILERPLATE_HANDLING_UNSPECIFIED":
                             case 0:
                                 message.boilerplateHandling = 0;
@@ -9457,7 +9601,7 @@
                                 object.boilerplateHandling = options.enums === String ? "BOILERPLATE_HANDLING_UNSPECIFIED" : 0;
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.language.v1beta2.Document.Type[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.language.v1beta2.Document.Type[message.type] === undefined ? message.type : $root.google.cloud.language.v1beta2.Document.Type[message.type] : message.type;
                             if (message.content != null && message.hasOwnProperty("content")) {
                                 object.content = message.content;
                                 if (options.oneofs)
@@ -9473,7 +9617,7 @@
                             if (message.referenceWebUri != null && message.hasOwnProperty("referenceWebUri"))
                                 object.referenceWebUri = message.referenceWebUri;
                             if (message.boilerplateHandling != null && message.hasOwnProperty("boilerplateHandling"))
-                                object.boilerplateHandling = options.enums === String ? $root.google.cloud.language.v1beta2.Document.BoilerplateHandling[message.boilerplateHandling] : message.boilerplateHandling;
+                                object.boilerplateHandling = options.enums === String ? $root.google.cloud.language.v1beta2.Document.BoilerplateHandling[message.boilerplateHandling] === undefined ? message.boilerplateHandling : $root.google.cloud.language.v1beta2.Document.BoilerplateHandling[message.boilerplateHandling] : message.boilerplateHandling;
                             return object;
                         };
     
@@ -10089,6 +10233,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "UNKNOWN":
                             case 0:
                                 message.type = 0;
@@ -10195,7 +10345,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.language.v1beta2.Entity.Type[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.language.v1beta2.Entity.Type[message.type] === undefined ? message.type : $root.google.cloud.language.v1beta2.Entity.Type[message.type] : message.type;
                             var keys2;
                             if (message.metadata && (keys2 = Object.keys(message.metadata)).length) {
                                 object.metadata = {};
@@ -11260,6 +11410,12 @@
                                 return object;
                             var message = new $root.google.cloud.language.v1beta2.PartOfSpeech();
                             switch (object.tag) {
+                            default:
+                                if (typeof object.tag === "number") {
+                                    message.tag = object.tag;
+                                    break;
+                                }
+                                break;
                             case "UNKNOWN":
                             case 0:
                                 message.tag = 0;
@@ -11318,6 +11474,12 @@
                                 break;
                             }
                             switch (object.aspect) {
+                            default:
+                                if (typeof object.aspect === "number") {
+                                    message.aspect = object.aspect;
+                                    break;
+                                }
+                                break;
                             case "ASPECT_UNKNOWN":
                             case 0:
                                 message.aspect = 0;
@@ -11336,6 +11498,12 @@
                                 break;
                             }
                             switch (object["case"]) {
+                            default:
+                                if (typeof object["case"] === "number") {
+                                    message["case"] = object["case"];
+                                    break;
+                                }
+                                break;
                             case "CASE_UNKNOWN":
                             case 0:
                                 message["case"] = 0;
@@ -11398,6 +11566,12 @@
                                 break;
                             }
                             switch (object.form) {
+                            default:
+                                if (typeof object.form === "number") {
+                                    message.form = object.form;
+                                    break;
+                                }
+                                break;
                             case "FORM_UNKNOWN":
                             case 0:
                                 message.form = 0;
@@ -11448,6 +11622,12 @@
                                 break;
                             }
                             switch (object.gender) {
+                            default:
+                                if (typeof object.gender === "number") {
+                                    message.gender = object.gender;
+                                    break;
+                                }
+                                break;
                             case "GENDER_UNKNOWN":
                             case 0:
                                 message.gender = 0;
@@ -11466,6 +11646,12 @@
                                 break;
                             }
                             switch (object.mood) {
+                            default:
+                                if (typeof object.mood === "number") {
+                                    message.mood = object.mood;
+                                    break;
+                                }
+                                break;
                             case "MOOD_UNKNOWN":
                             case 0:
                                 message.mood = 0;
@@ -11496,6 +11682,12 @@
                                 break;
                             }
                             switch (object.number) {
+                            default:
+                                if (typeof object.number === "number") {
+                                    message.number = object.number;
+                                    break;
+                                }
+                                break;
                             case "NUMBER_UNKNOWN":
                             case 0:
                                 message.number = 0;
@@ -11514,6 +11706,12 @@
                                 break;
                             }
                             switch (object.person) {
+                            default:
+                                if (typeof object.person === "number") {
+                                    message.person = object.person;
+                                    break;
+                                }
+                                break;
                             case "PERSON_UNKNOWN":
                             case 0:
                                 message.person = 0;
@@ -11536,6 +11734,12 @@
                                 break;
                             }
                             switch (object.proper) {
+                            default:
+                                if (typeof object.proper === "number") {
+                                    message.proper = object.proper;
+                                    break;
+                                }
+                                break;
                             case "PROPER_UNKNOWN":
                             case 0:
                                 message.proper = 0;
@@ -11550,6 +11754,12 @@
                                 break;
                             }
                             switch (object.reciprocity) {
+                            default:
+                                if (typeof object.reciprocity === "number") {
+                                    message.reciprocity = object.reciprocity;
+                                    break;
+                                }
+                                break;
                             case "RECIPROCITY_UNKNOWN":
                             case 0:
                                 message.reciprocity = 0;
@@ -11564,6 +11774,12 @@
                                 break;
                             }
                             switch (object.tense) {
+                            default:
+                                if (typeof object.tense === "number") {
+                                    message.tense = object.tense;
+                                    break;
+                                }
+                                break;
                             case "TENSE_UNKNOWN":
                             case 0:
                                 message.tense = 0;
@@ -11594,6 +11810,12 @@
                                 break;
                             }
                             switch (object.voice) {
+                            default:
+                                if (typeof object.voice === "number") {
+                                    message.voice = object.voice;
+                                    break;
+                                }
+                                break;
                             case "VOICE_UNKNOWN":
                             case 0:
                                 message.voice = 0;
@@ -11642,29 +11864,29 @@
                                 object.voice = options.enums === String ? "VOICE_UNKNOWN" : 0;
                             }
                             if (message.tag != null && message.hasOwnProperty("tag"))
-                                object.tag = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Tag[message.tag] : message.tag;
+                                object.tag = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Tag[message.tag] === undefined ? message.tag : $root.google.cloud.language.v1beta2.PartOfSpeech.Tag[message.tag] : message.tag;
                             if (message.aspect != null && message.hasOwnProperty("aspect"))
-                                object.aspect = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Aspect[message.aspect] : message.aspect;
+                                object.aspect = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Aspect[message.aspect] === undefined ? message.aspect : $root.google.cloud.language.v1beta2.PartOfSpeech.Aspect[message.aspect] : message.aspect;
                             if (message["case"] != null && message.hasOwnProperty("case"))
-                                object["case"] = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Case[message["case"]] : message["case"];
+                                object["case"] = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Case[message["case"]] === undefined ? message["case"] : $root.google.cloud.language.v1beta2.PartOfSpeech.Case[message["case"]] : message["case"];
                             if (message.form != null && message.hasOwnProperty("form"))
-                                object.form = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Form[message.form] : message.form;
+                                object.form = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Form[message.form] === undefined ? message.form : $root.google.cloud.language.v1beta2.PartOfSpeech.Form[message.form] : message.form;
                             if (message.gender != null && message.hasOwnProperty("gender"))
-                                object.gender = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Gender[message.gender] : message.gender;
+                                object.gender = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Gender[message.gender] === undefined ? message.gender : $root.google.cloud.language.v1beta2.PartOfSpeech.Gender[message.gender] : message.gender;
                             if (message.mood != null && message.hasOwnProperty("mood"))
-                                object.mood = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Mood[message.mood] : message.mood;
+                                object.mood = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Mood[message.mood] === undefined ? message.mood : $root.google.cloud.language.v1beta2.PartOfSpeech.Mood[message.mood] : message.mood;
                             if (message.number != null && message.hasOwnProperty("number"))
-                                object.number = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Number[message.number] : message.number;
+                                object.number = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Number[message.number] === undefined ? message.number : $root.google.cloud.language.v1beta2.PartOfSpeech.Number[message.number] : message.number;
                             if (message.person != null && message.hasOwnProperty("person"))
-                                object.person = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Person[message.person] : message.person;
+                                object.person = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Person[message.person] === undefined ? message.person : $root.google.cloud.language.v1beta2.PartOfSpeech.Person[message.person] : message.person;
                             if (message.proper != null && message.hasOwnProperty("proper"))
-                                object.proper = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Proper[message.proper] : message.proper;
+                                object.proper = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Proper[message.proper] === undefined ? message.proper : $root.google.cloud.language.v1beta2.PartOfSpeech.Proper[message.proper] : message.proper;
                             if (message.reciprocity != null && message.hasOwnProperty("reciprocity"))
-                                object.reciprocity = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Reciprocity[message.reciprocity] : message.reciprocity;
+                                object.reciprocity = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Reciprocity[message.reciprocity] === undefined ? message.reciprocity : $root.google.cloud.language.v1beta2.PartOfSpeech.Reciprocity[message.reciprocity] : message.reciprocity;
                             if (message.tense != null && message.hasOwnProperty("tense"))
-                                object.tense = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Tense[message.tense] : message.tense;
+                                object.tense = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Tense[message.tense] === undefined ? message.tense : $root.google.cloud.language.v1beta2.PartOfSpeech.Tense[message.tense] : message.tense;
                             if (message.voice != null && message.hasOwnProperty("voice"))
-                                object.voice = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Voice[message.voice] : message.voice;
+                                object.voice = options.enums === String ? $root.google.cloud.language.v1beta2.PartOfSpeech.Voice[message.voice] === undefined ? message.voice : $root.google.cloud.language.v1beta2.PartOfSpeech.Voice[message.voice] : message.voice;
                             return object;
                         };
     
@@ -12237,6 +12459,12 @@
                             if (object.headTokenIndex != null)
                                 message.headTokenIndex = object.headTokenIndex | 0;
                             switch (object.label) {
+                            default:
+                                if (typeof object.label === "number") {
+                                    message.label = object.label;
+                                    break;
+                                }
+                                break;
                             case "UNKNOWN":
                             case 0:
                                 message.label = 0;
@@ -12593,7 +12821,7 @@
                             if (message.headTokenIndex != null && message.hasOwnProperty("headTokenIndex"))
                                 object.headTokenIndex = message.headTokenIndex;
                             if (message.label != null && message.hasOwnProperty("label"))
-                                object.label = options.enums === String ? $root.google.cloud.language.v1beta2.DependencyEdge.Label[message.label] : message.label;
+                                object.label = options.enums === String ? $root.google.cloud.language.v1beta2.DependencyEdge.Label[message.label] === undefined ? message.label : $root.google.cloud.language.v1beta2.DependencyEdge.Label[message.label] : message.label;
                             return object;
                         };
     
@@ -13003,6 +13231,12 @@
                                 message.text = $root.google.cloud.language.v1beta2.TextSpan.fromObject(object.text);
                             }
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNKNOWN":
                             case 0:
                                 message.type = 0;
@@ -13045,7 +13279,7 @@
                             if (message.text != null && message.hasOwnProperty("text"))
                                 object.text = $root.google.cloud.language.v1beta2.TextSpan.toObject(message.text, options);
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.language.v1beta2.EntityMention.Type[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.language.v1beta2.EntityMention.Type[message.type] === undefined ? message.type : $root.google.cloud.language.v1beta2.EntityMention.Type[message.type] : message.type;
                             if (message.sentiment != null && message.hasOwnProperty("sentiment"))
                                 object.sentiment = $root.google.cloud.language.v1beta2.Sentiment.toObject(message.sentiment, options);
                             return object;
@@ -14140,6 +14374,12 @@
                                     return object;
                                 var message = new $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model();
                                 switch (object.contentCategoriesVersion) {
+                                default:
+                                    if (typeof object.contentCategoriesVersion === "number") {
+                                        message.contentCategoriesVersion = object.contentCategoriesVersion;
+                                        break;
+                                    }
+                                    break;
                                 case "CONTENT_CATEGORIES_VERSION_UNSPECIFIED":
                                 case 0:
                                     message.contentCategoriesVersion = 0;
@@ -14172,7 +14412,7 @@
                                 if (options.defaults)
                                     object.contentCategoriesVersion = options.enums === String ? "CONTENT_CATEGORIES_VERSION_UNSPECIFIED" : 0;
                                 if (message.contentCategoriesVersion != null && message.hasOwnProperty("contentCategoriesVersion"))
-                                    object.contentCategoriesVersion = options.enums === String ? $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.ContentCategoriesVersion[message.contentCategoriesVersion] : message.contentCategoriesVersion;
+                                    object.contentCategoriesVersion = options.enums === String ? $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.ContentCategoriesVersion[message.contentCategoriesVersion] === undefined ? message.contentCategoriesVersion : $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.ContentCategoriesVersion[message.contentCategoriesVersion] : message.contentCategoriesVersion;
                                 return object;
                             };
     
@@ -14406,6 +14646,12 @@
                                 message.document = $root.google.cloud.language.v1beta2.Document.fromObject(object.document);
                             }
                             switch (object.encodingType) {
+                            default:
+                                if (typeof object.encodingType === "number") {
+                                    message.encodingType = object.encodingType;
+                                    break;
+                                }
+                                break;
                             case "NONE":
                             case 0:
                                 message.encodingType = 0;
@@ -14446,7 +14692,7 @@
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.language.v1beta2.Document.toObject(message.document, options);
                             if (message.encodingType != null && message.hasOwnProperty("encodingType"))
-                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] : message.encodingType;
+                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] === undefined ? message.encodingType : $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] : message.encodingType;
                             return object;
                         };
     
@@ -14938,6 +15184,12 @@
                                 message.document = $root.google.cloud.language.v1beta2.Document.fromObject(object.document);
                             }
                             switch (object.encodingType) {
+                            default:
+                                if (typeof object.encodingType === "number") {
+                                    message.encodingType = object.encodingType;
+                                    break;
+                                }
+                                break;
                             case "NONE":
                             case 0:
                                 message.encodingType = 0;
@@ -14978,7 +15230,7 @@
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.language.v1beta2.Document.toObject(message.document, options);
                             if (message.encodingType != null && message.hasOwnProperty("encodingType"))
-                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] : message.encodingType;
+                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] === undefined ? message.encodingType : $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] : message.encodingType;
                             return object;
                         };
     
@@ -15441,6 +15693,12 @@
                                 message.document = $root.google.cloud.language.v1beta2.Document.fromObject(object.document);
                             }
                             switch (object.encodingType) {
+                            default:
+                                if (typeof object.encodingType === "number") {
+                                    message.encodingType = object.encodingType;
+                                    break;
+                                }
+                                break;
                             case "NONE":
                             case 0:
                                 message.encodingType = 0;
@@ -15481,7 +15739,7 @@
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.language.v1beta2.Document.toObject(message.document, options);
                             if (message.encodingType != null && message.hasOwnProperty("encodingType"))
-                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] : message.encodingType;
+                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] === undefined ? message.encodingType : $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] : message.encodingType;
                             return object;
                         };
     
@@ -15944,6 +16202,12 @@
                                 message.document = $root.google.cloud.language.v1beta2.Document.fromObject(object.document);
                             }
                             switch (object.encodingType) {
+                            default:
+                                if (typeof object.encodingType === "number") {
+                                    message.encodingType = object.encodingType;
+                                    break;
+                                }
+                                break;
                             case "NONE":
                             case 0:
                                 message.encodingType = 0;
@@ -15984,7 +16248,7 @@
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.language.v1beta2.Document.toObject(message.document, options);
                             if (message.encodingType != null && message.hasOwnProperty("encodingType"))
-                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] : message.encodingType;
+                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] === undefined ? message.encodingType : $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] : message.encodingType;
                             return object;
                         };
     
@@ -16978,6 +17242,12 @@
                                 message.features = $root.google.cloud.language.v1beta2.AnnotateTextRequest.Features.fromObject(object.features);
                             }
                             switch (object.encodingType) {
+                            default:
+                                if (typeof object.encodingType === "number") {
+                                    message.encodingType = object.encodingType;
+                                    break;
+                                }
+                                break;
                             case "NONE":
                             case 0:
                                 message.encodingType = 0;
@@ -17021,7 +17291,7 @@
                             if (message.features != null && message.hasOwnProperty("features"))
                                 object.features = $root.google.cloud.language.v1beta2.AnnotateTextRequest.Features.toObject(message.features, options);
                             if (message.encodingType != null && message.hasOwnProperty("encodingType"))
-                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] : message.encodingType;
+                                object.encodingType = options.enums === String ? $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] === undefined ? message.encodingType : $root.google.cloud.language.v1beta2.EncodingType[message.encodingType] : message.encodingType;
                             return object;
                         };
     
@@ -21315,6 +21585,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -21329,6 +21605,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -21455,9 +21737,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -23776,6 +24058,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -23872,7 +24160,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -24621,6 +24909,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -24637,6 +24931,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -24675,6 +24975,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -24739,7 +25043,7 @@
                         object.unverifiedLazy = false;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -24747,7 +25051,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -24760,7 +25064,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     return object;
                 };
@@ -26115,6 +26419,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -26178,7 +26488,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -27931,6 +28241,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -27980,7 +28296,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
