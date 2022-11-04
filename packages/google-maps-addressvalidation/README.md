@@ -116,8 +116,8 @@ async function callValidateAddress() {
   // Construct request
   const request = {
     address: {
-      regionCode: "US",
-      addressLines: ["1600 Amphitheatre Pkwy", "Mountain View CA 94040"]
+      regionCode: 'US',
+      addressLines: ['1600 Amphitheatre Pkwy', 'Mountain View CA 94040'],
     },
   };
 
