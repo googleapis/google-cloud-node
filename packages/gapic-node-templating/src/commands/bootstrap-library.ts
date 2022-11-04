@@ -72,7 +72,7 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
         demand: true,
       })
       .option('service-config-path', {
-        describe: 'name of directory of the package',
+        describe: 'path for the service configuration file',
         type: 'string',
         demand: true,
       });
