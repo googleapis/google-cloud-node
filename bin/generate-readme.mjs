@@ -152,13 +152,25 @@ async function processMetadata (repoMetadata) {
         supportDocsUrl = 'https://cloud.google.com/stackdriver/docs/getting-support';
       }
 
+      if (!supportDocsUrl.match(/^https/)) {
+        supportDocsUrl = `https://${supportDocsUrl}`
+      }
+      
+      let res;
+      let remoteUrlExists = true;
       // if URL doesn't exist, fall back to the generic docs page
-      const res = await request({
-        url: supportDocsUrl,
-        method: 'HEAD',
-        validateStatus: () => true
-      });
-      const remoteUrlExists = res.status !== 404;
+      try {
+        res = await request({
+          url: supportDocsUrl,
+          method: 'HEAD',
+          validateStatus: () => true
+        });
+      } catch (err) {
+        if (err.status) === 404 {
+          remoteUrlExists = false;
+        }
+      }
+
       if (!remoteUrlExists) {
         supportDocsUrl = metadata.product_documentation;
       }
