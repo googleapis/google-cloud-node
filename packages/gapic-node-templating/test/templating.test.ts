@@ -88,8 +88,11 @@ describe('tests for templates', () => {
     );
     assert.ok(
       packageJson.homepage,
-      'googleapis/google-cloud-node/packages/google-cloud-keymanagement'
+      'https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-keymanagement'
     );
+    assert.ok(
+      packageJson.repository.directory, 'packages/google-cloud-keymanagement' 
+    )
 
     assert.deepStrictEqual(
       readdirSync(templateDirRead),
