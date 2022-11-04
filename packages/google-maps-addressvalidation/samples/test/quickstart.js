@@ -17,9 +17,7 @@
 const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
-const {describe, it, before} = require('mocha');
-const {AddressValidationClient} = require('@google-cloud/addressvalidation').v1;
-const addressvalidationClient = new AddressValidationClient();
+const {describe, it} = require('mocha');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
