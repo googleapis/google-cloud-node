@@ -18,7 +18,7 @@
 
 'use strict';
 
-function main(address) {
+function main() {
   // [START addressvalidation_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -78,7 +78,10 @@ function main(address) {
   async function callValidateAddress() {
     // Construct request
     const request = {
-      address,
+      address: {
+        regionCode: "US",
+        addressLines: ["1600 Amphitheatre Pkwy", "Mountain View CA 94040"]
+      },
     };
 
     // Run request
