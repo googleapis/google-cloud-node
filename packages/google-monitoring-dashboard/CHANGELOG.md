@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.7.2](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v2.7.1...monitoring-dashboards-v2.7.2) (2022-11-03)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#3478](https://github.com/googleapis/google-cloud-node/issues/3478)) ([09305e0](https://github.com/googleapis/google-cloud-node/commit/09305e06548b89dc17bb3d3167e2d1e69588caa4))
+
+## [2.7.1](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v2.7.0...monitoring-dashboards-v2.7.1) (2022-10-13)
+
+
+### Bug Fixes
+
+* Samples test ([8311347](https://github.com/googleapis/google-cloud-node/commit/83113476faf791e74411419f8d4e0772df30fbf0))
+
 ## [2.7.0](https://github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.6.1...v2.7.0) (2022-04-08)
 
 

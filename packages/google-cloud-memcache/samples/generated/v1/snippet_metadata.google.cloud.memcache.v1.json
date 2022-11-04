@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-memcache",
-        "version": "2.1.2",
+        "version": "2.1.3",
         "language": "TYPESCRIPT",
         "apis": [
             {

@@ -560,6 +560,10 @@
                           "type": "InstancePolicyOrTemplate",
                           "id": 8
                         },
+                        "serviceAccount": {
+                          "type": "ServiceAccount",
+                          "id": 9
+                        },
                         "labels": {
                           "keyType": "string",
                           "type": "string",
@@ -698,6 +702,10 @@
                             "instanceTemplate": {
                               "type": "string",
                               "id": 2
+                            },
+                            "installGpuDrivers": {
+                              "type": "bool",
+                              "id": 3
                             }
                           }
                         },
@@ -780,6 +788,14 @@
                         "permissiveSsh": {
                           "type": "bool",
                           "id": 12
+                        }
+                      }
+                    },
+                    "ServiceAccount": {
+                      "fields": {
+                        "email": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -2020,7 +2036,10 @@
                         "scopes": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       }
                     },

@@ -5101,6 +5101,7 @@
                          * @interface IAllocationPolicy
                          * @property {google.cloud.batch.v1.AllocationPolicy.ILocationPolicy|null} [location] AllocationPolicy location
                          * @property {Array.<google.cloud.batch.v1.AllocationPolicy.IInstancePolicyOrTemplate>|null} [instances] AllocationPolicy instances
+                         * @property {google.cloud.batch.v1.IServiceAccount|null} [serviceAccount] AllocationPolicy serviceAccount
                          * @property {Object.<string,string>|null} [labels] AllocationPolicy labels
                          * @property {google.cloud.batch.v1.AllocationPolicy.INetworkPolicy|null} [network] AllocationPolicy network
                          */
@@ -5137,6 +5138,14 @@
                          * @instance
                          */
                         AllocationPolicy.prototype.instances = $util.emptyArray;
+    
+                        /**
+                         * AllocationPolicy serviceAccount.
+                         * @member {google.cloud.batch.v1.IServiceAccount|null|undefined} serviceAccount
+                         * @memberof google.cloud.batch.v1.AllocationPolicy
+                         * @instance
+                         */
+                        AllocationPolicy.prototype.serviceAccount = null;
     
                         /**
                          * AllocationPolicy labels.
@@ -5188,6 +5197,8 @@
                             if (message.instances != null && message.instances.length)
                                 for (var i = 0; i < message.instances.length; ++i)
                                     $root.google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate.encode(message.instances[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                $root.google.cloud.batch.v1.ServiceAccount.encode(message.serviceAccount, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -5230,6 +5241,10 @@
                                         if (!(message.instances && message.instances.length))
                                             message.instances = [];
                                         message.instances.push($root.google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        message.serviceAccount = $root.google.cloud.batch.v1.ServiceAccount.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -5308,6 +5323,11 @@
                                         return "instances." + error;
                                 }
                             }
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount")) {
+                                var error = $root.google.cloud.batch.v1.ServiceAccount.verify(message.serviceAccount);
+                                if (error)
+                                    return "serviceAccount." + error;
+                            }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
                                 if (!$util.isObject(message.labels))
                                     return "labels: object expected";
@@ -5351,6 +5371,11 @@
                                     message.instances[i] = $root.google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate.fromObject(object.instances[i]);
                                 }
                             }
+                            if (object.serviceAccount != null) {
+                                if (typeof object.serviceAccount !== "object")
+                                    throw TypeError(".google.cloud.batch.v1.AllocationPolicy.serviceAccount: object expected");
+                                message.serviceAccount = $root.google.cloud.batch.v1.ServiceAccount.fromObject(object.serviceAccount);
+                            }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
                                     throw TypeError(".google.cloud.batch.v1.AllocationPolicy.labels: object expected");
@@ -5386,6 +5411,7 @@
                             if (options.defaults) {
                                 object.location = null;
                                 object.network = null;
+                                object.serviceAccount = null;
                             }
                             if (message.location != null && message.hasOwnProperty("location"))
                                 object.location = $root.google.cloud.batch.v1.AllocationPolicy.LocationPolicy.toObject(message.location, options);
@@ -5402,6 +5428,8 @@
                                 for (var j = 0; j < message.instances.length; ++j)
                                     object.instances[j] = $root.google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate.toObject(message.instances[j], options);
                             }
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = $root.google.cloud.batch.v1.ServiceAccount.toObject(message.serviceAccount, options);
                             return object;
                         };
     
@@ -6900,6 +6928,7 @@
                              * @interface IInstancePolicyOrTemplate
                              * @property {google.cloud.batch.v1.AllocationPolicy.IInstancePolicy|null} [policy] InstancePolicyOrTemplate policy
                              * @property {string|null} [instanceTemplate] InstancePolicyOrTemplate instanceTemplate
+                             * @property {boolean|null} [installGpuDrivers] InstancePolicyOrTemplate installGpuDrivers
                              */
     
                             /**
@@ -6932,6 +6961,14 @@
                              * @instance
                              */
                             InstancePolicyOrTemplate.prototype.instanceTemplate = null;
+    
+                            /**
+                             * InstancePolicyOrTemplate installGpuDrivers.
+                             * @member {boolean} installGpuDrivers
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate
+                             * @instance
+                             */
+                            InstancePolicyOrTemplate.prototype.installGpuDrivers = false;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -6975,6 +7012,8 @@
                                     $root.google.cloud.batch.v1.AllocationPolicy.InstancePolicy.encode(message.policy, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                                 if (message.instanceTemplate != null && Object.hasOwnProperty.call(message, "instanceTemplate"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.instanceTemplate);
+                                if (message.installGpuDrivers != null && Object.hasOwnProperty.call(message, "installGpuDrivers"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.installGpuDrivers);
                                 return writer;
                             };
     
@@ -7015,6 +7054,10 @@
                                         }
                                     case 2: {
                                             message.instanceTemplate = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.installGpuDrivers = reader.bool();
                                             break;
                                         }
                                     default:
@@ -7068,6 +7111,9 @@
                                     if (!$util.isString(message.instanceTemplate))
                                         return "instanceTemplate: string expected";
                                 }
+                                if (message.installGpuDrivers != null && message.hasOwnProperty("installGpuDrivers"))
+                                    if (typeof message.installGpuDrivers !== "boolean")
+                                        return "installGpuDrivers: boolean expected";
                                 return null;
                             };
     
@@ -7090,6 +7136,8 @@
                                 }
                                 if (object.instanceTemplate != null)
                                     message.instanceTemplate = String(object.instanceTemplate);
+                                if (object.installGpuDrivers != null)
+                                    message.installGpuDrivers = Boolean(object.installGpuDrivers);
                                 return message;
                             };
     
@@ -7106,6 +7154,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.defaults)
+                                    object.installGpuDrivers = false;
                                 if (message.policy != null && message.hasOwnProperty("policy")) {
                                     object.policy = $root.google.cloud.batch.v1.AllocationPolicy.InstancePolicy.toObject(message.policy, options);
                                     if (options.oneofs)
@@ -7116,6 +7166,8 @@
                                     if (options.oneofs)
                                         object.policyTemplate = "instanceTemplate";
                                 }
+                                if (message.installGpuDrivers != null && message.hasOwnProperty("installGpuDrivers"))
+                                    object.installGpuDrivers = message.installGpuDrivers;
                                 return object;
                             };
     
@@ -8075,6 +8127,209 @@
                         };
     
                         return TaskGroup;
+                    })();
+    
+                    v1.ServiceAccount = (function() {
+    
+                        /**
+                         * Properties of a ServiceAccount.
+                         * @memberof google.cloud.batch.v1
+                         * @interface IServiceAccount
+                         * @property {string|null} [email] ServiceAccount email
+                         */
+    
+                        /**
+                         * Constructs a new ServiceAccount.
+                         * @memberof google.cloud.batch.v1
+                         * @classdesc Represents a ServiceAccount.
+                         * @implements IServiceAccount
+                         * @constructor
+                         * @param {google.cloud.batch.v1.IServiceAccount=} [properties] Properties to set
+                         */
+                        function ServiceAccount(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ServiceAccount email.
+                         * @member {string} email
+                         * @memberof google.cloud.batch.v1.ServiceAccount
+                         * @instance
+                         */
+                        ServiceAccount.prototype.email = "";
+    
+                        /**
+                         * Creates a new ServiceAccount instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.batch.v1.ServiceAccount
+                         * @static
+                         * @param {google.cloud.batch.v1.IServiceAccount=} [properties] Properties to set
+                         * @returns {google.cloud.batch.v1.ServiceAccount} ServiceAccount instance
+                         */
+                        ServiceAccount.create = function create(properties) {
+                            return new ServiceAccount(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ServiceAccount message. Does not implicitly {@link google.cloud.batch.v1.ServiceAccount.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.batch.v1.ServiceAccount
+                         * @static
+                         * @param {google.cloud.batch.v1.IServiceAccount} message ServiceAccount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServiceAccount.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.email != null && Object.hasOwnProperty.call(message, "email"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.email);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ServiceAccount message, length delimited. Does not implicitly {@link google.cloud.batch.v1.ServiceAccount.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.batch.v1.ServiceAccount
+                         * @static
+                         * @param {google.cloud.batch.v1.IServiceAccount} message ServiceAccount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServiceAccount.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ServiceAccount message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.batch.v1.ServiceAccount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.batch.v1.ServiceAccount} ServiceAccount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServiceAccount.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.batch.v1.ServiceAccount();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.email = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ServiceAccount message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.batch.v1.ServiceAccount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.batch.v1.ServiceAccount} ServiceAccount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServiceAccount.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ServiceAccount message.
+                         * @function verify
+                         * @memberof google.cloud.batch.v1.ServiceAccount
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ServiceAccount.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.email != null && message.hasOwnProperty("email"))
+                                if (!$util.isString(message.email))
+                                    return "email: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ServiceAccount message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.batch.v1.ServiceAccount
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.batch.v1.ServiceAccount} ServiceAccount
+                         */
+                        ServiceAccount.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.batch.v1.ServiceAccount)
+                                return object;
+                            var message = new $root.google.cloud.batch.v1.ServiceAccount();
+                            if (object.email != null)
+                                message.email = String(object.email);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ServiceAccount message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.batch.v1.ServiceAccount
+                         * @static
+                         * @param {google.cloud.batch.v1.ServiceAccount} message ServiceAccount
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ServiceAccount.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.email = "";
+                            if (message.email != null && message.hasOwnProperty("email"))
+                                object.email = message.email;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ServiceAccount to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.batch.v1.ServiceAccount
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ServiceAccount.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ServiceAccount
+                         * @function getTypeUrl
+                         * @memberof google.cloud.batch.v1.ServiceAccount
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ServiceAccount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.batch.v1.ServiceAccount";
+                        };
+    
+                        return ServiceAccount;
                     })();
     
                     v1.ComputeResource = (function() {

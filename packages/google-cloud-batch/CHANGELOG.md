@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/batch-v0.3.0...batch-v0.3.1) (2022-11-03)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#3478](https://github.com/googleapis/google-cloud-node/issues/3478)) ([09305e0](https://github.com/googleapis/google-cloud-node/commit/09305e06548b89dc17bb3d3167e2d1e69588caa4))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.2.0...batch-v0.3.0) (2022-10-19)
+
+
+### Features
+
+* Add initial files for google.cloud.discoveryengine.v1beta ([#3445](https://github.com/googleapis/google-cloud-node/issues/3445)) ([c220d49](https://github.com/googleapis/google-cloud-node/commit/c220d495cde64b1855b86df9550168e43e1c2f98))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.1.2...batch-v0.2.0) (2022-10-18)
+
+
+### Features
+
+* Enable install_gpu_drivers flag in v1 proto ([37c3db1](https://github.com/googleapis/google-cloud-node/commit/37c3db12dea1c18ba1d3d40f346cf7460fe9b3cb))
+
 ## [0.1.2](https://github.com/googleapis/google-cloud-node/compare/batch-v0.1.1...batch-v0.1.2) (2022-09-28)
 
 

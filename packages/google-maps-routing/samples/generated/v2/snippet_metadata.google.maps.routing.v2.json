@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-routing",
-        "version": "0.1.1",
+        "version": "0.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 118,
+                    "end": 127,
                     "type": "FULL"
                 }
             ],
@@ -78,6 +78,10 @@
                     {
                         "name": "units",
                         "type": ".google.maps.routing.v2.Units"
+                    },
+                    {
+                        "name": "requested_reference_routes",
+                        "type": "TYPE_ENUM[]"
                     }
                 ],
                 "resultType": ".google.maps.routing.v2.ComputeRoutesResponse",

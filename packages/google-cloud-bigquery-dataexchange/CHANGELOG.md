@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-exchange-v0.3.0...bigquery-data-exchange-v0.3.1) (2022-11-03)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#3478](https://github.com/googleapis/google-cloud-node/issues/3478)) ([09305e0](https://github.com/googleapis/google-cloud-node/commit/09305e06548b89dc17bb3d3167e2d1e69588caa4))
+
 ## [0.3.0](https://github.com/googleapis/nodejs-bigquery-data-exchange/compare/v0.2.1...v0.3.0) (2022-09-26)
 
 
