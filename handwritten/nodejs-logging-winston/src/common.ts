@@ -92,7 +92,7 @@ export const LOGGING_SAMPLED_KEY = 'logging.googleapis.com/trace_sampled';
 /**
  * Default library version to be used if version retrieval fails
  */
-export const NODEJS_WINSTON_DEFAULT_LIBRARY_VERSION = 'unknown';
+export const NODEJS_WINSTON_DEFAULT_LIBRARY_VERSION = '1.0.0'; // {x-release-please-version}
 
 // The variable to hold cached library version
 let libraryVersion: string;
