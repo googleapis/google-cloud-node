@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/logging-bunyan",
   "description": "Cloud Logging stream for Bunyan",
-  "version": "4.1.5",
+  "version": "4.2.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {

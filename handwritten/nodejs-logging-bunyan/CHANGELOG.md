@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.1.5...v4.2.0) (2022-11-04)
+
+
+### Features
+
+* Add support for instrumentation version annotations ([#670](https://github.com/googleapis/nodejs-logging-bunyan/issues/670)) ([e332a76](https://github.com/googleapis/nodejs-logging-bunyan/commit/e332a7626dd637daab4e23b36ca7249684506501))
+
 ## [4.1.5](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.1.4...v4.1.5) (2022-11-01)
 
 
