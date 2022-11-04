@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/policy-troubleshooter",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Policytroubleshooter client for Node.js",
   "repository": "googleapis/nodejs-policy-troubleshooter",
   "license": "Apache-2.0",
@@ -39,7 +39,7 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "google-gax": "^3.3.0"
+    "google-gax": "^3.5.2"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",

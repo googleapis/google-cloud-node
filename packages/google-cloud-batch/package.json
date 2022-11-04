@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/batch",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Batch client for Node.js",
   "repository": "googleapis/google-cloud-node",
   "license": "Apache-2.0",
@@ -39,7 +39,7 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "google-gax": "^3.0.1"
+    "google-gax": "^3.5.2"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",

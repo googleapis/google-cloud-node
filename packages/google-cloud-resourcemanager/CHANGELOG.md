@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource-manager?activeTab=versions
 
+## [4.1.2](https://github.com/googleapis/google-cloud-node/compare/resource-manager-v4.1.1...resource-manager-v4.1.2) (2022-11-03)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#3478](https://github.com/googleapis/google-cloud-node/issues/3478)) ([09305e0](https://github.com/googleapis/google-cloud-node/commit/09305e06548b89dc17bb3d3167e2d1e69588caa4))
+
 ## [4.1.1](https://github.com/googleapis/nodejs-resource-manager/compare/v4.1.0...v4.1.1) (2022-09-22)
 
 

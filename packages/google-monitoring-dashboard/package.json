@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/monitoring-dashboards",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "interact with dashboards for viewing and analyzing metric data",
   "repository": "googleapis/nodejs-monitoring-dashboards",
   "license": "Apache-2.0",
@@ -27,7 +27,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "google-gax": "^3.3.0"
+    "google-gax": "^3.5.2"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
