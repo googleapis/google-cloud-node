@@ -26,9 +26,8 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
-
   it('should run quickstart', async () => {
     const output = execSync('node ./quickstart.js', {cwd});
-   assert(output !== null);
+    assert(output !== null);
   });
 });
