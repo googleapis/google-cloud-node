@@ -4,7 +4,7 @@
   "description": "{{namePretty}} client for Node.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/googleapis/google-cloud-node",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
     "directory": "packages/{{folderName}}"
   },
   "license": "Apache-2.0",
