@@ -29,7 +29,6 @@ import {LogSeverityFunctions} from '@google-cloud/logging/build/src/utils/log-co
 import mapValues = require('lodash.mapvalues');
 import {Options} from '.';
 import {Entry, LogEntry} from '@google-cloud/logging/build/src/entry';
-import path = require('path');
 import {LogSyncOptions} from '@google-cloud/logging/build/src/log-sync';
 
 type Callback = (err: Error | null, apiResponse?: {}) => void;
@@ -90,12 +89,11 @@ export const LOGGING_SPAN_KEY = 'logging.googleapis.com/spanId';
 export const LOGGING_SAMPLED_KEY = 'logging.googleapis.com/trace_sampled';
 
 /**
- * Default library version to be used if version retrieval fails
+ * Default library version to be used
+ * Using release-please annotations to update DEFAULT_INSTRUMENTATION_VERSION with latest version.
+ * See https://github.com/googleapis/release-please/blob/main/docs/customizing.md#updating-arbitrary-files
  */
 export const NODEJS_WINSTON_DEFAULT_LIBRARY_VERSION = '5.2.0'; // {x-release-please-version}
-
-// The variable to hold cached library version
-let libraryVersion: string;
 
 /*!
  * Gets the current fully qualified trace ID when available from the
@@ -354,19 +352,7 @@ export class LoggingCommon {
 }
 
 export function getNodejsLibraryVersion() {
-  if (libraryVersion) {
-    return libraryVersion;
-  }
-  try {
-    libraryVersion = require(path.resolve(
-      __dirname,
-      '../../',
-      'package.json'
-    )).version;
-  } catch (err) {
-    libraryVersion = NODEJS_WINSTON_DEFAULT_LIBRARY_VERSION;
-  }
-  return libraryVersion;
+  return NODEJS_WINSTON_DEFAULT_LIBRARY_VERSION;
 }
 
 type MetadataArg = {
