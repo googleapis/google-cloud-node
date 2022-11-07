@@ -19,7 +19,6 @@ import loggers from './loggers.js';
 import {treeWalk} from './tree-walk.js';
 import {readFile, writeFile} from 'fs/promises';
 import babel from '@babel/core';
-import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {typescript as presetTypescript} from './preset-loader.js';
 import importToRequire from './import-to-require.js';
@@ -115,7 +114,9 @@ export async function* writeSamples(
 ): AsyncIterable<Sample> {
   for await (const s of samples) {
     // If requested, rewrite the output path to be elsewhere.
-    const newName = outputPath ? path.join(outputPath, path.basename(s.filename)) : s.filename;
+    const newName = outputPath
+      ? path.join(outputPath, path.basename(s.filename))
+      : s.filename;
 
     loggers.verbose('writing new sample', newName);
     await writeFile(newName, s.contents);
