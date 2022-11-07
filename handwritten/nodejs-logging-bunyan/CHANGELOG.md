@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [4.2.1](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.2.0...v4.2.1) (2022-11-07)
+
+
+### Bug Fixes
+
+* Switch instrumentation code to return version stored in NODEJS_BUNYAN_DEFAULT_LIBRARY_VERSION ([#672](https://github.com/googleapis/nodejs-logging-bunyan/issues/672)) ([2eb88d8](https://github.com/googleapis/nodejs-logging-bunyan/commit/2eb88d878583a2a8f823fa310353eeb6be931f7a))
+
 ## [4.2.0](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.1.5...v4.2.0) (2022-11-04)
 
 
