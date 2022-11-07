@@ -20,7 +20,6 @@ import {
   setInstrumentationStatus,
   createDiagnosticEntry,
 } from '@google-cloud/logging/build/src/utils/instrumentation';
-import path = require('path');
 
 // Export the express middleware as 'express'.
 export {express};
@@ -71,12 +70,11 @@ export const LOGGING_SPAN_KEY = 'logging.googleapis.com/spanId';
 export const LOGGING_SAMPLED_KEY = 'logging.googleapis.com/trace_sampled';
 
 /**
- * Default library version to be used if version retrieval fails
+ * Default library version to be used
+ * Using release-please annotations to update DEFAULT_INSTRUMENTATION_VERSION with latest version.
+ * See https://github.com/googleapis/release-please/blob/main/docs/customizing.md#updating-arbitrary-files
  */
 export const NODEJS_BUNYAN_DEFAULT_LIBRARY_VERSION = '4.2.0'; // {x-release-please-version}
-
-// The variable to hold cached library version
-let libraryVersion: string;
 
 /**
  * Gets the current fully qualified trace ID when available from the
@@ -477,23 +475,11 @@ export class LoggingBunyan extends Writable {
   }
 
   /**
-   * Method used to retrieve the current logging-bunyan library version
+   * Method used to retrieve the current logging-bunyan library version stored in NODEJS_BUNYAN_DEFAULT_LIBRARY_VERSION
    * @returns The version of this library
    */
   getNodejsLibraryVersion() {
-    if (libraryVersion) {
-      return libraryVersion;
-    }
-    try {
-      libraryVersion = require(path.resolve(
-        __dirname,
-        '../../',
-        'package.json'
-      )).version;
-    } catch (err) {
-      libraryVersion = NODEJS_BUNYAN_DEFAULT_LIBRARY_VERSION;
-    }
-    return libraryVersion;
+    return NODEJS_BUNYAN_DEFAULT_LIBRARY_VERSION;
   }
 }
 
