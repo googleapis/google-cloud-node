@@ -62,7 +62,8 @@ async function processArgs(args: string[]) {
       outputpath: {
         demandOption: false,
         type: 'string',
-        describe: 'outputs default to being next to the original; if set, this option will specify the output for all files',
+        describe:
+          'outputs default to being next to the original; if set, this option will specify the output for all files',
         alias: ['o'],
       },
       verbose: {

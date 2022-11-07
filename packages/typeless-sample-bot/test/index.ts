@@ -137,7 +137,7 @@ describe('command line option', () => {
       path.join(testOutputPath, 'getSchema.js'),
     ];
     try {
-      await mkdir(testOutputPath)
+      await mkdir(testOutputPath);
       const retcode = await main.main(cmdline);
       assert.strictEqual(retcode, 0);
       const contents = [
@@ -146,7 +146,7 @@ describe('command line option', () => {
       ];
       snapshot(contents);
     } finally {
-      rm(testOutputPath,{
+      rm(testOutputPath, {
         recursive: true,
       }).catch(() => {});
     }
