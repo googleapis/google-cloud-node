@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [5.2.1](https://github.com/googleapis/nodejs-logging-winston/compare/v5.2.0...v5.2.1) (2022-11-07)
+
+
+### Bug Fixes
+
+* Switch instrumentation code to return version stored in NODEJS_WINSTON_DEFAULT_LIBRARY_VERSION ([#764](https://github.com/googleapis/nodejs-logging-winston/issues/764)) ([3e23e5a](https://github.com/googleapis/nodejs-logging-winston/commit/3e23e5aeef1ad8c1084e68d04fc2cf7b457fde34))
+
 ## [5.2.0](https://github.com/googleapis/nodejs-logging-winston/compare/v5.1.8...v5.2.0) (2022-11-04)
 
 
