@@ -124,12 +124,20 @@ export async function* transformSamples(
 
 // Write out all samples to the file system.
 export async function* writeSamples(
-  samples: AsyncIterable<Sample>
+  samples: AsyncIterable<Sample>,
+  outputPath?: string
 ): AsyncIterable<Sample> {
   for await (const s of samples) {
-    loggers.verbose('writing new sample', s.filename);
-    await writeFile(s.filename, s.contents);
-    yield s;
+    // If requested, rewrite the output path to be elsewhere.
+    const newName = outputPath ? path.join(outputPath, path.basename(s.filename)) : s.filename;
+
+    loggers.verbose('writing new sample', newName);
+    await writeFile(newName, s.contents);
+
+    yield {
+      filename: newName,
+      contents: s.contents,
+    };
   }
 }
 
