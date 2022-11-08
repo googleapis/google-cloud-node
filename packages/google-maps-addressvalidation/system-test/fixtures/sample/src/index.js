@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const addressvalidation = require('@google-cloud/addressvalidation');
+const addressvalidation = require('@googlemaps/addressvalidation');
 
 function main() {
   const addressValidationClient =
