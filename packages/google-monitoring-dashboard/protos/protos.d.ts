@@ -2225,6 +2225,9 @@ export namespace google {
                     /** TimeSeriesQuery timeSeriesQueryLanguage */
                     timeSeriesQueryLanguage?: (string|null);
 
+                    /** TimeSeriesQuery prometheusQuery */
+                    prometheusQuery?: (string|null);
+
                     /** TimeSeriesQuery unitOverride */
                     unitOverride?: (string|null);
                 }
@@ -2247,11 +2250,14 @@ export namespace google {
                     /** TimeSeriesQuery timeSeriesQueryLanguage. */
                     public timeSeriesQueryLanguage?: (string|null);
 
+                    /** TimeSeriesQuery prometheusQuery. */
+                    public prometheusQuery?: (string|null);
+
                     /** TimeSeriesQuery unitOverride. */
                     public unitOverride: string;
 
                     /** TimeSeriesQuery source. */
-                    public source?: ("timeSeriesFilter"|"timeSeriesFilterRatio"|"timeSeriesQueryLanguage");
+                    public source?: ("timeSeriesFilter"|"timeSeriesFilterRatio"|"timeSeriesQueryLanguage"|"prometheusQuery");
 
                     /**
                      * Creates a new TimeSeriesQuery instance using the specified properties.

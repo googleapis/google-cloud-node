@@ -200,6 +200,9 @@ export class UserEventServiceClient {
           get: '/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',
           additional_bindings: [
             {
+              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/models/*/operations/*}',
+            },
+            {
               get: '/v1beta/{name=projects/*/locations/*/dataStores/*/operations/*}',
             },
             {get: '/v1beta/{name=projects/*/locations/*/operations/*}'},
@@ -208,8 +211,14 @@ export class UserEventServiceClient {
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta/{name=projects/*/locations/*/dataStores/*}/operations',
+          get: '/v1beta/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
           additional_bindings: [
+            {
+              get: '/v1beta/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
+            },
+            {
+              get: '/v1beta/{name=projects/*/locations/*/dataStores/*}/operations',
+            },
             {get: '/v1beta/{name=projects/*/locations/*}/operations'},
             {get: '/v1beta/{name=projects/*}/operations'},
           ],

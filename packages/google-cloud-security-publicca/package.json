@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/publicca",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Public Certificate Authority client for Node.js",
   "repository": "googleapis/google-cloud-node",
   "license": "Apache-2.0",
@@ -39,7 +39,7 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "google-gax": "^3.0.1"
+    "google-gax": "^3.5.2"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",

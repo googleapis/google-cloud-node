@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-discoveryengine",
-        "version": "0.1.0",
+        "version": "0.1.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -302,7 +302,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 130,
+                    "end": 148,
                     "type": "FULL"
                 }
             ],
@@ -333,6 +333,10 @@
                     },
                     {
                         "name": "params",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "user_labels",
                         "type": "TYPE_MESSAGE[]"
                     }
                 ],

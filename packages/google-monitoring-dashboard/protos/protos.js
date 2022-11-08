@@ -5857,6 +5857,7 @@
                          * @property {google.monitoring.dashboard.v1.ITimeSeriesFilter|null} [timeSeriesFilter] TimeSeriesQuery timeSeriesFilter
                          * @property {google.monitoring.dashboard.v1.ITimeSeriesFilterRatio|null} [timeSeriesFilterRatio] TimeSeriesQuery timeSeriesFilterRatio
                          * @property {string|null} [timeSeriesQueryLanguage] TimeSeriesQuery timeSeriesQueryLanguage
+                         * @property {string|null} [prometheusQuery] TimeSeriesQuery prometheusQuery
                          * @property {string|null} [unitOverride] TimeSeriesQuery unitOverride
                          */
     
@@ -5900,6 +5901,14 @@
                         TimeSeriesQuery.prototype.timeSeriesQueryLanguage = null;
     
                         /**
+                         * TimeSeriesQuery prometheusQuery.
+                         * @member {string|null|undefined} prometheusQuery
+                         * @memberof google.monitoring.dashboard.v1.TimeSeriesQuery
+                         * @instance
+                         */
+                        TimeSeriesQuery.prototype.prometheusQuery = null;
+    
+                        /**
                          * TimeSeriesQuery unitOverride.
                          * @member {string} unitOverride
                          * @memberof google.monitoring.dashboard.v1.TimeSeriesQuery
@@ -5912,12 +5921,12 @@
     
                         /**
                          * TimeSeriesQuery source.
-                         * @member {"timeSeriesFilter"|"timeSeriesFilterRatio"|"timeSeriesQueryLanguage"|undefined} source
+                         * @member {"timeSeriesFilter"|"timeSeriesFilterRatio"|"timeSeriesQueryLanguage"|"prometheusQuery"|undefined} source
                          * @memberof google.monitoring.dashboard.v1.TimeSeriesQuery
                          * @instance
                          */
                         Object.defineProperty(TimeSeriesQuery.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["timeSeriesFilter", "timeSeriesFilterRatio", "timeSeriesQueryLanguage"]),
+                            get: $util.oneOfGetter($oneOfFields = ["timeSeriesFilter", "timeSeriesFilterRatio", "timeSeriesQueryLanguage", "prometheusQuery"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -5953,6 +5962,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.timeSeriesQueryLanguage);
                             if (message.unitOverride != null && Object.hasOwnProperty.call(message, "unitOverride"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.unitOverride);
+                            if (message.prometheusQuery != null && Object.hasOwnProperty.call(message, "prometheusQuery"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.prometheusQuery);
                             return writer;
                         };
     
@@ -5997,6 +6008,10 @@
                                     }
                                 case 3: {
                                         message.timeSeriesQueryLanguage = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.prometheusQuery = reader.string();
                                         break;
                                     }
                                 case 5: {
@@ -6064,6 +6079,13 @@
                                 if (!$util.isString(message.timeSeriesQueryLanguage))
                                     return "timeSeriesQueryLanguage: string expected";
                             }
+                            if (message.prometheusQuery != null && message.hasOwnProperty("prometheusQuery")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                if (!$util.isString(message.prometheusQuery))
+                                    return "prometheusQuery: string expected";
+                            }
                             if (message.unitOverride != null && message.hasOwnProperty("unitOverride"))
                                 if (!$util.isString(message.unitOverride))
                                     return "unitOverride: string expected";
@@ -6094,6 +6116,8 @@
                             }
                             if (object.timeSeriesQueryLanguage != null)
                                 message.timeSeriesQueryLanguage = String(object.timeSeriesQueryLanguage);
+                            if (object.prometheusQuery != null)
+                                message.prometheusQuery = String(object.prometheusQuery);
                             if (object.unitOverride != null)
                                 message.unitOverride = String(object.unitOverride);
                             return message;
@@ -6131,6 +6155,11 @@
                             }
                             if (message.unitOverride != null && message.hasOwnProperty("unitOverride"))
                                 object.unitOverride = message.unitOverride;
+                            if (message.prometheusQuery != null && message.hasOwnProperty("prometheusQuery")) {
+                                object.prometheusQuery = message.prometheusQuery;
+                                if (options.oneofs)
+                                    object.source = "prometheusQuery";
+                            }
                             return object;
                         };
     
