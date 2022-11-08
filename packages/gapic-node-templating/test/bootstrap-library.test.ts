@@ -28,11 +28,9 @@ export const GITHUB_TOKEN = 'ghs_1234';
 export const FOLDER_NAME = 'google-cloud-kms';
 
 describe('tests running build trigger', () => {
-  let getDriftMetadataStub: sinon.SinonStub;
   let compileVarsStub: sinon.SinonStub;
   let compileTemplatesStub: sinon.SinonStub;
   let getDistributionNameStub: sinon.SinonStub;
-  let getServiceNameStub: sinon.SinonStub;
   beforeEach(() => {
     compileVarsStub = sinon.stub(vars, 'compileVars');
     compileTemplatesStub = sinon.stub(templates, 'compileTemplates');
