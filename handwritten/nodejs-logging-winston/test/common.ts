@@ -136,6 +136,7 @@ describe('logging-common', () => {
         error: 3,
         warn: 4,
         info: 6,
+        http: 6,
         verbose: 7,
         debug: 7,
         silly: 7,

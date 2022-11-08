@@ -50,10 +50,12 @@ export interface Metadata {
 }
 
 // Map of npm output levels to Cloud Logging levels.
+// See https://github.com/winstonjs/winston#logging-levels for more info.
 const NPM_LEVEL_NAME_TO_CODE = {
   error: 3,
   warn: 4,
   info: 6,
+  http: 6,
   verbose: 7,
   debug: 7,
   silly: 7,
