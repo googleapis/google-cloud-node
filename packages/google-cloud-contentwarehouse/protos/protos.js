@@ -27831,6 +27831,7 @@
                              * @property {string|null} [textStyle] Style textStyle
                              * @property {string|null} [textDecoration] Style textDecoration
                              * @property {google.cloud.documentai.v1.Document.Style.IFontSize|null} [fontSize] Style fontSize
+                             * @property {string|null} [fontFamily] Style fontFamily
                              */
     
                             /**
@@ -27905,6 +27906,14 @@
                             Style.prototype.fontSize = null;
     
                             /**
+                             * Style fontFamily.
+                             * @member {string} fontFamily
+                             * @memberof google.cloud.documentai.v1.Document.Style
+                             * @instance
+                             */
+                            Style.prototype.fontFamily = "";
+    
+                            /**
                              * Creates a new Style instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.documentai.v1.Document.Style
@@ -27942,6 +27951,8 @@
                                     writer.uint32(/* id 6, wireType 2 =*/50).string(message.textDecoration);
                                 if (message.fontSize != null && Object.hasOwnProperty.call(message, "fontSize"))
                                     $root.google.cloud.documentai.v1.Document.Style.FontSize.encode(message.fontSize, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.fontFamily != null && Object.hasOwnProperty.call(message, "fontFamily"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.fontFamily);
                                 return writer;
                             };
     
@@ -28002,6 +28013,10 @@
                                         }
                                     case 7: {
                                             message.fontSize = $root.google.cloud.documentai.v1.Document.Style.FontSize.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.fontFamily = reader.string();
                                             break;
                                         }
                                     default:
@@ -28068,6 +28083,9 @@
                                     if (error)
                                         return "fontSize." + error;
                                 }
+                                if (message.fontFamily != null && message.hasOwnProperty("fontFamily"))
+                                    if (!$util.isString(message.fontFamily))
+                                        return "fontFamily: string expected";
                                 return null;
                             };
     
@@ -28109,6 +28127,8 @@
                                         throw TypeError(".google.cloud.documentai.v1.Document.Style.fontSize: object expected");
                                     message.fontSize = $root.google.cloud.documentai.v1.Document.Style.FontSize.fromObject(object.fontSize);
                                 }
+                                if (object.fontFamily != null)
+                                    message.fontFamily = String(object.fontFamily);
                                 return message;
                             };
     
@@ -28133,6 +28153,7 @@
                                     object.textStyle = "";
                                     object.textDecoration = "";
                                     object.fontSize = null;
+                                    object.fontFamily = "";
                                 }
                                 if (message.textAnchor != null && message.hasOwnProperty("textAnchor"))
                                     object.textAnchor = $root.google.cloud.documentai.v1.Document.TextAnchor.toObject(message.textAnchor, options);
@@ -28148,6 +28169,8 @@
                                     object.textDecoration = message.textDecoration;
                                 if (message.fontSize != null && message.hasOwnProperty("fontSize"))
                                     object.fontSize = $root.google.cloud.documentai.v1.Document.Style.FontSize.toObject(message.fontSize, options);
+                                if (message.fontFamily != null && message.hasOwnProperty("fontFamily"))
+                                    object.fontFamily = message.fontFamily;
                                 return object;
                             };
     
@@ -28428,6 +28451,7 @@
                              * @property {Array.<google.cloud.documentai.v1.Document.Page.IFormField>|null} [formFields] Page formFields
                              * @property {Array.<google.cloud.documentai.v1.Document.Page.ISymbol>|null} [symbols] Page symbols
                              * @property {Array.<google.cloud.documentai.v1.Document.Page.IDetectedBarcode>|null} [detectedBarcodes] Page detectedBarcodes
+                             * @property {google.cloud.documentai.v1.Document.Page.IImageQualityScores|null} [imageQualityScores] Page imageQualityScores
                              * @property {google.cloud.documentai.v1.Document.IProvenance|null} [provenance] Page provenance
                              */
     
@@ -28578,6 +28602,14 @@
                             Page.prototype.detectedBarcodes = $util.emptyArray;
     
                             /**
+                             * Page imageQualityScores.
+                             * @member {google.cloud.documentai.v1.Document.Page.IImageQualityScores|null|undefined} imageQualityScores
+                             * @memberof google.cloud.documentai.v1.Document.Page
+                             * @instance
+                             */
+                            Page.prototype.imageQualityScores = null;
+    
+                            /**
                              * Page provenance.
                              * @member {google.cloud.documentai.v1.Document.IProvenance|null|undefined} provenance
                              * @memberof google.cloud.documentai.v1.Document.Page
@@ -28652,6 +28684,8 @@
                                         $root.google.cloud.documentai.v1.Document.Page.DetectedBarcode.encode(message.detectedBarcodes[i], writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                                 if (message.provenance != null && Object.hasOwnProperty.call(message, "provenance"))
                                     $root.google.cloud.documentai.v1.Document.Provenance.encode(message.provenance, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                                if (message.imageQualityScores != null && Object.hasOwnProperty.call(message, "imageQualityScores"))
+                                    $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.encode(message.imageQualityScores, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                                 return writer;
                             };
     
@@ -28766,6 +28800,10 @@
                                             if (!(message.detectedBarcodes && message.detectedBarcodes.length))
                                                 message.detectedBarcodes = [];
                                             message.detectedBarcodes.push($root.google.cloud.documentai.v1.Document.Page.DetectedBarcode.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 17: {
+                                            message.imageQualityScores = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 16: {
@@ -28924,6 +28962,11 @@
                                             return "detectedBarcodes." + error;
                                     }
                                 }
+                                if (message.imageQualityScores != null && message.hasOwnProperty("imageQualityScores")) {
+                                    var error = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.verify(message.imageQualityScores);
+                                    if (error)
+                                        return "imageQualityScores." + error;
+                                }
                                 if (message.provenance != null && message.hasOwnProperty("provenance")) {
                                     var error = $root.google.cloud.documentai.v1.Document.Provenance.verify(message.provenance);
                                     if (error)
@@ -29071,6 +29114,11 @@
                                         message.detectedBarcodes[i] = $root.google.cloud.documentai.v1.Document.Page.DetectedBarcode.fromObject(object.detectedBarcodes[i]);
                                     }
                                 }
+                                if (object.imageQualityScores != null) {
+                                    if (typeof object.imageQualityScores !== "object")
+                                        throw TypeError(".google.cloud.documentai.v1.Document.Page.imageQualityScores: object expected");
+                                    message.imageQualityScores = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.fromObject(object.imageQualityScores);
+                                }
                                 if (object.provenance != null) {
                                     if (typeof object.provenance !== "object")
                                         throw TypeError(".google.cloud.documentai.v1.Document.Page.provenance: object expected");
@@ -29111,6 +29159,7 @@
                                     object.layout = null;
                                     object.image = null;
                                     object.provenance = null;
+                                    object.imageQualityScores = null;
                                 }
                                 if (message.pageNumber != null && message.hasOwnProperty("pageNumber"))
                                     object.pageNumber = message.pageNumber;
@@ -29177,6 +29226,8 @@
                                 }
                                 if (message.provenance != null && message.hasOwnProperty("provenance"))
                                     object.provenance = $root.google.cloud.documentai.v1.Document.Provenance.toObject(message.provenance, options);
+                                if (message.imageQualityScores != null && message.hasOwnProperty("imageQualityScores"))
+                                    object.imageQualityScores = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.toObject(message.imageQualityScores, options);
                                 return object;
                             };
     
@@ -32291,6 +32342,7 @@
                                  * @property {Array.<google.cloud.documentai.v1.Document.Page.Table.ITableRow>|null} [headerRows] Table headerRows
                                  * @property {Array.<google.cloud.documentai.v1.Document.Page.Table.ITableRow>|null} [bodyRows] Table bodyRows
                                  * @property {Array.<google.cloud.documentai.v1.Document.Page.IDetectedLanguage>|null} [detectedLanguages] Table detectedLanguages
+                                 * @property {google.cloud.documentai.v1.Document.IProvenance|null} [provenance] Table provenance
                                  */
     
                                 /**
@@ -32344,6 +32396,14 @@
                                 Table.prototype.detectedLanguages = $util.emptyArray;
     
                                 /**
+                                 * Table provenance.
+                                 * @member {google.cloud.documentai.v1.Document.IProvenance|null|undefined} provenance
+                                 * @memberof google.cloud.documentai.v1.Document.Page.Table
+                                 * @instance
+                                 */
+                                Table.prototype.provenance = null;
+    
+                                /**
                                  * Creates a new Table instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.documentai.v1.Document.Page.Table
@@ -32378,6 +32438,8 @@
                                     if (message.detectedLanguages != null && message.detectedLanguages.length)
                                         for (var i = 0; i < message.detectedLanguages.length; ++i)
                                             $root.google.cloud.documentai.v1.Document.Page.DetectedLanguage.encode(message.detectedLanguages[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    if (message.provenance != null && Object.hasOwnProperty.call(message, "provenance"))
+                                        $root.google.cloud.documentai.v1.Document.Provenance.encode(message.provenance, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -32432,6 +32494,10 @@
                                                 if (!(message.detectedLanguages && message.detectedLanguages.length))
                                                     message.detectedLanguages = [];
                                                 message.detectedLanguages.push($root.google.cloud.documentai.v1.Document.Page.DetectedLanguage.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.provenance = $root.google.cloud.documentai.v1.Document.Provenance.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -32501,6 +32567,11 @@
                                                 return "detectedLanguages." + error;
                                         }
                                     }
+                                    if (message.provenance != null && message.hasOwnProperty("provenance")) {
+                                        var error = $root.google.cloud.documentai.v1.Document.Provenance.verify(message.provenance);
+                                        if (error)
+                                            return "provenance." + error;
+                                    }
                                     return null;
                                 };
     
@@ -32551,6 +32622,11 @@
                                             message.detectedLanguages[i] = $root.google.cloud.documentai.v1.Document.Page.DetectedLanguage.fromObject(object.detectedLanguages[i]);
                                         }
                                     }
+                                    if (object.provenance != null) {
+                                        if (typeof object.provenance !== "object")
+                                            throw TypeError(".google.cloud.documentai.v1.Document.Page.Table.provenance: object expected");
+                                        message.provenance = $root.google.cloud.documentai.v1.Document.Provenance.fromObject(object.provenance);
+                                    }
                                     return message;
                                 };
     
@@ -32572,8 +32648,10 @@
                                         object.bodyRows = [];
                                         object.detectedLanguages = [];
                                     }
-                                    if (options.defaults)
+                                    if (options.defaults) {
                                         object.layout = null;
+                                        object.provenance = null;
+                                    }
                                     if (message.layout != null && message.hasOwnProperty("layout"))
                                         object.layout = $root.google.cloud.documentai.v1.Document.Page.Layout.toObject(message.layout, options);
                                     if (message.headerRows && message.headerRows.length) {
@@ -32591,6 +32669,8 @@
                                         for (var j = 0; j < message.detectedLanguages.length; ++j)
                                             object.detectedLanguages[j] = $root.google.cloud.documentai.v1.Document.Page.DetectedLanguage.toObject(message.detectedLanguages[j], options);
                                     }
+                                    if (message.provenance != null && message.hasOwnProperty("provenance"))
+                                        object.provenance = $root.google.cloud.documentai.v1.Document.Provenance.toObject(message.provenance, options);
                                     return object;
                                 };
     
@@ -34033,6 +34113,481 @@
                                 };
     
                                 return DetectedLanguage;
+                            })();
+    
+                            Page.ImageQualityScores = (function() {
+    
+                                /**
+                                 * Properties of an ImageQualityScores.
+                                 * @memberof google.cloud.documentai.v1.Document.Page
+                                 * @interface IImageQualityScores
+                                 * @property {number|null} [qualityScore] ImageQualityScores qualityScore
+                                 * @property {Array.<google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect>|null} [detectedDefects] ImageQualityScores detectedDefects
+                                 */
+    
+                                /**
+                                 * Constructs a new ImageQualityScores.
+                                 * @memberof google.cloud.documentai.v1.Document.Page
+                                 * @classdesc Represents an ImageQualityScores.
+                                 * @implements IImageQualityScores
+                                 * @constructor
+                                 * @param {google.cloud.documentai.v1.Document.Page.IImageQualityScores=} [properties] Properties to set
+                                 */
+                                function ImageQualityScores(properties) {
+                                    this.detectedDefects = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ImageQualityScores qualityScore.
+                                 * @member {number} qualityScore
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @instance
+                                 */
+                                ImageQualityScores.prototype.qualityScore = 0;
+    
+                                /**
+                                 * ImageQualityScores detectedDefects.
+                                 * @member {Array.<google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect>} detectedDefects
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @instance
+                                 */
+                                ImageQualityScores.prototype.detectedDefects = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new ImageQualityScores instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.Document.Page.IImageQualityScores=} [properties] Properties to set
+                                 * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores} ImageQualityScores instance
+                                 */
+                                ImageQualityScores.create = function create(properties) {
+                                    return new ImageQualityScores(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ImageQualityScores message. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.ImageQualityScores.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.Document.Page.IImageQualityScores} message ImageQualityScores message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ImageQualityScores.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.qualityScore != null && Object.hasOwnProperty.call(message, "qualityScore"))
+                                        writer.uint32(/* id 1, wireType 5 =*/13).float(message.qualityScore);
+                                    if (message.detectedDefects != null && message.detectedDefects.length)
+                                        for (var i = 0; i < message.detectedDefects.length; ++i)
+                                            $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.encode(message.detectedDefects[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ImageQualityScores message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.ImageQualityScores.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.Document.Page.IImageQualityScores} message ImageQualityScores message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ImageQualityScores.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ImageQualityScores message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores} ImageQualityScores
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ImageQualityScores.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.qualityScore = reader.float();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.detectedDefects && message.detectedDefects.length))
+                                                    message.detectedDefects = [];
+                                                message.detectedDefects.push($root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ImageQualityScores message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores} ImageQualityScores
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ImageQualityScores.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ImageQualityScores message.
+                                 * @function verify
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ImageQualityScores.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.qualityScore != null && message.hasOwnProperty("qualityScore"))
+                                        if (typeof message.qualityScore !== "number")
+                                            return "qualityScore: number expected";
+                                    if (message.detectedDefects != null && message.hasOwnProperty("detectedDefects")) {
+                                        if (!Array.isArray(message.detectedDefects))
+                                            return "detectedDefects: array expected";
+                                        for (var i = 0; i < message.detectedDefects.length; ++i) {
+                                            var error = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.verify(message.detectedDefects[i]);
+                                            if (error)
+                                                return "detectedDefects." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ImageQualityScores message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores} ImageQualityScores
+                                 */
+                                ImageQualityScores.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores)
+                                        return object;
+                                    var message = new $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores();
+                                    if (object.qualityScore != null)
+                                        message.qualityScore = Number(object.qualityScore);
+                                    if (object.detectedDefects) {
+                                        if (!Array.isArray(object.detectedDefects))
+                                            throw TypeError(".google.cloud.documentai.v1.Document.Page.ImageQualityScores.detectedDefects: array expected");
+                                        message.detectedDefects = [];
+                                        for (var i = 0; i < object.detectedDefects.length; ++i) {
+                                            if (typeof object.detectedDefects[i] !== "object")
+                                                throw TypeError(".google.cloud.documentai.v1.Document.Page.ImageQualityScores.detectedDefects: object expected");
+                                            message.detectedDefects[i] = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.fromObject(object.detectedDefects[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ImageQualityScores message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.Document.Page.ImageQualityScores} message ImageQualityScores
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ImageQualityScores.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.detectedDefects = [];
+                                    if (options.defaults)
+                                        object.qualityScore = 0;
+                                    if (message.qualityScore != null && message.hasOwnProperty("qualityScore"))
+                                        object.qualityScore = options.json && !isFinite(message.qualityScore) ? String(message.qualityScore) : message.qualityScore;
+                                    if (message.detectedDefects && message.detectedDefects.length) {
+                                        object.detectedDefects = [];
+                                        for (var j = 0; j < message.detectedDefects.length; ++j)
+                                            object.detectedDefects[j] = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.toObject(message.detectedDefects[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ImageQualityScores to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ImageQualityScores.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ImageQualityScores
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ImageQualityScores.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.documentai.v1.Document.Page.ImageQualityScores";
+                                };
+    
+                                ImageQualityScores.DetectedDefect = (function() {
+    
+                                    /**
+                                     * Properties of a DetectedDefect.
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                     * @interface IDetectedDefect
+                                     * @property {string|null} [type] DetectedDefect type
+                                     * @property {number|null} [confidence] DetectedDefect confidence
+                                     */
+    
+                                    /**
+                                     * Constructs a new DetectedDefect.
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                     * @classdesc Represents a DetectedDefect.
+                                     * @implements IDetectedDefect
+                                     * @constructor
+                                     * @param {google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect=} [properties] Properties to set
+                                     */
+                                    function DetectedDefect(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * DetectedDefect type.
+                                     * @member {string} type
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @instance
+                                     */
+                                    DetectedDefect.prototype.type = "";
+    
+                                    /**
+                                     * DetectedDefect confidence.
+                                     * @member {number} confidence
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @instance
+                                     */
+                                    DetectedDefect.prototype.confidence = 0;
+    
+                                    /**
+                                     * Creates a new DetectedDefect instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect=} [properties] Properties to set
+                                     * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect} DetectedDefect instance
+                                     */
+                                    DetectedDefect.create = function create(properties) {
+                                        return new DetectedDefect(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified DetectedDefect message. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect} message DetectedDefect message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    DetectedDefect.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                                        if (message.confidence != null && Object.hasOwnProperty.call(message, "confidence"))
+                                            writer.uint32(/* id 2, wireType 5 =*/21).float(message.confidence);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified DetectedDefect message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect} message DetectedDefect message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    DetectedDefect.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a DetectedDefect message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect} DetectedDefect
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    DetectedDefect.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.type = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.confidence = reader.float();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a DetectedDefect message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect} DetectedDefect
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    DetectedDefect.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a DetectedDefect message.
+                                     * @function verify
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    DetectedDefect.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.type != null && message.hasOwnProperty("type"))
+                                            if (!$util.isString(message.type))
+                                                return "type: string expected";
+                                        if (message.confidence != null && message.hasOwnProperty("confidence"))
+                                            if (typeof message.confidence !== "number")
+                                                return "confidence: number expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a DetectedDefect message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect} DetectedDefect
+                                     */
+                                    DetectedDefect.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect)
+                                            return object;
+                                        var message = new $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect();
+                                        if (object.type != null)
+                                            message.type = String(object.type);
+                                        if (object.confidence != null)
+                                            message.confidence = Number(object.confidence);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a DetectedDefect message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect} message DetectedDefect
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    DetectedDefect.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.type = "";
+                                            object.confidence = 0;
+                                        }
+                                        if (message.type != null && message.hasOwnProperty("type"))
+                                            object.type = message.type;
+                                        if (message.confidence != null && message.hasOwnProperty("confidence"))
+                                            object.confidence = options.json && !isFinite(message.confidence) ? String(message.confidence) : message.confidence;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this DetectedDefect to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    DetectedDefect.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for DetectedDefect
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    DetectedDefect.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect";
+                                    };
+    
+                                    return DetectedDefect;
+                                })();
+    
+                                return ImageQualityScores;
                             })();
     
                             return Page;
