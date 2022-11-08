@@ -2,7 +2,12 @@
   "name": "@google-cloud/gke-connect-gateway",
   "version": "2.0.4",
   "description": "apigateway client for Node.js",
-  "repository": "googleapis/nodejs-gke-connect-gateway",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-cloud-gkeconnect-gateway"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gkeconnect-gateway",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
