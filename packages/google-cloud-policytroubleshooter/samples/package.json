@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@google-cloud/local-auth": "^2.0.0",
-    "@google-cloud/policy-troubleshooter": "^2.0.4"
+    "@google-cloud/policy-troubleshooter": "^2.0.5"
   },
   "devDependencies": {
     "c8": "^7.1.0",

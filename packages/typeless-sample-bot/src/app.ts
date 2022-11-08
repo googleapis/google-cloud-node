@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,10 +14,10 @@
 // limitations under the License.
 
 import yargs from 'yargs';
-import loggers from '../loggers.js';
-import {createLoggers} from '../loggers.js';
+import loggers from './loggers.js';
+import {createLoggers} from './loggers.js';
 import util from 'node:util';
-import {symbols} from '../symbols.js';
+import {symbols} from './symbols.js';
 import {
   filterByContents,
   findSamples,
@@ -24,8 +25,7 @@ import {
   writeSamples,
   waitForAllSamples,
   fromArray,
-} from '../samples.js';
-import url from 'node:url';
+} from './samples.js';
 
 let returnValue = 0;
 
@@ -58,6 +58,13 @@ async function processArgs(args: string[]) {
         boolean: true,
         describe: 'process the target(s) as directories, recursively',
         alias: ['r'],
+      },
+      outputpath: {
+        demandOption: false,
+        type: 'string',
+        describe:
+          'outputs default to being next to the original; if set, this option will specify the output for all files',
+        alias: ['o'],
       },
       verbose: {
         demandOption: false,
@@ -155,7 +162,7 @@ export async function main(args: string[]): Promise<number> {
   const transformed = transformSamples(filtered);
 
   // Write out all of the output samples.
-  const written = writeSamples(transformed);
+  const written = writeSamples(transformed, argv.outputpath);
 
   try {
     // Wait for the pipeline to complete.
@@ -181,16 +188,4 @@ export async function main(args: string[]): Promise<number> {
   }
 
   return returnValue;
-}
-
-// Only activate our command line mode if this is the "main" module.
-if (import.meta.url === url.pathToFileURL(process.argv[1]).href) {
-  main(process.argv.slice(2))
-    .then(e => process.exit(e))
-    .catch((e: Error) => {
-      console.error(
-        `Top level exception: ${e.toString()} ${e.stack?.toString()}`
-      );
-      process.exit(1);
-    });
 }
