@@ -71,7 +71,7 @@ function main(address) {
   // const enableUspsCass = true
 
   // Imports the Addressvalidation library
-  const {AddressValidationClient} = require('@google-cloud/addressvalidation').v1;
+  const {AddressValidationClient} = require('@googlemaps/addressvalidation').v1;
 
   // Instantiates a client
   const addressvalidationClient = new AddressValidationClient();
