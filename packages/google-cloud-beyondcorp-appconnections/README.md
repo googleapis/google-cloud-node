@@ -14,11 +14,11 @@ BeyondCorp API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
+[the CHANGELOG](googleapis/google-cloud-node/CHANGELOG.md).
 
 * [BeyondCorp API Node.js Client API Reference][client-docs]
 
-* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
+* [github.com/googleapis/google-cloud-node](googleapis/google-cloud-node)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].

@@ -14,11 +14,11 @@ Google Cloud Natural Language API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
+[the CHANGELOG](googleapis/nodejs-language/CHANGELOG.md).
 
 * [Natural Language Node.js Client API Reference][client-docs]
 * [Natural Language Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
+* [github.com/googleapis/nodejs-language](googleapis/nodejs-language)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].

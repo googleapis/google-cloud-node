@@ -14,11 +14,11 @@ analyticshub client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
+[the CHANGELOG](googleapis/nodejs-bigquery-data-exchange/CHANGELOG.md).
 
 * [Analytics Hub API Node.js Client API Reference][client-docs]
 * [Analytics Hub API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
+* [github.com/googleapis/nodejs-bigquery-data-exchange](googleapis/nodejs-bigquery-data-exchange)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
