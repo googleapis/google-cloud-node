@@ -3453,6 +3453,9 @@ export namespace google {
 
                     /** RecommendRequest params */
                     params?: ({ [k: string]: google.protobuf.IValue }|null);
+
+                    /** RecommendRequest userLabels */
+                    userLabels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a RecommendRequest. */
@@ -3481,6 +3484,9 @@ export namespace google {
 
                     /** RecommendRequest params. */
                     public params: { [k: string]: google.protobuf.IValue };
+
+                    /** RecommendRequest userLabels. */
+                    public userLabels: { [k: string]: string };
 
                     /**
                      * Creates a new RecommendRequest instance using the specified properties.

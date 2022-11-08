@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/certificate-manager",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "certificatemanager client for Node.js",
   "repository": "googleapis/nodejs-certificate-manager",
   "license": "Apache-2.0",
@@ -40,7 +40,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "google-gax": "^3.3.0"
+    "google-gax": "^3.5.2"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",

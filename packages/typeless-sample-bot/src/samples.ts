@@ -19,6 +19,9 @@ import loggers from './loggers.js';
 import {treeWalk} from './tree-walk.js';
 import {readFile, writeFile} from 'fs/promises';
 import babel from '@babel/core';
+import path from 'node:path';
+import {typescript as presetTypescript} from './preset-loader.js';
+import importToRequire from './import-to-require.js';
 
 // Converts an async iterable into an array of the same type.
 export async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
@@ -79,8 +82,8 @@ export async function* filterByContents(
 // Instead of a babelrc, this is used so that we can get more control over
 // the transform process.
 const babelConfig = {
-  presets: [['@babel/preset-typescript', {}]],
-  plugins: [['./build/src/import-to-require']],
+  presets: [[presetTypescript, {}]],
+  plugins: [[importToRequire]],
   parserOpts: {} as babel.ParserOptions,
   generatorOpts: {
     // Ensures that Babel keeps newlines so that comments end up
@@ -106,12 +109,22 @@ export async function* transformSamples(
 
 // Write out all samples to the file system.
 export async function* writeSamples(
-  samples: AsyncIterable<Sample>
+  samples: AsyncIterable<Sample>,
+  outputPath?: string
 ): AsyncIterable<Sample> {
   for await (const s of samples) {
-    loggers.verbose('writing new sample', s.filename);
-    await writeFile(s.filename, s.contents);
-    yield s;
+    // If requested, rewrite the output path to be elsewhere.
+    const newName = outputPath
+      ? path.join(outputPath, path.basename(s.filename))
+      : s.filename;
+
+    loggers.verbose('writing new sample', newName);
+    await writeFile(newName, s.contents);
+
+    yield {
+      filename: newName,
+      contents: s.contents,
+    };
   }
 }
 
