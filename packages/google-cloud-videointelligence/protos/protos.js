@@ -418,6 +418,10 @@
                                 for (var i = 0; i < object.features.length; ++i)
                                     switch (object.features[i]) {
                                     default:
+                                        if (typeof object.features[i] === "number") {
+                                            message.features[i] = object.features[i];
+                                            break;
+                                        }
                                     case "FEATURE_UNSPECIFIED":
                                     case 0:
                                         message.features[i] = 0;
@@ -505,7 +509,7 @@
                             if (message.features && message.features.length) {
                                 object.features = [];
                                 for (var j = 0; j < message.features.length; ++j)
-                                    object.features[j] = options.enums === String ? $root.google.cloud.videointelligence.v1.Feature[message.features[j]] : message.features[j];
+                                    object.features[j] = options.enums === String ? $root.google.cloud.videointelligence.v1.Feature[message.features[j]] === undefined ? message.features[j] : $root.google.cloud.videointelligence.v1.Feature[message.features[j]] : message.features[j];
                             }
                             if (message.videoContext != null && message.hasOwnProperty("videoContext"))
                                 object.videoContext = $root.google.cloud.videointelligence.v1.VideoContext.toObject(message.videoContext, options);
@@ -1296,6 +1300,12 @@
                                 return object;
                             var message = new $root.google.cloud.videointelligence.v1.LabelDetectionConfig();
                             switch (object.labelDetectionMode) {
+                            default:
+                                if (typeof object.labelDetectionMode === "number") {
+                                    message.labelDetectionMode = object.labelDetectionMode;
+                                    break;
+                                }
+                                break;
                             case "LABEL_DETECTION_MODE_UNSPECIFIED":
                             case 0:
                                 message.labelDetectionMode = 0;
@@ -1345,7 +1355,7 @@
                                 object.videoConfidenceThreshold = 0;
                             }
                             if (message.labelDetectionMode != null && message.hasOwnProperty("labelDetectionMode"))
-                                object.labelDetectionMode = options.enums === String ? $root.google.cloud.videointelligence.v1.LabelDetectionMode[message.labelDetectionMode] : message.labelDetectionMode;
+                                object.labelDetectionMode = options.enums === String ? $root.google.cloud.videointelligence.v1.LabelDetectionMode[message.labelDetectionMode] === undefined ? message.labelDetectionMode : $root.google.cloud.videointelligence.v1.LabelDetectionMode[message.labelDetectionMode] : message.labelDetectionMode;
                             if (message.stationaryCamera != null && message.hasOwnProperty("stationaryCamera"))
                                 object.stationaryCamera = message.stationaryCamera;
                             if (message.model != null && message.hasOwnProperty("model"))
@@ -4239,6 +4249,12 @@
                                 message.timeOffset = $root.google.protobuf.Duration.fromObject(object.timeOffset);
                             }
                             switch (object.pornographyLikelihood) {
+                            default:
+                                if (typeof object.pornographyLikelihood === "number") {
+                                    message.pornographyLikelihood = object.pornographyLikelihood;
+                                    break;
+                                }
+                                break;
                             case "LIKELIHOOD_UNSPECIFIED":
                             case 0:
                                 message.pornographyLikelihood = 0;
@@ -4287,7 +4303,7 @@
                             if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
                                 object.timeOffset = $root.google.protobuf.Duration.toObject(message.timeOffset, options);
                             if (message.pornographyLikelihood != null && message.hasOwnProperty("pornographyLikelihood"))
-                                object.pornographyLikelihood = options.enums === String ? $root.google.cloud.videointelligence.v1.Likelihood[message.pornographyLikelihood] : message.pornographyLikelihood;
+                                object.pornographyLikelihood = options.enums === String ? $root.google.cloud.videointelligence.v1.Likelihood[message.pornographyLikelihood] === undefined ? message.pornographyLikelihood : $root.google.cloud.videointelligence.v1.Likelihood[message.pornographyLikelihood] : message.pornographyLikelihood;
                             return object;
                         };
     
@@ -8646,6 +8662,12 @@
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
                             switch (object.feature) {
+                            default:
+                                if (typeof object.feature === "number") {
+                                    message.feature = object.feature;
+                                    break;
+                                }
+                                break;
                             case "FEATURE_UNSPECIFIED":
                             case 0:
                                 message.feature = 0;
@@ -8725,7 +8747,7 @@
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.feature != null && message.hasOwnProperty("feature"))
-                                object.feature = options.enums === String ? $root.google.cloud.videointelligence.v1.Feature[message.feature] : message.feature;
+                                object.feature = options.enums === String ? $root.google.cloud.videointelligence.v1.Feature[message.feature] === undefined ? message.feature : $root.google.cloud.videointelligence.v1.Feature[message.feature] : message.feature;
                             if (message.segment != null && message.hasOwnProperty("segment"))
                                 object.segment = $root.google.cloud.videointelligence.v1.VideoSegment.toObject(message.segment, options);
                             return object;
@@ -12982,6 +13004,10 @@
                                 for (var i = 0; i < object.features.length; ++i)
                                     switch (object.features[i]) {
                                     default:
+                                        if (typeof object.features[i] === "number") {
+                                            message.features[i] = object.features[i];
+                                            break;
+                                        }
                                     case "FEATURE_UNSPECIFIED":
                                     case 0:
                                         message.features[i] = 0;
@@ -13049,7 +13075,7 @@
                             if (message.features && message.features.length) {
                                 object.features = [];
                                 for (var j = 0; j < message.features.length; ++j)
-                                    object.features[j] = options.enums === String ? $root.google.cloud.videointelligence.v1beta2.Feature[message.features[j]] : message.features[j];
+                                    object.features[j] = options.enums === String ? $root.google.cloud.videointelligence.v1beta2.Feature[message.features[j]] === undefined ? message.features[j] : $root.google.cloud.videointelligence.v1beta2.Feature[message.features[j]] : message.features[j];
                             }
                             if (message.videoContext != null && message.hasOwnProperty("videoContext"))
                                 object.videoContext = $root.google.cloud.videointelligence.v1beta2.VideoContext.toObject(message.videoContext, options);
@@ -13622,6 +13648,12 @@
                                 return object;
                             var message = new $root.google.cloud.videointelligence.v1beta2.LabelDetectionConfig();
                             switch (object.labelDetectionMode) {
+                            default:
+                                if (typeof object.labelDetectionMode === "number") {
+                                    message.labelDetectionMode = object.labelDetectionMode;
+                                    break;
+                                }
+                                break;
                             case "LABEL_DETECTION_MODE_UNSPECIFIED":
                             case 0:
                                 message.labelDetectionMode = 0;
@@ -13665,7 +13697,7 @@
                                 object.model = "";
                             }
                             if (message.labelDetectionMode != null && message.hasOwnProperty("labelDetectionMode"))
-                                object.labelDetectionMode = options.enums === String ? $root.google.cloud.videointelligence.v1beta2.LabelDetectionMode[message.labelDetectionMode] : message.labelDetectionMode;
+                                object.labelDetectionMode = options.enums === String ? $root.google.cloud.videointelligence.v1beta2.LabelDetectionMode[message.labelDetectionMode] === undefined ? message.labelDetectionMode : $root.google.cloud.videointelligence.v1beta2.LabelDetectionMode[message.labelDetectionMode] : message.labelDetectionMode;
                             if (message.stationaryCamera != null && message.hasOwnProperty("stationaryCamera"))
                                 object.stationaryCamera = message.stationaryCamera;
                             if (message.model != null && message.hasOwnProperty("model"))
@@ -15812,6 +15844,12 @@
                                 message.timeOffset = $root.google.protobuf.Duration.fromObject(object.timeOffset);
                             }
                             switch (object.pornographyLikelihood) {
+                            default:
+                                if (typeof object.pornographyLikelihood === "number") {
+                                    message.pornographyLikelihood = object.pornographyLikelihood;
+                                    break;
+                                }
+                                break;
                             case "LIKELIHOOD_UNSPECIFIED":
                             case 0:
                                 message.pornographyLikelihood = 0;
@@ -15860,7 +15898,7 @@
                             if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
                                 object.timeOffset = $root.google.protobuf.Duration.toObject(message.timeOffset, options);
                             if (message.pornographyLikelihood != null && message.hasOwnProperty("pornographyLikelihood"))
-                                object.pornographyLikelihood = options.enums === String ? $root.google.cloud.videointelligence.v1beta2.Likelihood[message.pornographyLikelihood] : message.pornographyLikelihood;
+                                object.pornographyLikelihood = options.enums === String ? $root.google.cloud.videointelligence.v1beta2.Likelihood[message.pornographyLikelihood] === undefined ? message.pornographyLikelihood : $root.google.cloud.videointelligence.v1beta2.Likelihood[message.pornographyLikelihood] : message.pornographyLikelihood;
                             return object;
                         };
     
@@ -18785,6 +18823,10 @@
                                 for (var i = 0; i < object.features.length; ++i)
                                     switch (object.features[i]) {
                                     default:
+                                        if (typeof object.features[i] === "number") {
+                                            message.features[i] = object.features[i];
+                                            break;
+                                        }
                                     case "FEATURE_UNSPECIFIED":
                                     case 0:
                                         message.features[i] = 0;
@@ -18852,7 +18894,7 @@
                             if (message.features && message.features.length) {
                                 object.features = [];
                                 for (var j = 0; j < message.features.length; ++j)
-                                    object.features[j] = options.enums === String ? $root.google.cloud.videointelligence.v1p1beta1.Feature[message.features[j]] : message.features[j];
+                                    object.features[j] = options.enums === String ? $root.google.cloud.videointelligence.v1p1beta1.Feature[message.features[j]] === undefined ? message.features[j] : $root.google.cloud.videointelligence.v1p1beta1.Feature[message.features[j]] : message.features[j];
                             }
                             if (message.videoContext != null && message.hasOwnProperty("videoContext"))
                                 object.videoContext = $root.google.cloud.videointelligence.v1p1beta1.VideoContext.toObject(message.videoContext, options);
@@ -19425,6 +19467,12 @@
                                 return object;
                             var message = new $root.google.cloud.videointelligence.v1p1beta1.LabelDetectionConfig();
                             switch (object.labelDetectionMode) {
+                            default:
+                                if (typeof object.labelDetectionMode === "number") {
+                                    message.labelDetectionMode = object.labelDetectionMode;
+                                    break;
+                                }
+                                break;
                             case "LABEL_DETECTION_MODE_UNSPECIFIED":
                             case 0:
                                 message.labelDetectionMode = 0;
@@ -19468,7 +19516,7 @@
                                 object.model = "";
                             }
                             if (message.labelDetectionMode != null && message.hasOwnProperty("labelDetectionMode"))
-                                object.labelDetectionMode = options.enums === String ? $root.google.cloud.videointelligence.v1p1beta1.LabelDetectionMode[message.labelDetectionMode] : message.labelDetectionMode;
+                                object.labelDetectionMode = options.enums === String ? $root.google.cloud.videointelligence.v1p1beta1.LabelDetectionMode[message.labelDetectionMode] === undefined ? message.labelDetectionMode : $root.google.cloud.videointelligence.v1p1beta1.LabelDetectionMode[message.labelDetectionMode] : message.labelDetectionMode;
                             if (message.stationaryCamera != null && message.hasOwnProperty("stationaryCamera"))
                                 object.stationaryCamera = message.stationaryCamera;
                             if (message.model != null && message.hasOwnProperty("model"))
@@ -21388,6 +21436,12 @@
                                 message.timeOffset = $root.google.protobuf.Duration.fromObject(object.timeOffset);
                             }
                             switch (object.pornographyLikelihood) {
+                            default:
+                                if (typeof object.pornographyLikelihood === "number") {
+                                    message.pornographyLikelihood = object.pornographyLikelihood;
+                                    break;
+                                }
+                                break;
                             case "LIKELIHOOD_UNSPECIFIED":
                             case 0:
                                 message.pornographyLikelihood = 0;
@@ -21436,7 +21490,7 @@
                             if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
                                 object.timeOffset = $root.google.protobuf.Duration.toObject(message.timeOffset, options);
                             if (message.pornographyLikelihood != null && message.hasOwnProperty("pornographyLikelihood"))
-                                object.pornographyLikelihood = options.enums === String ? $root.google.cloud.videointelligence.v1p1beta1.Likelihood[message.pornographyLikelihood] : message.pornographyLikelihood;
+                                object.pornographyLikelihood = options.enums === String ? $root.google.cloud.videointelligence.v1p1beta1.Likelihood[message.pornographyLikelihood] === undefined ? message.pornographyLikelihood : $root.google.cloud.videointelligence.v1p1beta1.Likelihood[message.pornographyLikelihood] : message.pornographyLikelihood;
                             return object;
                         };
     
@@ -24667,6 +24721,10 @@
                                 for (var i = 0; i < object.features.length; ++i)
                                     switch (object.features[i]) {
                                     default:
+                                        if (typeof object.features[i] === "number") {
+                                            message.features[i] = object.features[i];
+                                            break;
+                                        }
                                     case "FEATURE_UNSPECIFIED":
                                     case 0:
                                         message.features[i] = 0;
@@ -24738,7 +24796,7 @@
                             if (message.features && message.features.length) {
                                 object.features = [];
                                 for (var j = 0; j < message.features.length; ++j)
-                                    object.features[j] = options.enums === String ? $root.google.cloud.videointelligence.v1p2beta1.Feature[message.features[j]] : message.features[j];
+                                    object.features[j] = options.enums === String ? $root.google.cloud.videointelligence.v1p2beta1.Feature[message.features[j]] === undefined ? message.features[j] : $root.google.cloud.videointelligence.v1p2beta1.Feature[message.features[j]] : message.features[j];
                             }
                             if (message.videoContext != null && message.hasOwnProperty("videoContext"))
                                 object.videoContext = $root.google.cloud.videointelligence.v1p2beta1.VideoContext.toObject(message.videoContext, options);
@@ -25311,6 +25369,12 @@
                                 return object;
                             var message = new $root.google.cloud.videointelligence.v1p2beta1.LabelDetectionConfig();
                             switch (object.labelDetectionMode) {
+                            default:
+                                if (typeof object.labelDetectionMode === "number") {
+                                    message.labelDetectionMode = object.labelDetectionMode;
+                                    break;
+                                }
+                                break;
                             case "LABEL_DETECTION_MODE_UNSPECIFIED":
                             case 0:
                                 message.labelDetectionMode = 0;
@@ -25354,7 +25418,7 @@
                                 object.model = "";
                             }
                             if (message.labelDetectionMode != null && message.hasOwnProperty("labelDetectionMode"))
-                                object.labelDetectionMode = options.enums === String ? $root.google.cloud.videointelligence.v1p2beta1.LabelDetectionMode[message.labelDetectionMode] : message.labelDetectionMode;
+                                object.labelDetectionMode = options.enums === String ? $root.google.cloud.videointelligence.v1p2beta1.LabelDetectionMode[message.labelDetectionMode] === undefined ? message.labelDetectionMode : $root.google.cloud.videointelligence.v1p2beta1.LabelDetectionMode[message.labelDetectionMode] : message.labelDetectionMode;
                             if (message.stationaryCamera != null && message.hasOwnProperty("stationaryCamera"))
                                 object.stationaryCamera = message.stationaryCamera;
                             if (message.model != null && message.hasOwnProperty("model"))
@@ -27493,6 +27557,12 @@
                                 message.timeOffset = $root.google.protobuf.Duration.fromObject(object.timeOffset);
                             }
                             switch (object.pornographyLikelihood) {
+                            default:
+                                if (typeof object.pornographyLikelihood === "number") {
+                                    message.pornographyLikelihood = object.pornographyLikelihood;
+                                    break;
+                                }
+                                break;
                             case "LIKELIHOOD_UNSPECIFIED":
                             case 0:
                                 message.pornographyLikelihood = 0;
@@ -27541,7 +27611,7 @@
                             if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
                                 object.timeOffset = $root.google.protobuf.Duration.toObject(message.timeOffset, options);
                             if (message.pornographyLikelihood != null && message.hasOwnProperty("pornographyLikelihood"))
-                                object.pornographyLikelihood = options.enums === String ? $root.google.cloud.videointelligence.v1p2beta1.Likelihood[message.pornographyLikelihood] : message.pornographyLikelihood;
+                                object.pornographyLikelihood = options.enums === String ? $root.google.cloud.videointelligence.v1p2beta1.Likelihood[message.pornographyLikelihood] === undefined ? message.pornographyLikelihood : $root.google.cloud.videointelligence.v1p2beta1.Likelihood[message.pornographyLikelihood] : message.pornographyLikelihood;
                             return object;
                         };
     
@@ -31637,6 +31707,10 @@
                                 for (var i = 0; i < object.features.length; ++i)
                                     switch (object.features[i]) {
                                     default:
+                                        if (typeof object.features[i] === "number") {
+                                            message.features[i] = object.features[i];
+                                            break;
+                                        }
                                     case "FEATURE_UNSPECIFIED":
                                     case 0:
                                         message.features[i] = 0;
@@ -31728,7 +31802,7 @@
                             if (message.features && message.features.length) {
                                 object.features = [];
                                 for (var j = 0; j < message.features.length; ++j)
-                                    object.features[j] = options.enums === String ? $root.google.cloud.videointelligence.v1p3beta1.Feature[message.features[j]] : message.features[j];
+                                    object.features[j] = options.enums === String ? $root.google.cloud.videointelligence.v1p3beta1.Feature[message.features[j]] === undefined ? message.features[j] : $root.google.cloud.videointelligence.v1p3beta1.Feature[message.features[j]] : message.features[j];
                             }
                             if (message.videoContext != null && message.hasOwnProperty("videoContext"))
                                 object.videoContext = $root.google.cloud.videointelligence.v1p3beta1.VideoContext.toObject(message.videoContext, options);
@@ -32489,6 +32563,12 @@
                                 return object;
                             var message = new $root.google.cloud.videointelligence.v1p3beta1.LabelDetectionConfig();
                             switch (object.labelDetectionMode) {
+                            default:
+                                if (typeof object.labelDetectionMode === "number") {
+                                    message.labelDetectionMode = object.labelDetectionMode;
+                                    break;
+                                }
+                                break;
                             case "LABEL_DETECTION_MODE_UNSPECIFIED":
                             case 0:
                                 message.labelDetectionMode = 0;
@@ -32538,7 +32618,7 @@
                                 object.videoConfidenceThreshold = 0;
                             }
                             if (message.labelDetectionMode != null && message.hasOwnProperty("labelDetectionMode"))
-                                object.labelDetectionMode = options.enums === String ? $root.google.cloud.videointelligence.v1p3beta1.LabelDetectionMode[message.labelDetectionMode] : message.labelDetectionMode;
+                                object.labelDetectionMode = options.enums === String ? $root.google.cloud.videointelligence.v1p3beta1.LabelDetectionMode[message.labelDetectionMode] === undefined ? message.labelDetectionMode : $root.google.cloud.videointelligence.v1p3beta1.LabelDetectionMode[message.labelDetectionMode] : message.labelDetectionMode;
                             if (message.stationaryCamera != null && message.hasOwnProperty("stationaryCamera"))
                                 object.stationaryCamera = message.stationaryCamera;
                             if (message.model != null && message.hasOwnProperty("model"))
@@ -35466,6 +35546,12 @@
                                 message.timeOffset = $root.google.protobuf.Duration.fromObject(object.timeOffset);
                             }
                             switch (object.pornographyLikelihood) {
+                            default:
+                                if (typeof object.pornographyLikelihood === "number") {
+                                    message.pornographyLikelihood = object.pornographyLikelihood;
+                                    break;
+                                }
+                                break;
                             case "LIKELIHOOD_UNSPECIFIED":
                             case 0:
                                 message.pornographyLikelihood = 0;
@@ -35514,7 +35600,7 @@
                             if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
                                 object.timeOffset = $root.google.protobuf.Duration.toObject(message.timeOffset, options);
                             if (message.pornographyLikelihood != null && message.hasOwnProperty("pornographyLikelihood"))
-                                object.pornographyLikelihood = options.enums === String ? $root.google.cloud.videointelligence.v1p3beta1.Likelihood[message.pornographyLikelihood] : message.pornographyLikelihood;
+                                object.pornographyLikelihood = options.enums === String ? $root.google.cloud.videointelligence.v1p3beta1.Likelihood[message.pornographyLikelihood] === undefined ? message.pornographyLikelihood : $root.google.cloud.videointelligence.v1p3beta1.Likelihood[message.pornographyLikelihood] : message.pornographyLikelihood;
                             return object;
                         };
     
@@ -39982,6 +40068,12 @@
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
                             switch (object.feature) {
+                            default:
+                                if (typeof object.feature === "number") {
+                                    message.feature = object.feature;
+                                    break;
+                                }
+                                break;
                             case "FEATURE_UNSPECIFIED":
                             case 0:
                                 message.feature = 0;
@@ -40065,7 +40157,7 @@
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.feature != null && message.hasOwnProperty("feature"))
-                                object.feature = options.enums === String ? $root.google.cloud.videointelligence.v1p3beta1.Feature[message.feature] : message.feature;
+                                object.feature = options.enums === String ? $root.google.cloud.videointelligence.v1p3beta1.Feature[message.feature] === undefined ? message.feature : $root.google.cloud.videointelligence.v1p3beta1.Feature[message.feature] : message.feature;
                             if (message.segment != null && message.hasOwnProperty("segment"))
                                 object.segment = $root.google.cloud.videointelligence.v1p3beta1.VideoSegment.toObject(message.segment, options);
                             return object;
@@ -44579,6 +44671,12 @@
                                 message.automlObjectTrackingConfig = $root.google.cloud.videointelligence.v1p3beta1.StreamingAutomlObjectTrackingConfig.fromObject(object.automlObjectTrackingConfig);
                             }
                             switch (object.feature) {
+                            default:
+                                if (typeof object.feature === "number") {
+                                    message.feature = object.feature;
+                                    break;
+                                }
+                                break;
                             case "STREAMING_FEATURE_UNSPECIFIED":
                             case 0:
                                 message.feature = 0;
@@ -44638,7 +44736,7 @@
                                 object.storageConfig = null;
                             }
                             if (message.feature != null && message.hasOwnProperty("feature"))
-                                object.feature = options.enums === String ? $root.google.cloud.videointelligence.v1p3beta1.StreamingFeature[message.feature] : message.feature;
+                                object.feature = options.enums === String ? $root.google.cloud.videointelligence.v1p3beta1.StreamingFeature[message.feature] === undefined ? message.feature : $root.google.cloud.videointelligence.v1p3beta1.StreamingFeature[message.feature] : message.feature;
                             if (message.shotChangeDetectionConfig != null && message.hasOwnProperty("shotChangeDetectionConfig")) {
                                 object.shotChangeDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig.toObject(message.shotChangeDetectionConfig, options);
                                 if (options.oneofs)
@@ -50401,6 +50499,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -50415,6 +50519,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -50541,9 +50651,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -52862,6 +52972,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -52958,7 +53074,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -53707,6 +53823,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -53723,6 +53845,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -53761,6 +53889,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -53825,7 +53957,7 @@
                         object.unverifiedLazy = false;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -53833,7 +53965,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -53846,7 +53978,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     return object;
                 };
@@ -55221,6 +55353,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -55290,7 +55428,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -57045,6 +57183,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -57094,7 +57238,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
