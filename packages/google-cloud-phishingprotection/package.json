@@ -1,7 +1,7 @@
 {
   "repository": "googleapis/nodejs-phishing-protection",
   "name": "@google-cloud/phishing-protection",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "author": "Google LLC",
   "description": "Phishing Protection API client for Node.js",
   "main": "build/src/index.js",
@@ -23,7 +23,7 @@
     "Phishing Protection API"
   ],
   "dependencies": {
-    "google-gax": "^3.3.0"
+    "google-gax": "^3.5.2"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",

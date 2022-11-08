@@ -192,5 +192,5 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=analyticshub.googleapis.com
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=bigquerydatapolicy.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started

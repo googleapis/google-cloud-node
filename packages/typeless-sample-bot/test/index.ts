@@ -17,7 +17,7 @@ import {describe, it} from 'mocha';
 import snapshot from 'snap-shot-it';
 import * as samples from '../src/samples.js';
 import * as main from '../src/app.js';
-import {readFile, rm, stat} from 'node:fs/promises';
+import {readFile, rm, stat, mkdir} from 'node:fs/promises';
 import * as url from 'node:url';
 import * as path from 'node:path';
 import * as sinon from 'sinon';
@@ -29,7 +29,7 @@ const dirName = url.fileURLToPath(new URL('.', import.meta.url));
 const fixturePath = path.join(dirName, '..', '..', 'test', 'fixtures');
 
 async function loadFixture(name: string): Promise<string> {
-  const fn = path.join(fixturePath, name);
+  const fn = name.includes(path.sep) ? name : path.join(fixturePath, name);
   return (await readFile(fn)).toString();
 }
 
@@ -121,10 +121,41 @@ describe('command line option', () => {
     }
   });
 
+  it('"outputpath" causes the output to move', async () => {
+    const testOutputPath = path.join(fixturePath, 'alternate');
+    const cmdline = [
+      'node',
+      'index.ts',
+      '--targets',
+      path.join(fixturePath, 'deleteSchema.ts'),
+      path.join(fixturePath, 'getSchema.ts'),
+      '--outputpath',
+      testOutputPath,
+    ];
+    const outputs = [
+      path.join(testOutputPath, 'deleteSchema.js'),
+      path.join(testOutputPath, 'getSchema.js'),
+    ];
+    try {
+      await mkdir(testOutputPath);
+      const retcode = await main.main(cmdline);
+      assert.strictEqual(retcode, 0);
+      const contents = [
+        await loadFixture(outputs[0]),
+        await loadFixture(outputs[1]),
+      ];
+      snapshot(contents);
+    } finally {
+      rm(testOutputPath, {
+        recursive: true,
+      }).catch(() => {});
+    }
+  });
+
   it('"recursive" causes recursion and only matches samples', async () => {
     const targets = [
-      path.join('folder', 'listenForAvroRecords.js'),
-      path.join('folder', 'publishAvroRecords.js'),
+      path.join(fixturePath, 'folder', 'listenForAvroRecords.js'),
+      path.join(fixturePath, 'folder', 'publishAvroRecords.js'),
     ];
     const antiTarget = path.join(fixturePath, 'folder', 'validateSchema.js');
     try {
@@ -138,7 +169,10 @@ describe('command line option', () => {
       const retcode = await main.main(cmdline);
       assert.strictEqual(retcode, 0);
 
-      const contents = await Promise.all(targets.map(loadFixture));
+      const contents = [
+        await loadFixture(targets[0]),
+        await loadFixture(targets[1]),
+      ];
       snapshot(contents);
 
       await assert.rejects(stat(antiTarget));

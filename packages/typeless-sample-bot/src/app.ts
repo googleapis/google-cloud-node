@@ -26,7 +26,6 @@ import {
   waitForAllSamples,
   fromArray,
 } from './samples.js';
-import url from 'node:url';
 
 let returnValue = 0;
 
@@ -59,6 +58,13 @@ async function processArgs(args: string[]) {
         boolean: true,
         describe: 'process the target(s) as directories, recursively',
         alias: ['r'],
+      },
+      outputpath: {
+        demandOption: false,
+        type: 'string',
+        describe:
+          'outputs default to being next to the original; if set, this option will specify the output for all files',
+        alias: ['o'],
       },
       verbose: {
         demandOption: false,
@@ -156,7 +162,7 @@ export async function main(args: string[]): Promise<number> {
   const transformed = transformSamples(filtered);
 
   // Write out all of the output samples.
-  const written = writeSamples(transformed);
+  const written = writeSamples(transformed, argv.outputpath);
 
   try {
     // Wait for the pipeline to complete.

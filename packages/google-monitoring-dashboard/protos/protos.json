@@ -500,7 +500,8 @@
                           "oneof": [
                             "timeSeriesFilter",
                             "timeSeriesFilterRatio",
-                            "timeSeriesQueryLanguage"
+                            "timeSeriesQueryLanguage",
+                            "prometheusQuery"
                           ]
                         }
                       },
@@ -516,6 +517,10 @@
                         "timeSeriesQueryLanguage": {
                           "type": "string",
                           "id": 3
+                        },
+                        "prometheusQuery": {
+                          "type": "string",
+                          "id": 6
                         },
                         "unitOverride": {
                           "type": "string",
@@ -720,6 +725,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }

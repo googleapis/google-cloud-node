@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/memcache",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Memcache client for Node.js",
   "repository": "googleapis/nodejs-memcache",
   "license": "Apache-2.0",
@@ -27,7 +27,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "google-gax": "^3.3.0"
+    "google-gax": "^3.5.2"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
