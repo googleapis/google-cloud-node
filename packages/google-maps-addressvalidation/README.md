@@ -5,7 +5,7 @@
 # [Address Validation API: Node.js Client](https://github.com/googleapis/google-cloud-node)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-maps/addressvalidation.svg)](https://www.npmjs.org/package/@google-maps/addressvalidation)
+[![npm version](https://img.shields.io/npm/v/@googlemaps/addressvalidation.svg)](https://www.npmjs.org/package/@googlemaps/addressvalidation)
 
 
 
@@ -50,7 +50,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-maps/addressvalidation
+npm install @googlemaps/addressvalidation
 ```
 
 
@@ -166,7 +166,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-maps/addressvalidation@legacy-8` installs client libraries
+For example, `npm install @googlemaps/addressvalidation@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning
