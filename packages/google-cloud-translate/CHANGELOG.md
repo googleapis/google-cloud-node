@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [7.0.4](https://github.com/googleapis/nodejs-translate/compare/v7.0.3...v7.0.4) (2022-11-09)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#879](https://github.com/googleapis/nodejs-translate/issues/879)) ([c425c4d](https://github.com/googleapis/nodejs-translate/commit/c425c4dae9fa6dcf73d1e27381e561add26a1ffb))
+* update proto definitions ([933973b](https://github.com/googleapis/nodejs-translate/commit/933973b971c59a9a018b5b63d27f1a64da530b76))
+* Update proto definitions ([#883](https://github.com/googleapis/nodejs-translate/issues/883)) ([933973b](https://github.com/googleapis/nodejs-translate/commit/933973b971c59a9a018b5b63d27f1a64da530b76))
+
 ## [7.0.3](https://github.com/googleapis/nodejs-translate/compare/v7.0.2...v7.0.3) (2022-09-22)
 
 
