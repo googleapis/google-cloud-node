@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [5.2.2](https://github.com/googleapis/nodejs-logging-winston/compare/v5.2.1...v5.2.2) (2022-11-08)
+
+
+### Bug Fixes
+
+* Unknown log level : http ([#766](https://github.com/googleapis/nodejs-logging-winston/issues/766)) ([167b89c](https://github.com/googleapis/nodejs-logging-winston/commit/167b89cd8b9fb0a20a8fd14e0831a46d566a5bb9))
+
 ## [5.2.1](https://github.com/googleapis/nodejs-logging-winston/compare/v5.2.0...v5.2.1) (2022-11-07)
 
 
