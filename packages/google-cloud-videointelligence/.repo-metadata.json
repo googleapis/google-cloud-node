@@ -1,6 +1,6 @@
 {
   "language": "nodejs",
-  "repo": "googleapis/nodejs-video-intelligence",
+  "repo": "googleapis/google-cloud-node",
   "name": "video",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5084810",
   "default_version": "v1",

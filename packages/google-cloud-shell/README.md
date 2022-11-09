@@ -14,11 +14,11 @@ cloudshell client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
+[the CHANGELOG](googleapis/nodejs-cloud-shell/CHANGELOG.md).
 
 * [Cloud Shell Node.js Client API Reference][client-docs]
 * [Cloud Shell Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
+* [github.com/googleapis/nodejs-cloud-shell](googleapis/nodejs-cloud-shell)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].

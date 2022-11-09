@@ -14,11 +14,11 @@ Google Cloud OS Login API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
+[the CHANGELOG](googleapis/nodejs-os-login/CHANGELOG.md).
 
 * [Google Cloud OS Login Node.js Client API Reference][client-docs]
 * [Google Cloud OS Login Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
+* [github.com/googleapis/nodejs-os-login](googleapis/nodejs-os-login)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].

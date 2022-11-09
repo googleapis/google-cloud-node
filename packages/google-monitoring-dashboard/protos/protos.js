@@ -730,6 +730,12 @@
                                 message.alignmentPeriod = $root.google.protobuf.Duration.fromObject(object.alignmentPeriod);
                             }
                             switch (object.perSeriesAligner) {
+                            default:
+                                if (typeof object.perSeriesAligner === "number") {
+                                    message.perSeriesAligner = object.perSeriesAligner;
+                                    break;
+                                }
+                                break;
                             case "ALIGN_NONE":
                             case 0:
                                 message.perSeriesAligner = 0;
@@ -808,6 +814,12 @@
                                 break;
                             }
                             switch (object.crossSeriesReducer) {
+                            default:
+                                if (typeof object.crossSeriesReducer === "number") {
+                                    message.crossSeriesReducer = object.crossSeriesReducer;
+                                    break;
+                                }
+                                break;
                             case "REDUCE_NONE":
                             case 0:
                                 message.crossSeriesReducer = 0;
@@ -898,9 +910,9 @@
                             if (message.alignmentPeriod != null && message.hasOwnProperty("alignmentPeriod"))
                                 object.alignmentPeriod = $root.google.protobuf.Duration.toObject(message.alignmentPeriod, options);
                             if (message.perSeriesAligner != null && message.hasOwnProperty("perSeriesAligner"))
-                                object.perSeriesAligner = options.enums === String ? $root.google.monitoring.dashboard.v1.Aggregation.Aligner[message.perSeriesAligner] : message.perSeriesAligner;
+                                object.perSeriesAligner = options.enums === String ? $root.google.monitoring.dashboard.v1.Aggregation.Aligner[message.perSeriesAligner] === undefined ? message.perSeriesAligner : $root.google.monitoring.dashboard.v1.Aggregation.Aligner[message.perSeriesAligner] : message.perSeriesAligner;
                             if (message.crossSeriesReducer != null && message.hasOwnProperty("crossSeriesReducer"))
-                                object.crossSeriesReducer = options.enums === String ? $root.google.monitoring.dashboard.v1.Aggregation.Reducer[message.crossSeriesReducer] : message.crossSeriesReducer;
+                                object.crossSeriesReducer = options.enums === String ? $root.google.monitoring.dashboard.v1.Aggregation.Reducer[message.crossSeriesReducer] === undefined ? message.crossSeriesReducer : $root.google.monitoring.dashboard.v1.Aggregation.Reducer[message.crossSeriesReducer] : message.crossSeriesReducer;
                             if (message.groupByFields && message.groupByFields.length) {
                                 object.groupByFields = [];
                                 for (var j = 0; j < message.groupByFields.length; ++j)
@@ -1225,6 +1237,12 @@
                                 return object;
                             var message = new $root.google.monitoring.dashboard.v1.PickTimeSeriesFilter();
                             switch (object.rankingMethod) {
+                            default:
+                                if (typeof object.rankingMethod === "number") {
+                                    message.rankingMethod = object.rankingMethod;
+                                    break;
+                                }
+                                break;
                             case "METHOD_UNSPECIFIED":
                             case 0:
                                 message.rankingMethod = 0;
@@ -1253,6 +1271,12 @@
                             if (object.numTimeSeries != null)
                                 message.numTimeSeries = object.numTimeSeries | 0;
                             switch (object.direction) {
+                            default:
+                                if (typeof object.direction === "number") {
+                                    message.direction = object.direction;
+                                    break;
+                                }
+                                break;
                             case "DIRECTION_UNSPECIFIED":
                             case 0:
                                 message.direction = 0;
@@ -1288,11 +1312,11 @@
                                 object.direction = options.enums === String ? "DIRECTION_UNSPECIFIED" : 0;
                             }
                             if (message.rankingMethod != null && message.hasOwnProperty("rankingMethod"))
-                                object.rankingMethod = options.enums === String ? $root.google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method[message.rankingMethod] : message.rankingMethod;
+                                object.rankingMethod = options.enums === String ? $root.google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method[message.rankingMethod] === undefined ? message.rankingMethod : $root.google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method[message.rankingMethod] : message.rankingMethod;
                             if (message.numTimeSeries != null && message.hasOwnProperty("numTimeSeries"))
                                 object.numTimeSeries = message.numTimeSeries;
                             if (message.direction != null && message.hasOwnProperty("direction"))
-                                object.direction = options.enums === String ? $root.google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction[message.direction] : message.direction;
+                                object.direction = options.enums === String ? $root.google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction[message.direction] === undefined ? message.direction : $root.google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction[message.direction] : message.direction;
                             return object;
                         };
     
@@ -1536,6 +1560,12 @@
                                 return object;
                             var message = new $root.google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter();
                             switch (object.rankingMethod) {
+                            default:
+                                if (typeof object.rankingMethod === "number") {
+                                    message.rankingMethod = object.rankingMethod;
+                                    break;
+                                }
+                                break;
                             case "METHOD_UNSPECIFIED":
                             case 0:
                                 message.rankingMethod = 0;
@@ -1568,7 +1598,7 @@
                                 object.numTimeSeries = 0;
                             }
                             if (message.rankingMethod != null && message.hasOwnProperty("rankingMethod"))
-                                object.rankingMethod = options.enums === String ? $root.google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method[message.rankingMethod] : message.rankingMethod;
+                                object.rankingMethod = options.enums === String ? $root.google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method[message.rankingMethod] === undefined ? message.rankingMethod : $root.google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method[message.rankingMethod] : message.rankingMethod;
                             if (message.numTimeSeries != null && message.hasOwnProperty("numTimeSeries"))
                                 object.numTimeSeries = message.numTimeSeries;
                             return object;
@@ -2360,6 +2390,12 @@
                             if (object.stringValue != null)
                                 message.stringValue = String(object.stringValue);
                             switch (object.filterType) {
+                            default:
+                                if (typeof object.filterType === "number") {
+                                    message.filterType = object.filterType;
+                                    break;
+                                }
+                                break;
                             case "FILTER_TYPE_UNSPECIFIED":
                             case 0:
                                 message.filterType = 0;
@@ -2416,7 +2452,7 @@
                                     object.defaultValue = "stringValue";
                             }
                             if (message.filterType != null && message.hasOwnProperty("filterType"))
-                                object.filterType = options.enums === String ? $root.google.monitoring.dashboard.v1.DashboardFilter.FilterType[message.filterType] : message.filterType;
+                                object.filterType = options.enums === String ? $root.google.monitoring.dashboard.v1.DashboardFilter.FilterType[message.filterType] === undefined ? message.filterType : $root.google.monitoring.dashboard.v1.DashboardFilter.FilterType[message.filterType] : message.filterType;
                             return object;
                         };
     
@@ -5729,6 +5765,12 @@
                                     return object;
                                 var message = new $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView();
                                 switch (object.sparkChartType) {
+                                default:
+                                    if (typeof object.sparkChartType === "number") {
+                                        message.sparkChartType = object.sparkChartType;
+                                        break;
+                                    }
+                                    break;
                                 case "SPARK_CHART_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.sparkChartType = 0;
@@ -5768,7 +5810,7 @@
                                     object.minAlignmentPeriod = null;
                                 }
                                 if (message.sparkChartType != null && message.hasOwnProperty("sparkChartType"))
-                                    object.sparkChartType = options.enums === String ? $root.google.monitoring.dashboard.v1.SparkChartType[message.sparkChartType] : message.sparkChartType;
+                                    object.sparkChartType = options.enums === String ? $root.google.monitoring.dashboard.v1.SparkChartType[message.sparkChartType] === undefined ? message.sparkChartType : $root.google.monitoring.dashboard.v1.SparkChartType[message.sparkChartType] : message.sparkChartType;
                                 if (message.minAlignmentPeriod != null && message.hasOwnProperty("minAlignmentPeriod"))
                                     object.minAlignmentPeriod = $root.google.protobuf.Duration.toObject(message.minAlignmentPeriod, options);
                                 return object;
@@ -7317,6 +7359,12 @@
                             if (object.value != null)
                                 message.value = Number(object.value);
                             switch (object.color) {
+                            default:
+                                if (typeof object.color === "number") {
+                                    message.color = object.color;
+                                    break;
+                                }
+                                break;
                             case "COLOR_UNSPECIFIED":
                             case 0:
                                 message.color = 0;
@@ -7331,6 +7379,12 @@
                                 break;
                             }
                             switch (object.direction) {
+                            default:
+                                if (typeof object.direction === "number") {
+                                    message.direction = object.direction;
+                                    break;
+                                }
+                                break;
                             case "DIRECTION_UNSPECIFIED":
                             case 0:
                                 message.direction = 0;
@@ -7345,6 +7399,12 @@
                                 break;
                             }
                             switch (object.targetAxis) {
+                            default:
+                                if (typeof object.targetAxis === "number") {
+                                    message.targetAxis = object.targetAxis;
+                                    break;
+                                }
+                                break;
                             case "TARGET_AXIS_UNSPECIFIED":
                             case 0:
                                 message.targetAxis = 0;
@@ -7386,11 +7446,11 @@
                             if (message.value != null && message.hasOwnProperty("value"))
                                 object.value = options.json && !isFinite(message.value) ? String(message.value) : message.value;
                             if (message.color != null && message.hasOwnProperty("color"))
-                                object.color = options.enums === String ? $root.google.monitoring.dashboard.v1.Threshold.Color[message.color] : message.color;
+                                object.color = options.enums === String ? $root.google.monitoring.dashboard.v1.Threshold.Color[message.color] === undefined ? message.color : $root.google.monitoring.dashboard.v1.Threshold.Color[message.color] : message.color;
                             if (message.direction != null && message.hasOwnProperty("direction"))
-                                object.direction = options.enums === String ? $root.google.monitoring.dashboard.v1.Threshold.Direction[message.direction] : message.direction;
+                                object.direction = options.enums === String ? $root.google.monitoring.dashboard.v1.Threshold.Direction[message.direction] === undefined ? message.direction : $root.google.monitoring.dashboard.v1.Threshold.Direction[message.direction] : message.direction;
                             if (message.targetAxis != null && message.hasOwnProperty("targetAxis"))
-                                object.targetAxis = options.enums === String ? $root.google.monitoring.dashboard.v1.Threshold.TargetAxis[message.targetAxis] : message.targetAxis;
+                                object.targetAxis = options.enums === String ? $root.google.monitoring.dashboard.v1.Threshold.TargetAxis[message.targetAxis] === undefined ? message.targetAxis : $root.google.monitoring.dashboard.v1.Threshold.TargetAxis[message.targetAxis] : message.targetAxis;
                             return object;
                         };
     
@@ -8394,6 +8454,12 @@
                             if (object.content != null)
                                 message.content = String(object.content);
                             switch (object.format) {
+                            default:
+                                if (typeof object.format === "number") {
+                                    message.format = object.format;
+                                    break;
+                                }
+                                break;
                             case "FORMAT_UNSPECIFIED":
                             case 0:
                                 message.format = 0;
@@ -8430,7 +8496,7 @@
                             if (message.content != null && message.hasOwnProperty("content"))
                                 object.content = message.content;
                             if (message.format != null && message.hasOwnProperty("format"))
-                                object.format = options.enums === String ? $root.google.monitoring.dashboard.v1.Text.Format[message.format] : message.format;
+                                object.format = options.enums === String ? $root.google.monitoring.dashboard.v1.Text.Format[message.format] === undefined ? message.format : $root.google.monitoring.dashboard.v1.Text.Format[message.format] : message.format;
                             return object;
                         };
     
@@ -9132,6 +9198,12 @@
                                     message.timeSeriesQuery = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.fromObject(object.timeSeriesQuery);
                                 }
                                 switch (object.plotType) {
+                                default:
+                                    if (typeof object.plotType === "number") {
+                                        message.plotType = object.plotType;
+                                        break;
+                                    }
+                                    break;
                                 case "PLOT_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.plotType = 0;
@@ -9161,6 +9233,12 @@
                                     message.minAlignmentPeriod = $root.google.protobuf.Duration.fromObject(object.minAlignmentPeriod);
                                 }
                                 switch (object.targetAxis) {
+                                default:
+                                    if (typeof object.targetAxis === "number") {
+                                        message.targetAxis = object.targetAxis;
+                                        break;
+                                    }
+                                    break;
                                 case "TARGET_AXIS_UNSPECIFIED":
                                 case 0:
                                     message.targetAxis = 0;
@@ -9200,13 +9278,13 @@
                                 if (message.timeSeriesQuery != null && message.hasOwnProperty("timeSeriesQuery"))
                                     object.timeSeriesQuery = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.toObject(message.timeSeriesQuery, options);
                                 if (message.plotType != null && message.hasOwnProperty("plotType"))
-                                    object.plotType = options.enums === String ? $root.google.monitoring.dashboard.v1.XyChart.DataSet.PlotType[message.plotType] : message.plotType;
+                                    object.plotType = options.enums === String ? $root.google.monitoring.dashboard.v1.XyChart.DataSet.PlotType[message.plotType] === undefined ? message.plotType : $root.google.monitoring.dashboard.v1.XyChart.DataSet.PlotType[message.plotType] : message.plotType;
                                 if (message.legendTemplate != null && message.hasOwnProperty("legendTemplate"))
                                     object.legendTemplate = message.legendTemplate;
                                 if (message.minAlignmentPeriod != null && message.hasOwnProperty("minAlignmentPeriod"))
                                     object.minAlignmentPeriod = $root.google.protobuf.Duration.toObject(message.minAlignmentPeriod, options);
                                 if (message.targetAxis != null && message.hasOwnProperty("targetAxis"))
-                                    object.targetAxis = options.enums === String ? $root.google.monitoring.dashboard.v1.XyChart.DataSet.TargetAxis[message.targetAxis] : message.targetAxis;
+                                    object.targetAxis = options.enums === String ? $root.google.monitoring.dashboard.v1.XyChart.DataSet.TargetAxis[message.targetAxis] === undefined ? message.targetAxis : $root.google.monitoring.dashboard.v1.XyChart.DataSet.TargetAxis[message.targetAxis] : message.targetAxis;
                                 return object;
                             };
     
@@ -9451,6 +9529,12 @@
                                 if (object.label != null)
                                     message.label = String(object.label);
                                 switch (object.scale) {
+                                default:
+                                    if (typeof object.scale === "number") {
+                                        message.scale = object.scale;
+                                        break;
+                                    }
+                                    break;
                                 case "SCALE_UNSPECIFIED":
                                 case 0:
                                     message.scale = 0;
@@ -9487,7 +9571,7 @@
                                 if (message.label != null && message.hasOwnProperty("label"))
                                     object.label = message.label;
                                 if (message.scale != null && message.hasOwnProperty("scale"))
-                                    object.scale = options.enums === String ? $root.google.monitoring.dashboard.v1.XyChart.Axis.Scale[message.scale] : message.scale;
+                                    object.scale = options.enums === String ? $root.google.monitoring.dashboard.v1.XyChart.Axis.Scale[message.scale] === undefined ? message.scale : $root.google.monitoring.dashboard.v1.XyChart.Axis.Scale[message.scale] : message.scale;
                                 return object;
                             };
     
@@ -9696,6 +9780,12 @@
                                 return object;
                             var message = new $root.google.monitoring.dashboard.v1.ChartOptions();
                             switch (object.mode) {
+                            default:
+                                if (typeof object.mode === "number") {
+                                    message.mode = object.mode;
+                                    break;
+                                }
+                                break;
                             case "MODE_UNSPECIFIED":
                             case 0:
                                 message.mode = 0;
@@ -9732,7 +9822,7 @@
                             if (options.defaults)
                                 object.mode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
                             if (message.mode != null && message.hasOwnProperty("mode"))
-                                object.mode = options.enums === String ? $root.google.monitoring.dashboard.v1.ChartOptions.Mode[message.mode] : message.mode;
+                                object.mode = options.enums === String ? $root.google.monitoring.dashboard.v1.ChartOptions.Mode[message.mode] === undefined ? message.mode : $root.google.monitoring.dashboard.v1.ChartOptions.Mode[message.mode] : message.mode;
                             return object;
                         };
     
@@ -11722,6 +11812,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -11746,6 +11842,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -11793,7 +11893,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -11801,7 +11901,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -15575,6 +15675,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -15589,6 +15695,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -15715,9 +15827,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -18064,6 +18176,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -18172,7 +18290,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -18974,6 +19092,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -18990,6 +19114,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -19028,6 +19158,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -19098,7 +19232,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -19106,7 +19240,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -19119,7 +19253,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -20476,6 +20610,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -20539,7 +20679,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -22292,6 +22432,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -22341,7 +22487,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     

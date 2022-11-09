@@ -14,11 +14,11 @@ Phishing Protection API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
+[the CHANGELOG](googleapis/nodejs-phishing-protection/CHANGELOG.md).
 
 * [Phishing Protection Node.js Client API Reference][client-docs]
 * [Phishing Protection Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
+* [github.com/googleapis/nodejs-phishing-protection](googleapis/nodejs-phishing-protection)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
