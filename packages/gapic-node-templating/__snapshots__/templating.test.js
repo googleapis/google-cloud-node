@@ -27,9 +27,9 @@ exports['tests for templates it should create the templates in the directory 2']
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "release_level": "beta",
   "language": "nodejs",
-  "repo": "googleapis/googleapis/google-cloud-node",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/kms",
-  "api_id": "google.cloud.kms.v1",
+  "api_id": "kms.googleapis.com",
   "default_version": "v1",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO"

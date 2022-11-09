@@ -15,16 +15,15 @@
 set -e
 
 MONO_REPO_NAME="google-cloud-node"
-WORKSPACE_DIR="/workspace"
-cd  "${WORKSPACE_DIR}/${MONO_REPO_NAME}/packages/gapic-node-templating"
+cd  "${MONO_REPO_PATH}/packages/gapic-node-templating"
 npm i
 npm run compile
 npm link .
 
-cd "${WORKSPACE_DIR}/${MONO_REPO_NAME}/containers/node-bootstrap-container"
+cd "${MONO_REPO_PATH}/containers/node-bootstrap-container"
 FOLDER_NAME=$(node /create-folder-name.js $API_ID) || node /create-gh-issue.js
-mkdir -p "${WORKSPACE_DIR}/${MONO_REPO_NAME}/packages/${FOLDER_NAME}" || node /create-gh-issue.js
-node /add-to-well-known-path.js "${WORKSPACE_DIR}" "${FOLDER_NAME}"
-cd  "${WORKSPACE_DIR}/${MONO_REPO_NAME}"
+mkdir -p "${MONO_REPO_PATH}/packages/${FOLDER_NAME}" || node /create-gh-issue.js
+node /add-to-well-known-path.js "${INTER_CONTAINER_VARS_PATH}" "${FOLDER_NAME}"
+cd  "${MONO_REPO_PATH}"
 
-/usr/local/bin/gapic-node-templating bootstrap-library --api-id "${API_ID}" --destination-folder "${WORKSPACE_DIR}/${MONO_REPO_NAME}/packages/${FOLDER_NAME}" --mono-repo-name "${MONO_REPO_NAME}" || node /create-gh-issue.js
+/usr/local/bin/gapic-node-templating bootstrap-library --api-id "${API_ID}" --destination-folder "${MONO_REPO_PATH}/packages/${FOLDER_NAME}" --mono-repo-name "${MONO_REPO_NAME}" --folder-name "${FOLDER_NAME}" --service-config-path "${SERVICE_CONFIG_PATH}" || node /create-gh-issue.js
