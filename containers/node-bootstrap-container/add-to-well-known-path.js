@@ -14,11 +14,10 @@
 
 const fs = require('fs');
 function getApiPathWithDashes(args) {
-    const [workdir, folderName] = args
-    const contents = JSON.parse(fs.readFileSync(`${workdir}/interContainerVars.json`).toString())
+    const [interContainerVarsPath, folderName] = args
+    const contents = JSON.parse(fs.readFileSync(interContainerVarsPath).toString())
     contents.owlbotYamlPath = `packages/${folderName}/.OwlBot.yaml`;
-    fs.writeFileSync(
-      `${workdir}/interContainerVars.json`,
+    fs.writeFileSync(interContainerVarsPath,
       JSON.stringify(contents, null, 4)
     );
 }

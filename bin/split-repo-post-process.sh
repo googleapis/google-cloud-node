@@ -72,6 +72,26 @@ echo "adding compile step to samples-test"
 jq -r ".scripts[\"samples-test\"] = \"npm run compile && cd samples/ && npm link ../ && npm i && npm test\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
 mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
 
+echo "updating repository object type"
+# using a temp file because jq doesn't like writing to the input file as it reads
+jq -r ".repository[\"type\"] = \"git\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
+mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
+
+echo "updating repository object url"
+# using a temp file because jq doesn't like writing to the input file as it reads
+jq -r ".repository[\"url\"] = \"https://github.com/googleapis/google-cloud-node.git\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
+mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
+
+echo "updating repository object directory"
+# using a temp file because jq doesn't like writing to the input file as it reads
+jq -r ".repository[\"directory\"] = \"packages/${PACKAGE_NAME}\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
+mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
+
+echo "updating repository object directory"
+# using a temp file because jq doesn't like writing to the input file as it reads
+jq -r ".homepage = \"https://github.com/googleapis/google-cloud-node/tree/main/packages/${PACKAGE_NAME}\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
+mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
+
 IMAGE="gcr.io/cloud-devrel-public-resources/owlbot-nodejs-mono-repo:latest"
 echo "Running post-processor: ${IMAGE}"
 docker pull "${IMAGE}"

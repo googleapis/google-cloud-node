@@ -8600,6 +8600,7 @@
                          * @property {string|null} [filter] RecommendRequest filter
                          * @property {boolean|null} [validateOnly] RecommendRequest validateOnly
                          * @property {Object.<string,google.protobuf.IValue>|null} [params] RecommendRequest params
+                         * @property {Object.<string,string>|null} [userLabels] RecommendRequest userLabels
                          */
     
                         /**
@@ -8612,6 +8613,7 @@
                          */
                         function RecommendRequest(properties) {
                             this.params = {};
+                            this.userLabels = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -8667,6 +8669,14 @@
                         RecommendRequest.prototype.params = $util.emptyObject;
     
                         /**
+                         * RecommendRequest userLabels.
+                         * @member {Object.<string,string>} userLabels
+                         * @memberof google.cloud.discoveryengine.v1beta.RecommendRequest
+                         * @instance
+                         */
+                        RecommendRequest.prototype.userLabels = $util.emptyObject;
+    
+                        /**
                          * Creates a new RecommendRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.discoveryengine.v1beta.RecommendRequest
@@ -8705,6 +8715,9 @@
                                     writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.protobuf.Value.encode(message.params[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.userLabels != null && Object.hasOwnProperty.call(message, "userLabels"))
+                                for (var keys = Object.keys(message.userLabels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.userLabels[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -8782,6 +8795,29 @@
                                         message.params[key] = value;
                                         break;
                                     }
+                                case 8: {
+                                        if (message.userLabels === $util.emptyObject)
+                                            message.userLabels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.userLabels[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8844,6 +8880,14 @@
                                         return "params." + error;
                                 }
                             }
+                            if (message.userLabels != null && message.hasOwnProperty("userLabels")) {
+                                if (!$util.isObject(message.userLabels))
+                                    return "userLabels: object expected";
+                                var key = Object.keys(message.userLabels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.userLabels[key[i]]))
+                                        return "userLabels: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -8882,6 +8926,13 @@
                                     message.params[keys[i]] = $root.google.protobuf.Value.fromObject(object.params[keys[i]]);
                                 }
                             }
+                            if (object.userLabels) {
+                                if (typeof object.userLabels !== "object")
+                                    throw TypeError(".google.cloud.discoveryengine.v1beta.RecommendRequest.userLabels: object expected");
+                                message.userLabels = {};
+                                for (var keys = Object.keys(object.userLabels), i = 0; i < keys.length; ++i)
+                                    message.userLabels[keys[i]] = String(object.userLabels[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -8898,8 +8949,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.params = {};
+                                object.userLabels = {};
+                            }
                             if (options.defaults) {
                                 object.servingConfig = "";
                                 object.userEvent = null;
@@ -8922,6 +8975,11 @@
                                 object.params = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.params[keys2[j]] = $root.google.protobuf.Value.toObject(message.params[keys2[j]], options);
+                            }
+                            if (message.userLabels && (keys2 = Object.keys(message.userLabels)).length) {
+                                object.userLabels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.userLabels[keys2[j]] = message.userLabels[keys2[j]];
                             }
                             return object;
                         };
