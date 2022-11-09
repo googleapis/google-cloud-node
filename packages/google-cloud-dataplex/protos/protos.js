@@ -485,6 +485,12 @@
                             if (object.description != null)
                                 message.description = String(object.description);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -576,7 +582,7 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.State[message.state] : message.state;
                             if (message.infrastructureSpec != null && message.hasOwnProperty("infrastructureSpec"))
                                 object.infrastructureSpec = $root.google.cloud.dataplex.v1.Environment.InfrastructureSpec.toObject(message.infrastructureSpec, options);
                             if (message.sessionSpec != null && message.hasOwnProperty("sessionSpec"))
@@ -2803,6 +2809,12 @@
                                     return object;
                                 var message = new $root.google.cloud.dataplex.v1.Content.SqlScript();
                                 switch (object.engine) {
+                                default:
+                                    if (typeof object.engine === "number") {
+                                        message.engine = object.engine;
+                                        break;
+                                    }
+                                    break;
                                 case "QUERY_ENGINE_UNSPECIFIED":
                                 case 0:
                                     message.engine = 0;
@@ -2831,7 +2843,7 @@
                                 if (options.defaults)
                                     object.engine = options.enums === String ? "QUERY_ENGINE_UNSPECIFIED" : 0;
                                 if (message.engine != null && message.hasOwnProperty("engine"))
-                                    object.engine = options.enums === String ? $root.google.cloud.dataplex.v1.Content.SqlScript.QueryEngine[message.engine] : message.engine;
+                                    object.engine = options.enums === String ? $root.google.cloud.dataplex.v1.Content.SqlScript.QueryEngine[message.engine] === undefined ? message.engine : $root.google.cloud.dataplex.v1.Content.SqlScript.QueryEngine[message.engine] : message.engine;
                                 return object;
                             };
     
@@ -3033,6 +3045,12 @@
                                     return object;
                                 var message = new $root.google.cloud.dataplex.v1.Content.Notebook();
                                 switch (object.kernelType) {
+                                default:
+                                    if (typeof object.kernelType === "number") {
+                                        message.kernelType = object.kernelType;
+                                        break;
+                                    }
+                                    break;
                                 case "KERNEL_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.kernelType = 0;
@@ -3061,7 +3079,7 @@
                                 if (options.defaults)
                                     object.kernelType = options.enums === String ? "KERNEL_TYPE_UNSPECIFIED" : 0;
                                 if (message.kernelType != null && message.hasOwnProperty("kernelType"))
-                                    object.kernelType = options.enums === String ? $root.google.cloud.dataplex.v1.Content.Notebook.KernelType[message.kernelType] : message.kernelType;
+                                    object.kernelType = options.enums === String ? $root.google.cloud.dataplex.v1.Content.Notebook.KernelType[message.kernelType] === undefined ? message.kernelType : $root.google.cloud.dataplex.v1.Content.Notebook.KernelType[message.kernelType] : message.kernelType;
                                 return object;
                             };
     
@@ -3334,6 +3352,12 @@
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -3384,7 +3408,7 @@
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.State[message.state] : message.state;
                             return object;
                         };
     
@@ -3834,6 +3858,12 @@
                             if (object.description != null)
                                 message.description = String(object.description);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -3922,7 +3952,7 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Lake.MetastoreStatus.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Lake.MetastoreStatus.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.Lake.MetastoreStatus.State[message.state] : message.state;
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
                             if (message.metastore != null && message.hasOwnProperty("metastore"))
@@ -4377,6 +4407,12 @@
                                     return object;
                                 var message = new $root.google.cloud.dataplex.v1.Lake.MetastoreStatus();
                                 switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
                                 case "STATE_UNSPECIFIED":
                                 case 0:
                                     message.state = 0;
@@ -4430,7 +4466,7 @@
                                     object.endpoint = "";
                                 }
                                 if (message.state != null && message.hasOwnProperty("state"))
-                                    object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Lake.MetastoreStatus.State[message.state] : message.state;
+                                    object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Lake.MetastoreStatus.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.Lake.MetastoreStatus.State[message.state] : message.state;
                                 if (message.message != null && message.hasOwnProperty("message"))
                                     object.message = message.message;
                                 if (message.updateTime != null && message.hasOwnProperty("updateTime"))
@@ -5170,6 +5206,12 @@
                             if (object.description != null)
                                 message.description = String(object.description);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -5192,6 +5234,12 @@
                                 break;
                             }
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -5270,9 +5318,9 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.State[message.state] : message.state;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.dataplex.v1.Zone.Type[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.dataplex.v1.Zone.Type[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.Zone.Type[message.type] : message.type;
                             if (message.discoverySpec != null && message.hasOwnProperty("discoverySpec"))
                                 object.discoverySpec = $root.google.cloud.dataplex.v1.Zone.DiscoverySpec.toObject(message.discoverySpec, options);
                             if (message.resourceSpec != null && message.hasOwnProperty("resourceSpec"))
@@ -5480,6 +5528,12 @@
                                     return object;
                                 var message = new $root.google.cloud.dataplex.v1.Zone.ResourceSpec();
                                 switch (object.locationType) {
+                                default:
+                                    if (typeof object.locationType === "number") {
+                                        message.locationType = object.locationType;
+                                        break;
+                                    }
+                                    break;
                                 case "LOCATION_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.locationType = 0;
@@ -5512,7 +5566,7 @@
                                 if (options.defaults)
                                     object.locationType = options.enums === String ? "LOCATION_TYPE_UNSPECIFIED" : 0;
                                 if (message.locationType != null && message.hasOwnProperty("locationType"))
-                                    object.locationType = options.enums === String ? $root.google.cloud.dataplex.v1.Zone.ResourceSpec.LocationType[message.locationType] : message.locationType;
+                                    object.locationType = options.enums === String ? $root.google.cloud.dataplex.v1.Zone.ResourceSpec.LocationType[message.locationType] === undefined ? message.locationType : $root.google.cloud.dataplex.v1.Zone.ResourceSpec.LocationType[message.locationType] : message.locationType;
                                 return object;
                             };
     
@@ -6952,6 +7006,12 @@
                                 return object;
                             var message = new $root.google.cloud.dataplex.v1.Action();
                             switch (object.category) {
+                            default:
+                                if (typeof object.category === "number") {
+                                    message.category = object.category;
+                                    break;
+                                }
+                                break;
                             case "CATEGORY_UNSPECIFIED":
                             case 0:
                                 message.category = 0;
@@ -7059,7 +7119,7 @@
                                 object.asset = "";
                             }
                             if (message.category != null && message.hasOwnProperty("category"))
-                                object.category = options.enums === String ? $root.google.cloud.dataplex.v1.Action.Category[message.category] : message.category;
+                                object.category = options.enums === String ? $root.google.cloud.dataplex.v1.Action.Category[message.category] === undefined ? message.category : $root.google.cloud.dataplex.v1.Action.Category[message.category] : message.category;
                             if (message.issue != null && message.hasOwnProperty("issue"))
                                 object.issue = message.issue;
                             if (message.detectTime != null && message.hasOwnProperty("detectTime"))
@@ -8233,6 +8293,12 @@
                                         message.sampledDataLocations[i] = String(object.sampledDataLocations[i]);
                                 }
                                 switch (object.schemaChange) {
+                                default:
+                                    if (typeof object.schemaChange === "number") {
+                                        message.schemaChange = object.schemaChange;
+                                        break;
+                                    }
+                                    break;
                                 case "SCHEMA_CHANGE_UNSPECIFIED":
                                 case 0:
                                     message.schemaChange = 0;
@@ -8282,7 +8348,7 @@
                                         object.sampledDataLocations[j] = message.sampledDataLocations[j];
                                 }
                                 if (message.schemaChange != null && message.hasOwnProperty("schemaChange"))
-                                    object.schemaChange = options.enums === String ? $root.google.cloud.dataplex.v1.Action.IncompatibleDataSchema.SchemaChange[message.schemaChange] : message.schemaChange;
+                                    object.schemaChange = options.enums === String ? $root.google.cloud.dataplex.v1.Action.IncompatibleDataSchema.SchemaChange[message.schemaChange] === undefined ? message.schemaChange : $root.google.cloud.dataplex.v1.Action.IncompatibleDataSchema.SchemaChange[message.schemaChange] : message.schemaChange;
                                 return object;
                             };
     
@@ -8487,6 +8553,12 @@
                                     return object;
                                 var message = new $root.google.cloud.dataplex.v1.Action.InvalidDataPartition();
                                 switch (object.expectedStructure) {
+                                default:
+                                    if (typeof object.expectedStructure === "number") {
+                                        message.expectedStructure = object.expectedStructure;
+                                        break;
+                                    }
+                                    break;
                                 case "PARTITION_STRUCTURE_UNSPECIFIED":
                                 case 0:
                                     message.expectedStructure = 0;
@@ -8519,7 +8591,7 @@
                                 if (options.defaults)
                                     object.expectedStructure = options.enums === String ? "PARTITION_STRUCTURE_UNSPECIFIED" : 0;
                                 if (message.expectedStructure != null && message.hasOwnProperty("expectedStructure"))
-                                    object.expectedStructure = options.enums === String ? $root.google.cloud.dataplex.v1.Action.InvalidDataPartition.PartitionStructure[message.expectedStructure] : message.expectedStructure;
+                                    object.expectedStructure = options.enums === String ? $root.google.cloud.dataplex.v1.Action.InvalidDataPartition.PartitionStructure[message.expectedStructure] === undefined ? message.expectedStructure : $root.google.cloud.dataplex.v1.Action.InvalidDataPartition.PartitionStructure[message.expectedStructure] : message.expectedStructure;
                                 return object;
                             };
     
@@ -9359,6 +9431,12 @@
                             if (object.description != null)
                                 message.description = String(object.description);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -9452,7 +9530,7 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Asset.SecurityStatus.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Asset.SecurityStatus.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.Asset.SecurityStatus.State[message.state] : message.state;
                             if (message.resourceSpec != null && message.hasOwnProperty("resourceSpec"))
                                 object.resourceSpec = $root.google.cloud.dataplex.v1.Asset.ResourceSpec.toObject(message.resourceSpec, options);
                             if (message.resourceStatus != null && message.hasOwnProperty("resourceStatus"))
@@ -9687,6 +9765,12 @@
                                     return object;
                                 var message = new $root.google.cloud.dataplex.v1.Asset.SecurityStatus();
                                 switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
                                 case "STATE_UNSPECIFIED":
                                 case 0:
                                     message.state = 0;
@@ -9733,7 +9817,7 @@
                                     object.updateTime = null;
                                 }
                                 if (message.state != null && message.hasOwnProperty("state"))
-                                    object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Asset.SecurityStatus.State[message.state] : message.state;
+                                    object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Asset.SecurityStatus.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.Asset.SecurityStatus.State[message.state] : message.state;
                                 if (message.message != null && message.hasOwnProperty("message"))
                                     object.message = message.message;
                                 if (message.updateTime != null && message.hasOwnProperty("updateTime"))
@@ -10846,6 +10930,12 @@
                                 if (object.name != null)
                                     message.name = String(object.name);
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -10882,7 +10972,7 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.Asset.ResourceSpec.Type[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.Asset.ResourceSpec.Type[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.Asset.ResourceSpec.Type[message.type] : message.type;
                                 return object;
                             };
     
@@ -11125,6 +11215,12 @@
                                     return object;
                                 var message = new $root.google.cloud.dataplex.v1.Asset.ResourceStatus();
                                 switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
                                 case "STATE_UNSPECIFIED":
                                 case 0:
                                     message.state = 0;
@@ -11167,7 +11263,7 @@
                                     object.updateTime = null;
                                 }
                                 if (message.state != null && message.hasOwnProperty("state"))
-                                    object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Asset.ResourceStatus.State[message.state] : message.state;
+                                    object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Asset.ResourceStatus.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.Asset.ResourceStatus.State[message.state] : message.state;
                                 if (message.message != null && message.hasOwnProperty("message"))
                                     object.message = message.message;
                                 if (message.updateTime != null && message.hasOwnProperty("updateTime"))
@@ -11476,6 +11572,12 @@
                                     return object;
                                 var message = new $root.google.cloud.dataplex.v1.Asset.DiscoveryStatus();
                                 switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
                                 case "STATE_UNSPECIFIED":
                                 case 0:
                                     message.state = 0;
@@ -11544,7 +11646,7 @@
                                     object.lastRunDuration = null;
                                 }
                                 if (message.state != null && message.hasOwnProperty("state"))
-                                    object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Asset.DiscoveryStatus.State[message.state] : message.state;
+                                    object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Asset.DiscoveryStatus.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.Asset.DiscoveryStatus.State[message.state] : message.state;
                                 if (message.message != null && message.hasOwnProperty("message"))
                                     object.message = message.message;
                                 if (message.updateTime != null && message.hasOwnProperty("updateTime"))
@@ -13673,6 +13775,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "CONTENT_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -13709,7 +13817,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.dataplex.v1.GetContentRequest.ContentView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.cloud.dataplex.v1.GetContentRequest.ContentView[message.view] === undefined ? message.view : $root.google.cloud.dataplex.v1.GetContentRequest.ContentView[message.view] : message.view;
                             return object;
                         };
     
@@ -14132,6 +14240,12 @@
                             if (object.dataLocation != null)
                                 message.dataLocation = String(object.dataLocation);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "EVENT_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -14220,7 +14334,7 @@
                             if (message.dataLocation != null && message.hasOwnProperty("dataLocation"))
                                 object.dataLocation = message.dataLocation;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.dataplex.v1.DiscoveryEvent.EventType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.dataplex.v1.DiscoveryEvent.EventType[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.DiscoveryEvent.EventType[message.type] : message.type;
                             if (message.config != null && message.hasOwnProperty("config")) {
                                 object.config = $root.google.cloud.dataplex.v1.DiscoveryEvent.ConfigDetails.toObject(message.config, options);
                                 if (options.oneofs)
@@ -14726,6 +14840,12 @@
                                 if (object.entity != null)
                                     message.entity = String(object.entity);
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "ENTITY_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -14762,7 +14882,7 @@
                                 if (message.entity != null && message.hasOwnProperty("entity"))
                                     object.entity = message.entity;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.DiscoveryEvent.EntityType[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.DiscoveryEvent.EntityType[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.DiscoveryEvent.EntityType[message.type] : message.type;
                                 return object;
                             };
     
@@ -15017,6 +15137,12 @@
                                 if (object.entity != null)
                                     message.entity = String(object.entity);
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "ENTITY_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -15065,7 +15191,7 @@
                                 if (message.entity != null && message.hasOwnProperty("entity"))
                                     object.entity = message.entity;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.DiscoveryEvent.EntityType[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.DiscoveryEvent.EntityType[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.DiscoveryEvent.EntityType[message.type] : message.type;
                                 if (message.sampledDataLocations && message.sampledDataLocations.length) {
                                     object.sampledDataLocations = [];
                                     for (var j = 0; j < message.sampledDataLocations.length; ++j)
@@ -15640,6 +15766,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -15664,6 +15796,12 @@
                             if (object.retries != null)
                                 message.retries = object.retries | 0;
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -15678,6 +15816,12 @@
                                 break;
                             }
                             switch (object.service) {
+                            default:
+                                if (typeof object.service === "number") {
+                                    message.service = object.service;
+                                    break;
+                                }
+                                break;
                             case "SERVICE_UNSPECIFIED":
                             case 0:
                                 message.service = 0;
@@ -15725,13 +15869,13 @@
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.JobEvent.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.JobEvent.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.JobEvent.State[message.state] : message.state;
                             if (message.retries != null && message.hasOwnProperty("retries"))
                                 object.retries = message.retries;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.dataplex.v1.JobEvent.Type[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.dataplex.v1.JobEvent.Type[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.JobEvent.Type[message.type] : message.type;
                             if (message.service != null && message.hasOwnProperty("service"))
-                                object.service = options.enums === String ? $root.google.cloud.dataplex.v1.JobEvent.Service[message.service] : message.service;
+                                object.service = options.enums === String ? $root.google.cloud.dataplex.v1.JobEvent.Service[message.service] === undefined ? message.service : $root.google.cloud.dataplex.v1.JobEvent.Service[message.service] : message.service;
                             if (message.serviceJob != null && message.hasOwnProperty("serviceJob"))
                                 object.serviceJob = message.serviceJob;
                             return object;
@@ -16128,6 +16272,12 @@
                             if (object.sessionId != null)
                                 message.sessionId = String(object.sessionId);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "EVENT_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -16195,7 +16345,7 @@
                             if (message.sessionId != null && message.hasOwnProperty("sessionId"))
                                 object.sessionId = message.sessionId;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.dataplex.v1.SessionEvent.EventType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.dataplex.v1.SessionEvent.EventType[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.SessionEvent.EventType[message.type] : message.type;
                             if (message.query != null && message.hasOwnProperty("query")) {
                                 object.query = $root.google.cloud.dataplex.v1.SessionEvent.QueryDetail.toObject(message.query, options);
                                 if (options.oneofs)
@@ -16508,6 +16658,12 @@
                                 if (object.queryText != null)
                                     message.queryText = String(object.queryText);
                                 switch (object.engine) {
+                                default:
+                                    if (typeof object.engine === "number") {
+                                        message.engine = object.engine;
+                                        break;
+                                    }
+                                    break;
                                 case "ENGINE_UNSPECIFIED":
                                 case 0:
                                     message.engine = 0;
@@ -16581,7 +16737,7 @@
                                 if (message.queryText != null && message.hasOwnProperty("queryText"))
                                     object.queryText = message.queryText;
                                 if (message.engine != null && message.hasOwnProperty("engine"))
-                                    object.engine = options.enums === String ? $root.google.cloud.dataplex.v1.SessionEvent.QueryDetail.Engine[message.engine] : message.engine;
+                                    object.engine = options.enums === String ? $root.google.cloud.dataplex.v1.SessionEvent.QueryDetail.Engine[message.engine] === undefined ? message.engine : $root.google.cloud.dataplex.v1.SessionEvent.QueryDetail.Engine[message.engine] : message.engine;
                                 if (message.duration != null && message.hasOwnProperty("duration"))
                                     object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
                                 if (message.resultSizeBytes != null && message.hasOwnProperty("resultSizeBytes"))
@@ -17921,6 +18077,12 @@
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "ENTITY_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -17966,7 +18128,7 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.dataplex.v1.ListEntitiesRequest.EntityView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.cloud.dataplex.v1.ListEntitiesRequest.EntityView[message.view] === undefined ? message.view : $root.google.cloud.dataplex.v1.ListEntitiesRequest.EntityView[message.view] : message.view;
                             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
@@ -18446,6 +18608,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "ENTITY_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -18486,7 +18654,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.dataplex.v1.GetEntityRequest.EntityView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.cloud.dataplex.v1.GetEntityRequest.EntityView[message.view] === undefined ? message.view : $root.google.cloud.dataplex.v1.GetEntityRequest.EntityView[message.view] : message.view;
                             return object;
                         };
     
@@ -20205,6 +20373,12 @@
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -20227,6 +20401,12 @@
                             if (object.catalogEntry != null)
                                 message.catalogEntry = String(object.catalogEntry);
                             switch (object.system) {
+                            default:
+                                if (typeof object.system === "number") {
+                                    message.system = object.system;
+                                    break;
+                                }
+                                break;
                             case "STORAGE_SYSTEM_UNSPECIFIED":
                             case 0:
                                 message.system = 0;
@@ -20304,7 +20484,7 @@
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.dataplex.v1.Entity.Type[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.dataplex.v1.Entity.Type[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.Entity.Type[message.type] : message.type;
                             if (message.asset != null && message.hasOwnProperty("asset"))
                                 object.asset = message.asset;
                             if (message.dataPath != null && message.hasOwnProperty("dataPath"))
@@ -20314,7 +20494,7 @@
                             if (message.catalogEntry != null && message.hasOwnProperty("catalogEntry"))
                                 object.catalogEntry = message.catalogEntry;
                             if (message.system != null && message.hasOwnProperty("system"))
-                                object.system = options.enums === String ? $root.google.cloud.dataplex.v1.StorageSystem[message.system] : message.system;
+                                object.system = options.enums === String ? $root.google.cloud.dataplex.v1.StorageSystem[message.system] === undefined ? message.system : $root.google.cloud.dataplex.v1.StorageSystem[message.system] : message.system;
                             if (message.format != null && message.hasOwnProperty("format"))
                                 object.format = $root.google.cloud.dataplex.v1.StorageFormat.toObject(message.format, options);
                             if (message.compatibility != null && message.hasOwnProperty("compatibility"))
@@ -21374,6 +21554,12 @@
                                 }
                             }
                             switch (object.partitionStyle) {
+                            default:
+                                if (typeof object.partitionStyle === "number") {
+                                    message.partitionStyle = object.partitionStyle;
+                                    break;
+                                }
+                                break;
                             case "PARTITION_STYLE_UNSPECIFIED":
                             case 0:
                                 message.partitionStyle = 0;
@@ -21420,7 +21606,7 @@
                                     object.partitionFields[j] = $root.google.cloud.dataplex.v1.Schema.PartitionField.toObject(message.partitionFields[j], options);
                             }
                             if (message.partitionStyle != null && message.hasOwnProperty("partitionStyle"))
-                                object.partitionStyle = options.enums === String ? $root.google.cloud.dataplex.v1.Schema.PartitionStyle[message.partitionStyle] : message.partitionStyle;
+                                object.partitionStyle = options.enums === String ? $root.google.cloud.dataplex.v1.Schema.PartitionStyle[message.partitionStyle] === undefined ? message.partitionStyle : $root.google.cloud.dataplex.v1.Schema.PartitionStyle[message.partitionStyle] : message.partitionStyle;
                             return object;
                         };
     
@@ -21772,6 +21958,12 @@
                                 if (object.description != null)
                                     message.description = String(object.description);
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -21838,6 +22030,12 @@
                                     break;
                                 }
                                 switch (object.mode) {
+                                default:
+                                    if (typeof object.mode === "number") {
+                                        message.mode = object.mode;
+                                        break;
+                                    }
+                                    break;
                                 case "MODE_UNSPECIFIED":
                                 case 0:
                                     message.mode = 0;
@@ -21894,9 +22092,9 @@
                                 if (message.description != null && message.hasOwnProperty("description"))
                                     object.description = message.description;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.Schema.Type[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.Schema.Type[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.Schema.Type[message.type] : message.type;
                                 if (message.mode != null && message.hasOwnProperty("mode"))
-                                    object.mode = options.enums === String ? $root.google.cloud.dataplex.v1.Schema.Mode[message.mode] : message.mode;
+                                    object.mode = options.enums === String ? $root.google.cloud.dataplex.v1.Schema.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.dataplex.v1.Schema.Mode[message.mode] : message.mode;
                                 if (message.fields && message.fields.length) {
                                     object.fields = [];
                                     for (var j = 0; j < message.fields.length; ++j)
@@ -22123,6 +22321,12 @@
                                 if (object.name != null)
                                     message.name = String(object.name);
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -22211,7 +22415,7 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.Schema.Type[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.Schema.Type[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.Schema.Type[message.type] : message.type;
                                 return object;
                             };
     
@@ -22532,6 +22736,12 @@
                                 return object;
                             var message = new $root.google.cloud.dataplex.v1.StorageFormat();
                             switch (object.format) {
+                            default:
+                                if (typeof object.format === "number") {
+                                    message.format = object.format;
+                                    break;
+                                }
+                                break;
                             case "FORMAT_UNSPECIFIED":
                             case 0:
                                 message.format = 0;
@@ -22586,6 +22796,12 @@
                                 break;
                             }
                             switch (object.compressionFormat) {
+                            default:
+                                if (typeof object.compressionFormat === "number") {
+                                    message.compressionFormat = object.compressionFormat;
+                                    break;
+                                }
+                                break;
                             case "COMPRESSION_FORMAT_UNSPECIFIED":
                             case 0:
                                 message.compressionFormat = 0;
@@ -22633,9 +22849,9 @@
                                 object.mimeType = "";
                             }
                             if (message.format != null && message.hasOwnProperty("format"))
-                                object.format = options.enums === String ? $root.google.cloud.dataplex.v1.StorageFormat.Format[message.format] : message.format;
+                                object.format = options.enums === String ? $root.google.cloud.dataplex.v1.StorageFormat.Format[message.format] === undefined ? message.format : $root.google.cloud.dataplex.v1.StorageFormat.Format[message.format] : message.format;
                             if (message.compressionFormat != null && message.hasOwnProperty("compressionFormat"))
-                                object.compressionFormat = options.enums === String ? $root.google.cloud.dataplex.v1.StorageFormat.CompressionFormat[message.compressionFormat] : message.compressionFormat;
+                                object.compressionFormat = options.enums === String ? $root.google.cloud.dataplex.v1.StorageFormat.CompressionFormat[message.compressionFormat] === undefined ? message.compressionFormat : $root.google.cloud.dataplex.v1.StorageFormat.CompressionFormat[message.compressionFormat] : message.compressionFormat;
                             if (message.mimeType != null && message.hasOwnProperty("mimeType"))
                                 object.mimeType = message.mimeType;
                             if (message.csv != null && message.hasOwnProperty("csv")) {
@@ -35065,6 +35281,12 @@
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -35161,7 +35383,7 @@
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.State[message.state] : message.state;
                             var keys2;
                             if (message.labels && (keys2 = Object.keys(message.labels)).length) {
                                 object.labels = {};
@@ -36634,6 +36856,12 @@
                                     return object;
                                 var message = new $root.google.cloud.dataplex.v1.Task.TriggerSpec();
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -36683,7 +36911,7 @@
                                 if (message.disabled != null && message.hasOwnProperty("disabled"))
                                     object.disabled = message.disabled;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.Task.TriggerSpec.Type[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.Task.TriggerSpec.Type[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.Task.TriggerSpec.Type[message.type] : message.type;
                                 if (message.startTime != null && message.hasOwnProperty("startTime"))
                                     object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                                 if (message.maxRetries != null && message.hasOwnProperty("maxRetries"))
@@ -38403,6 +38631,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -38435,6 +38669,12 @@
                             if (object.retryCount != null)
                                 message.retryCount = object.retryCount >>> 0;
                             switch (object.service) {
+                            default:
+                                if (typeof object.service === "number") {
+                                    message.service = object.service;
+                                    break;
+                                }
+                                break;
                             case "SERVICE_UNSPECIFIED":
                             case 0:
                                 message.service = 0;
@@ -38484,11 +38724,11 @@
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Job.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.Job.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.Job.State[message.state] : message.state;
                             if (message.retryCount != null && message.hasOwnProperty("retryCount"))
                                 object.retryCount = message.retryCount;
                             if (message.service != null && message.hasOwnProperty("service"))
-                                object.service = options.enums === String ? $root.google.cloud.dataplex.v1.Job.Service[message.service] : message.service;
+                                object.service = options.enums === String ? $root.google.cloud.dataplex.v1.Job.Service[message.service] === undefined ? message.service : $root.google.cloud.dataplex.v1.Job.Service[message.service] : message.service;
                             if (message.serviceJob != null && message.hasOwnProperty("serviceJob"))
                                 object.serviceJob = message.serviceJob;
                             if (message.message != null && message.hasOwnProperty("message"))
@@ -38911,6 +39151,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -38935,6 +39181,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -38982,7 +39232,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -38990,7 +39240,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -42764,6 +43014,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -42778,6 +43034,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -42904,9 +43166,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -45253,6 +45515,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -45361,7 +45629,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -46163,6 +46431,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -46179,6 +46453,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -46217,6 +46497,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -46287,7 +46571,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -46295,7 +46579,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -46308,7 +46592,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -47685,6 +47969,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -47754,7 +48044,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -49509,6 +49799,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -49558,7 +49854,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -53063,6 +53359,12 @@
                             return object;
                         var message = new $root.google.iam.v1.AuditLogConfig();
                         switch (object.logType) {
+                        default:
+                            if (typeof object.logType === "number") {
+                                message.logType = object.logType;
+                                break;
+                            }
+                            break;
                         case "LOG_TYPE_UNSPECIFIED":
                         case 0:
                             message.logType = 0;
@@ -53108,7 +53410,7 @@
                         if (options.defaults)
                             object.logType = options.enums === String ? "LOG_TYPE_UNSPECIFIED" : 0;
                         if (message.logType != null && message.hasOwnProperty("logType"))
-                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
+                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] === undefined ? message.logType : $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
                         if (message.exemptedMembers && message.exemptedMembers.length) {
                             object.exemptedMembers = [];
                             for (var j = 0; j < message.exemptedMembers.length; ++j)
@@ -53645,6 +53947,12 @@
                             return object;
                         var message = new $root.google.iam.v1.BindingDelta();
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "ACTION_UNSPECIFIED":
                         case 0:
                             message.action = 0;
@@ -53690,7 +53998,7 @@
                             object.condition = null;
                         }
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
                         if (message.role != null && message.hasOwnProperty("role"))
                             object.role = message.role;
                         if (message.member != null && message.hasOwnProperty("member"))
@@ -53955,6 +54263,12 @@
                             return object;
                         var message = new $root.google.iam.v1.AuditConfigDelta();
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "ACTION_UNSPECIFIED":
                         case 0:
                             message.action = 0;
@@ -53997,7 +54311,7 @@
                             object.logType = "";
                         }
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
                         if (message.service != null && message.hasOwnProperty("service"))
                             object.service = message.service;
                         if (message.exemptedMember != null && message.hasOwnProperty("exemptedMember"))
