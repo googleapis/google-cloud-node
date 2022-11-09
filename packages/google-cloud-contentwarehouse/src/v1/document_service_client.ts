@@ -1036,7 +1036,7 @@ export class DocumentServiceClient {
    *
    *   * Histogram facet (aka filterable properties): Facet names with format
    *   &lt;schema id&gt;.&lt;facet&gt;. Facets will have the
-   *   format of: {@link a-zA-Z0-9_:/-.|a-zA-Z}. If the facet is a child
+   *   format of: `{@link a-zA-Z0-9_:/-.|a-zA-Z}`. If the facet is a child
    *   facet, then the parent hierarchy needs to be specified separated by
    *   dots in the prefix after the schema id. Thus, the format for a multi-
    *   level facet is: &lt;schema id&gt;.&lt;parent facet name&gt;.
@@ -1213,7 +1213,7 @@ export class DocumentServiceClient {
    *
    *   * Histogram facet (aka filterable properties): Facet names with format
    *   &lt;schema id&gt;.&lt;facet&gt;. Facets will have the
-   *   format of: {@link a-zA-Z0-9_:/-.|a-zA-Z}. If the facet is a child
+   *   format of: `{@link a-zA-Z0-9_:/-.|a-zA-Z}`. If the facet is a child
    *   facet, then the parent hierarchy needs to be specified separated by
    *   dots in the prefix after the schema id. Thus, the format for a multi-
    *   level facet is: &lt;schema id&gt;.&lt;parent facet name&gt;.
@@ -1338,7 +1338,7 @@ export class DocumentServiceClient {
    *
    *   * Histogram facet (aka filterable properties): Facet names with format
    *   &lt;schema id&gt;.&lt;facet&gt;. Facets will have the
-   *   format of: {@link a-zA-Z0-9_:/-.|a-zA-Z}. If the facet is a child
+   *   format of: `{@link a-zA-Z0-9_:/-.|a-zA-Z}`. If the facet is a child
    *   facet, then the parent hierarchy needs to be specified separated by
    *   dots in the prefix after the schema id. Thus, the format for a multi-
    *   level facet is: &lt;schema id&gt;.&lt;parent facet name&gt;.
