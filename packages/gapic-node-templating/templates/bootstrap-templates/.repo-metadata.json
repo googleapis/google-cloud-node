@@ -8,7 +8,7 @@
   "language": "{{language}}",
   "repo": "googleapis/{{monoRepoName}}",
   "distribution_name": "{{distributionName}}",
-  "api_id": "{{apiId}}",
+  "api_id": "{{hostName}}",
   "default_version": "{{version}}",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO"
