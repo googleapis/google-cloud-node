@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-docs-samples-videointelligence",
+  "private": true,
+  "license": "Apache-2.0",
+  "files": [
+    "*.js",
+    "resources"
+  ],
+  "author": "Google Inc.",
+  "repository": "googleapis/nodejs-video-intelligence",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "scripts": {
+    "test": "mocha system-test --timeout=800000"
+  },
+  "dependencies": {
+    "@google-cloud/video-intelligence": "^4.1.1",
+    "yargs": "^16.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.0"
+  }
+}
