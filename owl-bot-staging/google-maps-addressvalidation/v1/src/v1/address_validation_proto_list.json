@@ -1,8 +1,0 @@
-[
-  "../../protos/google/geo/type/viewport.proto",
-  "../../protos/google/maps/addressvalidation/v1/address.proto",
-  "../../protos/google/maps/addressvalidation/v1/address_validation_service.proto",
-  "../../protos/google/maps/addressvalidation/v1/geocode.proto",
-  "../../protos/google/maps/addressvalidation/v1/metadata.proto",
-  "../../protos/google/maps/addressvalidation/v1/usps_data.proto"
-]

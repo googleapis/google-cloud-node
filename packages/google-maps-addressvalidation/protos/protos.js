@@ -4467,10 +4467,8 @@
                          * Properties of an AddressMetadata.
                          * @memberof google.maps.addressvalidation.v1
                          * @interface IAddressMetadata
-                         * @property {boolean|null} [highrise] AddressMetadata highrise
                          * @property {boolean|null} [business] AddressMetadata business
                          * @property {boolean|null} [poBox] AddressMetadata poBox
-                         * @property {boolean|null} [multiFamily] AddressMetadata multiFamily
                          * @property {boolean|null} [residential] AddressMetadata residential
                          */
     
@@ -4490,14 +4488,6 @@
                         }
     
                         /**
-                         * AddressMetadata highrise.
-                         * @member {boolean|null|undefined} highrise
-                         * @memberof google.maps.addressvalidation.v1.AddressMetadata
-                         * @instance
-                         */
-                        AddressMetadata.prototype.highrise = null;
-    
-                        /**
                          * AddressMetadata business.
                          * @member {boolean|null|undefined} business
                          * @memberof google.maps.addressvalidation.v1.AddressMetadata
@@ -4514,14 +4504,6 @@
                         AddressMetadata.prototype.poBox = null;
     
                         /**
-                         * AddressMetadata multiFamily.
-                         * @member {boolean|null|undefined} multiFamily
-                         * @memberof google.maps.addressvalidation.v1.AddressMetadata
-                         * @instance
-                         */
-                        AddressMetadata.prototype.multiFamily = null;
-    
-                        /**
                          * AddressMetadata residential.
                          * @member {boolean|null|undefined} residential
                          * @memberof google.maps.addressvalidation.v1.AddressMetadata
@@ -4531,17 +4513,6 @@
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
-    
-                        /**
-                         * AddressMetadata _highrise.
-                         * @member {"highrise"|undefined} _highrise
-                         * @memberof google.maps.addressvalidation.v1.AddressMetadata
-                         * @instance
-                         */
-                        Object.defineProperty(AddressMetadata.prototype, "_highrise", {
-                            get: $util.oneOfGetter($oneOfFields = ["highrise"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
     
                         /**
                          * AddressMetadata _business.
@@ -4562,17 +4533,6 @@
                          */
                         Object.defineProperty(AddressMetadata.prototype, "_poBox", {
                             get: $util.oneOfGetter($oneOfFields = ["poBox"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * AddressMetadata _multiFamily.
-                         * @member {"multiFamily"|undefined} _multiFamily
-                         * @memberof google.maps.addressvalidation.v1.AddressMetadata
-                         * @instance
-                         */
-                        Object.defineProperty(AddressMetadata.prototype, "_multiFamily", {
-                            get: $util.oneOfGetter($oneOfFields = ["multiFamily"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4611,14 +4571,10 @@
                         AddressMetadata.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.highrise != null && Object.hasOwnProperty.call(message, "highrise"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.highrise);
                             if (message.business != null && Object.hasOwnProperty.call(message, "business"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.business);
                             if (message.poBox != null && Object.hasOwnProperty.call(message, "poBox"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.poBox);
-                            if (message.multiFamily != null && Object.hasOwnProperty.call(message, "multiFamily"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.multiFamily);
                             if (message.residential != null && Object.hasOwnProperty.call(message, "residential"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.residential);
                             return writer;
@@ -4655,20 +4611,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1: {
-                                        message.highrise = reader.bool();
-                                        break;
-                                    }
                                 case 2: {
                                         message.business = reader.bool();
                                         break;
                                     }
                                 case 3: {
                                         message.poBox = reader.bool();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.multiFamily = reader.bool();
                                         break;
                                     }
                                 case 6: {
@@ -4711,11 +4659,6 @@
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             var properties = {};
-                            if (message.highrise != null && message.hasOwnProperty("highrise")) {
-                                properties._highrise = 1;
-                                if (typeof message.highrise !== "boolean")
-                                    return "highrise: boolean expected";
-                            }
                             if (message.business != null && message.hasOwnProperty("business")) {
                                 properties._business = 1;
                                 if (typeof message.business !== "boolean")
@@ -4725,11 +4668,6 @@
                                 properties._poBox = 1;
                                 if (typeof message.poBox !== "boolean")
                                     return "poBox: boolean expected";
-                            }
-                            if (message.multiFamily != null && message.hasOwnProperty("multiFamily")) {
-                                properties._multiFamily = 1;
-                                if (typeof message.multiFamily !== "boolean")
-                                    return "multiFamily: boolean expected";
                             }
                             if (message.residential != null && message.hasOwnProperty("residential")) {
                                 properties._residential = 1;
@@ -4751,14 +4689,10 @@
                             if (object instanceof $root.google.maps.addressvalidation.v1.AddressMetadata)
                                 return object;
                             var message = new $root.google.maps.addressvalidation.v1.AddressMetadata();
-                            if (object.highrise != null)
-                                message.highrise = Boolean(object.highrise);
                             if (object.business != null)
                                 message.business = Boolean(object.business);
                             if (object.poBox != null)
                                 message.poBox = Boolean(object.poBox);
-                            if (object.multiFamily != null)
-                                message.multiFamily = Boolean(object.multiFamily);
                             if (object.residential != null)
                                 message.residential = Boolean(object.residential);
                             return message;
@@ -4777,11 +4711,6 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (message.highrise != null && message.hasOwnProperty("highrise")) {
-                                object.highrise = message.highrise;
-                                if (options.oneofs)
-                                    object._highrise = "highrise";
-                            }
                             if (message.business != null && message.hasOwnProperty("business")) {
                                 object.business = message.business;
                                 if (options.oneofs)
@@ -4791,11 +4720,6 @@
                                 object.poBox = message.poBox;
                                 if (options.oneofs)
                                     object._poBox = "poBox";
-                            }
-                            if (message.multiFamily != null && message.hasOwnProperty("multiFamily")) {
-                                object.multiFamily = message.multiFamily;
-                                if (options.oneofs)
-                                    object._multiFamily = "multiFamily";
                             }
                             if (message.residential != null && message.hasOwnProperty("residential")) {
                                 object.residential = message.residential;
