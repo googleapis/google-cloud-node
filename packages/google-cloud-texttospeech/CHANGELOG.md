@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [4.0.4](https://github.com/googleapis/nodejs-text-to-speech/compare/v4.0.3...v4.0.4) (2022-11-09)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#641](https://github.com/googleapis/nodejs-text-to-speech/issues/641)) ([6f691f6](https://github.com/googleapis/nodejs-text-to-speech/commit/6f691f65c5d21f93117268ec87c89309fc6e667f))
+* update proto definitions ([3321981](https://github.com/googleapis/nodejs-text-to-speech/commit/3321981c96b4726ef764a76bc3ce35b90943b16b))
+* Update proto definitions ([#645](https://github.com/googleapis/nodejs-text-to-speech/issues/645)) ([3321981](https://github.com/googleapis/nodejs-text-to-speech/commit/3321981c96b4726ef764a76bc3ce35b90943b16b))
+
 ## [4.0.3](https://github.com/googleapis/nodejs-text-to-speech/compare/v4.0.2...v4.0.3) (2022-09-14)
 
 
