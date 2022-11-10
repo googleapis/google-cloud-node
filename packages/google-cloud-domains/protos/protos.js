@@ -1052,6 +1052,12 @@
                                 message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -1092,6 +1098,10 @@
                                 for (var i = 0; i < object.issues.length; ++i)
                                     switch (object.issues[i]) {
                                     default:
+                                        if (typeof object.issues[i] === "number") {
+                                            message.issues[i] = object.issues[i];
+                                            break;
+                                        }
                                     case "ISSUE_UNSPECIFIED":
                                     case 0:
                                         message.issues[i] = 0;
@@ -1140,6 +1150,10 @@
                                 for (var i = 0; i < object.supportedPrivacy.length; ++i)
                                     switch (object.supportedPrivacy[i]) {
                                     default:
+                                        if (typeof object.supportedPrivacy[i] === "number") {
+                                            message.supportedPrivacy[i] = object.supportedPrivacy[i];
+                                            break;
+                                        }
                                     case "CONTACT_PRIVACY_UNSPECIFIED":
                                     case 0:
                                         message.supportedPrivacy[i] = 0;
@@ -1200,11 +1214,11 @@
                             if (message.expireTime != null && message.hasOwnProperty("expireTime"))
                                 object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.domains.v1.Registration.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.domains.v1.Registration.State[message.state] === undefined ? message.state : $root.google.cloud.domains.v1.Registration.State[message.state] : message.state;
                             if (message.issues && message.issues.length) {
                                 object.issues = [];
                                 for (var j = 0; j < message.issues.length; ++j)
-                                    object.issues[j] = options.enums === String ? $root.google.cloud.domains.v1.Registration.Issue[message.issues[j]] : message.issues[j];
+                                    object.issues[j] = options.enums === String ? $root.google.cloud.domains.v1.Registration.Issue[message.issues[j]] === undefined ? message.issues[j] : $root.google.cloud.domains.v1.Registration.Issue[message.issues[j]] : message.issues[j];
                             }
                             var keys2;
                             if (message.labels && (keys2 = Object.keys(message.labels)).length) {
@@ -1223,7 +1237,7 @@
                             if (message.supportedPrivacy && message.supportedPrivacy.length) {
                                 object.supportedPrivacy = [];
                                 for (var j = 0; j < message.supportedPrivacy.length; ++j)
-                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactPrivacy[message.supportedPrivacy[j]] === undefined ? message.supportedPrivacy[j] : $root.google.cloud.domains.v1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
                             }
                             return object;
                         };
@@ -1479,6 +1493,12 @@
                                 return object;
                             var message = new $root.google.cloud.domains.v1.ManagementSettings();
                             switch (object.renewalMethod) {
+                            default:
+                                if (typeof object.renewalMethod === "number") {
+                                    message.renewalMethod = object.renewalMethod;
+                                    break;
+                                }
+                                break;
                             case "RENEWAL_METHOD_UNSPECIFIED":
                             case 0:
                                 message.renewalMethod = 0;
@@ -1493,6 +1513,12 @@
                                 break;
                             }
                             switch (object.transferLockState) {
+                            default:
+                                if (typeof object.transferLockState === "number") {
+                                    message.transferLockState = object.transferLockState;
+                                    break;
+                                }
+                                break;
                             case "TRANSFER_LOCK_STATE_UNSPECIFIED":
                             case 0:
                                 message.transferLockState = 0;
@@ -1527,9 +1553,9 @@
                                 object.transferLockState = options.enums === String ? "TRANSFER_LOCK_STATE_UNSPECIFIED" : 0;
                             }
                             if (message.renewalMethod != null && message.hasOwnProperty("renewalMethod"))
-                                object.renewalMethod = options.enums === String ? $root.google.cloud.domains.v1.ManagementSettings.RenewalMethod[message.renewalMethod] : message.renewalMethod;
+                                object.renewalMethod = options.enums === String ? $root.google.cloud.domains.v1.ManagementSettings.RenewalMethod[message.renewalMethod] === undefined ? message.renewalMethod : $root.google.cloud.domains.v1.ManagementSettings.RenewalMethod[message.renewalMethod] : message.renewalMethod;
                             if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
-                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1.TransferLockState[message.transferLockState] : message.transferLockState;
+                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1.TransferLockState[message.transferLockState] === undefined ? message.transferLockState : $root.google.cloud.domains.v1.TransferLockState[message.transferLockState] : message.transferLockState;
                             return object;
                         };
     
@@ -2363,6 +2389,12 @@
                                         message.nameServers[i] = String(object.nameServers[i]);
                                 }
                                 switch (object.dsState) {
+                                default:
+                                    if (typeof object.dsState === "number") {
+                                        message.dsState = object.dsState;
+                                        break;
+                                    }
+                                    break;
                                 case "DS_STATE_UNSPECIFIED":
                                 case 0:
                                     message.dsState = 0;
@@ -2414,7 +2446,7 @@
                                         object.nameServers[j] = message.nameServers[j];
                                 }
                                 if (message.dsState != null && message.hasOwnProperty("dsState"))
-                                    object.dsState = options.enums === String ? $root.google.cloud.domains.v1.DnsSettings.DsState[message.dsState] : message.dsState;
+                                    object.dsState = options.enums === String ? $root.google.cloud.domains.v1.DnsSettings.DsState[message.dsState] === undefined ? message.dsState : $root.google.cloud.domains.v1.DnsSettings.DsState[message.dsState] : message.dsState;
                                 if (message.dsRecords && message.dsRecords.length) {
                                     object.dsRecords = [];
                                     for (var j = 0; j < message.dsRecords.length; ++j)
@@ -2687,6 +2719,12 @@
                                 if (object.keyTag != null)
                                     message.keyTag = object.keyTag | 0;
                                 switch (object.algorithm) {
+                                default:
+                                    if (typeof object.algorithm === "number") {
+                                        message.algorithm = object.algorithm;
+                                        break;
+                                    }
+                                    break;
                                 case "ALGORITHM_UNSPECIFIED":
                                 case 0:
                                     message.algorithm = 0;
@@ -2761,6 +2799,12 @@
                                     break;
                                 }
                                 switch (object.digestType) {
+                                default:
+                                    if (typeof object.digestType === "number") {
+                                        message.digestType = object.digestType;
+                                        break;
+                                    }
+                                    break;
                                 case "DIGEST_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.digestType = 0;
@@ -2809,9 +2853,9 @@
                                 if (message.keyTag != null && message.hasOwnProperty("keyTag"))
                                     object.keyTag = message.keyTag;
                                 if (message.algorithm != null && message.hasOwnProperty("algorithm"))
-                                    object.algorithm = options.enums === String ? $root.google.cloud.domains.v1.DnsSettings.DsRecord.Algorithm[message.algorithm] : message.algorithm;
+                                    object.algorithm = options.enums === String ? $root.google.cloud.domains.v1.DnsSettings.DsRecord.Algorithm[message.algorithm] === undefined ? message.algorithm : $root.google.cloud.domains.v1.DnsSettings.DsRecord.Algorithm[message.algorithm] : message.algorithm;
                                 if (message.digestType != null && message.hasOwnProperty("digestType"))
-                                    object.digestType = options.enums === String ? $root.google.cloud.domains.v1.DnsSettings.DsRecord.DigestType[message.digestType] : message.digestType;
+                                    object.digestType = options.enums === String ? $root.google.cloud.domains.v1.DnsSettings.DsRecord.DigestType[message.digestType] === undefined ? message.digestType : $root.google.cloud.domains.v1.DnsSettings.DsRecord.DigestType[message.digestType] : message.digestType;
                                 if (message.digest != null && message.hasOwnProperty("digest"))
                                     object.digest = message.digest;
                                 return object;
@@ -3431,6 +3475,12 @@
                                 return object;
                             var message = new $root.google.cloud.domains.v1.ContactSettings();
                             switch (object.privacy) {
+                            default:
+                                if (typeof object.privacy === "number") {
+                                    message.privacy = object.privacy;
+                                    break;
+                                }
+                                break;
                             case "CONTACT_PRIVACY_UNSPECIFIED":
                             case 0:
                                 message.privacy = 0;
@@ -3486,7 +3536,7 @@
                                 object.technicalContact = null;
                             }
                             if (message.privacy != null && message.hasOwnProperty("privacy"))
-                                object.privacy = options.enums === String ? $root.google.cloud.domains.v1.ContactPrivacy[message.privacy] : message.privacy;
+                                object.privacy = options.enums === String ? $root.google.cloud.domains.v1.ContactPrivacy[message.privacy] === undefined ? message.privacy : $root.google.cloud.domains.v1.ContactPrivacy[message.privacy] : message.privacy;
                             if (message.registrantContact != null && message.hasOwnProperty("registrantContact"))
                                 object.registrantContact = $root.google.cloud.domains.v1.ContactSettings.Contact.toObject(message.registrantContact, options);
                             if (message.adminContact != null && message.hasOwnProperty("adminContact"))
@@ -4988,6 +5038,10 @@
                                 for (var i = 0; i < object.domainNotices.length; ++i)
                                     switch (object.domainNotices[i]) {
                                     default:
+                                        if (typeof object.domainNotices[i] === "number") {
+                                            message.domainNotices[i] = object.domainNotices[i];
+                                            break;
+                                        }
                                     case "DOMAIN_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.domainNotices[i] = 0;
@@ -5005,6 +5059,10 @@
                                 for (var i = 0; i < object.contactNotices.length; ++i)
                                     switch (object.contactNotices[i]) {
                                     default:
+                                        if (typeof object.contactNotices[i] === "number") {
+                                            message.contactNotices[i] = object.contactNotices[i];
+                                            break;
+                                        }
                                     case "CONTACT_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.contactNotices[i] = 0;
@@ -5055,12 +5113,12 @@
                             if (message.domainNotices && message.domainNotices.length) {
                                 object.domainNotices = [];
                                 for (var j = 0; j < message.domainNotices.length; ++j)
-                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
+                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.DomainNotice[message.domainNotices[j]] === undefined ? message.domainNotices[j] : $root.google.cloud.domains.v1.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
                             }
                             if (message.contactNotices && message.contactNotices.length) {
                                 object.contactNotices = [];
                                 for (var j = 0; j < message.contactNotices.length; ++j)
-                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactNotice[message.contactNotices[j]] === undefined ? message.contactNotices[j] : $root.google.cloud.domains.v1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
                             }
                             if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
                                 object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
@@ -5813,6 +5871,10 @@
                                 for (var i = 0; i < object.contactNotices.length; ++i)
                                     switch (object.contactNotices[i]) {
                                     default:
+                                        if (typeof object.contactNotices[i] === "number") {
+                                            message.contactNotices[i] = object.contactNotices[i];
+                                            break;
+                                        }
                                     case "CONTACT_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.contactNotices[i] = 0;
@@ -5867,7 +5929,7 @@
                             if (message.contactNotices && message.contactNotices.length) {
                                 object.contactNotices = [];
                                 for (var j = 0; j < message.contactNotices.length; ++j)
-                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactNotice[message.contactNotices[j]] === undefined ? message.contactNotices[j] : $root.google.cloud.domains.v1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
                             }
                             if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
                                 object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
@@ -7676,6 +7738,10 @@
                                 for (var i = 0; i < object.contactNotices.length; ++i)
                                     switch (object.contactNotices[i]) {
                                     default:
+                                        if (typeof object.contactNotices[i] === "number") {
+                                            message.contactNotices[i] = object.contactNotices[i];
+                                            break;
+                                        }
                                     case "CONTACT_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.contactNotices[i] = 0;
@@ -7721,7 +7787,7 @@
                             if (message.contactNotices && message.contactNotices.length) {
                                 object.contactNotices = [];
                                 for (var j = 0; j < message.contactNotices.length; ++j)
-                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactNotice[message.contactNotices[j]] === undefined ? message.contactNotices[j] : $root.google.cloud.domains.v1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
                             }
                             if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
                                 object.validateOnly = message.validateOnly;
@@ -8847,6 +8913,12 @@
                             if (object.domainName != null)
                                 message.domainName = String(object.domainName);
                             switch (object.availability) {
+                            default:
+                                if (typeof object.availability === "number") {
+                                    message.availability = object.availability;
+                                    break;
+                                }
+                                break;
                             case "AVAILABILITY_UNSPECIFIED":
                             case 0:
                                 message.availability = 0;
@@ -8875,6 +8947,10 @@
                                 for (var i = 0; i < object.supportedPrivacy.length; ++i)
                                     switch (object.supportedPrivacy[i]) {
                                     default:
+                                        if (typeof object.supportedPrivacy[i] === "number") {
+                                            message.supportedPrivacy[i] = object.supportedPrivacy[i];
+                                            break;
+                                        }
                                     case "CONTACT_PRIVACY_UNSPECIFIED":
                                     case 0:
                                         message.supportedPrivacy[i] = 0;
@@ -8900,6 +8976,10 @@
                                 for (var i = 0; i < object.domainNotices.length; ++i)
                                     switch (object.domainNotices[i]) {
                                     default:
+                                        if (typeof object.domainNotices[i] === "number") {
+                                            message.domainNotices[i] = object.domainNotices[i];
+                                            break;
+                                        }
                                     case "DOMAIN_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.domainNotices[i] = 0;
@@ -8943,16 +9023,16 @@
                             if (message.domainName != null && message.hasOwnProperty("domainName"))
                                 object.domainName = message.domainName;
                             if (message.availability != null && message.hasOwnProperty("availability"))
-                                object.availability = options.enums === String ? $root.google.cloud.domains.v1.RegisterParameters.Availability[message.availability] : message.availability;
+                                object.availability = options.enums === String ? $root.google.cloud.domains.v1.RegisterParameters.Availability[message.availability] === undefined ? message.availability : $root.google.cloud.domains.v1.RegisterParameters.Availability[message.availability] : message.availability;
                             if (message.supportedPrivacy && message.supportedPrivacy.length) {
                                 object.supportedPrivacy = [];
                                 for (var j = 0; j < message.supportedPrivacy.length; ++j)
-                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactPrivacy[message.supportedPrivacy[j]] === undefined ? message.supportedPrivacy[j] : $root.google.cloud.domains.v1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
                             }
                             if (message.domainNotices && message.domainNotices.length) {
                                 object.domainNotices = [];
                                 for (var j = 0; j < message.domainNotices.length; ++j)
-                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
+                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.DomainNotice[message.domainNotices[j]] === undefined ? message.domainNotices[j] : $root.google.cloud.domains.v1.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
                             }
                             if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
                                 object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
@@ -9298,6 +9378,12 @@
                                     message.nameServers[i] = String(object.nameServers[i]);
                             }
                             switch (object.transferLockState) {
+                            default:
+                                if (typeof object.transferLockState === "number") {
+                                    message.transferLockState = object.transferLockState;
+                                    break;
+                                }
+                                break;
                             case "TRANSFER_LOCK_STATE_UNSPECIFIED":
                             case 0:
                                 message.transferLockState = 0;
@@ -9318,6 +9404,10 @@
                                 for (var i = 0; i < object.supportedPrivacy.length; ++i)
                                     switch (object.supportedPrivacy[i]) {
                                     default:
+                                        if (typeof object.supportedPrivacy[i] === "number") {
+                                            message.supportedPrivacy[i] = object.supportedPrivacy[i];
+                                            break;
+                                        }
                                     case "CONTACT_PRIVACY_UNSPECIFIED":
                                     case 0:
                                         message.supportedPrivacy[i] = 0;
@@ -9377,11 +9467,11 @@
                                     object.nameServers[j] = message.nameServers[j];
                             }
                             if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
-                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1.TransferLockState[message.transferLockState] : message.transferLockState;
+                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1.TransferLockState[message.transferLockState] === undefined ? message.transferLockState : $root.google.cloud.domains.v1.TransferLockState[message.transferLockState] : message.transferLockState;
                             if (message.supportedPrivacy && message.supportedPrivacy.length) {
                                 object.supportedPrivacy = [];
                                 for (var j = 0; j < message.supportedPrivacy.length; ++j)
-                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactPrivacy[message.supportedPrivacy[j]] === undefined ? message.supportedPrivacy[j] : $root.google.cloud.domains.v1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
                             }
                             if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
                                 object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
@@ -11009,6 +11099,12 @@
                                 message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -11049,6 +11145,10 @@
                                 for (var i = 0; i < object.issues.length; ++i)
                                     switch (object.issues[i]) {
                                     default:
+                                        if (typeof object.issues[i] === "number") {
+                                            message.issues[i] = object.issues[i];
+                                            break;
+                                        }
                                     case "ISSUE_UNSPECIFIED":
                                     case 0:
                                         message.issues[i] = 0;
@@ -11097,6 +11197,10 @@
                                 for (var i = 0; i < object.supportedPrivacy.length; ++i)
                                     switch (object.supportedPrivacy[i]) {
                                     default:
+                                        if (typeof object.supportedPrivacy[i] === "number") {
+                                            message.supportedPrivacy[i] = object.supportedPrivacy[i];
+                                            break;
+                                        }
                                     case "CONTACT_PRIVACY_UNSPECIFIED":
                                     case 0:
                                         message.supportedPrivacy[i] = 0;
@@ -11157,11 +11261,11 @@
                             if (message.expireTime != null && message.hasOwnProperty("expireTime"))
                                 object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.domains.v1alpha2.Registration.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.domains.v1alpha2.Registration.State[message.state] === undefined ? message.state : $root.google.cloud.domains.v1alpha2.Registration.State[message.state] : message.state;
                             if (message.issues && message.issues.length) {
                                 object.issues = [];
                                 for (var j = 0; j < message.issues.length; ++j)
-                                    object.issues[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.Registration.Issue[message.issues[j]] : message.issues[j];
+                                    object.issues[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.Registration.Issue[message.issues[j]] === undefined ? message.issues[j] : $root.google.cloud.domains.v1alpha2.Registration.Issue[message.issues[j]] : message.issues[j];
                             }
                             var keys2;
                             if (message.labels && (keys2 = Object.keys(message.labels)).length) {
@@ -11180,7 +11284,7 @@
                             if (message.supportedPrivacy && message.supportedPrivacy.length) {
                                 object.supportedPrivacy = [];
                                 for (var j = 0; j < message.supportedPrivacy.length; ++j)
-                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.supportedPrivacy[j]] === undefined ? message.supportedPrivacy[j] : $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
                             }
                             return object;
                         };
@@ -11436,6 +11540,12 @@
                                 return object;
                             var message = new $root.google.cloud.domains.v1alpha2.ManagementSettings();
                             switch (object.renewalMethod) {
+                            default:
+                                if (typeof object.renewalMethod === "number") {
+                                    message.renewalMethod = object.renewalMethod;
+                                    break;
+                                }
+                                break;
                             case "RENEWAL_METHOD_UNSPECIFIED":
                             case 0:
                                 message.renewalMethod = 0;
@@ -11450,6 +11560,12 @@
                                 break;
                             }
                             switch (object.transferLockState) {
+                            default:
+                                if (typeof object.transferLockState === "number") {
+                                    message.transferLockState = object.transferLockState;
+                                    break;
+                                }
+                                break;
                             case "TRANSFER_LOCK_STATE_UNSPECIFIED":
                             case 0:
                                 message.transferLockState = 0;
@@ -11484,9 +11600,9 @@
                                 object.transferLockState = options.enums === String ? "TRANSFER_LOCK_STATE_UNSPECIFIED" : 0;
                             }
                             if (message.renewalMethod != null && message.hasOwnProperty("renewalMethod"))
-                                object.renewalMethod = options.enums === String ? $root.google.cloud.domains.v1alpha2.ManagementSettings.RenewalMethod[message.renewalMethod] : message.renewalMethod;
+                                object.renewalMethod = options.enums === String ? $root.google.cloud.domains.v1alpha2.ManagementSettings.RenewalMethod[message.renewalMethod] === undefined ? message.renewalMethod : $root.google.cloud.domains.v1alpha2.ManagementSettings.RenewalMethod[message.renewalMethod] : message.renewalMethod;
                             if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
-                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1alpha2.TransferLockState[message.transferLockState] : message.transferLockState;
+                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1alpha2.TransferLockState[message.transferLockState] === undefined ? message.transferLockState : $root.google.cloud.domains.v1alpha2.TransferLockState[message.transferLockState] : message.transferLockState;
                             return object;
                         };
     
@@ -12320,6 +12436,12 @@
                                         message.nameServers[i] = String(object.nameServers[i]);
                                 }
                                 switch (object.dsState) {
+                                default:
+                                    if (typeof object.dsState === "number") {
+                                        message.dsState = object.dsState;
+                                        break;
+                                    }
+                                    break;
                                 case "DS_STATE_UNSPECIFIED":
                                 case 0:
                                     message.dsState = 0;
@@ -12371,7 +12493,7 @@
                                         object.nameServers[j] = message.nameServers[j];
                                 }
                                 if (message.dsState != null && message.hasOwnProperty("dsState"))
-                                    object.dsState = options.enums === String ? $root.google.cloud.domains.v1alpha2.DnsSettings.DsState[message.dsState] : message.dsState;
+                                    object.dsState = options.enums === String ? $root.google.cloud.domains.v1alpha2.DnsSettings.DsState[message.dsState] === undefined ? message.dsState : $root.google.cloud.domains.v1alpha2.DnsSettings.DsState[message.dsState] : message.dsState;
                                 if (message.dsRecords && message.dsRecords.length) {
                                     object.dsRecords = [];
                                     for (var j = 0; j < message.dsRecords.length; ++j)
@@ -12644,6 +12766,12 @@
                                 if (object.keyTag != null)
                                     message.keyTag = object.keyTag | 0;
                                 switch (object.algorithm) {
+                                default:
+                                    if (typeof object.algorithm === "number") {
+                                        message.algorithm = object.algorithm;
+                                        break;
+                                    }
+                                    break;
                                 case "ALGORITHM_UNSPECIFIED":
                                 case 0:
                                     message.algorithm = 0;
@@ -12718,6 +12846,12 @@
                                     break;
                                 }
                                 switch (object.digestType) {
+                                default:
+                                    if (typeof object.digestType === "number") {
+                                        message.digestType = object.digestType;
+                                        break;
+                                    }
+                                    break;
                                 case "DIGEST_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.digestType = 0;
@@ -12766,9 +12900,9 @@
                                 if (message.keyTag != null && message.hasOwnProperty("keyTag"))
                                     object.keyTag = message.keyTag;
                                 if (message.algorithm != null && message.hasOwnProperty("algorithm"))
-                                    object.algorithm = options.enums === String ? $root.google.cloud.domains.v1alpha2.DnsSettings.DsRecord.Algorithm[message.algorithm] : message.algorithm;
+                                    object.algorithm = options.enums === String ? $root.google.cloud.domains.v1alpha2.DnsSettings.DsRecord.Algorithm[message.algorithm] === undefined ? message.algorithm : $root.google.cloud.domains.v1alpha2.DnsSettings.DsRecord.Algorithm[message.algorithm] : message.algorithm;
                                 if (message.digestType != null && message.hasOwnProperty("digestType"))
-                                    object.digestType = options.enums === String ? $root.google.cloud.domains.v1alpha2.DnsSettings.DsRecord.DigestType[message.digestType] : message.digestType;
+                                    object.digestType = options.enums === String ? $root.google.cloud.domains.v1alpha2.DnsSettings.DsRecord.DigestType[message.digestType] === undefined ? message.digestType : $root.google.cloud.domains.v1alpha2.DnsSettings.DsRecord.DigestType[message.digestType] : message.digestType;
                                 if (message.digest != null && message.hasOwnProperty("digest"))
                                     object.digest = message.digest;
                                 return object;
@@ -13388,6 +13522,12 @@
                                 return object;
                             var message = new $root.google.cloud.domains.v1alpha2.ContactSettings();
                             switch (object.privacy) {
+                            default:
+                                if (typeof object.privacy === "number") {
+                                    message.privacy = object.privacy;
+                                    break;
+                                }
+                                break;
                             case "CONTACT_PRIVACY_UNSPECIFIED":
                             case 0:
                                 message.privacy = 0;
@@ -13443,7 +13583,7 @@
                                 object.technicalContact = null;
                             }
                             if (message.privacy != null && message.hasOwnProperty("privacy"))
-                                object.privacy = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.privacy] : message.privacy;
+                                object.privacy = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.privacy] === undefined ? message.privacy : $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.privacy] : message.privacy;
                             if (message.registrantContact != null && message.hasOwnProperty("registrantContact"))
                                 object.registrantContact = $root.google.cloud.domains.v1alpha2.ContactSettings.Contact.toObject(message.registrantContact, options);
                             if (message.adminContact != null && message.hasOwnProperty("adminContact"))
@@ -14945,6 +15085,10 @@
                                 for (var i = 0; i < object.domainNotices.length; ++i)
                                     switch (object.domainNotices[i]) {
                                     default:
+                                        if (typeof object.domainNotices[i] === "number") {
+                                            message.domainNotices[i] = object.domainNotices[i];
+                                            break;
+                                        }
                                     case "DOMAIN_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.domainNotices[i] = 0;
@@ -14962,6 +15106,10 @@
                                 for (var i = 0; i < object.contactNotices.length; ++i)
                                     switch (object.contactNotices[i]) {
                                     default:
+                                        if (typeof object.contactNotices[i] === "number") {
+                                            message.contactNotices[i] = object.contactNotices[i];
+                                            break;
+                                        }
                                     case "CONTACT_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.contactNotices[i] = 0;
@@ -15012,12 +15160,12 @@
                             if (message.domainNotices && message.domainNotices.length) {
                                 object.domainNotices = [];
                                 for (var j = 0; j < message.domainNotices.length; ++j)
-                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
+                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.DomainNotice[message.domainNotices[j]] === undefined ? message.domainNotices[j] : $root.google.cloud.domains.v1alpha2.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
                             }
                             if (message.contactNotices && message.contactNotices.length) {
                                 object.contactNotices = [];
                                 for (var j = 0; j < message.contactNotices.length; ++j)
-                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactNotice[message.contactNotices[j]] === undefined ? message.contactNotices[j] : $root.google.cloud.domains.v1alpha2.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
                             }
                             if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
                                 object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
@@ -15770,6 +15918,10 @@
                                 for (var i = 0; i < object.contactNotices.length; ++i)
                                     switch (object.contactNotices[i]) {
                                     default:
+                                        if (typeof object.contactNotices[i] === "number") {
+                                            message.contactNotices[i] = object.contactNotices[i];
+                                            break;
+                                        }
                                     case "CONTACT_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.contactNotices[i] = 0;
@@ -15824,7 +15976,7 @@
                             if (message.contactNotices && message.contactNotices.length) {
                                 object.contactNotices = [];
                                 for (var j = 0; j < message.contactNotices.length; ++j)
-                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactNotice[message.contactNotices[j]] === undefined ? message.contactNotices[j] : $root.google.cloud.domains.v1alpha2.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
                             }
                             if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
                                 object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
@@ -17633,6 +17785,10 @@
                                 for (var i = 0; i < object.contactNotices.length; ++i)
                                     switch (object.contactNotices[i]) {
                                     default:
+                                        if (typeof object.contactNotices[i] === "number") {
+                                            message.contactNotices[i] = object.contactNotices[i];
+                                            break;
+                                        }
                                     case "CONTACT_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.contactNotices[i] = 0;
@@ -17678,7 +17834,7 @@
                             if (message.contactNotices && message.contactNotices.length) {
                                 object.contactNotices = [];
                                 for (var j = 0; j < message.contactNotices.length; ++j)
-                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactNotice[message.contactNotices[j]] === undefined ? message.contactNotices[j] : $root.google.cloud.domains.v1alpha2.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
                             }
                             if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
                                 object.validateOnly = message.validateOnly;
@@ -18804,6 +18960,12 @@
                             if (object.domainName != null)
                                 message.domainName = String(object.domainName);
                             switch (object.availability) {
+                            default:
+                                if (typeof object.availability === "number") {
+                                    message.availability = object.availability;
+                                    break;
+                                }
+                                break;
                             case "AVAILABILITY_UNSPECIFIED":
                             case 0:
                                 message.availability = 0;
@@ -18832,6 +18994,10 @@
                                 for (var i = 0; i < object.supportedPrivacy.length; ++i)
                                     switch (object.supportedPrivacy[i]) {
                                     default:
+                                        if (typeof object.supportedPrivacy[i] === "number") {
+                                            message.supportedPrivacy[i] = object.supportedPrivacy[i];
+                                            break;
+                                        }
                                     case "CONTACT_PRIVACY_UNSPECIFIED":
                                     case 0:
                                         message.supportedPrivacy[i] = 0;
@@ -18857,6 +19023,10 @@
                                 for (var i = 0; i < object.domainNotices.length; ++i)
                                     switch (object.domainNotices[i]) {
                                     default:
+                                        if (typeof object.domainNotices[i] === "number") {
+                                            message.domainNotices[i] = object.domainNotices[i];
+                                            break;
+                                        }
                                     case "DOMAIN_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.domainNotices[i] = 0;
@@ -18900,16 +19070,16 @@
                             if (message.domainName != null && message.hasOwnProperty("domainName"))
                                 object.domainName = message.domainName;
                             if (message.availability != null && message.hasOwnProperty("availability"))
-                                object.availability = options.enums === String ? $root.google.cloud.domains.v1alpha2.RegisterParameters.Availability[message.availability] : message.availability;
+                                object.availability = options.enums === String ? $root.google.cloud.domains.v1alpha2.RegisterParameters.Availability[message.availability] === undefined ? message.availability : $root.google.cloud.domains.v1alpha2.RegisterParameters.Availability[message.availability] : message.availability;
                             if (message.supportedPrivacy && message.supportedPrivacy.length) {
                                 object.supportedPrivacy = [];
                                 for (var j = 0; j < message.supportedPrivacy.length; ++j)
-                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.supportedPrivacy[j]] === undefined ? message.supportedPrivacy[j] : $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
                             }
                             if (message.domainNotices && message.domainNotices.length) {
                                 object.domainNotices = [];
                                 for (var j = 0; j < message.domainNotices.length; ++j)
-                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
+                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.DomainNotice[message.domainNotices[j]] === undefined ? message.domainNotices[j] : $root.google.cloud.domains.v1alpha2.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
                             }
                             if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
                                 object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
@@ -19255,6 +19425,12 @@
                                     message.nameServers[i] = String(object.nameServers[i]);
                             }
                             switch (object.transferLockState) {
+                            default:
+                                if (typeof object.transferLockState === "number") {
+                                    message.transferLockState = object.transferLockState;
+                                    break;
+                                }
+                                break;
                             case "TRANSFER_LOCK_STATE_UNSPECIFIED":
                             case 0:
                                 message.transferLockState = 0;
@@ -19275,6 +19451,10 @@
                                 for (var i = 0; i < object.supportedPrivacy.length; ++i)
                                     switch (object.supportedPrivacy[i]) {
                                     default:
+                                        if (typeof object.supportedPrivacy[i] === "number") {
+                                            message.supportedPrivacy[i] = object.supportedPrivacy[i];
+                                            break;
+                                        }
                                     case "CONTACT_PRIVACY_UNSPECIFIED":
                                     case 0:
                                         message.supportedPrivacy[i] = 0;
@@ -19334,11 +19514,11 @@
                                     object.nameServers[j] = message.nameServers[j];
                             }
                             if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
-                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1alpha2.TransferLockState[message.transferLockState] : message.transferLockState;
+                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1alpha2.TransferLockState[message.transferLockState] === undefined ? message.transferLockState : $root.google.cloud.domains.v1alpha2.TransferLockState[message.transferLockState] : message.transferLockState;
                             if (message.supportedPrivacy && message.supportedPrivacy.length) {
                                 object.supportedPrivacy = [];
                                 for (var j = 0; j < message.supportedPrivacy.length; ++j)
-                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.supportedPrivacy[j]] === undefined ? message.supportedPrivacy[j] : $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
                             }
                             if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
                                 object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
@@ -20966,6 +21146,12 @@
                                 message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -21006,6 +21192,10 @@
                                 for (var i = 0; i < object.issues.length; ++i)
                                     switch (object.issues[i]) {
                                     default:
+                                        if (typeof object.issues[i] === "number") {
+                                            message.issues[i] = object.issues[i];
+                                            break;
+                                        }
                                     case "ISSUE_UNSPECIFIED":
                                     case 0:
                                         message.issues[i] = 0;
@@ -21054,6 +21244,10 @@
                                 for (var i = 0; i < object.supportedPrivacy.length; ++i)
                                     switch (object.supportedPrivacy[i]) {
                                     default:
+                                        if (typeof object.supportedPrivacy[i] === "number") {
+                                            message.supportedPrivacy[i] = object.supportedPrivacy[i];
+                                            break;
+                                        }
                                     case "CONTACT_PRIVACY_UNSPECIFIED":
                                     case 0:
                                         message.supportedPrivacy[i] = 0;
@@ -21114,11 +21308,11 @@
                             if (message.expireTime != null && message.hasOwnProperty("expireTime"))
                                 object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.domains.v1beta1.Registration.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.domains.v1beta1.Registration.State[message.state] === undefined ? message.state : $root.google.cloud.domains.v1beta1.Registration.State[message.state] : message.state;
                             if (message.issues && message.issues.length) {
                                 object.issues = [];
                                 for (var j = 0; j < message.issues.length; ++j)
-                                    object.issues[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.Registration.Issue[message.issues[j]] : message.issues[j];
+                                    object.issues[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.Registration.Issue[message.issues[j]] === undefined ? message.issues[j] : $root.google.cloud.domains.v1beta1.Registration.Issue[message.issues[j]] : message.issues[j];
                             }
                             var keys2;
                             if (message.labels && (keys2 = Object.keys(message.labels)).length) {
@@ -21137,7 +21331,7 @@
                             if (message.supportedPrivacy && message.supportedPrivacy.length) {
                                 object.supportedPrivacy = [];
                                 for (var j = 0; j < message.supportedPrivacy.length; ++j)
-                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactPrivacy[message.supportedPrivacy[j]] === undefined ? message.supportedPrivacy[j] : $root.google.cloud.domains.v1beta1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
                             }
                             return object;
                         };
@@ -21393,6 +21587,12 @@
                                 return object;
                             var message = new $root.google.cloud.domains.v1beta1.ManagementSettings();
                             switch (object.renewalMethod) {
+                            default:
+                                if (typeof object.renewalMethod === "number") {
+                                    message.renewalMethod = object.renewalMethod;
+                                    break;
+                                }
+                                break;
                             case "RENEWAL_METHOD_UNSPECIFIED":
                             case 0:
                                 message.renewalMethod = 0;
@@ -21407,6 +21607,12 @@
                                 break;
                             }
                             switch (object.transferLockState) {
+                            default:
+                                if (typeof object.transferLockState === "number") {
+                                    message.transferLockState = object.transferLockState;
+                                    break;
+                                }
+                                break;
                             case "TRANSFER_LOCK_STATE_UNSPECIFIED":
                             case 0:
                                 message.transferLockState = 0;
@@ -21441,9 +21647,9 @@
                                 object.transferLockState = options.enums === String ? "TRANSFER_LOCK_STATE_UNSPECIFIED" : 0;
                             }
                             if (message.renewalMethod != null && message.hasOwnProperty("renewalMethod"))
-                                object.renewalMethod = options.enums === String ? $root.google.cloud.domains.v1beta1.ManagementSettings.RenewalMethod[message.renewalMethod] : message.renewalMethod;
+                                object.renewalMethod = options.enums === String ? $root.google.cloud.domains.v1beta1.ManagementSettings.RenewalMethod[message.renewalMethod] === undefined ? message.renewalMethod : $root.google.cloud.domains.v1beta1.ManagementSettings.RenewalMethod[message.renewalMethod] : message.renewalMethod;
                             if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
-                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1beta1.TransferLockState[message.transferLockState] : message.transferLockState;
+                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1beta1.TransferLockState[message.transferLockState] === undefined ? message.transferLockState : $root.google.cloud.domains.v1beta1.TransferLockState[message.transferLockState] : message.transferLockState;
                             return object;
                         };
     
@@ -22277,6 +22483,12 @@
                                         message.nameServers[i] = String(object.nameServers[i]);
                                 }
                                 switch (object.dsState) {
+                                default:
+                                    if (typeof object.dsState === "number") {
+                                        message.dsState = object.dsState;
+                                        break;
+                                    }
+                                    break;
                                 case "DS_STATE_UNSPECIFIED":
                                 case 0:
                                     message.dsState = 0;
@@ -22328,7 +22540,7 @@
                                         object.nameServers[j] = message.nameServers[j];
                                 }
                                 if (message.dsState != null && message.hasOwnProperty("dsState"))
-                                    object.dsState = options.enums === String ? $root.google.cloud.domains.v1beta1.DnsSettings.DsState[message.dsState] : message.dsState;
+                                    object.dsState = options.enums === String ? $root.google.cloud.domains.v1beta1.DnsSettings.DsState[message.dsState] === undefined ? message.dsState : $root.google.cloud.domains.v1beta1.DnsSettings.DsState[message.dsState] : message.dsState;
                                 if (message.dsRecords && message.dsRecords.length) {
                                     object.dsRecords = [];
                                     for (var j = 0; j < message.dsRecords.length; ++j)
@@ -22601,6 +22813,12 @@
                                 if (object.keyTag != null)
                                     message.keyTag = object.keyTag | 0;
                                 switch (object.algorithm) {
+                                default:
+                                    if (typeof object.algorithm === "number") {
+                                        message.algorithm = object.algorithm;
+                                        break;
+                                    }
+                                    break;
                                 case "ALGORITHM_UNSPECIFIED":
                                 case 0:
                                     message.algorithm = 0;
@@ -22675,6 +22893,12 @@
                                     break;
                                 }
                                 switch (object.digestType) {
+                                default:
+                                    if (typeof object.digestType === "number") {
+                                        message.digestType = object.digestType;
+                                        break;
+                                    }
+                                    break;
                                 case "DIGEST_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.digestType = 0;
@@ -22723,9 +22947,9 @@
                                 if (message.keyTag != null && message.hasOwnProperty("keyTag"))
                                     object.keyTag = message.keyTag;
                                 if (message.algorithm != null && message.hasOwnProperty("algorithm"))
-                                    object.algorithm = options.enums === String ? $root.google.cloud.domains.v1beta1.DnsSettings.DsRecord.Algorithm[message.algorithm] : message.algorithm;
+                                    object.algorithm = options.enums === String ? $root.google.cloud.domains.v1beta1.DnsSettings.DsRecord.Algorithm[message.algorithm] === undefined ? message.algorithm : $root.google.cloud.domains.v1beta1.DnsSettings.DsRecord.Algorithm[message.algorithm] : message.algorithm;
                                 if (message.digestType != null && message.hasOwnProperty("digestType"))
-                                    object.digestType = options.enums === String ? $root.google.cloud.domains.v1beta1.DnsSettings.DsRecord.DigestType[message.digestType] : message.digestType;
+                                    object.digestType = options.enums === String ? $root.google.cloud.domains.v1beta1.DnsSettings.DsRecord.DigestType[message.digestType] === undefined ? message.digestType : $root.google.cloud.domains.v1beta1.DnsSettings.DsRecord.DigestType[message.digestType] : message.digestType;
                                 if (message.digest != null && message.hasOwnProperty("digest"))
                                     object.digest = message.digest;
                                 return object;
@@ -23345,6 +23569,12 @@
                                 return object;
                             var message = new $root.google.cloud.domains.v1beta1.ContactSettings();
                             switch (object.privacy) {
+                            default:
+                                if (typeof object.privacy === "number") {
+                                    message.privacy = object.privacy;
+                                    break;
+                                }
+                                break;
                             case "CONTACT_PRIVACY_UNSPECIFIED":
                             case 0:
                                 message.privacy = 0;
@@ -23400,7 +23630,7 @@
                                 object.technicalContact = null;
                             }
                             if (message.privacy != null && message.hasOwnProperty("privacy"))
-                                object.privacy = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactPrivacy[message.privacy] : message.privacy;
+                                object.privacy = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactPrivacy[message.privacy] === undefined ? message.privacy : $root.google.cloud.domains.v1beta1.ContactPrivacy[message.privacy] : message.privacy;
                             if (message.registrantContact != null && message.hasOwnProperty("registrantContact"))
                                 object.registrantContact = $root.google.cloud.domains.v1beta1.ContactSettings.Contact.toObject(message.registrantContact, options);
                             if (message.adminContact != null && message.hasOwnProperty("adminContact"))
@@ -24902,6 +25132,10 @@
                                 for (var i = 0; i < object.domainNotices.length; ++i)
                                     switch (object.domainNotices[i]) {
                                     default:
+                                        if (typeof object.domainNotices[i] === "number") {
+                                            message.domainNotices[i] = object.domainNotices[i];
+                                            break;
+                                        }
                                     case "DOMAIN_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.domainNotices[i] = 0;
@@ -24919,6 +25153,10 @@
                                 for (var i = 0; i < object.contactNotices.length; ++i)
                                     switch (object.contactNotices[i]) {
                                     default:
+                                        if (typeof object.contactNotices[i] === "number") {
+                                            message.contactNotices[i] = object.contactNotices[i];
+                                            break;
+                                        }
                                     case "CONTACT_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.contactNotices[i] = 0;
@@ -24969,12 +25207,12 @@
                             if (message.domainNotices && message.domainNotices.length) {
                                 object.domainNotices = [];
                                 for (var j = 0; j < message.domainNotices.length; ++j)
-                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
+                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.DomainNotice[message.domainNotices[j]] === undefined ? message.domainNotices[j] : $root.google.cloud.domains.v1beta1.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
                             }
                             if (message.contactNotices && message.contactNotices.length) {
                                 object.contactNotices = [];
                                 for (var j = 0; j < message.contactNotices.length; ++j)
-                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactNotice[message.contactNotices[j]] === undefined ? message.contactNotices[j] : $root.google.cloud.domains.v1beta1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
                             }
                             if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
                                 object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
@@ -25727,6 +25965,10 @@
                                 for (var i = 0; i < object.contactNotices.length; ++i)
                                     switch (object.contactNotices[i]) {
                                     default:
+                                        if (typeof object.contactNotices[i] === "number") {
+                                            message.contactNotices[i] = object.contactNotices[i];
+                                            break;
+                                        }
                                     case "CONTACT_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.contactNotices[i] = 0;
@@ -25781,7 +26023,7 @@
                             if (message.contactNotices && message.contactNotices.length) {
                                 object.contactNotices = [];
                                 for (var j = 0; j < message.contactNotices.length; ++j)
-                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactNotice[message.contactNotices[j]] === undefined ? message.contactNotices[j] : $root.google.cloud.domains.v1beta1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
                             }
                             if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
                                 object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
@@ -27590,6 +27832,10 @@
                                 for (var i = 0; i < object.contactNotices.length; ++i)
                                     switch (object.contactNotices[i]) {
                                     default:
+                                        if (typeof object.contactNotices[i] === "number") {
+                                            message.contactNotices[i] = object.contactNotices[i];
+                                            break;
+                                        }
                                     case "CONTACT_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.contactNotices[i] = 0;
@@ -27635,7 +27881,7 @@
                             if (message.contactNotices && message.contactNotices.length) {
                                 object.contactNotices = [];
                                 for (var j = 0; j < message.contactNotices.length; ++j)
-                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactNotice[message.contactNotices[j]] === undefined ? message.contactNotices[j] : $root.google.cloud.domains.v1beta1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
                             }
                             if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
                                 object.validateOnly = message.validateOnly;
@@ -28761,6 +29007,12 @@
                             if (object.domainName != null)
                                 message.domainName = String(object.domainName);
                             switch (object.availability) {
+                            default:
+                                if (typeof object.availability === "number") {
+                                    message.availability = object.availability;
+                                    break;
+                                }
+                                break;
                             case "AVAILABILITY_UNSPECIFIED":
                             case 0:
                                 message.availability = 0;
@@ -28789,6 +29041,10 @@
                                 for (var i = 0; i < object.supportedPrivacy.length; ++i)
                                     switch (object.supportedPrivacy[i]) {
                                     default:
+                                        if (typeof object.supportedPrivacy[i] === "number") {
+                                            message.supportedPrivacy[i] = object.supportedPrivacy[i];
+                                            break;
+                                        }
                                     case "CONTACT_PRIVACY_UNSPECIFIED":
                                     case 0:
                                         message.supportedPrivacy[i] = 0;
@@ -28814,6 +29070,10 @@
                                 for (var i = 0; i < object.domainNotices.length; ++i)
                                     switch (object.domainNotices[i]) {
                                     default:
+                                        if (typeof object.domainNotices[i] === "number") {
+                                            message.domainNotices[i] = object.domainNotices[i];
+                                            break;
+                                        }
                                     case "DOMAIN_NOTICE_UNSPECIFIED":
                                     case 0:
                                         message.domainNotices[i] = 0;
@@ -28857,16 +29117,16 @@
                             if (message.domainName != null && message.hasOwnProperty("domainName"))
                                 object.domainName = message.domainName;
                             if (message.availability != null && message.hasOwnProperty("availability"))
-                                object.availability = options.enums === String ? $root.google.cloud.domains.v1beta1.RegisterParameters.Availability[message.availability] : message.availability;
+                                object.availability = options.enums === String ? $root.google.cloud.domains.v1beta1.RegisterParameters.Availability[message.availability] === undefined ? message.availability : $root.google.cloud.domains.v1beta1.RegisterParameters.Availability[message.availability] : message.availability;
                             if (message.supportedPrivacy && message.supportedPrivacy.length) {
                                 object.supportedPrivacy = [];
                                 for (var j = 0; j < message.supportedPrivacy.length; ++j)
-                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactPrivacy[message.supportedPrivacy[j]] === undefined ? message.supportedPrivacy[j] : $root.google.cloud.domains.v1beta1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
                             }
                             if (message.domainNotices && message.domainNotices.length) {
                                 object.domainNotices = [];
                                 for (var j = 0; j < message.domainNotices.length; ++j)
-                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
+                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.DomainNotice[message.domainNotices[j]] === undefined ? message.domainNotices[j] : $root.google.cloud.domains.v1beta1.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
                             }
                             if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
                                 object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
@@ -29212,6 +29472,12 @@
                                     message.nameServers[i] = String(object.nameServers[i]);
                             }
                             switch (object.transferLockState) {
+                            default:
+                                if (typeof object.transferLockState === "number") {
+                                    message.transferLockState = object.transferLockState;
+                                    break;
+                                }
+                                break;
                             case "TRANSFER_LOCK_STATE_UNSPECIFIED":
                             case 0:
                                 message.transferLockState = 0;
@@ -29232,6 +29498,10 @@
                                 for (var i = 0; i < object.supportedPrivacy.length; ++i)
                                     switch (object.supportedPrivacy[i]) {
                                     default:
+                                        if (typeof object.supportedPrivacy[i] === "number") {
+                                            message.supportedPrivacy[i] = object.supportedPrivacy[i];
+                                            break;
+                                        }
                                     case "CONTACT_PRIVACY_UNSPECIFIED":
                                     case 0:
                                         message.supportedPrivacy[i] = 0;
@@ -29291,11 +29561,11 @@
                                     object.nameServers[j] = message.nameServers[j];
                             }
                             if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
-                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1beta1.TransferLockState[message.transferLockState] : message.transferLockState;
+                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1beta1.TransferLockState[message.transferLockState] === undefined ? message.transferLockState : $root.google.cloud.domains.v1beta1.TransferLockState[message.transferLockState] : message.transferLockState;
                             if (message.supportedPrivacy && message.supportedPrivacy.length) {
                                 object.supportedPrivacy = [];
                                 for (var j = 0; j < message.supportedPrivacy.length; ++j)
-                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactPrivacy[message.supportedPrivacy[j]] === undefined ? message.supportedPrivacy[j] : $root.google.cloud.domains.v1beta1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
                             }
                             if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
                                 object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
@@ -31236,6 +31506,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -31260,6 +31536,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -31307,7 +31587,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -31315,7 +31595,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -34126,6 +34406,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -34140,6 +34426,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -34266,9 +34558,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -36615,6 +36907,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -36723,7 +37021,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -37525,6 +37823,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -37541,6 +37845,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -37579,6 +37889,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -37649,7 +37963,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -37657,7 +37971,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -37670,7 +37984,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -39047,6 +39361,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -39116,7 +39436,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -40871,6 +41191,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -40920,7 +41246,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
