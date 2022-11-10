@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 135,
+                    "end": 140,
                     "type": "FULL"
                 }
             ],
@@ -318,6 +318,10 @@
                     {
                         "name": "logging_config",
                         "type": ".google.container.v1.NodePoolLoggingConfig"
+                    },
+                    {
+                        "name": "resource_labels",
+                        "type": ".google.container.v1.ResourceLabels"
                     }
                 ],
                 "resultType": ".google.container.v1.Operation",

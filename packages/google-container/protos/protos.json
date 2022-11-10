@@ -868,6 +868,19 @@
                       "keyType": "string",
                       "type": "string",
                       "id": 1
+                    },
+                    "cgroupMode": {
+                      "type": "CgroupMode",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "CgroupMode": {
+                      "values": {
+                        "CGROUP_MODE_UNSPECIFIED": 0,
+                        "CGROUP_MODE_V1": 1,
+                        "CGROUP_MODE_V2": 2
+                      }
                     }
                   }
                 },
@@ -1007,6 +1020,11 @@
                       "type": "ConfidentialNodes",
                       "id": 35
                     },
+                    "resourceLabels": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 37
+                    },
                     "loggingConfig": {
                       "type": "NodePoolLoggingConfig",
                       "id": 38
@@ -1033,6 +1051,11 @@
                 },
                 "NodeNetworkConfig": {
                   "oneofs": {
+                    "_enablePrivateNodes": {
+                      "oneof": [
+                        "enablePrivateNodes"
+                      ]
+                    },
                     "_networkPerformanceConfig": {
                       "oneof": [
                         "networkPerformanceConfig"
@@ -1054,6 +1077,13 @@
                     "podIpv4CidrBlock": {
                       "type": "string",
                       "id": 6
+                    },
+                    "enablePrivateNodes": {
+                      "type": "bool",
+                      "id": 9,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     },
                     "networkPerformanceConfig": {
                       "type": "NetworkPerformanceConfig",
@@ -1191,6 +1221,15 @@
                   }
                 },
                 "NodeLabels": {
+                  "fields": {
+                    "labels": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "ResourceLabels": {
                   "fields": {
                     "labels": {
                       "keyType": "string",
@@ -1374,6 +1413,10 @@
                     "masterGlobalAccessConfig": {
                       "type": "PrivateClusterMasterGlobalAccessConfig",
                       "id": 8
+                    },
+                    "privateEndpointSubnetwork": {
+                      "type": "string",
+                      "id": 10
                     }
                   }
                 },
@@ -1443,6 +1486,13 @@
                   }
                 },
                 "MasterAuthorizedNetworksConfig": {
+                  "oneofs": {
+                    "_gcpPublicCidrsAccessEnabled": {
+                      "oneof": [
+                        "gcpPublicCidrsAccessEnabled"
+                      ]
+                    }
+                  },
                   "fields": {
                     "enabled": {
                       "type": "bool",
@@ -1452,6 +1502,13 @@
                       "rule": "repeated",
                       "type": "CidrBlock",
                       "id": 2
+                    },
+                    "gcpPublicCidrsAccessEnabled": {
+                      "type": "bool",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {
@@ -1927,6 +1984,13 @@
                   }
                 },
                 "ClusterUpdate": {
+                  "oneofs": {
+                    "_desiredEnablePrivateEndpoint": {
+                      "oneof": [
+                        "desiredEnablePrivateEndpoint"
+                      ]
+                    }
+                  },
                   "fields": {
                     "desiredNodeVersion": {
                       "type": "string",
@@ -2057,6 +2121,13 @@
                       "type": "ServiceExternalIPsConfig",
                       "id": 60
                     },
+                    "desiredEnablePrivateEndpoint": {
+                      "type": "bool",
+                      "id": 71,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
                     "desiredMasterVersion": {
                       "type": "string",
                       "id": 100
@@ -2068,6 +2139,10 @@
                     "desiredNodePoolAutoConfigNetworkTags": {
                       "type": "NetworkTags",
                       "id": 110
+                    },
+                    "desiredGatewayApiConfig": {
+                      "type": "GatewayAPIConfig",
+                      "id": 114
                     },
                     "desiredNodePoolLoggingConfig": {
                       "type": "NodePoolLoggingConfig",
@@ -2439,6 +2514,10 @@
                     "loggingConfig": {
                       "type": "NodePoolLoggingConfig",
                       "id": 32
+                    },
+                    "resourceLabels": {
+                      "type": "ResourceLabels",
+                      "id": 33
                     }
                   }
                 },
@@ -4103,6 +4182,28 @@
                     "serviceExternalIpsConfig": {
                       "type": "ServiceExternalIPsConfig",
                       "id": 15
+                    },
+                    "gatewayApiConfig": {
+                      "type": "GatewayAPIConfig",
+                      "id": 16
+                    }
+                  }
+                },
+                "GatewayAPIConfig": {
+                  "fields": {
+                    "channel": {
+                      "type": "Channel",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "Channel": {
+                      "values": {
+                        "CHANNEL_UNSPECIFIED": 0,
+                        "CHANNEL_DISABLED": 1,
+                        "CHANNEL_EXPERIMENTAL": 3,
+                        "CHANNEL_STANDARD": 4
+                      }
                     }
                   }
                 },
@@ -4686,7 +4787,10 @@
                       "values": {
                         "COMPONENT_UNSPECIFIED": 0,
                         "SYSTEM_COMPONENTS": 1,
-                        "WORKLOADS": 2
+                        "WORKLOADS": 2,
+                        "APISERVER": 3,
+                        "SCHEDULER": 4,
+                        "CONTROLLER_MANAGER": 5
                       }
                     }
                   }

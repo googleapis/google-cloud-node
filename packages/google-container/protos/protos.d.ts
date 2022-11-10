@@ -745,6 +745,9 @@ export namespace google {
 
                 /** LinuxNodeConfig sysctls */
                 sysctls?: ({ [k: string]: string }|null);
+
+                /** LinuxNodeConfig cgroupMode */
+                cgroupMode?: (google.container.v1.LinuxNodeConfig.CgroupMode|keyof typeof google.container.v1.LinuxNodeConfig.CgroupMode|null);
             }
 
             /** Represents a LinuxNodeConfig. */
@@ -758,6 +761,9 @@ export namespace google {
 
                 /** LinuxNodeConfig sysctls. */
                 public sysctls: { [k: string]: string };
+
+                /** LinuxNodeConfig cgroupMode. */
+                public cgroupMode: (google.container.v1.LinuxNodeConfig.CgroupMode|keyof typeof google.container.v1.LinuxNodeConfig.CgroupMode);
 
                 /**
                  * Creates a new LinuxNodeConfig instance using the specified properties.
@@ -835,6 +841,16 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace LinuxNodeConfig {
+
+                /** CgroupMode enum. */
+                enum CgroupMode {
+                    CGROUP_MODE_UNSPECIFIED = 0,
+                    CGROUP_MODE_V1 = 1,
+                    CGROUP_MODE_V2 = 2
+                }
             }
 
             /** Properties of a NodeKubeletConfig. */
@@ -1036,6 +1052,9 @@ export namespace google {
                 /** NodeConfig confidentialNodes */
                 confidentialNodes?: (google.container.v1.IConfidentialNodes|null);
 
+                /** NodeConfig resourceLabels */
+                resourceLabels?: ({ [k: string]: string }|null);
+
                 /** NodeConfig loggingConfig */
                 loggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
             }
@@ -1129,6 +1148,9 @@ export namespace google {
 
                 /** NodeConfig confidentialNodes. */
                 public confidentialNodes?: (google.container.v1.IConfidentialNodes|null);
+
+                /** NodeConfig resourceLabels. */
+                public resourceLabels: { [k: string]: string };
 
                 /** NodeConfig loggingConfig. */
                 public loggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
@@ -1323,6 +1345,9 @@ export namespace google {
                 /** NodeNetworkConfig podIpv4CidrBlock */
                 podIpv4CidrBlock?: (string|null);
 
+                /** NodeNetworkConfig enablePrivateNodes */
+                enablePrivateNodes?: (boolean|null);
+
                 /** NodeNetworkConfig networkPerformanceConfig */
                 networkPerformanceConfig?: (google.container.v1.NodeNetworkConfig.INetworkPerformanceConfig|null);
             }
@@ -1345,8 +1370,14 @@ export namespace google {
                 /** NodeNetworkConfig podIpv4CidrBlock. */
                 public podIpv4CidrBlock: string;
 
+                /** NodeNetworkConfig enablePrivateNodes. */
+                public enablePrivateNodes?: (boolean|null);
+
                 /** NodeNetworkConfig networkPerformanceConfig. */
                 public networkPerformanceConfig?: (google.container.v1.NodeNetworkConfig.INetworkPerformanceConfig|null);
+
+                /** NodeNetworkConfig _enablePrivateNodes. */
+                public _enablePrivateNodes?: "enablePrivateNodes";
 
                 /** NodeNetworkConfig _networkPerformanceConfig. */
                 public _networkPerformanceConfig?: "networkPerformanceConfig";
@@ -2275,6 +2306,103 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NodeLabels
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ResourceLabels. */
+            interface IResourceLabels {
+
+                /** ResourceLabels labels */
+                labels?: ({ [k: string]: string }|null);
+            }
+
+            /** Represents a ResourceLabels. */
+            class ResourceLabels implements IResourceLabels {
+
+                /**
+                 * Constructs a new ResourceLabels.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IResourceLabels);
+
+                /** ResourceLabels labels. */
+                public labels: { [k: string]: string };
+
+                /**
+                 * Creates a new ResourceLabels instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ResourceLabels instance
+                 */
+                public static create(properties?: google.container.v1.IResourceLabels): google.container.v1.ResourceLabels;
+
+                /**
+                 * Encodes the specified ResourceLabels message. Does not implicitly {@link google.container.v1.ResourceLabels.verify|verify} messages.
+                 * @param message ResourceLabels message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IResourceLabels, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ResourceLabels message, length delimited. Does not implicitly {@link google.container.v1.ResourceLabels.verify|verify} messages.
+                 * @param message ResourceLabels message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IResourceLabels, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ResourceLabels message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ResourceLabels
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.ResourceLabels;
+
+                /**
+                 * Decodes a ResourceLabels message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ResourceLabels
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.ResourceLabels;
+
+                /**
+                 * Verifies a ResourceLabels message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ResourceLabels message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ResourceLabels
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.ResourceLabels;
+
+                /**
+                 * Creates a plain object from a ResourceLabels message. Also converts values to other types if specified.
+                 * @param message ResourceLabels
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.ResourceLabels, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ResourceLabels to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ResourceLabels
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -3358,6 +3486,9 @@ export namespace google {
 
                 /** PrivateClusterConfig masterGlobalAccessConfig */
                 masterGlobalAccessConfig?: (google.container.v1.IPrivateClusterMasterGlobalAccessConfig|null);
+
+                /** PrivateClusterConfig privateEndpointSubnetwork */
+                privateEndpointSubnetwork?: (string|null);
             }
 
             /** Represents a PrivateClusterConfig. */
@@ -3389,6 +3520,9 @@ export namespace google {
 
                 /** PrivateClusterConfig masterGlobalAccessConfig. */
                 public masterGlobalAccessConfig?: (google.container.v1.IPrivateClusterMasterGlobalAccessConfig|null);
+
+                /** PrivateClusterConfig privateEndpointSubnetwork. */
+                public privateEndpointSubnetwork: string;
 
                 /**
                  * Creates a new PrivateClusterConfig instance using the specified properties.
@@ -4080,6 +4214,9 @@ export namespace google {
 
                 /** MasterAuthorizedNetworksConfig cidrBlocks */
                 cidrBlocks?: (google.container.v1.MasterAuthorizedNetworksConfig.ICidrBlock[]|null);
+
+                /** MasterAuthorizedNetworksConfig gcpPublicCidrsAccessEnabled */
+                gcpPublicCidrsAccessEnabled?: (boolean|null);
             }
 
             /** Represents a MasterAuthorizedNetworksConfig. */
@@ -4096,6 +4233,12 @@ export namespace google {
 
                 /** MasterAuthorizedNetworksConfig cidrBlocks. */
                 public cidrBlocks: google.container.v1.MasterAuthorizedNetworksConfig.ICidrBlock[];
+
+                /** MasterAuthorizedNetworksConfig gcpPublicCidrsAccessEnabled. */
+                public gcpPublicCidrsAccessEnabled?: (boolean|null);
+
+                /** MasterAuthorizedNetworksConfig _gcpPublicCidrsAccessEnabled. */
+                public _gcpPublicCidrsAccessEnabled?: "gcpPublicCidrsAccessEnabled";
 
                 /**
                  * Creates a new MasterAuthorizedNetworksConfig instance using the specified properties.
@@ -5660,6 +5803,9 @@ export namespace google {
                 /** ClusterUpdate desiredServiceExternalIpsConfig */
                 desiredServiceExternalIpsConfig?: (google.container.v1.IServiceExternalIPsConfig|null);
 
+                /** ClusterUpdate desiredEnablePrivateEndpoint */
+                desiredEnablePrivateEndpoint?: (boolean|null);
+
                 /** ClusterUpdate desiredMasterVersion */
                 desiredMasterVersion?: (string|null);
 
@@ -5668,6 +5814,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNodePoolAutoConfigNetworkTags */
                 desiredNodePoolAutoConfigNetworkTags?: (google.container.v1.INetworkTags|null);
+
+                /** ClusterUpdate desiredGatewayApiConfig */
+                desiredGatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
 
                 /** ClusterUpdate desiredNodePoolLoggingConfig */
                 desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
@@ -5778,6 +5927,9 @@ export namespace google {
                 /** ClusterUpdate desiredServiceExternalIpsConfig. */
                 public desiredServiceExternalIpsConfig?: (google.container.v1.IServiceExternalIPsConfig|null);
 
+                /** ClusterUpdate desiredEnablePrivateEndpoint. */
+                public desiredEnablePrivateEndpoint?: (boolean|null);
+
                 /** ClusterUpdate desiredMasterVersion. */
                 public desiredMasterVersion: string;
 
@@ -5787,8 +5939,14 @@ export namespace google {
                 /** ClusterUpdate desiredNodePoolAutoConfigNetworkTags. */
                 public desiredNodePoolAutoConfigNetworkTags?: (google.container.v1.INetworkTags|null);
 
+                /** ClusterUpdate desiredGatewayApiConfig. */
+                public desiredGatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
+
                 /** ClusterUpdate desiredNodePoolLoggingConfig. */
                 public desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
+
+                /** ClusterUpdate _desiredEnablePrivateEndpoint. */
+                public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
@@ -6731,6 +6889,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest loggingConfig */
                 loggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
+
+                /** UpdateNodePoolRequest resourceLabels */
+                resourceLabels?: (google.container.v1.IResourceLabels|null);
             }
 
             /** Represents an UpdateNodePoolRequest. */
@@ -6801,6 +6962,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest loggingConfig. */
                 public loggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
+
+                /** UpdateNodePoolRequest resourceLabels. */
+                public resourceLabels?: (google.container.v1.IResourceLabels|null);
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.
@@ -13315,6 +13479,9 @@ export namespace google {
 
                 /** NetworkConfig serviceExternalIpsConfig */
                 serviceExternalIpsConfig?: (google.container.v1.IServiceExternalIPsConfig|null);
+
+                /** NetworkConfig gatewayApiConfig */
+                gatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
             }
 
             /** Represents a NetworkConfig. */
@@ -13352,6 +13519,9 @@ export namespace google {
 
                 /** NetworkConfig serviceExternalIpsConfig. */
                 public serviceExternalIpsConfig?: (google.container.v1.IServiceExternalIPsConfig|null);
+
+                /** NetworkConfig gatewayApiConfig. */
+                public gatewayApiConfig?: (google.container.v1.IGatewayAPIConfig|null);
 
                 /**
                  * Creates a new NetworkConfig instance using the specified properties.
@@ -13429,6 +13599,114 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GatewayAPIConfig. */
+            interface IGatewayAPIConfig {
+
+                /** GatewayAPIConfig channel */
+                channel?: (google.container.v1.GatewayAPIConfig.Channel|keyof typeof google.container.v1.GatewayAPIConfig.Channel|null);
+            }
+
+            /** Represents a GatewayAPIConfig. */
+            class GatewayAPIConfig implements IGatewayAPIConfig {
+
+                /**
+                 * Constructs a new GatewayAPIConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IGatewayAPIConfig);
+
+                /** GatewayAPIConfig channel. */
+                public channel: (google.container.v1.GatewayAPIConfig.Channel|keyof typeof google.container.v1.GatewayAPIConfig.Channel);
+
+                /**
+                 * Creates a new GatewayAPIConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GatewayAPIConfig instance
+                 */
+                public static create(properties?: google.container.v1.IGatewayAPIConfig): google.container.v1.GatewayAPIConfig;
+
+                /**
+                 * Encodes the specified GatewayAPIConfig message. Does not implicitly {@link google.container.v1.GatewayAPIConfig.verify|verify} messages.
+                 * @param message GatewayAPIConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IGatewayAPIConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GatewayAPIConfig message, length delimited. Does not implicitly {@link google.container.v1.GatewayAPIConfig.verify|verify} messages.
+                 * @param message GatewayAPIConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IGatewayAPIConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GatewayAPIConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GatewayAPIConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.GatewayAPIConfig;
+
+                /**
+                 * Decodes a GatewayAPIConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GatewayAPIConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.GatewayAPIConfig;
+
+                /**
+                 * Verifies a GatewayAPIConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GatewayAPIConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GatewayAPIConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.GatewayAPIConfig;
+
+                /**
+                 * Creates a plain object from a GatewayAPIConfig message. Also converts values to other types if specified.
+                 * @param message GatewayAPIConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.GatewayAPIConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GatewayAPIConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GatewayAPIConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace GatewayAPIConfig {
+
+                /** Channel enum. */
+                enum Channel {
+                    CHANNEL_UNSPECIFIED = 0,
+                    CHANNEL_DISABLED = 1,
+                    CHANNEL_EXPERIMENTAL = 3,
+                    CHANNEL_STANDARD = 4
+                }
             }
 
             /** Properties of a ServiceExternalIPsConfig. */
@@ -17392,7 +17670,10 @@ export namespace google {
                 enum Component {
                     COMPONENT_UNSPECIFIED = 0,
                     SYSTEM_COMPONENTS = 1,
-                    WORKLOADS = 2
+                    WORKLOADS = 2,
+                    APISERVER = 3,
+                    SCHEDULER = 4,
+                    CONTROLLER_MANAGER = 5
                 }
             }
 

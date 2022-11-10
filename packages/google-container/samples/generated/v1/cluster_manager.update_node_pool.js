@@ -113,6 +113,11 @@ function main(nodeVersion, imageType) {
    *  Logging configuration.
    */
   // const loggingConfig = {}
+  /**
+   *  The resource labels for the node pool to use to annotate any related
+   *  Google Compute Engine resources.
+   */
+  // const resourceLabels = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;

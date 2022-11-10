@@ -830,6 +830,9 @@ export class ClusterManagerClient {
    *   Enable or disable gvnic on the node pool.
    * @param {google.container.v1.NodePoolLoggingConfig} request.loggingConfig
    *   Logging configuration.
+   * @param {google.container.v1.ResourceLabels} request.resourceLabels
+   *   The resource labels for the node pool to use to annotate any related
+   *   Google Compute Engine resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
