@@ -2,7 +2,7 @@
   "distribution_name": "@google-cloud/translate",
   "release_level": "stable",
   "product_documentation": "https://cloud.google.com/translate/docs/",
-  "repo": "googleapis/nodejs-translate",
+  "repo": "googleapis/google-cloud-node",
   "default_version": "v3",
   "language": "nodejs",
   "requires_billing": true,
