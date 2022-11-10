@@ -531,6 +531,12 @@
                                     return object;
                                 var message = new $root.google.cloud.dataqna.v1alpha.AnnotatedString.SemanticMarkup();
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "MARKUP_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -586,7 +592,7 @@
                                     object.length = 0;
                                 }
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.dataqna.v1alpha.AnnotatedString.SemanticMarkupType[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.dataqna.v1alpha.AnnotatedString.SemanticMarkupType[message.type] === undefined ? message.type : $root.google.cloud.dataqna.v1alpha.AnnotatedString.SemanticMarkupType[message.type] : message.type;
                                 if (message.startCharIndex != null && message.hasOwnProperty("startCharIndex"))
                                     object.startCharIndex = message.startCharIndex;
                                 if (message.length != null && message.hasOwnProperty("length"))
@@ -969,6 +975,10 @@
                                 for (var i = 0; i < object.suggestionTypes.length; ++i)
                                     switch (object.suggestionTypes[i]) {
                                     default:
+                                        if (typeof object.suggestionTypes[i] === "number") {
+                                            message.suggestionTypes[i] = object.suggestionTypes[i];
+                                            break;
+                                        }
                                     case "SUGGESTION_TYPE_UNSPECIFIED":
                                     case 0:
                                         message.suggestionTypes[i] = 0;
@@ -1019,7 +1029,7 @@
                             if (message.suggestionTypes && message.suggestionTypes.length) {
                                 object.suggestionTypes = [];
                                 for (var j = 0; j < message.suggestionTypes.length; ++j)
-                                    object.suggestionTypes[j] = options.enums === String ? $root.google.cloud.dataqna.v1alpha.SuggestionType[message.suggestionTypes[j]] : message.suggestionTypes[j];
+                                    object.suggestionTypes[j] = options.enums === String ? $root.google.cloud.dataqna.v1alpha.SuggestionType[message.suggestionTypes[j]] === undefined ? message.suggestionTypes[j] : $root.google.cloud.dataqna.v1alpha.SuggestionType[message.suggestionTypes[j]] : message.suggestionTypes[j];
                             }
                             return object;
                         };
@@ -1254,6 +1264,12 @@
                             if (object.rankingScore != null)
                                 message.rankingScore = Number(object.rankingScore);
                             switch (object.suggestionType) {
+                            default:
+                                if (typeof object.suggestionType === "number") {
+                                    message.suggestionType = object.suggestionType;
+                                    break;
+                                }
+                                break;
                             case "SUGGESTION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.suggestionType = 0;
@@ -1293,7 +1309,7 @@
                             if (message.rankingScore != null && message.hasOwnProperty("rankingScore"))
                                 object.rankingScore = options.json && !isFinite(message.rankingScore) ? String(message.rankingScore) : message.rankingScore;
                             if (message.suggestionType != null && message.hasOwnProperty("suggestionType"))
-                                object.suggestionType = options.enums === String ? $root.google.cloud.dataqna.v1alpha.SuggestionType[message.suggestionType] : message.suggestionType;
+                                object.suggestionType = options.enums === String ? $root.google.cloud.dataqna.v1alpha.SuggestionType[message.suggestionType] === undefined ? message.suggestionType : $root.google.cloud.dataqna.v1alpha.SuggestionType[message.suggestionType] : message.suggestionType;
                             return object;
                         };
     
@@ -2729,6 +2745,12 @@
                             if (object.message != null)
                                 message.message = String(object.message);
                             switch (object.code) {
+                            default:
+                                if (typeof object.code === "number") {
+                                    message.code = object.code;
+                                    break;
+                                }
+                                break;
                             case "INTERPRET_ERROR_CODE_UNSPECIFIED":
                             case 0:
                                 message.code = 0;
@@ -2775,7 +2797,7 @@
                             if (message.message != null && message.hasOwnProperty("message"))
                                 object.message = message.message;
                             if (message.code != null && message.hasOwnProperty("code"))
-                                object.code = options.enums === String ? $root.google.cloud.dataqna.v1alpha.InterpretError.InterpretErrorCode[message.code] : message.code;
+                                object.code = options.enums === String ? $root.google.cloud.dataqna.v1alpha.InterpretError.InterpretErrorCode[message.code] === undefined ? message.code : $root.google.cloud.dataqna.v1alpha.InterpretError.InterpretErrorCode[message.code] : message.code;
                             if (message.details != null && message.hasOwnProperty("details"))
                                 object.details = $root.google.cloud.dataqna.v1alpha.InterpretError.InterpretErrorDetails.toObject(message.details, options);
                             return object;
@@ -3509,6 +3531,10 @@
                                     for (var i = 0; i < object.entities.length; ++i)
                                         switch (object.entities[i]) {
                                         default:
+                                            if (typeof object.entities[i] === "number") {
+                                                message.entities[i] = object.entities[i];
+                                                break;
+                                            }
                                         case "INTERPRET_ENTITY_UNSPECIFIED":
                                         case 0:
                                             message.entities[i] = 0;
@@ -3544,7 +3570,7 @@
                                 if (message.entities && message.entities.length) {
                                     object.entities = [];
                                     for (var j = 0; j < message.entities.length; ++j)
-                                        object.entities[j] = options.enums === String ? $root.google.cloud.dataqna.v1alpha.InterpretEntity[message.entities[j]] : message.entities[j];
+                                        object.entities[j] = options.enums === String ? $root.google.cloud.dataqna.v1alpha.InterpretEntity[message.entities[j]] === undefined ? message.entities[j] : $root.google.cloud.dataqna.v1alpha.InterpretEntity[message.entities[j]] : message.entities[j];
                                 }
                                 return object;
                             };
@@ -3997,6 +4023,12 @@
                                 message.jobCreationStatus = $root.google.rpc.Status.fromObject(object.jobCreationStatus);
                             }
                             switch (object.jobExecutionState) {
+                            default:
+                                if (typeof object.jobExecutionState === "number") {
+                                    message.jobExecutionState = object.jobExecutionState;
+                                    break;
+                                }
+                                break;
                             case "JOB_EXECUTION_STATE_UNSPECIFIED":
                             case 0:
                                 message.jobExecutionState = 0;
@@ -4053,7 +4085,7 @@
                             if (message.jobCreationStatus != null && message.hasOwnProperty("jobCreationStatus"))
                                 object.jobCreationStatus = $root.google.rpc.Status.toObject(message.jobCreationStatus, options);
                             if (message.jobExecutionState != null && message.hasOwnProperty("jobExecutionState"))
-                                object.jobExecutionState = options.enums === String ? $root.google.cloud.dataqna.v1alpha.ExecutionInfo.JobExecutionState[message.jobExecutionState] : message.jobExecutionState;
+                                object.jobExecutionState = options.enums === String ? $root.google.cloud.dataqna.v1alpha.ExecutionInfo.JobExecutionState[message.jobExecutionState] === undefined ? message.jobExecutionState : $root.google.cloud.dataqna.v1alpha.ExecutionInfo.JobExecutionState[message.jobExecutionState] : message.jobExecutionState;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.bigqueryJob != null && message.hasOwnProperty("bigqueryJob"))
@@ -5412,6 +5444,10 @@
                                 for (var i = 0; i < object.visualizationTypes.length; ++i)
                                     switch (object.visualizationTypes[i]) {
                                     default:
+                                        if (typeof object.visualizationTypes[i] === "number") {
+                                            message.visualizationTypes[i] = object.visualizationTypes[i];
+                                            break;
+                                        }
                                     case "VISUALIZATION_TYPE_UNSPECIFIED":
                                     case 0:
                                         message.visualizationTypes[i] = 0;
@@ -5499,7 +5535,7 @@
                             if (message.visualizationTypes && message.visualizationTypes.length) {
                                 object.visualizationTypes = [];
                                 for (var j = 0; j < message.visualizationTypes.length; ++j)
-                                    object.visualizationTypes[j] = options.enums === String ? $root.google.cloud.dataqna.v1alpha.InterpretationStructure.VisualizationType[message.visualizationTypes[j]] : message.visualizationTypes[j];
+                                    object.visualizationTypes[j] = options.enums === String ? $root.google.cloud.dataqna.v1alpha.InterpretationStructure.VisualizationType[message.visualizationTypes[j]] === undefined ? message.visualizationTypes[j] : $root.google.cloud.dataqna.v1alpha.InterpretationStructure.VisualizationType[message.visualizationTypes[j]] : message.visualizationTypes[j];
                             }
                             if (message.columnInfo && message.columnInfo.length) {
                                 object.columnInfo = [];
@@ -7815,6 +7851,12 @@
                             if (object.freeFormFeedback != null)
                                 message.freeFormFeedback = String(object.freeFormFeedback);
                             switch (object.rating) {
+                            default:
+                                if (typeof object.rating === "number") {
+                                    message.rating = object.rating;
+                                    break;
+                                }
+                                break;
                             case "USER_FEEDBACK_RATING_UNSPECIFIED":
                             case 0:
                                 message.rating = 0;
@@ -7854,7 +7896,7 @@
                             if (message.freeFormFeedback != null && message.hasOwnProperty("freeFormFeedback"))
                                 object.freeFormFeedback = message.freeFormFeedback;
                             if (message.rating != null && message.hasOwnProperty("rating"))
-                                object.rating = options.enums === String ? $root.google.cloud.dataqna.v1alpha.UserFeedback.UserFeedbackRating[message.rating] : message.rating;
+                                object.rating = options.enums === String ? $root.google.cloud.dataqna.v1alpha.UserFeedback.UserFeedbackRating[message.rating] === undefined ? message.rating : $root.google.cloud.dataqna.v1alpha.UserFeedback.UserFeedbackRating[message.rating] : message.rating;
                             return object;
                         };
     
@@ -9214,6 +9256,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -9238,6 +9286,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -9285,7 +9337,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -9293,7 +9345,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -12104,6 +12156,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -12118,6 +12176,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -12244,9 +12308,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -14593,6 +14657,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -14701,7 +14771,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -15503,6 +15573,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -15519,6 +15595,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -15557,6 +15639,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -15627,7 +15713,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -15635,7 +15721,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -15648,7 +15734,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -17005,6 +17091,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -17068,7 +17160,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -18821,6 +18913,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -18870,7 +18968,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
