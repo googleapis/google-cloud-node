@@ -3626,6 +3626,12 @@
                                 return object;
                             var message = new $root.google.cloud.iot.v1.GatewayListOptions();
                             switch (object.gatewayType) {
+                            default:
+                                if (typeof object.gatewayType === "number") {
+                                    message.gatewayType = object.gatewayType;
+                                    break;
+                                }
+                                break;
                             case "GATEWAY_TYPE_UNSPECIFIED":
                             case 0:
                                 message.gatewayType = 0;
@@ -3660,7 +3666,7 @@
                                 options = {};
                             var object = {};
                             if (message.gatewayType != null && message.hasOwnProperty("gatewayType")) {
-                                object.gatewayType = options.enums === String ? $root.google.cloud.iot.v1.GatewayType[message.gatewayType] : message.gatewayType;
+                                object.gatewayType = options.enums === String ? $root.google.cloud.iot.v1.GatewayType[message.gatewayType] === undefined ? message.gatewayType : $root.google.cloud.iot.v1.GatewayType[message.gatewayType] : message.gatewayType;
                                 if (options.oneofs)
                                     object.filter = "gatewayType";
                             }
@@ -6985,6 +6991,12 @@
                                 message.state = $root.google.cloud.iot.v1.DeviceState.fromObject(object.state);
                             }
                             switch (object.logLevel) {
+                            default:
+                                if (typeof object.logLevel === "number") {
+                                    message.logLevel = object.logLevel;
+                                    break;
+                                }
+                                break;
                             case "LOG_LEVEL_UNSPECIFIED":
                             case 0:
                                 message.logLevel = 0;
@@ -7100,7 +7112,7 @@
                             if (message.lastStateTime != null && message.hasOwnProperty("lastStateTime"))
                                 object.lastStateTime = $root.google.protobuf.Timestamp.toObject(message.lastStateTime, options);
                             if (message.logLevel != null && message.hasOwnProperty("logLevel"))
-                                object.logLevel = options.enums === String ? $root.google.cloud.iot.v1.LogLevel[message.logLevel] : message.logLevel;
+                                object.logLevel = options.enums === String ? $root.google.cloud.iot.v1.LogLevel[message.logLevel] === undefined ? message.logLevel : $root.google.cloud.iot.v1.LogLevel[message.logLevel] : message.logLevel;
                             if (message.gatewayConfig != null && message.hasOwnProperty("gatewayConfig"))
                                 object.gatewayConfig = $root.google.cloud.iot.v1.GatewayConfig.toObject(message.gatewayConfig, options);
                             return object;
@@ -7354,6 +7366,12 @@
                                 return object;
                             var message = new $root.google.cloud.iot.v1.GatewayConfig();
                             switch (object.gatewayType) {
+                            default:
+                                if (typeof object.gatewayType === "number") {
+                                    message.gatewayType = object.gatewayType;
+                                    break;
+                                }
+                                break;
                             case "GATEWAY_TYPE_UNSPECIFIED":
                             case 0:
                                 message.gatewayType = 0;
@@ -7368,6 +7386,12 @@
                                 break;
                             }
                             switch (object.gatewayAuthMethod) {
+                            default:
+                                if (typeof object.gatewayAuthMethod === "number") {
+                                    message.gatewayAuthMethod = object.gatewayAuthMethod;
+                                    break;
+                                }
+                                break;
                             case "GATEWAY_AUTH_METHOD_UNSPECIFIED":
                             case 0:
                                 message.gatewayAuthMethod = 0;
@@ -7415,9 +7439,9 @@
                                 object.lastAccessedGatewayTime = null;
                             }
                             if (message.gatewayType != null && message.hasOwnProperty("gatewayType"))
-                                object.gatewayType = options.enums === String ? $root.google.cloud.iot.v1.GatewayType[message.gatewayType] : message.gatewayType;
+                                object.gatewayType = options.enums === String ? $root.google.cloud.iot.v1.GatewayType[message.gatewayType] === undefined ? message.gatewayType : $root.google.cloud.iot.v1.GatewayType[message.gatewayType] : message.gatewayType;
                             if (message.gatewayAuthMethod != null && message.hasOwnProperty("gatewayAuthMethod"))
-                                object.gatewayAuthMethod = options.enums === String ? $root.google.cloud.iot.v1.GatewayAuthMethod[message.gatewayAuthMethod] : message.gatewayAuthMethod;
+                                object.gatewayAuthMethod = options.enums === String ? $root.google.cloud.iot.v1.GatewayAuthMethod[message.gatewayAuthMethod] === undefined ? message.gatewayAuthMethod : $root.google.cloud.iot.v1.GatewayAuthMethod[message.gatewayAuthMethod] : message.gatewayAuthMethod;
                             if (message.lastAccessedGatewayId != null && message.hasOwnProperty("lastAccessedGatewayId"))
                                 object.lastAccessedGatewayId = message.lastAccessedGatewayId;
                             if (message.lastAccessedGatewayTime != null && message.hasOwnProperty("lastAccessedGatewayTime"))
@@ -7793,6 +7817,12 @@
                                 message.httpConfig = $root.google.cloud.iot.v1.HttpConfig.fromObject(object.httpConfig);
                             }
                             switch (object.logLevel) {
+                            default:
+                                if (typeof object.logLevel === "number") {
+                                    message.logLevel = object.logLevel;
+                                    break;
+                                }
+                                break;
                             case "LOG_LEVEL_UNSPECIFIED":
                             case 0:
                                 message.logLevel = 0;
@@ -7873,7 +7903,7 @@
                                     object.eventNotificationConfigs[j] = $root.google.cloud.iot.v1.EventNotificationConfig.toObject(message.eventNotificationConfigs[j], options);
                             }
                             if (message.logLevel != null && message.hasOwnProperty("logLevel"))
-                                object.logLevel = options.enums === String ? $root.google.cloud.iot.v1.LogLevel[message.logLevel] : message.logLevel;
+                                object.logLevel = options.enums === String ? $root.google.cloud.iot.v1.LogLevel[message.logLevel] === undefined ? message.logLevel : $root.google.cloud.iot.v1.LogLevel[message.logLevel] : message.logLevel;
                             return object;
                         };
     
@@ -8062,6 +8092,12 @@
                                 return object;
                             var message = new $root.google.cloud.iot.v1.MqttConfig();
                             switch (object.mqttEnabledState) {
+                            default:
+                                if (typeof object.mqttEnabledState === "number") {
+                                    message.mqttEnabledState = object.mqttEnabledState;
+                                    break;
+                                }
+                                break;
                             case "MQTT_STATE_UNSPECIFIED":
                             case 0:
                                 message.mqttEnabledState = 0;
@@ -8094,7 +8130,7 @@
                             if (options.defaults)
                                 object.mqttEnabledState = options.enums === String ? "MQTT_STATE_UNSPECIFIED" : 0;
                             if (message.mqttEnabledState != null && message.hasOwnProperty("mqttEnabledState"))
-                                object.mqttEnabledState = options.enums === String ? $root.google.cloud.iot.v1.MqttState[message.mqttEnabledState] : message.mqttEnabledState;
+                                object.mqttEnabledState = options.enums === String ? $root.google.cloud.iot.v1.MqttState[message.mqttEnabledState] === undefined ? message.mqttEnabledState : $root.google.cloud.iot.v1.MqttState[message.mqttEnabledState] : message.mqttEnabledState;
                             return object;
                         };
     
@@ -8299,6 +8335,12 @@
                                 return object;
                             var message = new $root.google.cloud.iot.v1.HttpConfig();
                             switch (object.httpEnabledState) {
+                            default:
+                                if (typeof object.httpEnabledState === "number") {
+                                    message.httpEnabledState = object.httpEnabledState;
+                                    break;
+                                }
+                                break;
                             case "HTTP_STATE_UNSPECIFIED":
                             case 0:
                                 message.httpEnabledState = 0;
@@ -8331,7 +8373,7 @@
                             if (options.defaults)
                                 object.httpEnabledState = options.enums === String ? "HTTP_STATE_UNSPECIFIED" : 0;
                             if (message.httpEnabledState != null && message.hasOwnProperty("httpEnabledState"))
-                                object.httpEnabledState = options.enums === String ? $root.google.cloud.iot.v1.HttpState[message.httpEnabledState] : message.httpEnabledState;
+                                object.httpEnabledState = options.enums === String ? $root.google.cloud.iot.v1.HttpState[message.httpEnabledState] === undefined ? message.httpEnabledState : $root.google.cloud.iot.v1.HttpState[message.httpEnabledState] : message.httpEnabledState;
                             return object;
                         };
     
@@ -9613,6 +9655,12 @@
                                 return object;
                             var message = new $root.google.cloud.iot.v1.PublicKeyCertificate();
                             switch (object.format) {
+                            default:
+                                if (typeof object.format === "number") {
+                                    message.format = object.format;
+                                    break;
+                                }
+                                break;
                             case "UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT":
                             case 0:
                                 message.format = 0;
@@ -9651,7 +9699,7 @@
                                 object.x509Details = null;
                             }
                             if (message.format != null && message.hasOwnProperty("format"))
-                                object.format = options.enums === String ? $root.google.cloud.iot.v1.PublicKeyCertificateFormat[message.format] : message.format;
+                                object.format = options.enums === String ? $root.google.cloud.iot.v1.PublicKeyCertificateFormat[message.format] === undefined ? message.format : $root.google.cloud.iot.v1.PublicKeyCertificateFormat[message.format] : message.format;
                             if (message.certificate != null && message.hasOwnProperty("certificate"))
                                 object.certificate = message.certificate;
                             if (message.x509Details != null && message.hasOwnProperty("x509Details"))
@@ -10134,6 +10182,12 @@
                                 return object;
                             var message = new $root.google.cloud.iot.v1.PublicKeyCredential();
                             switch (object.format) {
+                            default:
+                                if (typeof object.format === "number") {
+                                    message.format = object.format;
+                                    break;
+                                }
+                                break;
                             case "UNSPECIFIED_PUBLIC_KEY_FORMAT":
                             case 0:
                                 message.format = 0;
@@ -10178,7 +10232,7 @@
                                 object.key = "";
                             }
                             if (message.format != null && message.hasOwnProperty("format"))
-                                object.format = options.enums === String ? $root.google.cloud.iot.v1.PublicKeyFormat[message.format] : message.format;
+                                object.format = options.enums === String ? $root.google.cloud.iot.v1.PublicKeyFormat[message.format] === undefined ? message.format : $root.google.cloud.iot.v1.PublicKeyFormat[message.format] : message.format;
                             if (message.key != null && message.hasOwnProperty("key"))
                                 object.key = message.key;
                             return object;
@@ -12091,6 +12145,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -12115,6 +12175,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -12162,7 +12226,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -12170,7 +12234,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -14981,6 +15045,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -14995,6 +15065,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -15121,9 +15197,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -17470,6 +17546,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -17578,7 +17660,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -18380,6 +18462,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -18396,6 +18484,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -18434,6 +18528,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -18504,7 +18602,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -18512,7 +18610,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -18525,7 +18623,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -19882,6 +19980,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -19945,7 +20049,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -21698,6 +21802,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -21747,7 +21857,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -25295,6 +25405,12 @@
                             return object;
                         var message = new $root.google.iam.v1.AuditLogConfig();
                         switch (object.logType) {
+                        default:
+                            if (typeof object.logType === "number") {
+                                message.logType = object.logType;
+                                break;
+                            }
+                            break;
                         case "LOG_TYPE_UNSPECIFIED":
                         case 0:
                             message.logType = 0;
@@ -25340,7 +25456,7 @@
                         if (options.defaults)
                             object.logType = options.enums === String ? "LOG_TYPE_UNSPECIFIED" : 0;
                         if (message.logType != null && message.hasOwnProperty("logType"))
-                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
+                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] === undefined ? message.logType : $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
                         if (message.exemptedMembers && message.exemptedMembers.length) {
                             object.exemptedMembers = [];
                             for (var j = 0; j < message.exemptedMembers.length; ++j)
@@ -25877,6 +25993,12 @@
                             return object;
                         var message = new $root.google.iam.v1.BindingDelta();
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "ACTION_UNSPECIFIED":
                         case 0:
                             message.action = 0;
@@ -25922,7 +26044,7 @@
                             object.condition = null;
                         }
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
                         if (message.role != null && message.hasOwnProperty("role"))
                             object.role = message.role;
                         if (message.member != null && message.hasOwnProperty("member"))
@@ -26187,6 +26309,12 @@
                             return object;
                         var message = new $root.google.iam.v1.AuditConfigDelta();
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "ACTION_UNSPECIFIED":
                         case 0:
                             message.action = 0;
@@ -26229,7 +26357,7 @@
                             object.logType = "";
                         }
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
                         if (message.service != null && message.hasOwnProperty("service"))
                             object.service = message.service;
                         if (message.exemptedMember != null && message.hasOwnProperty("exemptedMember"))
