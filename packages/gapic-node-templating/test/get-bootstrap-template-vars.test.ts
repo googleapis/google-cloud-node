@@ -17,26 +17,26 @@ import {describe, it} from 'mocha';
 import * as assert from 'assert';
 import {
   compileVars,
-  getApiInfo,
   getApiPath,
   getApiPathWithDashes,
   getDistributionName,
-  getDriftMetadata,
   getServiceName,
   getVersion,
 } from '../src/get-bootstrap-template-vars';
+import {ServiceConfig} from '../src/commands/bootstrap-library';
 import {
   API_ID,
   DESTINATION_FOLDER,
   MONO_REPO_NAME,
 } from './bootstrap-library.test';
-import {Storage} from '@google-cloud/storage';
 // eslint-disable-next-line node/no-unpublished-import
 import * as sinon from 'sinon';
 // eslint-disable-next-line node/no-unpublished-import
 import nock from 'nock';
 // eslint-disable-next-line node/no-unpublished-import
 import {Octokit} from '@octokit/rest';
+import * as fs from 'fs';
+import yaml from 'js-yaml';
 
 const octokit = new Octokit({
   auth: 'mypersonalaccesstoken123',
@@ -71,15 +71,21 @@ describe('get bootstrap template vars', () => {
             'api-id': API_ID,
             'destination-folder': DESTINATION_FOLDER,
             'mono-repo-name': MONO_REPO_NAME,
+            'folder-name': DESTINATION_FOLDER,
+            'service-config-path': `${DESTINATION_FOLDER}/interContainerVars.json`,
           },
           {
-            apiShortName: 'kms',
-            displayName: 'Key Management Service',
-            docsRootUrl: 'https://cloud.google.com/kms',
-            launchStage: 'beta',
+            title: 'Key Management Service',
+            name: 'kms.googleapis.com',
+            apis: [{name: 'KeyManagementService'}],
+            publishing: {
+              api_short_name: 'kms',
+              github_label: 'kms_prefix',
+              documentation_uri: 'https://cloud.google.com/kms',
+              launch_stage: 'beta',
+            },
           },
-          '@google-cloud/kms',
-          'KeyManagementService'
+          '@google-cloud/kms'
         ),
         {
           name: 'kms',
@@ -93,81 +99,9 @@ describe('get bootstrap template vars', () => {
           apiPathDashes: 'google-cloud-kms',
           version: 'v1',
           serviceName: 'KeyManagementService',
+          hostName: 'kms.googleapis.com',
+          folderName: DESTINATION_FOLDER,
         }
-      );
-    });
-  });
-  describe('get drift metadata', () => {
-    it('should make a call to the Storage bucket', async () => {
-      const storage = {
-        bucket: sinon.stub().returns({
-          file: sinon.stub().returns({
-            download: sinon
-              .stub()
-              .returns(
-                `{"apis": [{"api_shortname": "${API_ID}", "display_name": "thing1", "docs_root_url": "thing2", "launch_stage": "thing3"}]}`
-              ),
-          }),
-        }),
-      } as unknown as Storage;
-
-      assert.deepStrictEqual(
-        await getDriftMetadata(
-          {
-            'api-id': API_ID,
-            'destination-folder': DESTINATION_FOLDER,
-            'mono-repo-name': MONO_REPO_NAME,
-          },
-          storage
-        ),
-        {
-          apiShortName: 'kms',
-          displayName: 'thing1',
-          docsRootUrl: 'thing2',
-          launchStage: 'thing3',
-        }
-      );
-    });
-
-    it('should throw an error if apis file is empty', async () => {
-      const storage = {
-        bucket: sinon.stub().returns({
-          file: sinon.stub().returns({
-            download: sinon
-              .stub()
-              .returns('{"apis": [{"api_shortname": "not-the-api-name"}]}'),
-          }),
-        }),
-      } as unknown as Storage;
-
-      assert.rejects(
-        async () =>
-          await getDriftMetadata(
-            {
-              'api-id': API_ID,
-              'destination-folder': DESTINATION_FOLDER,
-              'mono-repo-name': MONO_REPO_NAME,
-            },
-            storage
-          ),
-        /apis.json downloaded from Cloud Storage was empty/
-      );
-    });
-
-    it('getAPIInfo should return empty if there was no match', async () => {
-      assert.deepStrictEqual(
-        getApiInfo(
-          [
-            {
-              api_shortname: 'thing4',
-              display_name: 'thing1',
-              docs_root_url: 'thing2',
-              launch_stage: 'thing3',
-            },
-          ],
-          'google.cloud.kms.v1'
-        ),
-        {apiShortName: 'kms', displayName: '', docsRootUrl: '', launchStage: ''}
       );
     });
   });
@@ -195,31 +129,12 @@ describe('get bootstrap template vars', () => {
 
   describe('get service name', () => {
     it('should get the service name', async () => {
-      const fileRequest = nock('https://api.github.com')
-        .get('/repos/googleapis/googleapis/contents/google%2Fcloud%2Fkms%2Fv1')
-        .reply(200, [
-          {
-            name: 'cloudkms_v1.yaml',
-          },
-          {
-            name: 'cloudkms_grpc_service_config.json',
-          },
-          {
-            name: 'cloudkms_gapic.yaml',
-          },
-        ])
-        .get(
-          '/repos/googleapis/googleapis/contents/google%2Fcloud%2Fkms%2Fv1%2Fcloudkms_v1.yaml'
-        )
-        .reply(200, {
-          content:
-            'e2FwaXM6IFt7bmFtZTogJ2dvb2dsZS5jbG91ZC5rbXMudjEuS2V5TWFuYWdlbWVudFNlcnZpY2UnfSwge25hbWU6ICdnb29nbGUuaWFtLnYxLklBTVBvbGljeSd9XX0=',
-        });
-      const serviceName = await getServiceName(octokit, 'google.cloud.kms.v1');
+      const serviceConfig = yaml.load(
+        fs.readFileSync('./test/fixtures/serviceConfig.yaml', 'utf8')
+      ) as ServiceConfig;
+      const serviceName = getServiceName(serviceConfig);
 
       assert.deepStrictEqual(serviceName, 'KeyManagementService');
-
-      fileRequest.done();
     });
   });
 });
