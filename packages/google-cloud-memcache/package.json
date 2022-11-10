@@ -2,7 +2,12 @@
   "name": "@google-cloud/memcache",
   "version": "2.1.3",
   "description": "Memcache client for Node.js",
-  "repository": "googleapis/nodejs-memcache",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-cloud-memcache"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-memcache",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",

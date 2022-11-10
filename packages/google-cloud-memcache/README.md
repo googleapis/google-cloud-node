@@ -14,11 +14,11 @@ Memcache client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-memcache/CHANGELOG.md).
 
 * [Memorystore for Memcached Node.js Client API Reference][client-docs]
 * [Memorystore for Memcached Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
+* [github.com/googleapis/google-cloud-node/packages/google-cloud-memcache](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-memcache)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
