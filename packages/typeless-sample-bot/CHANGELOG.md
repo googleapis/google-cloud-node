@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.0.3...typeless-sample-bot-v1.1.0) (2022-11-10)
+
+
+### Features
+
+* **typeless-sample-bot:** Add output path flag, and another pass at module resolution fixing ([#3498](https://github.com/googleapis/google-cloud-node/issues/3498)) ([192659d](https://github.com/googleapis/google-cloud-node/commit/192659d7d6109ad23d1c84eaaf7b626b9bd05be5))
+
 ## [1.0.3](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v1.0.2...typeless-sample-bot-v1.0.3) (2022-11-03)
 
 

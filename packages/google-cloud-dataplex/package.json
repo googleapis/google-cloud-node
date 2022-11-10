@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/dataplex",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "dataplex client for Node.js",
   "repository": "googleapis/nodejs-dataplex",
   "license": "Apache-2.0",
