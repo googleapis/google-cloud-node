@@ -1951,6 +1951,12 @@
                                 return object;
                             var message = new $root.google.cloud.speech.v1.RecognitionConfig();
                             switch (object.encoding) {
+                            default:
+                                if (typeof object.encoding === "number") {
+                                    message.encoding = object.encoding;
+                                    break;
+                                }
+                                break;
                             case "ENCODING_UNSPECIFIED":
                             case 0:
                                 message.encoding = 0;
@@ -2092,7 +2098,7 @@
                                 object.enableSpokenEmojis = null;
                             }
                             if (message.encoding != null && message.hasOwnProperty("encoding"))
-                                object.encoding = options.enums === String ? $root.google.cloud.speech.v1.RecognitionConfig.AudioEncoding[message.encoding] : message.encoding;
+                                object.encoding = options.enums === String ? $root.google.cloud.speech.v1.RecognitionConfig.AudioEncoding[message.encoding] === undefined ? message.encoding : $root.google.cloud.speech.v1.RecognitionConfig.AudioEncoding[message.encoding] : message.encoding;
                             if (message.sampleRateHertz != null && message.hasOwnProperty("sampleRateHertz"))
                                 object.sampleRateHertz = message.sampleRateHertz;
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
@@ -2779,6 +2785,12 @@
                                 return object;
                             var message = new $root.google.cloud.speech.v1.RecognitionMetadata();
                             switch (object.interactionType) {
+                            default:
+                                if (typeof object.interactionType === "number") {
+                                    message.interactionType = object.interactionType;
+                                    break;
+                                }
+                                break;
                             case "INTERACTION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.interactionType = 0;
@@ -2819,6 +2831,12 @@
                             if (object.industryNaicsCodeOfAudio != null)
                                 message.industryNaicsCodeOfAudio = object.industryNaicsCodeOfAudio >>> 0;
                             switch (object.microphoneDistance) {
+                            default:
+                                if (typeof object.microphoneDistance === "number") {
+                                    message.microphoneDistance = object.microphoneDistance;
+                                    break;
+                                }
+                                break;
                             case "MICROPHONE_DISTANCE_UNSPECIFIED":
                             case 0:
                                 message.microphoneDistance = 0;
@@ -2837,6 +2855,12 @@
                                 break;
                             }
                             switch (object.originalMediaType) {
+                            default:
+                                if (typeof object.originalMediaType === "number") {
+                                    message.originalMediaType = object.originalMediaType;
+                                    break;
+                                }
+                                break;
                             case "ORIGINAL_MEDIA_TYPE_UNSPECIFIED":
                             case 0:
                                 message.originalMediaType = 0;
@@ -2851,6 +2875,12 @@
                                 break;
                             }
                             switch (object.recordingDeviceType) {
+                            default:
+                                if (typeof object.recordingDeviceType === "number") {
+                                    message.recordingDeviceType = object.recordingDeviceType;
+                                    break;
+                                }
+                                break;
                             case "RECORDING_DEVICE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.recordingDeviceType = 0;
@@ -2913,15 +2943,15 @@
                                 object.audioTopic = "";
                             }
                             if (message.interactionType != null && message.hasOwnProperty("interactionType"))
-                                object.interactionType = options.enums === String ? $root.google.cloud.speech.v1.RecognitionMetadata.InteractionType[message.interactionType] : message.interactionType;
+                                object.interactionType = options.enums === String ? $root.google.cloud.speech.v1.RecognitionMetadata.InteractionType[message.interactionType] === undefined ? message.interactionType : $root.google.cloud.speech.v1.RecognitionMetadata.InteractionType[message.interactionType] : message.interactionType;
                             if (message.industryNaicsCodeOfAudio != null && message.hasOwnProperty("industryNaicsCodeOfAudio"))
                                 object.industryNaicsCodeOfAudio = message.industryNaicsCodeOfAudio;
                             if (message.microphoneDistance != null && message.hasOwnProperty("microphoneDistance"))
-                                object.microphoneDistance = options.enums === String ? $root.google.cloud.speech.v1.RecognitionMetadata.MicrophoneDistance[message.microphoneDistance] : message.microphoneDistance;
+                                object.microphoneDistance = options.enums === String ? $root.google.cloud.speech.v1.RecognitionMetadata.MicrophoneDistance[message.microphoneDistance] === undefined ? message.microphoneDistance : $root.google.cloud.speech.v1.RecognitionMetadata.MicrophoneDistance[message.microphoneDistance] : message.microphoneDistance;
                             if (message.originalMediaType != null && message.hasOwnProperty("originalMediaType"))
-                                object.originalMediaType = options.enums === String ? $root.google.cloud.speech.v1.RecognitionMetadata.OriginalMediaType[message.originalMediaType] : message.originalMediaType;
+                                object.originalMediaType = options.enums === String ? $root.google.cloud.speech.v1.RecognitionMetadata.OriginalMediaType[message.originalMediaType] === undefined ? message.originalMediaType : $root.google.cloud.speech.v1.RecognitionMetadata.OriginalMediaType[message.originalMediaType] : message.originalMediaType;
                             if (message.recordingDeviceType != null && message.hasOwnProperty("recordingDeviceType"))
-                                object.recordingDeviceType = options.enums === String ? $root.google.cloud.speech.v1.RecognitionMetadata.RecordingDeviceType[message.recordingDeviceType] : message.recordingDeviceType;
+                                object.recordingDeviceType = options.enums === String ? $root.google.cloud.speech.v1.RecognitionMetadata.RecordingDeviceType[message.recordingDeviceType] === undefined ? message.recordingDeviceType : $root.google.cloud.speech.v1.RecognitionMetadata.RecordingDeviceType[message.recordingDeviceType] : message.recordingDeviceType;
                             if (message.recordingDeviceName != null && message.hasOwnProperty("recordingDeviceName"))
                                 object.recordingDeviceName = message.recordingDeviceName;
                             if (message.originalMimeType != null && message.hasOwnProperty("originalMimeType"))
@@ -4626,6 +4656,12 @@
                                 }
                             }
                             switch (object.speechEventType) {
+                            default:
+                                if (typeof object.speechEventType === "number") {
+                                    message.speechEventType = object.speechEventType;
+                                    break;
+                                }
+                                break;
                             case "SPEECH_EVENT_UNSPECIFIED":
                             case 0:
                                 message.speechEventType = 0;
@@ -4671,7 +4707,7 @@
                                     object.results[j] = $root.google.cloud.speech.v1.StreamingRecognitionResult.toObject(message.results[j], options);
                             }
                             if (message.speechEventType != null && message.hasOwnProperty("speechEventType"))
-                                object.speechEventType = options.enums === String ? $root.google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] : message.speechEventType;
+                                object.speechEventType = options.enums === String ? $root.google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] === undefined ? message.speechEventType : $root.google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] : message.speechEventType;
                             if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime"))
                                 object.totalBilledTime = $root.google.protobuf.Duration.toObject(message.totalBilledTime, options);
                             return object;
@@ -12337,6 +12373,12 @@
                                 return object;
                             var message = new $root.google.cloud.speech.v1p1beta1.RecognitionConfig();
                             switch (object.encoding) {
+                            default:
+                                if (typeof object.encoding === "number") {
+                                    message.encoding = object.encoding;
+                                    break;
+                                }
+                                break;
                             case "ENCODING_UNSPECIFIED":
                             case 0:
                                 message.encoding = 0;
@@ -12494,7 +12536,7 @@
                                 object.transcriptNormalization = null;
                             }
                             if (message.encoding != null && message.hasOwnProperty("encoding"))
-                                object.encoding = options.enums === String ? $root.google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding[message.encoding] : message.encoding;
+                                object.encoding = options.enums === String ? $root.google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding[message.encoding] === undefined ? message.encoding : $root.google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding[message.encoding] : message.encoding;
                             if (message.sampleRateHertz != null && message.hasOwnProperty("sampleRateHertz"))
                                 object.sampleRateHertz = message.sampleRateHertz;
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
@@ -13207,6 +13249,12 @@
                                 return object;
                             var message = new $root.google.cloud.speech.v1p1beta1.RecognitionMetadata();
                             switch (object.interactionType) {
+                            default:
+                                if (typeof object.interactionType === "number") {
+                                    message.interactionType = object.interactionType;
+                                    break;
+                                }
+                                break;
                             case "INTERACTION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.interactionType = 0;
@@ -13247,6 +13295,12 @@
                             if (object.industryNaicsCodeOfAudio != null)
                                 message.industryNaicsCodeOfAudio = object.industryNaicsCodeOfAudio >>> 0;
                             switch (object.microphoneDistance) {
+                            default:
+                                if (typeof object.microphoneDistance === "number") {
+                                    message.microphoneDistance = object.microphoneDistance;
+                                    break;
+                                }
+                                break;
                             case "MICROPHONE_DISTANCE_UNSPECIFIED":
                             case 0:
                                 message.microphoneDistance = 0;
@@ -13265,6 +13319,12 @@
                                 break;
                             }
                             switch (object.originalMediaType) {
+                            default:
+                                if (typeof object.originalMediaType === "number") {
+                                    message.originalMediaType = object.originalMediaType;
+                                    break;
+                                }
+                                break;
                             case "ORIGINAL_MEDIA_TYPE_UNSPECIFIED":
                             case 0:
                                 message.originalMediaType = 0;
@@ -13279,6 +13339,12 @@
                                 break;
                             }
                             switch (object.recordingDeviceType) {
+                            default:
+                                if (typeof object.recordingDeviceType === "number") {
+                                    message.recordingDeviceType = object.recordingDeviceType;
+                                    break;
+                                }
+                                break;
                             case "RECORDING_DEVICE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.recordingDeviceType = 0;
@@ -13355,15 +13421,15 @@
                                 object.audioTopic = "";
                             }
                             if (message.interactionType != null && message.hasOwnProperty("interactionType"))
-                                object.interactionType = options.enums === String ? $root.google.cloud.speech.v1p1beta1.RecognitionMetadata.InteractionType[message.interactionType] : message.interactionType;
+                                object.interactionType = options.enums === String ? $root.google.cloud.speech.v1p1beta1.RecognitionMetadata.InteractionType[message.interactionType] === undefined ? message.interactionType : $root.google.cloud.speech.v1p1beta1.RecognitionMetadata.InteractionType[message.interactionType] : message.interactionType;
                             if (message.industryNaicsCodeOfAudio != null && message.hasOwnProperty("industryNaicsCodeOfAudio"))
                                 object.industryNaicsCodeOfAudio = message.industryNaicsCodeOfAudio;
                             if (message.microphoneDistance != null && message.hasOwnProperty("microphoneDistance"))
-                                object.microphoneDistance = options.enums === String ? $root.google.cloud.speech.v1p1beta1.RecognitionMetadata.MicrophoneDistance[message.microphoneDistance] : message.microphoneDistance;
+                                object.microphoneDistance = options.enums === String ? $root.google.cloud.speech.v1p1beta1.RecognitionMetadata.MicrophoneDistance[message.microphoneDistance] === undefined ? message.microphoneDistance : $root.google.cloud.speech.v1p1beta1.RecognitionMetadata.MicrophoneDistance[message.microphoneDistance] : message.microphoneDistance;
                             if (message.originalMediaType != null && message.hasOwnProperty("originalMediaType"))
-                                object.originalMediaType = options.enums === String ? $root.google.cloud.speech.v1p1beta1.RecognitionMetadata.OriginalMediaType[message.originalMediaType] : message.originalMediaType;
+                                object.originalMediaType = options.enums === String ? $root.google.cloud.speech.v1p1beta1.RecognitionMetadata.OriginalMediaType[message.originalMediaType] === undefined ? message.originalMediaType : $root.google.cloud.speech.v1p1beta1.RecognitionMetadata.OriginalMediaType[message.originalMediaType] : message.originalMediaType;
                             if (message.recordingDeviceType != null && message.hasOwnProperty("recordingDeviceType"))
-                                object.recordingDeviceType = options.enums === String ? $root.google.cloud.speech.v1p1beta1.RecognitionMetadata.RecordingDeviceType[message.recordingDeviceType] : message.recordingDeviceType;
+                                object.recordingDeviceType = options.enums === String ? $root.google.cloud.speech.v1p1beta1.RecognitionMetadata.RecordingDeviceType[message.recordingDeviceType] === undefined ? message.recordingDeviceType : $root.google.cloud.speech.v1p1beta1.RecognitionMetadata.RecordingDeviceType[message.recordingDeviceType] : message.recordingDeviceType;
                             if (message.recordingDeviceName != null && message.hasOwnProperty("recordingDeviceName"))
                                 object.recordingDeviceName = message.recordingDeviceName;
                             if (message.originalMimeType != null && message.hasOwnProperty("originalMimeType"))
@@ -15101,6 +15167,12 @@
                                 }
                             }
                             switch (object.speechEventType) {
+                            default:
+                                if (typeof object.speechEventType === "number") {
+                                    message.speechEventType = object.speechEventType;
+                                    break;
+                                }
+                                break;
                             case "SPEECH_EVENT_UNSPECIFIED":
                             case 0:
                                 message.speechEventType = 0;
@@ -15146,7 +15218,7 @@
                                     object.results[j] = $root.google.cloud.speech.v1p1beta1.StreamingRecognitionResult.toObject(message.results[j], options);
                             }
                             if (message.speechEventType != null && message.hasOwnProperty("speechEventType"))
-                                object.speechEventType = options.enums === String ? $root.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] : message.speechEventType;
+                                object.speechEventType = options.enums === String ? $root.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] === undefined ? message.speechEventType : $root.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] : message.speechEventType;
                             if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime"))
                                 object.totalBilledTime = $root.google.protobuf.Duration.toObject(message.totalBilledTime, options);
                             return object;
@@ -25319,6 +25391,12 @@
                                     message.annotations[keys[i]] = String(object.annotations[keys[i]]);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -25413,7 +25491,7 @@
                                     object.annotations[keys2[j]] = message.annotations[keys2[j]];
                             }
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.speech.v2.Recognizer.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.speech.v2.Recognizer.State[message.state] === undefined ? message.state : $root.google.cloud.speech.v2.Recognizer.State[message.state] : message.state;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
@@ -25851,6 +25929,12 @@
                                 return object;
                             var message = new $root.google.cloud.speech.v2.ExplicitDecodingConfig();
                             switch (object.encoding) {
+                            default:
+                                if (typeof object.encoding === "number") {
+                                    message.encoding = object.encoding;
+                                    break;
+                                }
+                                break;
                             case "AUDIO_ENCODING_UNSPECIFIED":
                             case 0:
                                 message.encoding = 0;
@@ -25894,7 +25978,7 @@
                                 object.audioChannelCount = 0;
                             }
                             if (message.encoding != null && message.hasOwnProperty("encoding"))
-                                object.encoding = options.enums === String ? $root.google.cloud.speech.v2.ExplicitDecodingConfig.AudioEncoding[message.encoding] : message.encoding;
+                                object.encoding = options.enums === String ? $root.google.cloud.speech.v2.ExplicitDecodingConfig.AudioEncoding[message.encoding] === undefined ? message.encoding : $root.google.cloud.speech.v2.ExplicitDecodingConfig.AudioEncoding[message.encoding] : message.encoding;
                             if (message.sampleRateHertz != null && message.hasOwnProperty("sampleRateHertz"))
                                 object.sampleRateHertz = message.sampleRateHertz;
                             if (message.audioChannelCount != null && message.hasOwnProperty("audioChannelCount"))
@@ -26489,6 +26573,12 @@
                             if (object.enableSpokenEmojis != null)
                                 message.enableSpokenEmojis = Boolean(object.enableSpokenEmojis);
                             switch (object.multiChannelMode) {
+                            default:
+                                if (typeof object.multiChannelMode === "number") {
+                                    message.multiChannelMode = object.multiChannelMode;
+                                    break;
+                                }
+                                break;
                             case "MULTI_CHANNEL_MODE_UNSPECIFIED":
                             case 0:
                                 message.multiChannelMode = 0;
@@ -26549,7 +26639,7 @@
                             if (message.maxAlternatives != null && message.hasOwnProperty("maxAlternatives"))
                                 object.maxAlternatives = message.maxAlternatives;
                             if (message.multiChannelMode != null && message.hasOwnProperty("multiChannelMode"))
-                                object.multiChannelMode = options.enums === String ? $root.google.cloud.speech.v2.RecognitionFeatures.MultiChannelMode[message.multiChannelMode] : message.multiChannelMode;
+                                object.multiChannelMode = options.enums === String ? $root.google.cloud.speech.v2.RecognitionFeatures.MultiChannelMode[message.multiChannelMode] === undefined ? message.multiChannelMode : $root.google.cloud.speech.v2.RecognitionFeatures.MultiChannelMode[message.multiChannelMode] : message.multiChannelMode;
                             return object;
                         };
     
@@ -32296,6 +32386,12 @@
                                 }
                             }
                             switch (object.speechEventType) {
+                            default:
+                                if (typeof object.speechEventType === "number") {
+                                    message.speechEventType = object.speechEventType;
+                                    break;
+                                }
+                                break;
                             case "SPEECH_EVENT_TYPE_UNSPECIFIED":
                             case 0:
                                 message.speechEventType = 0;
@@ -32347,7 +32443,7 @@
                                 object.speechEventOffset = null;
                             }
                             if (message.speechEventType != null && message.hasOwnProperty("speechEventType"))
-                                object.speechEventType = options.enums === String ? $root.google.cloud.speech.v2.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] : message.speechEventType;
+                                object.speechEventType = options.enums === String ? $root.google.cloud.speech.v2.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] === undefined ? message.speechEventType : $root.google.cloud.speech.v2.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] : message.speechEventType;
                             if (message.metadata != null && message.hasOwnProperty("metadata"))
                                 object.metadata = $root.google.cloud.speech.v2.RecognitionResponseMetadata.toObject(message.metadata, options);
                             if (message.results && message.results.length) {
@@ -33552,6 +33648,12 @@
                                 }
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -33668,7 +33770,7 @@
                             if (message.kmsKeyVersionName != null && message.hasOwnProperty("kmsKeyVersionName"))
                                 object.kmsKeyVersionName = message.kmsKeyVersionName;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.speech.v2.CustomClass.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.speech.v2.CustomClass.State[message.state] === undefined ? message.state : $root.google.cloud.speech.v2.CustomClass.State[message.state] : message.state;
                             return object;
                         };
     
@@ -34390,6 +34492,12 @@
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -34509,7 +34617,7 @@
                             if (message.kmsKeyVersionName != null && message.hasOwnProperty("kmsKeyVersionName"))
                                 object.kmsKeyVersionName = message.kmsKeyVersionName;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.speech.v2.PhraseSet.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.speech.v2.PhraseSet.State[message.state] === undefined ? message.state : $root.google.cloud.speech.v2.PhraseSet.State[message.state] : message.state;
                             return object;
                         };
     
@@ -39666,6 +39774,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -39690,6 +39804,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -39737,7 +39855,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -39745,7 +39863,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -42556,6 +42674,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -42570,6 +42694,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -42696,9 +42826,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -45045,6 +45175,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -45153,7 +45289,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -45955,6 +46091,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -45971,6 +46113,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -46009,6 +46157,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -46079,7 +46231,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -46087,7 +46239,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -46100,7 +46252,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -47477,6 +47629,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -47546,7 +47704,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -49301,6 +49459,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -49350,7 +49514,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
