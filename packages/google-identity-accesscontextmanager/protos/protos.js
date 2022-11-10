@@ -2289,6 +2289,12 @@
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
                             switch (object.accessLevelFormat) {
+                            default:
+                                if (typeof object.accessLevelFormat === "number") {
+                                    message.accessLevelFormat = object.accessLevelFormat;
+                                    break;
+                                }
+                                break;
                             case "LEVEL_FORMAT_UNSPECIFIED":
                             case 0:
                                 message.accessLevelFormat = 0;
@@ -2331,7 +2337,7 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
                             if (message.accessLevelFormat != null && message.hasOwnProperty("accessLevelFormat"))
-                                object.accessLevelFormat = options.enums === String ? $root.google.identity.accesscontextmanager.v1.LevelFormat[message.accessLevelFormat] : message.accessLevelFormat;
+                                object.accessLevelFormat = options.enums === String ? $root.google.identity.accesscontextmanager.v1.LevelFormat[message.accessLevelFormat] === undefined ? message.accessLevelFormat : $root.google.identity.accesscontextmanager.v1.LevelFormat[message.accessLevelFormat] : message.accessLevelFormat;
                             return object;
                         };
     
@@ -2788,6 +2794,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.accessLevelFormat) {
+                            default:
+                                if (typeof object.accessLevelFormat === "number") {
+                                    message.accessLevelFormat = object.accessLevelFormat;
+                                    break;
+                                }
+                                break;
                             case "LEVEL_FORMAT_UNSPECIFIED":
                             case 0:
                                 message.accessLevelFormat = 0;
@@ -2824,7 +2836,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.accessLevelFormat != null && message.hasOwnProperty("accessLevelFormat"))
-                                object.accessLevelFormat = options.enums === String ? $root.google.identity.accesscontextmanager.v1.LevelFormat[message.accessLevelFormat] : message.accessLevelFormat;
+                                object.accessLevelFormat = options.enums === String ? $root.google.identity.accesscontextmanager.v1.LevelFormat[message.accessLevelFormat] === undefined ? message.accessLevelFormat : $root.google.identity.accesscontextmanager.v1.LevelFormat[message.accessLevelFormat] : message.accessLevelFormat;
                             return object;
                         };
     
@@ -8666,6 +8678,12 @@
                                 }
                             }
                             switch (object.combiningFunction) {
+                            default:
+                                if (typeof object.combiningFunction === "number") {
+                                    message.combiningFunction = object.combiningFunction;
+                                    break;
+                                }
+                                break;
                             case "AND":
                             case 0:
                                 message.combiningFunction = 0;
@@ -8701,7 +8719,7 @@
                                     object.conditions[j] = $root.google.identity.accesscontextmanager.v1.Condition.toObject(message.conditions[j], options);
                             }
                             if (message.combiningFunction != null && message.hasOwnProperty("combiningFunction"))
-                                object.combiningFunction = options.enums === String ? $root.google.identity.accesscontextmanager.v1.BasicLevel.ConditionCombiningFunction[message.combiningFunction] : message.combiningFunction;
+                                object.combiningFunction = options.enums === String ? $root.google.identity.accesscontextmanager.v1.BasicLevel.ConditionCombiningFunction[message.combiningFunction] === undefined ? message.combiningFunction : $root.google.identity.accesscontextmanager.v1.BasicLevel.ConditionCombiningFunction[message.combiningFunction] : message.combiningFunction;
                             return object;
                         };
     
@@ -9650,6 +9668,10 @@
                                 for (var i = 0; i < object.allowedEncryptionStatuses.length; ++i)
                                     switch (object.allowedEncryptionStatuses[i]) {
                                     default:
+                                        if (typeof object.allowedEncryptionStatuses[i] === "number") {
+                                            message.allowedEncryptionStatuses[i] = object.allowedEncryptionStatuses[i];
+                                            break;
+                                        }
                                     case "ENCRYPTION_UNSPECIFIED":
                                     case 0:
                                         message.allowedEncryptionStatuses[i] = 0;
@@ -9685,6 +9707,10 @@
                                 for (var i = 0; i < object.allowedDeviceManagementLevels.length; ++i)
                                     switch (object.allowedDeviceManagementLevels[i]) {
                                     default:
+                                        if (typeof object.allowedDeviceManagementLevels[i] === "number") {
+                                            message.allowedDeviceManagementLevels[i] = object.allowedDeviceManagementLevels[i];
+                                            break;
+                                        }
                                     case "MANAGEMENT_UNSPECIFIED":
                                     case 0:
                                         message.allowedDeviceManagementLevels[i] = 0;
@@ -9738,7 +9764,7 @@
                             if (message.allowedEncryptionStatuses && message.allowedEncryptionStatuses.length) {
                                 object.allowedEncryptionStatuses = [];
                                 for (var j = 0; j < message.allowedEncryptionStatuses.length; ++j)
-                                    object.allowedEncryptionStatuses[j] = options.enums === String ? $root.google.identity.accesscontextmanager.type.DeviceEncryptionStatus[message.allowedEncryptionStatuses[j]] : message.allowedEncryptionStatuses[j];
+                                    object.allowedEncryptionStatuses[j] = options.enums === String ? $root.google.identity.accesscontextmanager.type.DeviceEncryptionStatus[message.allowedEncryptionStatuses[j]] === undefined ? message.allowedEncryptionStatuses[j] : $root.google.identity.accesscontextmanager.type.DeviceEncryptionStatus[message.allowedEncryptionStatuses[j]] : message.allowedEncryptionStatuses[j];
                             }
                             if (message.osConstraints && message.osConstraints.length) {
                                 object.osConstraints = [];
@@ -9748,7 +9774,7 @@
                             if (message.allowedDeviceManagementLevels && message.allowedDeviceManagementLevels.length) {
                                 object.allowedDeviceManagementLevels = [];
                                 for (var j = 0; j < message.allowedDeviceManagementLevels.length; ++j)
-                                    object.allowedDeviceManagementLevels[j] = options.enums === String ? $root.google.identity.accesscontextmanager.type.DeviceManagementLevel[message.allowedDeviceManagementLevels[j]] : message.allowedDeviceManagementLevels[j];
+                                    object.allowedDeviceManagementLevels[j] = options.enums === String ? $root.google.identity.accesscontextmanager.type.DeviceManagementLevel[message.allowedDeviceManagementLevels[j]] === undefined ? message.allowedDeviceManagementLevels[j] : $root.google.identity.accesscontextmanager.type.DeviceManagementLevel[message.allowedDeviceManagementLevels[j]] : message.allowedDeviceManagementLevels[j];
                             }
                             if (message.requireAdminApproval != null && message.hasOwnProperty("requireAdminApproval"))
                                 object.requireAdminApproval = message.requireAdminApproval;
@@ -9982,6 +10008,12 @@
                                 return object;
                             var message = new $root.google.identity.accesscontextmanager.v1.OsConstraint();
                             switch (object.osType) {
+                            default:
+                                if (typeof object.osType === "number") {
+                                    message.osType = object.osType;
+                                    break;
+                                }
+                                break;
                             case "OS_UNSPECIFIED":
                             case 0:
                                 message.osType = 0;
@@ -10037,7 +10069,7 @@
                                 object.requireVerifiedChromeOs = false;
                             }
                             if (message.osType != null && message.hasOwnProperty("osType"))
-                                object.osType = options.enums === String ? $root.google.identity.accesscontextmanager.type.OsType[message.osType] : message.osType;
+                                object.osType = options.enums === String ? $root.google.identity.accesscontextmanager.type.OsType[message.osType] === undefined ? message.osType : $root.google.identity.accesscontextmanager.type.OsType[message.osType] : message.osType;
                             if (message.minimumVersion != null && message.hasOwnProperty("minimumVersion"))
                                 object.minimumVersion = message.minimumVersion;
                             if (message.requireVerifiedChromeOs != null && message.hasOwnProperty("requireVerifiedChromeOs"))
@@ -10993,6 +11025,12 @@
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
                             switch (object.perimeterType) {
+                            default:
+                                if (typeof object.perimeterType === "number") {
+                                    message.perimeterType = object.perimeterType;
+                                    break;
+                                }
+                                break;
                             case "PERIMETER_TYPE_REGULAR":
                             case 0:
                                 message.perimeterType = 0;
@@ -11052,7 +11090,7 @@
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.perimeterType != null && message.hasOwnProperty("perimeterType"))
-                                object.perimeterType = options.enums === String ? $root.google.identity.accesscontextmanager.v1.ServicePerimeter.PerimeterType[message.perimeterType] : message.perimeterType;
+                                object.perimeterType = options.enums === String ? $root.google.identity.accesscontextmanager.v1.ServicePerimeter.PerimeterType[message.perimeterType] === undefined ? message.perimeterType : $root.google.identity.accesscontextmanager.v1.ServicePerimeter.PerimeterType[message.perimeterType] : message.perimeterType;
                             if (message.status != null && message.hasOwnProperty("status"))
                                 object.status = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.toObject(message.status, options);
                             if (message.spec != null && message.hasOwnProperty("spec"))
@@ -13000,6 +13038,12 @@
                                         message.identities[i] = String(object.identities[i]);
                                 }
                                 switch (object.identityType) {
+                                default:
+                                    if (typeof object.identityType === "number") {
+                                        message.identityType = object.identityType;
+                                        break;
+                                    }
+                                    break;
                                 case "IDENTITY_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.identityType = 0;
@@ -13050,7 +13094,7 @@
                                         object.identities[j] = message.identities[j];
                                 }
                                 if (message.identityType != null && message.hasOwnProperty("identityType"))
-                                    object.identityType = options.enums === String ? $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType[message.identityType] : message.identityType;
+                                    object.identityType = options.enums === String ? $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType[message.identityType] === undefined ? message.identityType : $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType[message.identityType] : message.identityType;
                                 return object;
                             };
     
@@ -14011,6 +14055,12 @@
                                         message.identities[i] = String(object.identities[i]);
                                 }
                                 switch (object.identityType) {
+                                default:
+                                    if (typeof object.identityType === "number") {
+                                        message.identityType = object.identityType;
+                                        break;
+                                    }
+                                    break;
                                 case "IDENTITY_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.identityType = 0;
@@ -14054,7 +14104,7 @@
                                         object.identities[j] = message.identities[j];
                                 }
                                 if (message.identityType != null && message.hasOwnProperty("identityType"))
-                                    object.identityType = options.enums === String ? $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType[message.identityType] : message.identityType;
+                                    object.identityType = options.enums === String ? $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType[message.identityType] === undefined ? message.identityType : $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType[message.identityType] : message.identityType;
                                 return object;
                             };
     
@@ -15419,6 +15469,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -15443,6 +15499,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -15490,7 +15550,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -15498,7 +15558,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -18309,6 +18369,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -18323,6 +18389,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -18449,9 +18521,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -20798,6 +20870,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -20906,7 +20984,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -21708,6 +21786,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -21724,6 +21808,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -21762,6 +21852,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -21832,7 +21926,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -21840,7 +21934,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -21853,7 +21947,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -23230,6 +23324,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -23299,7 +23399,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -25054,6 +25154,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -25103,7 +25209,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
