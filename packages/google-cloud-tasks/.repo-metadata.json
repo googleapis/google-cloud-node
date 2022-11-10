@@ -2,7 +2,7 @@
   "distribution_name": "@google-cloud/tasks",
   "release_level": "stable",
   "product_documentation": "https://cloud.google.com/tasks/docs/",
-  "repo": "googleapis/nodejs-tasks",
+  "repo": "googleapis/google-cloud-node",
   "default_version": "v2",
   "language": "nodejs",
   "requires_billing": true,

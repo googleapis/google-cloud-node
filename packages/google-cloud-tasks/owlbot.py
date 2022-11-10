@@ -15,7 +15,7 @@
 """This script is used to synthesize generated parts of this library."""
 
 import synthtool as s
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 import pathlib
 
 
@@ -28,7 +28,7 @@ def patch(library: pathlib.Path):
             '"max_rpc_timeout_millis": 20000')
 
 
-node.owlbot_main(
+node.owlbot_main(relative_dir="packages/google-cloud-tasks",
     staging_excludes=["README.md", "package.json"],
     patch_staging=patch
 )
