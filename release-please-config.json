@@ -30,6 +30,7 @@
     "packages/google-cloud-resourcemanager": {},
     "packages/google-cloud-security-publicca": {},
     "packages/google-cloud-shell": {},
+    "packages/google-cloud-texttospeech": {},
     "packages/google-cloud-translate": {},
     "packages/google-cloud-videointelligence": {},
     "packages/google-devtools-artifactregistry": {},
