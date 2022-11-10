@@ -2,90 +2,43 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Translation: Node.js Samples](https://github.com/googleapis/nodejs-translate)
+# [Cloud Translation: Node.js Samples](https://github.com/googleapis/google-cloud-node)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
-The [Cloud Translation API](https://cloud.google.com/translate/docs/),
-can dynamically translate text between thousands
-of language pairs. The Cloud Translation API lets websites and programs
-integrate with the translation service programmatically. The Cloud Translation
-API is part of the larger Cloud Machine Learning API family.
+
 
 ## Table of Contents
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Hybrid Glossaries](#hybrid-glossaries)
+  * [Translation_service.batch_translate_document](#translation_service.batch_translate_document)
+  * [Translation_service.batch_translate_text](#translation_service.batch_translate_text)
+  * [Translation_service.create_glossary](#translation_service.create_glossary)
+  * [Translation_service.delete_glossary](#translation_service.delete_glossary)
+  * [Translation_service.detect_language](#translation_service.detect_language)
+  * [Translation_service.get_glossary](#translation_service.get_glossary)
+  * [Translation_service.get_supported_languages](#translation_service.get_supported_languages)
+  * [Translation_service.list_glossaries](#translation_service.list_glossaries)
+  * [Translation_service.translate_document](#translation_service.translate_document)
+  * [Translation_service.translate_text](#translation_service.translate_text)
+  * [Translation_service.batch_translate_document](#translation_service.batch_translate_document)
+  * [Translation_service.batch_translate_text](#translation_service.batch_translate_text)
+  * [Translation_service.create_glossary](#translation_service.create_glossary)
+  * [Translation_service.delete_glossary](#translation_service.delete_glossary)
+  * [Translation_service.detect_language](#translation_service.detect_language)
+  * [Translation_service.get_glossary](#translation_service.get_glossary)
+  * [Translation_service.get_supported_languages](#translation_service.get_supported_languages)
+  * [Translation_service.list_glossaries](#translation_service.list_glossaries)
+  * [Translation_service.translate_document](#translation_service.translate_document)
+  * [Translation_service.translate_text](#translation_service.translate_text)
   * [Quickstart](#quickstart)
-  * [Translate](#translate)
+  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/nodejs-translate#using-the-client-library).
-
-### Choosing between Advanced v3 and Basic v2
-
-Basic supports language detection and text translation [Cloud Translation - Basic v2](https://cloud.google.com/translate/docs/editions#basic).
-
-The advanced edition of [Cloud Translation - V3](https://cloud.google.com/translate/docs/editions#advanced) is optimized for customization and long form content use cases including glossary, batch, and model selection.
-
-### Translate V3 Beta Samples
-
-#### Install Dependencies
-
-From the [root directory](https://github.com/googleapis/nodejs-translate) of the client library install the dependencies:
-
-```
-npm install
-```
-
-Change to the samples directory, link the google-cloud/translate library from the parent, and install its dependencies:
-
-```
-cd samples/
-npm link ../
-npm install
-```
-
-#### Run the Tests
-
-To run the tests for the entire sample, run
-
-```
-npm test
-```
-
-To run the tests for only the translate v3 samples, run
-
-```
-npm run test-v3
-```
-
-To run the tests for a single translate v3 sample, run this command, substituting FILE_NAME with the name of a valid test file.
-
-```
-./node_modules/.bin/mocha test/v3beta1/FILE_NAME
-```
-
-For example, to test the `translate_list_language_names_beta` sample, the command would be
-
-```
-./node_modules/.bin/mocha test/v3beta1/translate_list_language_names_beta.test.js
-```
-
-To run a sample directly, call the file with the `node` command and any required CLI arguments:
-
-```
-node v3beta1/FILE_NAME <CLI argument 0> <CLI argument 1>
-```
-
-For example, to run the `translate_list_codes_beta` sample, you would run the following command, substituting your project ID in place of "your_project_id"
-
-```
-node v3beta1/translate_list_codes_beta.js "your_project_id"
-```
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -97,16 +50,339 @@ node v3beta1/translate_list_codes_beta.js "your_project_id"
 
 
 
-### Hybrid Glossaries
+### Translation_service.batch_translate_document
 
-View the [source code](https://github.com/googleapis/nodejs-translate/blob/main/samples/hybridGlossaries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.batch_translate_document.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-translate&page=editor&open_in_editor=samples/hybridGlossaries.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.batch_translate_document.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/hybridGlossaries.js`
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.batch_translate_document.js`
+
+
+-----
+
+
+
+
+### Translation_service.batch_translate_text
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.batch_translate_text.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.batch_translate_text.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.batch_translate_text.js`
+
+
+-----
+
+
+
+
+### Translation_service.create_glossary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.create_glossary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.create_glossary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.create_glossary.js`
+
+
+-----
+
+
+
+
+### Translation_service.delete_glossary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.delete_glossary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.delete_glossary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.delete_glossary.js`
+
+
+-----
+
+
+
+
+### Translation_service.detect_language
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.detect_language.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.detect_language.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.detect_language.js`
+
+
+-----
+
+
+
+
+### Translation_service.get_glossary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.get_glossary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.get_glossary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.get_glossary.js`
+
+
+-----
+
+
+
+
+### Translation_service.get_supported_languages
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.get_supported_languages.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.get_supported_languages.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.get_supported_languages.js`
+
+
+-----
+
+
+
+
+### Translation_service.list_glossaries
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.list_glossaries.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.list_glossaries.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.list_glossaries.js`
+
+
+-----
+
+
+
+
+### Translation_service.translate_document
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.translate_document.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.translate_document.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.translate_document.js`
+
+
+-----
+
+
+
+
+### Translation_service.translate_text
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3/translation_service.translate_text.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3/translation_service.translate_text.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3/translation_service.translate_text.js`
+
+
+-----
+
+
+
+
+### Translation_service.batch_translate_document
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.batch_translate_document.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.batch_translate_document.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3beta1/translation_service.batch_translate_document.js`
+
+
+-----
+
+
+
+
+### Translation_service.batch_translate_text
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.batch_translate_text.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.batch_translate_text.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3beta1/translation_service.batch_translate_text.js`
+
+
+-----
+
+
+
+
+### Translation_service.create_glossary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.create_glossary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.create_glossary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3beta1/translation_service.create_glossary.js`
+
+
+-----
+
+
+
+
+### Translation_service.delete_glossary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.delete_glossary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.delete_glossary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3beta1/translation_service.delete_glossary.js`
+
+
+-----
+
+
+
+
+### Translation_service.detect_language
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.detect_language.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.detect_language.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3beta1/translation_service.detect_language.js`
+
+
+-----
+
+
+
+
+### Translation_service.get_glossary
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_glossary.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_glossary.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_glossary.js`
+
+
+-----
+
+
+
+
+### Translation_service.get_supported_languages
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_supported_languages.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_supported_languages.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_supported_languages.js`
+
+
+-----
+
+
+
+
+### Translation_service.list_glossaries
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.list_glossaries.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.list_glossaries.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3beta1/translation_service.list_glossaries.js`
+
+
+-----
+
+
+
+
+### Translation_service.translate_document
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_document.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_document.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_document.js`
+
+
+-----
+
+
+
+
+### Translation_service.translate_text
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_text.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_text.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_text.js`
 
 
 -----
@@ -116,14 +392,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-translate/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-translate&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node packages/google-cloud-translate/samples/quickstart.js`
 
 
 -----
@@ -131,16 +407,16 @@ __Usage:__
 
 
 
-### Translate
+### Quickstart.test
 
-View the [source code](https://github.com/googleapis/nodejs-translate/blob/main/samples/translate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/test/quickstart.test.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-translate&page=editor&open_in_editor=samples/translate.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-translate/samples/test/quickstart.test.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/translate.js`
+`node packages/google-cloud-translate/samples/test/quickstart.test.js`
 
 
 
@@ -148,5 +424,5 @@ __Usage:__
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-translate&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
 [product-docs]: https://cloud.google.com/translate/docs/
