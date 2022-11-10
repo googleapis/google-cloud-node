@@ -1060,6 +1060,11 @@
                       },
                       "nested": {
                         "TelecommutePreference": {
+                          "valuesOptions": {
+                            "TELECOMMUTE_EXCLUDED": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "TELECOMMUTE_PREFERENCE_UNSPECIFIED": 0,
                             "TELECOMMUTE_EXCLUDED": 1,
@@ -3348,6 +3353,11 @@
                       },
                       "nested": {
                         "TelecommutePreference": {
+                          "valuesOptions": {
+                            "TELECOMMUTE_EXCLUDED": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "TELECOMMUTE_PREFERENCE_UNSPECIFIED": 0,
                             "TELECOMMUTE_EXCLUDED": 1,

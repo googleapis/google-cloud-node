@@ -813,6 +813,12 @@
                                 return object;
                             var message = new $root.google.cloud.talent.v4.Location();
                             switch (object.locationType) {
+                            default:
+                                if (typeof object.locationType === "number") {
+                                    message.locationType = object.locationType;
+                                    break;
+                                }
+                                break;
                             case "LOCATION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.locationType = 0;
@@ -893,7 +899,7 @@
                                 object.radiusMiles = 0;
                             }
                             if (message.locationType != null && message.hasOwnProperty("locationType"))
-                                object.locationType = options.enums === String ? $root.google.cloud.talent.v4.Location.LocationType[message.locationType] : message.locationType;
+                                object.locationType = options.enums === String ? $root.google.cloud.talent.v4.Location.LocationType[message.locationType] === undefined ? message.locationType : $root.google.cloud.talent.v4.Location.LocationType[message.locationType] : message.locationType;
                             if (message.postalAddress != null && message.hasOwnProperty("postalAddress"))
                                 object.postalAddress = $root.google.type.PostalAddress.toObject(message.postalAddress, options);
                             if (message.latLng != null && message.hasOwnProperty("latLng"))
@@ -1646,6 +1652,12 @@
                                 return object;
                             var message = new $root.google.cloud.talent.v4.DeviceInfo();
                             switch (object.deviceType) {
+                            default:
+                                if (typeof object.deviceType === "number") {
+                                    message.deviceType = object.deviceType;
+                                    break;
+                                }
+                                break;
                             case "DEVICE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.deviceType = 0;
@@ -1698,7 +1710,7 @@
                                 object.id = "";
                             }
                             if (message.deviceType != null && message.hasOwnProperty("deviceType"))
-                                object.deviceType = options.enums === String ? $root.google.cloud.talent.v4.DeviceInfo.DeviceType[message.deviceType] : message.deviceType;
+                                object.deviceType = options.enums === String ? $root.google.cloud.talent.v4.DeviceInfo.DeviceType[message.deviceType] === undefined ? message.deviceType : $root.google.cloud.talent.v4.DeviceInfo.DeviceType[message.deviceType] : message.deviceType;
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
                             return object;
@@ -2903,6 +2915,12 @@
                                     return object;
                                 var message = new $root.google.cloud.talent.v4.CompensationInfo.CompensationEntry();
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "COMPENSATION_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -2941,6 +2959,12 @@
                                     break;
                                 }
                                 switch (object.unit) {
+                                default:
+                                    if (typeof object.unit === "number") {
+                                        message.unit = object.unit;
+                                        break;
+                                    }
+                                    break;
                                 case "COMPENSATION_UNIT_UNSPECIFIED":
                                 case 0:
                                     message.unit = 0;
@@ -3014,9 +3038,9 @@
                                     object.expectedUnitsPerYear = null;
                                 }
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.talent.v4.CompensationInfo.CompensationType[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.talent.v4.CompensationInfo.CompensationType[message.type] === undefined ? message.type : $root.google.cloud.talent.v4.CompensationInfo.CompensationType[message.type] : message.type;
                                 if (message.unit != null && message.hasOwnProperty("unit"))
-                                    object.unit = options.enums === String ? $root.google.cloud.talent.v4.CompensationInfo.CompensationUnit[message.unit] : message.unit;
+                                    object.unit = options.enums === String ? $root.google.cloud.talent.v4.CompensationInfo.CompensationUnit[message.unit] === undefined ? message.unit : $root.google.cloud.talent.v4.CompensationInfo.CompensationUnit[message.unit] : message.unit;
                                 if (message.amount != null && message.hasOwnProperty("amount")) {
                                     object.amount = $root.google.type.Money.toObject(message.amount, options);
                                     if (options.oneofs)
@@ -3649,6 +3673,12 @@
                                 return object;
                             var message = new $root.google.cloud.talent.v4.BatchOperationMetadata();
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -3728,7 +3758,7 @@
                                 object.endTime = null;
                             }
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.talent.v4.BatchOperationMetadata.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.talent.v4.BatchOperationMetadata.State[message.state] === undefined ? message.state : $root.google.cloud.talent.v4.BatchOperationMetadata.State[message.state] : message.state;
                             if (message.stateDescription != null && message.hasOwnProperty("stateDescription"))
                                 object.stateDescription = message.stateDescription;
                             if (message.successCount != null && message.hasOwnProperty("successCount"))
@@ -4192,6 +4222,12 @@
                             if (object.externalId != null)
                                 message.externalId = String(object.externalId);
                             switch (object.size) {
+                            default:
+                                if (typeof object.size === "number") {
+                                    message.size = object.size;
+                                    break;
+                                }
+                                break;
                             case "COMPANY_SIZE_UNSPECIFIED":
                             case 0:
                                 message.size = 0;
@@ -4290,7 +4326,7 @@
                             if (message.externalId != null && message.hasOwnProperty("externalId"))
                                 object.externalId = message.externalId;
                             if (message.size != null && message.hasOwnProperty("size"))
-                                object.size = options.enums === String ? $root.google.cloud.talent.v4.CompanySize[message.size] : message.size;
+                                object.size = options.enums === String ? $root.google.cloud.talent.v4.CompanySize[message.size] === undefined ? message.size : $root.google.cloud.talent.v4.CompanySize[message.size] : message.size;
                             if (message.headquartersAddress != null && message.hasOwnProperty("headquartersAddress"))
                                 object.headquartersAddress = message.headquartersAddress;
                             if (message.hiringAgency != null && message.hasOwnProperty("hiringAgency"))
@@ -6539,6 +6575,12 @@
                             if (object.company != null)
                                 message.company = String(object.company);
                             switch (object.scope) {
+                            default:
+                                if (typeof object.scope === "number") {
+                                    message.scope = object.scope;
+                                    break;
+                                }
+                                break;
                             case "COMPLETION_SCOPE_UNSPECIFIED":
                             case 0:
                                 message.scope = 0;
@@ -6553,6 +6595,12 @@
                                 break;
                             }
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "COMPLETION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -6610,9 +6658,9 @@
                             if (message.company != null && message.hasOwnProperty("company"))
                                 object.company = message.company;
                             if (message.scope != null && message.hasOwnProperty("scope"))
-                                object.scope = options.enums === String ? $root.google.cloud.talent.v4.CompleteQueryRequest.CompletionScope[message.scope] : message.scope;
+                                object.scope = options.enums === String ? $root.google.cloud.talent.v4.CompleteQueryRequest.CompletionScope[message.scope] === undefined ? message.scope : $root.google.cloud.talent.v4.CompleteQueryRequest.CompletionScope[message.scope] : message.scope;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.talent.v4.CompleteQueryRequest.CompletionType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.talent.v4.CompleteQueryRequest.CompletionType[message.type] === undefined ? message.type : $root.google.cloud.talent.v4.CompleteQueryRequest.CompletionType[message.type] : message.type;
                             return object;
                         };
     
@@ -7124,6 +7172,12 @@
                                 if (object.suggestion != null)
                                     message.suggestion = String(object.suggestion);
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "COMPLETION_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -7167,7 +7221,7 @@
                                 if (message.suggestion != null && message.hasOwnProperty("suggestion"))
                                     object.suggestion = message.suggestion;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.talent.v4.CompleteQueryRequest.CompletionType[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.talent.v4.CompleteQueryRequest.CompletionType[message.type] === undefined ? message.type : $root.google.cloud.talent.v4.CompleteQueryRequest.CompletionType[message.type] : message.type;
                                 if (message.imageUri != null && message.hasOwnProperty("imageUri"))
                                     object.imageUri = message.imageUri;
                                 return object;
@@ -7726,6 +7780,12 @@
                                 return object;
                             var message = new $root.google.cloud.talent.v4.JobEvent();
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "JOB_EVENT_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -7819,7 +7879,7 @@
                             if (options.defaults)
                                 object.type = options.enums === String ? "JOB_EVENT_TYPE_UNSPECIFIED" : 0;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.talent.v4.JobEvent.JobEventType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.talent.v4.JobEvent.JobEventType[message.type] === undefined ? message.type : $root.google.cloud.talent.v4.JobEvent.JobEventType[message.type] : message.type;
                             if (message.jobs && message.jobs.length) {
                                 object.jobs = [];
                                 for (var j = 0; j < message.jobs.length; ++j)
@@ -8738,6 +8798,10 @@
                                 for (var i = 0; i < object.jobCategories.length; ++i)
                                     switch (object.jobCategories[i]) {
                                     default:
+                                        if (typeof object.jobCategories[i] === "number") {
+                                            message.jobCategories[i] = object.jobCategories[i];
+                                            break;
+                                        }
                                     case "JOB_CATEGORY_UNSPECIFIED":
                                     case 0:
                                         message.jobCategories[i] = 0;
@@ -8892,6 +8956,10 @@
                                 for (var i = 0; i < object.employmentTypes.length; ++i)
                                     switch (object.employmentTypes[i]) {
                                     default:
+                                        if (typeof object.employmentTypes[i] === "number") {
+                                            message.employmentTypes[i] = object.employmentTypes[i];
+                                            break;
+                                        }
                                     case "EMPLOYMENT_TYPE_UNSPECIFIED":
                                     case 0:
                                         message.employmentTypes[i] = 0;
@@ -9006,7 +9074,7 @@
                             if (message.jobCategories && message.jobCategories.length) {
                                 object.jobCategories = [];
                                 for (var j = 0; j < message.jobCategories.length; ++j)
-                                    object.jobCategories[j] = options.enums === String ? $root.google.cloud.talent.v4.JobCategory[message.jobCategories[j]] : message.jobCategories[j];
+                                    object.jobCategories[j] = options.enums === String ? $root.google.cloud.talent.v4.JobCategory[message.jobCategories[j]] === undefined ? message.jobCategories[j] : $root.google.cloud.talent.v4.JobCategory[message.jobCategories[j]] : message.jobCategories[j];
                             }
                             if (message.commuteFilter != null && message.hasOwnProperty("commuteFilter"))
                                 object.commuteFilter = $root.google.cloud.talent.v4.CommuteFilter.toObject(message.commuteFilter, options);
@@ -9024,7 +9092,7 @@
                             if (message.employmentTypes && message.employmentTypes.length) {
                                 object.employmentTypes = [];
                                 for (var j = 0; j < message.employmentTypes.length; ++j)
-                                    object.employmentTypes[j] = options.enums === String ? $root.google.cloud.talent.v4.EmploymentType[message.employmentTypes[j]] : message.employmentTypes[j];
+                                    object.employmentTypes[j] = options.enums === String ? $root.google.cloud.talent.v4.EmploymentType[message.employmentTypes[j]] === undefined ? message.employmentTypes[j] : $root.google.cloud.talent.v4.EmploymentType[message.employmentTypes[j]] : message.employmentTypes[j];
                             }
                             if (message.languageCodes && message.languageCodes.length) {
                                 object.languageCodes = [];
@@ -9314,6 +9382,12 @@
                             if (object.distanceInMiles != null)
                                 message.distanceInMiles = Number(object.distanceInMiles);
                             switch (object.telecommutePreference) {
+                            default:
+                                if (typeof object.telecommutePreference === "number") {
+                                    message.telecommutePreference = object.telecommutePreference;
+                                    break;
+                                }
+                                break;
                             case "TELECOMMUTE_PREFERENCE_UNSPECIFIED":
                             case 0:
                                 message.telecommutePreference = 0;
@@ -9363,7 +9437,7 @@
                             if (message.distanceInMiles != null && message.hasOwnProperty("distanceInMiles"))
                                 object.distanceInMiles = options.json && !isFinite(message.distanceInMiles) ? String(message.distanceInMiles) : message.distanceInMiles;
                             if (message.telecommutePreference != null && message.hasOwnProperty("telecommutePreference"))
-                                object.telecommutePreference = options.enums === String ? $root.google.cloud.talent.v4.LocationFilter.TelecommutePreference[message.telecommutePreference] : message.telecommutePreference;
+                                object.telecommutePreference = options.enums === String ? $root.google.cloud.talent.v4.LocationFilter.TelecommutePreference[message.telecommutePreference] === undefined ? message.telecommutePreference : $root.google.cloud.talent.v4.LocationFilter.TelecommutePreference[message.telecommutePreference] : message.telecommutePreference;
                             return object;
                         };
     
@@ -9655,6 +9729,12 @@
                                 return object;
                             var message = new $root.google.cloud.talent.v4.CompensationFilter();
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "FILTER_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -9683,6 +9763,10 @@
                                 for (var i = 0; i < object.units.length; ++i)
                                     switch (object.units[i]) {
                                     default:
+                                        if (typeof object.units[i] === "number") {
+                                            message.units[i] = object.units[i];
+                                            break;
+                                        }
                                     case "COMPENSATION_UNIT_UNSPECIFIED":
                                     case 0:
                                         message.units[i] = 0;
@@ -9748,11 +9832,11 @@
                                 object.includeJobsWithUnspecifiedCompensationRange = false;
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.talent.v4.CompensationFilter.FilterType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.talent.v4.CompensationFilter.FilterType[message.type] === undefined ? message.type : $root.google.cloud.talent.v4.CompensationFilter.FilterType[message.type] : message.type;
                             if (message.units && message.units.length) {
                                 object.units = [];
                                 for (var j = 0; j < message.units.length; ++j)
-                                    object.units[j] = options.enums === String ? $root.google.cloud.talent.v4.CompensationInfo.CompensationUnit[message.units[j]] : message.units[j];
+                                    object.units[j] = options.enums === String ? $root.google.cloud.talent.v4.CompensationInfo.CompensationUnit[message.units[j]] === undefined ? message.units[j] : $root.google.cloud.talent.v4.CompensationInfo.CompensationUnit[message.units[j]] : message.units[j];
                             }
                             if (message.range != null && message.hasOwnProperty("range"))
                                 object.range = $root.google.cloud.talent.v4.CompensationInfo.CompensationRange.toObject(message.range, options);
@@ -10093,6 +10177,12 @@
                                 return object;
                             var message = new $root.google.cloud.talent.v4.CommuteFilter();
                             switch (object.commuteMethod) {
+                            default:
+                                if (typeof object.commuteMethod === "number") {
+                                    message.commuteMethod = object.commuteMethod;
+                                    break;
+                                }
+                                break;
                             case "COMMUTE_METHOD_UNSPECIFIED":
                             case 0:
                                 message.commuteMethod = 0;
@@ -10131,6 +10221,12 @@
                             if (object.allowImpreciseAddresses != null)
                                 message.allowImpreciseAddresses = Boolean(object.allowImpreciseAddresses);
                             switch (object.roadTraffic) {
+                            default:
+                                if (typeof object.roadTraffic === "number") {
+                                    message.roadTraffic = object.roadTraffic;
+                                    break;
+                                }
+                                break;
                             case "ROAD_TRAFFIC_UNSPECIFIED":
                             case 0:
                                 message.roadTraffic = 0;
@@ -10172,7 +10268,7 @@
                                 object.allowImpreciseAddresses = false;
                             }
                             if (message.commuteMethod != null && message.hasOwnProperty("commuteMethod"))
-                                object.commuteMethod = options.enums === String ? $root.google.cloud.talent.v4.CommuteMethod[message.commuteMethod] : message.commuteMethod;
+                                object.commuteMethod = options.enums === String ? $root.google.cloud.talent.v4.CommuteMethod[message.commuteMethod] === undefined ? message.commuteMethod : $root.google.cloud.talent.v4.CommuteMethod[message.commuteMethod] : message.commuteMethod;
                             if (message.startCoordinates != null && message.hasOwnProperty("startCoordinates"))
                                 object.startCoordinates = $root.google.type.LatLng.toObject(message.startCoordinates, options);
                             if (message.travelDuration != null && message.hasOwnProperty("travelDuration"))
@@ -10180,7 +10276,7 @@
                             if (message.allowImpreciseAddresses != null && message.hasOwnProperty("allowImpreciseAddresses"))
                                 object.allowImpreciseAddresses = message.allowImpreciseAddresses;
                             if (message.roadTraffic != null && message.hasOwnProperty("roadTraffic")) {
-                                object.roadTraffic = options.enums === String ? $root.google.cloud.talent.v4.CommuteFilter.RoadTraffic[message.roadTraffic] : message.roadTraffic;
+                                object.roadTraffic = options.enums === String ? $root.google.cloud.talent.v4.CommuteFilter.RoadTraffic[message.roadTraffic] === undefined ? message.roadTraffic : $root.google.cloud.talent.v4.CommuteFilter.RoadTraffic[message.roadTraffic] : message.roadTraffic;
                                 if (options.oneofs)
                                     object.trafficOption = "roadTraffic";
                             }
@@ -11582,6 +11678,10 @@
                                 for (var i = 0; i < object.jobBenefits.length; ++i)
                                     switch (object.jobBenefits[i]) {
                                     default:
+                                        if (typeof object.jobBenefits[i] === "number") {
+                                            message.jobBenefits[i] = object.jobBenefits[i];
+                                            break;
+                                        }
                                     case "JOB_BENEFIT_UNSPECIFIED":
                                     case 0:
                                         message.jobBenefits[i] = 0;
@@ -11654,6 +11754,10 @@
                                 for (var i = 0; i < object.degreeTypes.length; ++i)
                                     switch (object.degreeTypes[i]) {
                                     default:
+                                        if (typeof object.degreeTypes[i] === "number") {
+                                            message.degreeTypes[i] = object.degreeTypes[i];
+                                            break;
+                                        }
                                     case "DEGREE_TYPE_UNSPECIFIED":
                                     case 0:
                                         message.degreeTypes[i] = 0;
@@ -11701,6 +11805,10 @@
                                 for (var i = 0; i < object.employmentTypes.length; ++i)
                                     switch (object.employmentTypes[i]) {
                                     default:
+                                        if (typeof object.employmentTypes[i] === "number") {
+                                            message.employmentTypes[i] = object.employmentTypes[i];
+                                            break;
+                                        }
                                     case "EMPLOYMENT_TYPE_UNSPECIFIED":
                                     case 0:
                                         message.employmentTypes[i] = 0;
@@ -11752,6 +11860,12 @@
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
                             switch (object.jobLevel) {
+                            default:
+                                if (typeof object.jobLevel === "number") {
+                                    message.jobLevel = object.jobLevel;
+                                    break;
+                                }
+                                break;
                             case "JOB_LEVEL_UNSPECIFIED":
                             case 0:
                                 message.jobLevel = 0;
@@ -11784,6 +11898,12 @@
                             if (object.responsibilities != null)
                                 message.responsibilities = String(object.responsibilities);
                             switch (object.postingRegion) {
+                            default:
+                                if (typeof object.postingRegion === "number") {
+                                    message.postingRegion = object.postingRegion;
+                                    break;
+                                }
+                                break;
                             case "POSTING_REGION_UNSPECIFIED":
                             case 0:
                                 message.postingRegion = 0;
@@ -11802,6 +11922,12 @@
                                 break;
                             }
                             switch (object.visibility) {
+                            default:
+                                if (typeof object.visibility === "number") {
+                                    message.visibility = object.visibility;
+                                    break;
+                                }
+                                break;
                             case "VISIBILITY_UNSPECIFIED":
                             case 0:
                                 message.visibility = 0;
@@ -11932,7 +12058,7 @@
                             if (message.jobBenefits && message.jobBenefits.length) {
                                 object.jobBenefits = [];
                                 for (var j = 0; j < message.jobBenefits.length; ++j)
-                                    object.jobBenefits[j] = options.enums === String ? $root.google.cloud.talent.v4.JobBenefit[message.jobBenefits[j]] : message.jobBenefits[j];
+                                    object.jobBenefits[j] = options.enums === String ? $root.google.cloud.talent.v4.JobBenefit[message.jobBenefits[j]] === undefined ? message.jobBenefits[j] : $root.google.cloud.talent.v4.JobBenefit[message.jobBenefits[j]] : message.jobBenefits[j];
                             }
                             if (message.compensationInfo != null && message.hasOwnProperty("compensationInfo"))
                                 object.compensationInfo = $root.google.cloud.talent.v4.CompensationInfo.toObject(message.compensationInfo, options);
@@ -11945,21 +12071,21 @@
                             if (message.degreeTypes && message.degreeTypes.length) {
                                 object.degreeTypes = [];
                                 for (var j = 0; j < message.degreeTypes.length; ++j)
-                                    object.degreeTypes[j] = options.enums === String ? $root.google.cloud.talent.v4.DegreeType[message.degreeTypes[j]] : message.degreeTypes[j];
+                                    object.degreeTypes[j] = options.enums === String ? $root.google.cloud.talent.v4.DegreeType[message.degreeTypes[j]] === undefined ? message.degreeTypes[j] : $root.google.cloud.talent.v4.DegreeType[message.degreeTypes[j]] : message.degreeTypes[j];
                             }
                             if (message.department != null && message.hasOwnProperty("department"))
                                 object.department = message.department;
                             if (message.employmentTypes && message.employmentTypes.length) {
                                 object.employmentTypes = [];
                                 for (var j = 0; j < message.employmentTypes.length; ++j)
-                                    object.employmentTypes[j] = options.enums === String ? $root.google.cloud.talent.v4.EmploymentType[message.employmentTypes[j]] : message.employmentTypes[j];
+                                    object.employmentTypes[j] = options.enums === String ? $root.google.cloud.talent.v4.EmploymentType[message.employmentTypes[j]] === undefined ? message.employmentTypes[j] : $root.google.cloud.talent.v4.EmploymentType[message.employmentTypes[j]] : message.employmentTypes[j];
                             }
                             if (message.incentives != null && message.hasOwnProperty("incentives"))
                                 object.incentives = message.incentives;
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
                             if (message.jobLevel != null && message.hasOwnProperty("jobLevel"))
-                                object.jobLevel = options.enums === String ? $root.google.cloud.talent.v4.JobLevel[message.jobLevel] : message.jobLevel;
+                                object.jobLevel = options.enums === String ? $root.google.cloud.talent.v4.JobLevel[message.jobLevel] === undefined ? message.jobLevel : $root.google.cloud.talent.v4.JobLevel[message.jobLevel] : message.jobLevel;
                             if (message.promotionValue != null && message.hasOwnProperty("promotionValue"))
                                 object.promotionValue = message.promotionValue;
                             if (message.qualifications != null && message.hasOwnProperty("qualifications"))
@@ -11967,9 +12093,9 @@
                             if (message.responsibilities != null && message.hasOwnProperty("responsibilities"))
                                 object.responsibilities = message.responsibilities;
                             if (message.postingRegion != null && message.hasOwnProperty("postingRegion"))
-                                object.postingRegion = options.enums === String ? $root.google.cloud.talent.v4.PostingRegion[message.postingRegion] : message.postingRegion;
+                                object.postingRegion = options.enums === String ? $root.google.cloud.talent.v4.PostingRegion[message.postingRegion] === undefined ? message.postingRegion : $root.google.cloud.talent.v4.PostingRegion[message.postingRegion] : message.postingRegion;
                             if (message.visibility != null && message.hasOwnProperty("visibility"))
-                                object.visibility = options.enums === String ? $root.google.cloud.talent.v4.Visibility[message.visibility] : message.visibility;
+                                object.visibility = options.enums === String ? $root.google.cloud.talent.v4.Visibility[message.visibility] === undefined ? message.visibility : $root.google.cloud.talent.v4.Visibility[message.visibility] : message.visibility;
                             if (message.jobStartTime != null && message.hasOwnProperty("jobStartTime"))
                                 object.jobStartTime = $root.google.protobuf.Timestamp.toObject(message.jobStartTime, options);
                             if (message.jobEndTime != null && message.hasOwnProperty("jobEndTime"))
@@ -12544,6 +12670,10 @@
                                     for (var i = 0; i < object.jobCategories.length; ++i)
                                         switch (object.jobCategories[i]) {
                                         default:
+                                            if (typeof object.jobCategories[i] === "number") {
+                                                message.jobCategories[i] = object.jobCategories[i];
+                                                break;
+                                            }
                                         case "JOB_CATEGORY_UNSPECIFIED":
                                         case 0:
                                             message.jobCategories[i] = 0;
@@ -12698,7 +12828,7 @@
                                 if (message.jobCategories && message.jobCategories.length) {
                                     object.jobCategories = [];
                                     for (var j = 0; j < message.jobCategories.length; ++j)
-                                        object.jobCategories[j] = options.enums === String ? $root.google.cloud.talent.v4.JobCategory[message.jobCategories[j]] : message.jobCategories[j];
+                                        object.jobCategories[j] = options.enums === String ? $root.google.cloud.talent.v4.JobCategory[message.jobCategories[j]] === undefined ? message.jobCategories[j] : $root.google.cloud.talent.v4.JobCategory[message.jobCategories[j]] : message.jobCategories[j];
                                 }
                                 return object;
                             };
@@ -12908,6 +13038,12 @@
                                 if (object.disableStreetAddressResolution != null)
                                     message.disableStreetAddressResolution = Boolean(object.disableStreetAddressResolution);
                                 switch (object.htmlSanitization) {
+                                default:
+                                    if (typeof object.htmlSanitization === "number") {
+                                        message.htmlSanitization = object.htmlSanitization;
+                                        break;
+                                    }
+                                    break;
                                 case "HTML_SANITIZATION_UNSPECIFIED":
                                 case 0:
                                     message.htmlSanitization = 0;
@@ -12944,7 +13080,7 @@
                                 if (message.disableStreetAddressResolution != null && message.hasOwnProperty("disableStreetAddressResolution"))
                                     object.disableStreetAddressResolution = message.disableStreetAddressResolution;
                                 if (message.htmlSanitization != null && message.hasOwnProperty("htmlSanitization"))
-                                    object.htmlSanitization = options.enums === String ? $root.google.cloud.talent.v4.HtmlSanitization[message.htmlSanitization] : message.htmlSanitization;
+                                    object.htmlSanitization = options.enums === String ? $root.google.cloud.talent.v4.HtmlSanitization[message.htmlSanitization] === undefined ? message.htmlSanitization : $root.google.cloud.talent.v4.HtmlSanitization[message.htmlSanitization] : message.htmlSanitization;
                                 return object;
                             };
     
@@ -14478,6 +14614,12 @@
                             if (object.pageSize != null)
                                 message.pageSize = object.pageSize | 0;
                             switch (object.jobView) {
+                            default:
+                                if (typeof object.jobView === "number") {
+                                    message.jobView = object.jobView;
+                                    break;
+                                }
+                                break;
                             case "JOB_VIEW_UNSPECIFIED":
                             case 0:
                                 message.jobView = 0;
@@ -14531,7 +14673,7 @@
                             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                                 object.pageSize = message.pageSize;
                             if (message.jobView != null && message.hasOwnProperty("jobView"))
-                                object.jobView = options.enums === String ? $root.google.cloud.talent.v4.JobView[message.jobView] : message.jobView;
+                                object.jobView = options.enums === String ? $root.google.cloud.talent.v4.JobView[message.jobView] === undefined ? message.jobView : $root.google.cloud.talent.v4.JobView[message.jobView] : message.jobView;
                             return object;
                         };
     
@@ -15291,6 +15433,12 @@
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             switch (object.searchMode) {
+                            default:
+                                if (typeof object.searchMode === "number") {
+                                    message.searchMode = object.searchMode;
+                                    break;
+                                }
+                                break;
                             case "SEARCH_MODE_UNSPECIFIED":
                             case 0:
                                 message.searchMode = 0;
@@ -15327,6 +15475,12 @@
                                 }
                             }
                             switch (object.jobView) {
+                            default:
+                                if (typeof object.jobView === "number") {
+                                    message.jobView = object.jobView;
+                                    break;
+                                }
+                                break;
                             case "JOB_VIEW_UNSPECIFIED":
                             case 0:
                                 message.jobView = 0;
@@ -15357,6 +15511,12 @@
                             if (object.orderBy != null)
                                 message.orderBy = String(object.orderBy);
                             switch (object.diversificationLevel) {
+                            default:
+                                if (typeof object.diversificationLevel === "number") {
+                                    message.diversificationLevel = object.diversificationLevel;
+                                    break;
+                                }
+                                break;
                             case "DIVERSIFICATION_LEVEL_UNSPECIFIED":
                             case 0:
                                 message.diversificationLevel = 0;
@@ -15390,6 +15550,12 @@
                             if (object.disableKeywordMatch != null)
                                 message.disableKeywordMatch = Boolean(object.disableKeywordMatch);
                             switch (object.keywordMatchMode) {
+                            default:
+                                if (typeof object.keywordMatchMode === "number") {
+                                    message.keywordMatchMode = object.keywordMatchMode;
+                                    break;
+                                }
+                                break;
                             case "KEYWORD_MATCH_MODE_UNSPECIFIED":
                             case 0:
                                 message.keywordMatchMode = 0;
@@ -15444,7 +15610,7 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             if (message.searchMode != null && message.hasOwnProperty("searchMode"))
-                                object.searchMode = options.enums === String ? $root.google.cloud.talent.v4.SearchJobsRequest.SearchMode[message.searchMode] : message.searchMode;
+                                object.searchMode = options.enums === String ? $root.google.cloud.talent.v4.SearchJobsRequest.SearchMode[message.searchMode] === undefined ? message.searchMode : $root.google.cloud.talent.v4.SearchJobsRequest.SearchMode[message.searchMode] : message.searchMode;
                             if (message.requestMetadata != null && message.hasOwnProperty("requestMetadata"))
                                 object.requestMetadata = $root.google.cloud.talent.v4.RequestMetadata.toObject(message.requestMetadata, options);
                             if (message.jobQuery != null && message.hasOwnProperty("jobQuery"))
@@ -15457,7 +15623,7 @@
                                     object.histogramQueries[j] = $root.google.cloud.talent.v4.HistogramQuery.toObject(message.histogramQueries[j], options);
                             }
                             if (message.jobView != null && message.hasOwnProperty("jobView"))
-                                object.jobView = options.enums === String ? $root.google.cloud.talent.v4.JobView[message.jobView] : message.jobView;
+                                object.jobView = options.enums === String ? $root.google.cloud.talent.v4.JobView[message.jobView] === undefined ? message.jobView : $root.google.cloud.talent.v4.JobView[message.jobView] : message.jobView;
                             if (message.offset != null && message.hasOwnProperty("offset"))
                                 object.offset = message.offset;
                             if (message.maxPageSize != null && message.hasOwnProperty("maxPageSize"))
@@ -15467,13 +15633,13 @@
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
                             if (message.diversificationLevel != null && message.hasOwnProperty("diversificationLevel"))
-                                object.diversificationLevel = options.enums === String ? $root.google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel[message.diversificationLevel] : message.diversificationLevel;
+                                object.diversificationLevel = options.enums === String ? $root.google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel[message.diversificationLevel] === undefined ? message.diversificationLevel : $root.google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel[message.diversificationLevel] : message.diversificationLevel;
                             if (message.customRankingInfo != null && message.hasOwnProperty("customRankingInfo"))
                                 object.customRankingInfo = $root.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.toObject(message.customRankingInfo, options);
                             if (message.disableKeywordMatch != null && message.hasOwnProperty("disableKeywordMatch"))
                                 object.disableKeywordMatch = message.disableKeywordMatch;
                             if (message.keywordMatchMode != null && message.hasOwnProperty("keywordMatchMode"))
-                                object.keywordMatchMode = options.enums === String ? $root.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode[message.keywordMatchMode] : message.keywordMatchMode;
+                                object.keywordMatchMode = options.enums === String ? $root.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode[message.keywordMatchMode] === undefined ? message.keywordMatchMode : $root.google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode[message.keywordMatchMode] : message.keywordMatchMode;
                             return object;
                         };
     
@@ -15737,6 +15903,12 @@
                                     return object;
                                 var message = new $root.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo();
                                 switch (object.importanceLevel) {
+                                default:
+                                    if (typeof object.importanceLevel === "number") {
+                                        message.importanceLevel = object.importanceLevel;
+                                        break;
+                                    }
+                                    break;
                                 case "IMPORTANCE_LEVEL_UNSPECIFIED":
                                 case 0:
                                     message.importanceLevel = 0;
@@ -15789,7 +15961,7 @@
                                     object.rankingExpression = "";
                                 }
                                 if (message.importanceLevel != null && message.hasOwnProperty("importanceLevel"))
-                                    object.importanceLevel = options.enums === String ? $root.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ImportanceLevel[message.importanceLevel] : message.importanceLevel;
+                                    object.importanceLevel = options.enums === String ? $root.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ImportanceLevel[message.importanceLevel] === undefined ? message.importanceLevel : $root.google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ImportanceLevel[message.importanceLevel] : message.importanceLevel;
                                 if (message.rankingExpression != null && message.hasOwnProperty("rankingExpression"))
                                     object.rankingExpression = message.rankingExpression;
                                 return object;
@@ -21097,6 +21269,12 @@
                                 return object;
                             var message = new $root.google.cloud.talent.v4beta1.Location();
                             switch (object.locationType) {
+                            default:
+                                if (typeof object.locationType === "number") {
+                                    message.locationType = object.locationType;
+                                    break;
+                                }
+                                break;
                             case "LOCATION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.locationType = 0;
@@ -21177,7 +21355,7 @@
                                 object.radiusMiles = 0;
                             }
                             if (message.locationType != null && message.hasOwnProperty("locationType"))
-                                object.locationType = options.enums === String ? $root.google.cloud.talent.v4beta1.Location.LocationType[message.locationType] : message.locationType;
+                                object.locationType = options.enums === String ? $root.google.cloud.talent.v4beta1.Location.LocationType[message.locationType] === undefined ? message.locationType : $root.google.cloud.talent.v4beta1.Location.LocationType[message.locationType] : message.locationType;
                             if (message.postalAddress != null && message.hasOwnProperty("postalAddress"))
                                 object.postalAddress = $root.google.type.PostalAddress.toObject(message.postalAddress, options);
                             if (message.latLng != null && message.hasOwnProperty("latLng"))
@@ -21930,6 +22108,12 @@
                                 return object;
                             var message = new $root.google.cloud.talent.v4beta1.DeviceInfo();
                             switch (object.deviceType) {
+                            default:
+                                if (typeof object.deviceType === "number") {
+                                    message.deviceType = object.deviceType;
+                                    break;
+                                }
+                                break;
                             case "DEVICE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.deviceType = 0;
@@ -21982,7 +22166,7 @@
                                 object.id = "";
                             }
                             if (message.deviceType != null && message.hasOwnProperty("deviceType"))
-                                object.deviceType = options.enums === String ? $root.google.cloud.talent.v4beta1.DeviceInfo.DeviceType[message.deviceType] : message.deviceType;
+                                object.deviceType = options.enums === String ? $root.google.cloud.talent.v4beta1.DeviceInfo.DeviceType[message.deviceType] === undefined ? message.deviceType : $root.google.cloud.talent.v4beta1.DeviceInfo.DeviceType[message.deviceType] : message.deviceType;
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
                             return object;
@@ -23187,6 +23371,12 @@
                                     return object;
                                 var message = new $root.google.cloud.talent.v4beta1.CompensationInfo.CompensationEntry();
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "COMPENSATION_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -23225,6 +23415,12 @@
                                     break;
                                 }
                                 switch (object.unit) {
+                                default:
+                                    if (typeof object.unit === "number") {
+                                        message.unit = object.unit;
+                                        break;
+                                    }
+                                    break;
                                 case "COMPENSATION_UNIT_UNSPECIFIED":
                                 case 0:
                                     message.unit = 0;
@@ -23298,9 +23494,9 @@
                                     object.expectedUnitsPerYear = null;
                                 }
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.talent.v4beta1.CompensationInfo.CompensationType[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.talent.v4beta1.CompensationInfo.CompensationType[message.type] === undefined ? message.type : $root.google.cloud.talent.v4beta1.CompensationInfo.CompensationType[message.type] : message.type;
                                 if (message.unit != null && message.hasOwnProperty("unit"))
-                                    object.unit = options.enums === String ? $root.google.cloud.talent.v4beta1.CompensationInfo.CompensationUnit[message.unit] : message.unit;
+                                    object.unit = options.enums === String ? $root.google.cloud.talent.v4beta1.CompensationInfo.CompensationUnit[message.unit] === undefined ? message.unit : $root.google.cloud.talent.v4beta1.CompensationInfo.CompensationUnit[message.unit] : message.unit;
                                 if (message.amount != null && message.hasOwnProperty("amount")) {
                                     object.amount = $root.google.type.Money.toObject(message.amount, options);
                                     if (options.oneofs)
@@ -23933,6 +24129,12 @@
                                 return object;
                             var message = new $root.google.cloud.talent.v4beta1.BatchOperationMetadata();
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -24012,7 +24214,7 @@
                                 object.endTime = null;
                             }
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.talent.v4beta1.BatchOperationMetadata.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.talent.v4beta1.BatchOperationMetadata.State[message.state] === undefined ? message.state : $root.google.cloud.talent.v4beta1.BatchOperationMetadata.State[message.state] : message.state;
                             if (message.stateDescription != null && message.hasOwnProperty("stateDescription"))
                                 object.stateDescription = message.stateDescription;
                             if (message.successCount != null && message.hasOwnProperty("successCount"))
@@ -24476,6 +24678,12 @@
                             if (object.externalId != null)
                                 message.externalId = String(object.externalId);
                             switch (object.size) {
+                            default:
+                                if (typeof object.size === "number") {
+                                    message.size = object.size;
+                                    break;
+                                }
+                                break;
                             case "COMPANY_SIZE_UNSPECIFIED":
                             case 0:
                                 message.size = 0;
@@ -24574,7 +24782,7 @@
                             if (message.externalId != null && message.hasOwnProperty("externalId"))
                                 object.externalId = message.externalId;
                             if (message.size != null && message.hasOwnProperty("size"))
-                                object.size = options.enums === String ? $root.google.cloud.talent.v4beta1.CompanySize[message.size] : message.size;
+                                object.size = options.enums === String ? $root.google.cloud.talent.v4beta1.CompanySize[message.size] === undefined ? message.size : $root.google.cloud.talent.v4beta1.CompanySize[message.size] : message.size;
                             if (message.headquartersAddress != null && message.hasOwnProperty("headquartersAddress"))
                                 object.headquartersAddress = message.headquartersAddress;
                             if (message.hiringAgency != null && message.hasOwnProperty("hiringAgency"))
@@ -26823,6 +27031,12 @@
                             if (object.company != null)
                                 message.company = String(object.company);
                             switch (object.scope) {
+                            default:
+                                if (typeof object.scope === "number") {
+                                    message.scope = object.scope;
+                                    break;
+                                }
+                                break;
                             case "COMPLETION_SCOPE_UNSPECIFIED":
                             case 0:
                                 message.scope = 0;
@@ -26837,6 +27051,12 @@
                                 break;
                             }
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "COMPLETION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -26894,9 +27114,9 @@
                             if (message.company != null && message.hasOwnProperty("company"))
                                 object.company = message.company;
                             if (message.scope != null && message.hasOwnProperty("scope"))
-                                object.scope = options.enums === String ? $root.google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionScope[message.scope] : message.scope;
+                                object.scope = options.enums === String ? $root.google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionScope[message.scope] === undefined ? message.scope : $root.google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionScope[message.scope] : message.scope;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionType[message.type] === undefined ? message.type : $root.google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionType[message.type] : message.type;
                             return object;
                         };
     
@@ -27408,6 +27628,12 @@
                                 if (object.suggestion != null)
                                     message.suggestion = String(object.suggestion);
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "COMPLETION_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -27451,7 +27677,7 @@
                                 if (message.suggestion != null && message.hasOwnProperty("suggestion"))
                                     object.suggestion = message.suggestion;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionType[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionType[message.type] === undefined ? message.type : $root.google.cloud.talent.v4beta1.CompleteQueryRequest.CompletionType[message.type] : message.type;
                                 if (message.imageUri != null && message.hasOwnProperty("imageUri"))
                                     object.imageUri = message.imageUri;
                                 return object;
@@ -28028,6 +28254,12 @@
                                 return object;
                             var message = new $root.google.cloud.talent.v4beta1.JobEvent();
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "JOB_EVENT_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -28125,7 +28357,7 @@
                                 object.profile = "";
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.talent.v4beta1.JobEvent.JobEventType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.talent.v4beta1.JobEvent.JobEventType[message.type] === undefined ? message.type : $root.google.cloud.talent.v4beta1.JobEvent.JobEventType[message.type] : message.type;
                             if (message.jobs && message.jobs.length) {
                                 object.jobs = [];
                                 for (var j = 0; j < message.jobs.length; ++j)
@@ -29046,6 +29278,10 @@
                                 for (var i = 0; i < object.jobCategories.length; ++i)
                                     switch (object.jobCategories[i]) {
                                     default:
+                                        if (typeof object.jobCategories[i] === "number") {
+                                            message.jobCategories[i] = object.jobCategories[i];
+                                            break;
+                                        }
                                     case "JOB_CATEGORY_UNSPECIFIED":
                                     case 0:
                                         message.jobCategories[i] = 0;
@@ -29200,6 +29436,10 @@
                                 for (var i = 0; i < object.employmentTypes.length; ++i)
                                     switch (object.employmentTypes[i]) {
                                     default:
+                                        if (typeof object.employmentTypes[i] === "number") {
+                                            message.employmentTypes[i] = object.employmentTypes[i];
+                                            break;
+                                        }
                                     case "EMPLOYMENT_TYPE_UNSPECIFIED":
                                     case 0:
                                         message.employmentTypes[i] = 0;
@@ -29314,7 +29554,7 @@
                             if (message.jobCategories && message.jobCategories.length) {
                                 object.jobCategories = [];
                                 for (var j = 0; j < message.jobCategories.length; ++j)
-                                    object.jobCategories[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.JobCategory[message.jobCategories[j]] : message.jobCategories[j];
+                                    object.jobCategories[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.JobCategory[message.jobCategories[j]] === undefined ? message.jobCategories[j] : $root.google.cloud.talent.v4beta1.JobCategory[message.jobCategories[j]] : message.jobCategories[j];
                             }
                             if (message.commuteFilter != null && message.hasOwnProperty("commuteFilter"))
                                 object.commuteFilter = $root.google.cloud.talent.v4beta1.CommuteFilter.toObject(message.commuteFilter, options);
@@ -29332,7 +29572,7 @@
                             if (message.employmentTypes && message.employmentTypes.length) {
                                 object.employmentTypes = [];
                                 for (var j = 0; j < message.employmentTypes.length; ++j)
-                                    object.employmentTypes[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.EmploymentType[message.employmentTypes[j]] : message.employmentTypes[j];
+                                    object.employmentTypes[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.EmploymentType[message.employmentTypes[j]] === undefined ? message.employmentTypes[j] : $root.google.cloud.talent.v4beta1.EmploymentType[message.employmentTypes[j]] : message.employmentTypes[j];
                             }
                             if (message.languageCodes && message.languageCodes.length) {
                                 object.languageCodes = [];
@@ -29640,6 +29880,12 @@
                             if (object.distanceInMiles != null)
                                 message.distanceInMiles = Number(object.distanceInMiles);
                             switch (object.telecommutePreference) {
+                            default:
+                                if (typeof object.telecommutePreference === "number") {
+                                    message.telecommutePreference = object.telecommutePreference;
+                                    break;
+                                }
+                                break;
                             case "TELECOMMUTE_PREFERENCE_UNSPECIFIED":
                             case 0:
                                 message.telecommutePreference = 0;
@@ -29692,7 +29938,7 @@
                             if (message.distanceInMiles != null && message.hasOwnProperty("distanceInMiles"))
                                 object.distanceInMiles = options.json && !isFinite(message.distanceInMiles) ? String(message.distanceInMiles) : message.distanceInMiles;
                             if (message.telecommutePreference != null && message.hasOwnProperty("telecommutePreference"))
-                                object.telecommutePreference = options.enums === String ? $root.google.cloud.talent.v4beta1.LocationFilter.TelecommutePreference[message.telecommutePreference] : message.telecommutePreference;
+                                object.telecommutePreference = options.enums === String ? $root.google.cloud.talent.v4beta1.LocationFilter.TelecommutePreference[message.telecommutePreference] === undefined ? message.telecommutePreference : $root.google.cloud.talent.v4beta1.LocationFilter.TelecommutePreference[message.telecommutePreference] : message.telecommutePreference;
                             if (message.negated != null && message.hasOwnProperty("negated"))
                                 object.negated = message.negated;
                             return object;
@@ -29986,6 +30232,12 @@
                                 return object;
                             var message = new $root.google.cloud.talent.v4beta1.CompensationFilter();
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "FILTER_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -30014,6 +30266,10 @@
                                 for (var i = 0; i < object.units.length; ++i)
                                     switch (object.units[i]) {
                                     default:
+                                        if (typeof object.units[i] === "number") {
+                                            message.units[i] = object.units[i];
+                                            break;
+                                        }
                                     case "COMPENSATION_UNIT_UNSPECIFIED":
                                     case 0:
                                         message.units[i] = 0;
@@ -30079,11 +30335,11 @@
                                 object.includeJobsWithUnspecifiedCompensationRange = false;
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.talent.v4beta1.CompensationFilter.FilterType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.talent.v4beta1.CompensationFilter.FilterType[message.type] === undefined ? message.type : $root.google.cloud.talent.v4beta1.CompensationFilter.FilterType[message.type] : message.type;
                             if (message.units && message.units.length) {
                                 object.units = [];
                                 for (var j = 0; j < message.units.length; ++j)
-                                    object.units[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.CompensationInfo.CompensationUnit[message.units[j]] : message.units[j];
+                                    object.units[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.CompensationInfo.CompensationUnit[message.units[j]] === undefined ? message.units[j] : $root.google.cloud.talent.v4beta1.CompensationInfo.CompensationUnit[message.units[j]] : message.units[j];
                             }
                             if (message.range != null && message.hasOwnProperty("range"))
                                 object.range = $root.google.cloud.talent.v4beta1.CompensationInfo.CompensationRange.toObject(message.range, options);
@@ -30423,6 +30679,12 @@
                                 return object;
                             var message = new $root.google.cloud.talent.v4beta1.CommuteFilter();
                             switch (object.commuteMethod) {
+                            default:
+                                if (typeof object.commuteMethod === "number") {
+                                    message.commuteMethod = object.commuteMethod;
+                                    break;
+                                }
+                                break;
                             case "COMMUTE_METHOD_UNSPECIFIED":
                             case 0:
                                 message.commuteMethod = 0;
@@ -30457,6 +30719,12 @@
                             if (object.allowImpreciseAddresses != null)
                                 message.allowImpreciseAddresses = Boolean(object.allowImpreciseAddresses);
                             switch (object.roadTraffic) {
+                            default:
+                                if (typeof object.roadTraffic === "number") {
+                                    message.roadTraffic = object.roadTraffic;
+                                    break;
+                                }
+                                break;
                             case "ROAD_TRAFFIC_UNSPECIFIED":
                             case 0:
                                 message.roadTraffic = 0;
@@ -30498,7 +30766,7 @@
                                 object.allowImpreciseAddresses = false;
                             }
                             if (message.commuteMethod != null && message.hasOwnProperty("commuteMethod"))
-                                object.commuteMethod = options.enums === String ? $root.google.cloud.talent.v4beta1.CommuteMethod[message.commuteMethod] : message.commuteMethod;
+                                object.commuteMethod = options.enums === String ? $root.google.cloud.talent.v4beta1.CommuteMethod[message.commuteMethod] === undefined ? message.commuteMethod : $root.google.cloud.talent.v4beta1.CommuteMethod[message.commuteMethod] : message.commuteMethod;
                             if (message.startCoordinates != null && message.hasOwnProperty("startCoordinates"))
                                 object.startCoordinates = $root.google.type.LatLng.toObject(message.startCoordinates, options);
                             if (message.travelDuration != null && message.hasOwnProperty("travelDuration"))
@@ -30506,7 +30774,7 @@
                             if (message.allowImpreciseAddresses != null && message.hasOwnProperty("allowImpreciseAddresses"))
                                 object.allowImpreciseAddresses = message.allowImpreciseAddresses;
                             if (message.roadTraffic != null && message.hasOwnProperty("roadTraffic")) {
-                                object.roadTraffic = options.enums === String ? $root.google.cloud.talent.v4beta1.CommuteFilter.RoadTraffic[message.roadTraffic] : message.roadTraffic;
+                                object.roadTraffic = options.enums === String ? $root.google.cloud.talent.v4beta1.CommuteFilter.RoadTraffic[message.roadTraffic] === undefined ? message.roadTraffic : $root.google.cloud.talent.v4beta1.CommuteFilter.RoadTraffic[message.roadTraffic] : message.roadTraffic;
                                 if (options.oneofs)
                                     object.trafficOption = "roadTraffic";
                             }
@@ -31908,6 +32176,10 @@
                                 for (var i = 0; i < object.jobBenefits.length; ++i)
                                     switch (object.jobBenefits[i]) {
                                     default:
+                                        if (typeof object.jobBenefits[i] === "number") {
+                                            message.jobBenefits[i] = object.jobBenefits[i];
+                                            break;
+                                        }
                                     case "JOB_BENEFIT_UNSPECIFIED":
                                     case 0:
                                         message.jobBenefits[i] = 0;
@@ -31980,6 +32252,10 @@
                                 for (var i = 0; i < object.degreeTypes.length; ++i)
                                     switch (object.degreeTypes[i]) {
                                     default:
+                                        if (typeof object.degreeTypes[i] === "number") {
+                                            message.degreeTypes[i] = object.degreeTypes[i];
+                                            break;
+                                        }
                                     case "DEGREE_TYPE_UNSPECIFIED":
                                     case 0:
                                         message.degreeTypes[i] = 0;
@@ -32027,6 +32303,10 @@
                                 for (var i = 0; i < object.employmentTypes.length; ++i)
                                     switch (object.employmentTypes[i]) {
                                     default:
+                                        if (typeof object.employmentTypes[i] === "number") {
+                                            message.employmentTypes[i] = object.employmentTypes[i];
+                                            break;
+                                        }
                                     case "EMPLOYMENT_TYPE_UNSPECIFIED":
                                     case 0:
                                         message.employmentTypes[i] = 0;
@@ -32078,6 +32358,12 @@
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
                             switch (object.jobLevel) {
+                            default:
+                                if (typeof object.jobLevel === "number") {
+                                    message.jobLevel = object.jobLevel;
+                                    break;
+                                }
+                                break;
                             case "JOB_LEVEL_UNSPECIFIED":
                             case 0:
                                 message.jobLevel = 0;
@@ -32110,6 +32396,12 @@
                             if (object.responsibilities != null)
                                 message.responsibilities = String(object.responsibilities);
                             switch (object.postingRegion) {
+                            default:
+                                if (typeof object.postingRegion === "number") {
+                                    message.postingRegion = object.postingRegion;
+                                    break;
+                                }
+                                break;
                             case "POSTING_REGION_UNSPECIFIED":
                             case 0:
                                 message.postingRegion = 0;
@@ -32128,6 +32420,12 @@
                                 break;
                             }
                             switch (object.visibility) {
+                            default:
+                                if (typeof object.visibility === "number") {
+                                    message.visibility = object.visibility;
+                                    break;
+                                }
+                                break;
                             case "VISIBILITY_UNSPECIFIED":
                             case 0:
                                 message.visibility = 0;
@@ -32258,7 +32556,7 @@
                             if (message.jobBenefits && message.jobBenefits.length) {
                                 object.jobBenefits = [];
                                 for (var j = 0; j < message.jobBenefits.length; ++j)
-                                    object.jobBenefits[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.JobBenefit[message.jobBenefits[j]] : message.jobBenefits[j];
+                                    object.jobBenefits[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.JobBenefit[message.jobBenefits[j]] === undefined ? message.jobBenefits[j] : $root.google.cloud.talent.v4beta1.JobBenefit[message.jobBenefits[j]] : message.jobBenefits[j];
                             }
                             if (message.compensationInfo != null && message.hasOwnProperty("compensationInfo"))
                                 object.compensationInfo = $root.google.cloud.talent.v4beta1.CompensationInfo.toObject(message.compensationInfo, options);
@@ -32271,21 +32569,21 @@
                             if (message.degreeTypes && message.degreeTypes.length) {
                                 object.degreeTypes = [];
                                 for (var j = 0; j < message.degreeTypes.length; ++j)
-                                    object.degreeTypes[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.DegreeType[message.degreeTypes[j]] : message.degreeTypes[j];
+                                    object.degreeTypes[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.DegreeType[message.degreeTypes[j]] === undefined ? message.degreeTypes[j] : $root.google.cloud.talent.v4beta1.DegreeType[message.degreeTypes[j]] : message.degreeTypes[j];
                             }
                             if (message.department != null && message.hasOwnProperty("department"))
                                 object.department = message.department;
                             if (message.employmentTypes && message.employmentTypes.length) {
                                 object.employmentTypes = [];
                                 for (var j = 0; j < message.employmentTypes.length; ++j)
-                                    object.employmentTypes[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.EmploymentType[message.employmentTypes[j]] : message.employmentTypes[j];
+                                    object.employmentTypes[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.EmploymentType[message.employmentTypes[j]] === undefined ? message.employmentTypes[j] : $root.google.cloud.talent.v4beta1.EmploymentType[message.employmentTypes[j]] : message.employmentTypes[j];
                             }
                             if (message.incentives != null && message.hasOwnProperty("incentives"))
                                 object.incentives = message.incentives;
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
                             if (message.jobLevel != null && message.hasOwnProperty("jobLevel"))
-                                object.jobLevel = options.enums === String ? $root.google.cloud.talent.v4beta1.JobLevel[message.jobLevel] : message.jobLevel;
+                                object.jobLevel = options.enums === String ? $root.google.cloud.talent.v4beta1.JobLevel[message.jobLevel] === undefined ? message.jobLevel : $root.google.cloud.talent.v4beta1.JobLevel[message.jobLevel] : message.jobLevel;
                             if (message.promotionValue != null && message.hasOwnProperty("promotionValue"))
                                 object.promotionValue = message.promotionValue;
                             if (message.qualifications != null && message.hasOwnProperty("qualifications"))
@@ -32293,9 +32591,9 @@
                             if (message.responsibilities != null && message.hasOwnProperty("responsibilities"))
                                 object.responsibilities = message.responsibilities;
                             if (message.postingRegion != null && message.hasOwnProperty("postingRegion"))
-                                object.postingRegion = options.enums === String ? $root.google.cloud.talent.v4beta1.PostingRegion[message.postingRegion] : message.postingRegion;
+                                object.postingRegion = options.enums === String ? $root.google.cloud.talent.v4beta1.PostingRegion[message.postingRegion] === undefined ? message.postingRegion : $root.google.cloud.talent.v4beta1.PostingRegion[message.postingRegion] : message.postingRegion;
                             if (message.visibility != null && message.hasOwnProperty("visibility"))
-                                object.visibility = options.enums === String ? $root.google.cloud.talent.v4beta1.Visibility[message.visibility] : message.visibility;
+                                object.visibility = options.enums === String ? $root.google.cloud.talent.v4beta1.Visibility[message.visibility] === undefined ? message.visibility : $root.google.cloud.talent.v4beta1.Visibility[message.visibility] : message.visibility;
                             if (message.jobStartTime != null && message.hasOwnProperty("jobStartTime"))
                                 object.jobStartTime = $root.google.protobuf.Timestamp.toObject(message.jobStartTime, options);
                             if (message.jobEndTime != null && message.hasOwnProperty("jobEndTime"))
@@ -32870,6 +33168,10 @@
                                     for (var i = 0; i < object.jobCategories.length; ++i)
                                         switch (object.jobCategories[i]) {
                                         default:
+                                            if (typeof object.jobCategories[i] === "number") {
+                                                message.jobCategories[i] = object.jobCategories[i];
+                                                break;
+                                            }
                                         case "JOB_CATEGORY_UNSPECIFIED":
                                         case 0:
                                             message.jobCategories[i] = 0;
@@ -33024,7 +33326,7 @@
                                 if (message.jobCategories && message.jobCategories.length) {
                                     object.jobCategories = [];
                                     for (var j = 0; j < message.jobCategories.length; ++j)
-                                        object.jobCategories[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.JobCategory[message.jobCategories[j]] : message.jobCategories[j];
+                                        object.jobCategories[j] = options.enums === String ? $root.google.cloud.talent.v4beta1.JobCategory[message.jobCategories[j]] === undefined ? message.jobCategories[j] : $root.google.cloud.talent.v4beta1.JobCategory[message.jobCategories[j]] : message.jobCategories[j];
                                 }
                                 return object;
                             };
@@ -33234,6 +33536,12 @@
                                 if (object.disableStreetAddressResolution != null)
                                     message.disableStreetAddressResolution = Boolean(object.disableStreetAddressResolution);
                                 switch (object.htmlSanitization) {
+                                default:
+                                    if (typeof object.htmlSanitization === "number") {
+                                        message.htmlSanitization = object.htmlSanitization;
+                                        break;
+                                    }
+                                    break;
                                 case "HTML_SANITIZATION_UNSPECIFIED":
                                 case 0:
                                     message.htmlSanitization = 0;
@@ -33270,7 +33578,7 @@
                                 if (message.disableStreetAddressResolution != null && message.hasOwnProperty("disableStreetAddressResolution"))
                                     object.disableStreetAddressResolution = message.disableStreetAddressResolution;
                                 if (message.htmlSanitization != null && message.hasOwnProperty("htmlSanitization"))
-                                    object.htmlSanitization = options.enums === String ? $root.google.cloud.talent.v4beta1.HtmlSanitization[message.htmlSanitization] : message.htmlSanitization;
+                                    object.htmlSanitization = options.enums === String ? $root.google.cloud.talent.v4beta1.HtmlSanitization[message.htmlSanitization] === undefined ? message.htmlSanitization : $root.google.cloud.talent.v4beta1.HtmlSanitization[message.htmlSanitization] : message.htmlSanitization;
                                 return object;
                             };
     
@@ -35031,6 +35339,12 @@
                             if (object.pageSize != null)
                                 message.pageSize = object.pageSize | 0;
                             switch (object.jobView) {
+                            default:
+                                if (typeof object.jobView === "number") {
+                                    message.jobView = object.jobView;
+                                    break;
+                                }
+                                break;
                             case "JOB_VIEW_UNSPECIFIED":
                             case 0:
                                 message.jobView = 0;
@@ -35084,7 +35398,7 @@
                             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                                 object.pageSize = message.pageSize;
                             if (message.jobView != null && message.hasOwnProperty("jobView"))
-                                object.jobView = options.enums === String ? $root.google.cloud.talent.v4beta1.JobView[message.jobView] : message.jobView;
+                                object.jobView = options.enums === String ? $root.google.cloud.talent.v4beta1.JobView[message.jobView] === undefined ? message.jobView : $root.google.cloud.talent.v4beta1.JobView[message.jobView] : message.jobView;
                             return object;
                         };
     
@@ -35859,6 +36173,12 @@
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             switch (object.searchMode) {
+                            default:
+                                if (typeof object.searchMode === "number") {
+                                    message.searchMode = object.searchMode;
+                                    break;
+                                }
+                                break;
                             case "SEARCH_MODE_UNSPECIFIED":
                             case 0:
                                 message.searchMode = 0;
@@ -35897,6 +36217,12 @@
                                 }
                             }
                             switch (object.jobView) {
+                            default:
+                                if (typeof object.jobView === "number") {
+                                    message.jobView = object.jobView;
+                                    break;
+                                }
+                                break;
                             case "JOB_VIEW_UNSPECIFIED":
                             case 0:
                                 message.jobView = 0;
@@ -35927,6 +36253,12 @@
                             if (object.orderBy != null)
                                 message.orderBy = String(object.orderBy);
                             switch (object.diversificationLevel) {
+                            default:
+                                if (typeof object.diversificationLevel === "number") {
+                                    message.diversificationLevel = object.diversificationLevel;
+                                    break;
+                                }
+                                break;
                             case "DIVERSIFICATION_LEVEL_UNSPECIFIED":
                             case 0:
                                 message.diversificationLevel = 0;
@@ -35948,6 +36280,12 @@
                             if (object.disableKeywordMatch != null)
                                 message.disableKeywordMatch = Boolean(object.disableKeywordMatch);
                             switch (object.keywordMatchMode) {
+                            default:
+                                if (typeof object.keywordMatchMode === "number") {
+                                    message.keywordMatchMode = object.keywordMatchMode;
+                                    break;
+                                }
+                                break;
                             case "KEYWORD_MATCH_MODE_UNSPECIFIED":
                             case 0:
                                 message.keywordMatchMode = 0;
@@ -36003,7 +36341,7 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             if (message.searchMode != null && message.hasOwnProperty("searchMode"))
-                                object.searchMode = options.enums === String ? $root.google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode[message.searchMode] : message.searchMode;
+                                object.searchMode = options.enums === String ? $root.google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode[message.searchMode] === undefined ? message.searchMode : $root.google.cloud.talent.v4beta1.SearchJobsRequest.SearchMode[message.searchMode] : message.searchMode;
                             if (message.requestMetadata != null && message.hasOwnProperty("requestMetadata"))
                                 object.requestMetadata = $root.google.cloud.talent.v4beta1.RequestMetadata.toObject(message.requestMetadata, options);
                             if (message.jobQuery != null && message.hasOwnProperty("jobQuery"))
@@ -36018,7 +36356,7 @@
                                     object.histogramQueries[j] = $root.google.cloud.talent.v4beta1.HistogramQuery.toObject(message.histogramQueries[j], options);
                             }
                             if (message.jobView != null && message.hasOwnProperty("jobView"))
-                                object.jobView = options.enums === String ? $root.google.cloud.talent.v4beta1.JobView[message.jobView] : message.jobView;
+                                object.jobView = options.enums === String ? $root.google.cloud.talent.v4beta1.JobView[message.jobView] === undefined ? message.jobView : $root.google.cloud.talent.v4beta1.JobView[message.jobView] : message.jobView;
                             if (message.offset != null && message.hasOwnProperty("offset"))
                                 object.offset = message.offset;
                             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
@@ -36028,13 +36366,13 @@
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
                             if (message.diversificationLevel != null && message.hasOwnProperty("diversificationLevel"))
-                                object.diversificationLevel = options.enums === String ? $root.google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel[message.diversificationLevel] : message.diversificationLevel;
+                                object.diversificationLevel = options.enums === String ? $root.google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel[message.diversificationLevel] === undefined ? message.diversificationLevel : $root.google.cloud.talent.v4beta1.SearchJobsRequest.DiversificationLevel[message.diversificationLevel] : message.diversificationLevel;
                             if (message.customRankingInfo != null && message.hasOwnProperty("customRankingInfo"))
                                 object.customRankingInfo = $root.google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.toObject(message.customRankingInfo, options);
                             if (message.disableKeywordMatch != null && message.hasOwnProperty("disableKeywordMatch"))
                                 object.disableKeywordMatch = message.disableKeywordMatch;
                             if (message.keywordMatchMode != null && message.hasOwnProperty("keywordMatchMode"))
-                                object.keywordMatchMode = options.enums === String ? $root.google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode[message.keywordMatchMode] : message.keywordMatchMode;
+                                object.keywordMatchMode = options.enums === String ? $root.google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode[message.keywordMatchMode] === undefined ? message.keywordMatchMode : $root.google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode[message.keywordMatchMode] : message.keywordMatchMode;
                             return object;
                         };
     
@@ -36292,6 +36630,12 @@
                                     return object;
                                 var message = new $root.google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo();
                                 switch (object.importanceLevel) {
+                                default:
+                                    if (typeof object.importanceLevel === "number") {
+                                        message.importanceLevel = object.importanceLevel;
+                                        break;
+                                    }
+                                    break;
                                 case "IMPORTANCE_LEVEL_UNSPECIFIED":
                                 case 0:
                                     message.importanceLevel = 0;
@@ -36344,7 +36688,7 @@
                                     object.rankingExpression = "";
                                 }
                                 if (message.importanceLevel != null && message.hasOwnProperty("importanceLevel"))
-                                    object.importanceLevel = options.enums === String ? $root.google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ImportanceLevel[message.importanceLevel] : message.importanceLevel;
+                                    object.importanceLevel = options.enums === String ? $root.google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ImportanceLevel[message.importanceLevel] === undefined ? message.importanceLevel : $root.google.cloud.talent.v4beta1.SearchJobsRequest.CustomRankingInfo.ImportanceLevel[message.importanceLevel] : message.importanceLevel;
                                 if (message.rankingExpression != null && message.hasOwnProperty("rankingExpression"))
                                     object.rankingExpression = message.rankingExpression;
                                 return object;
@@ -38620,6 +38964,12 @@
                             if (object.externalId != null)
                                 message.externalId = String(object.externalId);
                             switch (object.usageType) {
+                            default:
+                                if (typeof object.usageType === "number") {
+                                    message.usageType = object.usageType;
+                                    break;
+                                }
+                                break;
                             case "DATA_USAGE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.usageType = 0;
@@ -38668,7 +39018,7 @@
                             if (message.externalId != null && message.hasOwnProperty("externalId"))
                                 object.externalId = message.externalId;
                             if (message.usageType != null && message.hasOwnProperty("usageType"))
-                                object.usageType = options.enums === String ? $root.google.cloud.talent.v4beta1.Tenant.DataUsageType[message.usageType] : message.usageType;
+                                object.usageType = options.enums === String ? $root.google.cloud.talent.v4beta1.Tenant.DataUsageType[message.usageType] === undefined ? message.usageType : $root.google.cloud.talent.v4beta1.Tenant.DataUsageType[message.usageType] : message.usageType;
                             if (message.keywordSearchableProfileCustomAttributes && message.keywordSearchableProfileCustomAttributes.length) {
                                 object.keywordSearchableProfileCustomAttributes = [];
                                 for (var j = 0; j < message.keywordSearchableProfileCustomAttributes.length; ++j)
@@ -40672,6 +41022,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -40696,6 +41052,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -40743,7 +41103,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -40751,7 +41111,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -44525,6 +44885,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -44539,6 +44905,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -44665,9 +45037,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -47014,6 +47386,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -47122,7 +47500,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -47924,6 +48302,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -47940,6 +48324,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -47978,6 +48368,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -48048,7 +48442,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -48056,7 +48450,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -48069,7 +48463,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -49446,6 +49840,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -49515,7 +49915,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -51270,6 +51670,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -51319,7 +51725,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
