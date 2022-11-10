@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/addressvalidation",
+  "name": "@googlemaps/addressvalidation",
   "version": "0.0.0",
   "description": " client for Node.js",
   "repository": "googleapis/google-cloud-node",
