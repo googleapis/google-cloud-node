@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud Text-to-Speech: Node.js Samples](https://github.com/googleapis/nodejs-text-to-speech)
+# [Google Cloud Text-to-Speech: Node.js Samples](https://github.com/googleapis/google-cloud-node)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
@@ -12,16 +12,17 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Audio Profile](#audio-profile)
-  * [List Voices](#list-voices)
+  * [Text_to_speech.list_voices](#text_to_speech.list_voices)
+  * [Text_to_speech.synthesize_speech](#text_to_speech.synthesize_speech)
+  * [Text_to_speech.list_voices](#text_to_speech.list_voices)
+  * [Text_to_speech.synthesize_speech](#text_to_speech.synthesize_speech)
   * [Quickstart](#quickstart)
-  * [Ssml Addresses](#ssml-addresses)
-  * [Synthesize](#synthesize)
+  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/nodejs-text-to-speech#using-the-client-library).
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -33,16 +34,16 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Audio Profile
+### Text_to_speech.list_voices
 
-View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/main/samples/audioProfile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/text_to_speech.list_voices.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/audioProfile.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/text_to_speech.list_voices.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/audioProfile.js`
+`node /workspace/google-cloud-node/samples/generated/v1/text_to_speech.list_voices.js`
 
 
 -----
@@ -50,16 +51,50 @@ __Usage:__
 
 
 
-### List Voices
+### Text_to_speech.synthesize_speech
 
-View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/main/samples/listVoices.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/text_to_speech.synthesize_speech.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/listVoices.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/text_to_speech.synthesize_speech.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/listVoices.js`
+`node /workspace/google-cloud-node/samples/generated/v1/text_to_speech.synthesize_speech.js`
+
+
+-----
+
+
+
+
+### Text_to_speech.list_voices
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/text_to_speech.list_voices.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/text_to_speech.list_voices.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/text_to_speech.list_voices.js`
+
+
+-----
+
+
+
+
+### Text_to_speech.synthesize_speech
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/text_to_speech.synthesize_speech.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/text_to_speech.synthesize_speech.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/text_to_speech.synthesize_speech.js`
 
 
 -----
@@ -69,14 +104,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node /workspace/google-cloud-node/samples/quickstart.js`
 
 
 -----
@@ -84,33 +119,16 @@ __Usage:__
 
 
 
-### Ssml Addresses
+### Quickstart.test
 
-View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/main/samples/ssmlAddresses.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.test.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/ssmlAddresses.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/ssmlAddresses.js`
-
-
------
-
-
-
-
-### Synthesize
-
-View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/main/samples/synthesize.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/synthesize.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.test.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/synthesize.js`
+`node /workspace/google-cloud-node/samples/test/quickstart.test.js`
 
 
 
@@ -118,5 +136,5 @@ __Usage:__
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
 [product-docs]: https://cloud.google.com/text-to-speech

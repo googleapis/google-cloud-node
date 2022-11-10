@@ -11,7 +11,7 @@
   "distribution_name": "@google-cloud/text-to-speech",
   "name_pretty": "Google Cloud Text-to-Speech",
   "api_id": "texttospeech.googleapis.com",
-  "repo": "googleapis/nodejs-text-to-speech",
+  "repo": "googleapis/google-cloud-node",
   "api_shortname": "texttospeech",
   "library_type": "GAPIC_AUTO"
 }
