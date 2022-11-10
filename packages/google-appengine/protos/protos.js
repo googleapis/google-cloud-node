@@ -2797,6 +2797,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -2811,6 +2817,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -2937,9 +2949,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -5286,6 +5298,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -5394,7 +5412,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -6196,6 +6214,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -6212,6 +6236,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -6250,6 +6280,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -6320,7 +6354,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -6328,7 +6362,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -6341,7 +6375,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -7718,6 +7752,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -7787,7 +7827,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -9542,6 +9582,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -9591,7 +9637,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -10778,6 +10824,12 @@
                             return object;
                         var message = new $root.google.appengine.v1.ApiConfigHandler();
                         switch (object.authFailAction) {
+                        default:
+                            if (typeof object.authFailAction === "number") {
+                                message.authFailAction = object.authFailAction;
+                                break;
+                            }
+                            break;
                         case "AUTH_FAIL_ACTION_UNSPECIFIED":
                         case 0:
                             message.authFailAction = 0;
@@ -10792,6 +10844,12 @@
                             break;
                         }
                         switch (object.login) {
+                        default:
+                            if (typeof object.login === "number") {
+                                message.login = object.login;
+                                break;
+                            }
+                            break;
                         case "LOGIN_UNSPECIFIED":
                         case 0:
                             message.login = 0;
@@ -10812,6 +10870,12 @@
                         if (object.script != null)
                             message.script = String(object.script);
                         switch (object.securityLevel) {
+                        default:
+                            if (typeof object.securityLevel === "number") {
+                                message.securityLevel = object.securityLevel;
+                                break;
+                            }
+                            break;
                         case "SECURE_UNSPECIFIED":
                         case 0:
                             message.securityLevel = 0;
@@ -10859,13 +10923,13 @@
                             object.url = "";
                         }
                         if (message.authFailAction != null && message.hasOwnProperty("authFailAction"))
-                            object.authFailAction = options.enums === String ? $root.google.appengine.v1.AuthFailAction[message.authFailAction] : message.authFailAction;
+                            object.authFailAction = options.enums === String ? $root.google.appengine.v1.AuthFailAction[message.authFailAction] === undefined ? message.authFailAction : $root.google.appengine.v1.AuthFailAction[message.authFailAction] : message.authFailAction;
                         if (message.login != null && message.hasOwnProperty("login"))
-                            object.login = options.enums === String ? $root.google.appengine.v1.LoginRequirement[message.login] : message.login;
+                            object.login = options.enums === String ? $root.google.appengine.v1.LoginRequirement[message.login] === undefined ? message.login : $root.google.appengine.v1.LoginRequirement[message.login] : message.login;
                         if (message.script != null && message.hasOwnProperty("script"))
                             object.script = message.script;
                         if (message.securityLevel != null && message.hasOwnProperty("securityLevel"))
-                            object.securityLevel = options.enums === String ? $root.google.appengine.v1.SecurityLevel[message.securityLevel] : message.securityLevel;
+                            object.securityLevel = options.enums === String ? $root.google.appengine.v1.SecurityLevel[message.securityLevel] === undefined ? message.securityLevel : $root.google.appengine.v1.SecurityLevel[message.securityLevel] : message.securityLevel;
                         if (message.url != null && message.hasOwnProperty("url"))
                             object.url = message.url;
                         return object;
@@ -11094,6 +11158,12 @@
                             return object;
                         var message = new $root.google.appengine.v1.ErrorHandler();
                         switch (object.errorCode) {
+                        default:
+                            if (typeof object.errorCode === "number") {
+                                message.errorCode = object.errorCode;
+                                break;
+                            }
+                            break;
                         case "ERROR_CODE_UNSPECIFIED":
                         case 0:
                             message.errorCode = 0;
@@ -11141,7 +11211,7 @@
                             object.mimeType = "";
                         }
                         if (message.errorCode != null && message.hasOwnProperty("errorCode"))
-                            object.errorCode = options.enums === String ? $root.google.appengine.v1.ErrorHandler.ErrorCode[message.errorCode] : message.errorCode;
+                            object.errorCode = options.enums === String ? $root.google.appengine.v1.ErrorHandler.ErrorCode[message.errorCode] === undefined ? message.errorCode : $root.google.appengine.v1.ErrorHandler.ErrorCode[message.errorCode] : message.errorCode;
                         if (message.staticFile != null && message.hasOwnProperty("staticFile"))
                             object.staticFile = message.staticFile;
                         if (message.mimeType != null && message.hasOwnProperty("mimeType"))
@@ -11554,6 +11624,12 @@
                             message.apiEndpoint = $root.google.appengine.v1.ApiEndpointHandler.fromObject(object.apiEndpoint);
                         }
                         switch (object.securityLevel) {
+                        default:
+                            if (typeof object.securityLevel === "number") {
+                                message.securityLevel = object.securityLevel;
+                                break;
+                            }
+                            break;
                         case "SECURE_UNSPECIFIED":
                         case 0:
                             message.securityLevel = 0;
@@ -11576,6 +11652,12 @@
                             break;
                         }
                         switch (object.login) {
+                        default:
+                            if (typeof object.login === "number") {
+                                message.login = object.login;
+                                break;
+                            }
+                            break;
                         case "LOGIN_UNSPECIFIED":
                         case 0:
                             message.login = 0;
@@ -11594,6 +11676,12 @@
                             break;
                         }
                         switch (object.authFailAction) {
+                        default:
+                            if (typeof object.authFailAction === "number") {
+                                message.authFailAction = object.authFailAction;
+                                break;
+                            }
+                            break;
                         case "AUTH_FAIL_ACTION_UNSPECIFIED":
                         case 0:
                             message.authFailAction = 0;
@@ -11608,6 +11696,12 @@
                             break;
                         }
                         switch (object.redirectHttpResponseCode) {
+                        default:
+                            if (typeof object.redirectHttpResponseCode === "number") {
+                                message.redirectHttpResponseCode = object.redirectHttpResponseCode;
+                                break;
+                            }
+                            break;
                         case "REDIRECT_HTTP_RESPONSE_CODE_UNSPECIFIED":
                         case 0:
                             message.redirectHttpResponseCode = 0;
@@ -11670,13 +11764,13 @@
                                 object.handlerType = "apiEndpoint";
                         }
                         if (message.securityLevel != null && message.hasOwnProperty("securityLevel"))
-                            object.securityLevel = options.enums === String ? $root.google.appengine.v1.SecurityLevel[message.securityLevel] : message.securityLevel;
+                            object.securityLevel = options.enums === String ? $root.google.appengine.v1.SecurityLevel[message.securityLevel] === undefined ? message.securityLevel : $root.google.appengine.v1.SecurityLevel[message.securityLevel] : message.securityLevel;
                         if (message.login != null && message.hasOwnProperty("login"))
-                            object.login = options.enums === String ? $root.google.appengine.v1.LoginRequirement[message.login] : message.login;
+                            object.login = options.enums === String ? $root.google.appengine.v1.LoginRequirement[message.login] === undefined ? message.login : $root.google.appengine.v1.LoginRequirement[message.login] : message.login;
                         if (message.authFailAction != null && message.hasOwnProperty("authFailAction"))
-                            object.authFailAction = options.enums === String ? $root.google.appengine.v1.AuthFailAction[message.authFailAction] : message.authFailAction;
+                            object.authFailAction = options.enums === String ? $root.google.appengine.v1.AuthFailAction[message.authFailAction] === undefined ? message.authFailAction : $root.google.appengine.v1.AuthFailAction[message.authFailAction] : message.authFailAction;
                         if (message.redirectHttpResponseCode != null && message.hasOwnProperty("redirectHttpResponseCode"))
-                            object.redirectHttpResponseCode = options.enums === String ? $root.google.appengine.v1.UrlMap.RedirectHttpResponseCode[message.redirectHttpResponseCode] : message.redirectHttpResponseCode;
+                            object.redirectHttpResponseCode = options.enums === String ? $root.google.appengine.v1.UrlMap.RedirectHttpResponseCode[message.redirectHttpResponseCode] === undefined ? message.redirectHttpResponseCode : $root.google.appengine.v1.UrlMap.RedirectHttpResponseCode[message.redirectHttpResponseCode] : message.redirectHttpResponseCode;
                         return object;
                     };
     
@@ -16671,6 +16765,12 @@
                         if (object.parent != null)
                             message.parent = String(object.parent);
                         switch (object.view) {
+                        default:
+                            if (typeof object.view === "number") {
+                                message.view = object.view;
+                                break;
+                            }
+                            break;
                         case "BASIC":
                         case 0:
                             message.view = 0;
@@ -16709,7 +16809,7 @@
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
                         if (message.view != null && message.hasOwnProperty("view"))
-                            object.view = options.enums === String ? $root.google.appengine.v1.VersionView[message.view] : message.view;
+                            object.view = options.enums === String ? $root.google.appengine.v1.VersionView[message.view] === undefined ? message.view : $root.google.appengine.v1.VersionView[message.view] : message.view;
                         if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                             object.pageSize = message.pageSize;
                         if (message.pageToken != null && message.hasOwnProperty("pageToken"))
@@ -17183,6 +17283,12 @@
                         if (object.name != null)
                             message.name = String(object.name);
                         switch (object.view) {
+                        default:
+                            if (typeof object.view === "number") {
+                                message.view = object.view;
+                                break;
+                            }
+                            break;
                         case "BASIC":
                         case 0:
                             message.view = 0;
@@ -17215,7 +17321,7 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.view != null && message.hasOwnProperty("view"))
-                            object.view = options.enums === String ? $root.google.appengine.v1.VersionView[message.view] : message.view;
+                            object.view = options.enums === String ? $root.google.appengine.v1.VersionView[message.view] === undefined ? message.view : $root.google.appengine.v1.VersionView[message.view] : message.view;
                         return object;
                     };
     
@@ -22342,6 +22448,12 @@
                         if (object.parent != null)
                             message.parent = String(object.parent);
                         switch (object.view) {
+                        default:
+                            if (typeof object.view === "number") {
+                                message.view = object.view;
+                                break;
+                            }
+                            break;
                         case "BASIC_CERTIFICATE":
                         case 0:
                             message.view = 0;
@@ -22384,7 +22496,7 @@
                         if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                             object.pageToken = message.pageToken;
                         if (message.view != null && message.hasOwnProperty("view"))
-                            object.view = options.enums === String ? $root.google.appengine.v1.AuthorizedCertificateView[message.view] : message.view;
+                            object.view = options.enums === String ? $root.google.appengine.v1.AuthorizedCertificateView[message.view] === undefined ? message.view : $root.google.appengine.v1.AuthorizedCertificateView[message.view] : message.view;
                         return object;
                     };
     
@@ -22840,6 +22952,12 @@
                         if (object.name != null)
                             message.name = String(object.name);
                         switch (object.view) {
+                        default:
+                            if (typeof object.view === "number") {
+                                message.view = object.view;
+                                break;
+                            }
+                            break;
                         case "BASIC_CERTIFICATE":
                         case 0:
                             message.view = 0;
@@ -22872,7 +22990,7 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.view != null && message.hasOwnProperty("view"))
-                            object.view = options.enums === String ? $root.google.appengine.v1.AuthorizedCertificateView[message.view] : message.view;
+                            object.view = options.enums === String ? $root.google.appengine.v1.AuthorizedCertificateView[message.view] === undefined ? message.view : $root.google.appengine.v1.AuthorizedCertificateView[message.view] : message.view;
                         return object;
                     };
     
@@ -24732,6 +24850,12 @@
                             message.domainMapping = $root.google.appengine.v1.DomainMapping.fromObject(object.domainMapping);
                         }
                         switch (object.overrideStrategy) {
+                        default:
+                            if (typeof object.overrideStrategy === "number") {
+                                message.overrideStrategy = object.overrideStrategy;
+                                break;
+                            }
+                            break;
                         case "UNSPECIFIED_DOMAIN_OVERRIDE_STRATEGY":
                         case 0:
                             message.overrideStrategy = 0;
@@ -24771,7 +24895,7 @@
                         if (message.domainMapping != null && message.hasOwnProperty("domainMapping"))
                             object.domainMapping = $root.google.appengine.v1.DomainMapping.toObject(message.domainMapping, options);
                         if (message.overrideStrategy != null && message.hasOwnProperty("overrideStrategy"))
-                            object.overrideStrategy = options.enums === String ? $root.google.appengine.v1.DomainOverrideStrategy[message.overrideStrategy] : message.overrideStrategy;
+                            object.overrideStrategy = options.enums === String ? $root.google.appengine.v1.DomainOverrideStrategy[message.overrideStrategy] === undefined ? message.overrideStrategy : $root.google.appengine.v1.DomainOverrideStrategy[message.overrideStrategy] : message.overrideStrategy;
                         return object;
                     };
     
@@ -25724,6 +25848,12 @@
                             message.defaultCookieExpiration = $root.google.protobuf.Duration.fromObject(object.defaultCookieExpiration);
                         }
                         switch (object.servingStatus) {
+                        default:
+                            if (typeof object.servingStatus === "number") {
+                                message.servingStatus = object.servingStatus;
+                                break;
+                            }
+                            break;
                         case "UNSPECIFIED":
                         case 0:
                             message.servingStatus = 0;
@@ -25755,6 +25885,12 @@
                         if (object.gcrDomain != null)
                             message.gcrDomain = String(object.gcrDomain);
                         switch (object.databaseType) {
+                        default:
+                            if (typeof object.databaseType === "number") {
+                                message.databaseType = object.databaseType;
+                                break;
+                            }
+                            break;
                         case "DATABASE_TYPE_UNSPECIFIED":
                         case 0:
                             message.databaseType = 0;
@@ -25829,7 +25965,7 @@
                         if (message.defaultCookieExpiration != null && message.hasOwnProperty("defaultCookieExpiration"))
                             object.defaultCookieExpiration = $root.google.protobuf.Duration.toObject(message.defaultCookieExpiration, options);
                         if (message.servingStatus != null && message.hasOwnProperty("servingStatus"))
-                            object.servingStatus = options.enums === String ? $root.google.appengine.v1.Application.ServingStatus[message.servingStatus] : message.servingStatus;
+                            object.servingStatus = options.enums === String ? $root.google.appengine.v1.Application.ServingStatus[message.servingStatus] === undefined ? message.servingStatus : $root.google.appengine.v1.Application.ServingStatus[message.servingStatus] : message.servingStatus;
                         if (message.defaultHostname != null && message.hasOwnProperty("defaultHostname"))
                             object.defaultHostname = message.defaultHostname;
                         if (message.defaultBucket != null && message.hasOwnProperty("defaultBucket"))
@@ -25841,7 +25977,7 @@
                         if (message.gcrDomain != null && message.hasOwnProperty("gcrDomain"))
                             object.gcrDomain = message.gcrDomain;
                         if (message.databaseType != null && message.hasOwnProperty("databaseType"))
-                            object.databaseType = options.enums === String ? $root.google.appengine.v1.Application.DatabaseType[message.databaseType] : message.databaseType;
+                            object.databaseType = options.enums === String ? $root.google.appengine.v1.Application.DatabaseType[message.databaseType] === undefined ? message.databaseType : $root.google.appengine.v1.Application.DatabaseType[message.databaseType] : message.databaseType;
                         if (message.featureSettings != null && message.hasOwnProperty("featureSettings"))
                             object.featureSettings = $root.google.appengine.v1.Application.FeatureSettings.toObject(message.featureSettings, options);
                         return object;
@@ -27535,6 +27671,12 @@
                             message.lastRenewalTime = $root.google.protobuf.Timestamp.fromObject(object.lastRenewalTime);
                         }
                         switch (object.status) {
+                        default:
+                            if (typeof object.status === "number") {
+                                message.status = object.status;
+                                break;
+                            }
+                            break;
                         case "MANAGEMENT_STATUS_UNSPECIFIED":
                         case 0:
                             message.status = 0;
@@ -27587,7 +27729,7 @@
                         if (message.lastRenewalTime != null && message.hasOwnProperty("lastRenewalTime"))
                             object.lastRenewalTime = $root.google.protobuf.Timestamp.toObject(message.lastRenewalTime, options);
                         if (message.status != null && message.hasOwnProperty("status"))
-                            object.status = options.enums === String ? $root.google.appengine.v1.ManagementStatus[message.status] : message.status;
+                            object.status = options.enums === String ? $root.google.appengine.v1.ManagementStatus[message.status] === undefined ? message.status : $root.google.appengine.v1.ManagementStatus[message.status] : message.status;
                         return object;
                     };
     
@@ -28341,6 +28483,12 @@
                         if (object.certificateId != null)
                             message.certificateId = String(object.certificateId);
                         switch (object.sslManagementType) {
+                        default:
+                            if (typeof object.sslManagementType === "number") {
+                                message.sslManagementType = object.sslManagementType;
+                                break;
+                            }
+                            break;
                         case "SSL_MANAGEMENT_TYPE_UNSPECIFIED":
                         case 0:
                             message.sslManagementType = 0;
@@ -28380,7 +28528,7 @@
                         if (message.certificateId != null && message.hasOwnProperty("certificateId"))
                             object.certificateId = message.certificateId;
                         if (message.sslManagementType != null && message.hasOwnProperty("sslManagementType"))
-                            object.sslManagementType = options.enums === String ? $root.google.appengine.v1.SslSettings.SslManagementType[message.sslManagementType] : message.sslManagementType;
+                            object.sslManagementType = options.enums === String ? $root.google.appengine.v1.SslSettings.SslManagementType[message.sslManagementType] === undefined ? message.sslManagementType : $root.google.appengine.v1.SslSettings.SslManagementType[message.sslManagementType] : message.sslManagementType;
                         if (message.pendingManagedCertificateId != null && message.hasOwnProperty("pendingManagedCertificateId"))
                             object.pendingManagedCertificateId = message.pendingManagedCertificateId;
                         return object;
@@ -28628,6 +28776,12 @@
                         if (object.rrdata != null)
                             message.rrdata = String(object.rrdata);
                         switch (object.type) {
+                        default:
+                            if (typeof object.type === "number") {
+                                message.type = object.type;
+                                break;
+                            }
+                            break;
                         case "RECORD_TYPE_UNSPECIFIED":
                         case 0:
                             message.type = 0;
@@ -28671,7 +28825,7 @@
                         if (message.rrdata != null && message.hasOwnProperty("rrdata"))
                             object.rrdata = message.rrdata;
                         if (message.type != null && message.hasOwnProperty("type"))
-                            object.type = options.enums === String ? $root.google.appengine.v1.ResourceRecord.RecordType[message.type] : message.type;
+                            object.type = options.enums === String ? $root.google.appengine.v1.ResourceRecord.RecordType[message.type] === undefined ? message.type : $root.google.appengine.v1.ResourceRecord.RecordType[message.type] : message.type;
                         return object;
                     };
     
@@ -28934,6 +29088,12 @@
                         if (object.priority != null)
                             message.priority = object.priority | 0;
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "UNSPECIFIED_ACTION":
                         case 0:
                             message.action = 0;
@@ -28976,7 +29136,7 @@
                         if (message.priority != null && message.hasOwnProperty("priority"))
                             object.priority = message.priority;
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.appengine.v1.FirewallRule.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.appengine.v1.FirewallRule.Action[message.action] === undefined ? message.action : $root.google.appengine.v1.FirewallRule.Action[message.action] : message.action;
                         if (message.sourceRange != null && message.hasOwnProperty("sourceRange"))
                             object.sourceRange = message.sourceRange;
                         if (message.description != null && message.hasOwnProperty("description"))
@@ -29490,6 +29650,12 @@
                         if (object.appEngineRelease != null)
                             message.appEngineRelease = String(object.appEngineRelease);
                         switch (object.availability) {
+                        default:
+                            if (typeof object.availability === "number") {
+                                message.availability = object.availability;
+                                break;
+                            }
+                            break;
                         case "UNSPECIFIED":
                         case 0:
                             message.availability = 0;
@@ -29538,6 +29704,12 @@
                         if (object.vmIp != null)
                             message.vmIp = String(object.vmIp);
                         switch (object.vmLiveness) {
+                        default:
+                            if (typeof object.vmLiveness === "number") {
+                                message.vmLiveness = object.vmLiveness;
+                                break;
+                            }
+                            break;
                         case "LIVENESS_STATE_UNSPECIFIED":
                         case 0:
                             message.vmLiveness = 0;
@@ -29609,7 +29781,7 @@
                         if (message.appEngineRelease != null && message.hasOwnProperty("appEngineRelease"))
                             object.appEngineRelease = message.appEngineRelease;
                         if (message.availability != null && message.hasOwnProperty("availability"))
-                            object.availability = options.enums === String ? $root.google.appengine.v1.Instance.Availability[message.availability] : message.availability;
+                            object.availability = options.enums === String ? $root.google.appengine.v1.Instance.Availability[message.availability] === undefined ? message.availability : $root.google.appengine.v1.Instance.Availability[message.availability] : message.availability;
                         if (message.vmName != null && message.hasOwnProperty("vmName"))
                             object.vmName = message.vmName;
                         if (message.vmZoneName != null && message.hasOwnProperty("vmZoneName"))
@@ -29638,7 +29810,7 @@
                         if (message.vmIp != null && message.hasOwnProperty("vmIp"))
                             object.vmIp = message.vmIp;
                         if (message.vmLiveness != null && message.hasOwnProperty("vmLiveness"))
-                            object.vmLiveness = options.enums === String ? $root.google.appengine.v1.Instance.Liveness.LivenessState[message.vmLiveness] : message.vmLiveness;
+                            object.vmLiveness = options.enums === String ? $root.google.appengine.v1.Instance.Liveness.LivenessState[message.vmLiveness] === undefined ? message.vmLiveness : $root.google.appengine.v1.Instance.Liveness.LivenessState[message.vmLiveness] : message.vmLiveness;
                         return object;
                     };
     
@@ -30427,6 +30599,12 @@
                             return object;
                         var message = new $root.google.appengine.v1.TrafficSplit();
                         switch (object.shardBy) {
+                        default:
+                            if (typeof object.shardBy === "number") {
+                                message.shardBy = object.shardBy;
+                                break;
+                            }
+                            break;
                         case "UNSPECIFIED":
                         case 0:
                             message.shardBy = 0;
@@ -30472,7 +30650,7 @@
                         if (options.defaults)
                             object.shardBy = options.enums === String ? "UNSPECIFIED" : 0;
                         if (message.shardBy != null && message.hasOwnProperty("shardBy"))
-                            object.shardBy = options.enums === String ? $root.google.appengine.v1.TrafficSplit.ShardBy[message.shardBy] : message.shardBy;
+                            object.shardBy = options.enums === String ? $root.google.appengine.v1.TrafficSplit.ShardBy[message.shardBy] === undefined ? message.shardBy : $root.google.appengine.v1.TrafficSplit.ShardBy[message.shardBy] : message.shardBy;
                         var keys2;
                         if (message.allocations && (keys2 = Object.keys(message.allocations)).length) {
                             object.allocations = {};
@@ -30686,6 +30864,12 @@
                             return object;
                         var message = new $root.google.appengine.v1.NetworkSettings();
                         switch (object.ingressTrafficAllowed) {
+                        default:
+                            if (typeof object.ingressTrafficAllowed === "number") {
+                                message.ingressTrafficAllowed = object.ingressTrafficAllowed;
+                                break;
+                            }
+                            break;
                         case "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED":
                         case 0:
                             message.ingressTrafficAllowed = 0;
@@ -30722,7 +30906,7 @@
                         if (options.defaults)
                             object.ingressTrafficAllowed = options.enums === String ? "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED" : 0;
                         if (message.ingressTrafficAllowed != null && message.hasOwnProperty("ingressTrafficAllowed"))
-                            object.ingressTrafficAllowed = options.enums === String ? $root.google.appengine.v1.NetworkSettings.IngressTrafficAllowed[message.ingressTrafficAllowed] : message.ingressTrafficAllowed;
+                            object.ingressTrafficAllowed = options.enums === String ? $root.google.appengine.v1.NetworkSettings.IngressTrafficAllowed[message.ingressTrafficAllowed] === undefined ? message.ingressTrafficAllowed : $root.google.appengine.v1.NetworkSettings.IngressTrafficAllowed[message.ingressTrafficAllowed] : message.ingressTrafficAllowed;
                         return object;
                     };
     
@@ -31858,6 +32042,10 @@
                             for (var i = 0; i < object.inboundServices.length; ++i)
                                 switch (object.inboundServices[i]) {
                                 default:
+                                    if (typeof object.inboundServices[i] === "number") {
+                                        message.inboundServices[i] = object.inboundServices[i];
+                                        break;
+                                    }
                                 case "INBOUND_SERVICE_UNSPECIFIED":
                                 case 0:
                                     message.inboundServices[i] = 0;
@@ -31935,6 +32123,12 @@
                         if (object.env != null)
                             message.env = String(object.env);
                         switch (object.servingStatus) {
+                        default:
+                            if (typeof object.servingStatus === "number") {
+                                message.servingStatus = object.servingStatus;
+                                break;
+                            }
+                            break;
                         case "SERVING_STATUS_UNSPECIFIED":
                         case 0:
                             message.servingStatus = 0;
@@ -32148,7 +32342,7 @@
                         if (message.inboundServices && message.inboundServices.length) {
                             object.inboundServices = [];
                             for (var j = 0; j < message.inboundServices.length; ++j)
-                                object.inboundServices[j] = options.enums === String ? $root.google.appengine.v1.InboundServiceType[message.inboundServices[j]] : message.inboundServices[j];
+                                object.inboundServices[j] = options.enums === String ? $root.google.appengine.v1.InboundServiceType[message.inboundServices[j]] === undefined ? message.inboundServices[j] : $root.google.appengine.v1.InboundServiceType[message.inboundServices[j]] : message.inboundServices[j];
                         }
                         if (message.instanceClass != null && message.hasOwnProperty("instanceClass"))
                             object.instanceClass = message.instanceClass;
@@ -32171,7 +32365,7 @@
                         if (message.env != null && message.hasOwnProperty("env"))
                             object.env = message.env;
                         if (message.servingStatus != null && message.hasOwnProperty("servingStatus"))
-                            object.servingStatus = options.enums === String ? $root.google.appengine.v1.ServingStatus[message.servingStatus] : message.servingStatus;
+                            object.servingStatus = options.enums === String ? $root.google.appengine.v1.ServingStatus[message.servingStatus] === undefined ? message.servingStatus : $root.google.appengine.v1.ServingStatus[message.servingStatus] : message.servingStatus;
                         if (message.createdBy != null && message.hasOwnProperty("createdBy"))
                             object.createdBy = message.createdBy;
                         if (message.createTime != null && message.hasOwnProperty("createTime"))
@@ -32489,6 +32683,12 @@
                         if (object.configId != null)
                             message.configId = String(object.configId);
                         switch (object.rolloutStrategy) {
+                        default:
+                            if (typeof object.rolloutStrategy === "number") {
+                                message.rolloutStrategy = object.rolloutStrategy;
+                                break;
+                            }
+                            break;
                         case "UNSPECIFIED_ROLLOUT_STRATEGY":
                         case 0:
                             message.rolloutStrategy = 0;
@@ -32531,7 +32731,7 @@
                         if (message.configId != null && message.hasOwnProperty("configId"))
                             object.configId = message.configId;
                         if (message.rolloutStrategy != null && message.hasOwnProperty("rolloutStrategy"))
-                            object.rolloutStrategy = options.enums === String ? $root.google.appengine.v1.EndpointsApiService.RolloutStrategy[message.rolloutStrategy] : message.rolloutStrategy;
+                            object.rolloutStrategy = options.enums === String ? $root.google.appengine.v1.EndpointsApiService.RolloutStrategy[message.rolloutStrategy] === undefined ? message.rolloutStrategy : $root.google.appengine.v1.EndpointsApiService.RolloutStrategy[message.rolloutStrategy] : message.rolloutStrategy;
                         if (message.disableTraceSampling != null && message.hasOwnProperty("disableTraceSampling"))
                             object.disableTraceSampling = message.disableTraceSampling;
                         return object;
@@ -35916,6 +36116,12 @@
                         if (object.name != null)
                             message.name = String(object.name);
                         switch (object.egressSetting) {
+                        default:
+                            if (typeof object.egressSetting === "number") {
+                                message.egressSetting = object.egressSetting;
+                                break;
+                            }
+                            break;
                         case "EGRESS_SETTING_UNSPECIFIED":
                         case 0:
                             message.egressSetting = 0;
@@ -35952,7 +36158,7 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.egressSetting != null && message.hasOwnProperty("egressSetting"))
-                            object.egressSetting = options.enums === String ? $root.google.appengine.v1.VpcAccessConnector.EgressSetting[message.egressSetting] : message.egressSetting;
+                            object.egressSetting = options.enums === String ? $root.google.appengine.v1.VpcAccessConnector.EgressSetting[message.egressSetting] === undefined ? message.egressSetting : $root.google.appengine.v1.VpcAccessConnector.EgressSetting[message.egressSetting] : message.egressSetting;
                         return object;
                     };
     
@@ -40321,6 +40527,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -40345,6 +40557,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -40392,7 +40608,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -40400,7 +40616,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
