@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [5.1.2](https://github.com/googleapis/google-cloud-node/compare/language-v5.1.1...language-v5.1.2) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency yargs to v17 ([#3401](https://github.com/googleapis/google-cloud-node/issues/3401)) ([9a5608b](https://github.com/googleapis/google-cloud-node/commit/9a5608bd8a3d3c5a7d3c54a30ed599fe58246888))
+* Regenerated proto JS and TS definitions (generator update) ([#3472](https://github.com/googleapis/google-cloud-node/issues/3472)) ([5e2230d](https://github.com/googleapis/google-cloud-node/commit/5e2230dfc4302bb2ac9628ff4200eb46509e103d))
+
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/language-v5.1.0...language-v5.1.1) (2022-11-03)
 
 
