@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [3.1.5](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v3.1.4...bigquery-data-transfer-v3.1.5) (2022-11-10)
+
+
+### Bug Fixes
+
+* Regenerated proto JS and TS definitions (generator update) ([#3472](https://github.com/googleapis/google-cloud-node/issues/3472)) ([5e2230d](https://github.com/googleapis/google-cloud-node/commit/5e2230dfc4302bb2ac9628ff4200eb46509e103d))
+
 ## [3.1.4](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v3.1.3...bigquery-data-transfer-v3.1.4) (2022-11-03)
 
 

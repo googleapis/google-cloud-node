@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/googleapis/google-cloud-node/compare/clientgateways-v0.2.2...clientgateways-v0.2.3) (2022-11-10)
+
+
+### Bug Fixes
+
+* Regenerated proto JS and TS definitions (generator update) ([#3472](https://github.com/googleapis/google-cloud-node/issues/3472)) ([5e2230d](https://github.com/googleapis/google-cloud-node/commit/5e2230dfc4302bb2ac9628ff4200eb46509e103d))
+
 ## [0.2.2](https://github.com/googleapis/google-cloud-node/compare/clientgateways-v0.2.1...clientgateways-v0.2.2) (2022-11-03)
 
 
