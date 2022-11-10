@@ -798,6 +798,12 @@
                             if (object.findingType != null)
                                 message.findingType = String(object.findingType);
                             switch (object.severity) {
+                            default:
+                                if (typeof object.severity === "number") {
+                                    message.severity = object.severity;
+                                    break;
+                                }
+                                break;
                             case "SEVERITY_UNSPECIFIED":
                             case 0:
                                 message.severity = 0;
@@ -939,7 +945,7 @@
                             if (message.form != null && message.hasOwnProperty("form"))
                                 object.form = $root.google.cloud.websecurityscanner.v1.Form.toObject(message.form, options);
                             if (message.severity != null && message.hasOwnProperty("severity"))
-                                object.severity = options.enums === String ? $root.google.cloud.websecurityscanner.v1.Finding.Severity[message.severity] : message.severity;
+                                object.severity = options.enums === String ? $root.google.cloud.websecurityscanner.v1.Finding.Severity[message.severity] === undefined ? message.severity : $root.google.cloud.websecurityscanner.v1.Finding.Severity[message.severity] : message.severity;
                             if (message.xxe != null && message.hasOwnProperty("xxe"))
                                 object.xxe = $root.google.cloud.websecurityscanner.v1.Xxe.toObject(message.xxe, options);
                             return object;
@@ -2686,6 +2692,12 @@
                             if (object.errorMessage != null)
                                 message.errorMessage = String(object.errorMessage);
                             switch (object.attackVector) {
+                            default:
+                                if (typeof object.attackVector === "number") {
+                                    message.attackVector = object.attackVector;
+                                    break;
+                                }
+                                break;
                             case "ATTACK_VECTOR_UNSPECIFIED":
                             case 0:
                                 message.attackVector = 0;
@@ -2784,7 +2796,7 @@
                             if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
                                 object.errorMessage = message.errorMessage;
                             if (message.attackVector != null && message.hasOwnProperty("attackVector"))
-                                object.attackVector = options.enums === String ? $root.google.cloud.websecurityscanner.v1.Xss.AttackVector[message.attackVector] : message.attackVector;
+                                object.attackVector = options.enums === String ? $root.google.cloud.websecurityscanner.v1.Xss.AttackVector[message.attackVector] === undefined ? message.attackVector : $root.google.cloud.websecurityscanner.v1.Xss.AttackVector[message.attackVector] : message.attackVector;
                             if (message.storedXssSeedingUrl != null && message.hasOwnProperty("storedXssSeedingUrl"))
                                 object.storedXssSeedingUrl = message.storedXssSeedingUrl;
                             return object;
@@ -3036,6 +3048,12 @@
                             if (object.payloadValue != null)
                                 message.payloadValue = String(object.payloadValue);
                             switch (object.payloadLocation) {
+                            default:
+                                if (typeof object.payloadLocation === "number") {
+                                    message.payloadLocation = object.payloadLocation;
+                                    break;
+                                }
+                                break;
                             case "LOCATION_UNSPECIFIED":
                             case 0:
                                 message.payloadLocation = 0;
@@ -3068,7 +3086,7 @@
                             if (message.payloadValue != null && message.hasOwnProperty("payloadValue"))
                                 object.payloadValue = message.payloadValue;
                             if (message.payloadLocation != null && message.hasOwnProperty("payloadLocation"))
-                                object.payloadLocation = options.enums === String ? $root.google.cloud.websecurityscanner.v1.Xxe.Location[message.payloadLocation] : message.payloadLocation;
+                                object.payloadLocation = options.enums === String ? $root.google.cloud.websecurityscanner.v1.Xxe.Location[message.payloadLocation] === undefined ? message.payloadLocation : $root.google.cloud.websecurityscanner.v1.Xxe.Location[message.payloadLocation] : message.payloadLocation;
                             return object;
                         };
     
@@ -3765,6 +3783,12 @@
                                 message.authentication = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.fromObject(object.authentication);
                             }
                             switch (object.userAgent) {
+                            default:
+                                if (typeof object.userAgent === "number") {
+                                    message.userAgent = object.userAgent;
+                                    break;
+                                }
+                                break;
                             case "USER_AGENT_UNSPECIFIED":
                             case 0:
                                 message.userAgent = 0;
@@ -3795,6 +3819,12 @@
                                 message.schedule = $root.google.cloud.websecurityscanner.v1.ScanConfig.Schedule.fromObject(object.schedule);
                             }
                             switch (object.exportToSecurityCommandCenter) {
+                            default:
+                                if (typeof object.exportToSecurityCommandCenter === "number") {
+                                    message.exportToSecurityCommandCenter = object.exportToSecurityCommandCenter;
+                                    break;
+                                }
+                                break;
                             case "EXPORT_TO_SECURITY_COMMAND_CENTER_UNSPECIFIED":
                             case 0:
                                 message.exportToSecurityCommandCenter = 0;
@@ -3809,6 +3839,12 @@
                                 break;
                             }
                             switch (object.riskLevel) {
+                            default:
+                                if (typeof object.riskLevel === "number") {
+                                    message.riskLevel = object.riskLevel;
+                                    break;
+                                }
+                                break;
                             case "RISK_LEVEL_UNSPECIFIED":
                             case 0:
                                 message.riskLevel = 0;
@@ -3875,7 +3911,7 @@
                             if (message.authentication != null && message.hasOwnProperty("authentication"))
                                 object.authentication = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.toObject(message.authentication, options);
                             if (message.userAgent != null && message.hasOwnProperty("userAgent"))
-                                object.userAgent = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanConfig.UserAgent[message.userAgent] : message.userAgent;
+                                object.userAgent = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanConfig.UserAgent[message.userAgent] === undefined ? message.userAgent : $root.google.cloud.websecurityscanner.v1.ScanConfig.UserAgent[message.userAgent] : message.userAgent;
                             if (message.blacklistPatterns && message.blacklistPatterns.length) {
                                 object.blacklistPatterns = [];
                                 for (var j = 0; j < message.blacklistPatterns.length; ++j)
@@ -3884,9 +3920,9 @@
                             if (message.schedule != null && message.hasOwnProperty("schedule"))
                                 object.schedule = $root.google.cloud.websecurityscanner.v1.ScanConfig.Schedule.toObject(message.schedule, options);
                             if (message.exportToSecurityCommandCenter != null && message.hasOwnProperty("exportToSecurityCommandCenter"))
-                                object.exportToSecurityCommandCenter = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanConfig.ExportToSecurityCommandCenter[message.exportToSecurityCommandCenter] : message.exportToSecurityCommandCenter;
+                                object.exportToSecurityCommandCenter = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanConfig.ExportToSecurityCommandCenter[message.exportToSecurityCommandCenter] === undefined ? message.exportToSecurityCommandCenter : $root.google.cloud.websecurityscanner.v1.ScanConfig.ExportToSecurityCommandCenter[message.exportToSecurityCommandCenter] : message.exportToSecurityCommandCenter;
                             if (message.riskLevel != null && message.hasOwnProperty("riskLevel"))
-                                object.riskLevel = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanConfig.RiskLevel[message.riskLevel] : message.riskLevel;
+                                object.riskLevel = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanConfig.RiskLevel[message.riskLevel] === undefined ? message.riskLevel : $root.google.cloud.websecurityscanner.v1.ScanConfig.RiskLevel[message.riskLevel] : message.riskLevel;
                             if (message.managedScan != null && message.hasOwnProperty("managedScan"))
                                 object.managedScan = message.managedScan;
                             if (message.staticIpScan != null && message.hasOwnProperty("staticIpScan"))
@@ -5624,6 +5660,12 @@
                                 return object;
                             var message = new $root.google.cloud.websecurityscanner.v1.ScanConfigError();
                             switch (object.code) {
+                            default:
+                                if (typeof object.code === "number") {
+                                    message.code = object.code;
+                                    break;
+                                }
+                                break;
                             case "CODE_UNSPECIFIED":
                             case 0:
                                 message.code = 0;
@@ -5816,7 +5858,7 @@
                                 object.fieldName = "";
                             }
                             if (message.code != null && message.hasOwnProperty("code"))
-                                object.code = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanConfigError.Code[message.code] : message.code;
+                                object.code = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanConfigError.Code[message.code] === undefined ? message.code : $root.google.cloud.websecurityscanner.v1.ScanConfigError.Code[message.code] : message.code;
                             if (message.fieldName != null && message.hasOwnProperty("fieldName"))
                                 object.fieldName = message.fieldName;
                             return object;
@@ -6307,6 +6349,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.executionState) {
+                            default:
+                                if (typeof object.executionState === "number") {
+                                    message.executionState = object.executionState;
+                                    break;
+                                }
+                                break;
                             case "EXECUTION_STATE_UNSPECIFIED":
                             case 0:
                                 message.executionState = 0;
@@ -6325,6 +6373,12 @@
                                 break;
                             }
                             switch (object.resultState) {
+                            default:
+                                if (typeof object.resultState === "number") {
+                                    message.resultState = object.resultState;
+                                    break;
+                                }
+                                break;
                             case "RESULT_STATE_UNSPECIFIED":
                             case 0:
                                 message.resultState = 0;
@@ -6430,9 +6484,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.executionState != null && message.hasOwnProperty("executionState"))
-                                object.executionState = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanRun.ExecutionState[message.executionState] : message.executionState;
+                                object.executionState = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanRun.ExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.websecurityscanner.v1.ScanRun.ExecutionState[message.executionState] : message.executionState;
                             if (message.resultState != null && message.hasOwnProperty("resultState"))
-                                object.resultState = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanRun.ResultState[message.resultState] : message.resultState;
+                                object.resultState = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanRun.ResultState[message.resultState] === undefined ? message.resultState : $root.google.cloud.websecurityscanner.v1.ScanRun.ResultState[message.resultState] : message.resultState;
                             if (message.startTime != null && message.hasOwnProperty("startTime"))
                                 object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
@@ -6724,6 +6778,12 @@
                                 return object;
                             var message = new $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace();
                             switch (object.code) {
+                            default:
+                                if (typeof object.code === "number") {
+                                    message.code = object.code;
+                                    break;
+                                }
+                                break;
                             case "CODE_UNSPECIFIED":
                             case 0:
                                 message.code = 0;
@@ -6782,7 +6842,7 @@
                                 object.mostCommonHttpErrorCode = 0;
                             }
                             if (message.code != null && message.hasOwnProperty("code"))
-                                object.code = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.Code[message.code] : message.code;
+                                object.code = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.Code[message.code] === undefined ? message.code : $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.Code[message.code] : message.code;
                             if (message.scanConfigError != null && message.hasOwnProperty("scanConfigError"))
                                 object.scanConfigError = $root.google.cloud.websecurityscanner.v1.ScanConfigError.toObject(message.scanConfigError, options);
                             if (message.mostCommonHttpErrorCode != null && message.hasOwnProperty("mostCommonHttpErrorCode"))
@@ -7002,6 +7062,12 @@
                                 return object;
                             var message = new $root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace();
                             switch (object.code) {
+                            default:
+                                if (typeof object.code === "number") {
+                                    message.code = object.code;
+                                    break;
+                                }
+                                break;
                             case "CODE_UNSPECIFIED":
                             case 0:
                                 message.code = 0;
@@ -7046,7 +7112,7 @@
                             if (options.defaults)
                                 object.code = options.enums === String ? "CODE_UNSPECIFIED" : 0;
                             if (message.code != null && message.hasOwnProperty("code"))
-                                object.code = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace.Code[message.code] : message.code;
+                                object.code = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace.Code[message.code] === undefined ? message.code : $root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace.Code[message.code] : message.code;
                             return object;
                         };
     
@@ -7397,6 +7463,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.executionState) {
+                            default:
+                                if (typeof object.executionState === "number") {
+                                    message.executionState = object.executionState;
+                                    break;
+                                }
+                                break;
                             case "EXECUTION_STATE_UNSPECIFIED":
                             case 0:
                                 message.executionState = 0;
@@ -7415,6 +7487,12 @@
                                 break;
                             }
                             switch (object.resultState) {
+                            default:
+                                if (typeof object.resultState === "number") {
+                                    message.resultState = object.resultState;
+                                    break;
+                                }
+                                break;
                             case "RESULT_STATE_UNSPECIFIED":
                             case 0:
                                 message.resultState = 0;
@@ -7496,9 +7574,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.executionState != null && message.hasOwnProperty("executionState"))
-                                object.executionState = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanRun.ExecutionState[message.executionState] : message.executionState;
+                                object.executionState = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanRun.ExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.websecurityscanner.v1.ScanRun.ExecutionState[message.executionState] : message.executionState;
                             if (message.resultState != null && message.hasOwnProperty("resultState"))
-                                object.resultState = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanRun.ResultState[message.resultState] : message.resultState;
+                                object.resultState = options.enums === String ? $root.google.cloud.websecurityscanner.v1.ScanRun.ResultState[message.resultState] === undefined ? message.resultState : $root.google.cloud.websecurityscanner.v1.ScanRun.ResultState[message.resultState] : message.resultState;
                             if (message.urlsCrawledCount != null && message.hasOwnProperty("urlsCrawledCount"))
                                 if (typeof message.urlsCrawledCount === "number")
                                     object.urlsCrawledCount = options.longs === String ? String(message.urlsCrawledCount) : message.urlsCrawledCount;
@@ -12829,6 +12907,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.findingType) {
+                            default:
+                                if (typeof object.findingType === "number") {
+                                    message.findingType = object.findingType;
+                                    break;
+                                }
+                                break;
                             case "FINDING_TYPE_UNSPECIFIED":
                             case 0:
                                 message.findingType = 0;
@@ -12955,7 +13039,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.findingType != null && message.hasOwnProperty("findingType"))
-                                object.findingType = options.enums === String ? $root.google.cloud.websecurityscanner.v1alpha.Finding.FindingType[message.findingType] : message.findingType;
+                                object.findingType = options.enums === String ? $root.google.cloud.websecurityscanner.v1alpha.Finding.FindingType[message.findingType] === undefined ? message.findingType : $root.google.cloud.websecurityscanner.v1alpha.Finding.FindingType[message.findingType] : message.findingType;
                             if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
                                 object.httpMethod = message.httpMethod;
                             if (message.fuzzedUrl != null && message.hasOwnProperty("fuzzedUrl"))
@@ -14683,6 +14767,12 @@
                                 return object;
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.FindingTypeStats();
                             switch (object.findingType) {
+                            default:
+                                if (typeof object.findingType === "number") {
+                                    message.findingType = object.findingType;
+                                    break;
+                                }
+                                break;
                             case "FINDING_TYPE_UNSPECIFIED":
                             case 0:
                                 message.findingType = 0;
@@ -14755,7 +14845,7 @@
                                 object.findingCount = 0;
                             }
                             if (message.findingType != null && message.hasOwnProperty("findingType"))
-                                object.findingType = options.enums === String ? $root.google.cloud.websecurityscanner.v1alpha.Finding.FindingType[message.findingType] : message.findingType;
+                                object.findingType = options.enums === String ? $root.google.cloud.websecurityscanner.v1alpha.Finding.FindingType[message.findingType] === undefined ? message.findingType : $root.google.cloud.websecurityscanner.v1alpha.Finding.FindingType[message.findingType] : message.findingType;
                             if (message.findingCount != null && message.hasOwnProperty("findingCount"))
                                 object.findingCount = message.findingCount;
                             return object;
@@ -15171,6 +15261,12 @@
                                 message.authentication = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.fromObject(object.authentication);
                             }
                             switch (object.userAgent) {
+                            default:
+                                if (typeof object.userAgent === "number") {
+                                    message.userAgent = object.userAgent;
+                                    break;
+                                }
+                                break;
                             case "USER_AGENT_UNSPECIFIED":
                             case 0:
                                 message.userAgent = 0;
@@ -15207,6 +15303,10 @@
                                 for (var i = 0; i < object.targetPlatforms.length; ++i)
                                     switch (object.targetPlatforms[i]) {
                                     default:
+                                        if (typeof object.targetPlatforms[i] === "number") {
+                                            message.targetPlatforms[i] = object.targetPlatforms[i];
+                                            break;
+                                        }
                                     case "TARGET_PLATFORM_UNSPECIFIED":
                                     case 0:
                                         message.targetPlatforms[i] = 0;
@@ -15270,7 +15370,7 @@
                             if (message.authentication != null && message.hasOwnProperty("authentication"))
                                 object.authentication = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.toObject(message.authentication, options);
                             if (message.userAgent != null && message.hasOwnProperty("userAgent"))
-                                object.userAgent = options.enums === String ? $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.UserAgent[message.userAgent] : message.userAgent;
+                                object.userAgent = options.enums === String ? $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.UserAgent[message.userAgent] === undefined ? message.userAgent : $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.UserAgent[message.userAgent] : message.userAgent;
                             if (message.blacklistPatterns && message.blacklistPatterns.length) {
                                 object.blacklistPatterns = [];
                                 for (var j = 0; j < message.blacklistPatterns.length; ++j)
@@ -15281,7 +15381,7 @@
                             if (message.targetPlatforms && message.targetPlatforms.length) {
                                 object.targetPlatforms = [];
                                 for (var j = 0; j < message.targetPlatforms.length; ++j)
-                                    object.targetPlatforms[j] = options.enums === String ? $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.TargetPlatform[message.targetPlatforms[j]] : message.targetPlatforms[j];
+                                    object.targetPlatforms[j] = options.enums === String ? $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.TargetPlatform[message.targetPlatforms[j]] === undefined ? message.targetPlatforms[j] : $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.TargetPlatform[message.targetPlatforms[j]] : message.targetPlatforms[j];
                             }
                             if (message.latestRun != null && message.hasOwnProperty("latestRun"))
                                 object.latestRun = $root.google.cloud.websecurityscanner.v1alpha.ScanRun.toObject(message.latestRun, options);
@@ -16636,6 +16736,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.executionState) {
+                            default:
+                                if (typeof object.executionState === "number") {
+                                    message.executionState = object.executionState;
+                                    break;
+                                }
+                                break;
                             case "EXECUTION_STATE_UNSPECIFIED":
                             case 0:
                                 message.executionState = 0;
@@ -16654,6 +16760,12 @@
                                 break;
                             }
                             switch (object.resultState) {
+                            default:
+                                if (typeof object.resultState === "number") {
+                                    message.resultState = object.resultState;
+                                    break;
+                                }
+                                break;
                             case "RESULT_STATE_UNSPECIFIED":
                             case 0:
                                 message.resultState = 0;
@@ -16741,9 +16853,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.executionState != null && message.hasOwnProperty("executionState"))
-                                object.executionState = options.enums === String ? $root.google.cloud.websecurityscanner.v1alpha.ScanRun.ExecutionState[message.executionState] : message.executionState;
+                                object.executionState = options.enums === String ? $root.google.cloud.websecurityscanner.v1alpha.ScanRun.ExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.websecurityscanner.v1alpha.ScanRun.ExecutionState[message.executionState] : message.executionState;
                             if (message.resultState != null && message.hasOwnProperty("resultState"))
-                                object.resultState = options.enums === String ? $root.google.cloud.websecurityscanner.v1alpha.ScanRun.ResultState[message.resultState] : message.resultState;
+                                object.resultState = options.enums === String ? $root.google.cloud.websecurityscanner.v1alpha.ScanRun.ResultState[message.resultState] === undefined ? message.resultState : $root.google.cloud.websecurityscanner.v1alpha.ScanRun.ResultState[message.resultState] : message.resultState;
                             if (message.startTime != null && message.hasOwnProperty("startTime"))
                                 object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
@@ -24615,6 +24727,12 @@
                                 message.authentication = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.fromObject(object.authentication);
                             }
                             switch (object.userAgent) {
+                            default:
+                                if (typeof object.userAgent === "number") {
+                                    message.userAgent = object.userAgent;
+                                    break;
+                                }
+                                break;
                             case "USER_AGENT_UNSPECIFIED":
                             case 0:
                                 message.userAgent = 0;
@@ -24651,6 +24769,10 @@
                                 for (var i = 0; i < object.targetPlatforms.length; ++i)
                                     switch (object.targetPlatforms[i]) {
                                     default:
+                                        if (typeof object.targetPlatforms[i] === "number") {
+                                            message.targetPlatforms[i] = object.targetPlatforms[i];
+                                            break;
+                                        }
                                     case "TARGET_PLATFORM_UNSPECIFIED":
                                     case 0:
                                         message.targetPlatforms[i] = 0;
@@ -24666,6 +24788,12 @@
                                     }
                             }
                             switch (object.exportToSecurityCommandCenter) {
+                            default:
+                                if (typeof object.exportToSecurityCommandCenter === "number") {
+                                    message.exportToSecurityCommandCenter = object.exportToSecurityCommandCenter;
+                                    break;
+                                }
+                                break;
                             case "EXPORT_TO_SECURITY_COMMAND_CENTER_UNSPECIFIED":
                             case 0:
                                 message.exportToSecurityCommandCenter = 0;
@@ -24685,6 +24813,12 @@
                                 message.latestRun = $root.google.cloud.websecurityscanner.v1beta.ScanRun.fromObject(object.latestRun);
                             }
                             switch (object.riskLevel) {
+                            default:
+                                if (typeof object.riskLevel === "number") {
+                                    message.riskLevel = object.riskLevel;
+                                    break;
+                                }
+                                break;
                             case "RISK_LEVEL_UNSPECIFIED":
                             case 0:
                                 message.riskLevel = 0;
@@ -24744,7 +24878,7 @@
                             if (message.authentication != null && message.hasOwnProperty("authentication"))
                                 object.authentication = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.toObject(message.authentication, options);
                             if (message.userAgent != null && message.hasOwnProperty("userAgent"))
-                                object.userAgent = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanConfig.UserAgent[message.userAgent] : message.userAgent;
+                                object.userAgent = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanConfig.UserAgent[message.userAgent] === undefined ? message.userAgent : $root.google.cloud.websecurityscanner.v1beta.ScanConfig.UserAgent[message.userAgent] : message.userAgent;
                             if (message.blacklistPatterns && message.blacklistPatterns.length) {
                                 object.blacklistPatterns = [];
                                 for (var j = 0; j < message.blacklistPatterns.length; ++j)
@@ -24755,14 +24889,14 @@
                             if (message.targetPlatforms && message.targetPlatforms.length) {
                                 object.targetPlatforms = [];
                                 for (var j = 0; j < message.targetPlatforms.length; ++j)
-                                    object.targetPlatforms[j] = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanConfig.TargetPlatform[message.targetPlatforms[j]] : message.targetPlatforms[j];
+                                    object.targetPlatforms[j] = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanConfig.TargetPlatform[message.targetPlatforms[j]] === undefined ? message.targetPlatforms[j] : $root.google.cloud.websecurityscanner.v1beta.ScanConfig.TargetPlatform[message.targetPlatforms[j]] : message.targetPlatforms[j];
                             }
                             if (message.exportToSecurityCommandCenter != null && message.hasOwnProperty("exportToSecurityCommandCenter"))
-                                object.exportToSecurityCommandCenter = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanConfig.ExportToSecurityCommandCenter[message.exportToSecurityCommandCenter] : message.exportToSecurityCommandCenter;
+                                object.exportToSecurityCommandCenter = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanConfig.ExportToSecurityCommandCenter[message.exportToSecurityCommandCenter] === undefined ? message.exportToSecurityCommandCenter : $root.google.cloud.websecurityscanner.v1beta.ScanConfig.ExportToSecurityCommandCenter[message.exportToSecurityCommandCenter] : message.exportToSecurityCommandCenter;
                             if (message.latestRun != null && message.hasOwnProperty("latestRun"))
                                 object.latestRun = $root.google.cloud.websecurityscanner.v1beta.ScanRun.toObject(message.latestRun, options);
                             if (message.riskLevel != null && message.hasOwnProperty("riskLevel"))
-                                object.riskLevel = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanConfig.RiskLevel[message.riskLevel] : message.riskLevel;
+                                object.riskLevel = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanConfig.RiskLevel[message.riskLevel] === undefined ? message.riskLevel : $root.google.cloud.websecurityscanner.v1beta.ScanConfig.RiskLevel[message.riskLevel] : message.riskLevel;
                             return object;
                         };
     
@@ -26194,6 +26328,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.executionState) {
+                            default:
+                                if (typeof object.executionState === "number") {
+                                    message.executionState = object.executionState;
+                                    break;
+                                }
+                                break;
                             case "EXECUTION_STATE_UNSPECIFIED":
                             case 0:
                                 message.executionState = 0;
@@ -26212,6 +26352,12 @@
                                 break;
                             }
                             switch (object.resultState) {
+                            default:
+                                if (typeof object.resultState === "number") {
+                                    message.resultState = object.resultState;
+                                    break;
+                                }
+                                break;
                             case "RESULT_STATE_UNSPECIFIED":
                             case 0:
                                 message.resultState = 0;
@@ -26317,9 +26463,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.executionState != null && message.hasOwnProperty("executionState"))
-                                object.executionState = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanRun.ExecutionState[message.executionState] : message.executionState;
+                                object.executionState = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanRun.ExecutionState[message.executionState] === undefined ? message.executionState : $root.google.cloud.websecurityscanner.v1beta.ScanRun.ExecutionState[message.executionState] : message.executionState;
                             if (message.resultState != null && message.hasOwnProperty("resultState"))
-                                object.resultState = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanRun.ResultState[message.resultState] : message.resultState;
+                                object.resultState = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanRun.ResultState[message.resultState] === undefined ? message.resultState : $root.google.cloud.websecurityscanner.v1beta.ScanRun.ResultState[message.resultState] : message.resultState;
                             if (message.startTime != null && message.hasOwnProperty("startTime"))
                                 object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
@@ -26611,6 +26757,12 @@
                                 return object;
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace();
                             switch (object.code) {
+                            default:
+                                if (typeof object.code === "number") {
+                                    message.code = object.code;
+                                    break;
+                                }
+                                break;
                             case "CODE_UNSPECIFIED":
                             case 0:
                                 message.code = 0;
@@ -26669,7 +26821,7 @@
                                 object.mostCommonHttpErrorCode = 0;
                             }
                             if (message.code != null && message.hasOwnProperty("code"))
-                                object.code = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace.Code[message.code] : message.code;
+                                object.code = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace.Code[message.code] === undefined ? message.code : $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace.Code[message.code] : message.code;
                             if (message.scanConfigError != null && message.hasOwnProperty("scanConfigError"))
                                 object.scanConfigError = $root.google.cloud.websecurityscanner.v1beta.ScanConfigError.toObject(message.scanConfigError, options);
                             if (message.mostCommonHttpErrorCode != null && message.hasOwnProperty("mostCommonHttpErrorCode"))
@@ -26943,6 +27095,12 @@
                                 return object;
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfigError();
                             switch (object.code) {
+                            default:
+                                if (typeof object.code === "number") {
+                                    message.code = object.code;
+                                    break;
+                                }
+                                break;
                             case "CODE_UNSPECIFIED":
                             case 0:
                                 message.code = 0;
@@ -27135,7 +27293,7 @@
                                 object.fieldName = "";
                             }
                             if (message.code != null && message.hasOwnProperty("code"))
-                                object.code = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanConfigError.Code[message.code] : message.code;
+                                object.code = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanConfigError.Code[message.code] === undefined ? message.code : $root.google.cloud.websecurityscanner.v1beta.ScanConfigError.Code[message.code] : message.code;
                             if (message.fieldName != null && message.hasOwnProperty("fieldName"))
                                 object.fieldName = message.fieldName;
                             return object;
@@ -27422,6 +27580,12 @@
                                 return object;
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace();
                             switch (object.code) {
+                            default:
+                                if (typeof object.code === "number") {
+                                    message.code = object.code;
+                                    break;
+                                }
+                                break;
                             case "CODE_UNSPECIFIED":
                             case 0:
                                 message.code = 0;
@@ -27462,7 +27626,7 @@
                             if (options.defaults)
                                 object.code = options.enums === String ? "CODE_UNSPECIFIED" : 0;
                             if (message.code != null && message.hasOwnProperty("code"))
-                                object.code = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace.Code[message.code] : message.code;
+                                object.code = options.enums === String ? $root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace.Code[message.code] === undefined ? message.code : $root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace.Code[message.code] : message.code;
                             return object;
                         };
     
@@ -32456,6 +32620,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -32480,6 +32650,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -32527,7 +32701,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -32535,7 +32709,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -36309,6 +36483,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -36323,6 +36503,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -36449,9 +36635,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -38798,6 +38984,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -38906,7 +39098,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -39708,6 +39900,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -39724,6 +39922,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -39762,6 +39966,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -39832,7 +40040,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -39840,7 +40048,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -39853,7 +40061,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -41210,6 +41418,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -41273,7 +41487,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -43026,6 +43240,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -43075,7 +43295,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
