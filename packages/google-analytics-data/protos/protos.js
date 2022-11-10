@@ -2797,6 +2797,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -2811,6 +2817,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -2937,9 +2949,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -5286,6 +5298,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -5394,7 +5412,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -6196,6 +6214,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -6212,6 +6236,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -6250,6 +6280,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -6320,7 +6354,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -6328,7 +6362,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -6341,7 +6375,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -7698,6 +7732,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -7761,7 +7801,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -9514,6 +9554,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -9563,7 +9609,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -10086,6 +10132,12 @@
                                 message.funnelNextAction = $root.google.analytics.data.v1alpha.FunnelNextAction.fromObject(object.funnelNextAction);
                             }
                             switch (object.funnelVisualizationType) {
+                            default:
+                                if (typeof object.funnelVisualizationType === "number") {
+                                    message.funnelVisualizationType = object.funnelVisualizationType;
+                                    break;
+                                }
+                                break;
                             case "FUNNEL_VISUALIZATION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.funnelVisualizationType = 0;
@@ -10173,7 +10225,7 @@
                             if (message.funnelNextAction != null && message.hasOwnProperty("funnelNextAction"))
                                 object.funnelNextAction = $root.google.analytics.data.v1alpha.FunnelNextAction.toObject(message.funnelNextAction, options);
                             if (message.funnelVisualizationType != null && message.hasOwnProperty("funnelVisualizationType"))
-                                object.funnelVisualizationType = options.enums === String ? $root.google.analytics.data.v1alpha.RunFunnelReportRequest.FunnelVisualizationType[message.funnelVisualizationType] : message.funnelVisualizationType;
+                                object.funnelVisualizationType = options.enums === String ? $root.google.analytics.data.v1alpha.RunFunnelReportRequest.FunnelVisualizationType[message.funnelVisualizationType] === undefined ? message.funnelVisualizationType : $root.google.analytics.data.v1alpha.RunFunnelReportRequest.FunnelVisualizationType[message.funnelVisualizationType] : message.funnelVisualizationType;
                             if (message.segments && message.segments.length) {
                                 object.segments = [];
                                 for (var j = 0; j < message.segments.length; ++j)
@@ -12857,6 +12909,12 @@
                                 return object;
                             var message = new $root.google.analytics.data.v1alpha.StringFilter();
                             switch (object.matchType) {
+                            default:
+                                if (typeof object.matchType === "number") {
+                                    message.matchType = object.matchType;
+                                    break;
+                                }
+                                break;
                             case "MATCH_TYPE_UNSPECIFIED":
                             case 0:
                                 message.matchType = 0;
@@ -12912,7 +12970,7 @@
                                 object.caseSensitive = false;
                             }
                             if (message.matchType != null && message.hasOwnProperty("matchType"))
-                                object.matchType = options.enums === String ? $root.google.analytics.data.v1alpha.StringFilter.MatchType[message.matchType] : message.matchType;
+                                object.matchType = options.enums === String ? $root.google.analytics.data.v1alpha.StringFilter.MatchType[message.matchType] === undefined ? message.matchType : $root.google.analytics.data.v1alpha.StringFilter.MatchType[message.matchType] : message.matchType;
                             if (message.value != null && message.hasOwnProperty("value"))
                                 object.value = message.value;
                             if (message.caseSensitive != null && message.hasOwnProperty("caseSensitive"))
@@ -13395,6 +13453,12 @@
                                 return object;
                             var message = new $root.google.analytics.data.v1alpha.NumericFilter();
                             switch (object.operation) {
+                            default:
+                                if (typeof object.operation === "number") {
+                                    message.operation = object.operation;
+                                    break;
+                                }
+                                break;
                             case "OPERATION_UNSPECIFIED":
                             case 0:
                                 message.operation = 0;
@@ -13446,7 +13510,7 @@
                                 object.value = null;
                             }
                             if (message.operation != null && message.hasOwnProperty("operation"))
-                                object.operation = options.enums === String ? $root.google.analytics.data.v1alpha.NumericFilter.Operation[message.operation] : message.operation;
+                                object.operation = options.enums === String ? $root.google.analytics.data.v1alpha.NumericFilter.Operation[message.operation] === undefined ? message.operation : $root.google.analytics.data.v1alpha.NumericFilter.Operation[message.operation] : message.operation;
                             if (message.value != null && message.hasOwnProperty("value"))
                                 object.value = $root.google.analytics.data.v1alpha.NumericValue.toObject(message.value, options);
                             return object;
@@ -14389,6 +14453,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "METRIC_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -14465,7 +14535,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.analytics.data.v1alpha.MetricType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.analytics.data.v1alpha.MetricType[message.type] === undefined ? message.type : $root.google.analytics.data.v1alpha.MetricType[message.type] : message.type;
                             return object;
                         };
     
@@ -17871,6 +17941,12 @@
                                 return object;
                             var message = new $root.google.analytics.data.v1alpha.UserSegmentConditionGroup();
                             switch (object.conditionScoping) {
+                            default:
+                                if (typeof object.conditionScoping === "number") {
+                                    message.conditionScoping = object.conditionScoping;
+                                    break;
+                                }
+                                break;
                             case "USER_CRITERIA_SCOPING_UNSPECIFIED":
                             case 0:
                                 message.conditionScoping = 0;
@@ -17914,7 +17990,7 @@
                                 object.segmentFilterExpression = null;
                             }
                             if (message.conditionScoping != null && message.hasOwnProperty("conditionScoping"))
-                                object.conditionScoping = options.enums === String ? $root.google.analytics.data.v1alpha.UserCriteriaScoping[message.conditionScoping] : message.conditionScoping;
+                                object.conditionScoping = options.enums === String ? $root.google.analytics.data.v1alpha.UserCriteriaScoping[message.conditionScoping] === undefined ? message.conditionScoping : $root.google.analytics.data.v1alpha.UserCriteriaScoping[message.conditionScoping] : message.conditionScoping;
                             if (message.segmentFilterExpression != null && message.hasOwnProperty("segmentFilterExpression"))
                                 object.segmentFilterExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.toObject(message.segmentFilterExpression, options);
                             return object;
@@ -18154,6 +18230,12 @@
                                 return object;
                             var message = new $root.google.analytics.data.v1alpha.UserSegmentSequenceGroup();
                             switch (object.sequenceScoping) {
+                            default:
+                                if (typeof object.sequenceScoping === "number") {
+                                    message.sequenceScoping = object.sequenceScoping;
+                                    break;
+                                }
+                                break;
                             case "USER_CRITERIA_SCOPING_UNSPECIFIED":
                             case 0:
                                 message.sequenceScoping = 0;
@@ -18209,7 +18291,7 @@
                                 object.sequenceMaximumDuration = null;
                             }
                             if (message.sequenceScoping != null && message.hasOwnProperty("sequenceScoping"))
-                                object.sequenceScoping = options.enums === String ? $root.google.analytics.data.v1alpha.UserCriteriaScoping[message.sequenceScoping] : message.sequenceScoping;
+                                object.sequenceScoping = options.enums === String ? $root.google.analytics.data.v1alpha.UserCriteriaScoping[message.sequenceScoping] === undefined ? message.sequenceScoping : $root.google.analytics.data.v1alpha.UserCriteriaScoping[message.sequenceScoping] : message.sequenceScoping;
                             if (message.sequenceMaximumDuration != null && message.hasOwnProperty("sequenceMaximumDuration"))
                                 object.sequenceMaximumDuration = $root.google.protobuf.Duration.toObject(message.sequenceMaximumDuration, options);
                             if (message.userSequenceSteps && message.userSequenceSteps.length) {
@@ -18446,6 +18528,12 @@
                             if (object.isDirectlyFollowedBy != null)
                                 message.isDirectlyFollowedBy = Boolean(object.isDirectlyFollowedBy);
                             switch (object.stepScoping) {
+                            default:
+                                if (typeof object.stepScoping === "number") {
+                                    message.stepScoping = object.stepScoping;
+                                    break;
+                                }
+                                break;
                             case "USER_CRITERIA_SCOPING_UNSPECIFIED":
                             case 0:
                                 message.stepScoping = 0;
@@ -18492,7 +18580,7 @@
                             if (message.isDirectlyFollowedBy != null && message.hasOwnProperty("isDirectlyFollowedBy"))
                                 object.isDirectlyFollowedBy = message.isDirectlyFollowedBy;
                             if (message.stepScoping != null && message.hasOwnProperty("stepScoping"))
-                                object.stepScoping = options.enums === String ? $root.google.analytics.data.v1alpha.UserCriteriaScoping[message.stepScoping] : message.stepScoping;
+                                object.stepScoping = options.enums === String ? $root.google.analytics.data.v1alpha.UserCriteriaScoping[message.stepScoping] === undefined ? message.stepScoping : $root.google.analytics.data.v1alpha.UserCriteriaScoping[message.stepScoping] : message.stepScoping;
                             if (message.segmentFilterExpression != null && message.hasOwnProperty("segmentFilterExpression"))
                                 object.segmentFilterExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.toObject(message.segmentFilterExpression, options);
                             return object;
@@ -18703,6 +18791,12 @@
                                 return object;
                             var message = new $root.google.analytics.data.v1alpha.UserSegmentExclusion();
                             switch (object.userExclusionDuration) {
+                            default:
+                                if (typeof object.userExclusionDuration === "number") {
+                                    message.userExclusionDuration = object.userExclusionDuration;
+                                    break;
+                                }
+                                break;
                             case "USER_EXCLUSION_DURATION_UNSPECIFIED":
                             case 0:
                                 message.userExclusionDuration = 0;
@@ -18742,7 +18836,7 @@
                                 object.userExclusionCriteria = null;
                             }
                             if (message.userExclusionDuration != null && message.hasOwnProperty("userExclusionDuration"))
-                                object.userExclusionDuration = options.enums === String ? $root.google.analytics.data.v1alpha.UserExclusionDuration[message.userExclusionDuration] : message.userExclusionDuration;
+                                object.userExclusionDuration = options.enums === String ? $root.google.analytics.data.v1alpha.UserExclusionDuration[message.userExclusionDuration] === undefined ? message.userExclusionDuration : $root.google.analytics.data.v1alpha.UserExclusionDuration[message.userExclusionDuration] : message.userExclusionDuration;
                             if (message.userExclusionCriteria != null && message.hasOwnProperty("userExclusionCriteria"))
                                 object.userExclusionCriteria = $root.google.analytics.data.v1alpha.UserSegmentCriteria.toObject(message.userExclusionCriteria, options);
                             return object;
@@ -19446,6 +19540,12 @@
                                 return object;
                             var message = new $root.google.analytics.data.v1alpha.SessionSegmentConditionGroup();
                             switch (object.conditionScoping) {
+                            default:
+                                if (typeof object.conditionScoping === "number") {
+                                    message.conditionScoping = object.conditionScoping;
+                                    break;
+                                }
+                                break;
                             case "SESSION_CRITERIA_SCOPING_UNSPECIFIED":
                             case 0:
                                 message.conditionScoping = 0;
@@ -19485,7 +19585,7 @@
                                 object.segmentFilterExpression = null;
                             }
                             if (message.conditionScoping != null && message.hasOwnProperty("conditionScoping"))
-                                object.conditionScoping = options.enums === String ? $root.google.analytics.data.v1alpha.SessionCriteriaScoping[message.conditionScoping] : message.conditionScoping;
+                                object.conditionScoping = options.enums === String ? $root.google.analytics.data.v1alpha.SessionCriteriaScoping[message.conditionScoping] === undefined ? message.conditionScoping : $root.google.analytics.data.v1alpha.SessionCriteriaScoping[message.conditionScoping] : message.conditionScoping;
                             if (message.segmentFilterExpression != null && message.hasOwnProperty("segmentFilterExpression"))
                                 object.segmentFilterExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.toObject(message.segmentFilterExpression, options);
                             return object;
@@ -19696,6 +19796,12 @@
                                 return object;
                             var message = new $root.google.analytics.data.v1alpha.SessionSegmentExclusion();
                             switch (object.sessionExclusionDuration) {
+                            default:
+                                if (typeof object.sessionExclusionDuration === "number") {
+                                    message.sessionExclusionDuration = object.sessionExclusionDuration;
+                                    break;
+                                }
+                                break;
                             case "SESSION_EXCLUSION_DURATION_UNSPECIFIED":
                             case 0:
                                 message.sessionExclusionDuration = 0;
@@ -19735,7 +19841,7 @@
                                 object.sessionExclusionCriteria = null;
                             }
                             if (message.sessionExclusionDuration != null && message.hasOwnProperty("sessionExclusionDuration"))
-                                object.sessionExclusionDuration = options.enums === String ? $root.google.analytics.data.v1alpha.SessionExclusionDuration[message.sessionExclusionDuration] : message.sessionExclusionDuration;
+                                object.sessionExclusionDuration = options.enums === String ? $root.google.analytics.data.v1alpha.SessionExclusionDuration[message.sessionExclusionDuration] === undefined ? message.sessionExclusionDuration : $root.google.analytics.data.v1alpha.SessionExclusionDuration[message.sessionExclusionDuration] : message.sessionExclusionDuration;
                             if (message.sessionExclusionCriteria != null && message.hasOwnProperty("sessionExclusionCriteria"))
                                 object.sessionExclusionCriteria = $root.google.analytics.data.v1alpha.SessionSegmentCriteria.toObject(message.sessionExclusionCriteria, options);
                             return object;
@@ -20436,6 +20542,12 @@
                                 return object;
                             var message = new $root.google.analytics.data.v1alpha.EventSegmentConditionGroup();
                             switch (object.conditionScoping) {
+                            default:
+                                if (typeof object.conditionScoping === "number") {
+                                    message.conditionScoping = object.conditionScoping;
+                                    break;
+                                }
+                                break;
                             case "EVENT_CRITERIA_SCOPING_UNSPECIFIED":
                             case 0:
                                 message.conditionScoping = 0;
@@ -20471,7 +20583,7 @@
                                 object.segmentFilterExpression = null;
                             }
                             if (message.conditionScoping != null && message.hasOwnProperty("conditionScoping"))
-                                object.conditionScoping = options.enums === String ? $root.google.analytics.data.v1alpha.EventCriteriaScoping[message.conditionScoping] : message.conditionScoping;
+                                object.conditionScoping = options.enums === String ? $root.google.analytics.data.v1alpha.EventCriteriaScoping[message.conditionScoping] === undefined ? message.conditionScoping : $root.google.analytics.data.v1alpha.EventCriteriaScoping[message.conditionScoping] : message.conditionScoping;
                             if (message.segmentFilterExpression != null && message.hasOwnProperty("segmentFilterExpression"))
                                 object.segmentFilterExpression = $root.google.analytics.data.v1alpha.SegmentFilterExpression.toObject(message.segmentFilterExpression, options);
                             return object;
@@ -20681,6 +20793,12 @@
                                 return object;
                             var message = new $root.google.analytics.data.v1alpha.EventSegmentExclusion();
                             switch (object.eventExclusionDuration) {
+                            default:
+                                if (typeof object.eventExclusionDuration === "number") {
+                                    message.eventExclusionDuration = object.eventExclusionDuration;
+                                    break;
+                                }
+                                break;
                             case "EVENT_EXCLUSION_DURATION_UNSPECIFIED":
                             case 0:
                                 message.eventExclusionDuration = 0;
@@ -20716,7 +20834,7 @@
                                 object.eventExclusionCriteria = null;
                             }
                             if (message.eventExclusionDuration != null && message.hasOwnProperty("eventExclusionDuration"))
-                                object.eventExclusionDuration = options.enums === String ? $root.google.analytics.data.v1alpha.EventExclusionDuration[message.eventExclusionDuration] : message.eventExclusionDuration;
+                                object.eventExclusionDuration = options.enums === String ? $root.google.analytics.data.v1alpha.EventExclusionDuration[message.eventExclusionDuration] === undefined ? message.eventExclusionDuration : $root.google.analytics.data.v1alpha.EventExclusionDuration[message.eventExclusionDuration] : message.eventExclusionDuration;
                             if (message.eventExclusionCriteria != null && message.hasOwnProperty("eventExclusionCriteria"))
                                 object.eventExclusionCriteria = $root.google.analytics.data.v1alpha.EventSegmentCriteria.toObject(message.eventExclusionCriteria, options);
                             return object;
@@ -27025,6 +27143,12 @@
                                 message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.fromObject(object.metricFilter);
                             }
                             switch (object.compatibilityFilter) {
+                            default:
+                                if (typeof object.compatibilityFilter === "number") {
+                                    message.compatibilityFilter = object.compatibilityFilter;
+                                    break;
+                                }
+                                break;
                             case "COMPATIBILITY_UNSPECIFIED":
                             case 0:
                                 message.compatibilityFilter = 0;
@@ -27081,7 +27205,7 @@
                             if (message.metricFilter != null && message.hasOwnProperty("metricFilter"))
                                 object.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.toObject(message.metricFilter, options);
                             if (message.compatibilityFilter != null && message.hasOwnProperty("compatibilityFilter"))
-                                object.compatibilityFilter = options.enums === String ? $root.google.analytics.data.v1beta.Compatibility[message.compatibilityFilter] : message.compatibilityFilter;
+                                object.compatibilityFilter = options.enums === String ? $root.google.analytics.data.v1beta.Compatibility[message.compatibilityFilter] === undefined ? message.compatibilityFilter : $root.google.analytics.data.v1beta.Compatibility[message.compatibilityFilter] : message.compatibilityFilter;
                             return object;
                         };
     
@@ -28196,6 +28320,10 @@
                                 for (var i = 0; i < object.metricAggregations.length; ++i)
                                     switch (object.metricAggregations[i]) {
                                     default:
+                                        if (typeof object.metricAggregations[i] === "number") {
+                                            message.metricAggregations[i] = object.metricAggregations[i];
+                                            break;
+                                        }
                                     case "METRIC_AGGREGATION_UNSPECIFIED":
                                     case 0:
                                         message.metricAggregations[i] = 0;
@@ -28315,7 +28443,7 @@
                             if (message.metricAggregations && message.metricAggregations.length) {
                                 object.metricAggregations = [];
                                 for (var j = 0; j < message.metricAggregations.length; ++j)
-                                    object.metricAggregations[j] = options.enums === String ? $root.google.analytics.data.v1beta.MetricAggregation[message.metricAggregations[j]] : message.metricAggregations[j];
+                                    object.metricAggregations[j] = options.enums === String ? $root.google.analytics.data.v1beta.MetricAggregation[message.metricAggregations[j]] === undefined ? message.metricAggregations[j] : $root.google.analytics.data.v1beta.MetricAggregation[message.metricAggregations[j]] : message.metricAggregations[j];
                             }
                             if (message.orderBys && message.orderBys.length) {
                                 object.orderBys = [];
@@ -31550,6 +31678,10 @@
                                 for (var i = 0; i < object.metricAggregations.length; ++i)
                                     switch (object.metricAggregations[i]) {
                                     default:
+                                        if (typeof object.metricAggregations[i] === "number") {
+                                            message.metricAggregations[i] = object.metricAggregations[i];
+                                            break;
+                                        }
                                     case "METRIC_AGGREGATION_UNSPECIFIED":
                                     case 0:
                                         message.metricAggregations[i] = 0;
@@ -31652,7 +31784,7 @@
                             if (message.metricAggregations && message.metricAggregations.length) {
                                 object.metricAggregations = [];
                                 for (var j = 0; j < message.metricAggregations.length; ++j)
-                                    object.metricAggregations[j] = options.enums === String ? $root.google.analytics.data.v1beta.MetricAggregation[message.metricAggregations[j]] : message.metricAggregations[j];
+                                    object.metricAggregations[j] = options.enums === String ? $root.google.analytics.data.v1beta.MetricAggregation[message.metricAggregations[j]] === undefined ? message.metricAggregations[j] : $root.google.analytics.data.v1beta.MetricAggregation[message.metricAggregations[j]] : message.metricAggregations[j];
                             }
                             if (message.orderBys && message.orderBys.length) {
                                 object.orderBys = [];
@@ -35082,6 +35214,12 @@
                                     return object;
                                 var message = new $root.google.analytics.data.v1beta.Filter.StringFilter();
                                 switch (object.matchType) {
+                                default:
+                                    if (typeof object.matchType === "number") {
+                                        message.matchType = object.matchType;
+                                        break;
+                                    }
+                                    break;
                                 case "MATCH_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.matchType = 0;
@@ -35137,7 +35275,7 @@
                                     object.caseSensitive = false;
                                 }
                                 if (message.matchType != null && message.hasOwnProperty("matchType"))
-                                    object.matchType = options.enums === String ? $root.google.analytics.data.v1beta.Filter.StringFilter.MatchType[message.matchType] : message.matchType;
+                                    object.matchType = options.enums === String ? $root.google.analytics.data.v1beta.Filter.StringFilter.MatchType[message.matchType] === undefined ? message.matchType : $root.google.analytics.data.v1beta.Filter.StringFilter.MatchType[message.matchType] : message.matchType;
                                 if (message.value != null && message.hasOwnProperty("value"))
                                     object.value = message.value;
                                 if (message.caseSensitive != null && message.hasOwnProperty("caseSensitive"))
@@ -35620,6 +35758,12 @@
                                     return object;
                                 var message = new $root.google.analytics.data.v1beta.Filter.NumericFilter();
                                 switch (object.operation) {
+                                default:
+                                    if (typeof object.operation === "number") {
+                                        message.operation = object.operation;
+                                        break;
+                                    }
+                                    break;
                                 case "OPERATION_UNSPECIFIED":
                                 case 0:
                                     message.operation = 0;
@@ -35671,7 +35815,7 @@
                                     object.value = null;
                                 }
                                 if (message.operation != null && message.hasOwnProperty("operation"))
-                                    object.operation = options.enums === String ? $root.google.analytics.data.v1beta.Filter.NumericFilter.Operation[message.operation] : message.operation;
+                                    object.operation = options.enums === String ? $root.google.analytics.data.v1beta.Filter.NumericFilter.Operation[message.operation] === undefined ? message.operation : $root.google.analytics.data.v1beta.Filter.NumericFilter.Operation[message.operation] : message.operation;
                                 if (message.value != null && message.hasOwnProperty("value"))
                                     object.value = $root.google.analytics.data.v1beta.NumericValue.toObject(message.value, options);
                                 return object;
@@ -36666,6 +36810,12 @@
                                 if (object.dimensionName != null)
                                     message.dimensionName = String(object.dimensionName);
                                 switch (object.orderType) {
+                                default:
+                                    if (typeof object.orderType === "number") {
+                                        message.orderType = object.orderType;
+                                        break;
+                                    }
+                                    break;
                                 case "ORDER_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.orderType = 0;
@@ -36706,7 +36856,7 @@
                                 if (message.dimensionName != null && message.hasOwnProperty("dimensionName"))
                                     object.dimensionName = message.dimensionName;
                                 if (message.orderType != null && message.hasOwnProperty("orderType"))
-                                    object.orderType = options.enums === String ? $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy.OrderType[message.orderType] : message.orderType;
+                                    object.orderType = options.enums === String ? $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy.OrderType[message.orderType] === undefined ? message.orderType : $root.google.analytics.data.v1beta.OrderBy.DimensionOrderBy.OrderType[message.orderType] : message.orderType;
                                 return object;
                             };
     
@@ -37540,6 +37690,10 @@
                                 for (var i = 0; i < object.metricAggregations.length; ++i)
                                     switch (object.metricAggregations[i]) {
                                     default:
+                                        if (typeof object.metricAggregations[i] === "number") {
+                                            message.metricAggregations[i] = object.metricAggregations[i];
+                                            break;
+                                        }
                                     case "METRIC_AGGREGATION_UNSPECIFIED":
                                     case 0:
                                         message.metricAggregations[i] = 0;
@@ -37618,7 +37772,7 @@
                             if (message.metricAggregations && message.metricAggregations.length) {
                                 object.metricAggregations = [];
                                 for (var j = 0; j < message.metricAggregations.length; ++j)
-                                    object.metricAggregations[j] = options.enums === String ? $root.google.analytics.data.v1beta.MetricAggregation[message.metricAggregations[j]] : message.metricAggregations[j];
+                                    object.metricAggregations[j] = options.enums === String ? $root.google.analytics.data.v1beta.MetricAggregation[message.metricAggregations[j]] === undefined ? message.metricAggregations[j] : $root.google.analytics.data.v1beta.MetricAggregation[message.metricAggregations[j]] : message.metricAggregations[j];
                             }
                             return object;
                         };
@@ -38382,6 +38536,12 @@
                                 return object;
                             var message = new $root.google.analytics.data.v1beta.CohortsRange();
                             switch (object.granularity) {
+                            default:
+                                if (typeof object.granularity === "number") {
+                                    message.granularity = object.granularity;
+                                    break;
+                                }
+                                break;
                             case "GRANULARITY_UNSPECIFIED":
                             case 0:
                                 message.granularity = 0;
@@ -38425,7 +38585,7 @@
                                 object.endOffset = 0;
                             }
                             if (message.granularity != null && message.hasOwnProperty("granularity"))
-                                object.granularity = options.enums === String ? $root.google.analytics.data.v1beta.CohortsRange.Granularity[message.granularity] : message.granularity;
+                                object.granularity = options.enums === String ? $root.google.analytics.data.v1beta.CohortsRange.Granularity[message.granularity] === undefined ? message.granularity : $root.google.analytics.data.v1beta.CohortsRange.Granularity[message.granularity] : message.granularity;
                             if (message.startOffset != null && message.hasOwnProperty("startOffset"))
                                 object.startOffset = message.startOffset;
                             if (message.endOffset != null && message.hasOwnProperty("endOffset"))
@@ -39519,6 +39679,10 @@
                                         for (var i = 0; i < object.restrictedMetricTypes.length; ++i)
                                             switch (object.restrictedMetricTypes[i]) {
                                             default:
+                                                if (typeof object.restrictedMetricTypes[i] === "number") {
+                                                    message.restrictedMetricTypes[i] = object.restrictedMetricTypes[i];
+                                                    break;
+                                                }
                                             case "RESTRICTED_METRIC_TYPE_UNSPECIFIED":
                                             case 0:
                                                 message.restrictedMetricTypes[i] = 0;
@@ -39559,7 +39723,7 @@
                                     if (message.restrictedMetricTypes && message.restrictedMetricTypes.length) {
                                         object.restrictedMetricTypes = [];
                                         for (var j = 0; j < message.restrictedMetricTypes.length; ++j)
-                                            object.restrictedMetricTypes[j] = options.enums === String ? $root.google.analytics.data.v1beta.RestrictedMetricType[message.restrictedMetricTypes[j]] : message.restrictedMetricTypes[j];
+                                            object.restrictedMetricTypes[j] = options.enums === String ? $root.google.analytics.data.v1beta.RestrictedMetricType[message.restrictedMetricTypes[j]] === undefined ? message.restrictedMetricTypes[j] : $root.google.analytics.data.v1beta.RestrictedMetricType[message.restrictedMetricTypes[j]] : message.restrictedMetricTypes[j];
                                     }
                                     return object;
                                 };
@@ -39988,6 +40152,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "METRIC_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -40064,7 +40234,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.analytics.data.v1beta.MetricType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.analytics.data.v1beta.MetricType[message.type] === undefined ? message.type : $root.google.analytics.data.v1beta.MetricType[message.type] : message.type;
                             return object;
                         };
     
@@ -42805,6 +42975,12 @@
                                     message.deprecatedApiNames[i] = String(object.deprecatedApiNames[i]);
                             }
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "METRIC_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -42869,6 +43045,10 @@
                                 for (var i = 0; i < object.blockedReasons.length; ++i)
                                     switch (object.blockedReasons[i]) {
                                     default:
+                                        if (typeof object.blockedReasons[i] === "number") {
+                                            message.blockedReasons[i] = object.blockedReasons[i];
+                                            break;
+                                        }
                                     case "BLOCKED_REASON_UNSPECIFIED":
                                     case 0:
                                         message.blockedReasons[i] = 0;
@@ -42926,7 +43106,7 @@
                                     object.deprecatedApiNames[j] = message.deprecatedApiNames[j];
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.analytics.data.v1beta.MetricType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.analytics.data.v1beta.MetricType[message.type] === undefined ? message.type : $root.google.analytics.data.v1beta.MetricType[message.type] : message.type;
                             if (message.expression != null && message.hasOwnProperty("expression"))
                                 object.expression = message.expression;
                             if (message.customDefinition != null && message.hasOwnProperty("customDefinition"))
@@ -42934,7 +43114,7 @@
                             if (message.blockedReasons && message.blockedReasons.length) {
                                 object.blockedReasons = [];
                                 for (var j = 0; j < message.blockedReasons.length; ++j)
-                                    object.blockedReasons[j] = options.enums === String ? $root.google.analytics.data.v1beta.MetricMetadata.BlockedReason[message.blockedReasons[j]] : message.blockedReasons[j];
+                                    object.blockedReasons[j] = options.enums === String ? $root.google.analytics.data.v1beta.MetricMetadata.BlockedReason[message.blockedReasons[j]] === undefined ? message.blockedReasons[j] : $root.google.analytics.data.v1beta.MetricMetadata.BlockedReason[message.blockedReasons[j]] : message.blockedReasons[j];
                             }
                             if (message.category != null && message.hasOwnProperty("category"))
                                 object.category = message.category;
@@ -43198,6 +43378,12 @@
                                 message.dimensionMetadata = $root.google.analytics.data.v1beta.DimensionMetadata.fromObject(object.dimensionMetadata);
                             }
                             switch (object.compatibility) {
+                            default:
+                                if (typeof object.compatibility === "number") {
+                                    message.compatibility = object.compatibility;
+                                    break;
+                                }
+                                break;
                             case "COMPATIBILITY_UNSPECIFIED":
                             case 0:
                                 message.compatibility = 0;
@@ -43233,7 +43419,7 @@
                                     object._dimensionMetadata = "dimensionMetadata";
                             }
                             if (message.compatibility != null && message.hasOwnProperty("compatibility")) {
-                                object.compatibility = options.enums === String ? $root.google.analytics.data.v1beta.Compatibility[message.compatibility] : message.compatibility;
+                                object.compatibility = options.enums === String ? $root.google.analytics.data.v1beta.Compatibility[message.compatibility] === undefined ? message.compatibility : $root.google.analytics.data.v1beta.Compatibility[message.compatibility] : message.compatibility;
                                 if (options.oneofs)
                                     object._compatibility = "compatibility";
                             }
@@ -43481,6 +43667,12 @@
                                 message.metricMetadata = $root.google.analytics.data.v1beta.MetricMetadata.fromObject(object.metricMetadata);
                             }
                             switch (object.compatibility) {
+                            default:
+                                if (typeof object.compatibility === "number") {
+                                    message.compatibility = object.compatibility;
+                                    break;
+                                }
+                                break;
                             case "COMPATIBILITY_UNSPECIFIED":
                             case 0:
                                 message.compatibility = 0;
@@ -43516,7 +43708,7 @@
                                     object._metricMetadata = "metricMetadata";
                             }
                             if (message.compatibility != null && message.hasOwnProperty("compatibility")) {
-                                object.compatibility = options.enums === String ? $root.google.analytics.data.v1beta.Compatibility[message.compatibility] : message.compatibility;
+                                object.compatibility = options.enums === String ? $root.google.analytics.data.v1beta.Compatibility[message.compatibility] === undefined ? message.compatibility : $root.google.analytics.data.v1beta.Compatibility[message.compatibility] : message.compatibility;
                                 if (options.oneofs)
                                     object._compatibility = "compatibility";
                             }
@@ -44951,6 +45143,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -44975,6 +45173,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -45022,7 +45224,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -45030,7 +45232,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
