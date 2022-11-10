@@ -11352,6 +11352,12 @@
                         return object;
                     var message = new $root.grafeas.v1.AliasContext();
                     switch (object.kind) {
+                    default:
+                        if (typeof object.kind === "number") {
+                            message.kind = object.kind;
+                            break;
+                        }
+                        break;
                     case "KIND_UNSPECIFIED":
                     case 0:
                         message.kind = 0;
@@ -11392,7 +11398,7 @@
                         object.name = "";
                     }
                     if (message.kind != null && message.hasOwnProperty("kind"))
-                        object.kind = options.enums === String ? $root.grafeas.v1.AliasContext.Kind[message.kind] : message.kind;
+                        object.kind = options.enums === String ? $root.grafeas.v1.AliasContext.Kind[message.kind] === undefined ? message.kind : $root.grafeas.v1.AliasContext.Kind[message.kind] : message.kind;
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
                     return object;
@@ -13318,6 +13324,12 @@
                         if (object.profileLevel != null)
                             message.profileLevel = object.profileLevel | 0;
                         switch (object.severity) {
+                        default:
+                            if (typeof object.severity === "number") {
+                                message.severity = object.severity;
+                                break;
+                            }
+                            break;
                         case "SEVERITY_UNSPECIFIED":
                         case 0:
                             message.severity = 0;
@@ -13366,7 +13378,7 @@
                         if (message.profileLevel != null && message.hasOwnProperty("profileLevel"))
                             object.profileLevel = message.profileLevel;
                         if (message.severity != null && message.hasOwnProperty("severity"))
-                            object.severity = options.enums === String ? $root.grafeas.v1.Severity[message.severity] : message.severity;
+                            object.severity = options.enums === String ? $root.grafeas.v1.Severity[message.severity] === undefined ? message.severity : $root.grafeas.v1.Severity[message.severity] : message.severity;
                         return object;
                     };
     
@@ -14562,6 +14574,12 @@
                     if (object.impactScore != null)
                         message.impactScore = Number(object.impactScore);
                     switch (object.attackVector) {
+                    default:
+                        if (typeof object.attackVector === "number") {
+                            message.attackVector = object.attackVector;
+                            break;
+                        }
+                        break;
                     case "ATTACK_VECTOR_UNSPECIFIED":
                     case 0:
                         message.attackVector = 0;
@@ -14584,6 +14602,12 @@
                         break;
                     }
                     switch (object.attackComplexity) {
+                    default:
+                        if (typeof object.attackComplexity === "number") {
+                            message.attackComplexity = object.attackComplexity;
+                            break;
+                        }
+                        break;
                     case "ATTACK_COMPLEXITY_UNSPECIFIED":
                     case 0:
                         message.attackComplexity = 0;
@@ -14598,6 +14622,12 @@
                         break;
                     }
                     switch (object.privilegesRequired) {
+                    default:
+                        if (typeof object.privilegesRequired === "number") {
+                            message.privilegesRequired = object.privilegesRequired;
+                            break;
+                        }
+                        break;
                     case "PRIVILEGES_REQUIRED_UNSPECIFIED":
                     case 0:
                         message.privilegesRequired = 0;
@@ -14616,6 +14646,12 @@
                         break;
                     }
                     switch (object.userInteraction) {
+                    default:
+                        if (typeof object.userInteraction === "number") {
+                            message.userInteraction = object.userInteraction;
+                            break;
+                        }
+                        break;
                     case "USER_INTERACTION_UNSPECIFIED":
                     case 0:
                         message.userInteraction = 0;
@@ -14630,6 +14666,12 @@
                         break;
                     }
                     switch (object.scope) {
+                    default:
+                        if (typeof object.scope === "number") {
+                            message.scope = object.scope;
+                            break;
+                        }
+                        break;
                     case "SCOPE_UNSPECIFIED":
                     case 0:
                         message.scope = 0;
@@ -14644,6 +14686,12 @@
                         break;
                     }
                     switch (object.confidentialityImpact) {
+                    default:
+                        if (typeof object.confidentialityImpact === "number") {
+                            message.confidentialityImpact = object.confidentialityImpact;
+                            break;
+                        }
+                        break;
                     case "IMPACT_UNSPECIFIED":
                     case 0:
                         message.confidentialityImpact = 0;
@@ -14662,6 +14710,12 @@
                         break;
                     }
                     switch (object.integrityImpact) {
+                    default:
+                        if (typeof object.integrityImpact === "number") {
+                            message.integrityImpact = object.integrityImpact;
+                            break;
+                        }
+                        break;
                     case "IMPACT_UNSPECIFIED":
                     case 0:
                         message.integrityImpact = 0;
@@ -14680,6 +14734,12 @@
                         break;
                     }
                     switch (object.availabilityImpact) {
+                    default:
+                        if (typeof object.availabilityImpact === "number") {
+                            message.availabilityImpact = object.availabilityImpact;
+                            break;
+                        }
+                        break;
                     case "IMPACT_UNSPECIFIED":
                     case 0:
                         message.availabilityImpact = 0;
@@ -14733,21 +14793,21 @@
                     if (message.impactScore != null && message.hasOwnProperty("impactScore"))
                         object.impactScore = options.json && !isFinite(message.impactScore) ? String(message.impactScore) : message.impactScore;
                     if (message.attackVector != null && message.hasOwnProperty("attackVector"))
-                        object.attackVector = options.enums === String ? $root.grafeas.v1.CVSSv3.AttackVector[message.attackVector] : message.attackVector;
+                        object.attackVector = options.enums === String ? $root.grafeas.v1.CVSSv3.AttackVector[message.attackVector] === undefined ? message.attackVector : $root.grafeas.v1.CVSSv3.AttackVector[message.attackVector] : message.attackVector;
                     if (message.attackComplexity != null && message.hasOwnProperty("attackComplexity"))
-                        object.attackComplexity = options.enums === String ? $root.grafeas.v1.CVSSv3.AttackComplexity[message.attackComplexity] : message.attackComplexity;
+                        object.attackComplexity = options.enums === String ? $root.grafeas.v1.CVSSv3.AttackComplexity[message.attackComplexity] === undefined ? message.attackComplexity : $root.grafeas.v1.CVSSv3.AttackComplexity[message.attackComplexity] : message.attackComplexity;
                     if (message.privilegesRequired != null && message.hasOwnProperty("privilegesRequired"))
-                        object.privilegesRequired = options.enums === String ? $root.grafeas.v1.CVSSv3.PrivilegesRequired[message.privilegesRequired] : message.privilegesRequired;
+                        object.privilegesRequired = options.enums === String ? $root.grafeas.v1.CVSSv3.PrivilegesRequired[message.privilegesRequired] === undefined ? message.privilegesRequired : $root.grafeas.v1.CVSSv3.PrivilegesRequired[message.privilegesRequired] : message.privilegesRequired;
                     if (message.userInteraction != null && message.hasOwnProperty("userInteraction"))
-                        object.userInteraction = options.enums === String ? $root.grafeas.v1.CVSSv3.UserInteraction[message.userInteraction] : message.userInteraction;
+                        object.userInteraction = options.enums === String ? $root.grafeas.v1.CVSSv3.UserInteraction[message.userInteraction] === undefined ? message.userInteraction : $root.grafeas.v1.CVSSv3.UserInteraction[message.userInteraction] : message.userInteraction;
                     if (message.scope != null && message.hasOwnProperty("scope"))
-                        object.scope = options.enums === String ? $root.grafeas.v1.CVSSv3.Scope[message.scope] : message.scope;
+                        object.scope = options.enums === String ? $root.grafeas.v1.CVSSv3.Scope[message.scope] === undefined ? message.scope : $root.grafeas.v1.CVSSv3.Scope[message.scope] : message.scope;
                     if (message.confidentialityImpact != null && message.hasOwnProperty("confidentialityImpact"))
-                        object.confidentialityImpact = options.enums === String ? $root.grafeas.v1.CVSSv3.Impact[message.confidentialityImpact] : message.confidentialityImpact;
+                        object.confidentialityImpact = options.enums === String ? $root.grafeas.v1.CVSSv3.Impact[message.confidentialityImpact] === undefined ? message.confidentialityImpact : $root.grafeas.v1.CVSSv3.Impact[message.confidentialityImpact] : message.confidentialityImpact;
                     if (message.integrityImpact != null && message.hasOwnProperty("integrityImpact"))
-                        object.integrityImpact = options.enums === String ? $root.grafeas.v1.CVSSv3.Impact[message.integrityImpact] : message.integrityImpact;
+                        object.integrityImpact = options.enums === String ? $root.grafeas.v1.CVSSv3.Impact[message.integrityImpact] === undefined ? message.integrityImpact : $root.grafeas.v1.CVSSv3.Impact[message.integrityImpact] : message.integrityImpact;
                     if (message.availabilityImpact != null && message.hasOwnProperty("availabilityImpact"))
-                        object.availabilityImpact = options.enums === String ? $root.grafeas.v1.CVSSv3.Impact[message.availabilityImpact] : message.availabilityImpact;
+                        object.availabilityImpact = options.enums === String ? $root.grafeas.v1.CVSSv3.Impact[message.availabilityImpact] === undefined ? message.availabilityImpact : $root.grafeas.v1.CVSSv3.Impact[message.availabilityImpact] : message.availabilityImpact;
                     return object;
                 };
     
@@ -15299,6 +15359,12 @@
                     if (object.impactScore != null)
                         message.impactScore = Number(object.impactScore);
                     switch (object.attackVector) {
+                    default:
+                        if (typeof object.attackVector === "number") {
+                            message.attackVector = object.attackVector;
+                            break;
+                        }
+                        break;
                     case "ATTACK_VECTOR_UNSPECIFIED":
                     case 0:
                         message.attackVector = 0;
@@ -15321,6 +15387,12 @@
                         break;
                     }
                     switch (object.attackComplexity) {
+                    default:
+                        if (typeof object.attackComplexity === "number") {
+                            message.attackComplexity = object.attackComplexity;
+                            break;
+                        }
+                        break;
                     case "ATTACK_COMPLEXITY_UNSPECIFIED":
                     case 0:
                         message.attackComplexity = 0;
@@ -15335,6 +15407,12 @@
                         break;
                     }
                     switch (object.authentication) {
+                    default:
+                        if (typeof object.authentication === "number") {
+                            message.authentication = object.authentication;
+                            break;
+                        }
+                        break;
                     case "AUTHENTICATION_UNSPECIFIED":
                     case 0:
                         message.authentication = 0;
@@ -15353,6 +15431,12 @@
                         break;
                     }
                     switch (object.privilegesRequired) {
+                    default:
+                        if (typeof object.privilegesRequired === "number") {
+                            message.privilegesRequired = object.privilegesRequired;
+                            break;
+                        }
+                        break;
                     case "PRIVILEGES_REQUIRED_UNSPECIFIED":
                     case 0:
                         message.privilegesRequired = 0;
@@ -15371,6 +15455,12 @@
                         break;
                     }
                     switch (object.userInteraction) {
+                    default:
+                        if (typeof object.userInteraction === "number") {
+                            message.userInteraction = object.userInteraction;
+                            break;
+                        }
+                        break;
                     case "USER_INTERACTION_UNSPECIFIED":
                     case 0:
                         message.userInteraction = 0;
@@ -15385,6 +15475,12 @@
                         break;
                     }
                     switch (object.scope) {
+                    default:
+                        if (typeof object.scope === "number") {
+                            message.scope = object.scope;
+                            break;
+                        }
+                        break;
                     case "SCOPE_UNSPECIFIED":
                     case 0:
                         message.scope = 0;
@@ -15399,6 +15495,12 @@
                         break;
                     }
                     switch (object.confidentialityImpact) {
+                    default:
+                        if (typeof object.confidentialityImpact === "number") {
+                            message.confidentialityImpact = object.confidentialityImpact;
+                            break;
+                        }
+                        break;
                     case "IMPACT_UNSPECIFIED":
                     case 0:
                         message.confidentialityImpact = 0;
@@ -15417,6 +15519,12 @@
                         break;
                     }
                     switch (object.integrityImpact) {
+                    default:
+                        if (typeof object.integrityImpact === "number") {
+                            message.integrityImpact = object.integrityImpact;
+                            break;
+                        }
+                        break;
                     case "IMPACT_UNSPECIFIED":
                     case 0:
                         message.integrityImpact = 0;
@@ -15435,6 +15543,12 @@
                         break;
                     }
                     switch (object.availabilityImpact) {
+                    default:
+                        if (typeof object.availabilityImpact === "number") {
+                            message.availabilityImpact = object.availabilityImpact;
+                            break;
+                        }
+                        break;
                     case "IMPACT_UNSPECIFIED":
                     case 0:
                         message.availabilityImpact = 0;
@@ -15489,23 +15603,23 @@
                     if (message.impactScore != null && message.hasOwnProperty("impactScore"))
                         object.impactScore = options.json && !isFinite(message.impactScore) ? String(message.impactScore) : message.impactScore;
                     if (message.attackVector != null && message.hasOwnProperty("attackVector"))
-                        object.attackVector = options.enums === String ? $root.grafeas.v1.CVSS.AttackVector[message.attackVector] : message.attackVector;
+                        object.attackVector = options.enums === String ? $root.grafeas.v1.CVSS.AttackVector[message.attackVector] === undefined ? message.attackVector : $root.grafeas.v1.CVSS.AttackVector[message.attackVector] : message.attackVector;
                     if (message.attackComplexity != null && message.hasOwnProperty("attackComplexity"))
-                        object.attackComplexity = options.enums === String ? $root.grafeas.v1.CVSS.AttackComplexity[message.attackComplexity] : message.attackComplexity;
+                        object.attackComplexity = options.enums === String ? $root.grafeas.v1.CVSS.AttackComplexity[message.attackComplexity] === undefined ? message.attackComplexity : $root.grafeas.v1.CVSS.AttackComplexity[message.attackComplexity] : message.attackComplexity;
                     if (message.authentication != null && message.hasOwnProperty("authentication"))
-                        object.authentication = options.enums === String ? $root.grafeas.v1.CVSS.Authentication[message.authentication] : message.authentication;
+                        object.authentication = options.enums === String ? $root.grafeas.v1.CVSS.Authentication[message.authentication] === undefined ? message.authentication : $root.grafeas.v1.CVSS.Authentication[message.authentication] : message.authentication;
                     if (message.privilegesRequired != null && message.hasOwnProperty("privilegesRequired"))
-                        object.privilegesRequired = options.enums === String ? $root.grafeas.v1.CVSS.PrivilegesRequired[message.privilegesRequired] : message.privilegesRequired;
+                        object.privilegesRequired = options.enums === String ? $root.grafeas.v1.CVSS.PrivilegesRequired[message.privilegesRequired] === undefined ? message.privilegesRequired : $root.grafeas.v1.CVSS.PrivilegesRequired[message.privilegesRequired] : message.privilegesRequired;
                     if (message.userInteraction != null && message.hasOwnProperty("userInteraction"))
-                        object.userInteraction = options.enums === String ? $root.grafeas.v1.CVSS.UserInteraction[message.userInteraction] : message.userInteraction;
+                        object.userInteraction = options.enums === String ? $root.grafeas.v1.CVSS.UserInteraction[message.userInteraction] === undefined ? message.userInteraction : $root.grafeas.v1.CVSS.UserInteraction[message.userInteraction] : message.userInteraction;
                     if (message.scope != null && message.hasOwnProperty("scope"))
-                        object.scope = options.enums === String ? $root.grafeas.v1.CVSS.Scope[message.scope] : message.scope;
+                        object.scope = options.enums === String ? $root.grafeas.v1.CVSS.Scope[message.scope] === undefined ? message.scope : $root.grafeas.v1.CVSS.Scope[message.scope] : message.scope;
                     if (message.confidentialityImpact != null && message.hasOwnProperty("confidentialityImpact"))
-                        object.confidentialityImpact = options.enums === String ? $root.grafeas.v1.CVSS.Impact[message.confidentialityImpact] : message.confidentialityImpact;
+                        object.confidentialityImpact = options.enums === String ? $root.grafeas.v1.CVSS.Impact[message.confidentialityImpact] === undefined ? message.confidentialityImpact : $root.grafeas.v1.CVSS.Impact[message.confidentialityImpact] : message.confidentialityImpact;
                     if (message.integrityImpact != null && message.hasOwnProperty("integrityImpact"))
-                        object.integrityImpact = options.enums === String ? $root.grafeas.v1.CVSS.Impact[message.integrityImpact] : message.integrityImpact;
+                        object.integrityImpact = options.enums === String ? $root.grafeas.v1.CVSS.Impact[message.integrityImpact] === undefined ? message.integrityImpact : $root.grafeas.v1.CVSS.Impact[message.integrityImpact] : message.integrityImpact;
                     if (message.availabilityImpact != null && message.hasOwnProperty("availabilityImpact"))
-                        object.availabilityImpact = options.enums === String ? $root.grafeas.v1.CVSS.Impact[message.availabilityImpact] : message.availabilityImpact;
+                        object.availabilityImpact = options.enums === String ? $root.grafeas.v1.CVSS.Impact[message.availabilityImpact] === undefined ? message.availabilityImpact : $root.grafeas.v1.CVSS.Impact[message.availabilityImpact] : message.availabilityImpact;
                     return object;
                 };
     
@@ -16195,6 +16309,12 @@
                             message.resourceUri[i] = String(object.resourceUri[i]);
                     }
                     switch (object.platform) {
+                    default:
+                        if (typeof object.platform === "number") {
+                            message.platform = object.platform;
+                            break;
+                        }
+                        break;
                     case "PLATFORM_UNSPECIFIED":
                     case 0:
                         message.platform = 0;
@@ -16254,7 +16374,7 @@
                             object.resourceUri[j] = message.resourceUri[j];
                     }
                     if (message.platform != null && message.hasOwnProperty("platform"))
-                        object.platform = options.enums === String ? $root.grafeas.v1.DeploymentOccurrence.Platform[message.platform] : message.platform;
+                        object.platform = options.enums === String ? $root.grafeas.v1.DeploymentOccurrence.Platform[message.platform] === undefined ? message.platform : $root.grafeas.v1.DeploymentOccurrence.Platform[message.platform] : message.platform;
                     return object;
                 };
     
@@ -16469,6 +16589,12 @@
                         return object;
                     var message = new $root.grafeas.v1.DiscoveryNote();
                     switch (object.analysisKind) {
+                    default:
+                        if (typeof object.analysisKind === "number") {
+                            message.analysisKind = object.analysisKind;
+                            break;
+                        }
+                        break;
                     case "NOTE_KIND_UNSPECIFIED":
                     case 0:
                         message.analysisKind = 0;
@@ -16533,7 +16659,7 @@
                     if (options.defaults)
                         object.analysisKind = options.enums === String ? "NOTE_KIND_UNSPECIFIED" : 0;
                     if (message.analysisKind != null && message.hasOwnProperty("analysisKind"))
-                        object.analysisKind = options.enums === String ? $root.grafeas.v1.NoteKind[message.analysisKind] : message.analysisKind;
+                        object.analysisKind = options.enums === String ? $root.grafeas.v1.NoteKind[message.analysisKind] === undefined ? message.analysisKind : $root.grafeas.v1.NoteKind[message.analysisKind] : message.analysisKind;
                     return object;
                 };
     
@@ -16876,6 +17002,12 @@
                         return object;
                     var message = new $root.grafeas.v1.DiscoveryOccurrence();
                     switch (object.continuousAnalysis) {
+                    default:
+                        if (typeof object.continuousAnalysis === "number") {
+                            message.continuousAnalysis = object.continuousAnalysis;
+                            break;
+                        }
+                        break;
                     case "CONTINUOUS_ANALYSIS_UNSPECIFIED":
                     case 0:
                         message.continuousAnalysis = 0;
@@ -16890,6 +17022,12 @@
                         break;
                     }
                     switch (object.analysisStatus) {
+                    default:
+                        if (typeof object.analysisStatus === "number") {
+                            message.analysisStatus = object.analysisStatus;
+                            break;
+                        }
+                        break;
                     case "ANALYSIS_STATUS_UNSPECIFIED":
                     case 0:
                         message.analysisStatus = 0;
@@ -16979,9 +17117,9 @@
                         object.analysisCompleted = null;
                     }
                     if (message.continuousAnalysis != null && message.hasOwnProperty("continuousAnalysis"))
-                        object.continuousAnalysis = options.enums === String ? $root.grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis[message.continuousAnalysis] : message.continuousAnalysis;
+                        object.continuousAnalysis = options.enums === String ? $root.grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis[message.continuousAnalysis] === undefined ? message.continuousAnalysis : $root.grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis[message.continuousAnalysis] : message.continuousAnalysis;
                     if (message.analysisStatus != null && message.hasOwnProperty("analysisStatus"))
-                        object.analysisStatus = options.enums === String ? $root.grafeas.v1.DiscoveryOccurrence.AnalysisStatus[message.analysisStatus] : message.analysisStatus;
+                        object.analysisStatus = options.enums === String ? $root.grafeas.v1.DiscoveryOccurrence.AnalysisStatus[message.analysisStatus] === undefined ? message.analysisStatus : $root.grafeas.v1.DiscoveryOccurrence.AnalysisStatus[message.analysisStatus] : message.analysisStatus;
                     if (message.analysisStatusError != null && message.hasOwnProperty("analysisStatusError"))
                         object.analysisStatusError = $root.google.rpc.Status.toObject(message.analysisStatusError, options);
                     if (message.cpe != null && message.hasOwnProperty("cpe"))
@@ -19017,6 +19155,12 @@
                     if (object.noteName != null)
                         message.noteName = String(object.noteName);
                     switch (object.kind) {
+                    default:
+                        if (typeof object.kind === "number") {
+                            message.kind = object.kind;
+                            break;
+                        }
+                        break;
                     case "NOTE_KIND_UNSPECIFIED":
                     case 0:
                         message.kind = 0;
@@ -19162,7 +19306,7 @@
                     if (message.noteName != null && message.hasOwnProperty("noteName"))
                         object.noteName = message.noteName;
                     if (message.kind != null && message.hasOwnProperty("kind"))
-                        object.kind = options.enums === String ? $root.grafeas.v1.NoteKind[message.kind] : message.kind;
+                        object.kind = options.enums === String ? $root.grafeas.v1.NoteKind[message.kind] === undefined ? message.kind : $root.grafeas.v1.NoteKind[message.kind] : message.kind;
                     if (message.remediation != null && message.hasOwnProperty("remediation"))
                         object.remediation = message.remediation;
                     if (message.createTime != null && message.hasOwnProperty("createTime"))
@@ -19854,6 +19998,12 @@
                     if (object.longDescription != null)
                         message.longDescription = String(object.longDescription);
                     switch (object.kind) {
+                    default:
+                        if (typeof object.kind === "number") {
+                            message.kind = object.kind;
+                            break;
+                        }
+                        break;
                     case "NOTE_KIND_UNSPECIFIED":
                     case 0:
                         message.kind = 0;
@@ -20017,7 +20167,7 @@
                     if (message.longDescription != null && message.hasOwnProperty("longDescription"))
                         object.longDescription = message.longDescription;
                     if (message.kind != null && message.hasOwnProperty("kind"))
-                        object.kind = options.enums === String ? $root.grafeas.v1.NoteKind[message.kind] : message.kind;
+                        object.kind = options.enums === String ? $root.grafeas.v1.NoteKind[message.kind] === undefined ? message.kind : $root.grafeas.v1.NoteKind[message.kind] : message.kind;
                     if (message.relatedUrl && message.relatedUrl.length) {
                         object.relatedUrl = [];
                         for (var j = 0; j < message.relatedUrl.length; ++j)
@@ -25958,6 +26108,12 @@
                     if (object.cpeUri != null)
                         message.cpeUri = String(object.cpeUri);
                     switch (object.architecture) {
+                    default:
+                        if (typeof object.architecture === "number") {
+                            message.architecture = object.architecture;
+                            break;
+                        }
+                        break;
                     case "ARCHITECTURE_UNSPECIFIED":
                     case 0:
                         message.architecture = 0;
@@ -26009,7 +26165,7 @@
                     if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
                         object.cpeUri = message.cpeUri;
                     if (message.architecture != null && message.hasOwnProperty("architecture"))
-                        object.architecture = options.enums === String ? $root.grafeas.v1.Architecture[message.architecture] : message.architecture;
+                        object.architecture = options.enums === String ? $root.grafeas.v1.Architecture[message.architecture] === undefined ? message.architecture : $root.grafeas.v1.Architecture[message.architecture] : message.architecture;
                     if (message.latestVersion != null && message.hasOwnProperty("latestVersion"))
                         object.latestVersion = $root.grafeas.v1.Version.toObject(message.latestVersion, options);
                     if (message.maintainer != null && message.hasOwnProperty("maintainer"))
@@ -26681,6 +26837,12 @@
                     if (object.cpeUri != null)
                         message.cpeUri = String(object.cpeUri);
                     switch (object.architecture) {
+                    default:
+                        if (typeof object.architecture === "number") {
+                            message.architecture = object.architecture;
+                            break;
+                        }
+                        break;
                     case "ARCHITECTURE_UNSPECIFIED":
                     case 0:
                         message.architecture = 0;
@@ -26763,7 +26925,7 @@
                     if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
                         object.cpeUri = message.cpeUri;
                     if (message.architecture != null && message.hasOwnProperty("architecture"))
-                        object.architecture = options.enums === String ? $root.grafeas.v1.Architecture[message.architecture] : message.architecture;
+                        object.architecture = options.enums === String ? $root.grafeas.v1.Architecture[message.architecture] === undefined ? message.architecture : $root.grafeas.v1.Architecture[message.architecture] : message.architecture;
                     if (message.version != null && message.hasOwnProperty("version"))
                         object.version = $root.grafeas.v1.Version.toObject(message.version, options);
                     if (message.maintainer != null && message.hasOwnProperty("maintainer"))
@@ -27105,6 +27267,12 @@
                     if (object.cpeUri != null)
                         message.cpeUri = String(object.cpeUri);
                     switch (object.architecture) {
+                    default:
+                        if (typeof object.architecture === "number") {
+                            message.architecture = object.architecture;
+                            break;
+                        }
+                        break;
                     case "ARCHITECTURE_UNSPECIFIED":
                     case 0:
                         message.architecture = 0;
@@ -27166,7 +27334,7 @@
                     if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
                         object.cpeUri = message.cpeUri;
                     if (message.architecture != null && message.hasOwnProperty("architecture"))
-                        object.architecture = options.enums === String ? $root.grafeas.v1.Architecture[message.architecture] : message.architecture;
+                        object.architecture = options.enums === String ? $root.grafeas.v1.Architecture[message.architecture] === undefined ? message.architecture : $root.grafeas.v1.Architecture[message.architecture] : message.architecture;
                     if (message.license != null && message.hasOwnProperty("license"))
                         object.license = $root.grafeas.v1.License.toObject(message.license, options);
                     if (message.version != null && message.hasOwnProperty("version"))
@@ -27458,6 +27626,12 @@
                     if (object.inclusive != null)
                         message.inclusive = Boolean(object.inclusive);
                     switch (object.kind) {
+                    default:
+                        if (typeof object.kind === "number") {
+                            message.kind = object.kind;
+                            break;
+                        }
+                        break;
                     case "VERSION_KIND_UNSPECIFIED":
                     case 0:
                         message.kind = 0;
@@ -27508,7 +27682,7 @@
                     if (message.revision != null && message.hasOwnProperty("revision"))
                         object.revision = message.revision;
                     if (message.kind != null && message.hasOwnProperty("kind"))
-                        object.kind = options.enums === String ? $root.grafeas.v1.Version.VersionKind[message.kind] : message.kind;
+                        object.kind = options.enums === String ? $root.grafeas.v1.Version.VersionKind[message.kind] === undefined ? message.kind : $root.grafeas.v1.Version.VersionKind[message.kind] : message.kind;
                     if (message.fullName != null && message.hasOwnProperty("fullName"))
                         object.fullName = message.fullName;
                     if (message.inclusive != null && message.hasOwnProperty("inclusive"))
@@ -29590,6 +29764,12 @@
                     if (object.cvssScore != null)
                         message.cvssScore = Number(object.cvssScore);
                     switch (object.severity) {
+                    default:
+                        if (typeof object.severity === "number") {
+                            message.severity = object.severity;
+                            break;
+                        }
+                        break;
                     case "SEVERITY_UNSPECIFIED":
                     case 0:
                         message.severity = 0;
@@ -29646,6 +29826,12 @@
                         message.sourceUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.sourceUpdateTime);
                     }
                     switch (object.cvssVersion) {
+                    default:
+                        if (typeof object.cvssVersion === "number") {
+                            message.cvssVersion = object.cvssVersion;
+                            break;
+                        }
+                        break;
                     case "CVSS_VERSION_UNSPECIFIED":
                     case 0:
                         message.cvssVersion = 0;
@@ -29689,7 +29875,7 @@
                     if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
                         object.cvssScore = options.json && !isFinite(message.cvssScore) ? String(message.cvssScore) : message.cvssScore;
                     if (message.severity != null && message.hasOwnProperty("severity"))
-                        object.severity = options.enums === String ? $root.grafeas.v1.Severity[message.severity] : message.severity;
+                        object.severity = options.enums === String ? $root.grafeas.v1.Severity[message.severity] === undefined ? message.severity : $root.grafeas.v1.Severity[message.severity] : message.severity;
                     if (message.details && message.details.length) {
                         object.details = [];
                         for (var j = 0; j < message.details.length; ++j)
@@ -29705,7 +29891,7 @@
                     if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
                         object.sourceUpdateTime = $root.google.protobuf.Timestamp.toObject(message.sourceUpdateTime, options);
                     if (message.cvssVersion != null && message.hasOwnProperty("cvssVersion"))
-                        object.cvssVersion = options.enums === String ? $root.grafeas.v1.CVSSVersion[message.cvssVersion] : message.cvssVersion;
+                        object.cvssVersion = options.enums === String ? $root.grafeas.v1.CVSSVersion[message.cvssVersion] === undefined ? message.cvssVersion : $root.grafeas.v1.CVSSVersion[message.cvssVersion] : message.cvssVersion;
                     return object;
                 };
     
@@ -31161,6 +31347,12 @@
                     if (object.type != null)
                         message.type = String(object.type);
                     switch (object.severity) {
+                    default:
+                        if (typeof object.severity === "number") {
+                            message.severity = object.severity;
+                            break;
+                        }
+                        break;
                     case "SEVERITY_UNSPECIFIED":
                     case 0:
                         message.severity = 0;
@@ -31218,6 +31410,12 @@
                         }
                     }
                     switch (object.effectiveSeverity) {
+                    default:
+                        if (typeof object.effectiveSeverity === "number") {
+                            message.effectiveSeverity = object.effectiveSeverity;
+                            break;
+                        }
+                        break;
                     case "SEVERITY_UNSPECIFIED":
                     case 0:
                         message.effectiveSeverity = 0;
@@ -31246,6 +31444,12 @@
                     if (object.fixAvailable != null)
                         message.fixAvailable = Boolean(object.fixAvailable);
                     switch (object.cvssVersion) {
+                    default:
+                        if (typeof object.cvssVersion === "number") {
+                            message.cvssVersion = object.cvssVersion;
+                            break;
+                        }
+                        break;
                     case "CVSS_VERSION_UNSPECIFIED":
                     case 0:
                         message.cvssVersion = 0;
@@ -31293,7 +31497,7 @@
                     if (message.type != null && message.hasOwnProperty("type"))
                         object.type = message.type;
                     if (message.severity != null && message.hasOwnProperty("severity"))
-                        object.severity = options.enums === String ? $root.grafeas.v1.Severity[message.severity] : message.severity;
+                        object.severity = options.enums === String ? $root.grafeas.v1.Severity[message.severity] === undefined ? message.severity : $root.grafeas.v1.Severity[message.severity] : message.severity;
                     if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
                         object.cvssScore = options.json && !isFinite(message.cvssScore) ? String(message.cvssScore) : message.cvssScore;
                     if (message.packageIssue && message.packageIssue.length) {
@@ -31311,13 +31515,13 @@
                             object.relatedUrls[j] = $root.grafeas.v1.RelatedUrl.toObject(message.relatedUrls[j], options);
                     }
                     if (message.effectiveSeverity != null && message.hasOwnProperty("effectiveSeverity"))
-                        object.effectiveSeverity = options.enums === String ? $root.grafeas.v1.Severity[message.effectiveSeverity] : message.effectiveSeverity;
+                        object.effectiveSeverity = options.enums === String ? $root.grafeas.v1.Severity[message.effectiveSeverity] === undefined ? message.effectiveSeverity : $root.grafeas.v1.Severity[message.effectiveSeverity] : message.effectiveSeverity;
                     if (message.fixAvailable != null && message.hasOwnProperty("fixAvailable"))
                         object.fixAvailable = message.fixAvailable;
                     if (message.cvssv3 != null && message.hasOwnProperty("cvssv3"))
                         object.cvssv3 = $root.grafeas.v1.CVSS.toObject(message.cvssv3, options);
                     if (message.cvssVersion != null && message.hasOwnProperty("cvssVersion"))
-                        object.cvssVersion = options.enums === String ? $root.grafeas.v1.CVSSVersion[message.cvssVersion] : message.cvssVersion;
+                        object.cvssVersion = options.enums === String ? $root.grafeas.v1.CVSSVersion[message.cvssVersion] === undefined ? message.cvssVersion : $root.grafeas.v1.CVSSVersion[message.cvssVersion] : message.cvssVersion;
                     return object;
                 };
     
@@ -31704,6 +31908,12 @@
                         if (object.packageType != null)
                             message.packageType = String(object.packageType);
                         switch (object.effectiveSeverity) {
+                        default:
+                            if (typeof object.effectiveSeverity === "number") {
+                                message.effectiveSeverity = object.effectiveSeverity;
+                                break;
+                            }
+                            break;
                         case "SEVERITY_UNSPECIFIED":
                         case 0:
                             message.effectiveSeverity = 0;
@@ -31785,7 +31995,7 @@
                         if (message.packageType != null && message.hasOwnProperty("packageType"))
                             object.packageType = message.packageType;
                         if (message.effectiveSeverity != null && message.hasOwnProperty("effectiveSeverity"))
-                            object.effectiveSeverity = options.enums === String ? $root.grafeas.v1.Severity[message.effectiveSeverity] : message.effectiveSeverity;
+                            object.effectiveSeverity = options.enums === String ? $root.grafeas.v1.Severity[message.effectiveSeverity] === undefined ? message.effectiveSeverity : $root.grafeas.v1.Severity[message.effectiveSeverity] : message.effectiveSeverity;
                         if (message.fileLocation && message.fileLocation.length) {
                             object.fileLocation = [];
                             for (var j = 0; j < message.fileLocation.length; ++j)
@@ -32859,6 +33069,12 @@
                         return object;
                     var message = new $root.google.protobuf.Value();
                     switch (object.nullValue) {
+                    default:
+                        if (typeof object.nullValue === "number") {
+                            message.nullValue = object.nullValue;
+                            break;
+                        }
+                        break;
                     case "NULL_VALUE":
                     case 0:
                         message.nullValue = 0;
@@ -32897,7 +33113,7 @@
                         options = {};
                     var object = {};
                     if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
-                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
+                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] === undefined ? message.nullValue : $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
                         if (options.oneofs)
                             object.kind = "nullValue";
                     }
@@ -35702,6 +35918,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -35716,6 +35938,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -35842,9 +36070,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -38191,6 +38419,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -38299,7 +38533,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -39101,6 +39335,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -39117,6 +39357,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -39155,6 +39401,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -39225,7 +39475,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -39233,7 +39483,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -39246,7 +39496,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -40603,6 +40853,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -40666,7 +40922,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -42419,6 +42675,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -42468,7 +42730,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -44219,6 +44481,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -44243,6 +44511,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -44290,7 +44562,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -44298,7 +44570,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
