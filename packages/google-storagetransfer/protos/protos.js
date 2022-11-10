@@ -7020,6 +7020,12 @@
                             return object;
                         var message = new $root.google.storagetransfer.v1.S3CompatibleMetadata();
                         switch (object.authMethod) {
+                        default:
+                            if (typeof object.authMethod === "number") {
+                                message.authMethod = object.authMethod;
+                                break;
+                            }
+                            break;
                         case "AUTH_METHOD_UNSPECIFIED":
                         case 0:
                             message.authMethod = 0;
@@ -7034,6 +7040,12 @@
                             break;
                         }
                         switch (object.requestModel) {
+                        default:
+                            if (typeof object.requestModel === "number") {
+                                message.requestModel = object.requestModel;
+                                break;
+                            }
+                            break;
                         case "REQUEST_MODEL_UNSPECIFIED":
                         case 0:
                             message.requestModel = 0;
@@ -7048,6 +7060,12 @@
                             break;
                         }
                         switch (object.protocol) {
+                        default:
+                            if (typeof object.protocol === "number") {
+                                message.protocol = object.protocol;
+                                break;
+                            }
+                            break;
                         case "NETWORK_PROTOCOL_UNSPECIFIED":
                         case 0:
                             message.protocol = 0;
@@ -7062,6 +7080,12 @@
                             break;
                         }
                         switch (object.listApi) {
+                        default:
+                            if (typeof object.listApi === "number") {
+                                message.listApi = object.listApi;
+                                break;
+                            }
+                            break;
                         case "LIST_API_UNSPECIFIED":
                         case 0:
                             message.listApi = 0;
@@ -7098,13 +7122,13 @@
                             object.listApi = options.enums === String ? "LIST_API_UNSPECIFIED" : 0;
                         }
                         if (message.authMethod != null && message.hasOwnProperty("authMethod"))
-                            object.authMethod = options.enums === String ? $root.google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod[message.authMethod] : message.authMethod;
+                            object.authMethod = options.enums === String ? $root.google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod[message.authMethod] === undefined ? message.authMethod : $root.google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod[message.authMethod] : message.authMethod;
                         if (message.requestModel != null && message.hasOwnProperty("requestModel"))
-                            object.requestModel = options.enums === String ? $root.google.storagetransfer.v1.S3CompatibleMetadata.RequestModel[message.requestModel] : message.requestModel;
+                            object.requestModel = options.enums === String ? $root.google.storagetransfer.v1.S3CompatibleMetadata.RequestModel[message.requestModel] === undefined ? message.requestModel : $root.google.storagetransfer.v1.S3CompatibleMetadata.RequestModel[message.requestModel] : message.requestModel;
                         if (message.protocol != null && message.hasOwnProperty("protocol"))
-                            object.protocol = options.enums === String ? $root.google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol[message.protocol] : message.protocol;
+                            object.protocol = options.enums === String ? $root.google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol[message.protocol] === undefined ? message.protocol : $root.google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol[message.protocol] : message.protocol;
                         if (message.listApi != null && message.hasOwnProperty("listApi"))
-                            object.listApi = options.enums === String ? $root.google.storagetransfer.v1.S3CompatibleMetadata.ListApi[message.listApi] : message.listApi;
+                            object.listApi = options.enums === String ? $root.google.storagetransfer.v1.S3CompatibleMetadata.ListApi[message.listApi] === undefined ? message.listApi : $root.google.storagetransfer.v1.S3CompatibleMetadata.ListApi[message.listApi] : message.listApi;
                         return object;
                     };
     
@@ -7418,6 +7442,12 @@
                         if (object.displayName != null)
                             message.displayName = String(object.displayName);
                         switch (object.state) {
+                        default:
+                            if (typeof object.state === "number") {
+                                message.state = object.state;
+                                break;
+                            }
+                            break;
                         case "STATE_UNSPECIFIED":
                         case 0:
                             message.state = 0;
@@ -7467,7 +7497,7 @@
                         if (message.displayName != null && message.hasOwnProperty("displayName"))
                             object.displayName = message.displayName;
                         if (message.state != null && message.hasOwnProperty("state"))
-                            object.state = options.enums === String ? $root.google.storagetransfer.v1.AgentPool.State[message.state] : message.state;
+                            object.state = options.enums === String ? $root.google.storagetransfer.v1.AgentPool.State[message.state] === undefined ? message.state : $root.google.storagetransfer.v1.AgentPool.State[message.state] : message.state;
                         if (message.bandwidthLimit != null && message.hasOwnProperty("bandwidthLimit"))
                             object.bandwidthLimit = $root.google.storagetransfer.v1.AgentPool.BandwidthLimit.toObject(message.bandwidthLimit, options);
                         return object;
@@ -7974,6 +8004,12 @@
                         if (object.deleteObjectsFromSourceAfterTransfer != null)
                             message.deleteObjectsFromSourceAfterTransfer = Boolean(object.deleteObjectsFromSourceAfterTransfer);
                         switch (object.overwriteWhen) {
+                        default:
+                            if (typeof object.overwriteWhen === "number") {
+                                message.overwriteWhen = object.overwriteWhen;
+                                break;
+                            }
+                            break;
                         case "OVERWRITE_WHEN_UNSPECIFIED":
                         case 0:
                             message.overwriteWhen = 0;
@@ -8026,7 +8062,7 @@
                         if (message.deleteObjectsFromSourceAfterTransfer != null && message.hasOwnProperty("deleteObjectsFromSourceAfterTransfer"))
                             object.deleteObjectsFromSourceAfterTransfer = message.deleteObjectsFromSourceAfterTransfer;
                         if (message.overwriteWhen != null && message.hasOwnProperty("overwriteWhen"))
-                            object.overwriteWhen = options.enums === String ? $root.google.storagetransfer.v1.TransferOptions.OverwriteWhen[message.overwriteWhen] : message.overwriteWhen;
+                            object.overwriteWhen = options.enums === String ? $root.google.storagetransfer.v1.TransferOptions.OverwriteWhen[message.overwriteWhen] === undefined ? message.overwriteWhen : $root.google.storagetransfer.v1.TransferOptions.OverwriteWhen[message.overwriteWhen] : message.overwriteWhen;
                         if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions"))
                             object.metadataOptions = $root.google.storagetransfer.v1.MetadataOptions.toObject(message.metadataOptions, options);
                         return object;
@@ -9088,6 +9124,12 @@
                             return object;
                         var message = new $root.google.storagetransfer.v1.MetadataOptions();
                         switch (object.symlink) {
+                        default:
+                            if (typeof object.symlink === "number") {
+                                message.symlink = object.symlink;
+                                break;
+                            }
+                            break;
                         case "SYMLINK_UNSPECIFIED":
                         case 0:
                             message.symlink = 0;
@@ -9102,6 +9144,12 @@
                             break;
                         }
                         switch (object.mode) {
+                        default:
+                            if (typeof object.mode === "number") {
+                                message.mode = object.mode;
+                                break;
+                            }
+                            break;
                         case "MODE_UNSPECIFIED":
                         case 0:
                             message.mode = 0;
@@ -9116,6 +9164,12 @@
                             break;
                         }
                         switch (object.gid) {
+                        default:
+                            if (typeof object.gid === "number") {
+                                message.gid = object.gid;
+                                break;
+                            }
+                            break;
                         case "GID_UNSPECIFIED":
                         case 0:
                             message.gid = 0;
@@ -9130,6 +9184,12 @@
                             break;
                         }
                         switch (object.uid) {
+                        default:
+                            if (typeof object.uid === "number") {
+                                message.uid = object.uid;
+                                break;
+                            }
+                            break;
                         case "UID_UNSPECIFIED":
                         case 0:
                             message.uid = 0;
@@ -9144,6 +9204,12 @@
                             break;
                         }
                         switch (object.acl) {
+                        default:
+                            if (typeof object.acl === "number") {
+                                message.acl = object.acl;
+                                break;
+                            }
+                            break;
                         case "ACL_UNSPECIFIED":
                         case 0:
                             message.acl = 0;
@@ -9158,6 +9224,12 @@
                             break;
                         }
                         switch (object.storageClass) {
+                        default:
+                            if (typeof object.storageClass === "number") {
+                                message.storageClass = object.storageClass;
+                                break;
+                            }
+                            break;
                         case "STORAGE_CLASS_UNSPECIFIED":
                         case 0:
                             message.storageClass = 0;
@@ -9188,6 +9260,12 @@
                             break;
                         }
                         switch (object.temporaryHold) {
+                        default:
+                            if (typeof object.temporaryHold === "number") {
+                                message.temporaryHold = object.temporaryHold;
+                                break;
+                            }
+                            break;
                         case "TEMPORARY_HOLD_UNSPECIFIED":
                         case 0:
                             message.temporaryHold = 0;
@@ -9202,6 +9280,12 @@
                             break;
                         }
                         switch (object.kmsKey) {
+                        default:
+                            if (typeof object.kmsKey === "number") {
+                                message.kmsKey = object.kmsKey;
+                                break;
+                            }
+                            break;
                         case "KMS_KEY_UNSPECIFIED":
                         case 0:
                             message.kmsKey = 0;
@@ -9216,6 +9300,12 @@
                             break;
                         }
                         switch (object.timeCreated) {
+                        default:
+                            if (typeof object.timeCreated === "number") {
+                                message.timeCreated = object.timeCreated;
+                                break;
+                            }
+                            break;
                         case "TIME_CREATED_UNSPECIFIED":
                         case 0:
                             message.timeCreated = 0;
@@ -9257,23 +9347,23 @@
                             object.timeCreated = options.enums === String ? "TIME_CREATED_UNSPECIFIED" : 0;
                         }
                         if (message.symlink != null && message.hasOwnProperty("symlink"))
-                            object.symlink = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.Symlink[message.symlink] : message.symlink;
+                            object.symlink = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.Symlink[message.symlink] === undefined ? message.symlink : $root.google.storagetransfer.v1.MetadataOptions.Symlink[message.symlink] : message.symlink;
                         if (message.mode != null && message.hasOwnProperty("mode"))
-                            object.mode = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.Mode[message.mode] : message.mode;
+                            object.mode = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.Mode[message.mode] === undefined ? message.mode : $root.google.storagetransfer.v1.MetadataOptions.Mode[message.mode] : message.mode;
                         if (message.gid != null && message.hasOwnProperty("gid"))
-                            object.gid = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.GID[message.gid] : message.gid;
+                            object.gid = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.GID[message.gid] === undefined ? message.gid : $root.google.storagetransfer.v1.MetadataOptions.GID[message.gid] : message.gid;
                         if (message.uid != null && message.hasOwnProperty("uid"))
-                            object.uid = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.UID[message.uid] : message.uid;
+                            object.uid = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.UID[message.uid] === undefined ? message.uid : $root.google.storagetransfer.v1.MetadataOptions.UID[message.uid] : message.uid;
                         if (message.acl != null && message.hasOwnProperty("acl"))
-                            object.acl = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.Acl[message.acl] : message.acl;
+                            object.acl = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.Acl[message.acl] === undefined ? message.acl : $root.google.storagetransfer.v1.MetadataOptions.Acl[message.acl] : message.acl;
                         if (message.storageClass != null && message.hasOwnProperty("storageClass"))
-                            object.storageClass = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.StorageClass[message.storageClass] : message.storageClass;
+                            object.storageClass = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.StorageClass[message.storageClass] === undefined ? message.storageClass : $root.google.storagetransfer.v1.MetadataOptions.StorageClass[message.storageClass] : message.storageClass;
                         if (message.temporaryHold != null && message.hasOwnProperty("temporaryHold"))
-                            object.temporaryHold = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.TemporaryHold[message.temporaryHold] : message.temporaryHold;
+                            object.temporaryHold = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.TemporaryHold[message.temporaryHold] === undefined ? message.temporaryHold : $root.google.storagetransfer.v1.MetadataOptions.TemporaryHold[message.temporaryHold] : message.temporaryHold;
                         if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
-                            object.kmsKey = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.KmsKey[message.kmsKey] : message.kmsKey;
+                            object.kmsKey = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.KmsKey[message.kmsKey] === undefined ? message.kmsKey : $root.google.storagetransfer.v1.MetadataOptions.KmsKey[message.kmsKey] : message.kmsKey;
                         if (message.timeCreated != null && message.hasOwnProperty("timeCreated"))
-                            object.timeCreated = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.TimeCreated[message.timeCreated] : message.timeCreated;
+                            object.timeCreated = options.enums === String ? $root.google.storagetransfer.v1.MetadataOptions.TimeCreated[message.timeCreated] === undefined ? message.timeCreated : $root.google.storagetransfer.v1.MetadataOptions.TimeCreated[message.timeCreated] : message.timeCreated;
                         return object;
                     };
     
@@ -10377,6 +10467,12 @@
                             message.schedule = $root.google.storagetransfer.v1.Schedule.fromObject(object.schedule);
                         }
                         switch (object.status) {
+                        default:
+                            if (typeof object.status === "number") {
+                                message.status = object.status;
+                                break;
+                            }
+                            break;
                         case "STATUS_UNSPECIFIED":
                         case 0:
                             message.status = 0;
@@ -10452,7 +10548,7 @@
                         if (message.schedule != null && message.hasOwnProperty("schedule"))
                             object.schedule = $root.google.storagetransfer.v1.Schedule.toObject(message.schedule, options);
                         if (message.status != null && message.hasOwnProperty("status"))
-                            object.status = options.enums === String ? $root.google.storagetransfer.v1.TransferJob.Status[message.status] : message.status;
+                            object.status = options.enums === String ? $root.google.storagetransfer.v1.TransferJob.Status[message.status] === undefined ? message.status : $root.google.storagetransfer.v1.TransferJob.Status[message.status] : message.status;
                         if (message.creationTime != null && message.hasOwnProperty("creationTime"))
                             object.creationTime = $root.google.protobuf.Timestamp.toObject(message.creationTime, options);
                         if (message.lastModificationTime != null && message.hasOwnProperty("lastModificationTime"))
@@ -10974,6 +11070,12 @@
                             return object;
                         var message = new $root.google.storagetransfer.v1.ErrorSummary();
                         switch (object.errorCode) {
+                        default:
+                            if (typeof object.errorCode === "number") {
+                                message.errorCode = object.errorCode;
+                                break;
+                            }
+                            break;
                         case "OK":
                         case 0:
                             message.errorCode = 0;
@@ -11089,7 +11191,7 @@
                                 object.errorCount = options.longs === String ? "0" : 0;
                         }
                         if (message.errorCode != null && message.hasOwnProperty("errorCode"))
-                            object.errorCode = options.enums === String ? $root.google.rpc.Code[message.errorCode] : message.errorCode;
+                            object.errorCode = options.enums === String ? $root.google.rpc.Code[message.errorCode] === undefined ? message.errorCode : $root.google.rpc.Code[message.errorCode] : message.errorCode;
                         if (message.errorCount != null && message.hasOwnProperty("errorCount"))
                             if (typeof message.errorCount === "number")
                                 object.errorCount = options.longs === String ? String(message.errorCount) : message.errorCount;
@@ -12313,6 +12415,10 @@
                             for (var i = 0; i < object.eventTypes.length; ++i)
                                 switch (object.eventTypes[i]) {
                                 default:
+                                    if (typeof object.eventTypes[i] === "number") {
+                                        message.eventTypes[i] = object.eventTypes[i];
+                                        break;
+                                    }
                                 case "EVENT_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.eventTypes[i] = 0;
@@ -12332,6 +12438,12 @@
                                 }
                         }
                         switch (object.payloadFormat) {
+                        default:
+                            if (typeof object.payloadFormat === "number") {
+                                message.payloadFormat = object.payloadFormat;
+                                break;
+                            }
+                            break;
                         case "PAYLOAD_FORMAT_UNSPECIFIED":
                         case 0:
                             message.payloadFormat = 0;
@@ -12372,10 +12484,10 @@
                         if (message.eventTypes && message.eventTypes.length) {
                             object.eventTypes = [];
                             for (var j = 0; j < message.eventTypes.length; ++j)
-                                object.eventTypes[j] = options.enums === String ? $root.google.storagetransfer.v1.NotificationConfig.EventType[message.eventTypes[j]] : message.eventTypes[j];
+                                object.eventTypes[j] = options.enums === String ? $root.google.storagetransfer.v1.NotificationConfig.EventType[message.eventTypes[j]] === undefined ? message.eventTypes[j] : $root.google.storagetransfer.v1.NotificationConfig.EventType[message.eventTypes[j]] : message.eventTypes[j];
                         }
                         if (message.payloadFormat != null && message.hasOwnProperty("payloadFormat"))
-                            object.payloadFormat = options.enums === String ? $root.google.storagetransfer.v1.NotificationConfig.PayloadFormat[message.payloadFormat] : message.payloadFormat;
+                            object.payloadFormat = options.enums === String ? $root.google.storagetransfer.v1.NotificationConfig.PayloadFormat[message.payloadFormat] === undefined ? message.payloadFormat : $root.google.storagetransfer.v1.NotificationConfig.PayloadFormat[message.payloadFormat] : message.payloadFormat;
                         return object;
                     };
     
@@ -12679,6 +12791,10 @@
                             for (var i = 0; i < object.logActions.length; ++i)
                                 switch (object.logActions[i]) {
                                 default:
+                                    if (typeof object.logActions[i] === "number") {
+                                        message.logActions[i] = object.logActions[i];
+                                        break;
+                                    }
                                 case "LOGGABLE_ACTION_UNSPECIFIED":
                                 case 0:
                                     message.logActions[i] = 0;
@@ -12704,6 +12820,10 @@
                             for (var i = 0; i < object.logActionStates.length; ++i)
                                 switch (object.logActionStates[i]) {
                                 default:
+                                    if (typeof object.logActionStates[i] === "number") {
+                                        message.logActionStates[i] = object.logActionStates[i];
+                                        break;
+                                    }
                                 case "LOGGABLE_ACTION_STATE_UNSPECIFIED":
                                 case 0:
                                     message.logActionStates[i] = 0;
@@ -12745,12 +12865,12 @@
                         if (message.logActions && message.logActions.length) {
                             object.logActions = [];
                             for (var j = 0; j < message.logActions.length; ++j)
-                                object.logActions[j] = options.enums === String ? $root.google.storagetransfer.v1.LoggingConfig.LoggableAction[message.logActions[j]] : message.logActions[j];
+                                object.logActions[j] = options.enums === String ? $root.google.storagetransfer.v1.LoggingConfig.LoggableAction[message.logActions[j]] === undefined ? message.logActions[j] : $root.google.storagetransfer.v1.LoggingConfig.LoggableAction[message.logActions[j]] : message.logActions[j];
                         }
                         if (message.logActionStates && message.logActionStates.length) {
                             object.logActionStates = [];
                             for (var j = 0; j < message.logActionStates.length; ++j)
-                                object.logActionStates[j] = options.enums === String ? $root.google.storagetransfer.v1.LoggingConfig.LoggableActionState[message.logActionStates[j]] : message.logActionStates[j];
+                                object.logActionStates[j] = options.enums === String ? $root.google.storagetransfer.v1.LoggingConfig.LoggableActionState[message.logActionStates[j]] === undefined ? message.logActionStates[j] : $root.google.storagetransfer.v1.LoggingConfig.LoggableActionState[message.logActionStates[j]] : message.logActionStates[j];
                         }
                         if (message.enableOnpremGcsTransferLogs != null && message.hasOwnProperty("enableOnpremGcsTransferLogs"))
                             object.enableOnpremGcsTransferLogs = message.enableOnpremGcsTransferLogs;
@@ -13186,6 +13306,12 @@
                             message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                         }
                         switch (object.status) {
+                        default:
+                            if (typeof object.status === "number") {
+                                message.status = object.status;
+                                break;
+                            }
+                            break;
                         case "STATUS_UNSPECIFIED":
                         case 0:
                             message.status = 0;
@@ -13272,7 +13398,7 @@
                         if (message.endTime != null && message.hasOwnProperty("endTime"))
                             object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                         if (message.status != null && message.hasOwnProperty("status"))
-                            object.status = options.enums === String ? $root.google.storagetransfer.v1.TransferOperation.Status[message.status] : message.status;
+                            object.status = options.enums === String ? $root.google.storagetransfer.v1.TransferOperation.Status[message.status] === undefined ? message.status : $root.google.storagetransfer.v1.TransferOperation.Status[message.status] : message.status;
                         if (message.counters != null && message.hasOwnProperty("counters"))
                             object.counters = $root.google.storagetransfer.v1.TransferCounters.toObject(message.counters, options);
                         if (message.errorBreakdowns && message.errorBreakdowns.length) {
@@ -14648,6 +14774,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -14672,6 +14804,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -14719,7 +14855,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -14727,7 +14863,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -17538,6 +17674,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -17552,6 +17694,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -17678,9 +17826,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -20027,6 +20175,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -20135,7 +20289,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -20937,6 +21091,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -20953,6 +21113,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -20991,6 +21157,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -21061,7 +21231,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -21069,7 +21239,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -21082,7 +21252,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -22459,6 +22629,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -22528,7 +22704,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -24283,6 +24459,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -24332,7 +24514,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
