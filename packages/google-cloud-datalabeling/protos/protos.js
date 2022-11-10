@@ -319,6 +319,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.annotationSource) {
+                            default:
+                                if (typeof object.annotationSource === "number") {
+                                    message.annotationSource = object.annotationSource;
+                                    break;
+                                }
+                                break;
                             case "ANNOTATION_SOURCE_UNSPECIFIED":
                             case 0:
                                 message.annotationSource = 0;
@@ -339,6 +345,12 @@
                                 message.annotationMetadata = $root.google.cloud.datalabeling.v1beta1.AnnotationMetadata.fromObject(object.annotationMetadata);
                             }
                             switch (object.annotationSentiment) {
+                            default:
+                                if (typeof object.annotationSentiment === "number") {
+                                    message.annotationSentiment = object.annotationSentiment;
+                                    break;
+                                }
+                                break;
                             case "ANNOTATION_SENTIMENT_UNSPECIFIED":
                             case 0:
                                 message.annotationSentiment = 0;
@@ -378,13 +390,13 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.annotationSource != null && message.hasOwnProperty("annotationSource"))
-                                object.annotationSource = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.AnnotationSource[message.annotationSource] : message.annotationSource;
+                                object.annotationSource = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.AnnotationSource[message.annotationSource] === undefined ? message.annotationSource : $root.google.cloud.datalabeling.v1beta1.AnnotationSource[message.annotationSource] : message.annotationSource;
                             if (message.annotationValue != null && message.hasOwnProperty("annotationValue"))
                                 object.annotationValue = $root.google.cloud.datalabeling.v1beta1.AnnotationValue.toObject(message.annotationValue, options);
                             if (message.annotationMetadata != null && message.hasOwnProperty("annotationMetadata"))
                                 object.annotationMetadata = $root.google.cloud.datalabeling.v1beta1.AnnotationMetadata.toObject(message.annotationMetadata, options);
                             if (message.annotationSentiment != null && message.hasOwnProperty("annotationSentiment"))
-                                object.annotationSentiment = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.AnnotationSentiment[message.annotationSentiment] : message.annotationSentiment;
+                                object.annotationSentiment = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.AnnotationSentiment[message.annotationSentiment] === undefined ? message.annotationSentiment : $root.google.cloud.datalabeling.v1beta1.AnnotationSentiment[message.annotationSentiment] : message.annotationSentiment;
                             return object;
                         };
     
@@ -11297,6 +11309,12 @@
                                 message.basicConfig = $root.google.cloud.datalabeling.v1beta1.HumanAnnotationConfig.fromObject(object.basicConfig);
                             }
                             switch (object.feature) {
+                            default:
+                                if (typeof object.feature === "number") {
+                                    message.feature = object.feature;
+                                    break;
+                                }
+                                break;
                             case "FEATURE_UNSPECIFIED":
                             case 0:
                                 message.feature = 0;
@@ -11352,7 +11370,7 @@
                             if (message.basicConfig != null && message.hasOwnProperty("basicConfig"))
                                 object.basicConfig = $root.google.cloud.datalabeling.v1beta1.HumanAnnotationConfig.toObject(message.basicConfig, options);
                             if (message.feature != null && message.hasOwnProperty("feature"))
-                                object.feature = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.LabelImageRequest.Feature[message.feature] : message.feature;
+                                object.feature = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.LabelImageRequest.Feature[message.feature] === undefined ? message.feature : $root.google.cloud.datalabeling.v1beta1.LabelImageRequest.Feature[message.feature] : message.feature;
                             if (message.imageClassificationConfig != null && message.hasOwnProperty("imageClassificationConfig")) {
                                 object.imageClassificationConfig = $root.google.cloud.datalabeling.v1beta1.ImageClassificationConfig.toObject(message.imageClassificationConfig, options);
                                 if (options.oneofs)
@@ -11765,6 +11783,12 @@
                                 message.basicConfig = $root.google.cloud.datalabeling.v1beta1.HumanAnnotationConfig.fromObject(object.basicConfig);
                             }
                             switch (object.feature) {
+                            default:
+                                if (typeof object.feature === "number") {
+                                    message.feature = object.feature;
+                                    break;
+                                }
+                                break;
                             case "FEATURE_UNSPECIFIED":
                             case 0:
                                 message.feature = 0;
@@ -11812,7 +11836,7 @@
                             if (message.basicConfig != null && message.hasOwnProperty("basicConfig"))
                                 object.basicConfig = $root.google.cloud.datalabeling.v1beta1.HumanAnnotationConfig.toObject(message.basicConfig, options);
                             if (message.feature != null && message.hasOwnProperty("feature"))
-                                object.feature = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.LabelVideoRequest.Feature[message.feature] : message.feature;
+                                object.feature = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.LabelVideoRequest.Feature[message.feature] === undefined ? message.feature : $root.google.cloud.datalabeling.v1beta1.LabelVideoRequest.Feature[message.feature] : message.feature;
                             if (message.videoClassificationConfig != null && message.hasOwnProperty("videoClassificationConfig")) {
                                 object.videoClassificationConfig = $root.google.cloud.datalabeling.v1beta1.VideoClassificationConfig.toObject(message.videoClassificationConfig, options);
                                 if (options.oneofs)
@@ -12159,6 +12183,12 @@
                                 message.basicConfig = $root.google.cloud.datalabeling.v1beta1.HumanAnnotationConfig.fromObject(object.basicConfig);
                             }
                             switch (object.feature) {
+                            default:
+                                if (typeof object.feature === "number") {
+                                    message.feature = object.feature;
+                                    break;
+                                }
+                                break;
                             case "FEATURE_UNSPECIFIED":
                             case 0:
                                 message.feature = 0;
@@ -12208,7 +12238,7 @@
                                     object.requestConfig = "textEntityExtractionConfig";
                             }
                             if (message.feature != null && message.hasOwnProperty("feature"))
-                                object.feature = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.LabelTextRequest.Feature[message.feature] : message.feature;
+                                object.feature = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.LabelTextRequest.Feature[message.feature] === undefined ? message.feature : $root.google.cloud.datalabeling.v1beta1.LabelTextRequest.Feature[message.feature] : message.feature;
                             return object;
                         };
     
@@ -19345,6 +19375,12 @@
                                 message.bigquerySource = $root.google.cloud.datalabeling.v1beta1.BigQuerySource.fromObject(object.bigquerySource);
                             }
                             switch (object.dataType) {
+                            default:
+                                if (typeof object.dataType === "number") {
+                                    message.dataType = object.dataType;
+                                    break;
+                                }
+                                break;
                             case "DATA_TYPE_UNSPECIFIED":
                             case 0:
                                 message.dataType = 0;
@@ -19367,6 +19403,12 @@
                                 break;
                             }
                             switch (object.annotationType) {
+                            default:
+                                if (typeof object.annotationType === "number") {
+                                    message.annotationType = object.annotationType;
+                                    break;
+                                }
+                                break;
                             case "ANNOTATION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.annotationType = 0;
@@ -19451,14 +19493,14 @@
                                 object.classificationMetadata = null;
                             }
                             if (message.dataType != null && message.hasOwnProperty("dataType"))
-                                object.dataType = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.DataType[message.dataType] : message.dataType;
+                                object.dataType = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.DataType[message.dataType] === undefined ? message.dataType : $root.google.cloud.datalabeling.v1beta1.DataType[message.dataType] : message.dataType;
                             if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
                                 object.gcsSource = $root.google.cloud.datalabeling.v1beta1.GcsSource.toObject(message.gcsSource, options);
                                 if (options.oneofs)
                                     object.source = "gcsSource";
                             }
                             if (message.annotationType != null && message.hasOwnProperty("annotationType"))
-                                object.annotationType = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.AnnotationType[message.annotationType] : message.annotationType;
+                                object.annotationType = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.AnnotationType[message.annotationType] === undefined ? message.annotationType : $root.google.cloud.datalabeling.v1beta1.AnnotationType[message.annotationType] : message.annotationType;
                             if (message.classificationMetadata != null && message.hasOwnProperty("classificationMetadata"))
                                 object.classificationMetadata = $root.google.cloud.datalabeling.v1beta1.ClassificationMetadata.toObject(message.classificationMetadata, options);
                             if (message.bigquerySource != null && message.hasOwnProperty("bigquerySource")) {
@@ -21724,6 +21766,12 @@
                             if (object.description != null)
                                 message.description = String(object.description);
                             switch (object.annotationSource) {
+                            default:
+                                if (typeof object.annotationSource === "number") {
+                                    message.annotationSource = object.annotationSource;
+                                    break;
+                                }
+                                break;
                             case "ANNOTATION_SOURCE_UNSPECIFIED":
                             case 0:
                                 message.annotationSource = 0;
@@ -21734,6 +21782,12 @@
                                 break;
                             }
                             switch (object.annotationType) {
+                            default:
+                                if (typeof object.annotationType === "number") {
+                                    message.annotationType = object.annotationType;
+                                    break;
+                                }
+                                break;
                             case "ANNOTATION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.annotationType = 0;
@@ -21874,7 +21928,7 @@
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
                             if (message.annotationSource != null && message.hasOwnProperty("annotationSource"))
-                                object.annotationSource = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.AnnotationSource[message.annotationSource] : message.annotationSource;
+                                object.annotationSource = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.AnnotationSource[message.annotationSource] === undefined ? message.annotationSource : $root.google.cloud.datalabeling.v1beta1.AnnotationSource[message.annotationSource] : message.annotationSource;
                             if (message.exampleCount != null && message.hasOwnProperty("exampleCount"))
                                 if (typeof message.exampleCount === "number")
                                     object.exampleCount = options.longs === String ? String(message.exampleCount) : message.exampleCount;
@@ -21890,7 +21944,7 @@
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.annotationType != null && message.hasOwnProperty("annotationType"))
-                                object.annotationType = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.AnnotationType[message.annotationType] : message.annotationType;
+                                object.annotationType = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.AnnotationType[message.annotationType] === undefined ? message.annotationType : $root.google.cloud.datalabeling.v1beta1.AnnotationType[message.annotationType] : message.annotationType;
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             if (message.metadata != null && message.hasOwnProperty("metadata"))
@@ -24786,6 +24840,12 @@
                             if (object.allowMultiLabel != null)
                                 message.allowMultiLabel = Boolean(object.allowMultiLabel);
                             switch (object.answerAggregationType) {
+                            default:
+                                if (typeof object.answerAggregationType === "number") {
+                                    message.answerAggregationType = object.answerAggregationType;
+                                    break;
+                                }
+                                break;
                             case "STRING_AGGREGATION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.answerAggregationType = 0;
@@ -24829,7 +24889,7 @@
                             if (message.allowMultiLabel != null && message.hasOwnProperty("allowMultiLabel"))
                                 object.allowMultiLabel = message.allowMultiLabel;
                             if (message.answerAggregationType != null && message.hasOwnProperty("answerAggregationType"))
-                                object.answerAggregationType = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.StringAggregationType[message.answerAggregationType] : message.answerAggregationType;
+                                object.answerAggregationType = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.StringAggregationType[message.answerAggregationType] === undefined ? message.answerAggregationType : $root.google.cloud.datalabeling.v1beta1.StringAggregationType[message.answerAggregationType] : message.answerAggregationType;
                             return object;
                         };
     
@@ -27633,6 +27693,12 @@
                                 message.evaluationMetrics = $root.google.cloud.datalabeling.v1beta1.EvaluationMetrics.fromObject(object.evaluationMetrics);
                             }
                             switch (object.annotationType) {
+                            default:
+                                if (typeof object.annotationType === "number") {
+                                    message.annotationType = object.annotationType;
+                                    break;
+                                }
+                                break;
                             case "ANNOTATION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.annotationType = 0;
@@ -27739,7 +27805,7 @@
                             if (message.evaluationMetrics != null && message.hasOwnProperty("evaluationMetrics"))
                                 object.evaluationMetrics = $root.google.cloud.datalabeling.v1beta1.EvaluationMetrics.toObject(message.evaluationMetrics, options);
                             if (message.annotationType != null && message.hasOwnProperty("annotationType"))
-                                object.annotationType = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.AnnotationType[message.annotationType] : message.annotationType;
+                                object.annotationType = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.AnnotationType[message.annotationType] === undefined ? message.annotationType : $root.google.cloud.datalabeling.v1beta1.AnnotationType[message.annotationType] : message.annotationType;
                             if (message.evaluatedItemCount != null && message.hasOwnProperty("evaluatedItemCount"))
                                 if (typeof message.evaluatedItemCount === "number")
                                     object.evaluatedItemCount = options.longs === String ? String(message.evaluatedItemCount) : message.evaluatedItemCount;
@@ -30672,6 +30738,12 @@
                             if (object.description != null)
                                 message.description = String(object.description);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -30755,7 +30827,7 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.EvaluationJob.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.EvaluationJob.State[message.state] === undefined ? message.state : $root.google.cloud.datalabeling.v1beta1.EvaluationJob.State[message.state] : message.state;
                             if (message.schedule != null && message.hasOwnProperty("schedule"))
                                 object.schedule = message.schedule;
                             if (message.modelVersion != null && message.hasOwnProperty("modelVersion"))
@@ -32155,6 +32227,12 @@
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
                             switch (object.dataType) {
+                            default:
+                                if (typeof object.dataType === "number") {
+                                    message.dataType = object.dataType;
+                                    break;
+                                }
+                                break;
                             case "DATA_TYPE_UNSPECIFIED":
                             case 0:
                                 message.dataType = 0;
@@ -32232,7 +32310,7 @@
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.dataType != null && message.hasOwnProperty("dataType"))
-                                object.dataType = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.DataType[message.dataType] : message.dataType;
+                                object.dataType = options.enums === String ? $root.google.cloud.datalabeling.v1beta1.DataType[message.dataType] === undefined ? message.dataType : $root.google.cloud.datalabeling.v1beta1.DataType[message.dataType] : message.dataType;
                             if (message.csvInstruction != null && message.hasOwnProperty("csvInstruction"))
                                 object.csvInstruction = $root.google.cloud.datalabeling.v1beta1.CsvInstruction.toObject(message.csvInstruction, options);
                             if (message.pdfInstruction != null && message.hasOwnProperty("pdfInstruction"))
@@ -37595,6 +37673,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -37619,6 +37703,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -37666,7 +37754,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -37674,7 +37762,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -41474,6 +41562,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -41488,6 +41582,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -41614,9 +41714,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -43963,6 +44063,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -44071,7 +44177,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -44873,6 +44979,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -44889,6 +45001,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -44932,6 +45050,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -44997,7 +45119,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -45005,7 +45127,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -45018,7 +45140,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -46395,6 +46517,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -46464,7 +46592,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -48219,6 +48347,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -48268,7 +48402,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
