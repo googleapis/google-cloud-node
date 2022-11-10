@@ -423,6 +423,11 @@
                           },
                           "nested": {
                             "ResourceType": {
+                              "valuesOptions": {
+                                "CONSUMER_PROJECT": {
+                                  "deprecated": true
+                                }
+                              },
                               "values": {
                                 "RESOURCE_TYPE_UNSPECIFIED": 0,
                                 "CONSUMER_PROJECT": 1,
@@ -1287,6 +1292,11 @@
                           },
                           "nested": {
                             "ResourceType": {
+                              "valuesOptions": {
+                                "CONSUMER_PROJECT": {
+                                  "deprecated": true
+                                }
+                              },
                               "values": {
                                 "RESOURCE_TYPE_UNSPECIFIED": 0,
                                 "CONSUMER_PROJECT": 1,

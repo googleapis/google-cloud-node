@@ -2362,6 +2362,12 @@
                                 }
                             }
                             switch (object.complianceRegime) {
+                            default:
+                                if (typeof object.complianceRegime === "number") {
+                                    message.complianceRegime = object.complianceRegime;
+                                    break;
+                                }
+                                break;
                             case "COMPLIANCE_REGIME_UNSPECIFIED":
                             case 0:
                                 message.complianceRegime = 0;
@@ -2449,6 +2455,12 @@
                                 }
                             }
                             switch (object.kajEnrollmentState) {
+                            default:
+                                if (typeof object.kajEnrollmentState === "number") {
+                                    message.kajEnrollmentState = object.kajEnrollmentState;
+                                    break;
+                                }
+                                break;
                             case "KAJ_ENROLLMENT_STATE_UNSPECIFIED":
                             case 0:
                                 message.kajEnrollmentState = 0;
@@ -2477,6 +2489,12 @@
                                     message.compliantButDisallowedServices[i] = String(object.compliantButDisallowedServices[i]);
                             }
                             switch (object.partner) {
+                            default:
+                                if (typeof object.partner === "number") {
+                                    message.partner = object.partner;
+                                    break;
+                                }
+                                break;
                             case "PARTNER_UNSPECIFIED":
                             case 0:
                                 message.partner = 0;
@@ -2533,7 +2551,7 @@
                                     object.resources[j] = $root.google.cloud.assuredworkloads.v1.Workload.ResourceInfo.toObject(message.resources[j], options);
                             }
                             if (message.complianceRegime != null && message.hasOwnProperty("complianceRegime"))
-                                object.complianceRegime = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.ComplianceRegime[message.complianceRegime] : message.complianceRegime;
+                                object.complianceRegime = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.ComplianceRegime[message.complianceRegime] === undefined ? message.complianceRegime : $root.google.cloud.assuredworkloads.v1.Workload.ComplianceRegime[message.complianceRegime] : message.complianceRegime;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
@@ -2556,7 +2574,7 @@
                                     object.resourceSettings[j] = $root.google.cloud.assuredworkloads.v1.Workload.ResourceSettings.toObject(message.resourceSettings[j], options);
                             }
                             if (message.kajEnrollmentState != null && message.hasOwnProperty("kajEnrollmentState"))
-                                object.kajEnrollmentState = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState[message.kajEnrollmentState] : message.kajEnrollmentState;
+                                object.kajEnrollmentState = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState[message.kajEnrollmentState] === undefined ? message.kajEnrollmentState : $root.google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState[message.kajEnrollmentState] : message.kajEnrollmentState;
                             if (message.enableSovereignControls != null && message.hasOwnProperty("enableSovereignControls"))
                                 object.enableSovereignControls = message.enableSovereignControls;
                             if (message.saaEnrollmentResponse != null && message.hasOwnProperty("saaEnrollmentResponse"))
@@ -2567,7 +2585,7 @@
                                     object.compliantButDisallowedServices[j] = message.compliantButDisallowedServices[j];
                             }
                             if (message.partner != null && message.hasOwnProperty("partner"))
-                                object.partner = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.Partner[message.partner] : message.partner;
+                                object.partner = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.Partner[message.partner] === undefined ? message.partner : $root.google.cloud.assuredworkloads.v1.Workload.Partner[message.partner] : message.partner;
                             return object;
                         };
     
@@ -2782,6 +2800,12 @@
                                     else if (typeof object.resourceId === "object")
                                         message.resourceId = new $util.LongBits(object.resourceId.low >>> 0, object.resourceId.high >>> 0).toNumber();
                                 switch (object.resourceType) {
+                                default:
+                                    if (typeof object.resourceType === "number") {
+                                        message.resourceType = object.resourceType;
+                                        break;
+                                    }
+                                    break;
                                 case "RESOURCE_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.resourceType = 0;
@@ -2833,7 +2857,7 @@
                                     else
                                         object.resourceId = options.longs === String ? $util.Long.prototype.toString.call(message.resourceId) : options.longs === Number ? new $util.LongBits(message.resourceId.low >>> 0, message.resourceId.high >>> 0).toNumber() : message.resourceId;
                                 if (message.resourceType != null && message.hasOwnProperty("resourceType"))
-                                    object.resourceType = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType[message.resourceType] : message.resourceType;
+                                    object.resourceType = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType[message.resourceType] === undefined ? message.resourceType : $root.google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType[message.resourceType] : message.resourceType;
                                 return object;
                             };
     
@@ -3355,6 +3379,12 @@
                                 if (object.resourceId != null)
                                     message.resourceId = String(object.resourceId);
                                 switch (object.resourceType) {
+                                default:
+                                    if (typeof object.resourceType === "number") {
+                                        message.resourceType = object.resourceType;
+                                        break;
+                                    }
+                                    break;
                                 case "RESOURCE_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.resourceType = 0;
@@ -3402,7 +3432,7 @@
                                 if (message.resourceId != null && message.hasOwnProperty("resourceId"))
                                     object.resourceId = message.resourceId;
                                 if (message.resourceType != null && message.hasOwnProperty("resourceType"))
-                                    object.resourceType = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType[message.resourceType] : message.resourceType;
+                                    object.resourceType = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType[message.resourceType] === undefined ? message.resourceType : $root.google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType[message.resourceType] : message.resourceType;
                                 if (message.displayName != null && message.hasOwnProperty("displayName"))
                                     object.displayName = message.displayName;
                                 return object;
@@ -3668,6 +3698,12 @@
                                     return object;
                                 var message = new $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse();
                                 switch (object.setupStatus) {
+                                default:
+                                    if (typeof object.setupStatus === "number") {
+                                        message.setupStatus = object.setupStatus;
+                                        break;
+                                    }
+                                    break;
                                 case "SETUP_STATE_UNSPECIFIED":
                                 case 0:
                                     message.setupStatus = 0;
@@ -3688,6 +3724,10 @@
                                     for (var i = 0; i < object.setupErrors.length; ++i)
                                         switch (object.setupErrors[i]) {
                                         default:
+                                            if (typeof object.setupErrors[i] === "number") {
+                                                message.setupErrors[i] = object.setupErrors[i];
+                                                break;
+                                            }
                                         case "SETUP_ERROR_UNSPECIFIED":
                                         case 0:
                                             message.setupErrors[i] = 0;
@@ -3729,14 +3769,14 @@
                                 if (options.arrays || options.defaults)
                                     object.setupErrors = [];
                                 if (message.setupStatus != null && message.hasOwnProperty("setupStatus")) {
-                                    object.setupStatus = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState[message.setupStatus] : message.setupStatus;
+                                    object.setupStatus = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState[message.setupStatus] === undefined ? message.setupStatus : $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState[message.setupStatus] : message.setupStatus;
                                     if (options.oneofs)
                                         object._setupStatus = "setupStatus";
                                 }
                                 if (message.setupErrors && message.setupErrors.length) {
                                     object.setupErrors = [];
                                     for (var j = 0; j < message.setupErrors.length; ++j)
-                                        object.setupErrors[j] = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError[message.setupErrors[j]] : message.setupErrors[j];
+                                        object.setupErrors[j] = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError[message.setupErrors[j]] === undefined ? message.setupErrors[j] : $root.google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError[message.setupErrors[j]] : message.setupErrors[j];
                                 }
                                 return object;
                             };
@@ -4054,6 +4094,12 @@
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             switch (object.complianceRegime) {
+                            default:
+                                if (typeof object.complianceRegime === "number") {
+                                    message.complianceRegime = object.complianceRegime;
+                                    break;
+                                }
+                                break;
                             case "COMPLIANCE_REGIME_UNSPECIFIED":
                             case 0:
                                 message.complianceRegime = 0;
@@ -4136,7 +4182,7 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             if (message.complianceRegime != null && message.hasOwnProperty("complianceRegime"))
-                                object.complianceRegime = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.ComplianceRegime[message.complianceRegime] : message.complianceRegime;
+                                object.complianceRegime = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Workload.ComplianceRegime[message.complianceRegime] === undefined ? message.complianceRegime : $root.google.cloud.assuredworkloads.v1.Workload.ComplianceRegime[message.complianceRegime] : message.complianceRegime;
                             return object;
                         };
     
@@ -4345,6 +4391,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.restrictionType) {
+                            default:
+                                if (typeof object.restrictionType === "number") {
+                                    message.restrictionType = object.restrictionType;
+                                    break;
+                                }
+                                break;
                             case "RESTRICTION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.restrictionType = 0;
@@ -4381,7 +4433,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.restrictionType != null && message.hasOwnProperty("restrictionType"))
-                                object.restrictionType = options.enums === String ? $root.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType[message.restrictionType] : message.restrictionType;
+                                object.restrictionType = options.enums === String ? $root.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType[message.restrictionType] === undefined ? message.restrictionType : $root.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType[message.restrictionType] : message.restrictionType;
                             return object;
                         };
     
@@ -6459,6 +6511,12 @@
                             if (object.category != null)
                                 message.category = String(object.category);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -6540,7 +6598,7 @@
                             if (message.category != null && message.hasOwnProperty("category"))
                                 object.category = message.category;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Violation.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Violation.State[message.state] === undefined ? message.state : $root.google.cloud.assuredworkloads.v1.Violation.State[message.state] : message.state;
                             if (message.orgPolicyConstraint != null && message.hasOwnProperty("orgPolicyConstraint"))
                                 object.orgPolicyConstraint = message.orgPolicyConstraint;
                             if (message.auditLogLink != null && message.hasOwnProperty("auditLogLink"))
@@ -6821,6 +6879,12 @@
                                         message.compliantValues[i] = String(object.compliantValues[i]);
                                 }
                                 switch (object.remediationType) {
+                                default:
+                                    if (typeof object.remediationType === "number") {
+                                        message.remediationType = object.remediationType;
+                                        break;
+                                    }
+                                    break;
                                 case "REMEDIATION_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.remediationType = 0;
@@ -6872,7 +6936,7 @@
                                         object.compliantValues[j] = message.compliantValues[j];
                                 }
                                 if (message.remediationType != null && message.hasOwnProperty("remediationType"))
-                                    object.remediationType = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType[message.remediationType] : message.remediationType;
+                                    object.remediationType = options.enums === String ? $root.google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType[message.remediationType] === undefined ? message.remediationType : $root.google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType[message.remediationType] : message.remediationType;
                                 return object;
                             };
     
@@ -8441,6 +8505,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.restrictionType) {
+                            default:
+                                if (typeof object.restrictionType === "number") {
+                                    message.restrictionType = object.restrictionType;
+                                    break;
+                                }
+                                break;
                             case "RESTRICTION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.restrictionType = 0;
@@ -8477,7 +8547,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.restrictionType != null && message.hasOwnProperty("restrictionType"))
-                                object.restrictionType = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType[message.restrictionType] : message.restrictionType;
+                                object.restrictionType = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType[message.restrictionType] === undefined ? message.restrictionType : $root.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType[message.restrictionType] : message.restrictionType;
                             return object;
                         };
     
@@ -10755,6 +10825,12 @@
                                 }
                             }
                             switch (object.complianceRegime) {
+                            default:
+                                if (typeof object.complianceRegime === "number") {
+                                    message.complianceRegime = object.complianceRegime;
+                                    break;
+                                }
+                                break;
                             case "COMPLIANCE_REGIME_UNSPECIFIED":
                             case 0:
                                 message.complianceRegime = 0;
@@ -10858,6 +10934,12 @@
                                 }
                             }
                             switch (object.kajEnrollmentState) {
+                            default:
+                                if (typeof object.kajEnrollmentState === "number") {
+                                    message.kajEnrollmentState = object.kajEnrollmentState;
+                                    break;
+                                }
+                                break;
                             case "KAJ_ENROLLMENT_STATE_UNSPECIFIED":
                             case 0:
                                 message.kajEnrollmentState = 0;
@@ -10931,7 +11013,7 @@
                                     object.resources[j] = $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.toObject(message.resources[j], options);
                             }
                             if (message.complianceRegime != null && message.hasOwnProperty("complianceRegime"))
-                                object.complianceRegime = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime[message.complianceRegime] : message.complianceRegime;
+                                object.complianceRegime = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime[message.complianceRegime] === undefined ? message.complianceRegime : $root.google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime[message.complianceRegime] : message.complianceRegime;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
@@ -10974,7 +11056,7 @@
                                     object.resourceSettings[j] = $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.toObject(message.resourceSettings[j], options);
                             }
                             if (message.kajEnrollmentState != null && message.hasOwnProperty("kajEnrollmentState"))
-                                object.kajEnrollmentState = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState[message.kajEnrollmentState] : message.kajEnrollmentState;
+                                object.kajEnrollmentState = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState[message.kajEnrollmentState] === undefined ? message.kajEnrollmentState : $root.google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState[message.kajEnrollmentState] : message.kajEnrollmentState;
                             if (message.enableSovereignControls != null && message.hasOwnProperty("enableSovereignControls"))
                                 object.enableSovereignControls = message.enableSovereignControls;
                             if (message.saaEnrollmentResponse != null && message.hasOwnProperty("saaEnrollmentResponse"))
@@ -11198,6 +11280,12 @@
                                     else if (typeof object.resourceId === "object")
                                         message.resourceId = new $util.LongBits(object.resourceId.low >>> 0, object.resourceId.high >>> 0).toNumber();
                                 switch (object.resourceType) {
+                                default:
+                                    if (typeof object.resourceType === "number") {
+                                        message.resourceType = object.resourceType;
+                                        break;
+                                    }
+                                    break;
                                 case "RESOURCE_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.resourceType = 0;
@@ -11249,7 +11337,7 @@
                                     else
                                         object.resourceId = options.longs === String ? $util.Long.prototype.toString.call(message.resourceId) : options.longs === Number ? new $util.LongBits(message.resourceId.low >>> 0, message.resourceId.high >>> 0).toNumber() : message.resourceId;
                                 if (message.resourceType != null && message.hasOwnProperty("resourceType"))
-                                    object.resourceType = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType[message.resourceType] : message.resourceType;
+                                    object.resourceType = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType[message.resourceType] === undefined ? message.resourceType : $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType[message.resourceType] : message.resourceType;
                                 return object;
                             };
     
@@ -12601,6 +12689,12 @@
                                 if (object.resourceId != null)
                                     message.resourceId = String(object.resourceId);
                                 switch (object.resourceType) {
+                                default:
+                                    if (typeof object.resourceType === "number") {
+                                        message.resourceType = object.resourceType;
+                                        break;
+                                    }
+                                    break;
                                 case "RESOURCE_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.resourceType = 0;
@@ -12648,7 +12742,7 @@
                                 if (message.resourceId != null && message.hasOwnProperty("resourceId"))
                                     object.resourceId = message.resourceId;
                                 if (message.resourceType != null && message.hasOwnProperty("resourceType"))
-                                    object.resourceType = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType[message.resourceType] : message.resourceType;
+                                    object.resourceType = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType[message.resourceType] === undefined ? message.resourceType : $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType[message.resourceType] : message.resourceType;
                                 if (message.displayName != null && message.hasOwnProperty("displayName"))
                                     object.displayName = message.displayName;
                                 return object;
@@ -12914,6 +13008,12 @@
                                     return object;
                                 var message = new $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse();
                                 switch (object.setupStatus) {
+                                default:
+                                    if (typeof object.setupStatus === "number") {
+                                        message.setupStatus = object.setupStatus;
+                                        break;
+                                    }
+                                    break;
                                 case "SETUP_STATE_UNSPECIFIED":
                                 case 0:
                                     message.setupStatus = 0;
@@ -12934,6 +13034,10 @@
                                     for (var i = 0; i < object.setupErrors.length; ++i)
                                         switch (object.setupErrors[i]) {
                                         default:
+                                            if (typeof object.setupErrors[i] === "number") {
+                                                message.setupErrors[i] = object.setupErrors[i];
+                                                break;
+                                            }
                                         case "SETUP_ERROR_UNSPECIFIED":
                                         case 0:
                                             message.setupErrors[i] = 0;
@@ -12975,14 +13079,14 @@
                                 if (options.arrays || options.defaults)
                                     object.setupErrors = [];
                                 if (message.setupStatus != null && message.hasOwnProperty("setupStatus")) {
-                                    object.setupStatus = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupState[message.setupStatus] : message.setupStatus;
+                                    object.setupStatus = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupState[message.setupStatus] === undefined ? message.setupStatus : $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupState[message.setupStatus] : message.setupStatus;
                                     if (options.oneofs)
                                         object._setupStatus = "setupStatus";
                                 }
                                 if (message.setupErrors && message.setupErrors.length) {
                                     object.setupErrors = [];
                                     for (var j = 0; j < message.setupErrors.length; ++j)
-                                        object.setupErrors[j] = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupError[message.setupErrors[j]] : message.setupErrors[j];
+                                        object.setupErrors[j] = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupError[message.setupErrors[j]] === undefined ? message.setupErrors[j] : $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.SetupError[message.setupErrors[j]] : message.setupErrors[j];
                                 }
                                 return object;
                             };
@@ -13313,6 +13417,12 @@
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             switch (object.complianceRegime) {
+                            default:
+                                if (typeof object.complianceRegime === "number") {
+                                    message.complianceRegime = object.complianceRegime;
+                                    break;
+                                }
+                                break;
                             case "COMPLIANCE_REGIME_UNSPECIFIED":
                             case 0:
                                 message.complianceRegime = 0;
@@ -13403,7 +13513,7 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             if (message.complianceRegime != null && message.hasOwnProperty("complianceRegime"))
-                                object.complianceRegime = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime[message.complianceRegime] : message.complianceRegime;
+                                object.complianceRegime = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime[message.complianceRegime] === undefined ? message.complianceRegime : $root.google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime[message.complianceRegime] : message.complianceRegime;
                             if (message.resourceSettings && message.resourceSettings.length) {
                                 object.resourceSettings = [];
                                 for (var j = 0; j < message.resourceSettings.length; ++j)
@@ -15018,6 +15128,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -15042,6 +15158,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -15089,7 +15209,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -15097,7 +15217,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -17908,6 +18028,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -17922,6 +18048,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -18048,9 +18180,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -20397,6 +20529,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -20505,7 +20643,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -21307,6 +21445,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -21323,6 +21467,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -21361,6 +21511,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -21431,7 +21585,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -21439,7 +21593,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -21452,7 +21606,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -22829,6 +22983,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -22898,7 +23058,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -24653,6 +24813,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -24702,7 +24868,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
