@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AddressValidationClient} from '@google-cloud/addressvalidation';
+import {AddressValidationClient} from '@googlemaps/addressvalidation';
 
 // check that the client class type name can be used
 function doStuffWithAddressValidationClient(client: AddressValidationClient) {

@@ -3434,6 +3434,12 @@
                                 return object;
                             var message = new $root.google.cloud.batch.v1.LogsPolicy();
                             switch (object.destination) {
+                            default:
+                                if (typeof object.destination === "number") {
+                                    message.destination = object.destination;
+                                    break;
+                                }
+                                break;
                             case "DESTINATION_UNSPECIFIED":
                             case 0:
                                 message.destination = 0;
@@ -3470,7 +3476,7 @@
                                 object.logsPath = "";
                             }
                             if (message.destination != null && message.hasOwnProperty("destination"))
-                                object.destination = options.enums === String ? $root.google.cloud.batch.v1.LogsPolicy.Destination[message.destination] : message.destination;
+                                object.destination = options.enums === String ? $root.google.cloud.batch.v1.LogsPolicy.Destination[message.destination] === undefined ? message.destination : $root.google.cloud.batch.v1.LogsPolicy.Destination[message.destination] : message.destination;
                             if (message.logsPath != null && message.hasOwnProperty("logsPath"))
                                 object.logsPath = message.logsPath;
                             return object;
@@ -3777,6 +3783,12 @@
                                 return object;
                             var message = new $root.google.cloud.batch.v1.JobStatus();
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -3856,7 +3868,7 @@
                                 object.runDuration = null;
                             }
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.batch.v1.JobStatus.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.batch.v1.JobStatus.State[message.state] === undefined ? message.state : $root.google.cloud.batch.v1.JobStatus.State[message.state] : message.state;
                             if (message.statusEvents && message.statusEvents.length) {
                                 object.statusEvents = [];
                                 for (var j = 0; j < message.statusEvents.length; ++j)
@@ -4094,6 +4106,12 @@
                                 if (object.machineType != null)
                                     message.machineType = String(object.machineType);
                                 switch (object.provisioningModel) {
+                                default:
+                                    if (typeof object.provisioningModel === "number") {
+                                        message.provisioningModel = object.provisioningModel;
+                                        break;
+                                    }
+                                    break;
                                 case "PROVISIONING_MODEL_UNSPECIFIED":
                                 case 0:
                                     message.provisioningModel = 0;
@@ -4148,7 +4166,7 @@
                                 if (message.machineType != null && message.hasOwnProperty("machineType"))
                                     object.machineType = message.machineType;
                                 if (message.provisioningModel != null && message.hasOwnProperty("provisioningModel"))
-                                    object.provisioningModel = options.enums === String ? $root.google.cloud.batch.v1.AllocationPolicy.ProvisioningModel[message.provisioningModel] : message.provisioningModel;
+                                    object.provisioningModel = options.enums === String ? $root.google.cloud.batch.v1.AllocationPolicy.ProvisioningModel[message.provisioningModel] === undefined ? message.provisioningModel : $root.google.cloud.batch.v1.AllocationPolicy.ProvisioningModel[message.provisioningModel] : message.provisioningModel;
                                 if (message.taskPack != null && message.hasOwnProperty("taskPack"))
                                     if (typeof message.taskPack === "number")
                                         object.taskPack = options.longs === String ? String(message.taskPack) : message.taskPack;
@@ -4946,6 +4964,12 @@
                                     return object;
                                 var message = new $root.google.cloud.batch.v1.JobNotification.Message();
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -4960,6 +4984,12 @@
                                     break;
                                 }
                                 switch (object.newJobState) {
+                                default:
+                                    if (typeof object.newJobState === "number") {
+                                        message.newJobState = object.newJobState;
+                                        break;
+                                    }
+                                    break;
                                 case "STATE_UNSPECIFIED":
                                 case 0:
                                     message.newJobState = 0;
@@ -4990,6 +5020,12 @@
                                     break;
                                 }
                                 switch (object.newTaskState) {
+                                default:
+                                    if (typeof object.newTaskState === "number") {
+                                        message.newTaskState = object.newTaskState;
+                                        break;
+                                    }
+                                    break;
                                 case "STATE_UNSPECIFIED":
                                 case 0:
                                     message.newTaskState = 0;
@@ -5037,11 +5073,11 @@
                                     object.newTaskState = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 }
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.batch.v1.JobNotification.Type[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.batch.v1.JobNotification.Type[message.type] === undefined ? message.type : $root.google.cloud.batch.v1.JobNotification.Type[message.type] : message.type;
                                 if (message.newJobState != null && message.hasOwnProperty("newJobState"))
-                                    object.newJobState = options.enums === String ? $root.google.cloud.batch.v1.JobStatus.State[message.newJobState] : message.newJobState;
+                                    object.newJobState = options.enums === String ? $root.google.cloud.batch.v1.JobStatus.State[message.newJobState] === undefined ? message.newJobState : $root.google.cloud.batch.v1.JobStatus.State[message.newJobState] : message.newJobState;
                                 if (message.newTaskState != null && message.hasOwnProperty("newTaskState"))
-                                    object.newTaskState = options.enums === String ? $root.google.cloud.batch.v1.TaskStatus.State[message.newTaskState] : message.newTaskState;
+                                    object.newTaskState = options.enums === String ? $root.google.cloud.batch.v1.TaskStatus.State[message.newTaskState] === undefined ? message.newTaskState : $root.google.cloud.batch.v1.TaskStatus.State[message.newTaskState] : message.newTaskState;
                                 return object;
                             };
     
@@ -6810,6 +6846,12 @@
                                 if (object.minCpuPlatform != null)
                                     message.minCpuPlatform = String(object.minCpuPlatform);
                                 switch (object.provisioningModel) {
+                                default:
+                                    if (typeof object.provisioningModel === "number") {
+                                        message.provisioningModel = object.provisioningModel;
+                                        break;
+                                    }
+                                    break;
                                 case "PROVISIONING_MODEL_UNSPECIFIED":
                                 case 0:
                                     message.provisioningModel = 0;
@@ -6877,7 +6919,7 @@
                                 if (message.minCpuPlatform != null && message.hasOwnProperty("minCpuPlatform"))
                                     object.minCpuPlatform = message.minCpuPlatform;
                                 if (message.provisioningModel != null && message.hasOwnProperty("provisioningModel"))
-                                    object.provisioningModel = options.enums === String ? $root.google.cloud.batch.v1.AllocationPolicy.ProvisioningModel[message.provisioningModel] : message.provisioningModel;
+                                    object.provisioningModel = options.enums === String ? $root.google.cloud.batch.v1.AllocationPolicy.ProvisioningModel[message.provisioningModel] === undefined ? message.provisioningModel : $root.google.cloud.batch.v1.AllocationPolicy.ProvisioningModel[message.provisioningModel] : message.provisioningModel;
                                 if (message.accelerators && message.accelerators.length) {
                                     object.accelerators = [];
                                     for (var j = 0; j < message.accelerators.length; ++j)
@@ -9297,6 +9339,12 @@
                                 return object;
                             var message = new $root.google.cloud.batch.v1.TaskStatus();
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -9353,7 +9401,7 @@
                             if (options.defaults)
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.batch.v1.TaskStatus.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.batch.v1.TaskStatus.State[message.state] === undefined ? message.state : $root.google.cloud.batch.v1.TaskStatus.State[message.state] : message.state;
                             if (message.statusEvents && message.statusEvents.length) {
                                 object.statusEvents = [];
                                 for (var j = 0; j < message.statusEvents.length; ++j)
@@ -11346,6 +11394,12 @@
                                 return object;
                             var message = new $root.google.cloud.batch.v1.LifecyclePolicy();
                             switch (object.action) {
+                            default:
+                                if (typeof object.action === "number") {
+                                    message.action = object.action;
+                                    break;
+                                }
+                                break;
                             case "ACTION_UNSPECIFIED":
                             case 0:
                                 message.action = 0;
@@ -11385,7 +11439,7 @@
                                 object.actionCondition = null;
                             }
                             if (message.action != null && message.hasOwnProperty("action"))
-                                object.action = options.enums === String ? $root.google.cloud.batch.v1.LifecyclePolicy.Action[message.action] : message.action;
+                                object.action = options.enums === String ? $root.google.cloud.batch.v1.LifecyclePolicy.Action[message.action] === undefined ? message.action : $root.google.cloud.batch.v1.LifecyclePolicy.Action[message.action] : message.action;
                             if (message.actionCondition != null && message.hasOwnProperty("actionCondition"))
                                 object.actionCondition = $root.google.cloud.batch.v1.LifecyclePolicy.ActionCondition.toObject(message.actionCondition, options);
                             return object;
@@ -16051,6 +16105,12 @@
                                 }
                             }
                             switch (object.schedulingPolicy) {
+                            default:
+                                if (typeof object.schedulingPolicy === "number") {
+                                    message.schedulingPolicy = object.schedulingPolicy;
+                                    break;
+                                }
+                                break;
                             case "SCHEDULING_POLICY_UNSPECIFIED":
                             case 0:
                                 message.schedulingPolicy = 0;
@@ -16171,7 +16231,7 @@
                                     object.taskGroups[j] = $root.google.cloud.batch.v1alpha.TaskGroup.toObject(message.taskGroups[j], options);
                             }
                             if (message.schedulingPolicy != null && message.hasOwnProperty("schedulingPolicy"))
-                                object.schedulingPolicy = options.enums === String ? $root.google.cloud.batch.v1alpha.Job.SchedulingPolicy[message.schedulingPolicy] : message.schedulingPolicy;
+                                object.schedulingPolicy = options.enums === String ? $root.google.cloud.batch.v1alpha.Job.SchedulingPolicy[message.schedulingPolicy] === undefined ? message.schedulingPolicy : $root.google.cloud.batch.v1alpha.Job.SchedulingPolicy[message.schedulingPolicy] : message.schedulingPolicy;
                             if (message.dependencies && message.dependencies.length) {
                                 object.dependencies = [];
                                 for (var j = 0; j < message.dependencies.length; ++j)
@@ -16420,6 +16480,12 @@
                                 return object;
                             var message = new $root.google.cloud.batch.v1alpha.LogsPolicy();
                             switch (object.destination) {
+                            default:
+                                if (typeof object.destination === "number") {
+                                    message.destination = object.destination;
+                                    break;
+                                }
+                                break;
                             case "DESTINATION_UNSPECIFIED":
                             case 0:
                                 message.destination = 0;
@@ -16456,7 +16522,7 @@
                                 object.logsPath = "";
                             }
                             if (message.destination != null && message.hasOwnProperty("destination"))
-                                object.destination = options.enums === String ? $root.google.cloud.batch.v1alpha.LogsPolicy.Destination[message.destination] : message.destination;
+                                object.destination = options.enums === String ? $root.google.cloud.batch.v1alpha.LogsPolicy.Destination[message.destination] === undefined ? message.destination : $root.google.cloud.batch.v1alpha.LogsPolicy.Destination[message.destination] : message.destination;
                             if (message.logsPath != null && message.hasOwnProperty("logsPath"))
                                 object.logsPath = message.logsPath;
                             return object;
@@ -16695,6 +16761,12 @@
                                 message.items = {};
                                 for (var keys = Object.keys(object.items), i = 0; i < keys.length; ++i)
                                     switch (object.items[keys[i]]) {
+                                    default:
+                                        if (typeof object.items[keys[i]] === "number") {
+                                            message.items[keys[i]] = object.items[keys[i]];
+                                            break;
+                                        }
+                                        break;
                                     case "TYPE_UNSPECIFIED":
                                     case 0:
                                         message.items[keys[i]] = 0;
@@ -16735,7 +16807,7 @@
                             if (message.items && (keys2 = Object.keys(message.items)).length) {
                                 object.items = {};
                                 for (var j = 0; j < keys2.length; ++j)
-                                    object.items[keys2[j]] = options.enums === String ? $root.google.cloud.batch.v1alpha.JobDependency.Type[message.items[keys2[j]]] : message.items[keys2[j]];
+                                    object.items[keys2[j]] = options.enums === String ? $root.google.cloud.batch.v1alpha.JobDependency.Type[message.items[keys2[j]]] === undefined ? message.items[keys2[j]] : $root.google.cloud.batch.v1alpha.JobDependency.Type[message.items[keys2[j]]] : message.items[keys2[j]];
                             }
                             return object;
                         };
@@ -17043,6 +17115,12 @@
                                 return object;
                             var message = new $root.google.cloud.batch.v1alpha.JobStatus();
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -17122,7 +17200,7 @@
                                 object.runDuration = null;
                             }
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.batch.v1alpha.JobStatus.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.batch.v1alpha.JobStatus.State[message.state] === undefined ? message.state : $root.google.cloud.batch.v1alpha.JobStatus.State[message.state] : message.state;
                             if (message.statusEvents && message.statusEvents.length) {
                                 object.statusEvents = [];
                                 for (var j = 0; j < message.statusEvents.length; ++j)
@@ -17360,6 +17438,12 @@
                                 if (object.machineType != null)
                                     message.machineType = String(object.machineType);
                                 switch (object.provisioningModel) {
+                                default:
+                                    if (typeof object.provisioningModel === "number") {
+                                        message.provisioningModel = object.provisioningModel;
+                                        break;
+                                    }
+                                    break;
                                 case "PROVISIONING_MODEL_UNSPECIFIED":
                                 case 0:
                                     message.provisioningModel = 0;
@@ -17414,7 +17498,7 @@
                                 if (message.machineType != null && message.hasOwnProperty("machineType"))
                                     object.machineType = message.machineType;
                                 if (message.provisioningModel != null && message.hasOwnProperty("provisioningModel"))
-                                    object.provisioningModel = options.enums === String ? $root.google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel[message.provisioningModel] : message.provisioningModel;
+                                    object.provisioningModel = options.enums === String ? $root.google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel[message.provisioningModel] === undefined ? message.provisioningModel : $root.google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel[message.provisioningModel] : message.provisioningModel;
                                 if (message.taskPack != null && message.hasOwnProperty("taskPack"))
                                     if (typeof message.taskPack === "number")
                                         object.taskPack = options.longs === String ? String(message.taskPack) : message.taskPack;
@@ -18212,6 +18296,12 @@
                                     return object;
                                 var message = new $root.google.cloud.batch.v1alpha.JobNotification.Message();
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -18226,6 +18316,12 @@
                                     break;
                                 }
                                 switch (object.newJobState) {
+                                default:
+                                    if (typeof object.newJobState === "number") {
+                                        message.newJobState = object.newJobState;
+                                        break;
+                                    }
+                                    break;
                                 case "STATE_UNSPECIFIED":
                                 case 0:
                                     message.newJobState = 0;
@@ -18256,6 +18352,12 @@
                                     break;
                                 }
                                 switch (object.newTaskState) {
+                                default:
+                                    if (typeof object.newTaskState === "number") {
+                                        message.newTaskState = object.newTaskState;
+                                        break;
+                                    }
+                                    break;
                                 case "STATE_UNSPECIFIED":
                                 case 0:
                                     message.newTaskState = 0;
@@ -18303,11 +18405,11 @@
                                     object.newTaskState = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 }
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.batch.v1alpha.JobNotification.Type[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.batch.v1alpha.JobNotification.Type[message.type] === undefined ? message.type : $root.google.cloud.batch.v1alpha.JobNotification.Type[message.type] : message.type;
                                 if (message.newJobState != null && message.hasOwnProperty("newJobState"))
-                                    object.newJobState = options.enums === String ? $root.google.cloud.batch.v1alpha.JobStatus.State[message.newJobState] : message.newJobState;
+                                    object.newJobState = options.enums === String ? $root.google.cloud.batch.v1alpha.JobStatus.State[message.newJobState] === undefined ? message.newJobState : $root.google.cloud.batch.v1alpha.JobStatus.State[message.newJobState] : message.newJobState;
                                 if (message.newTaskState != null && message.hasOwnProperty("newTaskState"))
-                                    object.newTaskState = options.enums === String ? $root.google.cloud.batch.v1alpha.TaskStatus.State[message.newTaskState] : message.newTaskState;
+                                    object.newTaskState = options.enums === String ? $root.google.cloud.batch.v1alpha.TaskStatus.State[message.newTaskState] === undefined ? message.newTaskState : $root.google.cloud.batch.v1alpha.TaskStatus.State[message.newTaskState] : message.newTaskState;
                                 return object;
                             };
     
@@ -18761,6 +18863,10 @@
                                 for (var i = 0; i < object.provisioningModels.length; ++i)
                                     switch (object.provisioningModels[i]) {
                                     default:
+                                        if (typeof object.provisioningModels[i] === "number") {
+                                            message.provisioningModels[i] = object.provisioningModels[i];
+                                            break;
+                                        }
                                     case "PROVISIONING_MODEL_UNSPECIFIED":
                                     case 0:
                                         message.provisioningModels[i] = 0;
@@ -18840,7 +18946,7 @@
                             if (message.provisioningModels && message.provisioningModels.length) {
                                 object.provisioningModels = [];
                                 for (var j = 0; j < message.provisioningModels.length; ++j)
-                                    object.provisioningModels[j] = options.enums === String ? $root.google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel[message.provisioningModels[j]] : message.provisioningModels[j];
+                                    object.provisioningModels[j] = options.enums === String ? $root.google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel[message.provisioningModels[j]] === undefined ? message.provisioningModels[j] : $root.google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel[message.provisioningModels[j]] : message.provisioningModels[j];
                             }
                             if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
                                 object.serviceAccountEmail = message.serviceAccountEmail;
@@ -20312,6 +20418,12 @@
                                 if (object.minCpuPlatform != null)
                                     message.minCpuPlatform = String(object.minCpuPlatform);
                                 switch (object.provisioningModel) {
+                                default:
+                                    if (typeof object.provisioningModel === "number") {
+                                        message.provisioningModel = object.provisioningModel;
+                                        break;
+                                    }
+                                    break;
                                 case "PROVISIONING_MODEL_UNSPECIFIED":
                                 case 0:
                                     message.provisioningModel = 0;
@@ -20385,7 +20497,7 @@
                                 if (message.minCpuPlatform != null && message.hasOwnProperty("minCpuPlatform"))
                                     object.minCpuPlatform = message.minCpuPlatform;
                                 if (message.provisioningModel != null && message.hasOwnProperty("provisioningModel"))
-                                    object.provisioningModel = options.enums === String ? $root.google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel[message.provisioningModel] : message.provisioningModel;
+                                    object.provisioningModel = options.enums === String ? $root.google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel[message.provisioningModel] === undefined ? message.provisioningModel : $root.google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel[message.provisioningModel] : message.provisioningModel;
                                 if (message.accelerators && message.accelerators.length) {
                                     object.accelerators = [];
                                     for (var j = 0; j < message.accelerators.length; ++j)
@@ -21603,6 +21715,12 @@
                                 else if (typeof object.parallelism === "object")
                                     message.parallelism = new $util.LongBits(object.parallelism.low >>> 0, object.parallelism.high >>> 0).toNumber();
                             switch (object.schedulingPolicy) {
+                            default:
+                                if (typeof object.schedulingPolicy === "number") {
+                                    message.schedulingPolicy = object.schedulingPolicy;
+                                    break;
+                                }
+                                break;
                             case "SCHEDULING_POLICY_UNSPECIFIED":
                             case 0:
                                 message.schedulingPolicy = 0;
@@ -21705,7 +21823,7 @@
                                 else
                                     object.parallelism = options.longs === String ? $util.Long.prototype.toString.call(message.parallelism) : options.longs === Number ? new $util.LongBits(message.parallelism.low >>> 0, message.parallelism.high >>> 0).toNumber() : message.parallelism;
                             if (message.schedulingPolicy != null && message.hasOwnProperty("schedulingPolicy"))
-                                object.schedulingPolicy = options.enums === String ? $root.google.cloud.batch.v1alpha.TaskGroup.SchedulingPolicy[message.schedulingPolicy] : message.schedulingPolicy;
+                                object.schedulingPolicy = options.enums === String ? $root.google.cloud.batch.v1alpha.TaskGroup.SchedulingPolicy[message.schedulingPolicy] === undefined ? message.schedulingPolicy : $root.google.cloud.batch.v1alpha.TaskGroup.SchedulingPolicy[message.schedulingPolicy] : message.schedulingPolicy;
                             if (message.allocationPolicy != null && message.hasOwnProperty("allocationPolicy"))
                                 object.allocationPolicy = $root.google.cloud.batch.v1alpha.AllocationPolicy.toObject(message.allocationPolicy, options);
                             var keys2;
@@ -23019,6 +23137,12 @@
                                 return object;
                             var message = new $root.google.cloud.batch.v1alpha.TaskStatus();
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -23075,7 +23199,7 @@
                             if (options.defaults)
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.batch.v1alpha.TaskStatus.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.batch.v1alpha.TaskStatus.State[message.state] === undefined ? message.state : $root.google.cloud.batch.v1alpha.TaskStatus.State[message.state] : message.state;
                             if (message.statusEvents && message.statusEvents.length) {
                                 object.statusEvents = [];
                                 for (var j = 0; j < message.statusEvents.length; ++j)
@@ -25127,6 +25251,12 @@
                                 return object;
                             var message = new $root.google.cloud.batch.v1alpha.LifecyclePolicy();
                             switch (object.action) {
+                            default:
+                                if (typeof object.action === "number") {
+                                    message.action = object.action;
+                                    break;
+                                }
+                                break;
                             case "ACTION_UNSPECIFIED":
                             case 0:
                                 message.action = 0;
@@ -25166,7 +25296,7 @@
                                 object.actionCondition = null;
                             }
                             if (message.action != null && message.hasOwnProperty("action"))
-                                object.action = options.enums === String ? $root.google.cloud.batch.v1alpha.LifecyclePolicy.Action[message.action] : message.action;
+                                object.action = options.enums === String ? $root.google.cloud.batch.v1alpha.LifecyclePolicy.Action[message.action] === undefined ? message.action : $root.google.cloud.batch.v1alpha.LifecyclePolicy.Action[message.action] : message.action;
                             if (message.actionCondition != null && message.hasOwnProperty("actionCondition"))
                                 object.actionCondition = $root.google.cloud.batch.v1alpha.LifecyclePolicy.ActionCondition.toObject(message.actionCondition, options);
                             return object;
@@ -28609,6 +28739,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -28633,6 +28769,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -28680,7 +28820,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -28688,7 +28828,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -31499,6 +31639,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -31513,6 +31659,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -31639,9 +31791,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -33988,6 +34140,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -34096,7 +34254,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -34898,6 +35056,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -34914,6 +35078,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -34952,6 +35122,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -35022,7 +35196,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -35030,7 +35204,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -35043,7 +35217,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -36420,6 +36594,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -36489,7 +36669,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -38244,6 +38424,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -38293,7 +38479,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     

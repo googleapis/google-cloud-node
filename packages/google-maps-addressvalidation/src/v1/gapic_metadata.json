@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.maps.addressvalidation.v1",
-  "libraryPackage": "@google-cloud/addressvalidation",
+  "libraryPackage": "@googlemaps/addressvalidation",
   "services": {
     "AddressValidation": {
       "clients": {

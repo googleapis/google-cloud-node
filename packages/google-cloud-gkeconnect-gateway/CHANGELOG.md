@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.5](https://github.com/googleapis/google-cloud-node/compare/gke-connect-gateway-v2.0.4...gke-connect-gateway-v2.0.5) (2022-11-10)
+
+
+### Bug Fixes
+
+* Regenerated proto JS and TS definitions (generator update) ([#3472](https://github.com/googleapis/google-cloud-node/issues/3472)) ([5e2230d](https://github.com/googleapis/google-cloud-node/commit/5e2230dfc4302bb2ac9628ff4200eb46509e103d))
+
 ## [2.0.4](https://github.com/googleapis/google-cloud-node/compare/gke-connect-gateway-v2.0.3...gke-connect-gateway-v2.0.4) (2022-11-03)
 
 
