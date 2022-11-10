@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [3.0.5](https://github.com/googleapis/nodejs-tasks/compare/v3.0.4...v3.0.5) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#673](https://github.com/googleapis/nodejs-tasks/issues/673)) ([f3cc910](https://github.com/googleapis/nodejs-tasks/commit/f3cc9105e053e44e5503ae004c2151bd24125845))
+* update proto definitions ([42e0ebb](https://github.com/googleapis/nodejs-tasks/commit/42e0ebb5ce3cc0abdbfe95d2ee9ec2b5a0242cee))
+* Update proto definitions([#677](https://github.com/googleapis/nodejs-tasks/issues/677)) ([42e0ebb](https://github.com/googleapis/nodejs-tasks/commit/42e0ebb5ce3cc0abdbfe95d2ee9ec2b5a0242cee))
+
 ## [3.0.4](https://github.com/googleapis/nodejs-tasks/compare/v3.0.3...v3.0.4) (2022-09-22)
 
 
