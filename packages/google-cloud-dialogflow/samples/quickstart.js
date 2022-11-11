@@ -14,65 +14,61 @@
 
 'use strict';
 
-// [START dialogflow_quickstart]
-
-const dialogflow = require('@google-cloud/dialogflow');
-const uuid = require('uuid');
-
 /**
- * Send a query to the dialogflow agent, and return the query result.
+ * List of all intents in the specified project.
  * @param {string} projectId The project to be used
  */
-async function runSample(projectId = 'your-project-id') {
-  // A unique identifier for the given session
-  const sessionId = uuid.v4();
+function main(projectId = 'YOUR_PROJECT_ID') {
+  // [START dialogflow_list_intents]
 
-  // Create a new session
-  const sessionClient = new dialogflow.SessionsClient();
-  const sessionPath = sessionClient.projectAgentSessionPath(
-    projectId,
-    sessionId
-  );
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const projectId = 'The Project ID to use, e.g. 'YOUR_GCP_ID';
 
-  // The text query request.
-  const request = {
-    session: sessionPath,
-    queryInput: {
-      text: {
-        // The query to send to the dialogflow agent
-        text: 'hello',
-        // The language used by the client (en-US)
-        languageCode: 'en-US',
-      },
-    },
-  };
+  // Imports the Dialogflow library
+  const dialogflow = require('@google-cloud/dialogflow');
 
-  // Send request and log result
-  const responses = await sessionClient.detectIntent(request);
-  console.log('Detected intent');
-  const result = responses[0].queryResult;
-  console.log(`  Query: ${result.queryText}`);
-  console.log(`  Response: ${result.fulfillmentText}`);
-  if (result.intent) {
-    console.log(`  Intent: ${result.intent.displayName}`);
-  } else {
-    console.log('  No intent matched.');
+  // Instantiates clients
+  const intentsClient = new dialogflow.IntentsClient();
+
+  async function listIntents() {
+    // Construct request
+
+    // The path to identify the agent that owns the intents.
+    const projectAgentPath = intentsClient.projectAgentPath(projectId);
+
+    console.log(projectAgentPath);
+
+    const request = {
+      parent: projectAgentPath,
+    };
+
+    // Send the request for listing intents.
+    const [response] = await intentsClient.listIntents(request);
+    response.forEach(intent => {
+      console.log('====================');
+      console.log(`Intent name: ${intent.name}`);
+      console.log(`Intent display name: ${intent.displayName}`);
+      console.log(`Action: ${intent.action}`);
+      console.log(`Root folowup intent: ${intent.rootFollowupIntentName}`);
+      console.log(`Parent followup intent: ${intent.parentFollowupIntentName}`);
+
+      console.log('Input contexts:');
+      intent.inputContextNames.forEach(inputContextName => {
+        console.log(`\tName: ${inputContextName}`);
+      });
+
+      console.log('Output contexts:');
+      intent.outputContexts.forEach(outputContext => {
+        console.log(`\tName: ${outputContext.name}`);
+      });
+    });
   }
-}
-// [END dialogflow_quickstart]
 
-const args = process.argv.slice(2);
-if (args.length !== 1) {
-  console.error(`
-    USAGE:
-       node quickstart.js <projectId>
+  listIntents();
 
-     EXAMPLE:
-       node quickstart.js my-project-id
-
-    You can find your project ID in your Dialogflow agent settings:  https://dialogflow.com/docs/agents#settings.
-  `);
-  process.exit(1);
+  // [END dialogflow_list_intents]
 }
 
-runSample(...args).catch(console.error);
+main(...process.argv.slice(2));
