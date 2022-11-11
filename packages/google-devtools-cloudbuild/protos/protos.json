@@ -666,6 +666,44 @@
                         }
                       }
                     },
+                    "UploadedPythonPackage": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fileHashes": {
+                          "type": "FileHashes",
+                          "id": 2
+                        },
+                        "pushTiming": {
+                          "type": "TimeSpan",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UploadedMavenArtifact": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fileHashes": {
+                          "type": "FileHashes",
+                          "id": 2
+                        },
+                        "pushTiming": {
+                          "type": "TimeSpan",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "BuildStep": {
                       "fields": {
                         "name": {
@@ -734,6 +772,22 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "allowFailure": {
+                          "type": "bool",
+                          "id": 14
+                        },
+                        "exitCode": {
+                          "type": "int32",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "allowExitCodes": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 18
+                        },
                         "script": {
                           "type": "string",
                           "id": 19
@@ -780,6 +834,16 @@
                         "artifactTiming": {
                           "type": "TimeSpan",
                           "id": 7
+                        },
+                        "pythonPackages": {
+                          "rule": "repeated",
+                          "type": "UploadedPythonPackage",
+                          "id": 8
+                        },
+                        "mavenArtifacts": {
+                          "rule": "repeated",
+                          "type": "UploadedMavenArtifact",
+                          "id": 9
                         }
                       }
                     },
@@ -1051,6 +1115,16 @@
                         "objects": {
                           "type": "ArtifactObjects",
                           "id": 2
+                        },
+                        "mavenArtifacts": {
+                          "rule": "repeated",
+                          "type": "MavenArtifact",
+                          "id": 3
+                        },
+                        "pythonPackages": {
+                          "rule": "repeated",
+                          "type": "PythonPackage",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -1071,6 +1145,43 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            }
+                          }
+                        },
+                        "MavenArtifact": {
+                          "fields": {
+                            "repository": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "path": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "artifactId": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "groupId": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "version": {
+                              "type": "string",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "PythonPackage": {
+                          "fields": {
+                            "repository": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "paths": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
                             }
                           }
                         }

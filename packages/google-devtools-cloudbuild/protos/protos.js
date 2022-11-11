@@ -2735,6 +2735,526 @@
                         return BuiltImage;
                     })();
     
+                    v1.UploadedPythonPackage = (function() {
+    
+                        /**
+                         * Properties of an UploadedPythonPackage.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IUploadedPythonPackage
+                         * @property {string|null} [uri] UploadedPythonPackage uri
+                         * @property {google.devtools.cloudbuild.v1.IFileHashes|null} [fileHashes] UploadedPythonPackage fileHashes
+                         * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [pushTiming] UploadedPythonPackage pushTiming
+                         */
+    
+                        /**
+                         * Constructs a new UploadedPythonPackage.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents an UploadedPythonPackage.
+                         * @implements IUploadedPythonPackage
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IUploadedPythonPackage=} [properties] Properties to set
+                         */
+                        function UploadedPythonPackage(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UploadedPythonPackage uri.
+                         * @member {string} uri
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @instance
+                         */
+                        UploadedPythonPackage.prototype.uri = "";
+    
+                        /**
+                         * UploadedPythonPackage fileHashes.
+                         * @member {google.devtools.cloudbuild.v1.IFileHashes|null|undefined} fileHashes
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @instance
+                         */
+                        UploadedPythonPackage.prototype.fileHashes = null;
+    
+                        /**
+                         * UploadedPythonPackage pushTiming.
+                         * @member {google.devtools.cloudbuild.v1.ITimeSpan|null|undefined} pushTiming
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @instance
+                         */
+                        UploadedPythonPackage.prototype.pushTiming = null;
+    
+                        /**
+                         * Creates a new UploadedPythonPackage instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IUploadedPythonPackage=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.UploadedPythonPackage} UploadedPythonPackage instance
+                         */
+                        UploadedPythonPackage.create = function create(properties) {
+                            return new UploadedPythonPackage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UploadedPythonPackage message. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedPythonPackage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IUploadedPythonPackage} message UploadedPythonPackage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadedPythonPackage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.fileHashes != null && Object.hasOwnProperty.call(message, "fileHashes"))
+                                $root.google.devtools.cloudbuild.v1.FileHashes.encode(message.fileHashes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.pushTiming != null && Object.hasOwnProperty.call(message, "pushTiming"))
+                                $root.google.devtools.cloudbuild.v1.TimeSpan.encode(message.pushTiming, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UploadedPythonPackage message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedPythonPackage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IUploadedPythonPackage} message UploadedPythonPackage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadedPythonPackage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UploadedPythonPackage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.UploadedPythonPackage} UploadedPythonPackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadedPythonPackage.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.UploadedPythonPackage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UploadedPythonPackage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.UploadedPythonPackage} UploadedPythonPackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadedPythonPackage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UploadedPythonPackage message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UploadedPythonPackage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.fileHashes != null && message.hasOwnProperty("fileHashes")) {
+                                var error = $root.google.devtools.cloudbuild.v1.FileHashes.verify(message.fileHashes);
+                                if (error)
+                                    return "fileHashes." + error;
+                            }
+                            if (message.pushTiming != null && message.hasOwnProperty("pushTiming")) {
+                                var error = $root.google.devtools.cloudbuild.v1.TimeSpan.verify(message.pushTiming);
+                                if (error)
+                                    return "pushTiming." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UploadedPythonPackage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.UploadedPythonPackage} UploadedPythonPackage
+                         */
+                        UploadedPythonPackage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.UploadedPythonPackage)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.UploadedPythonPackage();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.fileHashes != null) {
+                                if (typeof object.fileHashes !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.UploadedPythonPackage.fileHashes: object expected");
+                                message.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.fromObject(object.fileHashes);
+                            }
+                            if (object.pushTiming != null) {
+                                if (typeof object.pushTiming !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.UploadedPythonPackage.pushTiming: object expected");
+                                message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.fromObject(object.pushTiming);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UploadedPythonPackage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.UploadedPythonPackage} message UploadedPythonPackage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UploadedPythonPackage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.uri = "";
+                                object.fileHashes = null;
+                                object.pushTiming = null;
+                            }
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.fileHashes != null && message.hasOwnProperty("fileHashes"))
+                                object.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.toObject(message.fileHashes, options);
+                            if (message.pushTiming != null && message.hasOwnProperty("pushTiming"))
+                                object.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.toObject(message.pushTiming, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UploadedPythonPackage to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UploadedPythonPackage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UploadedPythonPackage
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UploadedPythonPackage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v1.UploadedPythonPackage";
+                        };
+    
+                        return UploadedPythonPackage;
+                    })();
+    
+                    v1.UploadedMavenArtifact = (function() {
+    
+                        /**
+                         * Properties of an UploadedMavenArtifact.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IUploadedMavenArtifact
+                         * @property {string|null} [uri] UploadedMavenArtifact uri
+                         * @property {google.devtools.cloudbuild.v1.IFileHashes|null} [fileHashes] UploadedMavenArtifact fileHashes
+                         * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [pushTiming] UploadedMavenArtifact pushTiming
+                         */
+    
+                        /**
+                         * Constructs a new UploadedMavenArtifact.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents an UploadedMavenArtifact.
+                         * @implements IUploadedMavenArtifact
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IUploadedMavenArtifact=} [properties] Properties to set
+                         */
+                        function UploadedMavenArtifact(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UploadedMavenArtifact uri.
+                         * @member {string} uri
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @instance
+                         */
+                        UploadedMavenArtifact.prototype.uri = "";
+    
+                        /**
+                         * UploadedMavenArtifact fileHashes.
+                         * @member {google.devtools.cloudbuild.v1.IFileHashes|null|undefined} fileHashes
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @instance
+                         */
+                        UploadedMavenArtifact.prototype.fileHashes = null;
+    
+                        /**
+                         * UploadedMavenArtifact pushTiming.
+                         * @member {google.devtools.cloudbuild.v1.ITimeSpan|null|undefined} pushTiming
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @instance
+                         */
+                        UploadedMavenArtifact.prototype.pushTiming = null;
+    
+                        /**
+                         * Creates a new UploadedMavenArtifact instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IUploadedMavenArtifact=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.UploadedMavenArtifact} UploadedMavenArtifact instance
+                         */
+                        UploadedMavenArtifact.create = function create(properties) {
+                            return new UploadedMavenArtifact(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UploadedMavenArtifact message. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedMavenArtifact.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IUploadedMavenArtifact} message UploadedMavenArtifact message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadedMavenArtifact.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.fileHashes != null && Object.hasOwnProperty.call(message, "fileHashes"))
+                                $root.google.devtools.cloudbuild.v1.FileHashes.encode(message.fileHashes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.pushTiming != null && Object.hasOwnProperty.call(message, "pushTiming"))
+                                $root.google.devtools.cloudbuild.v1.TimeSpan.encode(message.pushTiming, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UploadedMavenArtifact message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedMavenArtifact.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IUploadedMavenArtifact} message UploadedMavenArtifact message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UploadedMavenArtifact.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UploadedMavenArtifact message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.UploadedMavenArtifact} UploadedMavenArtifact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadedMavenArtifact.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UploadedMavenArtifact message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.UploadedMavenArtifact} UploadedMavenArtifact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UploadedMavenArtifact.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UploadedMavenArtifact message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UploadedMavenArtifact.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.fileHashes != null && message.hasOwnProperty("fileHashes")) {
+                                var error = $root.google.devtools.cloudbuild.v1.FileHashes.verify(message.fileHashes);
+                                if (error)
+                                    return "fileHashes." + error;
+                            }
+                            if (message.pushTiming != null && message.hasOwnProperty("pushTiming")) {
+                                var error = $root.google.devtools.cloudbuild.v1.TimeSpan.verify(message.pushTiming);
+                                if (error)
+                                    return "pushTiming." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UploadedMavenArtifact message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.UploadedMavenArtifact} UploadedMavenArtifact
+                         */
+                        UploadedMavenArtifact.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.fileHashes != null) {
+                                if (typeof object.fileHashes !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.UploadedMavenArtifact.fileHashes: object expected");
+                                message.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.fromObject(object.fileHashes);
+                            }
+                            if (object.pushTiming != null) {
+                                if (typeof object.pushTiming !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.UploadedMavenArtifact.pushTiming: object expected");
+                                message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.fromObject(object.pushTiming);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UploadedMavenArtifact message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.UploadedMavenArtifact} message UploadedMavenArtifact
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UploadedMavenArtifact.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.uri = "";
+                                object.fileHashes = null;
+                                object.pushTiming = null;
+                            }
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.fileHashes != null && message.hasOwnProperty("fileHashes"))
+                                object.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.toObject(message.fileHashes, options);
+                            if (message.pushTiming != null && message.hasOwnProperty("pushTiming"))
+                                object.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.toObject(message.pushTiming, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UploadedMavenArtifact to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UploadedMavenArtifact.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UploadedMavenArtifact
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UploadedMavenArtifact.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v1.UploadedMavenArtifact";
+                        };
+    
+                        return UploadedMavenArtifact;
+                    })();
+    
                     v1.BuildStep = (function() {
     
                         /**
@@ -2754,6 +3274,9 @@
                          * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [pullTiming] BuildStep pullTiming
                          * @property {google.protobuf.IDuration|null} [timeout] BuildStep timeout
                          * @property {google.devtools.cloudbuild.v1.Build.Status|null} [status] BuildStep status
+                         * @property {boolean|null} [allowFailure] BuildStep allowFailure
+                         * @property {number|null} [exitCode] BuildStep exitCode
+                         * @property {Array.<number>|null} [allowExitCodes] BuildStep allowExitCodes
                          * @property {string|null} [script] BuildStep script
                          */
     
@@ -2771,6 +3294,7 @@
                             this.waitFor = [];
                             this.secretEnv = [];
                             this.volumes = [];
+                            this.allowExitCodes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -2882,6 +3406,30 @@
                         BuildStep.prototype.status = 0;
     
                         /**
+                         * BuildStep allowFailure.
+                         * @member {boolean} allowFailure
+                         * @memberof google.devtools.cloudbuild.v1.BuildStep
+                         * @instance
+                         */
+                        BuildStep.prototype.allowFailure = false;
+    
+                        /**
+                         * BuildStep exitCode.
+                         * @member {number} exitCode
+                         * @memberof google.devtools.cloudbuild.v1.BuildStep
+                         * @instance
+                         */
+                        BuildStep.prototype.exitCode = 0;
+    
+                        /**
+                         * BuildStep allowExitCodes.
+                         * @member {Array.<number>} allowExitCodes
+                         * @memberof google.devtools.cloudbuild.v1.BuildStep
+                         * @instance
+                         */
+                        BuildStep.prototype.allowExitCodes = $util.emptyArray;
+    
+                        /**
                          * BuildStep script.
                          * @member {string} script
                          * @memberof google.devtools.cloudbuild.v1.BuildStep
@@ -2944,6 +3492,16 @@
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.status);
                             if (message.pullTiming != null && Object.hasOwnProperty.call(message, "pullTiming"))
                                 $root.google.devtools.cloudbuild.v1.TimeSpan.encode(message.pullTiming, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.allowFailure != null && Object.hasOwnProperty.call(message, "allowFailure"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.allowFailure);
+                            if (message.exitCode != null && Object.hasOwnProperty.call(message, "exitCode"))
+                                writer.uint32(/* id 16, wireType 0 =*/128).int32(message.exitCode);
+                            if (message.allowExitCodes != null && message.allowExitCodes.length) {
+                                writer.uint32(/* id 18, wireType 2 =*/146).fork();
+                                for (var i = 0; i < message.allowExitCodes.length; ++i)
+                                    writer.int32(message.allowExitCodes[i]);
+                                writer.ldelim();
+                            }
                             if (message.script != null && Object.hasOwnProperty.call(message, "script"))
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.script);
                             return writer;
@@ -3040,6 +3598,25 @@
                                     }
                                 case 12: {
                                         message.status = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.allowFailure = reader.bool();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.exitCode = reader.int32();
+                                        break;
+                                    }
+                                case 18: {
+                                        if (!(message.allowExitCodes && message.allowExitCodes.length))
+                                            message.allowExitCodes = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.allowExitCodes.push(reader.int32());
+                                        } else
+                                            message.allowExitCodes.push(reader.int32());
                                         break;
                                     }
                                 case 19: {
@@ -3161,6 +3738,19 @@
                                 case 9:
                                     break;
                                 }
+                            if (message.allowFailure != null && message.hasOwnProperty("allowFailure"))
+                                if (typeof message.allowFailure !== "boolean")
+                                    return "allowFailure: boolean expected";
+                            if (message.exitCode != null && message.hasOwnProperty("exitCode"))
+                                if (!$util.isInteger(message.exitCode))
+                                    return "exitCode: integer expected";
+                            if (message.allowExitCodes != null && message.hasOwnProperty("allowExitCodes")) {
+                                if (!Array.isArray(message.allowExitCodes))
+                                    return "allowExitCodes: array expected";
+                                for (var i = 0; i < message.allowExitCodes.length; ++i)
+                                    if (!$util.isInteger(message.allowExitCodes[i]))
+                                        return "allowExitCodes: integer[] expected";
+                            }
                             if (message.script != null && message.hasOwnProperty("script"))
                                 if (!$util.isString(message.script))
                                     return "script: string expected";
@@ -3288,6 +3878,17 @@
                                 message.status = 9;
                                 break;
                             }
+                            if (object.allowFailure != null)
+                                message.allowFailure = Boolean(object.allowFailure);
+                            if (object.exitCode != null)
+                                message.exitCode = object.exitCode | 0;
+                            if (object.allowExitCodes) {
+                                if (!Array.isArray(object.allowExitCodes))
+                                    throw TypeError(".google.devtools.cloudbuild.v1.BuildStep.allowExitCodes: array expected");
+                                message.allowExitCodes = [];
+                                for (var i = 0; i < object.allowExitCodes.length; ++i)
+                                    message.allowExitCodes[i] = object.allowExitCodes[i] | 0;
+                            }
                             if (object.script != null)
                                 message.script = String(object.script);
                             return message;
@@ -3312,6 +3913,7 @@
                                 object.waitFor = [];
                                 object.secretEnv = [];
                                 object.volumes = [];
+                                object.allowExitCodes = [];
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -3322,6 +3924,8 @@
                                 object.timeout = null;
                                 object.status = options.enums === String ? "STATUS_UNKNOWN" : 0;
                                 object.pullTiming = null;
+                                object.allowFailure = false;
+                                object.exitCode = 0;
                                 object.script = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -3365,6 +3969,15 @@
                                 object.status = options.enums === String ? $root.google.devtools.cloudbuild.v1.Build.Status[message.status] === undefined ? message.status : $root.google.devtools.cloudbuild.v1.Build.Status[message.status] : message.status;
                             if (message.pullTiming != null && message.hasOwnProperty("pullTiming"))
                                 object.pullTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.toObject(message.pullTiming, options);
+                            if (message.allowFailure != null && message.hasOwnProperty("allowFailure"))
+                                object.allowFailure = message.allowFailure;
+                            if (message.exitCode != null && message.hasOwnProperty("exitCode"))
+                                object.exitCode = message.exitCode;
+                            if (message.allowExitCodes && message.allowExitCodes.length) {
+                                object.allowExitCodes = [];
+                                for (var j = 0; j < message.allowExitCodes.length; ++j)
+                                    object.allowExitCodes[j] = message.allowExitCodes[j];
+                            }
                             if (message.script != null && message.hasOwnProperty("script"))
                                 object.script = message.script;
                             return object;
@@ -3638,6 +4251,8 @@
                          * @property {number|Long|null} [numArtifacts] Results numArtifacts
                          * @property {Array.<Uint8Array>|null} [buildStepOutputs] Results buildStepOutputs
                          * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [artifactTiming] Results artifactTiming
+                         * @property {Array.<google.devtools.cloudbuild.v1.IUploadedPythonPackage>|null} [pythonPackages] Results pythonPackages
+                         * @property {Array.<google.devtools.cloudbuild.v1.IUploadedMavenArtifact>|null} [mavenArtifacts] Results mavenArtifacts
                          */
     
                         /**
@@ -3652,6 +4267,8 @@
                             this.images = [];
                             this.buildStepImages = [];
                             this.buildStepOutputs = [];
+                            this.pythonPackages = [];
+                            this.mavenArtifacts = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3707,6 +4324,22 @@
                         Results.prototype.artifactTiming = null;
     
                         /**
+                         * Results pythonPackages.
+                         * @member {Array.<google.devtools.cloudbuild.v1.IUploadedPythonPackage>} pythonPackages
+                         * @memberof google.devtools.cloudbuild.v1.Results
+                         * @instance
+                         */
+                        Results.prototype.pythonPackages = $util.emptyArray;
+    
+                        /**
+                         * Results mavenArtifacts.
+                         * @member {Array.<google.devtools.cloudbuild.v1.IUploadedMavenArtifact>} mavenArtifacts
+                         * @memberof google.devtools.cloudbuild.v1.Results
+                         * @instance
+                         */
+                        Results.prototype.mavenArtifacts = $util.emptyArray;
+    
+                        /**
                          * Creates a new Results instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.Results
@@ -3745,6 +4378,12 @@
                                     writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.buildStepOutputs[i]);
                             if (message.artifactTiming != null && Object.hasOwnProperty.call(message, "artifactTiming"))
                                 $root.google.devtools.cloudbuild.v1.TimeSpan.encode(message.artifactTiming, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.pythonPackages != null && message.pythonPackages.length)
+                                for (var i = 0; i < message.pythonPackages.length; ++i)
+                                    $root.google.devtools.cloudbuild.v1.UploadedPythonPackage.encode(message.pythonPackages[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.mavenArtifacts != null && message.mavenArtifacts.length)
+                                for (var i = 0; i < message.mavenArtifacts.length; ++i)
+                                    $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.encode(message.mavenArtifacts[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -3807,6 +4446,18 @@
                                     }
                                 case 7: {
                                         message.artifactTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.pythonPackages && message.pythonPackages.length))
+                                            message.pythonPackages = [];
+                                        message.pythonPackages.push($root.google.devtools.cloudbuild.v1.UploadedPythonPackage.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.mavenArtifacts && message.mavenArtifacts.length))
+                                            message.mavenArtifacts = [];
+                                        message.mavenArtifacts.push($root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -3878,6 +4529,24 @@
                                 if (error)
                                     return "artifactTiming." + error;
                             }
+                            if (message.pythonPackages != null && message.hasOwnProperty("pythonPackages")) {
+                                if (!Array.isArray(message.pythonPackages))
+                                    return "pythonPackages: array expected";
+                                for (var i = 0; i < message.pythonPackages.length; ++i) {
+                                    var error = $root.google.devtools.cloudbuild.v1.UploadedPythonPackage.verify(message.pythonPackages[i]);
+                                    if (error)
+                                        return "pythonPackages." + error;
+                                }
+                            }
+                            if (message.mavenArtifacts != null && message.hasOwnProperty("mavenArtifacts")) {
+                                if (!Array.isArray(message.mavenArtifacts))
+                                    return "mavenArtifacts: array expected";
+                                for (var i = 0; i < message.mavenArtifacts.length; ++i) {
+                                    var error = $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.verify(message.mavenArtifacts[i]);
+                                    if (error)
+                                        return "mavenArtifacts." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -3936,6 +4605,26 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.Results.artifactTiming: object expected");
                                 message.artifactTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.fromObject(object.artifactTiming);
                             }
+                            if (object.pythonPackages) {
+                                if (!Array.isArray(object.pythonPackages))
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Results.pythonPackages: array expected");
+                                message.pythonPackages = [];
+                                for (var i = 0; i < object.pythonPackages.length; ++i) {
+                                    if (typeof object.pythonPackages[i] !== "object")
+                                        throw TypeError(".google.devtools.cloudbuild.v1.Results.pythonPackages: object expected");
+                                    message.pythonPackages[i] = $root.google.devtools.cloudbuild.v1.UploadedPythonPackage.fromObject(object.pythonPackages[i]);
+                                }
+                            }
+                            if (object.mavenArtifacts) {
+                                if (!Array.isArray(object.mavenArtifacts))
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Results.mavenArtifacts: array expected");
+                                message.mavenArtifacts = [];
+                                for (var i = 0; i < object.mavenArtifacts.length; ++i) {
+                                    if (typeof object.mavenArtifacts[i] !== "object")
+                                        throw TypeError(".google.devtools.cloudbuild.v1.Results.mavenArtifacts: object expected");
+                                    message.mavenArtifacts[i] = $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.fromObject(object.mavenArtifacts[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -3956,6 +4645,8 @@
                                 object.images = [];
                                 object.buildStepImages = [];
                                 object.buildStepOutputs = [];
+                                object.pythonPackages = [];
+                                object.mavenArtifacts = [];
                             }
                             if (options.defaults) {
                                 object.artifactManifest = "";
@@ -3990,6 +4681,16 @@
                             }
                             if (message.artifactTiming != null && message.hasOwnProperty("artifactTiming"))
                                 object.artifactTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.toObject(message.artifactTiming, options);
+                            if (message.pythonPackages && message.pythonPackages.length) {
+                                object.pythonPackages = [];
+                                for (var j = 0; j < message.pythonPackages.length; ++j)
+                                    object.pythonPackages[j] = $root.google.devtools.cloudbuild.v1.UploadedPythonPackage.toObject(message.pythonPackages[j], options);
+                            }
+                            if (message.mavenArtifacts && message.mavenArtifacts.length) {
+                                object.mavenArtifacts = [];
+                                for (var j = 0; j < message.mavenArtifacts.length; ++j)
+                                    object.mavenArtifacts[j] = $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact.toObject(message.mavenArtifacts[j], options);
+                            }
                             return object;
                         };
     
@@ -6024,6 +6725,8 @@
                          * @interface IArtifacts
                          * @property {Array.<string>|null} [images] Artifacts images
                          * @property {google.devtools.cloudbuild.v1.Artifacts.IArtifactObjects|null} [objects] Artifacts objects
+                         * @property {Array.<google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact>|null} [mavenArtifacts] Artifacts mavenArtifacts
+                         * @property {Array.<google.devtools.cloudbuild.v1.Artifacts.IPythonPackage>|null} [pythonPackages] Artifacts pythonPackages
                          */
     
                         /**
@@ -6036,6 +6739,8 @@
                          */
                         function Artifacts(properties) {
                             this.images = [];
+                            this.mavenArtifacts = [];
+                            this.pythonPackages = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6057,6 +6762,22 @@
                          * @instance
                          */
                         Artifacts.prototype.objects = null;
+    
+                        /**
+                         * Artifacts mavenArtifacts.
+                         * @member {Array.<google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact>} mavenArtifacts
+                         * @memberof google.devtools.cloudbuild.v1.Artifacts
+                         * @instance
+                         */
+                        Artifacts.prototype.mavenArtifacts = $util.emptyArray;
+    
+                        /**
+                         * Artifacts pythonPackages.
+                         * @member {Array.<google.devtools.cloudbuild.v1.Artifacts.IPythonPackage>} pythonPackages
+                         * @memberof google.devtools.cloudbuild.v1.Artifacts
+                         * @instance
+                         */
+                        Artifacts.prototype.pythonPackages = $util.emptyArray;
     
                         /**
                          * Creates a new Artifacts instance using the specified properties.
@@ -6087,6 +6808,12 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.images[i]);
                             if (message.objects != null && Object.hasOwnProperty.call(message, "objects"))
                                 $root.google.devtools.cloudbuild.v1.Artifacts.ArtifactObjects.encode(message.objects, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.mavenArtifacts != null && message.mavenArtifacts.length)
+                                for (var i = 0; i < message.mavenArtifacts.length; ++i)
+                                    $root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.encode(message.mavenArtifacts[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.pythonPackages != null && message.pythonPackages.length)
+                                for (var i = 0; i < message.pythonPackages.length; ++i)
+                                    $root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage.encode(message.pythonPackages[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -6129,6 +6856,18 @@
                                     }
                                 case 2: {
                                         message.objects = $root.google.devtools.cloudbuild.v1.Artifacts.ArtifactObjects.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.mavenArtifacts && message.mavenArtifacts.length))
+                                            message.mavenArtifacts = [];
+                                        message.mavenArtifacts.push($root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.pythonPackages && message.pythonPackages.length))
+                                            message.pythonPackages = [];
+                                        message.pythonPackages.push($root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -6178,6 +6917,24 @@
                                 if (error)
                                     return "objects." + error;
                             }
+                            if (message.mavenArtifacts != null && message.hasOwnProperty("mavenArtifacts")) {
+                                if (!Array.isArray(message.mavenArtifacts))
+                                    return "mavenArtifacts: array expected";
+                                for (var i = 0; i < message.mavenArtifacts.length; ++i) {
+                                    var error = $root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.verify(message.mavenArtifacts[i]);
+                                    if (error)
+                                        return "mavenArtifacts." + error;
+                                }
+                            }
+                            if (message.pythonPackages != null && message.hasOwnProperty("pythonPackages")) {
+                                if (!Array.isArray(message.pythonPackages))
+                                    return "pythonPackages: array expected";
+                                for (var i = 0; i < message.pythonPackages.length; ++i) {
+                                    var error = $root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage.verify(message.pythonPackages[i]);
+                                    if (error)
+                                        return "pythonPackages." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -6205,6 +6962,26 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.Artifacts.objects: object expected");
                                 message.objects = $root.google.devtools.cloudbuild.v1.Artifacts.ArtifactObjects.fromObject(object.objects);
                             }
+                            if (object.mavenArtifacts) {
+                                if (!Array.isArray(object.mavenArtifacts))
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Artifacts.mavenArtifacts: array expected");
+                                message.mavenArtifacts = [];
+                                for (var i = 0; i < object.mavenArtifacts.length; ++i) {
+                                    if (typeof object.mavenArtifacts[i] !== "object")
+                                        throw TypeError(".google.devtools.cloudbuild.v1.Artifacts.mavenArtifacts: object expected");
+                                    message.mavenArtifacts[i] = $root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.fromObject(object.mavenArtifacts[i]);
+                                }
+                            }
+                            if (object.pythonPackages) {
+                                if (!Array.isArray(object.pythonPackages))
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Artifacts.pythonPackages: array expected");
+                                message.pythonPackages = [];
+                                for (var i = 0; i < object.pythonPackages.length; ++i) {
+                                    if (typeof object.pythonPackages[i] !== "object")
+                                        throw TypeError(".google.devtools.cloudbuild.v1.Artifacts.pythonPackages: object expected");
+                                    message.pythonPackages[i] = $root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage.fromObject(object.pythonPackages[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -6221,8 +6998,11 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.images = [];
+                                object.mavenArtifacts = [];
+                                object.pythonPackages = [];
+                            }
                             if (options.defaults)
                                 object.objects = null;
                             if (message.images && message.images.length) {
@@ -6232,6 +7012,16 @@
                             }
                             if (message.objects != null && message.hasOwnProperty("objects"))
                                 object.objects = $root.google.devtools.cloudbuild.v1.Artifacts.ArtifactObjects.toObject(message.objects, options);
+                            if (message.mavenArtifacts && message.mavenArtifacts.length) {
+                                object.mavenArtifacts = [];
+                                for (var j = 0; j < message.mavenArtifacts.length; ++j)
+                                    object.mavenArtifacts[j] = $root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.toObject(message.mavenArtifacts[j], options);
+                            }
+                            if (message.pythonPackages && message.pythonPackages.length) {
+                                object.pythonPackages = [];
+                                for (var j = 0; j < message.pythonPackages.length; ++j)
+                                    object.pythonPackages[j] = $root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage.toObject(message.pythonPackages[j], options);
+                            }
                             return object;
                         };
     
@@ -6531,6 +7321,545 @@
                             };
     
                             return ArtifactObjects;
+                        })();
+    
+                        Artifacts.MavenArtifact = (function() {
+    
+                            /**
+                             * Properties of a MavenArtifact.
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts
+                             * @interface IMavenArtifact
+                             * @property {string|null} [repository] MavenArtifact repository
+                             * @property {string|null} [path] MavenArtifact path
+                             * @property {string|null} [artifactId] MavenArtifact artifactId
+                             * @property {string|null} [groupId] MavenArtifact groupId
+                             * @property {string|null} [version] MavenArtifact version
+                             */
+    
+                            /**
+                             * Constructs a new MavenArtifact.
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts
+                             * @classdesc Represents a MavenArtifact.
+                             * @implements IMavenArtifact
+                             * @constructor
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact=} [properties] Properties to set
+                             */
+                            function MavenArtifact(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MavenArtifact repository.
+                             * @member {string} repository
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @instance
+                             */
+                            MavenArtifact.prototype.repository = "";
+    
+                            /**
+                             * MavenArtifact path.
+                             * @member {string} path
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @instance
+                             */
+                            MavenArtifact.prototype.path = "";
+    
+                            /**
+                             * MavenArtifact artifactId.
+                             * @member {string} artifactId
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @instance
+                             */
+                            MavenArtifact.prototype.artifactId = "";
+    
+                            /**
+                             * MavenArtifact groupId.
+                             * @member {string} groupId
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @instance
+                             */
+                            MavenArtifact.prototype.groupId = "";
+    
+                            /**
+                             * MavenArtifact version.
+                             * @member {string} version
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @instance
+                             */
+                            MavenArtifact.prototype.version = "";
+    
+                            /**
+                             * Creates a new MavenArtifact instance using the specified properties.
+                             * @function create
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact=} [properties] Properties to set
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.MavenArtifact} MavenArtifact instance
+                             */
+                            MavenArtifact.create = function create(properties) {
+                                return new MavenArtifact(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MavenArtifact message. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact} message MavenArtifact message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MavenArtifact.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.repository != null && Object.hasOwnProperty.call(message, "repository"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.repository);
+                                if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.path);
+                                if (message.artifactId != null && Object.hasOwnProperty.call(message, "artifactId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.artifactId);
+                                if (message.groupId != null && Object.hasOwnProperty.call(message, "groupId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.groupId);
+                                if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.version);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MavenArtifact message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact} message MavenArtifact message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MavenArtifact.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MavenArtifact message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.MavenArtifact} MavenArtifact
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MavenArtifact.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.repository = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.path = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.artifactId = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.groupId = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.version = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MavenArtifact message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.MavenArtifact} MavenArtifact
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MavenArtifact.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MavenArtifact message.
+                             * @function verify
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MavenArtifact.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.repository != null && message.hasOwnProperty("repository"))
+                                    if (!$util.isString(message.repository))
+                                        return "repository: string expected";
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    if (!$util.isString(message.path))
+                                        return "path: string expected";
+                                if (message.artifactId != null && message.hasOwnProperty("artifactId"))
+                                    if (!$util.isString(message.artifactId))
+                                        return "artifactId: string expected";
+                                if (message.groupId != null && message.hasOwnProperty("groupId"))
+                                    if (!$util.isString(message.groupId))
+                                        return "groupId: string expected";
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    if (!$util.isString(message.version))
+                                        return "version: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MavenArtifact message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.MavenArtifact} MavenArtifact
+                             */
+                            MavenArtifact.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact)
+                                    return object;
+                                var message = new $root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact();
+                                if (object.repository != null)
+                                    message.repository = String(object.repository);
+                                if (object.path != null)
+                                    message.path = String(object.path);
+                                if (object.artifactId != null)
+                                    message.artifactId = String(object.artifactId);
+                                if (object.groupId != null)
+                                    message.groupId = String(object.groupId);
+                                if (object.version != null)
+                                    message.version = String(object.version);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MavenArtifact message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.MavenArtifact} message MavenArtifact
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MavenArtifact.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.repository = "";
+                                    object.path = "";
+                                    object.artifactId = "";
+                                    object.groupId = "";
+                                    object.version = "";
+                                }
+                                if (message.repository != null && message.hasOwnProperty("repository"))
+                                    object.repository = message.repository;
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    object.path = message.path;
+                                if (message.artifactId != null && message.hasOwnProperty("artifactId"))
+                                    object.artifactId = message.artifactId;
+                                if (message.groupId != null && message.hasOwnProperty("groupId"))
+                                    object.groupId = message.groupId;
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    object.version = message.version;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MavenArtifact to JSON.
+                             * @function toJSON
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MavenArtifact.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MavenArtifact
+                             * @function getTypeUrl
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.MavenArtifact
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MavenArtifact.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devtools.cloudbuild.v1.Artifacts.MavenArtifact";
+                            };
+    
+                            return MavenArtifact;
+                        })();
+    
+                        Artifacts.PythonPackage = (function() {
+    
+                            /**
+                             * Properties of a PythonPackage.
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts
+                             * @interface IPythonPackage
+                             * @property {string|null} [repository] PythonPackage repository
+                             * @property {Array.<string>|null} [paths] PythonPackage paths
+                             */
+    
+                            /**
+                             * Constructs a new PythonPackage.
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts
+                             * @classdesc Represents a PythonPackage.
+                             * @implements IPythonPackage
+                             * @constructor
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.IPythonPackage=} [properties] Properties to set
+                             */
+                            function PythonPackage(properties) {
+                                this.paths = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PythonPackage repository.
+                             * @member {string} repository
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.PythonPackage
+                             * @instance
+                             */
+                            PythonPackage.prototype.repository = "";
+    
+                            /**
+                             * PythonPackage paths.
+                             * @member {Array.<string>} paths
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.PythonPackage
+                             * @instance
+                             */
+                            PythonPackage.prototype.paths = $util.emptyArray;
+    
+                            /**
+                             * Creates a new PythonPackage instance using the specified properties.
+                             * @function create
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.PythonPackage
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.IPythonPackage=} [properties] Properties to set
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.PythonPackage} PythonPackage instance
+                             */
+                            PythonPackage.create = function create(properties) {
+                                return new PythonPackage(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PythonPackage message. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.PythonPackage.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.PythonPackage
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.IPythonPackage} message PythonPackage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PythonPackage.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.repository != null && Object.hasOwnProperty.call(message, "repository"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.repository);
+                                if (message.paths != null && message.paths.length)
+                                    for (var i = 0; i < message.paths.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.paths[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PythonPackage message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.PythonPackage.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.PythonPackage
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.IPythonPackage} message PythonPackage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PythonPackage.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PythonPackage message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.PythonPackage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.PythonPackage} PythonPackage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PythonPackage.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.repository = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.paths && message.paths.length))
+                                                message.paths = [];
+                                            message.paths.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PythonPackage message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.PythonPackage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.PythonPackage} PythonPackage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PythonPackage.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PythonPackage message.
+                             * @function verify
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.PythonPackage
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PythonPackage.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.repository != null && message.hasOwnProperty("repository"))
+                                    if (!$util.isString(message.repository))
+                                        return "repository: string expected";
+                                if (message.paths != null && message.hasOwnProperty("paths")) {
+                                    if (!Array.isArray(message.paths))
+                                        return "paths: array expected";
+                                    for (var i = 0; i < message.paths.length; ++i)
+                                        if (!$util.isString(message.paths[i]))
+                                            return "paths: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PythonPackage message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.PythonPackage
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devtools.cloudbuild.v1.Artifacts.PythonPackage} PythonPackage
+                             */
+                            PythonPackage.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage)
+                                    return object;
+                                var message = new $root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage();
+                                if (object.repository != null)
+                                    message.repository = String(object.repository);
+                                if (object.paths) {
+                                    if (!Array.isArray(object.paths))
+                                        throw TypeError(".google.devtools.cloudbuild.v1.Artifacts.PythonPackage.paths: array expected");
+                                    message.paths = [];
+                                    for (var i = 0; i < object.paths.length; ++i)
+                                        message.paths[i] = String(object.paths[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PythonPackage message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.PythonPackage
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Artifacts.PythonPackage} message PythonPackage
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PythonPackage.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.paths = [];
+                                if (options.defaults)
+                                    object.repository = "";
+                                if (message.repository != null && message.hasOwnProperty("repository"))
+                                    object.repository = message.repository;
+                                if (message.paths && message.paths.length) {
+                                    object.paths = [];
+                                    for (var j = 0; j < message.paths.length; ++j)
+                                        object.paths[j] = message.paths[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PythonPackage to JSON.
+                             * @function toJSON
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.PythonPackage
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PythonPackage.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PythonPackage
+                             * @function getTypeUrl
+                             * @memberof google.devtools.cloudbuild.v1.Artifacts.PythonPackage
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PythonPackage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devtools.cloudbuild.v1.Artifacts.PythonPackage";
+                            };
+    
+                            return PythonPackage;
                         })();
     
                         return Artifacts;

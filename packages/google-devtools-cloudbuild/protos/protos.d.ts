@@ -1233,6 +1233,224 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UploadedPythonPackage. */
+                interface IUploadedPythonPackage {
+
+                    /** UploadedPythonPackage uri */
+                    uri?: (string|null);
+
+                    /** UploadedPythonPackage fileHashes */
+                    fileHashes?: (google.devtools.cloudbuild.v1.IFileHashes|null);
+
+                    /** UploadedPythonPackage pushTiming */
+                    pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+                }
+
+                /** Represents an UploadedPythonPackage. */
+                class UploadedPythonPackage implements IUploadedPythonPackage {
+
+                    /**
+                     * Constructs a new UploadedPythonPackage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IUploadedPythonPackage);
+
+                    /** UploadedPythonPackage uri. */
+                    public uri: string;
+
+                    /** UploadedPythonPackage fileHashes. */
+                    public fileHashes?: (google.devtools.cloudbuild.v1.IFileHashes|null);
+
+                    /** UploadedPythonPackage pushTiming. */
+                    public pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /**
+                     * Creates a new UploadedPythonPackage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UploadedPythonPackage instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IUploadedPythonPackage): google.devtools.cloudbuild.v1.UploadedPythonPackage;
+
+                    /**
+                     * Encodes the specified UploadedPythonPackage message. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedPythonPackage.verify|verify} messages.
+                     * @param message UploadedPythonPackage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IUploadedPythonPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UploadedPythonPackage message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedPythonPackage.verify|verify} messages.
+                     * @param message UploadedPythonPackage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IUploadedPythonPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UploadedPythonPackage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UploadedPythonPackage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.UploadedPythonPackage;
+
+                    /**
+                     * Decodes an UploadedPythonPackage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UploadedPythonPackage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.UploadedPythonPackage;
+
+                    /**
+                     * Verifies an UploadedPythonPackage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UploadedPythonPackage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UploadedPythonPackage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.UploadedPythonPackage;
+
+                    /**
+                     * Creates a plain object from an UploadedPythonPackage message. Also converts values to other types if specified.
+                     * @param message UploadedPythonPackage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.UploadedPythonPackage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UploadedPythonPackage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UploadedPythonPackage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UploadedMavenArtifact. */
+                interface IUploadedMavenArtifact {
+
+                    /** UploadedMavenArtifact uri */
+                    uri?: (string|null);
+
+                    /** UploadedMavenArtifact fileHashes */
+                    fileHashes?: (google.devtools.cloudbuild.v1.IFileHashes|null);
+
+                    /** UploadedMavenArtifact pushTiming */
+                    pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+                }
+
+                /** Represents an UploadedMavenArtifact. */
+                class UploadedMavenArtifact implements IUploadedMavenArtifact {
+
+                    /**
+                     * Constructs a new UploadedMavenArtifact.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IUploadedMavenArtifact);
+
+                    /** UploadedMavenArtifact uri. */
+                    public uri: string;
+
+                    /** UploadedMavenArtifact fileHashes. */
+                    public fileHashes?: (google.devtools.cloudbuild.v1.IFileHashes|null);
+
+                    /** UploadedMavenArtifact pushTiming. */
+                    public pushTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /**
+                     * Creates a new UploadedMavenArtifact instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UploadedMavenArtifact instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IUploadedMavenArtifact): google.devtools.cloudbuild.v1.UploadedMavenArtifact;
+
+                    /**
+                     * Encodes the specified UploadedMavenArtifact message. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedMavenArtifact.verify|verify} messages.
+                     * @param message UploadedMavenArtifact message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IUploadedMavenArtifact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UploadedMavenArtifact message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.UploadedMavenArtifact.verify|verify} messages.
+                     * @param message UploadedMavenArtifact message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IUploadedMavenArtifact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UploadedMavenArtifact message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UploadedMavenArtifact
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.UploadedMavenArtifact;
+
+                    /**
+                     * Decodes an UploadedMavenArtifact message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UploadedMavenArtifact
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.UploadedMavenArtifact;
+
+                    /**
+                     * Verifies an UploadedMavenArtifact message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UploadedMavenArtifact message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UploadedMavenArtifact
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.UploadedMavenArtifact;
+
+                    /**
+                     * Creates a plain object from an UploadedMavenArtifact message. Also converts values to other types if specified.
+                     * @param message UploadedMavenArtifact
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.UploadedMavenArtifact, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UploadedMavenArtifact to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UploadedMavenArtifact
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a BuildStep. */
                 interface IBuildStep {
 
@@ -1274,6 +1492,15 @@ export namespace google {
 
                     /** BuildStep status */
                     status?: (google.devtools.cloudbuild.v1.Build.Status|keyof typeof google.devtools.cloudbuild.v1.Build.Status|null);
+
+                    /** BuildStep allowFailure */
+                    allowFailure?: (boolean|null);
+
+                    /** BuildStep exitCode */
+                    exitCode?: (number|null);
+
+                    /** BuildStep allowExitCodes */
+                    allowExitCodes?: (number[]|null);
 
                     /** BuildStep script */
                     script?: (string|null);
@@ -1326,6 +1553,15 @@ export namespace google {
 
                     /** BuildStep status. */
                     public status: (google.devtools.cloudbuild.v1.Build.Status|keyof typeof google.devtools.cloudbuild.v1.Build.Status);
+
+                    /** BuildStep allowFailure. */
+                    public allowFailure: boolean;
+
+                    /** BuildStep exitCode. */
+                    public exitCode: number;
+
+                    /** BuildStep allowExitCodes. */
+                    public allowExitCodes: number[];
 
                     /** BuildStep script. */
                     public script: string;
@@ -1531,6 +1767,12 @@ export namespace google {
 
                     /** Results artifactTiming */
                     artifactTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /** Results pythonPackages */
+                    pythonPackages?: (google.devtools.cloudbuild.v1.IUploadedPythonPackage[]|null);
+
+                    /** Results mavenArtifacts */
+                    mavenArtifacts?: (google.devtools.cloudbuild.v1.IUploadedMavenArtifact[]|null);
                 }
 
                 /** Represents a Results. */
@@ -1559,6 +1801,12 @@ export namespace google {
 
                     /** Results artifactTiming. */
                     public artifactTiming?: (google.devtools.cloudbuild.v1.ITimeSpan|null);
+
+                    /** Results pythonPackages. */
+                    public pythonPackages: google.devtools.cloudbuild.v1.IUploadedPythonPackage[];
+
+                    /** Results mavenArtifacts. */
+                    public mavenArtifacts: google.devtools.cloudbuild.v1.IUploadedMavenArtifact[];
 
                     /**
                      * Creates a new Results instance using the specified properties.
@@ -2262,6 +2510,12 @@ export namespace google {
 
                     /** Artifacts objects */
                     objects?: (google.devtools.cloudbuild.v1.Artifacts.IArtifactObjects|null);
+
+                    /** Artifacts mavenArtifacts */
+                    mavenArtifacts?: (google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact[]|null);
+
+                    /** Artifacts pythonPackages */
+                    pythonPackages?: (google.devtools.cloudbuild.v1.Artifacts.IPythonPackage[]|null);
                 }
 
                 /** Represents an Artifacts. */
@@ -2278,6 +2532,12 @@ export namespace google {
 
                     /** Artifacts objects. */
                     public objects?: (google.devtools.cloudbuild.v1.Artifacts.IArtifactObjects|null);
+
+                    /** Artifacts mavenArtifacts. */
+                    public mavenArtifacts: google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact[];
+
+                    /** Artifacts pythonPackages. */
+                    public pythonPackages: google.devtools.cloudbuild.v1.Artifacts.IPythonPackage[];
 
                     /**
                      * Creates a new Artifacts instance using the specified properties.
@@ -2462,6 +2722,230 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ArtifactObjects
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MavenArtifact. */
+                    interface IMavenArtifact {
+
+                        /** MavenArtifact repository */
+                        repository?: (string|null);
+
+                        /** MavenArtifact path */
+                        path?: (string|null);
+
+                        /** MavenArtifact artifactId */
+                        artifactId?: (string|null);
+
+                        /** MavenArtifact groupId */
+                        groupId?: (string|null);
+
+                        /** MavenArtifact version */
+                        version?: (string|null);
+                    }
+
+                    /** Represents a MavenArtifact. */
+                    class MavenArtifact implements IMavenArtifact {
+
+                        /**
+                         * Constructs a new MavenArtifact.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact);
+
+                        /** MavenArtifact repository. */
+                        public repository: string;
+
+                        /** MavenArtifact path. */
+                        public path: string;
+
+                        /** MavenArtifact artifactId. */
+                        public artifactId: string;
+
+                        /** MavenArtifact groupId. */
+                        public groupId: string;
+
+                        /** MavenArtifact version. */
+                        public version: string;
+
+                        /**
+                         * Creates a new MavenArtifact instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MavenArtifact instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact): google.devtools.cloudbuild.v1.Artifacts.MavenArtifact;
+
+                        /**
+                         * Encodes the specified MavenArtifact message. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.verify|verify} messages.
+                         * @param message MavenArtifact message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MavenArtifact message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.MavenArtifact.verify|verify} messages.
+                         * @param message MavenArtifact message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.Artifacts.IMavenArtifact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MavenArtifact message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MavenArtifact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Artifacts.MavenArtifact;
+
+                        /**
+                         * Decodes a MavenArtifact message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MavenArtifact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Artifacts.MavenArtifact;
+
+                        /**
+                         * Verifies a MavenArtifact message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MavenArtifact message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MavenArtifact
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Artifacts.MavenArtifact;
+
+                        /**
+                         * Creates a plain object from a MavenArtifact message. Also converts values to other types if specified.
+                         * @param message MavenArtifact
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.Artifacts.MavenArtifact, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MavenArtifact to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MavenArtifact
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PythonPackage. */
+                    interface IPythonPackage {
+
+                        /** PythonPackage repository */
+                        repository?: (string|null);
+
+                        /** PythonPackage paths */
+                        paths?: (string[]|null);
+                    }
+
+                    /** Represents a PythonPackage. */
+                    class PythonPackage implements IPythonPackage {
+
+                        /**
+                         * Constructs a new PythonPackage.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.Artifacts.IPythonPackage);
+
+                        /** PythonPackage repository. */
+                        public repository: string;
+
+                        /** PythonPackage paths. */
+                        public paths: string[];
+
+                        /**
+                         * Creates a new PythonPackage instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PythonPackage instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.Artifacts.IPythonPackage): google.devtools.cloudbuild.v1.Artifacts.PythonPackage;
+
+                        /**
+                         * Encodes the specified PythonPackage message. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.PythonPackage.verify|verify} messages.
+                         * @param message PythonPackage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.Artifacts.IPythonPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PythonPackage message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Artifacts.PythonPackage.verify|verify} messages.
+                         * @param message PythonPackage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.Artifacts.IPythonPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PythonPackage message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PythonPackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Artifacts.PythonPackage;
+
+                        /**
+                         * Decodes a PythonPackage message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PythonPackage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Artifacts.PythonPackage;
+
+                        /**
+                         * Verifies a PythonPackage message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PythonPackage message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PythonPackage
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Artifacts.PythonPackage;
+
+                        /**
+                         * Creates a plain object from a PythonPackage message. Also converts values to other types if specified.
+                         * @param message PythonPackage
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.Artifacts.PythonPackage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PythonPackage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PythonPackage
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
