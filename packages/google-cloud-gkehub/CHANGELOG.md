@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.2.2](https://github.com/googleapis/nodejs-gke-hub/compare/v3.2.1...v3.2.2) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#176](https://github.com/googleapis/nodejs-gke-hub/issues/176)) ([3865475](https://github.com/googleapis/nodejs-gke-hub/commit/386547518eb49ec1b323137718be5fa8cf2166d5))
+* Preserve default values in x-goog-request-params header ([#169](https://github.com/googleapis/nodejs-gke-hub/issues/169)) ([8415dbb](https://github.com/googleapis/nodejs-gke-hub/commit/8415dbb88f9017248fb27121a811b4521c66b8e5))
+* Regenerated protos JS and TS definitions ([#179](https://github.com/googleapis/nodejs-gke-hub/issues/179)) ([657dd66](https://github.com/googleapis/nodejs-gke-hub/commit/657dd66c9ad8b6daba40a58bf791b0a240925a02))
+
 ## [3.2.1](https://github.com/googleapis/nodejs-gke-hub/compare/v3.2.0...v3.2.1) (2022-09-01)
 
 
