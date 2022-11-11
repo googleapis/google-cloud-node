@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.4](https://github.com/googleapis/nodejs-video-live-stream/compare/v0.3.3...v0.3.4) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#82](https://github.com/googleapis/nodejs-video-live-stream/issues/82)) ([f032c54](https://github.com/googleapis/nodejs-video-live-stream/commit/f032c546a3e61f4064439ed2a452c5d3fbeae8e8))
+* Regenerated protos JS and TS definitions ([#86](https://github.com/googleapis/nodejs-video-live-stream/issues/86)) ([9942fd4](https://github.com/googleapis/nodejs-video-live-stream/commit/9942fd4f62d287df3e3d02d75f3eccb698edc62e))
+
 ## [0.3.3](https://github.com/googleapis/nodejs-video-live-stream/compare/v0.3.2...v0.3.3) (2022-09-14)
 
 
