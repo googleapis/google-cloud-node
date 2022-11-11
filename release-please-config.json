@@ -30,6 +30,7 @@
     "packages/google-cloud-recommender": {},
     "packages/google-cloud-redis": {},
     "packages/google-cloud-resourcemanager": {},
+    "packages/google-cloud-resourcesettings": {},
     "packages/google-cloud-security-publicca": {},
     "packages/google-cloud-shell": {},
     "packages/google-cloud-texttospeech": {},
