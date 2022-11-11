@@ -1,0 +1,17 @@
+{
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/grafeas/latest",
+  "api_id": "containeranalysis.googleapis.com",
+  "distribution_name": "@google-cloud/grafeas",
+  "release_level": "stable",
+  "default_version": "v1",
+  "language": "nodejs",
+  "name_pretty": "Grafeas",
+  "repo": "googleapis/nodejs-grafeas",
+  "product_documentation": "https://cloud.google.com/container-registry/docs/container-analysis",
+  "requires_billing": false,
+  "name": "grafeas",
+  "issue_tracker": "https://github.com/grafeas/grafeas/issues",
+  "api_shortname": "containeranalysis",
+  "codeowner_team": "@googleapis/aap-dpes",
+  "library_type": "GAPIC_AUTO"
+}
