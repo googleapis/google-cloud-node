@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-access-approval/compare/v2.1.1...v2.1.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#148](https://github.com/googleapis/nodejs-access-approval/issues/148)) ([b789799](https://github.com/googleapis/nodejs-access-approval/commit/b7897999b970ca291f268d313367a750d3a8971d))
+* Preserve default values in x-goog-request-params header ([#141](https://github.com/googleapis/nodejs-access-approval/issues/141)) ([4642f13](https://github.com/googleapis/nodejs-access-approval/commit/4642f13b2f1b2931a3405069607f9331809605b6))
+* Regenerated protos JS and TS definitions ([#151](https://github.com/googleapis/nodejs-access-approval/issues/151)) ([f1fd7d3](https://github.com/googleapis/nodejs-access-approval/commit/f1fd7d3257c3fd3b3c55914838c0f21480aab5dd))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-access-approval/compare/v2.1.0...v2.1.1) (2022-09-01)
 
 
