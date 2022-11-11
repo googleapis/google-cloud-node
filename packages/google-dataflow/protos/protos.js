@@ -597,6 +597,12 @@
                         if (object.serviceAccountEmail != null)
                             message.serviceAccountEmail = String(object.serviceAccountEmail);
                         switch (object.flexResourceSchedulingGoal) {
+                        default:
+                            if (typeof object.flexResourceSchedulingGoal === "number") {
+                                message.flexResourceSchedulingGoal = object.flexResourceSchedulingGoal;
+                                break;
+                            }
+                            break;
                         case "FLEXRS_UNSPECIFIED":
                         case 0:
                             message.flexResourceSchedulingGoal = 0;
@@ -615,6 +621,12 @@
                         if (object.workerZone != null)
                             message.workerZone = String(object.workerZone);
                         switch (object.shuffleMode) {
+                        default:
+                            if (typeof object.shuffleMode === "number") {
+                                message.shuffleMode = object.shuffleMode;
+                                break;
+                            }
+                            break;
                         case "SHUFFLE_MODE_UNSPECIFIED":
                         case 0:
                             message.shuffleMode = 0;
@@ -697,7 +709,7 @@
                         if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
                             object.serviceAccountEmail = message.serviceAccountEmail;
                         if (message.flexResourceSchedulingGoal != null && message.hasOwnProperty("flexResourceSchedulingGoal"))
-                            object.flexResourceSchedulingGoal = options.enums === String ? $root.google.dataflow.v1beta3.FlexResourceSchedulingGoal[message.flexResourceSchedulingGoal] : message.flexResourceSchedulingGoal;
+                            object.flexResourceSchedulingGoal = options.enums === String ? $root.google.dataflow.v1beta3.FlexResourceSchedulingGoal[message.flexResourceSchedulingGoal] === undefined ? message.flexResourceSchedulingGoal : $root.google.dataflow.v1beta3.FlexResourceSchedulingGoal[message.flexResourceSchedulingGoal] : message.flexResourceSchedulingGoal;
                         if (message.serviceKmsKeyName != null && message.hasOwnProperty("serviceKmsKeyName"))
                             object.serviceKmsKeyName = message.serviceKmsKeyName;
                         if (message.workerRegion != null && message.hasOwnProperty("workerRegion"))
@@ -705,7 +717,7 @@
                         if (message.workerZone != null && message.hasOwnProperty("workerZone"))
                             object.workerZone = message.workerZone;
                         if (message.shuffleMode != null && message.hasOwnProperty("shuffleMode"))
-                            object.shuffleMode = options.enums === String ? $root.google.dataflow.v1beta3.ShuffleMode[message.shuffleMode] : message.shuffleMode;
+                            object.shuffleMode = options.enums === String ? $root.google.dataflow.v1beta3.ShuffleMode[message.shuffleMode] === undefined ? message.shuffleMode : $root.google.dataflow.v1beta3.ShuffleMode[message.shuffleMode] : message.shuffleMode;
                         if (message.serviceOptions && message.serviceOptions.length) {
                             object.serviceOptions = [];
                             for (var j = 0; j < message.serviceOptions.length; ++j)
@@ -2439,6 +2451,12 @@
                             return object;
                         var message = new $root.google.dataflow.v1beta3.AutoscalingSettings();
                         switch (object.algorithm) {
+                        default:
+                            if (typeof object.algorithm === "number") {
+                                message.algorithm = object.algorithm;
+                                break;
+                            }
+                            break;
                         case "AUTOSCALING_ALGORITHM_UNKNOWN":
                         case 0:
                             message.algorithm = 0;
@@ -2475,7 +2493,7 @@
                             object.maxNumWorkers = 0;
                         }
                         if (message.algorithm != null && message.hasOwnProperty("algorithm"))
-                            object.algorithm = options.enums === String ? $root.google.dataflow.v1beta3.AutoscalingAlgorithm[message.algorithm] : message.algorithm;
+                            object.algorithm = options.enums === String ? $root.google.dataflow.v1beta3.AutoscalingAlgorithm[message.algorithm] === undefined ? message.algorithm : $root.google.dataflow.v1beta3.AutoscalingAlgorithm[message.algorithm] : message.algorithm;
                         if (message.maxNumWorkers != null && message.hasOwnProperty("maxNumWorkers"))
                             object.maxNumWorkers = message.maxNumWorkers;
                         return object;
@@ -3440,6 +3458,12 @@
                             }
                         }
                         switch (object.defaultPackageSet) {
+                        default:
+                            if (typeof object.defaultPackageSet === "number") {
+                                message.defaultPackageSet = object.defaultPackageSet;
+                                break;
+                            }
+                            break;
                         case "DEFAULT_PACKAGE_SET_UNKNOWN":
                         case 0:
                             message.defaultPackageSet = 0;
@@ -3460,6 +3484,12 @@
                         if (object.machineType != null)
                             message.machineType = String(object.machineType);
                         switch (object.teardownPolicy) {
+                        default:
+                            if (typeof object.teardownPolicy === "number") {
+                                message.teardownPolicy = object.teardownPolicy;
+                                break;
+                            }
+                            break;
                         case "TEARDOWN_POLICY_UNKNOWN":
                         case 0:
                             message.teardownPolicy = 0;
@@ -3528,6 +3558,12 @@
                         if (object.numThreadsPerWorker != null)
                             message.numThreadsPerWorker = object.numThreadsPerWorker | 0;
                         switch (object.ipConfiguration) {
+                        default:
+                            if (typeof object.ipConfiguration === "number") {
+                                message.ipConfiguration = object.ipConfiguration;
+                                break;
+                            }
+                            break;
                         case "WORKER_IP_UNSPECIFIED":
                         case 0:
                             message.ipConfiguration = 0;
@@ -3604,11 +3640,11 @@
                                 object.packages[j] = $root.google.dataflow.v1beta3.Package.toObject(message.packages[j], options);
                         }
                         if (message.defaultPackageSet != null && message.hasOwnProperty("defaultPackageSet"))
-                            object.defaultPackageSet = options.enums === String ? $root.google.dataflow.v1beta3.DefaultPackageSet[message.defaultPackageSet] : message.defaultPackageSet;
+                            object.defaultPackageSet = options.enums === String ? $root.google.dataflow.v1beta3.DefaultPackageSet[message.defaultPackageSet] === undefined ? message.defaultPackageSet : $root.google.dataflow.v1beta3.DefaultPackageSet[message.defaultPackageSet] : message.defaultPackageSet;
                         if (message.machineType != null && message.hasOwnProperty("machineType"))
                             object.machineType = message.machineType;
                         if (message.teardownPolicy != null && message.hasOwnProperty("teardownPolicy"))
-                            object.teardownPolicy = options.enums === String ? $root.google.dataflow.v1beta3.TeardownPolicy[message.teardownPolicy] : message.teardownPolicy;
+                            object.teardownPolicy = options.enums === String ? $root.google.dataflow.v1beta3.TeardownPolicy[message.teardownPolicy] === undefined ? message.teardownPolicy : $root.google.dataflow.v1beta3.TeardownPolicy[message.teardownPolicy] : message.teardownPolicy;
                         if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
                             object.diskSizeGb = message.diskSizeGb;
                         if (message.diskSourceImage != null && message.hasOwnProperty("diskSourceImage"))
@@ -3645,7 +3681,7 @@
                         if (message.numThreadsPerWorker != null && message.hasOwnProperty("numThreadsPerWorker"))
                             object.numThreadsPerWorker = message.numThreadsPerWorker;
                         if (message.ipConfiguration != null && message.hasOwnProperty("ipConfiguration"))
-                            object.ipConfiguration = options.enums === String ? $root.google.dataflow.v1beta3.WorkerIPAddressConfiguration[message.ipConfiguration] : message.ipConfiguration;
+                            object.ipConfiguration = options.enums === String ? $root.google.dataflow.v1beta3.WorkerIPAddressConfiguration[message.ipConfiguration] === undefined ? message.ipConfiguration : $root.google.dataflow.v1beta3.WorkerIPAddressConfiguration[message.ipConfiguration] : message.ipConfiguration;
                         if (message.sdkHarnessContainerImages && message.sdkHarnessContainerImages.length) {
                             object.sdkHarnessContainerImages = [];
                             for (var j = 0; j < message.sdkHarnessContainerImages.length; ++j)
@@ -4888,6 +4924,12 @@
                         if (object.name != null)
                             message.name = String(object.name);
                         switch (object.type) {
+                        default:
+                            if (typeof object.type === "number") {
+                                message.type = object.type;
+                                break;
+                            }
+                            break;
                         case "JOB_TYPE_UNKNOWN":
                         case 0:
                             message.type = 0;
@@ -4919,6 +4961,12 @@
                         if (object.stepsLocation != null)
                             message.stepsLocation = String(object.stepsLocation);
                         switch (object.currentState) {
+                        default:
+                            if (typeof object.currentState === "number") {
+                                message.currentState = object.currentState;
+                                break;
+                            }
+                            break;
                         case "JOB_STATE_UNKNOWN":
                         case 0:
                             message.currentState = 0;
@@ -4978,6 +5026,12 @@
                             message.currentStateTime = $root.google.protobuf.Timestamp.fromObject(object.currentStateTime);
                         }
                         switch (object.requestedState) {
+                        default:
+                            if (typeof object.requestedState === "number") {
+                                message.requestedState = object.requestedState;
+                                break;
+                            }
+                            break;
                         case "JOB_STATE_UNKNOWN":
                         case 0:
                             message.requestedState = 0;
@@ -5153,7 +5207,7 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.type != null && message.hasOwnProperty("type"))
-                            object.type = options.enums === String ? $root.google.dataflow.v1beta3.JobType[message.type] : message.type;
+                            object.type = options.enums === String ? $root.google.dataflow.v1beta3.JobType[message.type] === undefined ? message.type : $root.google.dataflow.v1beta3.JobType[message.type] : message.type;
                         if (message.environment != null && message.hasOwnProperty("environment"))
                             object.environment = $root.google.dataflow.v1beta3.Environment.toObject(message.environment, options);
                         if (message.steps && message.steps.length) {
@@ -5162,11 +5216,11 @@
                                 object.steps[j] = $root.google.dataflow.v1beta3.Step.toObject(message.steps[j], options);
                         }
                         if (message.currentState != null && message.hasOwnProperty("currentState"))
-                            object.currentState = options.enums === String ? $root.google.dataflow.v1beta3.JobState[message.currentState] : message.currentState;
+                            object.currentState = options.enums === String ? $root.google.dataflow.v1beta3.JobState[message.currentState] === undefined ? message.currentState : $root.google.dataflow.v1beta3.JobState[message.currentState] : message.currentState;
                         if (message.currentStateTime != null && message.hasOwnProperty("currentStateTime"))
                             object.currentStateTime = $root.google.protobuf.Timestamp.toObject(message.currentStateTime, options);
                         if (message.requestedState != null && message.hasOwnProperty("requestedState"))
-                            object.requestedState = options.enums === String ? $root.google.dataflow.v1beta3.JobState[message.requestedState] : message.requestedState;
+                            object.requestedState = options.enums === String ? $root.google.dataflow.v1beta3.JobState[message.requestedState] === undefined ? message.requestedState : $root.google.dataflow.v1beta3.JobState[message.requestedState] : message.requestedState;
                         if (message.executionInfo != null && message.hasOwnProperty("executionInfo"))
                             object.executionInfo = $root.google.dataflow.v1beta3.JobExecutionInfo.toObject(message.executionInfo, options);
                         if (message.createTime != null && message.hasOwnProperty("createTime"))
@@ -6872,6 +6926,12 @@
                         if (object.versionDisplayName != null)
                             message.versionDisplayName = String(object.versionDisplayName);
                         switch (object.sdkSupportStatus) {
+                        default:
+                            if (typeof object.sdkSupportStatus === "number") {
+                                message.sdkSupportStatus = object.sdkSupportStatus;
+                                break;
+                            }
+                            break;
                         case "UNKNOWN":
                         case 0:
                             message.sdkSupportStatus = 0;
@@ -6919,7 +6979,7 @@
                         if (message.versionDisplayName != null && message.hasOwnProperty("versionDisplayName"))
                             object.versionDisplayName = message.versionDisplayName;
                         if (message.sdkSupportStatus != null && message.hasOwnProperty("sdkSupportStatus"))
-                            object.sdkSupportStatus = options.enums === String ? $root.google.dataflow.v1beta3.SdkVersion.SdkSupportStatus[message.sdkSupportStatus] : message.sdkSupportStatus;
+                            object.sdkSupportStatus = options.enums === String ? $root.google.dataflow.v1beta3.SdkVersion.SdkSupportStatus[message.sdkSupportStatus] === undefined ? message.sdkSupportStatus : $root.google.dataflow.v1beta3.SdkVersion.SdkSupportStatus[message.sdkSupportStatus] : message.sdkSupportStatus;
                         return object;
                     };
     
@@ -7652,6 +7712,12 @@
                         if (object.executionStageName != null)
                             message.executionStageName = String(object.executionStageName);
                         switch (object.executionStageState) {
+                        default:
+                            if (typeof object.executionStageState === "number") {
+                                message.executionStageState = object.executionStageState;
+                                break;
+                            }
+                            break;
                         case "JOB_STATE_UNKNOWN":
                         case 0:
                             message.executionStageState = 0;
@@ -7734,7 +7800,7 @@
                         if (message.executionStageName != null && message.hasOwnProperty("executionStageName"))
                             object.executionStageName = message.executionStageName;
                         if (message.executionStageState != null && message.hasOwnProperty("executionStageState"))
-                            object.executionStageState = options.enums === String ? $root.google.dataflow.v1beta3.JobState[message.executionStageState] : message.executionStageState;
+                            object.executionStageState = options.enums === String ? $root.google.dataflow.v1beta3.JobState[message.executionStageState] === undefined ? message.executionStageState : $root.google.dataflow.v1beta3.JobState[message.executionStageState] : message.executionStageState;
                         if (message.currentStateTime != null && message.hasOwnProperty("currentStateTime"))
                             object.currentStateTime = $root.google.protobuf.Timestamp.toObject(message.currentStateTime, options);
                         return object;
@@ -8388,6 +8454,12 @@
                             return object;
                         var message = new $root.google.dataflow.v1beta3.TransformSummary();
                         switch (object.kind) {
+                        default:
+                            if (typeof object.kind === "number") {
+                                message.kind = object.kind;
+                                break;
+                            }
+                            break;
                         case "UNKNOWN_KIND":
                         case 0:
                             message.kind = 0;
@@ -8480,7 +8552,7 @@
                             object.name = "";
                         }
                         if (message.kind != null && message.hasOwnProperty("kind"))
-                            object.kind = options.enums === String ? $root.google.dataflow.v1beta3.KindType[message.kind] : message.kind;
+                            object.kind = options.enums === String ? $root.google.dataflow.v1beta3.KindType[message.kind] === undefined ? message.kind : $root.google.dataflow.v1beta3.KindType[message.kind] : message.kind;
                         if (message.id != null && message.hasOwnProperty("id"))
                             object.id = message.id;
                         if (message.name != null && message.hasOwnProperty("name"))
@@ -8872,6 +8944,12 @@
                         if (object.id != null)
                             message.id = String(object.id);
                         switch (object.kind) {
+                        default:
+                            if (typeof object.kind === "number") {
+                                message.kind = object.kind;
+                                break;
+                            }
+                            break;
                         case "UNKNOWN_KIND":
                         case 0:
                             message.kind = 0;
@@ -8989,7 +9067,7 @@
                         if (message.id != null && message.hasOwnProperty("id"))
                             object.id = message.id;
                         if (message.kind != null && message.hasOwnProperty("kind"))
-                            object.kind = options.enums === String ? $root.google.dataflow.v1beta3.KindType[message.kind] : message.kind;
+                            object.kind = options.enums === String ? $root.google.dataflow.v1beta3.KindType[message.kind] === undefined ? message.kind : $root.google.dataflow.v1beta3.KindType[message.kind] : message.kind;
                         if (message.inputSource && message.inputSource.length) {
                             object.inputSource = [];
                             for (var j = 0; j < message.inputSource.length; ++j)
@@ -11379,6 +11457,12 @@
                             message.job = $root.google.dataflow.v1beta3.Job.fromObject(object.job);
                         }
                         switch (object.view) {
+                        default:
+                            if (typeof object.view === "number") {
+                                message.view = object.view;
+                                break;
+                            }
+                            break;
                         case "JOB_VIEW_UNKNOWN":
                         case 0:
                             message.view = 0;
@@ -11428,7 +11512,7 @@
                         if (message.job != null && message.hasOwnProperty("job"))
                             object.job = $root.google.dataflow.v1beta3.Job.toObject(message.job, options);
                         if (message.view != null && message.hasOwnProperty("view"))
-                            object.view = options.enums === String ? $root.google.dataflow.v1beta3.JobView[message.view] : message.view;
+                            object.view = options.enums === String ? $root.google.dataflow.v1beta3.JobView[message.view] === undefined ? message.view : $root.google.dataflow.v1beta3.JobView[message.view] : message.view;
                         if (message.replaceJobId != null && message.hasOwnProperty("replaceJobId"))
                             object.replaceJobId = message.replaceJobId;
                         if (message.location != null && message.hasOwnProperty("location"))
@@ -11680,6 +11764,12 @@
                         if (object.jobId != null)
                             message.jobId = String(object.jobId);
                         switch (object.view) {
+                        default:
+                            if (typeof object.view === "number") {
+                                message.view = object.view;
+                                break;
+                            }
+                            break;
                         case "JOB_VIEW_UNKNOWN":
                         case 0:
                             message.view = 0;
@@ -11726,7 +11816,7 @@
                         if (message.jobId != null && message.hasOwnProperty("jobId"))
                             object.jobId = message.jobId;
                         if (message.view != null && message.hasOwnProperty("view"))
-                            object.view = options.enums === String ? $root.google.dataflow.v1beta3.JobView[message.view] : message.view;
+                            object.view = options.enums === String ? $root.google.dataflow.v1beta3.JobView[message.view] === undefined ? message.view : $root.google.dataflow.v1beta3.JobView[message.view] : message.view;
                         if (message.location != null && message.hasOwnProperty("location"))
                             object.location = message.location;
                         return object;
@@ -12293,6 +12383,12 @@
                             return object;
                         var message = new $root.google.dataflow.v1beta3.ListJobsRequest();
                         switch (object.filter) {
+                        default:
+                            if (typeof object.filter === "number") {
+                                message.filter = object.filter;
+                                break;
+                            }
+                            break;
                         case "UNKNOWN":
                         case 0:
                             message.filter = 0;
@@ -12313,6 +12409,12 @@
                         if (object.projectId != null)
                             message.projectId = String(object.projectId);
                         switch (object.view) {
+                        default:
+                            if (typeof object.view === "number") {
+                                message.view = object.view;
+                                break;
+                            }
+                            break;
                         case "JOB_VIEW_UNKNOWN":
                         case 0:
                             message.view = 0;
@@ -12363,13 +12465,13 @@
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
                         if (message.view != null && message.hasOwnProperty("view"))
-                            object.view = options.enums === String ? $root.google.dataflow.v1beta3.JobView[message.view] : message.view;
+                            object.view = options.enums === String ? $root.google.dataflow.v1beta3.JobView[message.view] === undefined ? message.view : $root.google.dataflow.v1beta3.JobView[message.view] : message.view;
                         if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                             object.pageSize = message.pageSize;
                         if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                             object.pageToken = message.pageToken;
                         if (message.filter != null && message.hasOwnProperty("filter"))
-                            object.filter = options.enums === String ? $root.google.dataflow.v1beta3.ListJobsRequest.Filter[message.filter] : message.filter;
+                            object.filter = options.enums === String ? $root.google.dataflow.v1beta3.ListJobsRequest.Filter[message.filter] === undefined ? message.filter : $root.google.dataflow.v1beta3.ListJobsRequest.Filter[message.filter] : message.filter;
                         if (message.location != null && message.hasOwnProperty("location"))
                             object.location = message.location;
                         return object;
@@ -14410,6 +14512,12 @@
                             message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
                         }
                         switch (object.state) {
+                        default:
+                            if (typeof object.state === "number") {
+                                message.state = object.state;
+                                break;
+                            }
+                            break;
                         case "UNKNOWN_SNAPSHOT_STATE":
                         case 0:
                             message.state = 0;
@@ -14502,7 +14610,7 @@
                         if (message.ttl != null && message.hasOwnProperty("ttl"))
                             object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options);
                         if (message.state != null && message.hasOwnProperty("state"))
-                            object.state = options.enums === String ? $root.google.dataflow.v1beta3.SnapshotState[message.state] : message.state;
+                            object.state = options.enums === String ? $root.google.dataflow.v1beta3.SnapshotState[message.state] === undefined ? message.state : $root.google.dataflow.v1beta3.SnapshotState[message.state] : message.state;
                         if (message.pubsubMetadata && message.pubsubMetadata.length) {
                             object.pubsubMetadata = [];
                             for (var j = 0; j < message.pubsubMetadata.length; ++j)
@@ -15990,6 +16098,12 @@
                         if (object.messageText != null)
                             message.messageText = String(object.messageText);
                         switch (object.messageImportance) {
+                        default:
+                            if (typeof object.messageImportance === "number") {
+                                message.messageImportance = object.messageImportance;
+                                break;
+                            }
+                            break;
                         case "JOB_MESSAGE_IMPORTANCE_UNKNOWN":
                         case 0:
                             message.messageImportance = 0;
@@ -16044,7 +16158,7 @@
                         if (message.messageText != null && message.hasOwnProperty("messageText"))
                             object.messageText = message.messageText;
                         if (message.messageImportance != null && message.hasOwnProperty("messageImportance"))
-                            object.messageImportance = options.enums === String ? $root.google.dataflow.v1beta3.JobMessageImportance[message.messageImportance] : message.messageImportance;
+                            object.messageImportance = options.enums === String ? $root.google.dataflow.v1beta3.JobMessageImportance[message.messageImportance] === undefined ? message.messageImportance : $root.google.dataflow.v1beta3.JobMessageImportance[message.messageImportance] : message.messageImportance;
                         return object;
                     };
     
@@ -16873,6 +16987,12 @@
                             else if (typeof object.targetNumWorkers === "object")
                                 message.targetNumWorkers = new $util.LongBits(object.targetNumWorkers.low >>> 0, object.targetNumWorkers.high >>> 0).toNumber();
                         switch (object.eventType) {
+                        default:
+                            if (typeof object.eventType === "number") {
+                                message.eventType = object.eventType;
+                                break;
+                            }
+                            break;
                         case "TYPE_UNKNOWN":
                         case 0:
                             message.eventType = 0;
@@ -16949,7 +17069,7 @@
                             else
                                 object.targetNumWorkers = options.longs === String ? $util.Long.prototype.toString.call(message.targetNumWorkers) : options.longs === Number ? new $util.LongBits(message.targetNumWorkers.low >>> 0, message.targetNumWorkers.high >>> 0).toNumber() : message.targetNumWorkers;
                         if (message.eventType != null && message.hasOwnProperty("eventType"))
-                            object.eventType = options.enums === String ? $root.google.dataflow.v1beta3.AutoscalingEvent.AutoscalingEventType[message.eventType] : message.eventType;
+                            object.eventType = options.enums === String ? $root.google.dataflow.v1beta3.AutoscalingEvent.AutoscalingEventType[message.eventType] === undefined ? message.eventType : $root.google.dataflow.v1beta3.AutoscalingEvent.AutoscalingEventType[message.eventType] : message.eventType;
                         if (message.description != null && message.hasOwnProperty("description"))
                             object.description = $root.google.dataflow.v1beta3.StructuredMessage.toObject(message.description, options);
                         if (message.time != null && message.hasOwnProperty("time"))
@@ -17301,6 +17421,12 @@
                         if (object.jobId != null)
                             message.jobId = String(object.jobId);
                         switch (object.minimumImportance) {
+                        default:
+                            if (typeof object.minimumImportance === "number") {
+                                message.minimumImportance = object.minimumImportance;
+                                break;
+                            }
+                            break;
                         case "JOB_MESSAGE_IMPORTANCE_UNKNOWN":
                         case 0:
                             message.minimumImportance = 0;
@@ -17373,7 +17499,7 @@
                         if (message.jobId != null && message.hasOwnProperty("jobId"))
                             object.jobId = message.jobId;
                         if (message.minimumImportance != null && message.hasOwnProperty("minimumImportance"))
-                            object.minimumImportance = options.enums === String ? $root.google.dataflow.v1beta3.JobMessageImportance[message.minimumImportance] : message.minimumImportance;
+                            object.minimumImportance = options.enums === String ? $root.google.dataflow.v1beta3.JobMessageImportance[message.minimumImportance] === undefined ? message.minimumImportance : $root.google.dataflow.v1beta3.JobMessageImportance[message.minimumImportance] : message.minimumImportance;
                         if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                             object.pageSize = message.pageSize;
                         if (message.pageToken != null && message.hasOwnProperty("pageToken"))
@@ -20204,6 +20330,12 @@
                         if (object.stageId != null)
                             message.stageId = String(object.stageId);
                         switch (object.state) {
+                        default:
+                            if (typeof object.state === "number") {
+                                message.state = object.state;
+                                break;
+                            }
+                            break;
                         case "EXECUTION_STATE_UNKNOWN":
                         case 0:
                             message.state = 0;
@@ -20282,7 +20414,7 @@
                         if (message.stageId != null && message.hasOwnProperty("stageId"))
                             object.stageId = message.stageId;
                         if (message.state != null && message.hasOwnProperty("state"))
-                            object.state = options.enums === String ? $root.google.dataflow.v1beta3.ExecutionState[message.state] : message.state;
+                            object.state = options.enums === String ? $root.google.dataflow.v1beta3.ExecutionState[message.state] === undefined ? message.state : $root.google.dataflow.v1beta3.ExecutionState[message.state] : message.state;
                         if (message.startTime != null && message.hasOwnProperty("startTime"))
                             object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                         if (message.endTime != null && message.hasOwnProperty("endTime"))
@@ -21246,6 +21378,12 @@
                             message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                         }
                         switch (object.state) {
+                        default:
+                            if (typeof object.state === "number") {
+                                message.state = object.state;
+                                break;
+                            }
+                            break;
                         case "EXECUTION_STATE_UNKNOWN":
                         case 0:
                             message.state = 0;
@@ -21321,7 +21459,7 @@
                         if (message.endTime != null && message.hasOwnProperty("endTime"))
                             object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                         if (message.state != null && message.hasOwnProperty("state"))
-                            object.state = options.enums === String ? $root.google.dataflow.v1beta3.ExecutionState[message.state] : message.state;
+                            object.state = options.enums === String ? $root.google.dataflow.v1beta3.ExecutionState[message.state] === undefined ? message.state : $root.google.dataflow.v1beta3.ExecutionState[message.state] : message.state;
                         if (message.progress != null && message.hasOwnProperty("progress"))
                             object.progress = $root.google.dataflow.v1beta3.ProgressTimeseries.toObject(message.progress, options);
                         if (message.metrics && message.metrics.length) {
@@ -27473,6 +27611,12 @@
                         if (object.kmsKeyName != null)
                             message.kmsKeyName = String(object.kmsKeyName);
                         switch (object.ipConfiguration) {
+                        default:
+                            if (typeof object.ipConfiguration === "number") {
+                                message.ipConfiguration = object.ipConfiguration;
+                                break;
+                            }
+                            break;
                         case "WORKER_IP_UNSPECIFIED":
                         case 0:
                             message.ipConfiguration = 0;
@@ -27493,6 +27637,12 @@
                         if (object.enableStreamingEngine != null)
                             message.enableStreamingEngine = Boolean(object.enableStreamingEngine);
                         switch (object.flexrsGoal) {
+                        default:
+                            if (typeof object.flexrsGoal === "number") {
+                                message.flexrsGoal = object.flexrsGoal;
+                                break;
+                            }
+                            break;
                         case "FLEXRS_UNSPECIFIED":
                         case 0:
                             message.flexrsGoal = 0;
@@ -27513,6 +27663,12 @@
                         if (object.diskSizeGb != null)
                             message.diskSizeGb = object.diskSizeGb | 0;
                         switch (object.autoscalingAlgorithm) {
+                        default:
+                            if (typeof object.autoscalingAlgorithm === "number") {
+                                message.autoscalingAlgorithm = object.autoscalingAlgorithm;
+                                break;
+                            }
+                            break;
                         case "AUTOSCALING_ALGORITHM_UNKNOWN":
                         case 0:
                             message.autoscalingAlgorithm = 0;
@@ -27605,7 +27761,7 @@
                         if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                             object.kmsKeyName = message.kmsKeyName;
                         if (message.ipConfiguration != null && message.hasOwnProperty("ipConfiguration"))
-                            object.ipConfiguration = options.enums === String ? $root.google.dataflow.v1beta3.WorkerIPAddressConfiguration[message.ipConfiguration] : message.ipConfiguration;
+                            object.ipConfiguration = options.enums === String ? $root.google.dataflow.v1beta3.WorkerIPAddressConfiguration[message.ipConfiguration] === undefined ? message.ipConfiguration : $root.google.dataflow.v1beta3.WorkerIPAddressConfiguration[message.ipConfiguration] : message.ipConfiguration;
                         if (message.workerRegion != null && message.hasOwnProperty("workerRegion"))
                             object.workerRegion = message.workerRegion;
                         if (message.workerZone != null && message.hasOwnProperty("workerZone"))
@@ -27613,7 +27769,7 @@
                         if (message.enableStreamingEngine != null && message.hasOwnProperty("enableStreamingEngine"))
                             object.enableStreamingEngine = message.enableStreamingEngine;
                         if (message.flexrsGoal != null && message.hasOwnProperty("flexrsGoal"))
-                            object.flexrsGoal = options.enums === String ? $root.google.dataflow.v1beta3.FlexResourceSchedulingGoal[message.flexrsGoal] : message.flexrsGoal;
+                            object.flexrsGoal = options.enums === String ? $root.google.dataflow.v1beta3.FlexResourceSchedulingGoal[message.flexrsGoal] === undefined ? message.flexrsGoal : $root.google.dataflow.v1beta3.FlexResourceSchedulingGoal[message.flexrsGoal] : message.flexrsGoal;
                         if (message.stagingLocation != null && message.hasOwnProperty("stagingLocation"))
                             object.stagingLocation = message.stagingLocation;
                         if (message.sdkContainerImage != null && message.hasOwnProperty("sdkContainerImage"))
@@ -27621,7 +27777,7 @@
                         if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
                             object.diskSizeGb = message.diskSizeGb;
                         if (message.autoscalingAlgorithm != null && message.hasOwnProperty("autoscalingAlgorithm"))
-                            object.autoscalingAlgorithm = options.enums === String ? $root.google.dataflow.v1beta3.AutoscalingAlgorithm[message.autoscalingAlgorithm] : message.autoscalingAlgorithm;
+                            object.autoscalingAlgorithm = options.enums === String ? $root.google.dataflow.v1beta3.AutoscalingAlgorithm[message.autoscalingAlgorithm] === undefined ? message.autoscalingAlgorithm : $root.google.dataflow.v1beta3.AutoscalingAlgorithm[message.autoscalingAlgorithm] : message.autoscalingAlgorithm;
                         if (message.dumpHeapOnOom != null && message.hasOwnProperty("dumpHeapOnOom"))
                             object.dumpHeapOnOom = message.dumpHeapOnOom;
                         if (message.saveHeapDumpsToGcsPath != null && message.hasOwnProperty("saveHeapDumpsToGcsPath"))
@@ -28432,6 +28588,12 @@
                         if (object.kmsKeyName != null)
                             message.kmsKeyName = String(object.kmsKeyName);
                         switch (object.ipConfiguration) {
+                        default:
+                            if (typeof object.ipConfiguration === "number") {
+                                message.ipConfiguration = object.ipConfiguration;
+                                break;
+                            }
+                            break;
                         case "WORKER_IP_UNSPECIFIED":
                         case 0:
                             message.ipConfiguration = 0;
@@ -28519,7 +28681,7 @@
                         if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                             object.kmsKeyName = message.kmsKeyName;
                         if (message.ipConfiguration != null && message.hasOwnProperty("ipConfiguration"))
-                            object.ipConfiguration = options.enums === String ? $root.google.dataflow.v1beta3.WorkerIPAddressConfiguration[message.ipConfiguration] : message.ipConfiguration;
+                            object.ipConfiguration = options.enums === String ? $root.google.dataflow.v1beta3.WorkerIPAddressConfiguration[message.ipConfiguration] === undefined ? message.ipConfiguration : $root.google.dataflow.v1beta3.WorkerIPAddressConfiguration[message.ipConfiguration] : message.ipConfiguration;
                         if (message.workerRegion != null && message.hasOwnProperty("workerRegion"))
                             object.workerRegion = message.workerRegion;
                         if (message.workerZone != null && message.hasOwnProperty("workerZone"))
@@ -28878,6 +29040,12 @@
                                 message.regexes[i] = String(object.regexes[i]);
                         }
                         switch (object.paramType) {
+                        default:
+                            if (typeof object.paramType === "number") {
+                                message.paramType = object.paramType;
+                                break;
+                            }
+                            break;
                         case "DEFAULT":
                         case 0:
                             message.paramType = 0;
@@ -28967,7 +29135,7 @@
                                 object.regexes[j] = message.regexes[j];
                         }
                         if (message.paramType != null && message.hasOwnProperty("paramType"))
-                            object.paramType = options.enums === String ? $root.google.dataflow.v1beta3.ParameterType[message.paramType] : message.paramType;
+                            object.paramType = options.enums === String ? $root.google.dataflow.v1beta3.ParameterType[message.paramType] === undefined ? message.paramType : $root.google.dataflow.v1beta3.ParameterType[message.paramType] : message.paramType;
                         var keys2;
                         if (message.customMetadata && (keys2 = Object.keys(message.customMetadata)).length) {
                             object.customMetadata = {};
@@ -29482,6 +29650,12 @@
                             return object;
                         var message = new $root.google.dataflow.v1beta3.SDKInfo();
                         switch (object.language) {
+                        default:
+                            if (typeof object.language === "number") {
+                                message.language = object.language;
+                                break;
+                            }
+                            break;
                         case "UNKNOWN":
                         case 0:
                             message.language = 0;
@@ -29518,7 +29692,7 @@
                             object.version = "";
                         }
                         if (message.language != null && message.hasOwnProperty("language"))
-                            object.language = options.enums === String ? $root.google.dataflow.v1beta3.SDKInfo.Language[message.language] : message.language;
+                            object.language = options.enums === String ? $root.google.dataflow.v1beta3.SDKInfo.Language[message.language] === undefined ? message.language : $root.google.dataflow.v1beta3.SDKInfo.Language[message.language] : message.language;
                         if (message.version != null && message.hasOwnProperty("version"))
                             object.version = message.version;
                         return object;
@@ -30430,6 +30604,12 @@
                         if (object.gcsPath != null)
                             message.gcsPath = String(object.gcsPath);
                         switch (object.view) {
+                        default:
+                            if (typeof object.view === "number") {
+                                message.view = object.view;
+                                break;
+                            }
+                            break;
                         case "METADATA_ONLY":
                         case 0:
                             message.view = 0;
@@ -30466,7 +30646,7 @@
                                 object.template = "gcsPath";
                         }
                         if (message.view != null && message.hasOwnProperty("view"))
-                            object.view = options.enums === String ? $root.google.dataflow.v1beta3.GetTemplateRequest.TemplateView[message.view] : message.view;
+                            object.view = options.enums === String ? $root.google.dataflow.v1beta3.GetTemplateRequest.TemplateView[message.view] === undefined ? message.view : $root.google.dataflow.v1beta3.GetTemplateRequest.TemplateView[message.view] : message.view;
                         if (message.location != null && message.hasOwnProperty("location"))
                             object.location = message.location;
                         return object;
@@ -30739,6 +30919,12 @@
                             message.metadata = $root.google.dataflow.v1beta3.TemplateMetadata.fromObject(object.metadata);
                         }
                         switch (object.templateType) {
+                        default:
+                            if (typeof object.templateType === "number") {
+                                message.templateType = object.templateType;
+                                break;
+                            }
+                            break;
                         case "UNKNOWN":
                         case 0:
                             message.templateType = 0;
@@ -30784,7 +30970,7 @@
                         if (message.metadata != null && message.hasOwnProperty("metadata"))
                             object.metadata = $root.google.dataflow.v1beta3.TemplateMetadata.toObject(message.metadata, options);
                         if (message.templateType != null && message.hasOwnProperty("templateType"))
-                            object.templateType = options.enums === String ? $root.google.dataflow.v1beta3.GetTemplateResponse.TemplateType[message.templateType] : message.templateType;
+                            object.templateType = options.enums === String ? $root.google.dataflow.v1beta3.GetTemplateResponse.TemplateType[message.templateType] === undefined ? message.templateType : $root.google.dataflow.v1beta3.GetTemplateResponse.TemplateType[message.templateType] : message.templateType;
                         if (message.runtimeMetadata != null && message.hasOwnProperty("runtimeMetadata"))
                             object.runtimeMetadata = $root.google.dataflow.v1beta3.RuntimeMetadata.toObject(message.runtimeMetadata, options);
                         return object;
@@ -35972,6 +36158,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -35986,6 +36178,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -36112,9 +36310,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -38433,6 +38631,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -38529,7 +38733,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -39278,6 +39482,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -39294,6 +39504,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -39332,6 +39548,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -39396,7 +39616,7 @@
                         object.unverifiedLazy = false;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -39404,7 +39624,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -39417,7 +39637,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     return object;
                 };
@@ -40772,6 +40992,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -40835,7 +41061,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -42588,6 +42814,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -42637,7 +42869,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -43457,6 +43689,12 @@
                         return object;
                     var message = new $root.google.protobuf.Value();
                     switch (object.nullValue) {
+                    default:
+                        if (typeof object.nullValue === "number") {
+                            message.nullValue = object.nullValue;
+                            break;
+                        }
+                        break;
                     case "NULL_VALUE":
                     case 0:
                         message.nullValue = 0;
@@ -43495,7 +43733,7 @@
                         options = {};
                     var object = {};
                     if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
-                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
+                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] === undefined ? message.nullValue : $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
                         if (options.oneofs)
                             object.kind = "nullValue";
                     }
