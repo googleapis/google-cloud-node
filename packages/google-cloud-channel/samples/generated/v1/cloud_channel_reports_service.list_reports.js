@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, sku) {
-  // [START cloudchannel_v1_generated_CloudChannelService_ListTransferableOffers_async]
+function main(parent) {
+  // [START cloudchannel_v1_generated_CloudChannelReportsService_ListReports_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,64 +29,53 @@ function main(parent, sku) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Customer's Cloud Identity ID
-   */
-  // const cloudIdentityId = 'abc123'
-  /**
-   *  A reseller should create a customer and use the resource name of
-   *  that customer here.
-   */
-  // const customerName = 'abc123'
-  /**
-   *  Required. The resource name of the reseller's account.
+   *  Required. The resource name of the partner account to list available reports for.
+   *  Parent uses the format:
+   *  accounts/{account_id}
    */
   // const parent = 'abc123'
   /**
-   *  Requested page size. Server might return fewer results than requested.
-   *  If unspecified, returns at most 100 offers.
-   *  The maximum value is 1000; the server will coerce values above 1000.
+   *  Optional. Requested page size of the report. The server might return fewer results
+   *  than requested. If unspecified, returns 20 reports.
+   *  The maximum value is 100.
    */
   // const pageSize = 1234
   /**
-   *  A token for a page of results other than the first page.
-   *  Obtained using
-   *  ListTransferableOffersResponse.next_page_token google.cloud.channel.v1.ListTransferableOffersResponse.next_page_token  of the previous
-   *  CloudChannelService.ListTransferableOffers google.cloud.channel.v1.CloudChannelService.ListTransferableOffers  call.
+   *  Optional. A token that specifies a page of results beyond the first page.
+   *  Obtained through
+   *  ListReportsResponse.next_page_token google.cloud.channel.v1.ListReportsResponse.next_page_token  of the previous
+   *  CloudChannelReportsService.ListReports google.cloud.channel.v1.CloudChannelReportsService.ListReports  call.
    */
   // const pageToken = 'abc123'
   /**
-   *  Required. The SKU to look up Offers for.
-   */
-  // const sku = 'abc123'
-  /**
-   *  Optional. The BCP-47 language code. For example, "en-US". The
-   *  response will localize in the corresponding language code, if specified.
-   *  The default value is "en-US".
+   *  Optional. The BCP-47 language code, such as "en-US".  If specified, the
+   *  response is localized to the corresponding language code if the
+   *  original data sources support it.
+   *  Default is "en-US".
    */
   // const languageCode = 'abc123'
 
   // Imports the Channel library
-  const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;
+  const {CloudChannelReportsServiceClient} = require('@google-cloud/channel').v1;
 
   // Instantiates a client
-  const channelClient = new CloudChannelServiceClient();
+  const channelClient = new CloudChannelReportsServiceClient();
 
-  async function callListTransferableOffers() {
+  async function callListReports() {
     // Construct request
     const request = {
       parent,
-      sku,
     };
 
     // Run request
-    const iterable = await channelClient.listTransferableOffersAsync(request);
+    const iterable = await channelClient.listReportsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListTransferableOffers();
-  // [END cloudchannel_v1_generated_CloudChannelService_ListTransferableOffers_async]
+  callListReports();
+  // [END cloudchannel_v1_generated_CloudChannelReportsService_ListReports_async]
 }
 
 process.on('unhandledRejection', err => {

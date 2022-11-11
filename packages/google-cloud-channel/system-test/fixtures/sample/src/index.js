@@ -20,6 +20,8 @@
 const channel = require('@google-cloud/channel');
 
 function main() {
+  const cloudChannelReportsServiceClient =
+    new channel.CloudChannelReportsServiceClient();
   const cloudChannelServiceClient = new channel.CloudChannelServiceClient();
 }
 

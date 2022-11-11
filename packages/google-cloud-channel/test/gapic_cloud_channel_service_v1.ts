@@ -10613,6 +10613,108 @@ describe('v1.CloudChannelServiceClient', () => {
       });
     });
 
+    describe('report', () => {
+      const fakePath = '/rendered/path/report';
+      const expectedParameters = {
+        account: 'accountValue',
+        report: 'reportValue',
+      };
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.reportPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.reportPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('reportPath', () => {
+        const result = client.reportPath('accountValue', 'reportValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.reportPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromReportName', () => {
+        const result = client.matchAccountFromReportName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.reportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchReportFromReportName', () => {
+        const result = client.matchReportFromReportName(fakePath);
+        assert.strictEqual(result, 'reportValue');
+        assert(
+          (client.pathTemplates.reportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('reportJob', () => {
+      const fakePath = '/rendered/path/reportJob';
+      const expectedParameters = {
+        account: 'accountValue',
+        report_job: 'reportJobValue',
+      };
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.reportJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.reportJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('reportJobPath', () => {
+        const result = client.reportJobPath('accountValue', 'reportJobValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.reportJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromReportJobName', () => {
+        const result = client.matchAccountFromReportJobName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.reportJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchReportJobFromReportJobName', () => {
+        const result = client.matchReportJobFromReportJobName(fakePath);
+        assert.strictEqual(result, 'reportJobValue');
+        assert(
+          (client.pathTemplates.reportJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('sku', () => {
       const fakePath = '/rendered/path/sku';
       const expectedParameters = {

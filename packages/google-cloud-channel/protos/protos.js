@@ -5483,6 +5483,7 @@
                          * @property {google.protobuf.ITimestamp|null} [startTime] Offer startTime
                          * @property {google.protobuf.ITimestamp|null} [endTime] Offer endTime
                          * @property {Array.<google.cloud.channel.v1.IParameterDefinition>|null} [parameterDefinitions] Offer parameterDefinitions
+                         * @property {string|null} [dealCode] Offer dealCode
                          */
     
                         /**
@@ -5575,6 +5576,14 @@
                         Offer.prototype.parameterDefinitions = $util.emptyArray;
     
                         /**
+                         * Offer dealCode.
+                         * @member {string} dealCode
+                         * @memberof google.cloud.channel.v1.Offer
+                         * @instance
+                         */
+                        Offer.prototype.dealCode = "";
+    
+                        /**
                          * Creates a new Offer instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.Offer
@@ -5618,6 +5627,8 @@
                             if (message.parameterDefinitions != null && message.parameterDefinitions.length)
                                 for (var i = 0; i < message.parameterDefinitions.length; ++i)
                                     $root.google.cloud.channel.v1.ParameterDefinition.encode(message.parameterDefinitions[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.dealCode != null && Object.hasOwnProperty.call(message, "dealCode"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.dealCode);
                             return writer;
                         };
     
@@ -5690,6 +5701,10 @@
                                         if (!(message.parameterDefinitions && message.parameterDefinitions.length))
                                             message.parameterDefinitions = [];
                                         message.parameterDefinitions.push($root.google.cloud.channel.v1.ParameterDefinition.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 12: {
+                                        message.dealCode = reader.string();
                                         break;
                                     }
                                 default:
@@ -5778,6 +5793,9 @@
                                         return "parameterDefinitions." + error;
                                 }
                             }
+                            if (message.dealCode != null && message.hasOwnProperty("dealCode"))
+                                if (!$util.isString(message.dealCode))
+                                    return "dealCode: string expected";
                             return null;
                         };
     
@@ -5845,6 +5863,8 @@
                                     message.parameterDefinitions[i] = $root.google.cloud.channel.v1.ParameterDefinition.fromObject(object.parameterDefinitions[i]);
                                 }
                             }
+                            if (object.dealCode != null)
+                                message.dealCode = String(object.dealCode);
                             return message;
                         };
     
@@ -5873,6 +5893,7 @@
                                 object.constraints = null;
                                 object.startTime = null;
                                 object.endTime = null;
+                                object.dealCode = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5898,6 +5919,8 @@
                                 for (var j = 0; j < message.parameterDefinitions.length; ++j)
                                     object.parameterDefinitions[j] = $root.google.cloud.channel.v1.ParameterDefinition.toObject(message.parameterDefinitions[j], options);
                             }
+                            if (message.dealCode != null && message.hasOwnProperty("dealCode"))
+                                object.dealCode = message.dealCode;
                             return object;
                         };
     
@@ -10022,6 +10045,4069 @@
                         })();
     
                         return OperationMetadata;
+                    })();
+    
+                    v1.CloudChannelReportsService = (function() {
+    
+                        /**
+                         * Constructs a new CloudChannelReportsService service.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a CloudChannelReportsService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function CloudChannelReportsService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (CloudChannelReportsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = CloudChannelReportsService;
+    
+                        /**
+                         * Creates new CloudChannelReportsService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.CloudChannelReportsService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {CloudChannelReportsService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        CloudChannelReportsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelReportsService|runReportJob}.
+                         * @memberof google.cloud.channel.v1.CloudChannelReportsService
+                         * @typedef RunReportJobCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RunReportJob.
+                         * @function runReportJob
+                         * @memberof google.cloud.channel.v1.CloudChannelReportsService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IRunReportJobRequest} request RunReportJobRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelReportsService.RunReportJobCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelReportsService.prototype.runReportJob = function runReportJob(request, callback) {
+                            return this.rpcCall(runReportJob, $root.google.cloud.channel.v1.RunReportJobRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RunReportJob" });
+    
+                        /**
+                         * Calls RunReportJob.
+                         * @function runReportJob
+                         * @memberof google.cloud.channel.v1.CloudChannelReportsService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IRunReportJobRequest} request RunReportJobRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelReportsService|fetchReportResults}.
+                         * @memberof google.cloud.channel.v1.CloudChannelReportsService
+                         * @typedef FetchReportResultsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.FetchReportResultsResponse} [response] FetchReportResultsResponse
+                         */
+    
+                        /**
+                         * Calls FetchReportResults.
+                         * @function fetchReportResults
+                         * @memberof google.cloud.channel.v1.CloudChannelReportsService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IFetchReportResultsRequest} request FetchReportResultsRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelReportsService.FetchReportResultsCallback} callback Node-style callback called with the error, if any, and FetchReportResultsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelReportsService.prototype.fetchReportResults = function fetchReportResults(request, callback) {
+                            return this.rpcCall(fetchReportResults, $root.google.cloud.channel.v1.FetchReportResultsRequest, $root.google.cloud.channel.v1.FetchReportResultsResponse, request, callback);
+                        }, "name", { value: "FetchReportResults" });
+    
+                        /**
+                         * Calls FetchReportResults.
+                         * @function fetchReportResults
+                         * @memberof google.cloud.channel.v1.CloudChannelReportsService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IFetchReportResultsRequest} request FetchReportResultsRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.FetchReportResultsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelReportsService|listReports}.
+                         * @memberof google.cloud.channel.v1.CloudChannelReportsService
+                         * @typedef ListReportsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.ListReportsResponse} [response] ListReportsResponse
+                         */
+    
+                        /**
+                         * Calls ListReports.
+                         * @function listReports
+                         * @memberof google.cloud.channel.v1.CloudChannelReportsService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListReportsRequest} request ListReportsRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelReportsService.ListReportsCallback} callback Node-style callback called with the error, if any, and ListReportsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelReportsService.prototype.listReports = function listReports(request, callback) {
+                            return this.rpcCall(listReports, $root.google.cloud.channel.v1.ListReportsRequest, $root.google.cloud.channel.v1.ListReportsResponse, request, callback);
+                        }, "name", { value: "ListReports" });
+    
+                        /**
+                         * Calls ListReports.
+                         * @function listReports
+                         * @memberof google.cloud.channel.v1.CloudChannelReportsService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IListReportsRequest} request ListReportsRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.ListReportsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return CloudChannelReportsService;
+                    })();
+    
+                    v1.RunReportJobRequest = (function() {
+    
+                        /**
+                         * Properties of a RunReportJobRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IRunReportJobRequest
+                         * @property {string|null} [name] RunReportJobRequest name
+                         * @property {google.cloud.channel.v1.IDateRange|null} [dateRange] RunReportJobRequest dateRange
+                         * @property {string|null} [filter] RunReportJobRequest filter
+                         * @property {string|null} [languageCode] RunReportJobRequest languageCode
+                         */
+    
+                        /**
+                         * Constructs a new RunReportJobRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a RunReportJobRequest.
+                         * @implements IRunReportJobRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IRunReportJobRequest=} [properties] Properties to set
+                         */
+                        function RunReportJobRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RunReportJobRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @instance
+                         */
+                        RunReportJobRequest.prototype.name = "";
+    
+                        /**
+                         * RunReportJobRequest dateRange.
+                         * @member {google.cloud.channel.v1.IDateRange|null|undefined} dateRange
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @instance
+                         */
+                        RunReportJobRequest.prototype.dateRange = null;
+    
+                        /**
+                         * RunReportJobRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @instance
+                         */
+                        RunReportJobRequest.prototype.filter = "";
+    
+                        /**
+                         * RunReportJobRequest languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @instance
+                         */
+                        RunReportJobRequest.prototype.languageCode = "";
+    
+                        /**
+                         * Creates a new RunReportJobRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IRunReportJobRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.RunReportJobRequest} RunReportJobRequest instance
+                         */
+                        RunReportJobRequest.create = function create(properties) {
+                            return new RunReportJobRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunReportJobRequest message. Does not implicitly {@link google.cloud.channel.v1.RunReportJobRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IRunReportJobRequest} message RunReportJobRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunReportJobRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.dateRange != null && Object.hasOwnProperty.call(message, "dateRange"))
+                                $root.google.cloud.channel.v1.DateRange.encode(message.dateRange, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.languageCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunReportJobRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RunReportJobRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IRunReportJobRequest} message RunReportJobRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunReportJobRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunReportJobRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.RunReportJobRequest} RunReportJobRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunReportJobRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.RunReportJobRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dateRange = $root.google.cloud.channel.v1.DateRange.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.languageCode = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunReportJobRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.RunReportJobRequest} RunReportJobRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunReportJobRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunReportJobRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunReportJobRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.dateRange != null && message.hasOwnProperty("dateRange")) {
+                                var error = $root.google.cloud.channel.v1.DateRange.verify(message.dateRange);
+                                if (error)
+                                    return "dateRange." + error;
+                            }
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunReportJobRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.RunReportJobRequest} RunReportJobRequest
+                         */
+                        RunReportJobRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.RunReportJobRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.RunReportJobRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.dateRange != null) {
+                                if (typeof object.dateRange !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.RunReportJobRequest.dateRange: object expected");
+                                message.dateRange = $root.google.cloud.channel.v1.DateRange.fromObject(object.dateRange);
+                            }
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunReportJobRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.RunReportJobRequest} message RunReportJobRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunReportJobRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.dateRange = null;
+                                object.filter = "";
+                                object.languageCode = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.dateRange != null && message.hasOwnProperty("dateRange"))
+                                object.dateRange = $root.google.cloud.channel.v1.DateRange.toObject(message.dateRange, options);
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RunReportJobRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunReportJobRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RunReportJobRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.RunReportJobRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunReportJobRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.RunReportJobRequest";
+                        };
+    
+                        return RunReportJobRequest;
+                    })();
+    
+                    v1.RunReportJobResponse = (function() {
+    
+                        /**
+                         * Properties of a RunReportJobResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IRunReportJobResponse
+                         * @property {google.cloud.channel.v1.IReportJob|null} [reportJob] RunReportJobResponse reportJob
+                         * @property {google.cloud.channel.v1.IReportResultsMetadata|null} [reportMetadata] RunReportJobResponse reportMetadata
+                         */
+    
+                        /**
+                         * Constructs a new RunReportJobResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a RunReportJobResponse.
+                         * @implements IRunReportJobResponse
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IRunReportJobResponse=} [properties] Properties to set
+                         */
+                        function RunReportJobResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RunReportJobResponse reportJob.
+                         * @member {google.cloud.channel.v1.IReportJob|null|undefined} reportJob
+                         * @memberof google.cloud.channel.v1.RunReportJobResponse
+                         * @instance
+                         */
+                        RunReportJobResponse.prototype.reportJob = null;
+    
+                        /**
+                         * RunReportJobResponse reportMetadata.
+                         * @member {google.cloud.channel.v1.IReportResultsMetadata|null|undefined} reportMetadata
+                         * @memberof google.cloud.channel.v1.RunReportJobResponse
+                         * @instance
+                         */
+                        RunReportJobResponse.prototype.reportMetadata = null;
+    
+                        /**
+                         * Creates a new RunReportJobResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.RunReportJobResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IRunReportJobResponse=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.RunReportJobResponse} RunReportJobResponse instance
+                         */
+                        RunReportJobResponse.create = function create(properties) {
+                            return new RunReportJobResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RunReportJobResponse message. Does not implicitly {@link google.cloud.channel.v1.RunReportJobResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.RunReportJobResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IRunReportJobResponse} message RunReportJobResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunReportJobResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reportJob != null && Object.hasOwnProperty.call(message, "reportJob"))
+                                $root.google.cloud.channel.v1.ReportJob.encode(message.reportJob, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.reportMetadata != null && Object.hasOwnProperty.call(message, "reportMetadata"))
+                                $root.google.cloud.channel.v1.ReportResultsMetadata.encode(message.reportMetadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RunReportJobResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RunReportJobResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.RunReportJobResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IRunReportJobResponse} message RunReportJobResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RunReportJobResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RunReportJobResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.RunReportJobResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.RunReportJobResponse} RunReportJobResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunReportJobResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.RunReportJobResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.reportJob = $root.google.cloud.channel.v1.ReportJob.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.reportMetadata = $root.google.cloud.channel.v1.ReportResultsMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RunReportJobResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.RunReportJobResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.RunReportJobResponse} RunReportJobResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RunReportJobResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RunReportJobResponse message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.RunReportJobResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RunReportJobResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reportJob != null && message.hasOwnProperty("reportJob")) {
+                                var error = $root.google.cloud.channel.v1.ReportJob.verify(message.reportJob);
+                                if (error)
+                                    return "reportJob." + error;
+                            }
+                            if (message.reportMetadata != null && message.hasOwnProperty("reportMetadata")) {
+                                var error = $root.google.cloud.channel.v1.ReportResultsMetadata.verify(message.reportMetadata);
+                                if (error)
+                                    return "reportMetadata." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RunReportJobResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.RunReportJobResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.RunReportJobResponse} RunReportJobResponse
+                         */
+                        RunReportJobResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.RunReportJobResponse)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.RunReportJobResponse();
+                            if (object.reportJob != null) {
+                                if (typeof object.reportJob !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.RunReportJobResponse.reportJob: object expected");
+                                message.reportJob = $root.google.cloud.channel.v1.ReportJob.fromObject(object.reportJob);
+                            }
+                            if (object.reportMetadata != null) {
+                                if (typeof object.reportMetadata !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.RunReportJobResponse.reportMetadata: object expected");
+                                message.reportMetadata = $root.google.cloud.channel.v1.ReportResultsMetadata.fromObject(object.reportMetadata);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RunReportJobResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.RunReportJobResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.RunReportJobResponse} message RunReportJobResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RunReportJobResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.reportJob = null;
+                                object.reportMetadata = null;
+                            }
+                            if (message.reportJob != null && message.hasOwnProperty("reportJob"))
+                                object.reportJob = $root.google.cloud.channel.v1.ReportJob.toObject(message.reportJob, options);
+                            if (message.reportMetadata != null && message.hasOwnProperty("reportMetadata"))
+                                object.reportMetadata = $root.google.cloud.channel.v1.ReportResultsMetadata.toObject(message.reportMetadata, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RunReportJobResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.RunReportJobResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RunReportJobResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RunReportJobResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.RunReportJobResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RunReportJobResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.RunReportJobResponse";
+                        };
+    
+                        return RunReportJobResponse;
+                    })();
+    
+                    v1.FetchReportResultsRequest = (function() {
+    
+                        /**
+                         * Properties of a FetchReportResultsRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IFetchReportResultsRequest
+                         * @property {string|null} [reportJob] FetchReportResultsRequest reportJob
+                         * @property {number|null} [pageSize] FetchReportResultsRequest pageSize
+                         * @property {string|null} [pageToken] FetchReportResultsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new FetchReportResultsRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a FetchReportResultsRequest.
+                         * @implements IFetchReportResultsRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IFetchReportResultsRequest=} [properties] Properties to set
+                         */
+                        function FetchReportResultsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchReportResultsRequest reportJob.
+                         * @member {string} reportJob
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @instance
+                         */
+                        FetchReportResultsRequest.prototype.reportJob = "";
+    
+                        /**
+                         * FetchReportResultsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @instance
+                         */
+                        FetchReportResultsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * FetchReportResultsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @instance
+                         */
+                        FetchReportResultsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new FetchReportResultsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IFetchReportResultsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.FetchReportResultsRequest} FetchReportResultsRequest instance
+                         */
+                        FetchReportResultsRequest.create = function create(properties) {
+                            return new FetchReportResultsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchReportResultsRequest message. Does not implicitly {@link google.cloud.channel.v1.FetchReportResultsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IFetchReportResultsRequest} message FetchReportResultsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchReportResultsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reportJob != null && Object.hasOwnProperty.call(message, "reportJob"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.reportJob);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchReportResultsRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.FetchReportResultsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IFetchReportResultsRequest} message FetchReportResultsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchReportResultsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchReportResultsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.FetchReportResultsRequest} FetchReportResultsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchReportResultsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.FetchReportResultsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.reportJob = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchReportResultsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.FetchReportResultsRequest} FetchReportResultsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchReportResultsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchReportResultsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchReportResultsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reportJob != null && message.hasOwnProperty("reportJob"))
+                                if (!$util.isString(message.reportJob))
+                                    return "reportJob: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchReportResultsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.FetchReportResultsRequest} FetchReportResultsRequest
+                         */
+                        FetchReportResultsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.FetchReportResultsRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.FetchReportResultsRequest();
+                            if (object.reportJob != null)
+                                message.reportJob = String(object.reportJob);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchReportResultsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.FetchReportResultsRequest} message FetchReportResultsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchReportResultsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.reportJob = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.reportJob != null && message.hasOwnProperty("reportJob"))
+                                object.reportJob = message.reportJob;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchReportResultsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchReportResultsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchReportResultsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.FetchReportResultsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchReportResultsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.FetchReportResultsRequest";
+                        };
+    
+                        return FetchReportResultsRequest;
+                    })();
+    
+                    v1.FetchReportResultsResponse = (function() {
+    
+                        /**
+                         * Properties of a FetchReportResultsResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IFetchReportResultsResponse
+                         * @property {google.cloud.channel.v1.IReportResultsMetadata|null} [reportMetadata] FetchReportResultsResponse reportMetadata
+                         * @property {Array.<google.cloud.channel.v1.IRow>|null} [rows] FetchReportResultsResponse rows
+                         * @property {string|null} [nextPageToken] FetchReportResultsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new FetchReportResultsResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a FetchReportResultsResponse.
+                         * @implements IFetchReportResultsResponse
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IFetchReportResultsResponse=} [properties] Properties to set
+                         */
+                        function FetchReportResultsResponse(properties) {
+                            this.rows = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchReportResultsResponse reportMetadata.
+                         * @member {google.cloud.channel.v1.IReportResultsMetadata|null|undefined} reportMetadata
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @instance
+                         */
+                        FetchReportResultsResponse.prototype.reportMetadata = null;
+    
+                        /**
+                         * FetchReportResultsResponse rows.
+                         * @member {Array.<google.cloud.channel.v1.IRow>} rows
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @instance
+                         */
+                        FetchReportResultsResponse.prototype.rows = $util.emptyArray;
+    
+                        /**
+                         * FetchReportResultsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @instance
+                         */
+                        FetchReportResultsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new FetchReportResultsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IFetchReportResultsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.FetchReportResultsResponse} FetchReportResultsResponse instance
+                         */
+                        FetchReportResultsResponse.create = function create(properties) {
+                            return new FetchReportResultsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchReportResultsResponse message. Does not implicitly {@link google.cloud.channel.v1.FetchReportResultsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IFetchReportResultsResponse} message FetchReportResultsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchReportResultsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reportMetadata != null && Object.hasOwnProperty.call(message, "reportMetadata"))
+                                $root.google.cloud.channel.v1.ReportResultsMetadata.encode(message.reportMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.rows != null && message.rows.length)
+                                for (var i = 0; i < message.rows.length; ++i)
+                                    $root.google.cloud.channel.v1.Row.encode(message.rows[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchReportResultsResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.FetchReportResultsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IFetchReportResultsResponse} message FetchReportResultsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchReportResultsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchReportResultsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.FetchReportResultsResponse} FetchReportResultsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchReportResultsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.FetchReportResultsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.reportMetadata = $root.google.cloud.channel.v1.ReportResultsMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.rows && message.rows.length))
+                                            message.rows = [];
+                                        message.rows.push($root.google.cloud.channel.v1.Row.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchReportResultsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.FetchReportResultsResponse} FetchReportResultsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchReportResultsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchReportResultsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchReportResultsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reportMetadata != null && message.hasOwnProperty("reportMetadata")) {
+                                var error = $root.google.cloud.channel.v1.ReportResultsMetadata.verify(message.reportMetadata);
+                                if (error)
+                                    return "reportMetadata." + error;
+                            }
+                            if (message.rows != null && message.hasOwnProperty("rows")) {
+                                if (!Array.isArray(message.rows))
+                                    return "rows: array expected";
+                                for (var i = 0; i < message.rows.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.Row.verify(message.rows[i]);
+                                    if (error)
+                                        return "rows." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchReportResultsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.FetchReportResultsResponse} FetchReportResultsResponse
+                         */
+                        FetchReportResultsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.FetchReportResultsResponse)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.FetchReportResultsResponse();
+                            if (object.reportMetadata != null) {
+                                if (typeof object.reportMetadata !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.FetchReportResultsResponse.reportMetadata: object expected");
+                                message.reportMetadata = $root.google.cloud.channel.v1.ReportResultsMetadata.fromObject(object.reportMetadata);
+                            }
+                            if (object.rows) {
+                                if (!Array.isArray(object.rows))
+                                    throw TypeError(".google.cloud.channel.v1.FetchReportResultsResponse.rows: array expected");
+                                message.rows = [];
+                                for (var i = 0; i < object.rows.length; ++i) {
+                                    if (typeof object.rows[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.FetchReportResultsResponse.rows: object expected");
+                                    message.rows[i] = $root.google.cloud.channel.v1.Row.fromObject(object.rows[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchReportResultsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.FetchReportResultsResponse} message FetchReportResultsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchReportResultsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.rows = [];
+                            if (options.defaults) {
+                                object.reportMetadata = null;
+                                object.nextPageToken = "";
+                            }
+                            if (message.reportMetadata != null && message.hasOwnProperty("reportMetadata"))
+                                object.reportMetadata = $root.google.cloud.channel.v1.ReportResultsMetadata.toObject(message.reportMetadata, options);
+                            if (message.rows && message.rows.length) {
+                                object.rows = [];
+                                for (var j = 0; j < message.rows.length; ++j)
+                                    object.rows[j] = $root.google.cloud.channel.v1.Row.toObject(message.rows[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchReportResultsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchReportResultsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchReportResultsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.FetchReportResultsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchReportResultsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.FetchReportResultsResponse";
+                        };
+    
+                        return FetchReportResultsResponse;
+                    })();
+    
+                    v1.ListReportsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListReportsRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListReportsRequest
+                         * @property {string|null} [parent] ListReportsRequest parent
+                         * @property {number|null} [pageSize] ListReportsRequest pageSize
+                         * @property {string|null} [pageToken] ListReportsRequest pageToken
+                         * @property {string|null} [languageCode] ListReportsRequest languageCode
+                         */
+    
+                        /**
+                         * Constructs a new ListReportsRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListReportsRequest.
+                         * @implements IListReportsRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListReportsRequest=} [properties] Properties to set
+                         */
+                        function ListReportsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListReportsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @instance
+                         */
+                        ListReportsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListReportsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @instance
+                         */
+                        ListReportsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListReportsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @instance
+                         */
+                        ListReportsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListReportsRequest languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @instance
+                         */
+                        ListReportsRequest.prototype.languageCode = "";
+    
+                        /**
+                         * Creates a new ListReportsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListReportsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListReportsRequest} ListReportsRequest instance
+                         */
+                        ListReportsRequest.create = function create(properties) {
+                            return new ListReportsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListReportsRequest message. Does not implicitly {@link google.cloud.channel.v1.ListReportsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListReportsRequest} message ListReportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListReportsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.languageCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListReportsRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListReportsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IListReportsRequest} message ListReportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListReportsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListReportsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListReportsRequest} ListReportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListReportsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListReportsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.languageCode = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListReportsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListReportsRequest} ListReportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListReportsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListReportsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListReportsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListReportsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListReportsRequest} ListReportsRequest
+                         */
+                        ListReportsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListReportsRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListReportsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListReportsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ListReportsRequest} message ListReportsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListReportsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.languageCode = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListReportsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListReportsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListReportsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ListReportsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListReportsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ListReportsRequest";
+                        };
+    
+                        return ListReportsRequest;
+                    })();
+    
+                    v1.ListReportsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListReportsResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IListReportsResponse
+                         * @property {Array.<google.cloud.channel.v1.IReport>|null} [reports] ListReportsResponse reports
+                         * @property {string|null} [nextPageToken] ListReportsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListReportsResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ListReportsResponse.
+                         * @implements IListReportsResponse
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IListReportsResponse=} [properties] Properties to set
+                         */
+                        function ListReportsResponse(properties) {
+                            this.reports = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListReportsResponse reports.
+                         * @member {Array.<google.cloud.channel.v1.IReport>} reports
+                         * @memberof google.cloud.channel.v1.ListReportsResponse
+                         * @instance
+                         */
+                        ListReportsResponse.prototype.reports = $util.emptyArray;
+    
+                        /**
+                         * ListReportsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.channel.v1.ListReportsResponse
+                         * @instance
+                         */
+                        ListReportsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListReportsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ListReportsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListReportsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ListReportsResponse} ListReportsResponse instance
+                         */
+                        ListReportsResponse.create = function create(properties) {
+                            return new ListReportsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListReportsResponse message. Does not implicitly {@link google.cloud.channel.v1.ListReportsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ListReportsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListReportsResponse} message ListReportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListReportsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reports != null && message.reports.length)
+                                for (var i = 0; i < message.reports.length; ++i)
+                                    $root.google.cloud.channel.v1.Report.encode(message.reports[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListReportsResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListReportsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ListReportsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IListReportsResponse} message ListReportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListReportsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListReportsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ListReportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ListReportsResponse} ListReportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListReportsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ListReportsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.reports && message.reports.length))
+                                            message.reports = [];
+                                        message.reports.push($root.google.cloud.channel.v1.Report.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListReportsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ListReportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ListReportsResponse} ListReportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListReportsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListReportsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ListReportsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListReportsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reports != null && message.hasOwnProperty("reports")) {
+                                if (!Array.isArray(message.reports))
+                                    return "reports: array expected";
+                                for (var i = 0; i < message.reports.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.Report.verify(message.reports[i]);
+                                    if (error)
+                                        return "reports." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListReportsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ListReportsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ListReportsResponse} ListReportsResponse
+                         */
+                        ListReportsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ListReportsResponse)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ListReportsResponse();
+                            if (object.reports) {
+                                if (!Array.isArray(object.reports))
+                                    throw TypeError(".google.cloud.channel.v1.ListReportsResponse.reports: array expected");
+                                message.reports = [];
+                                for (var i = 0; i < object.reports.length; ++i) {
+                                    if (typeof object.reports[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.ListReportsResponse.reports: object expected");
+                                    message.reports[i] = $root.google.cloud.channel.v1.Report.fromObject(object.reports[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListReportsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ListReportsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.ListReportsResponse} message ListReportsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListReportsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.reports = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.reports && message.reports.length) {
+                                object.reports = [];
+                                for (var j = 0; j < message.reports.length; ++j)
+                                    object.reports[j] = $root.google.cloud.channel.v1.Report.toObject(message.reports[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListReportsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ListReportsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListReportsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListReportsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ListReportsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListReportsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ListReportsResponse";
+                        };
+    
+                        return ListReportsResponse;
+                    })();
+    
+                    v1.ReportJob = (function() {
+    
+                        /**
+                         * Properties of a ReportJob.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IReportJob
+                         * @property {string|null} [name] ReportJob name
+                         * @property {google.cloud.channel.v1.IReportStatus|null} [reportStatus] ReportJob reportStatus
+                         */
+    
+                        /**
+                         * Constructs a new ReportJob.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ReportJob.
+                         * @implements IReportJob
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IReportJob=} [properties] Properties to set
+                         */
+                        function ReportJob(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReportJob name.
+                         * @member {string} name
+                         * @memberof google.cloud.channel.v1.ReportJob
+                         * @instance
+                         */
+                        ReportJob.prototype.name = "";
+    
+                        /**
+                         * ReportJob reportStatus.
+                         * @member {google.cloud.channel.v1.IReportStatus|null|undefined} reportStatus
+                         * @memberof google.cloud.channel.v1.ReportJob
+                         * @instance
+                         */
+                        ReportJob.prototype.reportStatus = null;
+    
+                        /**
+                         * Creates a new ReportJob instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ReportJob
+                         * @static
+                         * @param {google.cloud.channel.v1.IReportJob=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ReportJob} ReportJob instance
+                         */
+                        ReportJob.create = function create(properties) {
+                            return new ReportJob(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReportJob message. Does not implicitly {@link google.cloud.channel.v1.ReportJob.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ReportJob
+                         * @static
+                         * @param {google.cloud.channel.v1.IReportJob} message ReportJob message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportJob.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.reportStatus != null && Object.hasOwnProperty.call(message, "reportStatus"))
+                                $root.google.cloud.channel.v1.ReportStatus.encode(message.reportStatus, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReportJob message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ReportJob.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ReportJob
+                         * @static
+                         * @param {google.cloud.channel.v1.IReportJob} message ReportJob message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportJob.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReportJob message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ReportJob
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ReportJob} ReportJob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportJob.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ReportJob();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.reportStatus = $root.google.cloud.channel.v1.ReportStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReportJob message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ReportJob
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ReportJob} ReportJob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportJob.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReportJob message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ReportJob
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReportJob.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.reportStatus != null && message.hasOwnProperty("reportStatus")) {
+                                var error = $root.google.cloud.channel.v1.ReportStatus.verify(message.reportStatus);
+                                if (error)
+                                    return "reportStatus." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReportJob message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ReportJob
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ReportJob} ReportJob
+                         */
+                        ReportJob.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ReportJob)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ReportJob();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.reportStatus != null) {
+                                if (typeof object.reportStatus !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ReportJob.reportStatus: object expected");
+                                message.reportStatus = $root.google.cloud.channel.v1.ReportStatus.fromObject(object.reportStatus);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReportJob message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ReportJob
+                         * @static
+                         * @param {google.cloud.channel.v1.ReportJob} message ReportJob
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReportJob.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.reportStatus = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.reportStatus != null && message.hasOwnProperty("reportStatus"))
+                                object.reportStatus = $root.google.cloud.channel.v1.ReportStatus.toObject(message.reportStatus, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReportJob to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ReportJob
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReportJob.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReportJob
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ReportJob
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReportJob.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ReportJob";
+                        };
+    
+                        return ReportJob;
+                    })();
+    
+                    v1.ReportResultsMetadata = (function() {
+    
+                        /**
+                         * Properties of a ReportResultsMetadata.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IReportResultsMetadata
+                         * @property {google.cloud.channel.v1.IReport|null} [report] ReportResultsMetadata report
+                         * @property {number|Long|null} [rowCount] ReportResultsMetadata rowCount
+                         * @property {google.cloud.channel.v1.IDateRange|null} [dateRange] ReportResultsMetadata dateRange
+                         * @property {google.cloud.channel.v1.IDateRange|null} [precedingDateRange] ReportResultsMetadata precedingDateRange
+                         */
+    
+                        /**
+                         * Constructs a new ReportResultsMetadata.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ReportResultsMetadata.
+                         * @implements IReportResultsMetadata
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IReportResultsMetadata=} [properties] Properties to set
+                         */
+                        function ReportResultsMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReportResultsMetadata report.
+                         * @member {google.cloud.channel.v1.IReport|null|undefined} report
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @instance
+                         */
+                        ReportResultsMetadata.prototype.report = null;
+    
+                        /**
+                         * ReportResultsMetadata rowCount.
+                         * @member {number|Long} rowCount
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @instance
+                         */
+                        ReportResultsMetadata.prototype.rowCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * ReportResultsMetadata dateRange.
+                         * @member {google.cloud.channel.v1.IDateRange|null|undefined} dateRange
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @instance
+                         */
+                        ReportResultsMetadata.prototype.dateRange = null;
+    
+                        /**
+                         * ReportResultsMetadata precedingDateRange.
+                         * @member {google.cloud.channel.v1.IDateRange|null|undefined} precedingDateRange
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @instance
+                         */
+                        ReportResultsMetadata.prototype.precedingDateRange = null;
+    
+                        /**
+                         * Creates a new ReportResultsMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @static
+                         * @param {google.cloud.channel.v1.IReportResultsMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ReportResultsMetadata} ReportResultsMetadata instance
+                         */
+                        ReportResultsMetadata.create = function create(properties) {
+                            return new ReportResultsMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReportResultsMetadata message. Does not implicitly {@link google.cloud.channel.v1.ReportResultsMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @static
+                         * @param {google.cloud.channel.v1.IReportResultsMetadata} message ReportResultsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportResultsMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.report != null && Object.hasOwnProperty.call(message, "report"))
+                                $root.google.cloud.channel.v1.Report.encode(message.report, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.rowCount != null && Object.hasOwnProperty.call(message, "rowCount"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.rowCount);
+                            if (message.dateRange != null && Object.hasOwnProperty.call(message, "dateRange"))
+                                $root.google.cloud.channel.v1.DateRange.encode(message.dateRange, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.precedingDateRange != null && Object.hasOwnProperty.call(message, "precedingDateRange"))
+                                $root.google.cloud.channel.v1.DateRange.encode(message.precedingDateRange, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReportResultsMetadata message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ReportResultsMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @static
+                         * @param {google.cloud.channel.v1.IReportResultsMetadata} message ReportResultsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportResultsMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReportResultsMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ReportResultsMetadata} ReportResultsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportResultsMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ReportResultsMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.report = $root.google.cloud.channel.v1.Report.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rowCount = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.dateRange = $root.google.cloud.channel.v1.DateRange.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.precedingDateRange = $root.google.cloud.channel.v1.DateRange.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReportResultsMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ReportResultsMetadata} ReportResultsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportResultsMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReportResultsMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReportResultsMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.report != null && message.hasOwnProperty("report")) {
+                                var error = $root.google.cloud.channel.v1.Report.verify(message.report);
+                                if (error)
+                                    return "report." + error;
+                            }
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                if (!$util.isInteger(message.rowCount) && !(message.rowCount && $util.isInteger(message.rowCount.low) && $util.isInteger(message.rowCount.high)))
+                                    return "rowCount: integer|Long expected";
+                            if (message.dateRange != null && message.hasOwnProperty("dateRange")) {
+                                var error = $root.google.cloud.channel.v1.DateRange.verify(message.dateRange);
+                                if (error)
+                                    return "dateRange." + error;
+                            }
+                            if (message.precedingDateRange != null && message.hasOwnProperty("precedingDateRange")) {
+                                var error = $root.google.cloud.channel.v1.DateRange.verify(message.precedingDateRange);
+                                if (error)
+                                    return "precedingDateRange." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReportResultsMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ReportResultsMetadata} ReportResultsMetadata
+                         */
+                        ReportResultsMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ReportResultsMetadata)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ReportResultsMetadata();
+                            if (object.report != null) {
+                                if (typeof object.report !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ReportResultsMetadata.report: object expected");
+                                message.report = $root.google.cloud.channel.v1.Report.fromObject(object.report);
+                            }
+                            if (object.rowCount != null)
+                                if ($util.Long)
+                                    (message.rowCount = $util.Long.fromValue(object.rowCount)).unsigned = false;
+                                else if (typeof object.rowCount === "string")
+                                    message.rowCount = parseInt(object.rowCount, 10);
+                                else if (typeof object.rowCount === "number")
+                                    message.rowCount = object.rowCount;
+                                else if (typeof object.rowCount === "object")
+                                    message.rowCount = new $util.LongBits(object.rowCount.low >>> 0, object.rowCount.high >>> 0).toNumber();
+                            if (object.dateRange != null) {
+                                if (typeof object.dateRange !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ReportResultsMetadata.dateRange: object expected");
+                                message.dateRange = $root.google.cloud.channel.v1.DateRange.fromObject(object.dateRange);
+                            }
+                            if (object.precedingDateRange != null) {
+                                if (typeof object.precedingDateRange !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ReportResultsMetadata.precedingDateRange: object expected");
+                                message.precedingDateRange = $root.google.cloud.channel.v1.DateRange.fromObject(object.precedingDateRange);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReportResultsMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @static
+                         * @param {google.cloud.channel.v1.ReportResultsMetadata} message ReportResultsMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReportResultsMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.report = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.rowCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.rowCount = options.longs === String ? "0" : 0;
+                                object.dateRange = null;
+                                object.precedingDateRange = null;
+                            }
+                            if (message.report != null && message.hasOwnProperty("report"))
+                                object.report = $root.google.cloud.channel.v1.Report.toObject(message.report, options);
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount"))
+                                if (typeof message.rowCount === "number")
+                                    object.rowCount = options.longs === String ? String(message.rowCount) : message.rowCount;
+                                else
+                                    object.rowCount = options.longs === String ? $util.Long.prototype.toString.call(message.rowCount) : options.longs === Number ? new $util.LongBits(message.rowCount.low >>> 0, message.rowCount.high >>> 0).toNumber() : message.rowCount;
+                            if (message.dateRange != null && message.hasOwnProperty("dateRange"))
+                                object.dateRange = $root.google.cloud.channel.v1.DateRange.toObject(message.dateRange, options);
+                            if (message.precedingDateRange != null && message.hasOwnProperty("precedingDateRange"))
+                                object.precedingDateRange = $root.google.cloud.channel.v1.DateRange.toObject(message.precedingDateRange, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReportResultsMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReportResultsMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReportResultsMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ReportResultsMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReportResultsMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ReportResultsMetadata";
+                        };
+    
+                        return ReportResultsMetadata;
+                    })();
+    
+                    v1.Column = (function() {
+    
+                        /**
+                         * Properties of a Column.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IColumn
+                         * @property {string|null} [columnId] Column columnId
+                         * @property {string|null} [displayName] Column displayName
+                         * @property {google.cloud.channel.v1.Column.DataType|null} [dataType] Column dataType
+                         */
+    
+                        /**
+                         * Constructs a new Column.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a Column.
+                         * @implements IColumn
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IColumn=} [properties] Properties to set
+                         */
+                        function Column(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Column columnId.
+                         * @member {string} columnId
+                         * @memberof google.cloud.channel.v1.Column
+                         * @instance
+                         */
+                        Column.prototype.columnId = "";
+    
+                        /**
+                         * Column displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.channel.v1.Column
+                         * @instance
+                         */
+                        Column.prototype.displayName = "";
+    
+                        /**
+                         * Column dataType.
+                         * @member {google.cloud.channel.v1.Column.DataType} dataType
+                         * @memberof google.cloud.channel.v1.Column
+                         * @instance
+                         */
+                        Column.prototype.dataType = 0;
+    
+                        /**
+                         * Creates a new Column instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.Column
+                         * @static
+                         * @param {google.cloud.channel.v1.IColumn=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.Column} Column instance
+                         */
+                        Column.create = function create(properties) {
+                            return new Column(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Column message. Does not implicitly {@link google.cloud.channel.v1.Column.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.Column
+                         * @static
+                         * @param {google.cloud.channel.v1.IColumn} message Column message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Column.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.columnId != null && Object.hasOwnProperty.call(message, "columnId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.columnId);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.dataType != null && Object.hasOwnProperty.call(message, "dataType"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.dataType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Column message, length delimited. Does not implicitly {@link google.cloud.channel.v1.Column.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.Column
+                         * @static
+                         * @param {google.cloud.channel.v1.IColumn} message Column message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Column.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Column message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.Column
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.Column} Column
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Column.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.Column();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.columnId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.dataType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Column message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.Column
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.Column} Column
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Column.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Column message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.Column
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Column.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.columnId != null && message.hasOwnProperty("columnId"))
+                                if (!$util.isString(message.columnId))
+                                    return "columnId: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.dataType != null && message.hasOwnProperty("dataType"))
+                                switch (message.dataType) {
+                                default:
+                                    return "dataType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Column message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.Column
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.Column} Column
+                         */
+                        Column.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.Column)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.Column();
+                            if (object.columnId != null)
+                                message.columnId = String(object.columnId);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            switch (object.dataType) {
+                            case "DATA_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.dataType = 0;
+                                break;
+                            case "STRING":
+                            case 1:
+                                message.dataType = 1;
+                                break;
+                            case "INT":
+                            case 2:
+                                message.dataType = 2;
+                                break;
+                            case "DECIMAL":
+                            case 3:
+                                message.dataType = 3;
+                                break;
+                            case "MONEY":
+                            case 4:
+                                message.dataType = 4;
+                                break;
+                            case "DATE":
+                            case 5:
+                                message.dataType = 5;
+                                break;
+                            case "DATE_TIME":
+                            case 6:
+                                message.dataType = 6;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Column message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.Column
+                         * @static
+                         * @param {google.cloud.channel.v1.Column} message Column
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Column.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.columnId = "";
+                                object.displayName = "";
+                                object.dataType = options.enums === String ? "DATA_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.columnId != null && message.hasOwnProperty("columnId"))
+                                object.columnId = message.columnId;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.dataType != null && message.hasOwnProperty("dataType"))
+                                object.dataType = options.enums === String ? $root.google.cloud.channel.v1.Column.DataType[message.dataType] : message.dataType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Column to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.Column
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Column.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Column
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.Column
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Column.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.Column";
+                        };
+    
+                        /**
+                         * DataType enum.
+                         * @name google.cloud.channel.v1.Column.DataType
+                         * @enum {number}
+                         * @property {number} DATA_TYPE_UNSPECIFIED=0 DATA_TYPE_UNSPECIFIED value
+                         * @property {number} STRING=1 STRING value
+                         * @property {number} INT=2 INT value
+                         * @property {number} DECIMAL=3 DECIMAL value
+                         * @property {number} MONEY=4 MONEY value
+                         * @property {number} DATE=5 DATE value
+                         * @property {number} DATE_TIME=6 DATE_TIME value
+                         */
+                        Column.DataType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DATA_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STRING"] = 1;
+                            values[valuesById[2] = "INT"] = 2;
+                            values[valuesById[3] = "DECIMAL"] = 3;
+                            values[valuesById[4] = "MONEY"] = 4;
+                            values[valuesById[5] = "DATE"] = 5;
+                            values[valuesById[6] = "DATE_TIME"] = 6;
+                            return values;
+                        })();
+    
+                        return Column;
+                    })();
+    
+                    v1.DateRange = (function() {
+    
+                        /**
+                         * Properties of a DateRange.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IDateRange
+                         * @property {google.type.IDateTime|null} [usageStartDateTime] DateRange usageStartDateTime
+                         * @property {google.type.IDateTime|null} [usageEndDateTime] DateRange usageEndDateTime
+                         * @property {google.type.IDate|null} [invoiceStartDate] DateRange invoiceStartDate
+                         * @property {google.type.IDate|null} [invoiceEndDate] DateRange invoiceEndDate
+                         */
+    
+                        /**
+                         * Constructs a new DateRange.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a DateRange.
+                         * @implements IDateRange
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IDateRange=} [properties] Properties to set
+                         */
+                        function DateRange(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DateRange usageStartDateTime.
+                         * @member {google.type.IDateTime|null|undefined} usageStartDateTime
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @instance
+                         */
+                        DateRange.prototype.usageStartDateTime = null;
+    
+                        /**
+                         * DateRange usageEndDateTime.
+                         * @member {google.type.IDateTime|null|undefined} usageEndDateTime
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @instance
+                         */
+                        DateRange.prototype.usageEndDateTime = null;
+    
+                        /**
+                         * DateRange invoiceStartDate.
+                         * @member {google.type.IDate|null|undefined} invoiceStartDate
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @instance
+                         */
+                        DateRange.prototype.invoiceStartDate = null;
+    
+                        /**
+                         * DateRange invoiceEndDate.
+                         * @member {google.type.IDate|null|undefined} invoiceEndDate
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @instance
+                         */
+                        DateRange.prototype.invoiceEndDate = null;
+    
+                        /**
+                         * Creates a new DateRange instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @static
+                         * @param {google.cloud.channel.v1.IDateRange=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.DateRange} DateRange instance
+                         */
+                        DateRange.create = function create(properties) {
+                            return new DateRange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DateRange message. Does not implicitly {@link google.cloud.channel.v1.DateRange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @static
+                         * @param {google.cloud.channel.v1.IDateRange} message DateRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DateRange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.usageStartDateTime != null && Object.hasOwnProperty.call(message, "usageStartDateTime"))
+                                $root.google.type.DateTime.encode(message.usageStartDateTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.usageEndDateTime != null && Object.hasOwnProperty.call(message, "usageEndDateTime"))
+                                $root.google.type.DateTime.encode(message.usageEndDateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.invoiceStartDate != null && Object.hasOwnProperty.call(message, "invoiceStartDate"))
+                                $root.google.type.Date.encode(message.invoiceStartDate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.invoiceEndDate != null && Object.hasOwnProperty.call(message, "invoiceEndDate"))
+                                $root.google.type.Date.encode(message.invoiceEndDate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DateRange message, length delimited. Does not implicitly {@link google.cloud.channel.v1.DateRange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @static
+                         * @param {google.cloud.channel.v1.IDateRange} message DateRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DateRange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DateRange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.DateRange} DateRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DateRange.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.DateRange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.usageStartDateTime = $root.google.type.DateTime.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.usageEndDateTime = $root.google.type.DateTime.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.invoiceStartDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.invoiceEndDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DateRange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.DateRange} DateRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DateRange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DateRange message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DateRange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.usageStartDateTime != null && message.hasOwnProperty("usageStartDateTime")) {
+                                var error = $root.google.type.DateTime.verify(message.usageStartDateTime);
+                                if (error)
+                                    return "usageStartDateTime." + error;
+                            }
+                            if (message.usageEndDateTime != null && message.hasOwnProperty("usageEndDateTime")) {
+                                var error = $root.google.type.DateTime.verify(message.usageEndDateTime);
+                                if (error)
+                                    return "usageEndDateTime." + error;
+                            }
+                            if (message.invoiceStartDate != null && message.hasOwnProperty("invoiceStartDate")) {
+                                var error = $root.google.type.Date.verify(message.invoiceStartDate);
+                                if (error)
+                                    return "invoiceStartDate." + error;
+                            }
+                            if (message.invoiceEndDate != null && message.hasOwnProperty("invoiceEndDate")) {
+                                var error = $root.google.type.Date.verify(message.invoiceEndDate);
+                                if (error)
+                                    return "invoiceEndDate." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DateRange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.DateRange} DateRange
+                         */
+                        DateRange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.DateRange)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.DateRange();
+                            if (object.usageStartDateTime != null) {
+                                if (typeof object.usageStartDateTime !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.DateRange.usageStartDateTime: object expected");
+                                message.usageStartDateTime = $root.google.type.DateTime.fromObject(object.usageStartDateTime);
+                            }
+                            if (object.usageEndDateTime != null) {
+                                if (typeof object.usageEndDateTime !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.DateRange.usageEndDateTime: object expected");
+                                message.usageEndDateTime = $root.google.type.DateTime.fromObject(object.usageEndDateTime);
+                            }
+                            if (object.invoiceStartDate != null) {
+                                if (typeof object.invoiceStartDate !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.DateRange.invoiceStartDate: object expected");
+                                message.invoiceStartDate = $root.google.type.Date.fromObject(object.invoiceStartDate);
+                            }
+                            if (object.invoiceEndDate != null) {
+                                if (typeof object.invoiceEndDate !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.DateRange.invoiceEndDate: object expected");
+                                message.invoiceEndDate = $root.google.type.Date.fromObject(object.invoiceEndDate);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DateRange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @static
+                         * @param {google.cloud.channel.v1.DateRange} message DateRange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DateRange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.usageStartDateTime = null;
+                                object.usageEndDateTime = null;
+                                object.invoiceStartDate = null;
+                                object.invoiceEndDate = null;
+                            }
+                            if (message.usageStartDateTime != null && message.hasOwnProperty("usageStartDateTime"))
+                                object.usageStartDateTime = $root.google.type.DateTime.toObject(message.usageStartDateTime, options);
+                            if (message.usageEndDateTime != null && message.hasOwnProperty("usageEndDateTime"))
+                                object.usageEndDateTime = $root.google.type.DateTime.toObject(message.usageEndDateTime, options);
+                            if (message.invoiceStartDate != null && message.hasOwnProperty("invoiceStartDate"))
+                                object.invoiceStartDate = $root.google.type.Date.toObject(message.invoiceStartDate, options);
+                            if (message.invoiceEndDate != null && message.hasOwnProperty("invoiceEndDate"))
+                                object.invoiceEndDate = $root.google.type.Date.toObject(message.invoiceEndDate, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DateRange to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DateRange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DateRange
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.DateRange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DateRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.DateRange";
+                        };
+    
+                        return DateRange;
+                    })();
+    
+                    v1.Row = (function() {
+    
+                        /**
+                         * Properties of a Row.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IRow
+                         * @property {Array.<google.cloud.channel.v1.IReportValue>|null} [values] Row values
+                         */
+    
+                        /**
+                         * Constructs a new Row.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a Row.
+                         * @implements IRow
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IRow=} [properties] Properties to set
+                         */
+                        function Row(properties) {
+                            this.values = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Row values.
+                         * @member {Array.<google.cloud.channel.v1.IReportValue>} values
+                         * @memberof google.cloud.channel.v1.Row
+                         * @instance
+                         */
+                        Row.prototype.values = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Row instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.Row
+                         * @static
+                         * @param {google.cloud.channel.v1.IRow=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.Row} Row instance
+                         */
+                        Row.create = function create(properties) {
+                            return new Row(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Row message. Does not implicitly {@link google.cloud.channel.v1.Row.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.Row
+                         * @static
+                         * @param {google.cloud.channel.v1.IRow} message Row message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Row.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.values != null && message.values.length)
+                                for (var i = 0; i < message.values.length; ++i)
+                                    $root.google.cloud.channel.v1.ReportValue.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Row message, length delimited. Does not implicitly {@link google.cloud.channel.v1.Row.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.Row
+                         * @static
+                         * @param {google.cloud.channel.v1.IRow} message Row message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Row.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Row message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.Row
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.Row} Row
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Row.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.Row();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.values && message.values.length))
+                                            message.values = [];
+                                        message.values.push($root.google.cloud.channel.v1.ReportValue.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Row message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.Row
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.Row} Row
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Row.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Row message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.Row
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Row.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.values != null && message.hasOwnProperty("values")) {
+                                if (!Array.isArray(message.values))
+                                    return "values: array expected";
+                                for (var i = 0; i < message.values.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.ReportValue.verify(message.values[i]);
+                                    if (error)
+                                        return "values." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Row message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.Row
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.Row} Row
+                         */
+                        Row.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.Row)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.Row();
+                            if (object.values) {
+                                if (!Array.isArray(object.values))
+                                    throw TypeError(".google.cloud.channel.v1.Row.values: array expected");
+                                message.values = [];
+                                for (var i = 0; i < object.values.length; ++i) {
+                                    if (typeof object.values[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.Row.values: object expected");
+                                    message.values[i] = $root.google.cloud.channel.v1.ReportValue.fromObject(object.values[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Row message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.Row
+                         * @static
+                         * @param {google.cloud.channel.v1.Row} message Row
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Row.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.values = [];
+                            if (message.values && message.values.length) {
+                                object.values = [];
+                                for (var j = 0; j < message.values.length; ++j)
+                                    object.values[j] = $root.google.cloud.channel.v1.ReportValue.toObject(message.values[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Row to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.Row
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Row.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Row
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.Row
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Row.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.Row";
+                        };
+    
+                        return Row;
+                    })();
+    
+                    v1.ReportValue = (function() {
+    
+                        /**
+                         * Properties of a ReportValue.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IReportValue
+                         * @property {string|null} [stringValue] ReportValue stringValue
+                         * @property {number|Long|null} [intValue] ReportValue intValue
+                         * @property {google.type.IDecimal|null} [decimalValue] ReportValue decimalValue
+                         * @property {google.type.IMoney|null} [moneyValue] ReportValue moneyValue
+                         * @property {google.type.IDate|null} [dateValue] ReportValue dateValue
+                         * @property {google.type.IDateTime|null} [dateTimeValue] ReportValue dateTimeValue
+                         */
+    
+                        /**
+                         * Constructs a new ReportValue.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ReportValue.
+                         * @implements IReportValue
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IReportValue=} [properties] Properties to set
+                         */
+                        function ReportValue(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReportValue stringValue.
+                         * @member {string|null|undefined} stringValue
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @instance
+                         */
+                        ReportValue.prototype.stringValue = null;
+    
+                        /**
+                         * ReportValue intValue.
+                         * @member {number|Long|null|undefined} intValue
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @instance
+                         */
+                        ReportValue.prototype.intValue = null;
+    
+                        /**
+                         * ReportValue decimalValue.
+                         * @member {google.type.IDecimal|null|undefined} decimalValue
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @instance
+                         */
+                        ReportValue.prototype.decimalValue = null;
+    
+                        /**
+                         * ReportValue moneyValue.
+                         * @member {google.type.IMoney|null|undefined} moneyValue
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @instance
+                         */
+                        ReportValue.prototype.moneyValue = null;
+    
+                        /**
+                         * ReportValue dateValue.
+                         * @member {google.type.IDate|null|undefined} dateValue
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @instance
+                         */
+                        ReportValue.prototype.dateValue = null;
+    
+                        /**
+                         * ReportValue dateTimeValue.
+                         * @member {google.type.IDateTime|null|undefined} dateTimeValue
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @instance
+                         */
+                        ReportValue.prototype.dateTimeValue = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ReportValue value.
+                         * @member {"stringValue"|"intValue"|"decimalValue"|"moneyValue"|"dateValue"|"dateTimeValue"|undefined} value
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @instance
+                         */
+                        Object.defineProperty(ReportValue.prototype, "value", {
+                            get: $util.oneOfGetter($oneOfFields = ["stringValue", "intValue", "decimalValue", "moneyValue", "dateValue", "dateTimeValue"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ReportValue instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @static
+                         * @param {google.cloud.channel.v1.IReportValue=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ReportValue} ReportValue instance
+                         */
+                        ReportValue.create = function create(properties) {
+                            return new ReportValue(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReportValue message. Does not implicitly {@link google.cloud.channel.v1.ReportValue.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @static
+                         * @param {google.cloud.channel.v1.IReportValue} message ReportValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportValue.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.stringValue);
+                            if (message.intValue != null && Object.hasOwnProperty.call(message, "intValue"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.intValue);
+                            if (message.decimalValue != null && Object.hasOwnProperty.call(message, "decimalValue"))
+                                $root.google.type.Decimal.encode(message.decimalValue, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.moneyValue != null && Object.hasOwnProperty.call(message, "moneyValue"))
+                                $root.google.type.Money.encode(message.moneyValue, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.dateValue != null && Object.hasOwnProperty.call(message, "dateValue"))
+                                $root.google.type.Date.encode(message.dateValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.dateTimeValue != null && Object.hasOwnProperty.call(message, "dateTimeValue"))
+                                $root.google.type.DateTime.encode(message.dateTimeValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReportValue message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ReportValue.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @static
+                         * @param {google.cloud.channel.v1.IReportValue} message ReportValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportValue.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReportValue message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ReportValue} ReportValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportValue.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ReportValue();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.stringValue = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.intValue = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.decimalValue = $root.google.type.Decimal.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.moneyValue = $root.google.type.Money.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.dateValue = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.dateTimeValue = $root.google.type.DateTime.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReportValue message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ReportValue} ReportValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportValue.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReportValue message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReportValue.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                                properties.value = 1;
+                                if (!$util.isString(message.stringValue))
+                                    return "stringValue: string expected";
+                            }
+                            if (message.intValue != null && message.hasOwnProperty("intValue")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                if (!$util.isInteger(message.intValue) && !(message.intValue && $util.isInteger(message.intValue.low) && $util.isInteger(message.intValue.high)))
+                                    return "intValue: integer|Long expected";
+                            }
+                            if (message.decimalValue != null && message.hasOwnProperty("decimalValue")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                {
+                                    var error = $root.google.type.Decimal.verify(message.decimalValue);
+                                    if (error)
+                                        return "decimalValue." + error;
+                                }
+                            }
+                            if (message.moneyValue != null && message.hasOwnProperty("moneyValue")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                {
+                                    var error = $root.google.type.Money.verify(message.moneyValue);
+                                    if (error)
+                                        return "moneyValue." + error;
+                                }
+                            }
+                            if (message.dateValue != null && message.hasOwnProperty("dateValue")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                {
+                                    var error = $root.google.type.Date.verify(message.dateValue);
+                                    if (error)
+                                        return "dateValue." + error;
+                                }
+                            }
+                            if (message.dateTimeValue != null && message.hasOwnProperty("dateTimeValue")) {
+                                if (properties.value === 1)
+                                    return "value: multiple values";
+                                properties.value = 1;
+                                {
+                                    var error = $root.google.type.DateTime.verify(message.dateTimeValue);
+                                    if (error)
+                                        return "dateTimeValue." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReportValue message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ReportValue} ReportValue
+                         */
+                        ReportValue.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ReportValue)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ReportValue();
+                            if (object.stringValue != null)
+                                message.stringValue = String(object.stringValue);
+                            if (object.intValue != null)
+                                if ($util.Long)
+                                    (message.intValue = $util.Long.fromValue(object.intValue)).unsigned = false;
+                                else if (typeof object.intValue === "string")
+                                    message.intValue = parseInt(object.intValue, 10);
+                                else if (typeof object.intValue === "number")
+                                    message.intValue = object.intValue;
+                                else if (typeof object.intValue === "object")
+                                    message.intValue = new $util.LongBits(object.intValue.low >>> 0, object.intValue.high >>> 0).toNumber();
+                            if (object.decimalValue != null) {
+                                if (typeof object.decimalValue !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ReportValue.decimalValue: object expected");
+                                message.decimalValue = $root.google.type.Decimal.fromObject(object.decimalValue);
+                            }
+                            if (object.moneyValue != null) {
+                                if (typeof object.moneyValue !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ReportValue.moneyValue: object expected");
+                                message.moneyValue = $root.google.type.Money.fromObject(object.moneyValue);
+                            }
+                            if (object.dateValue != null) {
+                                if (typeof object.dateValue !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ReportValue.dateValue: object expected");
+                                message.dateValue = $root.google.type.Date.fromObject(object.dateValue);
+                            }
+                            if (object.dateTimeValue != null) {
+                                if (typeof object.dateTimeValue !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ReportValue.dateTimeValue: object expected");
+                                message.dateTimeValue = $root.google.type.DateTime.fromObject(object.dateTimeValue);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReportValue message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @static
+                         * @param {google.cloud.channel.v1.ReportValue} message ReportValue
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReportValue.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                                object.stringValue = message.stringValue;
+                                if (options.oneofs)
+                                    object.value = "stringValue";
+                            }
+                            if (message.intValue != null && message.hasOwnProperty("intValue")) {
+                                if (typeof message.intValue === "number")
+                                    object.intValue = options.longs === String ? String(message.intValue) : message.intValue;
+                                else
+                                    object.intValue = options.longs === String ? $util.Long.prototype.toString.call(message.intValue) : options.longs === Number ? new $util.LongBits(message.intValue.low >>> 0, message.intValue.high >>> 0).toNumber() : message.intValue;
+                                if (options.oneofs)
+                                    object.value = "intValue";
+                            }
+                            if (message.decimalValue != null && message.hasOwnProperty("decimalValue")) {
+                                object.decimalValue = $root.google.type.Decimal.toObject(message.decimalValue, options);
+                                if (options.oneofs)
+                                    object.value = "decimalValue";
+                            }
+                            if (message.moneyValue != null && message.hasOwnProperty("moneyValue")) {
+                                object.moneyValue = $root.google.type.Money.toObject(message.moneyValue, options);
+                                if (options.oneofs)
+                                    object.value = "moneyValue";
+                            }
+                            if (message.dateValue != null && message.hasOwnProperty("dateValue")) {
+                                object.dateValue = $root.google.type.Date.toObject(message.dateValue, options);
+                                if (options.oneofs)
+                                    object.value = "dateValue";
+                            }
+                            if (message.dateTimeValue != null && message.hasOwnProperty("dateTimeValue")) {
+                                object.dateTimeValue = $root.google.type.DateTime.toObject(message.dateTimeValue, options);
+                                if (options.oneofs)
+                                    object.value = "dateTimeValue";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReportValue to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReportValue.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReportValue
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ReportValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReportValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ReportValue";
+                        };
+    
+                        return ReportValue;
+                    })();
+    
+                    v1.ReportStatus = (function() {
+    
+                        /**
+                         * Properties of a ReportStatus.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IReportStatus
+                         * @property {google.cloud.channel.v1.ReportStatus.State|null} [state] ReportStatus state
+                         * @property {google.protobuf.ITimestamp|null} [startTime] ReportStatus startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] ReportStatus endTime
+                         */
+    
+                        /**
+                         * Constructs a new ReportStatus.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a ReportStatus.
+                         * @implements IReportStatus
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IReportStatus=} [properties] Properties to set
+                         */
+                        function ReportStatus(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReportStatus state.
+                         * @member {google.cloud.channel.v1.ReportStatus.State} state
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @instance
+                         */
+                        ReportStatus.prototype.state = 0;
+    
+                        /**
+                         * ReportStatus startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @instance
+                         */
+                        ReportStatus.prototype.startTime = null;
+    
+                        /**
+                         * ReportStatus endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @instance
+                         */
+                        ReportStatus.prototype.endTime = null;
+    
+                        /**
+                         * Creates a new ReportStatus instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @static
+                         * @param {google.cloud.channel.v1.IReportStatus=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ReportStatus} ReportStatus instance
+                         */
+                        ReportStatus.create = function create(properties) {
+                            return new ReportStatus(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReportStatus message. Does not implicitly {@link google.cloud.channel.v1.ReportStatus.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @static
+                         * @param {google.cloud.channel.v1.IReportStatus} message ReportStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportStatus.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReportStatus message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ReportStatus.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @static
+                         * @param {google.cloud.channel.v1.IReportStatus} message ReportStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReportStatus message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ReportStatus} ReportStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportStatus.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ReportStatus();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReportStatus message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ReportStatus} ReportStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportStatus.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReportStatus message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReportStatus.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReportStatus message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ReportStatus} ReportStatus
+                         */
+                        ReportStatus.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ReportStatus)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ReportStatus();
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "STARTED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "WRITING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "AVAILABLE":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FAILED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ReportStatus.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.ReportStatus.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReportStatus message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @static
+                         * @param {google.cloud.channel.v1.ReportStatus} message ReportStatus
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReportStatus.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.startTime = null;
+                                object.endTime = null;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.channel.v1.ReportStatus.State[message.state] : message.state;
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReportStatus to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReportStatus.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReportStatus
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.ReportStatus
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReportStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.ReportStatus";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.channel.v1.ReportStatus.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} STARTED=1 STARTED value
+                         * @property {number} WRITING=2 WRITING value
+                         * @property {number} AVAILABLE=3 AVAILABLE value
+                         * @property {number} FAILED=4 FAILED value
+                         */
+                        ReportStatus.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STARTED"] = 1;
+                            values[valuesById[2] = "WRITING"] = 2;
+                            values[valuesById[3] = "AVAILABLE"] = 3;
+                            values[valuesById[4] = "FAILED"] = 4;
+                            return values;
+                        })();
+    
+                        return ReportStatus;
+                    })();
+    
+                    v1.Report = (function() {
+    
+                        /**
+                         * Properties of a Report.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IReport
+                         * @property {string|null} [name] Report name
+                         * @property {string|null} [displayName] Report displayName
+                         * @property {Array.<google.cloud.channel.v1.IColumn>|null} [columns] Report columns
+                         * @property {string|null} [description] Report description
+                         */
+    
+                        /**
+                         * Constructs a new Report.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a Report.
+                         * @implements IReport
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IReport=} [properties] Properties to set
+                         */
+                        function Report(properties) {
+                            this.columns = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Report name.
+                         * @member {string} name
+                         * @memberof google.cloud.channel.v1.Report
+                         * @instance
+                         */
+                        Report.prototype.name = "";
+    
+                        /**
+                         * Report displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.channel.v1.Report
+                         * @instance
+                         */
+                        Report.prototype.displayName = "";
+    
+                        /**
+                         * Report columns.
+                         * @member {Array.<google.cloud.channel.v1.IColumn>} columns
+                         * @memberof google.cloud.channel.v1.Report
+                         * @instance
+                         */
+                        Report.prototype.columns = $util.emptyArray;
+    
+                        /**
+                         * Report description.
+                         * @member {string} description
+                         * @memberof google.cloud.channel.v1.Report
+                         * @instance
+                         */
+                        Report.prototype.description = "";
+    
+                        /**
+                         * Creates a new Report instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.Report
+                         * @static
+                         * @param {google.cloud.channel.v1.IReport=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.Report} Report instance
+                         */
+                        Report.create = function create(properties) {
+                            return new Report(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Report message. Does not implicitly {@link google.cloud.channel.v1.Report.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.Report
+                         * @static
+                         * @param {google.cloud.channel.v1.IReport} message Report message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Report.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.columns != null && message.columns.length)
+                                for (var i = 0; i < message.columns.length; ++i)
+                                    $root.google.cloud.channel.v1.Column.encode(message.columns[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Report message, length delimited. Does not implicitly {@link google.cloud.channel.v1.Report.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.Report
+                         * @static
+                         * @param {google.cloud.channel.v1.IReport} message Report message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Report.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Report message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.Report
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.Report} Report
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Report.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.Report();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.columns && message.columns.length))
+                                            message.columns = [];
+                                        message.columns.push($root.google.cloud.channel.v1.Column.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Report message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.Report
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.Report} Report
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Report.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Report message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.Report
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Report.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.columns != null && message.hasOwnProperty("columns")) {
+                                if (!Array.isArray(message.columns))
+                                    return "columns: array expected";
+                                for (var i = 0; i < message.columns.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.Column.verify(message.columns[i]);
+                                    if (error)
+                                        return "columns." + error;
+                                }
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Report message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.Report
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.Report} Report
+                         */
+                        Report.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.Report)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.Report();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.columns) {
+                                if (!Array.isArray(object.columns))
+                                    throw TypeError(".google.cloud.channel.v1.Report.columns: array expected");
+                                message.columns = [];
+                                for (var i = 0; i < object.columns.length; ++i) {
+                                    if (typeof object.columns[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.Report.columns: object expected");
+                                    message.columns[i] = $root.google.cloud.channel.v1.Column.fromObject(object.columns[i]);
+                                }
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Report message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.Report
+                         * @static
+                         * @param {google.cloud.channel.v1.Report} message Report
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Report.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.columns = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.description = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.columns && message.columns.length) {
+                                object.columns = [];
+                                for (var j = 0; j < message.columns.length; ++j)
+                                    object.columns[j] = $root.google.cloud.channel.v1.Column.toObject(message.columns[j], options);
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Report to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.Report
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Report.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Report
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.Report
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Report.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.Report";
+                        };
+    
+                        return Report;
                     })();
     
                     /**
@@ -44707,6 +48793,658 @@
                 };
     
                 return Date;
+            })();
+    
+            type.DateTime = (function() {
+    
+                /**
+                 * Properties of a DateTime.
+                 * @memberof google.type
+                 * @interface IDateTime
+                 * @property {number|null} [year] DateTime year
+                 * @property {number|null} [month] DateTime month
+                 * @property {number|null} [day] DateTime day
+                 * @property {number|null} [hours] DateTime hours
+                 * @property {number|null} [minutes] DateTime minutes
+                 * @property {number|null} [seconds] DateTime seconds
+                 * @property {number|null} [nanos] DateTime nanos
+                 * @property {google.protobuf.IDuration|null} [utcOffset] DateTime utcOffset
+                 * @property {google.type.ITimeZone|null} [timeZone] DateTime timeZone
+                 */
+    
+                /**
+                 * Constructs a new DateTime.
+                 * @memberof google.type
+                 * @classdesc Represents a DateTime.
+                 * @implements IDateTime
+                 * @constructor
+                 * @param {google.type.IDateTime=} [properties] Properties to set
+                 */
+                function DateTime(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DateTime year.
+                 * @member {number} year
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.year = 0;
+    
+                /**
+                 * DateTime month.
+                 * @member {number} month
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.month = 0;
+    
+                /**
+                 * DateTime day.
+                 * @member {number} day
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.day = 0;
+    
+                /**
+                 * DateTime hours.
+                 * @member {number} hours
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.hours = 0;
+    
+                /**
+                 * DateTime minutes.
+                 * @member {number} minutes
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.minutes = 0;
+    
+                /**
+                 * DateTime seconds.
+                 * @member {number} seconds
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.seconds = 0;
+    
+                /**
+                 * DateTime nanos.
+                 * @member {number} nanos
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.nanos = 0;
+    
+                /**
+                 * DateTime utcOffset.
+                 * @member {google.protobuf.IDuration|null|undefined} utcOffset
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.utcOffset = null;
+    
+                /**
+                 * DateTime timeZone.
+                 * @member {google.type.ITimeZone|null|undefined} timeZone
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.timeZone = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * DateTime timeOffset.
+                 * @member {"utcOffset"|"timeZone"|undefined} timeOffset
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                Object.defineProperty(DateTime.prototype, "timeOffset", {
+                    get: $util.oneOfGetter($oneOfFields = ["utcOffset", "timeZone"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new DateTime instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {google.type.IDateTime=} [properties] Properties to set
+                 * @returns {google.type.DateTime} DateTime instance
+                 */
+                DateTime.create = function create(properties) {
+                    return new DateTime(properties);
+                };
+    
+                /**
+                 * Encodes the specified DateTime message. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {google.type.IDateTime} message DateTime message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DateTime.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
+                    if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.hours);
+                    if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.minutes);
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.nanos);
+                    if (message.utcOffset != null && Object.hasOwnProperty.call(message, "utcOffset"))
+                        $root.google.protobuf.Duration.encode(message.utcOffset, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
+                        $root.google.type.TimeZone.encode(message.timeZone, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DateTime message, length delimited. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {google.type.IDateTime} message DateTime message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DateTime.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DateTime message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.DateTime} DateTime
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DateTime.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.DateTime();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.year = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.month = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.day = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.hours = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.minutes = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.seconds = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.utcOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                message.timeZone = $root.google.type.TimeZone.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DateTime message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.DateTime} DateTime
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DateTime.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DateTime message.
+                 * @function verify
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DateTime.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        if (!$util.isInteger(message.year))
+                            return "year: integer expected";
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        if (!$util.isInteger(message.month))
+                            return "month: integer expected";
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        if (!$util.isInteger(message.day))
+                            return "day: integer expected";
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        if (!$util.isInteger(message.hours))
+                            return "hours: integer expected";
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        if (!$util.isInteger(message.minutes))
+                            return "minutes: integer expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds))
+                            return "seconds: integer expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    if (message.utcOffset != null && message.hasOwnProperty("utcOffset")) {
+                        properties.timeOffset = 1;
+                        {
+                            var error = $root.google.protobuf.Duration.verify(message.utcOffset);
+                            if (error)
+                                return "utcOffset." + error;
+                        }
+                    }
+                    if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
+                        if (properties.timeOffset === 1)
+                            return "timeOffset: multiple values";
+                        properties.timeOffset = 1;
+                        {
+                            var error = $root.google.type.TimeZone.verify(message.timeZone);
+                            if (error)
+                                return "timeZone." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a DateTime message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.DateTime} DateTime
+                 */
+                DateTime.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.DateTime)
+                        return object;
+                    var message = new $root.google.type.DateTime();
+                    if (object.year != null)
+                        message.year = object.year | 0;
+                    if (object.month != null)
+                        message.month = object.month | 0;
+                    if (object.day != null)
+                        message.day = object.day | 0;
+                    if (object.hours != null)
+                        message.hours = object.hours | 0;
+                    if (object.minutes != null)
+                        message.minutes = object.minutes | 0;
+                    if (object.seconds != null)
+                        message.seconds = object.seconds | 0;
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    if (object.utcOffset != null) {
+                        if (typeof object.utcOffset !== "object")
+                            throw TypeError(".google.type.DateTime.utcOffset: object expected");
+                        message.utcOffset = $root.google.protobuf.Duration.fromObject(object.utcOffset);
+                    }
+                    if (object.timeZone != null) {
+                        if (typeof object.timeZone !== "object")
+                            throw TypeError(".google.type.DateTime.timeZone: object expected");
+                        message.timeZone = $root.google.type.TimeZone.fromObject(object.timeZone);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DateTime message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {google.type.DateTime} message DateTime
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DateTime.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.year = 0;
+                        object.month = 0;
+                        object.day = 0;
+                        object.hours = 0;
+                        object.minutes = 0;
+                        object.seconds = 0;
+                        object.nanos = 0;
+                    }
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        object.year = message.year;
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        object.month = message.month;
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        object.day = message.day;
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        object.hours = message.hours;
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        object.minutes = message.minutes;
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        object.seconds = message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    if (message.utcOffset != null && message.hasOwnProperty("utcOffset")) {
+                        object.utcOffset = $root.google.protobuf.Duration.toObject(message.utcOffset, options);
+                        if (options.oneofs)
+                            object.timeOffset = "utcOffset";
+                    }
+                    if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
+                        object.timeZone = $root.google.type.TimeZone.toObject(message.timeZone, options);
+                        if (options.oneofs)
+                            object.timeOffset = "timeZone";
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this DateTime to JSON.
+                 * @function toJSON
+                 * @memberof google.type.DateTime
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DateTime.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DateTime
+                 * @function getTypeUrl
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DateTime.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.DateTime";
+                };
+    
+                return DateTime;
+            })();
+    
+            type.TimeZone = (function() {
+    
+                /**
+                 * Properties of a TimeZone.
+                 * @memberof google.type
+                 * @interface ITimeZone
+                 * @property {string|null} [id] TimeZone id
+                 * @property {string|null} [version] TimeZone version
+                 */
+    
+                /**
+                 * Constructs a new TimeZone.
+                 * @memberof google.type
+                 * @classdesc Represents a TimeZone.
+                 * @implements ITimeZone
+                 * @constructor
+                 * @param {google.type.ITimeZone=} [properties] Properties to set
+                 */
+                function TimeZone(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TimeZone id.
+                 * @member {string} id
+                 * @memberof google.type.TimeZone
+                 * @instance
+                 */
+                TimeZone.prototype.id = "";
+    
+                /**
+                 * TimeZone version.
+                 * @member {string} version
+                 * @memberof google.type.TimeZone
+                 * @instance
+                 */
+                TimeZone.prototype.version = "";
+    
+                /**
+                 * Creates a new TimeZone instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {google.type.ITimeZone=} [properties] Properties to set
+                 * @returns {google.type.TimeZone} TimeZone instance
+                 */
+                TimeZone.create = function create(properties) {
+                    return new TimeZone(properties);
+                };
+    
+                /**
+                 * Encodes the specified TimeZone message. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {google.type.ITimeZone} message TimeZone message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeZone.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TimeZone message, length delimited. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {google.type.ITimeZone} message TimeZone message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeZone.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TimeZone message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.TimeZone} TimeZone
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeZone.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeZone();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.id = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.version = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TimeZone message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.TimeZone} TimeZone
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeZone.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TimeZone message.
+                 * @function verify
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TimeZone.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        if (!$util.isString(message.version))
+                            return "version: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TimeZone message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.TimeZone} TimeZone
+                 */
+                TimeZone.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.TimeZone)
+                        return object;
+                    var message = new $root.google.type.TimeZone();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    if (object.version != null)
+                        message.version = String(object.version);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TimeZone message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {google.type.TimeZone} message TimeZone
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TimeZone.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.id = "";
+                        object.version = "";
+                    }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        object.version = message.version;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TimeZone to JSON.
+                 * @function toJSON
+                 * @memberof google.type.TimeZone
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TimeZone.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TimeZone
+                 * @function getTypeUrl
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TimeZone.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.TimeZone";
+                };
+    
+                return TimeZone;
             })();
     
             type.Decimal = (function() {

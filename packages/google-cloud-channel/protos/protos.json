@@ -706,6 +706,10 @@
                           "rule": "repeated",
                           "type": "ParameterDefinition",
                           "id": 9
+                        },
+                        "dealCode": {
+                          "type": "string",
+                          "id": 12
                         }
                       }
                     },
@@ -986,6 +990,401 @@
                             "CHANGE_PARAMETERS": 15,
                             "PROVISION_CLOUD_IDENTITY": 16
                           }
+                        }
+                      }
+                    },
+                    "CloudChannelReportsService": {
+                      "options": {
+                        "(google.api.default_host)": "cloudchannel.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/apps.reports.usage.readonly"
+                      },
+                      "methods": {
+                        "RunReportJob": {
+                          "requestType": "RunReportJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=accounts/*/reports/*}:run",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "RunReportJobResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=accounts/*/reports/*}:run",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RunReportJobResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "FetchReportResults": {
+                          "requestType": "FetchReportResultsRequest",
+                          "responseType": "FetchReportResultsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{report_job=accounts/*/reportJobs/*}:fetchReportResults",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "report_job"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{report_job=accounts/*/reportJobs/*}:fetchReportResults",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "report_job"
+                            }
+                          ]
+                        },
+                        "ListReports": {
+                          "requestType": "ListReportsRequest",
+                          "responseType": "ListReportsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=accounts/*}/reports",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=accounts/*}/reports"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RunReportJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Report"
+                          }
+                        },
+                        "dateRange": {
+                          "type": "DateRange",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RunReportJobResponse": {
+                      "fields": {
+                        "reportJob": {
+                          "type": "ReportJob",
+                          "id": 1
+                        },
+                        "reportMetadata": {
+                          "type": "ReportResultsMetadata",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FetchReportResultsRequest": {
+                      "fields": {
+                        "reportJob": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/ReportJob"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FetchReportResultsResponse": {
+                      "fields": {
+                        "reportMetadata": {
+                          "type": "ReportResultsMetadata",
+                          "id": 1
+                        },
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListReportsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListReportsResponse": {
+                      "fields": {
+                        "reports": {
+                          "rule": "repeated",
+                          "type": "Report",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ReportJob": {
+                      "options": {
+                        "(google.api.resource).type": "cloudchannel.googleapis.com/ReportJob",
+                        "(google.api.resource).pattern": "accounts/{account}/reportJobs/{report_job}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "reportStatus": {
+                          "type": "ReportStatus",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ReportResultsMetadata": {
+                      "fields": {
+                        "report": {
+                          "type": "Report",
+                          "id": 1
+                        },
+                        "rowCount": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "dateRange": {
+                          "type": "DateRange",
+                          "id": 3
+                        },
+                        "precedingDateRange": {
+                          "type": "DateRange",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "Column": {
+                      "fields": {
+                        "columnId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "dataType": {
+                          "type": "DataType",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "DataType": {
+                          "values": {
+                            "DATA_TYPE_UNSPECIFIED": 0,
+                            "STRING": 1,
+                            "INT": 2,
+                            "DECIMAL": 3,
+                            "MONEY": 4,
+                            "DATE": 5,
+                            "DATE_TIME": 6
+                          }
+                        }
+                      }
+                    },
+                    "DateRange": {
+                      "fields": {
+                        "usageStartDateTime": {
+                          "type": "google.type.DateTime",
+                          "id": 1
+                        },
+                        "usageEndDateTime": {
+                          "type": "google.type.DateTime",
+                          "id": 2
+                        },
+                        "invoiceStartDate": {
+                          "type": "google.type.Date",
+                          "id": 3
+                        },
+                        "invoiceEndDate": {
+                          "type": "google.type.Date",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "Row": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "ReportValue",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ReportValue": {
+                      "oneofs": {
+                        "value": {
+                          "oneof": [
+                            "stringValue",
+                            "intValue",
+                            "decimalValue",
+                            "moneyValue",
+                            "dateValue",
+                            "dateTimeValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "stringValue": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "intValue": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "decimalValue": {
+                          "type": "google.type.Decimal",
+                          "id": 3
+                        },
+                        "moneyValue": {
+                          "type": "google.type.Money",
+                          "id": 4
+                        },
+                        "dateValue": {
+                          "type": "google.type.Date",
+                          "id": 5
+                        },
+                        "dateTimeValue": {
+                          "type": "google.type.DateTime",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ReportStatus": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STARTED": 1,
+                            "WRITING": 2,
+                            "AVAILABLE": 3,
+                            "FAILED": 4
+                          }
+                        }
+                      }
+                    },
+                    "Report": {
+                      "options": {
+                        "(google.api.resource).type": "cloudchannel.googleapis.com/Report",
+                        "(google.api.resource).pattern": "accounts/{account}/reports/{report}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "columns": {
+                          "rule": "repeated",
+                          "type": "Column",
+                          "id": 3
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -2297,7 +2696,10 @@
                         },
                         "authToken": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "languageCode": {
                           "type": "string",
@@ -2360,7 +2762,10 @@
                         },
                         "languageCode": {
                           "type": "string",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4796,6 +5201,66 @@
                 "day": {
                   "type": "int32",
                   "id": 3
+                }
+              }
+            },
+            "DateTime": {
+              "oneofs": {
+                "timeOffset": {
+                  "oneof": [
+                    "utcOffset",
+                    "timeZone"
+                  ]
+                }
+              },
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "hours": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "minutes": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "seconds": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "utcOffset": {
+                  "type": "google.protobuf.Duration",
+                  "id": 8
+                },
+                "timeZone": {
+                  "type": "TimeZone",
+                  "id": 9
+                }
+              }
+            },
+            "TimeZone": {
+              "fields": {
+                "id": {
+                  "type": "string",
+                  "id": 1
+                },
+                "version": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },

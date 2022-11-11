@@ -16,4 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {CloudChannelReportsServiceClient} from './cloud_channel_reports_service_client';
 export {CloudChannelServiceClient} from './cloud_channel_service_client';

@@ -218,6 +218,12 @@ export class CloudChannelServiceClient {
       productPathTemplate: new this._gaxModule.PathTemplate(
         'products/{product}'
       ),
+      reportPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/reports/{report}'
+      ),
+      reportJobPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/reportJobs/{report_job}'
+      ),
       skuPathTemplate: new this._gaxModule.PathTemplate(
         'products/{product}/skus/{sku}'
       ),
@@ -5506,8 +5512,8 @@ export class CloudChannelServiceClient {
    *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus} call.
    *   Optional.
-   * @param {string} request.authToken
-   *   The super admin of the resold customer generates this token to
+   * @param {string} [request.authToken]
+   *   Optional. The super admin of the resold customer generates this token to
    *   authorize a reseller to access their Cloud Identity and purchase
    *   entitlements on their behalf. You can omit this token after authorization.
    *   See https://support.google.com/a/answer/7643790 for more details.
@@ -5629,8 +5635,8 @@ export class CloudChannelServiceClient {
    *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus} call.
    *   Optional.
-   * @param {string} request.authToken
-   *   The super admin of the resold customer generates this token to
+   * @param {string} [request.authToken]
+   *   Optional. The super admin of the resold customer generates this token to
    *   authorize a reseller to access their Cloud Identity and purchase
    *   entitlements on their behalf. You can omit this token after authorization.
    *   See https://support.google.com/a/answer/7643790 for more details.
@@ -5700,8 +5706,8 @@ export class CloudChannelServiceClient {
    *   {@link google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token|ListTransferableSkusResponse.next_page_token} of the previous
    *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableSkus|CloudChannelService.ListTransferableSkus} call.
    *   Optional.
-   * @param {string} request.authToken
-   *   The super admin of the resold customer generates this token to
+   * @param {string} [request.authToken]
+   *   Optional. The super admin of the resold customer generates this token to
    *   authorize a reseller to access their Cloud Identity and purchase
    *   entitlements on their behalf. You can omit this token after authorization.
    *   See https://support.google.com/a/answer/7643790 for more details.
@@ -5756,7 +5762,8 @@ export class CloudChannelServiceClient {
    *
    * * PERMISSION_DENIED:
    *     * The customer doesn't belong to the reseller and has no auth token.
-   *     * The supplied auth token is invalid.
+   *     * The customer provided incorrect reseller information when generating
+   *     auth token.
    *     * The reseller account making the request is different
    *     from the reseller account in the query.
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
@@ -5784,8 +5791,8 @@ export class CloudChannelServiceClient {
    *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers} call.
    * @param {string} request.sku
    *   Required. The SKU to look up Offers for.
-   * @param {string} request.languageCode
-   *   The BCP-47 language code. For example, "en-US". The
+   * @param {string} [request.languageCode]
+   *   Optional. The BCP-47 language code. For example, "en-US". The
    *   response will localize in the corresponding language code, if specified.
    *   The default value is "en-US".
    * @param {object} [options]
@@ -5902,8 +5909,8 @@ export class CloudChannelServiceClient {
    *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers} call.
    * @param {string} request.sku
    *   Required. The SKU to look up Offers for.
-   * @param {string} request.languageCode
-   *   The BCP-47 language code. For example, "en-US". The
+   * @param {string} [request.languageCode]
+   *   Optional. The BCP-47 language code. For example, "en-US". The
    *   response will localize in the corresponding language code, if specified.
    *   The default value is "en-US".
    * @param {object} [options]
@@ -5964,8 +5971,8 @@ export class CloudChannelServiceClient {
    *   {@link google.cloud.channel.v1.CloudChannelService.ListTransferableOffers|CloudChannelService.ListTransferableOffers} call.
    * @param {string} request.sku
    *   Required. The SKU to look up Offers for.
-   * @param {string} request.languageCode
-   *   The BCP-47 language code. For example, "en-US". The
+   * @param {string} [request.languageCode]
+   *   Optional. The BCP-47 language code. For example, "en-US". The
    *   response will localize in the corresponding language code, if specified.
    *   The default value is "en-US".
    * @param {object} [options]
@@ -8589,6 +8596,80 @@ export class CloudChannelServiceClient {
    */
   matchProductFromProductName(productName: string) {
     return this.pathTemplates.productPathTemplate.match(productName).product;
+  }
+
+  /**
+   * Return a fully-qualified report resource name string.
+   *
+   * @param {string} account
+   * @param {string} report
+   * @returns {string} Resource name string.
+   */
+  reportPath(account: string, report: string) {
+    return this.pathTemplates.reportPathTemplate.render({
+      account: account,
+      report: report,
+    });
+  }
+
+  /**
+   * Parse the account from Report resource.
+   *
+   * @param {string} reportName
+   *   A fully-qualified path representing Report resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromReportName(reportName: string) {
+    return this.pathTemplates.reportPathTemplate.match(reportName).account;
+  }
+
+  /**
+   * Parse the report from Report resource.
+   *
+   * @param {string} reportName
+   *   A fully-qualified path representing Report resource.
+   * @returns {string} A string representing the report.
+   */
+  matchReportFromReportName(reportName: string) {
+    return this.pathTemplates.reportPathTemplate.match(reportName).report;
+  }
+
+  /**
+   * Return a fully-qualified reportJob resource name string.
+   *
+   * @param {string} account
+   * @param {string} report_job
+   * @returns {string} Resource name string.
+   */
+  reportJobPath(account: string, reportJob: string) {
+    return this.pathTemplates.reportJobPathTemplate.render({
+      account: account,
+      report_job: reportJob,
+    });
+  }
+
+  /**
+   * Parse the account from ReportJob resource.
+   *
+   * @param {string} reportJobName
+   *   A fully-qualified path representing ReportJob resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromReportJobName(reportJobName: string) {
+    return this.pathTemplates.reportJobPathTemplate.match(reportJobName)
+      .account;
+  }
+
+  /**
+   * Parse the report_job from ReportJob resource.
+   *
+   * @param {string} reportJobName
+   *   A fully-qualified path representing ReportJob resource.
+   * @returns {string} A string representing the report_job.
+   */
+  matchReportJobFromReportJobName(reportJobName: string) {
+    return this.pathTemplates.reportJobPathTemplate.match(reportJobName)
+      .report_job;
   }
 
   /**

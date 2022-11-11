@@ -2112,6 +2112,9 @@ export namespace google {
 
                     /** Offer parameterDefinitions */
                     parameterDefinitions?: (google.cloud.channel.v1.IParameterDefinition[]|null);
+
+                    /** Offer dealCode */
+                    dealCode?: (string|null);
                 }
 
                 /** Represents an Offer. */
@@ -2149,6 +2152,9 @@ export namespace google {
 
                     /** Offer parameterDefinitions. */
                     public parameterDefinitions: google.cloud.channel.v1.IParameterDefinition[];
+
+                    /** Offer dealCode. */
+                    public dealCode: string;
 
                     /**
                      * Creates a new Offer instance using the specified properties.
@@ -3800,6 +3806,1666 @@ export namespace google {
                         CHANGE_PARAMETERS = 15,
                         PROVISION_CLOUD_IDENTITY = 16
                     }
+                }
+
+                /** Represents a CloudChannelReportsService */
+                class CloudChannelReportsService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new CloudChannelReportsService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CloudChannelReportsService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CloudChannelReportsService;
+
+                    /**
+                     * Calls RunReportJob.
+                     * @param request RunReportJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public runReportJob(request: google.cloud.channel.v1.IRunReportJobRequest, callback: google.cloud.channel.v1.CloudChannelReportsService.RunReportJobCallback): void;
+
+                    /**
+                     * Calls RunReportJob.
+                     * @param request RunReportJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public runReportJob(request: google.cloud.channel.v1.IRunReportJobRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls FetchReportResults.
+                     * @param request FetchReportResultsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchReportResultsResponse
+                     */
+                    public fetchReportResults(request: google.cloud.channel.v1.IFetchReportResultsRequest, callback: google.cloud.channel.v1.CloudChannelReportsService.FetchReportResultsCallback): void;
+
+                    /**
+                     * Calls FetchReportResults.
+                     * @param request FetchReportResultsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchReportResults(request: google.cloud.channel.v1.IFetchReportResultsRequest): Promise<google.cloud.channel.v1.FetchReportResultsResponse>;
+
+                    /**
+                     * Calls ListReports.
+                     * @param request ListReportsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListReportsResponse
+                     */
+                    public listReports(request: google.cloud.channel.v1.IListReportsRequest, callback: google.cloud.channel.v1.CloudChannelReportsService.ListReportsCallback): void;
+
+                    /**
+                     * Calls ListReports.
+                     * @param request ListReportsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listReports(request: google.cloud.channel.v1.IListReportsRequest): Promise<google.cloud.channel.v1.ListReportsResponse>;
+                }
+
+                namespace CloudChannelReportsService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.channel.v1.CloudChannelReportsService|runReportJob}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RunReportJobCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.channel.v1.CloudChannelReportsService|fetchReportResults}.
+                     * @param error Error, if any
+                     * @param [response] FetchReportResultsResponse
+                     */
+                    type FetchReportResultsCallback = (error: (Error|null), response?: google.cloud.channel.v1.FetchReportResultsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.channel.v1.CloudChannelReportsService|listReports}.
+                     * @param error Error, if any
+                     * @param [response] ListReportsResponse
+                     */
+                    type ListReportsCallback = (error: (Error|null), response?: google.cloud.channel.v1.ListReportsResponse) => void;
+                }
+
+                /** Properties of a RunReportJobRequest. */
+                interface IRunReportJobRequest {
+
+                    /** RunReportJobRequest name */
+                    name?: (string|null);
+
+                    /** RunReportJobRequest dateRange */
+                    dateRange?: (google.cloud.channel.v1.IDateRange|null);
+
+                    /** RunReportJobRequest filter */
+                    filter?: (string|null);
+
+                    /** RunReportJobRequest languageCode */
+                    languageCode?: (string|null);
+                }
+
+                /** Represents a RunReportJobRequest. */
+                class RunReportJobRequest implements IRunReportJobRequest {
+
+                    /**
+                     * Constructs a new RunReportJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IRunReportJobRequest);
+
+                    /** RunReportJobRequest name. */
+                    public name: string;
+
+                    /** RunReportJobRequest dateRange. */
+                    public dateRange?: (google.cloud.channel.v1.IDateRange|null);
+
+                    /** RunReportJobRequest filter. */
+                    public filter: string;
+
+                    /** RunReportJobRequest languageCode. */
+                    public languageCode: string;
+
+                    /**
+                     * Creates a new RunReportJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunReportJobRequest instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IRunReportJobRequest): google.cloud.channel.v1.RunReportJobRequest;
+
+                    /**
+                     * Encodes the specified RunReportJobRequest message. Does not implicitly {@link google.cloud.channel.v1.RunReportJobRequest.verify|verify} messages.
+                     * @param message RunReportJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IRunReportJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunReportJobRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RunReportJobRequest.verify|verify} messages.
+                     * @param message RunReportJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IRunReportJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunReportJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunReportJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.RunReportJobRequest;
+
+                    /**
+                     * Decodes a RunReportJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunReportJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.RunReportJobRequest;
+
+                    /**
+                     * Verifies a RunReportJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunReportJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunReportJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.RunReportJobRequest;
+
+                    /**
+                     * Creates a plain object from a RunReportJobRequest message. Also converts values to other types if specified.
+                     * @param message RunReportJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.RunReportJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunReportJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunReportJobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RunReportJobResponse. */
+                interface IRunReportJobResponse {
+
+                    /** RunReportJobResponse reportJob */
+                    reportJob?: (google.cloud.channel.v1.IReportJob|null);
+
+                    /** RunReportJobResponse reportMetadata */
+                    reportMetadata?: (google.cloud.channel.v1.IReportResultsMetadata|null);
+                }
+
+                /** Represents a RunReportJobResponse. */
+                class RunReportJobResponse implements IRunReportJobResponse {
+
+                    /**
+                     * Constructs a new RunReportJobResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IRunReportJobResponse);
+
+                    /** RunReportJobResponse reportJob. */
+                    public reportJob?: (google.cloud.channel.v1.IReportJob|null);
+
+                    /** RunReportJobResponse reportMetadata. */
+                    public reportMetadata?: (google.cloud.channel.v1.IReportResultsMetadata|null);
+
+                    /**
+                     * Creates a new RunReportJobResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunReportJobResponse instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IRunReportJobResponse): google.cloud.channel.v1.RunReportJobResponse;
+
+                    /**
+                     * Encodes the specified RunReportJobResponse message. Does not implicitly {@link google.cloud.channel.v1.RunReportJobResponse.verify|verify} messages.
+                     * @param message RunReportJobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IRunReportJobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunReportJobResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.RunReportJobResponse.verify|verify} messages.
+                     * @param message RunReportJobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IRunReportJobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunReportJobResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunReportJobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.RunReportJobResponse;
+
+                    /**
+                     * Decodes a RunReportJobResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunReportJobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.RunReportJobResponse;
+
+                    /**
+                     * Verifies a RunReportJobResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunReportJobResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunReportJobResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.RunReportJobResponse;
+
+                    /**
+                     * Creates a plain object from a RunReportJobResponse message. Also converts values to other types if specified.
+                     * @param message RunReportJobResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.RunReportJobResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunReportJobResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunReportJobResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchReportResultsRequest. */
+                interface IFetchReportResultsRequest {
+
+                    /** FetchReportResultsRequest reportJob */
+                    reportJob?: (string|null);
+
+                    /** FetchReportResultsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** FetchReportResultsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a FetchReportResultsRequest. */
+                class FetchReportResultsRequest implements IFetchReportResultsRequest {
+
+                    /**
+                     * Constructs a new FetchReportResultsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IFetchReportResultsRequest);
+
+                    /** FetchReportResultsRequest reportJob. */
+                    public reportJob: string;
+
+                    /** FetchReportResultsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** FetchReportResultsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new FetchReportResultsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchReportResultsRequest instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IFetchReportResultsRequest): google.cloud.channel.v1.FetchReportResultsRequest;
+
+                    /**
+                     * Encodes the specified FetchReportResultsRequest message. Does not implicitly {@link google.cloud.channel.v1.FetchReportResultsRequest.verify|verify} messages.
+                     * @param message FetchReportResultsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IFetchReportResultsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchReportResultsRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.FetchReportResultsRequest.verify|verify} messages.
+                     * @param message FetchReportResultsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IFetchReportResultsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchReportResultsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchReportResultsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.FetchReportResultsRequest;
+
+                    /**
+                     * Decodes a FetchReportResultsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchReportResultsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.FetchReportResultsRequest;
+
+                    /**
+                     * Verifies a FetchReportResultsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchReportResultsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchReportResultsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.FetchReportResultsRequest;
+
+                    /**
+                     * Creates a plain object from a FetchReportResultsRequest message. Also converts values to other types if specified.
+                     * @param message FetchReportResultsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.FetchReportResultsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchReportResultsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchReportResultsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchReportResultsResponse. */
+                interface IFetchReportResultsResponse {
+
+                    /** FetchReportResultsResponse reportMetadata */
+                    reportMetadata?: (google.cloud.channel.v1.IReportResultsMetadata|null);
+
+                    /** FetchReportResultsResponse rows */
+                    rows?: (google.cloud.channel.v1.IRow[]|null);
+
+                    /** FetchReportResultsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a FetchReportResultsResponse. */
+                class FetchReportResultsResponse implements IFetchReportResultsResponse {
+
+                    /**
+                     * Constructs a new FetchReportResultsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IFetchReportResultsResponse);
+
+                    /** FetchReportResultsResponse reportMetadata. */
+                    public reportMetadata?: (google.cloud.channel.v1.IReportResultsMetadata|null);
+
+                    /** FetchReportResultsResponse rows. */
+                    public rows: google.cloud.channel.v1.IRow[];
+
+                    /** FetchReportResultsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new FetchReportResultsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchReportResultsResponse instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IFetchReportResultsResponse): google.cloud.channel.v1.FetchReportResultsResponse;
+
+                    /**
+                     * Encodes the specified FetchReportResultsResponse message. Does not implicitly {@link google.cloud.channel.v1.FetchReportResultsResponse.verify|verify} messages.
+                     * @param message FetchReportResultsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IFetchReportResultsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchReportResultsResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.FetchReportResultsResponse.verify|verify} messages.
+                     * @param message FetchReportResultsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IFetchReportResultsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchReportResultsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchReportResultsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.FetchReportResultsResponse;
+
+                    /**
+                     * Decodes a FetchReportResultsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchReportResultsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.FetchReportResultsResponse;
+
+                    /**
+                     * Verifies a FetchReportResultsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchReportResultsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchReportResultsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.FetchReportResultsResponse;
+
+                    /**
+                     * Creates a plain object from a FetchReportResultsResponse message. Also converts values to other types if specified.
+                     * @param message FetchReportResultsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.FetchReportResultsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchReportResultsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchReportResultsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListReportsRequest. */
+                interface IListReportsRequest {
+
+                    /** ListReportsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListReportsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListReportsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListReportsRequest languageCode */
+                    languageCode?: (string|null);
+                }
+
+                /** Represents a ListReportsRequest. */
+                class ListReportsRequest implements IListReportsRequest {
+
+                    /**
+                     * Constructs a new ListReportsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IListReportsRequest);
+
+                    /** ListReportsRequest parent. */
+                    public parent: string;
+
+                    /** ListReportsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListReportsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListReportsRequest languageCode. */
+                    public languageCode: string;
+
+                    /**
+                     * Creates a new ListReportsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListReportsRequest instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IListReportsRequest): google.cloud.channel.v1.ListReportsRequest;
+
+                    /**
+                     * Encodes the specified ListReportsRequest message. Does not implicitly {@link google.cloud.channel.v1.ListReportsRequest.verify|verify} messages.
+                     * @param message ListReportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IListReportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListReportsRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListReportsRequest.verify|verify} messages.
+                     * @param message ListReportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IListReportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListReportsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListReportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ListReportsRequest;
+
+                    /**
+                     * Decodes a ListReportsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListReportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ListReportsRequest;
+
+                    /**
+                     * Verifies a ListReportsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListReportsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListReportsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ListReportsRequest;
+
+                    /**
+                     * Creates a plain object from a ListReportsRequest message. Also converts values to other types if specified.
+                     * @param message ListReportsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ListReportsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListReportsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListReportsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListReportsResponse. */
+                interface IListReportsResponse {
+
+                    /** ListReportsResponse reports */
+                    reports?: (google.cloud.channel.v1.IReport[]|null);
+
+                    /** ListReportsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListReportsResponse. */
+                class ListReportsResponse implements IListReportsResponse {
+
+                    /**
+                     * Constructs a new ListReportsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IListReportsResponse);
+
+                    /** ListReportsResponse reports. */
+                    public reports: google.cloud.channel.v1.IReport[];
+
+                    /** ListReportsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListReportsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListReportsResponse instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IListReportsResponse): google.cloud.channel.v1.ListReportsResponse;
+
+                    /**
+                     * Encodes the specified ListReportsResponse message. Does not implicitly {@link google.cloud.channel.v1.ListReportsResponse.verify|verify} messages.
+                     * @param message ListReportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IListReportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListReportsResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ListReportsResponse.verify|verify} messages.
+                     * @param message ListReportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IListReportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListReportsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListReportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ListReportsResponse;
+
+                    /**
+                     * Decodes a ListReportsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListReportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ListReportsResponse;
+
+                    /**
+                     * Verifies a ListReportsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListReportsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListReportsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ListReportsResponse;
+
+                    /**
+                     * Creates a plain object from a ListReportsResponse message. Also converts values to other types if specified.
+                     * @param message ListReportsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ListReportsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListReportsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListReportsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReportJob. */
+                interface IReportJob {
+
+                    /** ReportJob name */
+                    name?: (string|null);
+
+                    /** ReportJob reportStatus */
+                    reportStatus?: (google.cloud.channel.v1.IReportStatus|null);
+                }
+
+                /** Represents a ReportJob. */
+                class ReportJob implements IReportJob {
+
+                    /**
+                     * Constructs a new ReportJob.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IReportJob);
+
+                    /** ReportJob name. */
+                    public name: string;
+
+                    /** ReportJob reportStatus. */
+                    public reportStatus?: (google.cloud.channel.v1.IReportStatus|null);
+
+                    /**
+                     * Creates a new ReportJob instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReportJob instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IReportJob): google.cloud.channel.v1.ReportJob;
+
+                    /**
+                     * Encodes the specified ReportJob message. Does not implicitly {@link google.cloud.channel.v1.ReportJob.verify|verify} messages.
+                     * @param message ReportJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IReportJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReportJob message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ReportJob.verify|verify} messages.
+                     * @param message ReportJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IReportJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReportJob message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReportJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ReportJob;
+
+                    /**
+                     * Decodes a ReportJob message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReportJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ReportJob;
+
+                    /**
+                     * Verifies a ReportJob message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReportJob message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReportJob
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ReportJob;
+
+                    /**
+                     * Creates a plain object from a ReportJob message. Also converts values to other types if specified.
+                     * @param message ReportJob
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ReportJob, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReportJob to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReportJob
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReportResultsMetadata. */
+                interface IReportResultsMetadata {
+
+                    /** ReportResultsMetadata report */
+                    report?: (google.cloud.channel.v1.IReport|null);
+
+                    /** ReportResultsMetadata rowCount */
+                    rowCount?: (number|Long|string|null);
+
+                    /** ReportResultsMetadata dateRange */
+                    dateRange?: (google.cloud.channel.v1.IDateRange|null);
+
+                    /** ReportResultsMetadata precedingDateRange */
+                    precedingDateRange?: (google.cloud.channel.v1.IDateRange|null);
+                }
+
+                /** Represents a ReportResultsMetadata. */
+                class ReportResultsMetadata implements IReportResultsMetadata {
+
+                    /**
+                     * Constructs a new ReportResultsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IReportResultsMetadata);
+
+                    /** ReportResultsMetadata report. */
+                    public report?: (google.cloud.channel.v1.IReport|null);
+
+                    /** ReportResultsMetadata rowCount. */
+                    public rowCount: (number|Long|string);
+
+                    /** ReportResultsMetadata dateRange. */
+                    public dateRange?: (google.cloud.channel.v1.IDateRange|null);
+
+                    /** ReportResultsMetadata precedingDateRange. */
+                    public precedingDateRange?: (google.cloud.channel.v1.IDateRange|null);
+
+                    /**
+                     * Creates a new ReportResultsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReportResultsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IReportResultsMetadata): google.cloud.channel.v1.ReportResultsMetadata;
+
+                    /**
+                     * Encodes the specified ReportResultsMetadata message. Does not implicitly {@link google.cloud.channel.v1.ReportResultsMetadata.verify|verify} messages.
+                     * @param message ReportResultsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IReportResultsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReportResultsMetadata message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ReportResultsMetadata.verify|verify} messages.
+                     * @param message ReportResultsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IReportResultsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReportResultsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReportResultsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ReportResultsMetadata;
+
+                    /**
+                     * Decodes a ReportResultsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReportResultsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ReportResultsMetadata;
+
+                    /**
+                     * Verifies a ReportResultsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReportResultsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReportResultsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ReportResultsMetadata;
+
+                    /**
+                     * Creates a plain object from a ReportResultsMetadata message. Also converts values to other types if specified.
+                     * @param message ReportResultsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ReportResultsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReportResultsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReportResultsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Column. */
+                interface IColumn {
+
+                    /** Column columnId */
+                    columnId?: (string|null);
+
+                    /** Column displayName */
+                    displayName?: (string|null);
+
+                    /** Column dataType */
+                    dataType?: (google.cloud.channel.v1.Column.DataType|keyof typeof google.cloud.channel.v1.Column.DataType|null);
+                }
+
+                /** Represents a Column. */
+                class Column implements IColumn {
+
+                    /**
+                     * Constructs a new Column.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IColumn);
+
+                    /** Column columnId. */
+                    public columnId: string;
+
+                    /** Column displayName. */
+                    public displayName: string;
+
+                    /** Column dataType. */
+                    public dataType: (google.cloud.channel.v1.Column.DataType|keyof typeof google.cloud.channel.v1.Column.DataType);
+
+                    /**
+                     * Creates a new Column instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Column instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IColumn): google.cloud.channel.v1.Column;
+
+                    /**
+                     * Encodes the specified Column message. Does not implicitly {@link google.cloud.channel.v1.Column.verify|verify} messages.
+                     * @param message Column message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IColumn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Column message, length delimited. Does not implicitly {@link google.cloud.channel.v1.Column.verify|verify} messages.
+                     * @param message Column message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IColumn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Column message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Column
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.Column;
+
+                    /**
+                     * Decodes a Column message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Column
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.Column;
+
+                    /**
+                     * Verifies a Column message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Column message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Column
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.Column;
+
+                    /**
+                     * Creates a plain object from a Column message. Also converts values to other types if specified.
+                     * @param message Column
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.Column, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Column to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Column
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Column {
+
+                    /** DataType enum. */
+                    enum DataType {
+                        DATA_TYPE_UNSPECIFIED = 0,
+                        STRING = 1,
+                        INT = 2,
+                        DECIMAL = 3,
+                        MONEY = 4,
+                        DATE = 5,
+                        DATE_TIME = 6
+                    }
+                }
+
+                /** Properties of a DateRange. */
+                interface IDateRange {
+
+                    /** DateRange usageStartDateTime */
+                    usageStartDateTime?: (google.type.IDateTime|null);
+
+                    /** DateRange usageEndDateTime */
+                    usageEndDateTime?: (google.type.IDateTime|null);
+
+                    /** DateRange invoiceStartDate */
+                    invoiceStartDate?: (google.type.IDate|null);
+
+                    /** DateRange invoiceEndDate */
+                    invoiceEndDate?: (google.type.IDate|null);
+                }
+
+                /** Represents a DateRange. */
+                class DateRange implements IDateRange {
+
+                    /**
+                     * Constructs a new DateRange.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IDateRange);
+
+                    /** DateRange usageStartDateTime. */
+                    public usageStartDateTime?: (google.type.IDateTime|null);
+
+                    /** DateRange usageEndDateTime. */
+                    public usageEndDateTime?: (google.type.IDateTime|null);
+
+                    /** DateRange invoiceStartDate. */
+                    public invoiceStartDate?: (google.type.IDate|null);
+
+                    /** DateRange invoiceEndDate. */
+                    public invoiceEndDate?: (google.type.IDate|null);
+
+                    /**
+                     * Creates a new DateRange instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DateRange instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IDateRange): google.cloud.channel.v1.DateRange;
+
+                    /**
+                     * Encodes the specified DateRange message. Does not implicitly {@link google.cloud.channel.v1.DateRange.verify|verify} messages.
+                     * @param message DateRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DateRange message, length delimited. Does not implicitly {@link google.cloud.channel.v1.DateRange.verify|verify} messages.
+                     * @param message DateRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IDateRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DateRange message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DateRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.DateRange;
+
+                    /**
+                     * Decodes a DateRange message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DateRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.DateRange;
+
+                    /**
+                     * Verifies a DateRange message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DateRange message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DateRange
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.DateRange;
+
+                    /**
+                     * Creates a plain object from a DateRange message. Also converts values to other types if specified.
+                     * @param message DateRange
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.DateRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DateRange to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DateRange
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Row. */
+                interface IRow {
+
+                    /** Row values */
+                    values?: (google.cloud.channel.v1.IReportValue[]|null);
+                }
+
+                /** Represents a Row. */
+                class Row implements IRow {
+
+                    /**
+                     * Constructs a new Row.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IRow);
+
+                    /** Row values. */
+                    public values: google.cloud.channel.v1.IReportValue[];
+
+                    /**
+                     * Creates a new Row instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Row instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IRow): google.cloud.channel.v1.Row;
+
+                    /**
+                     * Encodes the specified Row message. Does not implicitly {@link google.cloud.channel.v1.Row.verify|verify} messages.
+                     * @param message Row message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Row message, length delimited. Does not implicitly {@link google.cloud.channel.v1.Row.verify|verify} messages.
+                     * @param message Row message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Row message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Row
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.Row;
+
+                    /**
+                     * Decodes a Row message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Row
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.Row;
+
+                    /**
+                     * Verifies a Row message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Row message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Row
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.Row;
+
+                    /**
+                     * Creates a plain object from a Row message. Also converts values to other types if specified.
+                     * @param message Row
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.Row, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Row to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Row
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReportValue. */
+                interface IReportValue {
+
+                    /** ReportValue stringValue */
+                    stringValue?: (string|null);
+
+                    /** ReportValue intValue */
+                    intValue?: (number|Long|string|null);
+
+                    /** ReportValue decimalValue */
+                    decimalValue?: (google.type.IDecimal|null);
+
+                    /** ReportValue moneyValue */
+                    moneyValue?: (google.type.IMoney|null);
+
+                    /** ReportValue dateValue */
+                    dateValue?: (google.type.IDate|null);
+
+                    /** ReportValue dateTimeValue */
+                    dateTimeValue?: (google.type.IDateTime|null);
+                }
+
+                /** Represents a ReportValue. */
+                class ReportValue implements IReportValue {
+
+                    /**
+                     * Constructs a new ReportValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IReportValue);
+
+                    /** ReportValue stringValue. */
+                    public stringValue?: (string|null);
+
+                    /** ReportValue intValue. */
+                    public intValue?: (number|Long|string|null);
+
+                    /** ReportValue decimalValue. */
+                    public decimalValue?: (google.type.IDecimal|null);
+
+                    /** ReportValue moneyValue. */
+                    public moneyValue?: (google.type.IMoney|null);
+
+                    /** ReportValue dateValue. */
+                    public dateValue?: (google.type.IDate|null);
+
+                    /** ReportValue dateTimeValue. */
+                    public dateTimeValue?: (google.type.IDateTime|null);
+
+                    /** ReportValue value. */
+                    public value?: ("stringValue"|"intValue"|"decimalValue"|"moneyValue"|"dateValue"|"dateTimeValue");
+
+                    /**
+                     * Creates a new ReportValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReportValue instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IReportValue): google.cloud.channel.v1.ReportValue;
+
+                    /**
+                     * Encodes the specified ReportValue message. Does not implicitly {@link google.cloud.channel.v1.ReportValue.verify|verify} messages.
+                     * @param message ReportValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IReportValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReportValue message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ReportValue.verify|verify} messages.
+                     * @param message ReportValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IReportValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReportValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReportValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ReportValue;
+
+                    /**
+                     * Decodes a ReportValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReportValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ReportValue;
+
+                    /**
+                     * Verifies a ReportValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReportValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReportValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ReportValue;
+
+                    /**
+                     * Creates a plain object from a ReportValue message. Also converts values to other types if specified.
+                     * @param message ReportValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ReportValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReportValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReportValue
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReportStatus. */
+                interface IReportStatus {
+
+                    /** ReportStatus state */
+                    state?: (google.cloud.channel.v1.ReportStatus.State|keyof typeof google.cloud.channel.v1.ReportStatus.State|null);
+
+                    /** ReportStatus startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ReportStatus endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ReportStatus. */
+                class ReportStatus implements IReportStatus {
+
+                    /**
+                     * Constructs a new ReportStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IReportStatus);
+
+                    /** ReportStatus state. */
+                    public state: (google.cloud.channel.v1.ReportStatus.State|keyof typeof google.cloud.channel.v1.ReportStatus.State);
+
+                    /** ReportStatus startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ReportStatus endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ReportStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReportStatus instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IReportStatus): google.cloud.channel.v1.ReportStatus;
+
+                    /**
+                     * Encodes the specified ReportStatus message. Does not implicitly {@link google.cloud.channel.v1.ReportStatus.verify|verify} messages.
+                     * @param message ReportStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IReportStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReportStatus message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ReportStatus.verify|verify} messages.
+                     * @param message ReportStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IReportStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReportStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReportStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ReportStatus;
+
+                    /**
+                     * Decodes a ReportStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReportStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ReportStatus;
+
+                    /**
+                     * Verifies a ReportStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReportStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReportStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ReportStatus;
+
+                    /**
+                     * Creates a plain object from a ReportStatus message. Also converts values to other types if specified.
+                     * @param message ReportStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ReportStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReportStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReportStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReportStatus {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        STARTED = 1,
+                        WRITING = 2,
+                        AVAILABLE = 3,
+                        FAILED = 4
+                    }
+                }
+
+                /** Properties of a Report. */
+                interface IReport {
+
+                    /** Report name */
+                    name?: (string|null);
+
+                    /** Report displayName */
+                    displayName?: (string|null);
+
+                    /** Report columns */
+                    columns?: (google.cloud.channel.v1.IColumn[]|null);
+
+                    /** Report description */
+                    description?: (string|null);
+                }
+
+                /** Represents a Report. */
+                class Report implements IReport {
+
+                    /**
+                     * Constructs a new Report.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IReport);
+
+                    /** Report name. */
+                    public name: string;
+
+                    /** Report displayName. */
+                    public displayName: string;
+
+                    /** Report columns. */
+                    public columns: google.cloud.channel.v1.IColumn[];
+
+                    /** Report description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new Report instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Report instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IReport): google.cloud.channel.v1.Report;
+
+                    /**
+                     * Encodes the specified Report message. Does not implicitly {@link google.cloud.channel.v1.Report.verify|verify} messages.
+                     * @param message Report message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Report message, length delimited. Does not implicitly {@link google.cloud.channel.v1.Report.verify|verify} messages.
+                     * @param message Report message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Report message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Report
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.Report;
+
+                    /**
+                     * Decodes a Report message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Report
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.Report;
+
+                    /**
+                     * Verifies a Report message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Report message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Report
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.Report;
+
+                    /**
+                     * Creates a plain object from a Report message. Also converts values to other types if specified.
+                     * @param message Report
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.Report, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Report to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Report
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** RebillingBasis enum. */
@@ -18169,6 +19835,257 @@ export namespace google {
 
             /**
              * Gets the default type url for Date
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DateTime. */
+        interface IDateTime {
+
+            /** DateTime year */
+            year?: (number|null);
+
+            /** DateTime month */
+            month?: (number|null);
+
+            /** DateTime day */
+            day?: (number|null);
+
+            /** DateTime hours */
+            hours?: (number|null);
+
+            /** DateTime minutes */
+            minutes?: (number|null);
+
+            /** DateTime seconds */
+            seconds?: (number|null);
+
+            /** DateTime nanos */
+            nanos?: (number|null);
+
+            /** DateTime utcOffset */
+            utcOffset?: (google.protobuf.IDuration|null);
+
+            /** DateTime timeZone */
+            timeZone?: (google.type.ITimeZone|null);
+        }
+
+        /** Represents a DateTime. */
+        class DateTime implements IDateTime {
+
+            /**
+             * Constructs a new DateTime.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDateTime);
+
+            /** DateTime year. */
+            public year: number;
+
+            /** DateTime month. */
+            public month: number;
+
+            /** DateTime day. */
+            public day: number;
+
+            /** DateTime hours. */
+            public hours: number;
+
+            /** DateTime minutes. */
+            public minutes: number;
+
+            /** DateTime seconds. */
+            public seconds: number;
+
+            /** DateTime nanos. */
+            public nanos: number;
+
+            /** DateTime utcOffset. */
+            public utcOffset?: (google.protobuf.IDuration|null);
+
+            /** DateTime timeZone. */
+            public timeZone?: (google.type.ITimeZone|null);
+
+            /** DateTime timeOffset. */
+            public timeOffset?: ("utcOffset"|"timeZone");
+
+            /**
+             * Creates a new DateTime instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DateTime instance
+             */
+            public static create(properties?: google.type.IDateTime): google.type.DateTime;
+
+            /**
+             * Encodes the specified DateTime message. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
+             * @param message DateTime message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDateTime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DateTime message, length delimited. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
+             * @param message DateTime message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDateTime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DateTime message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DateTime
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.DateTime;
+
+            /**
+             * Decodes a DateTime message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DateTime
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.DateTime;
+
+            /**
+             * Verifies a DateTime message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DateTime message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DateTime
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.DateTime;
+
+            /**
+             * Creates a plain object from a DateTime message. Also converts values to other types if specified.
+             * @param message DateTime
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.DateTime, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DateTime to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DateTime
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a TimeZone. */
+        interface ITimeZone {
+
+            /** TimeZone id */
+            id?: (string|null);
+
+            /** TimeZone version */
+            version?: (string|null);
+        }
+
+        /** Represents a TimeZone. */
+        class TimeZone implements ITimeZone {
+
+            /**
+             * Constructs a new TimeZone.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ITimeZone);
+
+            /** TimeZone id. */
+            public id: string;
+
+            /** TimeZone version. */
+            public version: string;
+
+            /**
+             * Creates a new TimeZone instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TimeZone instance
+             */
+            public static create(properties?: google.type.ITimeZone): google.type.TimeZone;
+
+            /**
+             * Encodes the specified TimeZone message. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
+             * @param message TimeZone message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ITimeZone, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TimeZone message, length delimited. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
+             * @param message TimeZone message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ITimeZone, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TimeZone message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TimeZone
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeZone;
+
+            /**
+             * Decodes a TimeZone message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TimeZone
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeZone;
+
+            /**
+             * Verifies a TimeZone message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TimeZone message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TimeZone
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.TimeZone;
+
+            /**
+             * Creates a plain object from a TimeZone message. Also converts values to other types if specified.
+             * @param message TimeZone
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.TimeZone, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TimeZone to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TimeZone
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

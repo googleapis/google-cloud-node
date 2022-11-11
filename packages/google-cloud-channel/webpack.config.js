@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'CloudChannelService',
-    filename: './cloud-channel-service.js',
+    library: 'CloudChannelReportsService',
+    filename: './cloud-channel-reports-service.js',
   },
   node: {
     child_process: 'empty',

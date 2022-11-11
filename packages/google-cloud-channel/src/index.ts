@@ -18,10 +18,16 @@
 
 import * as v1 from './v1';
 
+const CloudChannelReportsServiceClient = v1.CloudChannelReportsServiceClient;
+type CloudChannelReportsServiceClient = v1.CloudChannelReportsServiceClient;
 const CloudChannelServiceClient = v1.CloudChannelServiceClient;
 type CloudChannelServiceClient = v1.CloudChannelServiceClient;
 
-export {v1, CloudChannelServiceClient};
-export default {v1, CloudChannelServiceClient};
+export {v1, CloudChannelReportsServiceClient, CloudChannelServiceClient};
+export default {
+  v1,
+  CloudChannelReportsServiceClient,
+  CloudChannelServiceClient,
+};
 import * as protos from '../protos/protos';
 export {protos};
