@@ -62,7 +62,8 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Speech_translation_service.streaming_translate_speech | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js,samples/README.md) |
+| Speech_translation_service.streaming_translate_speech | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-mediatranslation/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-mediatranslation/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-mediatranslation/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-mediatranslation/samples/quickstart.js,samples/README.md) |
 
 
 
