@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-cloud-tpu/compare/v2.1.0...v2.2.0) (2022-11-10)
+
+
+### Features
+
+* Add Secure Boot support to TPU v2alpha1 API ([#98](https://github.com/googleapis/nodejs-cloud-tpu/issues/98)) ([e4fc278](https://github.com/googleapis/nodejs-cloud-tpu/commit/e4fc27883278b8161bb7ad598dd83021e2467d99))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#96](https://github.com/googleapis/nodejs-cloud-tpu/issues/96)) ([d636ecf](https://github.com/googleapis/nodejs-cloud-tpu/commit/d636ecf4798258a71f289bd6a6add2cf45e6a2cb))
+* Better support for fallback mode ([#91](https://github.com/googleapis/nodejs-cloud-tpu/issues/91)) ([a291abd](https://github.com/googleapis/nodejs-cloud-tpu/commit/a291abd4a0418eb375f9c4a27f19735afee4acca))
+* Change import long to require ([#92](https://github.com/googleapis/nodejs-cloud-tpu/issues/92)) ([5de09bb](https://github.com/googleapis/nodejs-cloud-tpu/commit/5de09bb8786a790ff5a6d643f8493b6f6ea3c4ec))
+* **deps:** Use google-gax v3.5.2 ([#104](https://github.com/googleapis/nodejs-cloud-tpu/issues/104)) ([86b8617](https://github.com/googleapis/nodejs-cloud-tpu/commit/86b86173fe7f8dd33e5cb6abb683f32d148670c6))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-cloud-tpu/issues/1553)) ([#95](https://github.com/googleapis/nodejs-cloud-tpu/issues/95)) ([e4289c1](https://github.com/googleapis/nodejs-cloud-tpu/commit/e4289c164ea2123947328ceddfb09cf083e50a19))
+* Preserve default values in x-goog-request-params header ([#97](https://github.com/googleapis/nodejs-cloud-tpu/issues/97)) ([42310b7](https://github.com/googleapis/nodejs-cloud-tpu/commit/42310b7a99b51320e9924f8ecd1d75513b28b598))
+* Regenerated protos JS and TS definitions ([#107](https://github.com/googleapis/nodejs-cloud-tpu/issues/107)) ([7e3cba5](https://github.com/googleapis/nodejs-cloud-tpu/commit/7e3cba5fd489373a7c460369d37f04c32e3cd9c3))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-cloud-tpu/issues/1546)) ([#94](https://github.com/googleapis/nodejs-cloud-tpu/issues/94)) ([7a26fe6](https://github.com/googleapis/nodejs-cloud-tpu/commit/7a26fe63b51c661bdd22bfafecc3d4291247dddf))
+* use google-gax v3.3.0 ([e4289c1](https://github.com/googleapis/nodejs-cloud-tpu/commit/e4289c164ea2123947328ceddfb09cf083e50a19))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-cloud-tpu/compare/v2.0.0...v2.1.0) (2022-07-12)
 
 
