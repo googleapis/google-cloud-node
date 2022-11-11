@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-notebooks/compare/v2.1.1...v2.1.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#174](https://github.com/googleapis/nodejs-notebooks/issues/174)) ([53ef94c](https://github.com/googleapis/nodejs-notebooks/commit/53ef94cba2356023c85ae8cf1812b64d8736ddfd))
+* Preserve default values in x-goog-request-params header ([#167](https://github.com/googleapis/nodejs-notebooks/issues/167)) ([3bbba83](https://github.com/googleapis/nodejs-notebooks/commit/3bbba8390a8d40453ebae6f03aad6c1265ed6935))
+* Regenerated protos JS and TS definitions ([#177](https://github.com/googleapis/nodejs-notebooks/issues/177)) ([085d2cc](https://github.com/googleapis/nodejs-notebooks/commit/085d2ccf4a2b8c20575e69ca8cb5680146ed0672))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-notebooks/compare/v2.1.0...v2.1.1) (2022-09-01)
 
 
