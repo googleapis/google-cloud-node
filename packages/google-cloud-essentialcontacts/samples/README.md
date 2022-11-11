@@ -38,14 +38,14 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Essential_contacts_service.compute_contacts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.compute_contacts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.compute_contacts.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.compute_contacts.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.compute_contacts.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.compute_contacts.js`
+`node packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.compute_contacts.js`
 
 
 -----
@@ -55,14 +55,14 @@ __Usage:__
 
 ### Essential_contacts_service.create_contact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.create_contact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.create_contact.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.create_contact.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.create_contact.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.create_contact.js`
+`node packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.create_contact.js`
 
 
 -----
@@ -72,14 +72,14 @@ __Usage:__
 
 ### Essential_contacts_service.delete_contact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.delete_contact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.delete_contact.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.delete_contact.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.delete_contact.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.delete_contact.js`
+`node packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.delete_contact.js`
 
 
 -----
@@ -89,14 +89,14 @@ __Usage:__
 
 ### Essential_contacts_service.get_contact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.get_contact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.get_contact.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.get_contact.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.get_contact.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.get_contact.js`
+`node packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.get_contact.js`
 
 
 -----
@@ -106,14 +106,14 @@ __Usage:__
 
 ### Essential_contacts_service.list_contacts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.list_contacts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.list_contacts.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.list_contacts.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.list_contacts.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.list_contacts.js`
+`node packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.list_contacts.js`
 
 
 -----
@@ -123,14 +123,14 @@ __Usage:__
 
 ### Essential_contacts_service.send_test_message
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.send_test_message.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.send_test_message.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.send_test_message.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.send_test_message.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.send_test_message.js`
+`node packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.send_test_message.js`
 
 
 -----
@@ -140,14 +140,14 @@ __Usage:__
 
 ### Essential_contacts_service.update_contact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.update_contact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.update_contact.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.update_contact.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.update_contact.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/essential_contacts_service.update_contact.js`
+`node packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.update_contact.js`
 
 
 -----
@@ -157,14 +157,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/quickstart.js`
+`node packages/google-cloud-essentialcontacts/samples/quickstart.js`
 
 
 
