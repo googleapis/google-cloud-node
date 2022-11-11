@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-area120-tables/compare/v2.1.1...v2.1.2) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#167](https://github.com/googleapis/nodejs-area120-tables/issues/167)) ([e227ceb](https://github.com/googleapis/nodejs-area120-tables/commit/e227cebfa22aaca82b4f1e40112e36f8a5bd17f4))
+* Preserve default values in x-goog-request-params header ([#160](https://github.com/googleapis/nodejs-area120-tables/issues/160)) ([f07849a](https://github.com/googleapis/nodejs-area120-tables/commit/f07849ae3496daa11c089e7f2a85287d3c66a13f))
+* Regenerated protos JS and TS definitions ([#170](https://github.com/googleapis/nodejs-area120-tables/issues/170)) ([284297f](https://github.com/googleapis/nodejs-area120-tables/commit/284297f80752818dbb259a631385ba6c2c84284f))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-area120-tables/compare/v2.1.0...v2.1.1) (2022-09-01)
 
 
