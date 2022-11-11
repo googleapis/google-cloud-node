@@ -580,6 +580,12 @@
                         return object;
                     var message = new $root.google.protobuf.Value();
                     switch (object.nullValue) {
+                    default:
+                        if (typeof object.nullValue === "number") {
+                            message.nullValue = object.nullValue;
+                            break;
+                        }
+                        break;
                     case "NULL_VALUE":
                     case 0:
                         message.nullValue = 0;
@@ -618,7 +624,7 @@
                         options = {};
                     var object = {};
                     if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
-                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
+                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] === undefined ? message.nullValue : $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
                         if (options.oneofs)
                             object.kind = "nullValue";
                     }
@@ -1249,6 +1255,12 @@
                         }
                     }
                     switch (object.syntax) {
+                    default:
+                        if (typeof object.syntax === "number") {
+                            message.syntax = object.syntax;
+                            break;
+                        }
+                        break;
                     case "SYNTAX_PROTO2":
                     case 0:
                         message.syntax = 0;
@@ -1307,7 +1319,7 @@
                             object.mixins[j] = $root.google.protobuf.Mixin.toObject(message.mixins[j], options);
                     }
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
-                        object.syntax = options.enums === String ? $root.google.protobuf.Syntax[message.syntax] : message.syntax;
+                        object.syntax = options.enums === String ? $root.google.protobuf.Syntax[message.syntax] === undefined ? message.syntax : $root.google.protobuf.Syntax[message.syntax] : message.syntax;
                     return object;
                 };
     
@@ -1633,6 +1645,12 @@
                         }
                     }
                     switch (object.syntax) {
+                    default:
+                        if (typeof object.syntax === "number") {
+                            message.syntax = object.syntax;
+                            break;
+                        }
+                        break;
                     case "SYNTAX_PROTO2":
                     case 0:
                         message.syntax = 0;
@@ -1684,7 +1702,7 @@
                             object.options[j] = $root.google.protobuf.Option.toObject(message.options[j], options);
                     }
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
-                        object.syntax = options.enums === String ? $root.google.protobuf.Syntax[message.syntax] : message.syntax;
+                        object.syntax = options.enums === String ? $root.google.protobuf.Syntax[message.syntax] === undefined ? message.syntax : $root.google.protobuf.Syntax[message.syntax] : message.syntax;
                     return object;
                 };
     
@@ -2456,6 +2474,12 @@
                         message.sourceContext = $root.google.protobuf.SourceContext.fromObject(object.sourceContext);
                     }
                     switch (object.syntax) {
+                    default:
+                        if (typeof object.syntax === "number") {
+                            message.syntax = object.syntax;
+                            break;
+                        }
+                        break;
                     case "SYNTAX_PROTO2":
                     case 0:
                         message.syntax = 0;
@@ -2511,7 +2535,7 @@
                     if (message.sourceContext != null && message.hasOwnProperty("sourceContext"))
                         object.sourceContext = $root.google.protobuf.SourceContext.toObject(message.sourceContext, options);
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
-                        object.syntax = options.enums === String ? $root.google.protobuf.Syntax[message.syntax] : message.syntax;
+                        object.syntax = options.enums === String ? $root.google.protobuf.Syntax[message.syntax] === undefined ? message.syntax : $root.google.protobuf.Syntax[message.syntax] : message.syntax;
                     return object;
                 };
     
@@ -2895,6 +2919,12 @@
                         return object;
                     var message = new $root.google.protobuf.Field();
                     switch (object.kind) {
+                    default:
+                        if (typeof object.kind === "number") {
+                            message.kind = object.kind;
+                            break;
+                        }
+                        break;
                     case "TYPE_UNKNOWN":
                     case 0:
                         message.kind = 0;
@@ -2973,6 +3003,12 @@
                         break;
                     }
                     switch (object.cardinality) {
+                    default:
+                        if (typeof object.cardinality === "number") {
+                            message.cardinality = object.cardinality;
+                            break;
+                        }
+                        break;
                     case "CARDINALITY_UNKNOWN":
                     case 0:
                         message.cardinality = 0;
@@ -3044,9 +3080,9 @@
                         object.defaultValue = "";
                     }
                     if (message.kind != null && message.hasOwnProperty("kind"))
-                        object.kind = options.enums === String ? $root.google.protobuf.Field.Kind[message.kind] : message.kind;
+                        object.kind = options.enums === String ? $root.google.protobuf.Field.Kind[message.kind] === undefined ? message.kind : $root.google.protobuf.Field.Kind[message.kind] : message.kind;
                     if (message.cardinality != null && message.hasOwnProperty("cardinality"))
-                        object.cardinality = options.enums === String ? $root.google.protobuf.Field.Cardinality[message.cardinality] : message.cardinality;
+                        object.cardinality = options.enums === String ? $root.google.protobuf.Field.Cardinality[message.cardinality] === undefined ? message.cardinality : $root.google.protobuf.Field.Cardinality[message.cardinality] : message.cardinality;
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.name != null && message.hasOwnProperty("name"))
@@ -3440,6 +3476,12 @@
                         message.sourceContext = $root.google.protobuf.SourceContext.fromObject(object.sourceContext);
                     }
                     switch (object.syntax) {
+                    default:
+                        if (typeof object.syntax === "number") {
+                            message.syntax = object.syntax;
+                            break;
+                        }
+                        break;
                     case "SYNTAX_PROTO2":
                     case 0:
                         message.syntax = 0;
@@ -3489,7 +3531,7 @@
                     if (message.sourceContext != null && message.hasOwnProperty("sourceContext"))
                         object.sourceContext = $root.google.protobuf.SourceContext.toObject(message.sourceContext, options);
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
-                        object.syntax = options.enums === String ? $root.google.protobuf.Syntax[message.syntax] : message.syntax;
+                        object.syntax = options.enums === String ? $root.google.protobuf.Syntax[message.syntax] === undefined ? message.syntax : $root.google.protobuf.Syntax[message.syntax] : message.syntax;
                     return object;
                 };
     
@@ -6784,6 +6826,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -6798,6 +6846,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -6924,9 +6978,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -9245,6 +9299,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -9341,7 +9401,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -10045,6 +10105,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -10061,6 +10127,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -10120,7 +10192,7 @@
                         object.unverifiedLazy = false;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -10128,7 +10200,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -11511,6 +11583,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -11580,7 +11658,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -13335,6 +13413,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -13384,7 +13468,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -14322,6 +14406,12 @@
                                 message.config = $root.google.api.serviceusage.v1.ServiceConfig.fromObject(object.config);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -14362,7 +14452,7 @@
                             if (message.config != null && message.hasOwnProperty("config"))
                                 object.config = $root.google.api.serviceusage.v1.ServiceConfig.toObject(message.config, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.api.serviceusage.v1.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.api.serviceusage.v1.State[message.state] === undefined ? message.state : $root.google.api.serviceusage.v1.State[message.state] : message.state;
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             return object;
@@ -15973,6 +16063,12 @@
                             if (object.disableDependentServices != null)
                                 message.disableDependentServices = Boolean(object.disableDependentServices);
                             switch (object.checkIfServiceHasUsage) {
+                            default:
+                                if (typeof object.checkIfServiceHasUsage === "number") {
+                                    message.checkIfServiceHasUsage = object.checkIfServiceHasUsage;
+                                    break;
+                                }
+                                break;
                             case "CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED":
                             case 0:
                                 message.checkIfServiceHasUsage = 0;
@@ -16012,7 +16108,7 @@
                             if (message.disableDependentServices != null && message.hasOwnProperty("disableDependentServices"))
                                 object.disableDependentServices = message.disableDependentServices;
                             if (message.checkIfServiceHasUsage != null && message.hasOwnProperty("checkIfServiceHasUsage"))
-                                object.checkIfServiceHasUsage = options.enums === String ? $root.google.api.serviceusage.v1.DisableServiceRequest.CheckIfServiceHasUsage[message.checkIfServiceHasUsage] : message.checkIfServiceHasUsage;
+                                object.checkIfServiceHasUsage = options.enums === String ? $root.google.api.serviceusage.v1.DisableServiceRequest.CheckIfServiceHasUsage[message.checkIfServiceHasUsage] === undefined ? message.checkIfServiceHasUsage : $root.google.api.serviceusage.v1.DisableServiceRequest.CheckIfServiceHasUsage[message.checkIfServiceHasUsage] : message.checkIfServiceHasUsage;
                             return object;
                         };
     
@@ -18432,6 +18528,12 @@
                                 message.config = $root.google.api.serviceusage.v1beta1.ServiceConfig.fromObject(object.config);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -18472,7 +18574,7 @@
                             if (message.config != null && message.hasOwnProperty("config"))
                                 object.config = $root.google.api.serviceusage.v1beta1.ServiceConfig.toObject(message.config, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.api.serviceusage.v1beta1.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.api.serviceusage.v1beta1.State[message.state] === undefined ? message.state : $root.google.api.serviceusage.v1beta1.State[message.state] : message.state;
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             return object;
@@ -23817,6 +23919,12 @@
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "QUOTA_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -23859,7 +23967,7 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaView[message.view] === undefined ? message.view : $root.google.api.serviceusage.v1beta1.QuotaView[message.view] : message.view;
                             return object;
                         };
     
@@ -24316,6 +24424,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "QUOTA_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -24352,7 +24466,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaView[message.view] === undefined ? message.view : $root.google.api.serviceusage.v1beta1.QuotaView[message.view] : message.view;
                             return object;
                         };
     
@@ -24561,6 +24675,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "QUOTA_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -24597,7 +24717,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaView[message.view] === undefined ? message.view : $root.google.api.serviceusage.v1beta1.QuotaView[message.view] : message.view;
                             return object;
                         };
     
@@ -24873,6 +24993,10 @@
                                 for (var i = 0; i < object.forceOnly.length; ++i)
                                     switch (object.forceOnly[i]) {
                                     default:
+                                        if (typeof object.forceOnly[i] === "number") {
+                                            message.forceOnly[i] = object.forceOnly[i];
+                                            break;
+                                        }
                                     case "QUOTA_SAFETY_CHECK_UNSPECIFIED":
                                     case 0:
                                         message.forceOnly[i] = 0;
@@ -24919,7 +25043,7 @@
                             if (message.forceOnly && message.forceOnly.length) {
                                 object.forceOnly = [];
                                 for (var j = 0; j < message.forceOnly.length; ++j)
-                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
+                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] === undefined ? message.forceOnly[j] : $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
                             }
                             return object;
                         };
@@ -25221,6 +25345,10 @@
                                 for (var i = 0; i < object.forceOnly.length; ++i)
                                     switch (object.forceOnly[i]) {
                                     default:
+                                        if (typeof object.forceOnly[i] === "number") {
+                                            message.forceOnly[i] = object.forceOnly[i];
+                                            break;
+                                        }
                                     case "QUOTA_SAFETY_CHECK_UNSPECIFIED":
                                     case 0:
                                         message.forceOnly[i] = 0;
@@ -25270,7 +25398,7 @@
                             if (message.forceOnly && message.forceOnly.length) {
                                 object.forceOnly = [];
                                 for (var j = 0; j < message.forceOnly.length; ++j)
-                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
+                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] === undefined ? message.forceOnly[j] : $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
                             }
                             return object;
                         };
@@ -25522,6 +25650,10 @@
                                 for (var i = 0; i < object.forceOnly.length; ++i)
                                     switch (object.forceOnly[i]) {
                                     default:
+                                        if (typeof object.forceOnly[i] === "number") {
+                                            message.forceOnly[i] = object.forceOnly[i];
+                                            break;
+                                        }
                                     case "QUOTA_SAFETY_CHECK_UNSPECIFIED":
                                     case 0:
                                         message.forceOnly[i] = 0;
@@ -25565,7 +25697,7 @@
                             if (message.forceOnly && message.forceOnly.length) {
                                 object.forceOnly = [];
                                 for (var j = 0; j < message.forceOnly.length; ++j)
-                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
+                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] === undefined ? message.forceOnly[j] : $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
                             }
                             return object;
                         };
@@ -26582,6 +26714,10 @@
                                 for (var i = 0; i < object.forceOnly.length; ++i)
                                     switch (object.forceOnly[i]) {
                                     default:
+                                        if (typeof object.forceOnly[i] === "number") {
+                                            message.forceOnly[i] = object.forceOnly[i];
+                                            break;
+                                        }
                                     case "QUOTA_SAFETY_CHECK_UNSPECIFIED":
                                     case 0:
                                         message.forceOnly[i] = 0;
@@ -26630,7 +26766,7 @@
                             if (message.forceOnly && message.forceOnly.length) {
                                 object.forceOnly = [];
                                 for (var j = 0; j < message.forceOnly.length; ++j)
-                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
+                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] === undefined ? message.forceOnly[j] : $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
                             }
                             return object;
                         };
@@ -27306,6 +27442,10 @@
                                 for (var i = 0; i < object.forceOnly.length; ++i)
                                     switch (object.forceOnly[i]) {
                                     default:
+                                        if (typeof object.forceOnly[i] === "number") {
+                                            message.forceOnly[i] = object.forceOnly[i];
+                                            break;
+                                        }
                                     case "QUOTA_SAFETY_CHECK_UNSPECIFIED":
                                     case 0:
                                         message.forceOnly[i] = 0;
@@ -27352,7 +27492,7 @@
                             if (message.forceOnly && message.forceOnly.length) {
                                 object.forceOnly = [];
                                 for (var j = 0; j < message.forceOnly.length; ++j)
-                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
+                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] === undefined ? message.forceOnly[j] : $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
                             }
                             return object;
                         };
@@ -27654,6 +27794,10 @@
                                 for (var i = 0; i < object.forceOnly.length; ++i)
                                     switch (object.forceOnly[i]) {
                                     default:
+                                        if (typeof object.forceOnly[i] === "number") {
+                                            message.forceOnly[i] = object.forceOnly[i];
+                                            break;
+                                        }
                                     case "QUOTA_SAFETY_CHECK_UNSPECIFIED":
                                     case 0:
                                         message.forceOnly[i] = 0;
@@ -27703,7 +27847,7 @@
                             if (message.forceOnly && message.forceOnly.length) {
                                 object.forceOnly = [];
                                 for (var j = 0; j < message.forceOnly.length; ++j)
-                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
+                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] === undefined ? message.forceOnly[j] : $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
                             }
                             return object;
                         };
@@ -27955,6 +28099,10 @@
                                 for (var i = 0; i < object.forceOnly.length; ++i)
                                     switch (object.forceOnly[i]) {
                                     default:
+                                        if (typeof object.forceOnly[i] === "number") {
+                                            message.forceOnly[i] = object.forceOnly[i];
+                                            break;
+                                        }
                                     case "QUOTA_SAFETY_CHECK_UNSPECIFIED":
                                     case 0:
                                         message.forceOnly[i] = 0;
@@ -27998,7 +28146,7 @@
                             if (message.forceOnly && message.forceOnly.length) {
                                 object.forceOnly = [];
                                 for (var j = 0; j < message.forceOnly.length; ++j)
-                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
+                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] === undefined ? message.forceOnly[j] : $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
                             }
                             return object;
                         };
@@ -29015,6 +29163,10 @@
                                 for (var i = 0; i < object.forceOnly.length; ++i)
                                     switch (object.forceOnly[i]) {
                                     default:
+                                        if (typeof object.forceOnly[i] === "number") {
+                                            message.forceOnly[i] = object.forceOnly[i];
+                                            break;
+                                        }
                                     case "QUOTA_SAFETY_CHECK_UNSPECIFIED":
                                     case 0:
                                         message.forceOnly[i] = 0;
@@ -29063,7 +29215,7 @@
                             if (message.forceOnly && message.forceOnly.length) {
                                 object.forceOnly = [];
                                 for (var j = 0; j < message.forceOnly.length; ++j)
-                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
+                                    object.forceOnly[j] = options.enums === String ? $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] === undefined ? message.forceOnly[j] : $root.google.api.serviceusage.v1beta1.QuotaSafetyCheck[message.forceOnly[j]] : message.forceOnly[j];
                             }
                             return object;
                         };
@@ -30803,6 +30955,12 @@
                                 message.identity = $root.google.api.serviceusage.v1beta1.ServiceIdentity.fromObject(object.identity);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "IDENTITY_STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -30835,7 +30993,7 @@
                             if (message.identity != null && message.hasOwnProperty("identity"))
                                 object.identity = $root.google.api.serviceusage.v1beta1.ServiceIdentity.toObject(message.identity, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.api.serviceusage.v1beta1.GetServiceIdentityResponse.IdentityState[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.api.serviceusage.v1beta1.GetServiceIdentityResponse.IdentityState[message.state] === undefined ? message.state : $root.google.api.serviceusage.v1beta1.GetServiceIdentityResponse.IdentityState[message.state] : message.state;
                             return object;
                         };
     
@@ -34131,6 +34289,12 @@
                         }
                     }
                     switch (object.launchStage) {
+                    default:
+                        if (typeof object.launchStage === "number") {
+                            message.launchStage = object.launchStage;
+                            break;
+                        }
+                        break;
                     case "LAUNCH_STAGE_UNSPECIFIED":
                     case 0:
                         message.launchStage = 0;
@@ -34203,7 +34367,7 @@
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
                     if (message.launchStage != null && message.hasOwnProperty("launchStage"))
-                        object.launchStage = options.enums === String ? $root.google.api.LaunchStage[message.launchStage] : message.launchStage;
+                        object.launchStage = options.enums === String ? $root.google.api.LaunchStage[message.launchStage] === undefined ? message.launchStage : $root.google.api.LaunchStage[message.launchStage] : message.launchStage;
                     return object;
                 };
     
@@ -34959,6 +35123,12 @@
                     if (object.key != null)
                         message.key = String(object.key);
                     switch (object.valueType) {
+                    default:
+                        if (typeof object.valueType === "number") {
+                            message.valueType = object.valueType;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.valueType = 0;
@@ -34998,7 +35168,7 @@
                     if (message.key != null && message.hasOwnProperty("key"))
                         object.key = message.key;
                     if (message.valueType != null && message.hasOwnProperty("valueType"))
-                        object.valueType = options.enums === String ? $root.google.api.LabelDescriptor.ValueType[message.valueType] : message.valueType;
+                        object.valueType = options.enums === String ? $root.google.api.LabelDescriptor.ValueType[message.valueType] === undefined ? message.valueType : $root.google.api.LabelDescriptor.ValueType[message.valueType] : message.valueType;
                     if (message.description != null && message.hasOwnProperty("description"))
                         object.description = message.description;
                     return object;
