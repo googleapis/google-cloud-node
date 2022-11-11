@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-appengine-admin/compare/v2.1.1...v2.1.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#156](https://github.com/googleapis/nodejs-appengine-admin/issues/156)) ([b203e7e](https://github.com/googleapis/nodejs-appengine-admin/commit/b203e7eb65d947e00be58f80fc6cf3f94ad8de8b))
+* **deps:** Use google-gax v3.5.2 ([#164](https://github.com/googleapis/nodejs-appengine-admin/issues/164)) ([8525dac](https://github.com/googleapis/nodejs-appengine-admin/commit/8525dac6e50bd9c9cf8bd7b6ff6c431b6900d5ad))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-appengine-admin/issues/1553)) ([#155](https://github.com/googleapis/nodejs-appengine-admin/issues/155)) ([eaff462](https://github.com/googleapis/nodejs-appengine-admin/commit/eaff462965a3440556f7b959ea881f9e317817a8))
+* Preserve default values in x-goog-request-params header ([#158](https://github.com/googleapis/nodejs-appengine-admin/issues/158)) ([3636c4a](https://github.com/googleapis/nodejs-appengine-admin/commit/3636c4a967718909c397de4bca372e351ce56a83))
+* Regenerated protos JS and TS definitions ([#167](https://github.com/googleapis/nodejs-appengine-admin/issues/167)) ([f629b53](https://github.com/googleapis/nodejs-appengine-admin/commit/f629b536ee41a787594d1168eb0715903a0975b1))
+* use google-gax v3.3.0 ([eaff462](https://github.com/googleapis/nodejs-appengine-admin/commit/eaff462965a3440556f7b959ea881f9e317817a8))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-appengine-admin/compare/v2.1.0...v2.1.1) (2022-08-23)
 
 
