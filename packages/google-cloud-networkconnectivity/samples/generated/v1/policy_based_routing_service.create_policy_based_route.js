@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, spokeId, spoke) {
-  // [START networkconnectivity_v1_generated_HubService_CreateSpoke_async]
+function main(parent, policyBasedRoute) {
+  // [START networkconnectivity_v1_generated_PolicyBasedRoutingService_CreatePolicyBasedRoute_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,55 +29,53 @@ function main(parent, spokeId, spoke) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource.
+   *  Required. The parent resource's name of the PolicyBasedRoute.
    */
   // const parent = 'abc123'
   /**
-   *  Required. Unique id for the spoke to create.
+   *  Optional. Unique id for the Policy Based Route to create.
    */
-  // const spokeId = 'abc123'
+  // const policyBasedRouteId = 'abc123'
   /**
-   *  Required. The initial values for a new spoke.
+   *  Required. Initial values for a new Policy Based Route.
    */
-  // const spoke = {}
+  // const policyBasedRoute = {}
   /**
-   *  Optional. A unique request ID (optional). If you specify this ID, you can
-   *  use it in cases when you need to retry your request. When you need to
-   *  retry, this ID lets the server know that it can ignore the request if it
-   *  has already been completed. The server guarantees that for at least 60
-   *  minutes after the first request.
-   *  For example, consider a situation where you make an initial request and
-   *  the request times out. If you make the request again with the same request
-   *  ID, the server can check to see whether the original operation
-   *  was received. If it was, the server ignores the second request. This
-   *  behavior prevents clients from mistakenly creating duplicate commitments.
-   *  The request ID must be a valid UUID, with the exception that zero UUID is
+   *  Optional. An optional request ID to identify requests. Specify a unique request ID
+   *  so that if you must retry your request, the server will know to ignore
+   *  the request if it has already been completed. The server will guarantee
+   *  that for at least 60 minutes since the first request.
+   *  For example, consider a situation where you make an initial request and t
+   *  he request times out. If you make the request again with the same request
+   *  ID, the server can check if original operation with the same request ID
+   *  was received, and if so, will ignore the second request. This prevents
+   *  clients from accidentally creating duplicate commitments.
+   *  The request ID must be a valid UUID with the exception that zero UUID is
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
 
   // Imports the Networkconnectivity library
-  const {HubServiceClient} = require('@google-cloud/network-connectivity').v1;
+  const {PolicyBasedRoutingServiceClient} = require('@google-cloud/network-connectivity').v1;
 
   // Instantiates a client
-  const networkconnectivityClient = new HubServiceClient();
+  const networkconnectivityClient = new PolicyBasedRoutingServiceClient();
 
-  async function callCreateSpoke() {
+  async function callCreatePolicyBasedRoute() {
     // Construct request
     const request = {
       parent,
-      spokeId,
-      spoke,
+      policyBasedRoute,
     };
 
     // Run request
-    const [operation] = await networkconnectivityClient.createSpoke(request);
+    const [operation] = await networkconnectivityClient.createPolicyBasedRoute(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateSpoke();
-  // [END networkconnectivity_v1_generated_HubService_CreateSpoke_async]
+  callCreatePolicyBasedRoute();
+  // [END networkconnectivity_v1_generated_PolicyBasedRoutingService_CreatePolicyBasedRoute_async]
 }
 
 process.on('unhandledRejection', err => {

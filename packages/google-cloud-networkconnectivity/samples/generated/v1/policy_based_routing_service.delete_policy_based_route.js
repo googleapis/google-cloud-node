@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START networkconnectivity_v1_generated_HubService_DeleteHub_async]
+  // [START networkconnectivity_v1_generated_PolicyBasedRoutingService_DeletePolicyBasedRoute_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,45 +29,44 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the hub to delete.
+   *  Required. Name of the PolicyBasedRoute resource to delete.
    */
   // const name = 'abc123'
   /**
-   *  Optional. A unique request ID (optional). If you specify this ID, you can
-   *  use it in cases when you need to retry your request. When you need to
-   *  retry, this ID lets the server know that it can ignore the request if it
-   *  has already been completed. The server guarantees that for at least 60
-   *  minutes after the first request.
-   *  For example, consider a situation where you make an initial request and
-   *  the request times out. If you make the request again with the same request
-   *  ID, the server can check to see whether the original operation
-   *  was received. If it was, the server ignores the second request. This
-   *  behavior prevents clients from mistakenly creating duplicate commitments.
-   *  The request ID must be a valid UUID, with the exception that zero UUID is
+   *  Optional. An optional request ID to identify requests. Specify a unique request ID
+   *  so that if you must retry your request, the server will know to ignore
+   *  the request if it has already been completed. The server will guarantee
+   *  that for at least 60 minutes after the first request.
+   *  For example, consider a situation where you make an initial request and t
+   *  he request times out. If you make the request again with the same request
+   *  ID, the server can check if original operation with the same request ID
+   *  was received, and if so, will ignore the second request. This prevents
+   *  clients from accidentally creating duplicate commitments.
+   *  The request ID must be a valid UUID with the exception that zero UUID is
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
 
   // Imports the Networkconnectivity library
-  const {HubServiceClient} = require('@google-cloud/network-connectivity').v1;
+  const {PolicyBasedRoutingServiceClient} = require('@google-cloud/network-connectivity').v1;
 
   // Instantiates a client
-  const networkconnectivityClient = new HubServiceClient();
+  const networkconnectivityClient = new PolicyBasedRoutingServiceClient();
 
-  async function callDeleteHub() {
+  async function callDeletePolicyBasedRoute() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await networkconnectivityClient.deleteHub(request);
+    const [operation] = await networkconnectivityClient.deletePolicyBasedRoute(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteHub();
-  // [END networkconnectivity_v1_generated_HubService_DeleteHub_async]
+  callDeletePolicyBasedRoute();
+  // [END networkconnectivity_v1_generated_PolicyBasedRoutingService_DeletePolicyBasedRoute_async]
 }
 
 process.on('unhandledRejection', err => {
