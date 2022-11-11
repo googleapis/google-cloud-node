@@ -12,6 +12,6 @@
   "name_pretty": "Dialogflow CX API",
   "api_id": "dialogflow.googleapis.com",
   "repo": "googleapis/nodejs-dialogflow-cx",
-  "api_shortname": "dialogflow-cx",
+  "api_shortname": "dialogflow",
   "library_type": "GAPIC_AUTO"
 }
