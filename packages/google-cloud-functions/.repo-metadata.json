@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/functions",
   "api_id": "cloudfunctions.googleapis.com",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/functions/latest",
-  "repo": "googleapis/nodejs-functions",
+  "repo": "googleapis/google-cloud-node",
   "release_level": "stable",
   "requires_billing": false,
   "name_pretty": "Google Cloud Functions",
