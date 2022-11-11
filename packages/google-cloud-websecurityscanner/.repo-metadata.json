@@ -6,11 +6,11 @@
   "default_version": "v1beta",
   "language": "nodejs",
   "name_pretty": "Web Security Scanner",
-  "repo": "googleapis/nodejs-web-security-scanner",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/security-scanner/",
   "requires_billing": true,
   "name": "websecurityscanner",
-  "issue_tracker": "https://github.com/googleapis/nodejs-web-security-scanner/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "api_shortname": "websecurityscanner",
   "library_type": "GAPIC_AUTO"
 }
