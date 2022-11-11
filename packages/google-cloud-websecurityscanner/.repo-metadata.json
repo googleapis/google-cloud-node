@@ -1,0 +1,16 @@
+{
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/web-security-scanner/latest",
+  "api_id": "websecurityscanner.googleapis.com",
+  "distribution_name": "@google-cloud/web-security-scanner",
+  "release_level": "stable",
+  "default_version": "v1beta",
+  "language": "nodejs",
+  "name_pretty": "Web Security Scanner",
+  "repo": "googleapis/nodejs-web-security-scanner",
+  "product_documentation": "https://cloud.google.com/security-scanner/",
+  "requires_billing": true,
+  "name": "websecurityscanner",
+  "issue_tracker": "https://github.com/googleapis/nodejs-web-security-scanner/issues",
+  "api_shortname": "websecurityscanner",
+  "library_type": "GAPIC_AUTO"
+}
