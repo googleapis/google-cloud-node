@@ -2,7 +2,11 @@
   "name": "@google-cloud/video-transcoder",
   "version": "2.2.3",
   "description": "Transcoder client for Node.js",
-  "repository": "googleapis/nodejs-video-transcoder",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-video-transcoder",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
@@ -34,8 +38,8 @@
     "lint": "gts check",
     "prelint": "cd samples; npm link ../; npm i",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
-    "samples-test": "cd samples/ && npm link ../ && npm test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "test": "c8 mocha build/test"
   },
   "dependencies": {
@@ -61,5 +65,6 @@
   },
   "engines": {
     "node": ">=12.0.0"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-video-transcoder"
 }
