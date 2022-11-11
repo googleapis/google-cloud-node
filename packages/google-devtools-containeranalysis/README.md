@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,54 +53,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/containeranalysis
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * TODO(developer): Uncomment these variables before running the sample
- */
-// const projectId = 'your-project-id', // Your GCP Project ID
-// const noteId = 'my-note-id' // Id of the note
-
-// Import the library and create a client
-const {ContainerAnalysisClient} = require('@google-cloud/containeranalysis');
-const client = new ContainerAnalysisClient();
-// Fetch an instance of a Grafeas client:
-// see: https://googleapis.dev/nodejs/grafeas/latest
-const grafeasClient = client.getGrafeasClient();
-
-// Construct request
-// Associate the Note with a metadata type
-// https://cloud.google.com/container-registry/docs/container-analysis#supported_metadata_types
-// Here, we use the type "vulnerabiltity"
-const formattedParent = grafeasClient.projectPath(projectId);
-
-// Creates and returns a new Note
-const [note] = await grafeasClient.createNote({
-  parent: formattedParent,
-  noteId: noteId,
-  note: {
-    vulnerability: {
-      details: [
-        {
-          affectedCpeUri: 'foo.uri',
-          affectedPackage: 'foo',
-          minAffectedVersion: {
-            kind: 'MINIMUM',
-          },
-          fixedVersion: {
-            kind: 'MAXIMUM',
-          },
-        },
-      ],
-    },
-  },
-});
-
-console.log(`Note ${note.name} created.`);
-
-```
 
 
 
@@ -150,6 +102,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Grafeas_v1_beta1.update_note | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.update_note.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.update_note.js,samples/README.md) |
 | Grafeas_v1_beta1.update_occurrence | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.update_occurrence.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.update_occurrence.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/quickstart.js,samples/README.md) |
+| Quickstart.test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/test/quickstart.test.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/test/quickstart.test.js,samples/README.md) |
 
 
 
