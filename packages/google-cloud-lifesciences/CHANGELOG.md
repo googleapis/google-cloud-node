@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-life-sciences/compare/v2.1.1...v2.1.2) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#101](https://github.com/googleapis/nodejs-life-sciences/issues/101)) ([106359e](https://github.com/googleapis/nodejs-life-sciences/commit/106359e0689f5085b7fb19ec36d7217648ad556b))
+* Preserve default values in x-goog-request-params header ([#94](https://github.com/googleapis/nodejs-life-sciences/issues/94)) ([3e9bcad](https://github.com/googleapis/nodejs-life-sciences/commit/3e9bcad4fca23646c1170a5f13d30e344bc079d3))
+* Regenerated protos JS and TS definitions ([#104](https://github.com/googleapis/nodejs-life-sciences/issues/104)) ([9debd1e](https://github.com/googleapis/nodejs-life-sciences/commit/9debd1eb1f02efc40d30d48806eb6829cbb9cf78))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-life-sciences/compare/v2.1.0...v2.1.1) (2022-09-01)
 
 
