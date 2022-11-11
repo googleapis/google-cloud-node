@@ -40,15 +40,15 @@ import * as gapicConfig from './access_context_manager_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  API for setting [Access Levels]
- *  [google.identity.accesscontextmanager.v1.AccessLevel] and [Service
- *  Perimeters] [google.identity.accesscontextmanager.v1.ServicePerimeter]
- *  for Google Cloud Projects. Each organization has one [AccessPolicy]
- *  [google.identity.accesscontextmanager.v1.AccessPolicy] containing the
- *  [Access Levels] [google.identity.accesscontextmanager.v1.AccessLevel]
- *  and [Service Perimeters]
+ *  API for setting [access levels]
+ *  [google.identity.accesscontextmanager.v1.AccessLevel] and [service
+ *  perimeters] [google.identity.accesscontextmanager.v1.ServicePerimeter]
+ *  for Google Cloud projects. Each organization has one [access policy]
+ *  [google.identity.accesscontextmanager.v1.AccessPolicy] that contains the
+ *  [access levels] [google.identity.accesscontextmanager.v1.AccessLevel]
+ *  and [service perimeters]
  *  [google.identity.accesscontextmanager.v1.ServicePerimeter]. This
- *  [AccessPolicy] [google.identity.accesscontextmanager.v1.AccessPolicy] is
+ *  [access policy] [google.identity.accesscontextmanager.v1.AccessPolicy] is
  *  applicable to all resources in the organization.
  *  AccessPolicies
  * @class
@@ -526,6 +526,9 @@ export class AccessContextManagerClient {
       'createGcpUserAccessBinding',
       'updateGcpUserAccessBinding',
       'deleteGcpUserAccessBinding',
+      'setIamPolicy',
+      'getIamPolicy',
+      'testIamPermissions',
     ];
     for (const methodName of accessContextManagerStubMethods) {
       const callPromise = this.accessContextManagerStub.then(
@@ -613,8 +616,8 @@ export class AccessContextManagerClient {
   // -- Service calls --
   // -------------------
   /**
-   * Get an [AccessPolicy]
-   * [google.identity.accesscontextmanager.v1.AccessPolicy] by name.
+   * Returns an [access policy]
+   * [google.identity.accesscontextmanager.v1.AccessPolicy] based on the name.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -713,8 +716,8 @@ export class AccessContextManagerClient {
     return this.innerApiCalls.getAccessPolicy(request, options, callback);
   }
   /**
-   * Get an [Access Level]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] by resource
+   * Gets an [access level]
+   * [google.identity.accesscontextmanager.v1.AccessLevel] based on the resource
    * name.
    *
    * @param {Object} request
@@ -825,9 +828,9 @@ export class AccessContextManagerClient {
     return this.innerApiCalls.getAccessLevel(request, options, callback);
   }
   /**
-   * Get a [Service Perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] by resource
-   * name.
+   * Gets a [service perimeter]
+   * [google.identity.accesscontextmanager.v1.ServicePerimeter] based on the
+   * resource name.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1030,12 +1033,294 @@ export class AccessContextManagerClient {
       callback
     );
   }
+  /**
+   * Sets the IAM policy for the specified Access Context Manager
+   * {@link google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
+   * This method replaces the existing IAM policy on the access policy. The IAM
+   * policy controls the set of users who can perform specific operations on the
+   * Access Context Manager [access
+   * policy][google.identity.accesscontextmanager.v1.AccessPolicy].
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *   the fields in the mask will be modified. If no mask is provided, the
+   *   following default mask is used:
+   *
+   *   `paths: "bindings, etag"`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/access_context_manager.set_iam_policy.js</caption>
+   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_SetIamPolicy_async
+   */
+  setIamPolicy(
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.setIamPolicy(request, options, callback);
+  }
+  /**
+   * Gets the IAM policy for the specified Access Context Manager
+   * {@link google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/access_context_manager.get_iam_policy.js</caption>
+   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetIamPolicy_async
+   */
+  getIamPolicy(
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getIamPolicy(request, options, callback);
+  }
+  /**
+   * Returns the IAM permissions that the caller has on the specified Access
+   * Context Manager resource. The resource can be an
+   * {@link google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy},
+   * {@link google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}, or
+   * [ServicePerimeter][google.identity.accesscontextmanager.v1.ServicePerimeter
+   * ]. This method does not support other resources.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/access_context_manager.test_iam_permissions.js</caption>
+   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_TestIamPermissions_async
+   */
+  testIamPermissions(
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  testIamPermissions(
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.testIamPermissions(request, options, callback);
+  }
 
   /**
-   * Create an `AccessPolicy`. Fails if this organization already has a
-   * `AccessPolicy`. The longrunning Operation will have a successful status
-   * once the `AccessPolicy` has propagated to long-lasting storage.
-   * Syntactic and basic semantic errors will be returned in `metadata` as a
+   * Creates an access policy. This method fails if the organization already has
+   * an access policy. The long-running operation has a successful status
+   * after the access policy propagates to long-lasting storage.
+   * Syntactic and basic semantic errors are returned in `metadata` as a
    * BadRequest proto.
    *
    * @param {Object} request
@@ -1049,6 +1334,21 @@ export class AccessContextManagerClient {
    *   `organizations/{organization_id}`
    * @param {string} request.title
    *   Required. Human readable title. Does not affect behavior.
+   * @param {string[]} request.scopes
+   *   The scopes of a policy define which resources an ACM policy can restrict,
+   *   and where ACM resources can be referenced.
+   *   For example, a policy with scopes=["folders/123"] has the following
+   *   behavior:
+   *   - vpcsc perimeters can only restrict projects within folders/123
+   *   - access levels can only be referenced by resources within folders/123.
+   *   If empty, there are no limitations on which resources can be restricted by
+   *   an ACM policy, and there are no limitations on where ACM resources can be
+   *   referenced.
+   *   Only one policy can include a given scope (attempting to create a second
+   *   policy which includes "folders/123" will result in an error).
+   *   Currently, scopes cannot be modified after a policy is created.
+   *   Currently, policies can only have a single scope.
+   *   Format: list of `folders/{folder_number}` or `projects/{project_number}`
    * @param {google.protobuf.Timestamp} request.createTime
    *   Output only. Time the `AccessPolicy` was created in UTC.
    * @param {google.protobuf.Timestamp} request.updateTime
@@ -1186,13 +1486,12 @@ export class AccessContextManagerClient {
     >;
   }
   /**
-   * Update an [AccessPolicy]
+   * Updates an [access policy]
    * [google.identity.accesscontextmanager.v1.AccessPolicy]. The
-   * longrunning Operation from this RPC will have a successful status once the
-   * changes to the [AccessPolicy]
-   * [google.identity.accesscontextmanager.v1.AccessPolicy] have propagated
-   * to long-lasting storage. Syntactic and basic semantic errors will be
-   * returned in `metadata` as a BadRequest proto.
+   * long-running operation from this RPC has a successful status after the
+   * changes to the [access policy]
+   * [google.identity.accesscontextmanager.v1.AccessPolicy] propagate
+   * to long-lasting storage.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1332,11 +1631,11 @@ export class AccessContextManagerClient {
     >;
   }
   /**
-   * Delete an [AccessPolicy]
-   * [google.identity.accesscontextmanager.v1.AccessPolicy] by resource
-   * name. The longrunning Operation will have a successful status once the
-   * [AccessPolicy] [google.identity.accesscontextmanager.v1.AccessPolicy]
-   * has been removed from long-lasting storage.
+   * Deletes an [access policy]
+   * [google.identity.accesscontextmanager.v1.AccessPolicy] based on the
+   * resource name. The long-running operation has a successful status after the
+   * [access policy] [google.identity.accesscontextmanager.v1.AccessPolicy]
+   * is removed from long-lasting storage.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1476,13 +1775,13 @@ export class AccessContextManagerClient {
     >;
   }
   /**
-   * Create an [Access Level]
-   * [google.identity.accesscontextmanager.v1.AccessLevel]. The longrunning
-   * operation from this RPC will have a successful status once the [Access
-   * Level] [google.identity.accesscontextmanager.v1.AccessLevel] has
-   * propagated to long-lasting storage. [Access Levels]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] containing
-   * errors will result in an error response for the first error encountered.
+   * Creates an [access level]
+   * [google.identity.accesscontextmanager.v1.AccessLevel]. The long-running
+   * operation from this RPC has a successful status after the [access
+   * level] [google.identity.accesscontextmanager.v1.AccessLevel]
+   * propagates to long-lasting storage. If [access levels]
+   * [google.identity.accesscontextmanager.v1.AccessLevel] contain
+   * errors, an error response is returned for the first error encountered.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1629,14 +1928,14 @@ export class AccessContextManagerClient {
     >;
   }
   /**
-   * Update an [Access Level]
-   * [google.identity.accesscontextmanager.v1.AccessLevel]. The longrunning
-   * operation from this RPC will have a successful status once the changes to
-   * the [Access Level]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] have propagated
-   * to long-lasting storage. [Access Levels]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] containing
-   * errors will result in an error response for the first error encountered.
+   * Updates an [access level]
+   * [google.identity.accesscontextmanager.v1.AccessLevel]. The long-running
+   * operation from this RPC has a successful status after the changes to
+   * the [access level]
+   * [google.identity.accesscontextmanager.v1.AccessLevel] propagate
+   * to long-lasting storage. If [access levels]
+   * [google.identity.accesscontextmanager.v1.AccessLevel] contain
+   * errors, an error response is returned for the first error encountered.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1780,10 +2079,10 @@ export class AccessContextManagerClient {
     >;
   }
   /**
-   * Delete an [Access Level]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] by resource
-   * name. The longrunning operation from this RPC will have a successful status
-   * once the [Access Level]
+   * Deletes an [access level]
+   * [google.identity.accesscontextmanager.v1.AccessLevel] based on the resource
+   * name. The long-running operation from this RPC has a successful status
+   * after the [access level]
    * [google.identity.accesscontextmanager.v1.AccessLevel] has been removed
    * from long-lasting storage.
    *
@@ -1927,22 +2226,22 @@ export class AccessContextManagerClient {
     >;
   }
   /**
-   * Replace all existing [Access Levels]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] in an [Access
-   * Policy] [google.identity.accesscontextmanager.v1.AccessPolicy] with
-   * the [Access Levels]
+   * Replaces all existing [access levels]
+   * [google.identity.accesscontextmanager.v1.AccessLevel] in an [access
+   * policy] [google.identity.accesscontextmanager.v1.AccessPolicy] with
+   * the [access levels]
    * [google.identity.accesscontextmanager.v1.AccessLevel] provided. This
-   * is done atomically. The longrunning operation from this RPC will have a
-   * successful status once all replacements have propagated to long-lasting
-   * storage. Replacements containing errors will result in an error response
-   * for the first error encountered.  Replacement will be cancelled on error,
-   * existing [Access Levels]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] will not be
-   * affected. Operation.response field will contain
-   * ReplaceAccessLevelsResponse. Removing [Access Levels]
+   * is done atomically. The long-running operation from this RPC has a
+   * successful status after all replacements propagate to long-lasting
+   * storage. If the replacement contains errors, an error response is returned
+   * for the first error encountered.  Upon error, the replacement is cancelled,
+   * and existing [access levels]
+   * [google.identity.accesscontextmanager.v1.AccessLevel] are not
+   * affected. The Operation.response field contains
+   * ReplaceAccessLevelsResponse. Removing [access levels]
    * [google.identity.accesscontextmanager.v1.AccessLevel] contained in existing
-   * [Service Perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] will result in
+   * [service perimeters]
+   * [google.identity.accesscontextmanager.v1.ServicePerimeter] result in an
    * error.
    *
    * @param {Object} request
@@ -2100,14 +2399,14 @@ export class AccessContextManagerClient {
     >;
   }
   /**
-   * Create a [Service Perimeter]
+   * Creates a [service perimeter]
    * [google.identity.accesscontextmanager.v1.ServicePerimeter]. The
-   * longrunning operation from this RPC will have a successful status once the
-   * [Service Perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] has
-   * propagated to long-lasting storage. [Service Perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] containing
-   * errors will result in an error response for the first error encountered.
+   * long-running operation from this RPC has a successful status after the
+   * [service perimeter]
+   * [google.identity.accesscontextmanager.v1.ServicePerimeter]
+   * propagates to long-lasting storage. If a [service perimeter]
+   * [google.identity.accesscontextmanager.v1.ServicePerimeter] contains
+   * errors, an error response is returned for the first error encountered.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2258,14 +2557,14 @@ export class AccessContextManagerClient {
     >;
   }
   /**
-   * Update a [Service Perimeter]
+   * Updates a [service perimeter]
    * [google.identity.accesscontextmanager.v1.ServicePerimeter]. The
-   * longrunning operation from this RPC will have a successful status once the
-   * changes to the [Service Perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] have
-   * propagated to long-lasting storage. [Service Perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] containing
-   * errors will result in an error response for the first error encountered.
+   * long-running operation from this RPC has a successful status after the
+   * [service perimeter]
+   * [google.identity.accesscontextmanager.v1.ServicePerimeter]
+   * propagates to long-lasting storage. If a [service perimeter]
+   * [google.identity.accesscontextmanager.v1.ServicePerimeter] contains
+   * errors, an error response is returned for the first error encountered.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2410,12 +2709,12 @@ export class AccessContextManagerClient {
     >;
   }
   /**
-   * Delete a [Service Perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] by resource
-   * name. The longrunning operation from this RPC will have a successful status
-   * once the [Service Perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] has been
-   * removed from long-lasting storage.
+   * Deletes a [service perimeter]
+   * [google.identity.accesscontextmanager.v1.ServicePerimeter] based on the
+   * resource name. The long-running operation from this RPC has a successful
+   * status after the [service perimeter]
+   * [google.identity.accesscontextmanager.v1.ServicePerimeter] is removed from
+   * long-lasting storage.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2561,18 +2860,18 @@ export class AccessContextManagerClient {
     >;
   }
   /**
-   * Replace all existing [Service Perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] in an
-   * [Access Policy] [google.identity.accesscontextmanager.v1.AccessPolicy]
-   * with the [Service Perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] provided.
-   * This is done atomically. The longrunning operation from this
-   * RPC will have a successful status once all replacements have propagated to
-   * long-lasting storage. Replacements containing errors will result in an
-   * error response for the first error encountered. Replacement will be
-   * cancelled on error, existing [Service Perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] will not be
-   * affected. Operation.response field will contain
+   * Replace all existing [service perimeters]
+   * [google.identity.accesscontextmanager.v1.ServicePerimeter] in an [access
+   * policy] [google.identity.accesscontextmanager.v1.AccessPolicy] with the
+   * [service perimeters]
+   * [google.identity.accesscontextmanager.v1.ServicePerimeter] provided. This
+   * is done atomically. The long-running operation from this RPC has a
+   * successful status after all replacements propagate to long-lasting storage.
+   * Replacements containing errors result in an error response for the first
+   * error encountered. Upon an error, replacement are cancelled and existing
+   * [service perimeters]
+   * [google.identity.accesscontextmanager.v1.ServicePerimeter] are not
+   * affected. The Operation.response field contains
    * ReplaceServicePerimetersResponse.
    *
    * @param {Object} request
@@ -2734,21 +3033,21 @@ export class AccessContextManagerClient {
     >;
   }
   /**
-   * Commit the dry-run spec for all the [Service Perimeters]
+   * Commits the dry-run specification for all the [service perimeters]
    * [google.identity.accesscontextmanager.v1.ServicePerimeter] in an
-   * {@link google.identity.accesscontextmanager.v1.AccessPolicy|Access Policy}.
-   * A commit operation on a Service Perimeter involves copying its `spec` field
-   * to that Service Perimeter's `status` field. Only [Service Perimeters]
+   * {@link google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
+   * A commit operation on a service perimeter involves copying its `spec` field
+   * to the `status` field of the service perimeter. Only [service perimeters]
    * [google.identity.accesscontextmanager.v1.ServicePerimeter] with
    * `use_explicit_dry_run_spec` field set to true are affected by a commit
-   * operation. The longrunning operation from this RPC will have a successful
-   * status once the dry-run specs for all the [Service Perimeters]
+   * operation. The long-running operation from this RPC has a successful
+   * status after the dry-run specifications for all the [service perimeters]
    * [google.identity.accesscontextmanager.v1.ServicePerimeter] have been
-   * committed. If a commit fails, it will cause the longrunning operation to
-   * return an error response and the entire commit operation will be cancelled.
-   * When successful, Operation.response field will contain
-   * CommitServicePerimetersResponse. The `dry_run` and the `spec` fields will
-   * be cleared after a successful commit operation.
+   * committed. If a commit fails, it causes the long-running operation to
+   * return an error response and the entire commit operation is cancelled.
+   * When successful, the Operation.response field contains
+   * CommitServicePerimetersResponse. The `dry_run` and the `spec` fields are
+   * cleared after a successful commit operation.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2762,7 +3061,7 @@ export class AccessContextManagerClient {
    *   Format: `accessPolicies/{policy_id}`
    * @param {string} request.etag
    *   Optional. The etag for the version of the [Access Policy]
-   *   [google.identity.accesscontextmanager.v1alpha.AccessPolicy] that this
+   *   [google.identity.accesscontextmanager.v1.AccessPolicy] that this
    *   commit operation is to be performed on. If, at the time of commit, the
    *   etag for the Access Policy stored in Access Context Manager is different
    *   from the specified etag, then the commit operation will not be performed
@@ -2908,7 +3207,7 @@ export class AccessContextManagerClient {
    * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding]. If the
    * client specifies a [name]
    * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding.name],
-   * the server will ignore it. Fails if a resource already exists with the same
+   * the server ignores it. Fails if a resource already exists with the same
    * [group_key]
    * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding.group_key].
    * Completion of this long-running operation does not necessarily signify that
@@ -3359,9 +3658,9 @@ export class AccessContextManagerClient {
     >;
   }
   /**
-   * List all [AccessPolicies]
-   * [google.identity.accesscontextmanager.v1.AccessPolicy] under a
-   * container.
+   * Lists all [access policies]
+   * [google.identity.accesscontextmanager.v1.AccessPolicy] in an
+   * organization.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3553,7 +3852,7 @@ export class AccessContextManagerClient {
     ) as AsyncIterable<protos.google.identity.accesscontextmanager.v1.IAccessPolicy>;
   }
   /**
-   * List all [Access Levels]
+   * Lists all [access levels]
    * [google.identity.accesscontextmanager.v1.AccessLevel] for an access
    * policy.
    *
@@ -3780,7 +4079,7 @@ export class AccessContextManagerClient {
     ) as AsyncIterable<protos.google.identity.accesscontextmanager.v1.IAccessLevel>;
   }
   /**
-   * List all [Service Perimeters]
+   * Lists all [service perimeters]
    * [google.identity.accesscontextmanager.v1.ServicePerimeter] for an
    * access policy.
    *
@@ -4201,6 +4500,183 @@ export class AccessContextManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding>;
   }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}. The promise has a method named
+   * "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------

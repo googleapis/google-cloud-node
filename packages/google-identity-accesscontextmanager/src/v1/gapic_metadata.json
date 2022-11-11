@@ -30,6 +30,21 @@
                 "getGcpUserAccessBinding"
               ]
             },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "CreateAccessPolicy": {
               "methods": [
                 "createAccessPolicy"
@@ -156,6 +171,21 @@
             "GetGcpUserAccessBinding": {
               "methods": [
                 "getGcpUserAccessBinding"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
               ]
             },
             "CreateAccessPolicy": {

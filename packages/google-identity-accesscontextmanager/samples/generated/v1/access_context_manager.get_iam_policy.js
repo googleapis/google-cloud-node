@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START accesscontextmanager_v1_generated_AccessContextManager_CommitServicePerimeters_async]
+function main(resource) {
+  // [START accesscontextmanager_v1_generated_AccessContextManager_GetIamPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,24 +29,15 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for the parent Access Policy 
-   *  google.identity.accesscontextmanager.v1.AccessPolicy  which owns all
-   *  Service Perimeters 
-   *  google.identity.accesscontextmanager.v1.ServicePerimeter  in scope for
-   *  the commit operation.
-   *  Format: `accessPolicies/{policy_id}`
+   *  REQUIRED: The resource for which the policy is being requested.
+   *  See the operation documentation for the appropriate value for this field.
    */
-  // const parent = 'abc123'
+  // const resource = 'abc123'
   /**
-   *  Optional. The etag for the version of the Access Policy 
-   *  google.identity.accesscontextmanager.v1.AccessPolicy  that this
-   *  commit operation is to be performed on. If, at the time of commit, the
-   *  etag for the Access Policy stored in Access Context Manager is different
-   *  from the specified etag, then the commit operation will not be performed
-   *  and the call will fail. This field is not required. If etag is not
-   *  provided, the operation will be performed as if a valid etag is provided.
+   *  OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *  `GetIamPolicy`.
    */
-  // const etag = 'abc123'
+  // const options = {}
 
   // Imports the Accesscontextmanager library
   const {AccessContextManagerClient} = require('@google-cloud/access-context-manager').v1;
@@ -54,20 +45,19 @@ function main(parent) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function callCommitServicePerimeters() {
+  async function callGetIamPolicy() {
     // Construct request
     const request = {
-      parent,
+      resource,
     };
 
     // Run request
-    const [operation] = await accesscontextmanagerClient.commitServicePerimeters(request);
-    const [response] = await operation.promise();
+    const response = await accesscontextmanagerClient.getIamPolicy(request);
     console.log(response);
   }
 
-  callCommitServicePerimeters();
-  // [END accesscontextmanager_v1_generated_AccessContextManager_CommitServicePerimeters_async]
+  callGetIamPolicy();
+  // [END accesscontextmanager_v1_generated_AccessContextManager_GetIamPolicy_async]
 }
 
 process.on('unhandledRejection', err => {
