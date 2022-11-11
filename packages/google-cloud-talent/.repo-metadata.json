@@ -6,7 +6,7 @@
   "default_version": "v4",
   "language": "nodejs",
   "name_pretty": "Google Cloud Talent Solution",
-  "repo": "googleapis/nodejs-talent",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/solutions/talent-solution/",
   "requires_billing": true,
   "name": "talent",
