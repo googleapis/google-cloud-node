@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [3.1.1](https://github.com/googleapis/nodejs-datalabeling/compare/v3.1.0...v3.1.1) (2022-11-11)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#373](https://github.com/googleapis/nodejs-datalabeling/issues/373)) ([79cdd8f](https://github.com/googleapis/nodejs-datalabeling/commit/79cdd8f9034fbd65f1db9b50a33116929d529736))
+* Better support for fallback mode ([#369](https://github.com/googleapis/nodejs-datalabeling/issues/369)) ([bc2cf61](https://github.com/googleapis/nodejs-datalabeling/commit/bc2cf61fefcd03248a8b1eae492729edc677555a))
+* Change import long to require ([#370](https://github.com/googleapis/nodejs-datalabeling/issues/370)) ([7e53220](https://github.com/googleapis/nodejs-datalabeling/commit/7e53220e039ef6ec12a96dfbacd539cbc4948288))
+* **deps:** Do not depend on protobufjs ([#365](https://github.com/googleapis/nodejs-datalabeling/issues/365)) ([68c3205](https://github.com/googleapis/nodejs-datalabeling/commit/68c320583fcd4157a2a95aa01c431bf2193d0182))
+* **deps:** Use google-gax v3.5.2 ([#379](https://github.com/googleapis/nodejs-datalabeling/issues/379)) ([67a6af6](https://github.com/googleapis/nodejs-datalabeling/commit/67a6af631dcb9919eaa58ccbc2d19f359489f277))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-datalabeling/issues/1553)) ([#372](https://github.com/googleapis/nodejs-datalabeling/issues/372)) ([7740922](https://github.com/googleapis/nodejs-datalabeling/commit/77409220eba817c81a7b87fd535e839a75bcb7d3))
+* Preserve default values in x-goog-request-params header ([#374](https://github.com/googleapis/nodejs-datalabeling/issues/374)) ([c2df026](https://github.com/googleapis/nodejs-datalabeling/commit/c2df0262f6135946f0bf81ad89748e80079321c3))
+* Regenerated protos JS and TS definitions ([#382](https://github.com/googleapis/nodejs-datalabeling/issues/382)) ([91598fc](https://github.com/googleapis/nodejs-datalabeling/commit/91598fce400d2f9a11b3780f81f8d30be101c864))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-datalabeling/issues/1546)) ([#371](https://github.com/googleapis/nodejs-datalabeling/issues/371)) ([d8844f2](https://github.com/googleapis/nodejs-datalabeling/commit/d8844f29ccfd352b98b91f3422d085934e722f76))
+* use google-gax v3.3.0 ([7740922](https://github.com/googleapis/nodejs-datalabeling/commit/77409220eba817c81a7b87fd535e839a75bcb7d3))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-datalabeling/compare/v3.0.0...v3.1.0) (2022-07-05)
 
 
