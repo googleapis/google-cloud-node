@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/nodejs-dataflow/compare/v2.0.0...v2.0.1) (2022-11-11)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#80](https://github.com/googleapis/nodejs-dataflow/issues/80)) ([9054e83](https://github.com/googleapis/nodejs-dataflow/commit/9054e835bff17366ca8810852c9d128b2ce6660f))
+* Better support for fallback mode ([#76](https://github.com/googleapis/nodejs-dataflow/issues/76)) ([7b4c304](https://github.com/googleapis/nodejs-dataflow/commit/7b4c30408db223dc273b4d82a7402f945b30aa21))
+* Change import long to require ([#77](https://github.com/googleapis/nodejs-dataflow/issues/77)) ([531996b](https://github.com/googleapis/nodejs-dataflow/commit/531996bb8c228f653dee2adf4a0488f275e85710))
+* **deps:** Use google-gax v3.5.2 ([#87](https://github.com/googleapis/nodejs-dataflow/issues/87)) ([9f856a5](https://github.com/googleapis/nodejs-dataflow/commit/9f856a5f95c68fe7310fdd5e4de747d551192136))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-dataflow/issues/1553)) ([#79](https://github.com/googleapis/nodejs-dataflow/issues/79)) ([a0924da](https://github.com/googleapis/nodejs-dataflow/commit/a0924dac7a384c659650a3c61e4072d7206df678))
+* **docs:** Document fallback rest option ([#72](https://github.com/googleapis/nodejs-dataflow/issues/72)) ([bb637f7](https://github.com/googleapis/nodejs-dataflow/commit/bb637f7a64b1f3cbe78e45d1584a52874904a607))
+* Preserve default values in x-goog-request-params header ([#81](https://github.com/googleapis/nodejs-dataflow/issues/81)) ([18e64cc](https://github.com/googleapis/nodejs-dataflow/commit/18e64cc81f6d02e3a137f0a3cbee5e38bbaac5d9))
+* Regenerated protos JS and TS definitions ([#90](https://github.com/googleapis/nodejs-dataflow/issues/90)) ([920d3fe](https://github.com/googleapis/nodejs-dataflow/commit/920d3fea4f8900113fd24f72debc2d417e9c53c0))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-dataflow/issues/1546)) ([#78](https://github.com/googleapis/nodejs-dataflow/issues/78)) ([884ea27](https://github.com/googleapis/nodejs-dataflow/commit/884ea27767fb25ff73d01899250000ea53360be5))
+* use google-gax v3.3.0 ([a0924da](https://github.com/googleapis/nodejs-dataflow/commit/a0924dac7a384c659650a3c61e4072d7206df678))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-dataflow/compare/v1.2.0...v2.0.0) (2022-06-10)
 
 
