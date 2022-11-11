@@ -11,7 +11,7 @@
   "distribution_name": "@google-cloud/datalabeling",
   "name_pretty": "Google Cloud Data Labeling",
   "api_id": "datalabeling.googleapis.com",
-  "repo": "googleapis/nodejs-datalabeling",
+  "repo": "googleapis/google-cloud-node",
   "api_shortname": "datalabeling",
   "library_type": "GAPIC_AUTO"
 }

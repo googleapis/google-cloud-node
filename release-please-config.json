@@ -15,6 +15,7 @@
     "packages/google-cloud-bigquery-reservation": {},
     "packages/google-cloud-certificatemanager": {},
     "packages/google-cloud-contentwarehouse": {},
+    "packages/google-cloud-datalabeling": {},
     "packages/google-cloud-dataplex": {},
     "packages/google-cloud-dataproc": {},
     "packages/google-cloud-deploy": {},
