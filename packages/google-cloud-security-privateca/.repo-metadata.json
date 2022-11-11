@@ -6,11 +6,11 @@
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Certificate Authority Service",
-  "repo": "googleapis/nodejs-security-private-ca",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/certificate-authority-service",
   "requires_billing": true,
   "name": "security-private-ca",
-  "issue_tracker": "https://github.com/googleapis/nodejs-security-private-ca/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "api_shortname": "privateca",
   "library_type": "GAPIC_AUTO"
 }
