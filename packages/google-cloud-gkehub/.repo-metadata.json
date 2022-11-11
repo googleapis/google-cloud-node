@@ -6,11 +6,11 @@
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "GKE Hub",
-  "repo": "googleapis/nodejs-gke-hub",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/anthos/gke",
   "requires_billing": true,
   "name": "gke-hub",
-  "issue_tracker": "https://github.com/googleapis/nodejs-gke-hub/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "api_shortname": "gkehub",
   "library_type": "GAPIC_AUTO"
 }
