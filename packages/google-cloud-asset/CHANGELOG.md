@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [4.5.0](https://github.com/googleapis/nodejs-asset/compare/v4.4.0...v4.5.0) (2022-11-11)
+
+
+### Features
+
+* Add a new searchable field kmsKeys ([#665](https://github.com/googleapis/nodejs-asset/issues/665)) ([567ccbd](https://github.com/googleapis/nodejs-asset/commit/567ccbd70f35f5fce8125b2569d9b0492a9da5cb))
+
+
+### Bug Fixes
+
+* deprecate searchable field kmsKey ([567ccbd](https://github.com/googleapis/nodejs-asset/commit/567ccbd70f35f5fce8125b2569d9b0492a9da5cb))
+* **deps:** Use google-gax v3.5.2 ([#669](https://github.com/googleapis/nodejs-asset/issues/669)) ([a6ede56](https://github.com/googleapis/nodejs-asset/commit/a6ede563b7cfd10e6646a3255b64a9aa74b07169))
+* Regenerated protos JS and TS definitions ([#673](https://github.com/googleapis/nodejs-asset/issues/673)) ([35bb44c](https://github.com/googleapis/nodejs-asset/commit/35bb44c04408a5319a34e816e63e26d1877e4cd5))
+
 ## [4.4.0](https://github.com/googleapis/nodejs-asset/compare/v4.3.0...v4.4.0) (2022-09-22)
 
 
