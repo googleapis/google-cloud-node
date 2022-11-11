@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-filestore/compare/v2.1.0...v2.2.0) (2022-11-11)
+
+
+### Features
+
+* New APIs added to reflect updates to the filestore service ([#93](https://github.com/googleapis/nodejs-filestore/issues/93)) ([619e7f1](https://github.com/googleapis/nodejs-filestore/commit/619e7f142a621303afc58b38261711d33584ea5f))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#82](https://github.com/googleapis/nodejs-filestore/issues/82)) ([37a928b](https://github.com/googleapis/nodejs-filestore/commit/37a928bf3c049d0cd66e4efa5d41717fa5ff9a28))
+* Better support for fallback mode ([#77](https://github.com/googleapis/nodejs-filestore/issues/77)) ([c339f3f](https://github.com/googleapis/nodejs-filestore/commit/c339f3f49c0a10fd2d42a64de20a9d2f06ae061e))
+* Change import long to require ([#78](https://github.com/googleapis/nodejs-filestore/issues/78)) ([c9ce9d1](https://github.com/googleapis/nodejs-filestore/commit/c9ce9d147dd1cc6f99b63e53af9cf75c1999dc90))
+* **deps:** Use google-gax v3.5.2 ([#89](https://github.com/googleapis/nodejs-filestore/issues/89)) ([5fde972](https://github.com/googleapis/nodejs-filestore/commit/5fde972b08be1106b42bce644f1282f690b93677))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-filestore/issues/1553)) ([#81](https://github.com/googleapis/nodejs-filestore/issues/81)) ([e0b4ac4](https://github.com/googleapis/nodejs-filestore/commit/e0b4ac42145ad648f3ae5f6c77917a2dd94d5192))
+* Preserve default values in x-goog-request-params header ([#83](https://github.com/googleapis/nodejs-filestore/issues/83)) ([2cd3cb0](https://github.com/googleapis/nodejs-filestore/commit/2cd3cb022d1cb11fa3d04dbda58fd32de995c462))
+* Regenerated protos JS and TS definitions ([#92](https://github.com/googleapis/nodejs-filestore/issues/92)) ([cb324b9](https://github.com/googleapis/nodejs-filestore/commit/cb324b9f3f93eaea7228386e5bf406ed570bafcc))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-filestore/issues/1546)) ([#80](https://github.com/googleapis/nodejs-filestore/issues/80)) ([73de8d6](https://github.com/googleapis/nodejs-filestore/commit/73de8d63b8b221df09c193400d1028cf3924a6ae))
+* use google-gax v3.3.0 ([e0b4ac4](https://github.com/googleapis/nodejs-filestore/commit/e0b4ac42145ad648f3ae5f6c77917a2dd94d5192))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-filestore/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
