@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,23 +14,27 @@
 
 'use strict';
 
-const {assert} = require('chai');
+const assert = require('assert');
+const path = require('path');
 const {describe, it, before} = require('mocha');
-const {execSync} = require('child_process');
-const {DataLabelingServiceClient} = require('@google-cloud/datalabeling');
-const client = new DataLabelingServiceClient();
+const cp = require('child_process');
+const iot = require('@google-cloud/iot');
+const client = new iot.v1.DeviceManagerClient();
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const cwd = path.join(__dirname, '..');
 
-const exec = cmd => execSync(cmd, {encoding: 'utf8'});
-
-describe('quickstart', () => {
+describe('iot samples', () => {
   let projectId;
 
   before(async () => {
     projectId = await client.getProjectId();
   });
 
-  it('should run the quickstart', () => {
-    const stdout = exec(`node quickstart.js ${projectId}`);
-    assert.include(stdout, 'Datasets:');
+  it('should run the quickstart', async () => {
+    const stdout = execSync(
+      `node quickstart projects/${projectId}/locations/us-central1`,
+      {cwd}
+    );
+    assert(stdout !== null);
   });
 });
