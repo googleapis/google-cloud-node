@@ -39,6 +39,7 @@
     "packages/google-maps-addressvalidation": {},
     "packages/google-maps-routing": {},
     "packages/google-monitoring-dashboard": {},
+    "packages/grafeas": {},
     "packages/typeless-sample-bot": {}
   },
   "plugins": [
