@@ -34,6 +34,7 @@
   "packages/google-cloud-texttospeech": "4.0.4",
   "packages/google-cloud-translate": "7.0.4",
   "packages/google-cloud-videointelligence": "4.1.1",
+  "packages/google-cloud-workflows-executions": "2.2.0",
   "packages/google-container": "4.4.0",
   "packages/google-devtools-artifactregistry": "2.0.2",
   "packages/google-iam": "0.2.2",

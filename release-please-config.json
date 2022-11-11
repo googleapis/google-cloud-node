@@ -35,6 +35,7 @@
     "packages/google-cloud-texttospeech": {},
     "packages/google-cloud-translate": {},
     "packages/google-cloud-videointelligence": {},
+    "packages/google-cloud-workflows-executions": {},
     "packages/google-container": {},
     "packages/google-devtools-artifactregistry": {},
     "packages/google-iam": {},
