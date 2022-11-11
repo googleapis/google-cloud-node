@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.2.1](https://github.com/googleapis/nodejs-vmmigration/compare/v2.2.0...v2.2.1) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#68](https://github.com/googleapis/nodejs-vmmigration/issues/68)) ([658939e](https://github.com/googleapis/nodejs-vmmigration/commit/658939eddfed48c3057a34053200e4773013cd36))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-vmmigration/issues/1553)) ([#58](https://github.com/googleapis/nodejs-vmmigration/issues/58)) ([2904a86](https://github.com/googleapis/nodejs-vmmigration/commit/2904a8663508a1bef3c8637ebad6702d05bd1935))
+* Preserve default values in x-goog-request-params header ([#62](https://github.com/googleapis/nodejs-vmmigration/issues/62)) ([2a42aea](https://github.com/googleapis/nodejs-vmmigration/commit/2a42aea5c7b10e97b0f43f134d4351a0bd14abf0))
+* Regenerated protos JS and TS definitions ([#71](https://github.com/googleapis/nodejs-vmmigration/issues/71)) ([603438c](https://github.com/googleapis/nodejs-vmmigration/commit/603438c4a72376d71f87d16ef65de11e1e94589a))
+* Use _gaxModule when accessing gax for bundling ([#59](https://github.com/googleapis/nodejs-vmmigration/issues/59)) ([a74d392](https://github.com/googleapis/nodejs-vmmigration/commit/a74d39272844d45c1730eafc416a88c049499b18))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-vmmigration/compare/v2.1.0...v2.2.0) (2022-08-23)
 
 
