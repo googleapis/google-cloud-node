@@ -27,6 +27,7 @@
     "packages/google-cloud-oslogin": {},
     "packages/google-cloud-phishingprotection": {},
     "packages/google-cloud-policytroubleshooter": {},
+    "packages/google-cloud-privatecatalog": {},
     "packages/google-cloud-recommender": {},
     "packages/google-cloud-redis": {},
     "packages/google-cloud-resourcemanager": {},
