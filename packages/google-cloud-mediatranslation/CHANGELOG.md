@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.5](https://github.com/googleapis/nodejs-media-translation/compare/v3.0.4...v3.0.5) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#258](https://github.com/googleapis/nodejs-media-translation/issues/258)) ([1e26910](https://github.com/googleapis/nodejs-media-translation/commit/1e2691026bf580a0330d70f0f854987b7f96c865))
+* Regenerated protos JS and TS definitions ([#262](https://github.com/googleapis/nodejs-media-translation/issues/262)) ([18948d2](https://github.com/googleapis/nodejs-media-translation/commit/18948d24a7b262db7211e47366cb1fd9f5499df6))
+
 ## [3.0.4](https://github.com/googleapis/nodejs-media-translation/compare/v3.0.3...v3.0.4) (2022-09-14)
 
 
