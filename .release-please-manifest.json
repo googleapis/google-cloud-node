@@ -45,5 +45,6 @@
   "packages/google-maps-addressvalidation": "0.1.0",
   "packages/google-maps-routing": "0.2.1",
   "packages/google-monitoring-dashboard": "2.8.0",
+  "packages/grafeas": "4.2.1",
   "packages/typeless-sample-bot": "1.1.0"
 }
