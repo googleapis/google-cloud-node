@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.3.1](https://github.com/googleapis/nodejs-network-management/compare/v2.3.0...v2.3.1) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#93](https://github.com/googleapis/nodejs-network-management/issues/93)) ([95915f2](https://github.com/googleapis/nodejs-network-management/commit/95915f2e95c1970096b1ab0b7907d0fe1a5a3ee2))
+* Preserve default values in x-goog-request-params header ([#86](https://github.com/googleapis/nodejs-network-management/issues/86)) ([af58175](https://github.com/googleapis/nodejs-network-management/commit/af58175c71f3303f6808235db1efe216f2e27c2a))
+* Regenerated protos JS and TS definitions ([#96](https://github.com/googleapis/nodejs-network-management/issues/96)) ([503d3dd](https://github.com/googleapis/nodejs-network-management/commit/503d3dd876892c8a5586091103bf464500cadc3e))
+
 ## [2.3.0](https://github.com/googleapis/nodejs-network-management/compare/v2.2.0...v2.3.0) (2022-09-01)
 
 
