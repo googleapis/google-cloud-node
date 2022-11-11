@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-datastream/compare/v2.1.1...v2.1.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#71](https://github.com/googleapis/nodejs-datastream/issues/71)) ([bf11be5](https://github.com/googleapis/nodejs-datastream/commit/bf11be5263887efbe7b56d6fba9cf3aa1659e371))
+* Preserve default values in x-goog-request-params header ([#64](https://github.com/googleapis/nodejs-datastream/issues/64)) ([eaf97d2](https://github.com/googleapis/nodejs-datastream/commit/eaf97d247a4185e9cdc7402daefc7089b85d0bb3))
+* Regenerated protos JS and TS definitions ([#74](https://github.com/googleapis/nodejs-datastream/issues/74)) ([7b9da59](https://github.com/googleapis/nodejs-datastream/commit/7b9da59897e185dd007a31b806c06ed13dba18aa))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-datastream/compare/v2.1.0...v2.1.1) (2022-09-01)
 
 
