@@ -2,7 +2,11 @@
   "name": "@google-cloud/dialogflow-cx",
   "version": "3.1.2",
   "description": "Cx client for Node.js",
-  "repository": "googleapis/nodejs-dialogflow-cx",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-dialogflow-cx",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
@@ -45,9 +49,9 @@
     "lint": "gts check",
     "prelint": "cd samples; npm link ../; npm i",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 node build/test/run.js",
-    "samples-test": "cd samples/ && npm link ../ && npm test"
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test"
   },
   "dependencies": {
     "google-gax": "^3.5.2"
@@ -73,5 +77,6 @@
   },
   "engines": {
     "node": ">=12.0.0"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dialogflow-cx"
 }
