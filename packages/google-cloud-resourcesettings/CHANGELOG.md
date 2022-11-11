@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.3](https://github.com/googleapis/nodejs-resource-settings/compare/v2.0.2...v2.0.3) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#99](https://github.com/googleapis/nodejs-resource-settings/issues/99)) ([8fdec6f](https://github.com/googleapis/nodejs-resource-settings/commit/8fdec6f6a8c4869b538434ea0e9c02d806078ea7))
+* Preserve default values in x-goog-request-params header ([#92](https://github.com/googleapis/nodejs-resource-settings/issues/92)) ([b09f5fb](https://github.com/googleapis/nodejs-resource-settings/commit/b09f5fb6c2d573dd5c8c01118971596471e085b2))
+* Regenerated protos JS and TS definitions ([#102](https://github.com/googleapis/nodejs-resource-settings/issues/102)) ([7228136](https://github.com/googleapis/nodejs-resource-settings/commit/72281366b3453766a8dea4833ba3b198b98207a7))
+
 ## [2.0.2](https://github.com/googleapis/nodejs-resource-settings/compare/v2.0.1...v2.0.2) (2022-09-01)
 
 
