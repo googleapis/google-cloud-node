@@ -1,5 +1,25 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/nodejs-assured-workloads/compare/v3.4.1...v3.5.0) (2022-11-10)
+
+
+### Features
+
+* Add apis for AssuredWorkload monitoring feature and to restrict allowed resources ([#192](https://github.com/googleapis/nodejs-assured-workloads/issues/192)) ([ab33d32](https://github.com/googleapis/nodejs-assured-workloads/commit/ab33d32d2585d0c0de372660001b5d1bfcea4cd7))
+* Add compliant_but_disallowed_services field to the v1beta1 Workload proto ([3101b18](https://github.com/googleapis/nodejs-assured-workloads/commit/3101b1896af8f684c4cf26b634411980a74f1b66))
+* Add new field for exception audit log link ([#193](https://github.com/googleapis/nodejs-assured-workloads/issues/193)) ([89f20ba](https://github.com/googleapis/nodejs-assured-workloads/commit/89f20baa4487638eb53ddaf018dce8f880d36973))
+* Updated v1beta1 analyzeWorkloadMove documentation ([e02a438](https://github.com/googleapis/nodejs-assured-workloads/commit/e02a4381a79b94e8bd745ee6435f15770824f592))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#185](https://github.com/googleapis/nodejs-assured-workloads/issues/185)) ([e02a438](https://github.com/googleapis/nodejs-assured-workloads/commit/e02a4381a79b94e8bd745ee6435f15770824f592))
+* **deps:** Use google-gax v3.5.2 ([#196](https://github.com/googleapis/nodejs-assured-workloads/issues/196)) ([cfa9ce8](https://github.com/googleapis/nodejs-assured-workloads/commit/cfa9ce8356937cbbf99ffba80d5a3631f1f8480b))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-assured-workloads/issues/1553)) ([#186](https://github.com/googleapis/nodejs-assured-workloads/issues/186)) ([bc1ee5f](https://github.com/googleapis/nodejs-assured-workloads/commit/bc1ee5ffab28bce1803829ab275c687d2e4e1360))
+* Preserve default values in x-goog-request-params header ([#188](https://github.com/googleapis/nodejs-assured-workloads/issues/188)) ([3101b18](https://github.com/googleapis/nodejs-assured-workloads/commit/3101b1896af8f684c4cf26b634411980a74f1b66))
+* Regenerated protos JS and TS definitions ([#199](https://github.com/googleapis/nodejs-assured-workloads/issues/199)) ([c23065a](https://github.com/googleapis/nodejs-assured-workloads/commit/c23065a364233fbc045798891973dc8b2a8001b5))
+* use google-gax v3.3.0 ([bc1ee5f](https://github.com/googleapis/nodejs-assured-workloads/commit/bc1ee5ffab28bce1803829ab275c687d2e4e1360))
+
 ## [3.4.1](https://github.com/googleapis/nodejs-assured-workloads/compare/v3.4.0...v3.4.1) (2022-08-23)
 
 
