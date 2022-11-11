@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.4.0](https://github.com/googleapis/nodejs-cloud-container/compare/v4.3.0...v4.4.0) (2022-11-10)
+
+
+### Features
+
+* Add APIs for GKE Control Plane Logs ([#588](https://github.com/googleapis/nodejs-cloud-container/issues/588)) ([de62f0b](https://github.com/googleapis/nodejs-cloud-container/commit/de62f0bfc4d6972d1bbd48428ec2005ef2ccf890))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#582](https://github.com/googleapis/nodejs-cloud-container/issues/582)) ([3c62c1a](https://github.com/googleapis/nodejs-cloud-container/commit/3c62c1adbc913212097f50496e10c4ccfb6f2d86))
+* Update proto definitions ([#586](https://github.com/googleapis/nodejs-cloud-container/issues/586)) ([dbee22e](https://github.com/googleapis/nodejs-cloud-container/commit/dbee22e4f5e793d1e1ebe5cec33edf2128963a60))
+
 ## [4.3.0](https://github.com/googleapis/nodejs-cloud-container/compare/v4.2.0...v4.3.0) (2022-10-14)
 
 
