@@ -302,6 +302,14 @@
                       },
                       "nested": {
                         "Annotation": {
+                          "valuesOptions": {
+                            "PASSWORD_CORRECT": {
+                              "deprecated": true
+                            },
+                            "PASSWORD_INCORRECT": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "ANNOTATION_UNSPECIFIED": 0,
                             "LEGITIMATE": 1,
@@ -1208,6 +1216,14 @@
                       },
                       "nested": {
                         "Annotation": {
+                          "valuesOptions": {
+                            "PASSWORD_CORRECT": {
+                              "deprecated": true
+                            },
+                            "PASSWORD_INCORRECT": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "ANNOTATION_UNSPECIFIED": 0,
                             "LEGITIMATE": 1,
@@ -1392,6 +1408,11 @@
                       },
                       "nested": {
                         "InvalidReason": {
+                          "valuesOptions": {
+                            "SITE_MISMATCH": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "INVALID_REASON_UNSPECIFIED": 0,
                             "UNKNOWN_INVALID_REASON": 1,

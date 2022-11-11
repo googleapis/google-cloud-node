@@ -1010,6 +1010,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.annotation) {
+                            default:
+                                if (typeof object.annotation === "number") {
+                                    message.annotation = object.annotation;
+                                    break;
+                                }
+                                break;
                             case "ANNOTATION_UNSPECIFIED":
                             case 0:
                                 message.annotation = 0;
@@ -1038,6 +1044,10 @@
                                 for (var i = 0; i < object.reasons.length; ++i)
                                     switch (object.reasons[i]) {
                                     default:
+                                        if (typeof object.reasons[i] === "number") {
+                                            message.reasons[i] = object.reasons[i];
+                                            break;
+                                        }
                                     case "REASON_UNSPECIFIED":
                                     case 0:
                                         message.reasons[i] = 0;
@@ -1137,11 +1147,11 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.annotation != null && message.hasOwnProperty("annotation"))
-                                object.annotation = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation[message.annotation] : message.annotation;
+                                object.annotation = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation[message.annotation] === undefined ? message.annotation : $root.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation[message.annotation] : message.annotation;
                             if (message.reasons && message.reasons.length) {
                                 object.reasons = [];
                                 for (var j = 0; j < message.reasons.length; ++j)
-                                    object.reasons[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason[message.reasons[j]] : message.reasons[j];
+                                    object.reasons[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason[message.reasons[j]] === undefined ? message.reasons[j] : $root.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason[message.reasons[j]] : message.reasons[j];
                             }
                             if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
                                 object.hashedAccountId = options.bytes === String ? $util.base64.encode(message.hashedAccountId, 0, message.hashedAccountId.length) : options.bytes === Array ? Array.prototype.slice.call(message.hashedAccountId) : message.hashedAccountId;
@@ -2605,6 +2615,10 @@
                                 for (var i = 0; i < object.reasons.length; ++i)
                                     switch (object.reasons[i]) {
                                     default:
+                                        if (typeof object.reasons[i] === "number") {
+                                            message.reasons[i] = object.reasons[i];
+                                            break;
+                                        }
                                     case "CLASSIFICATION_REASON_UNSPECIFIED":
                                     case 0:
                                         message.reasons[i] = 0;
@@ -2656,7 +2670,7 @@
                             if (message.reasons && message.reasons.length) {
                                 object.reasons = [];
                                 for (var j = 0; j < message.reasons.length; ++j)
-                                    object.reasons[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.RiskAnalysis.ClassificationReason[message.reasons[j]] : message.reasons[j];
+                                    object.reasons[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.RiskAnalysis.ClassificationReason[message.reasons[j]] === undefined ? message.reasons[j] : $root.google.cloud.recaptchaenterprise.v1.RiskAnalysis.ClassificationReason[message.reasons[j]] : message.reasons[j];
                             }
                             return object;
                         };
@@ -2948,6 +2962,12 @@
                             if (object.valid != null)
                                 message.valid = Boolean(object.valid);
                             switch (object.invalidReason) {
+                            default:
+                                if (typeof object.invalidReason === "number") {
+                                    message.invalidReason = object.invalidReason;
+                                    break;
+                                }
+                                break;
                             case "INVALID_REASON_UNSPECIFIED":
                             case 0:
                                 message.invalidReason = 0;
@@ -3012,7 +3032,7 @@
                             if (message.valid != null && message.hasOwnProperty("valid"))
                                 object.valid = message.valid;
                             if (message.invalidReason != null && message.hasOwnProperty("invalidReason"))
-                                object.invalidReason = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.TokenProperties.InvalidReason[message.invalidReason] : message.invalidReason;
+                                object.invalidReason = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.TokenProperties.InvalidReason[message.invalidReason] === undefined ? message.invalidReason : $root.google.cloud.recaptchaenterprise.v1.TokenProperties.InvalidReason[message.invalidReason] : message.invalidReason;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.hostname != null && message.hasOwnProperty("hostname"))
@@ -3255,6 +3275,10 @@
                                 for (var i = 0; i < object.labels.length; ++i)
                                     switch (object.labels[i]) {
                                     default:
+                                        if (typeof object.labels[i] === "number") {
+                                            message.labels[i] = object.labels[i];
+                                            break;
+                                        }
                                     case "ACCOUNT_DEFENDER_LABEL_UNSPECIFIED":
                                     case 0:
                                         message.labels[i] = 0;
@@ -3298,7 +3322,7 @@
                             if (message.labels && message.labels.length) {
                                 object.labels = [];
                                 for (var j = 0; j < message.labels.length; ++j)
-                                    object.labels[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel[message.labels[j]] : message.labels[j];
+                                    object.labels[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel[message.labels[j]] === undefined ? message.labels[j] : $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel[message.labels[j]] : message.labels[j];
                             }
                             return object;
                         };
@@ -6523,6 +6547,12 @@
                             if (object.testingScore != null)
                                 message.testingScore = Number(object.testingScore);
                             switch (object.testingChallenge) {
+                            default:
+                                if (typeof object.testingChallenge === "number") {
+                                    message.testingChallenge = object.testingChallenge;
+                                    break;
+                                }
+                                break;
                             case "TESTING_CHALLENGE_UNSPECIFIED":
                             case 0:
                                 message.testingChallenge = 0;
@@ -6559,7 +6589,7 @@
                             if (message.testingScore != null && message.hasOwnProperty("testingScore"))
                                 object.testingScore = options.json && !isFinite(message.testingScore) ? String(message.testingScore) : message.testingScore;
                             if (message.testingChallenge != null && message.hasOwnProperty("testingChallenge"))
-                                object.testingChallenge = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge[message.testingChallenge] : message.testingChallenge;
+                                object.testingChallenge = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge[message.testingChallenge] === undefined ? message.testingChallenge : $root.google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge[message.testingChallenge] : message.testingChallenge;
                             return object;
                         };
     
@@ -6863,6 +6893,12 @@
                             if (object.allowAmpTraffic != null)
                                 message.allowAmpTraffic = Boolean(object.allowAmpTraffic);
                             switch (object.integrationType) {
+                            default:
+                                if (typeof object.integrationType === "number") {
+                                    message.integrationType = object.integrationType;
+                                    break;
+                                }
+                                break;
                             case "INTEGRATION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.integrationType = 0;
@@ -6881,6 +6917,12 @@
                                 break;
                             }
                             switch (object.challengeSecurityPreference) {
+                            default:
+                                if (typeof object.challengeSecurityPreference === "number") {
+                                    message.challengeSecurityPreference = object.challengeSecurityPreference;
+                                    break;
+                                }
+                                break;
                             case "CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED":
                             case 0:
                                 message.challengeSecurityPreference = 0;
@@ -6932,9 +6974,9 @@
                             if (message.allowAllDomains != null && message.hasOwnProperty("allowAllDomains"))
                                 object.allowAllDomains = message.allowAllDomains;
                             if (message.integrationType != null && message.hasOwnProperty("integrationType"))
-                                object.integrationType = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.WebKeySettings.IntegrationType[message.integrationType] : message.integrationType;
+                                object.integrationType = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.WebKeySettings.IntegrationType[message.integrationType] === undefined ? message.integrationType : $root.google.cloud.recaptchaenterprise.v1.WebKeySettings.IntegrationType[message.integrationType] : message.integrationType;
                             if (message.challengeSecurityPreference != null && message.hasOwnProperty("challengeSecurityPreference"))
-                                object.challengeSecurityPreference = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSecurityPreference[message.challengeSecurityPreference] : message.challengeSecurityPreference;
+                                object.challengeSecurityPreference = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSecurityPreference[message.challengeSecurityPreference] === undefined ? message.challengeSecurityPreference : $root.google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSecurityPreference[message.challengeSecurityPreference] : message.challengeSecurityPreference;
                             return object;
                         };
     
@@ -10488,6 +10530,12 @@
                                 return object;
                             var message = new $root.google.cloud.recaptchaenterprise.v1.WafSettings();
                             switch (object.wafService) {
+                            default:
+                                if (typeof object.wafService === "number") {
+                                    message.wafService = object.wafService;
+                                    break;
+                                }
+                                break;
                             case "WAF_SERVICE_UNSPECIFIED":
                             case 0:
                                 message.wafService = 0;
@@ -10498,6 +10546,12 @@
                                 break;
                             }
                             switch (object.wafFeature) {
+                            default:
+                                if (typeof object.wafFeature === "number") {
+                                    message.wafFeature = object.wafFeature;
+                                    break;
+                                }
+                                break;
                             case "WAF_FEATURE_UNSPECIFIED":
                             case 0:
                                 message.wafFeature = 0;
@@ -10536,9 +10590,9 @@
                                 object.wafFeature = options.enums === String ? "WAF_FEATURE_UNSPECIFIED" : 0;
                             }
                             if (message.wafService != null && message.hasOwnProperty("wafService"))
-                                object.wafService = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.WafSettings.WafService[message.wafService] : message.wafService;
+                                object.wafService = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.WafSettings.WafService[message.wafService] === undefined ? message.wafService : $root.google.cloud.recaptchaenterprise.v1.WafSettings.WafService[message.wafService] : message.wafService;
                             if (message.wafFeature != null && message.hasOwnProperty("wafFeature"))
-                                object.wafFeature = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature[message.wafFeature] : message.wafFeature;
+                                object.wafFeature = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature[message.wafFeature] === undefined ? message.wafFeature : $root.google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature[message.wafFeature] : message.wafFeature;
                             return object;
                         };
     
@@ -11191,6 +11245,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.annotation) {
+                            default:
+                                if (typeof object.annotation === "number") {
+                                    message.annotation = object.annotation;
+                                    break;
+                                }
+                                break;
                             case "ANNOTATION_UNSPECIFIED":
                             case 0:
                                 message.annotation = 0;
@@ -11219,6 +11279,10 @@
                                 for (var i = 0; i < object.reasons.length; ++i)
                                     switch (object.reasons[i]) {
                                     default:
+                                        if (typeof object.reasons[i] === "number") {
+                                            message.reasons[i] = object.reasons[i];
+                                            break;
+                                        }
                                     case "REASON_UNSPECIFIED":
                                     case 0:
                                         message.reasons[i] = 0;
@@ -11298,11 +11362,11 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.annotation != null && message.hasOwnProperty("annotation"))
-                                object.annotation = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation[message.annotation] : message.annotation;
+                                object.annotation = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation[message.annotation] === undefined ? message.annotation : $root.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation[message.annotation] : message.annotation;
                             if (message.reasons && message.reasons.length) {
                                 object.reasons = [];
                                 for (var j = 0; j < message.reasons.length; ++j)
-                                    object.reasons[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Reason[message.reasons[j]] : message.reasons[j];
+                                    object.reasons[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Reason[message.reasons[j]] === undefined ? message.reasons[j] : $root.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Reason[message.reasons[j]] : message.reasons[j];
                             }
                             if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
                                 object.hashedAccountId = options.bytes === String ? $util.base64.encode(message.hashedAccountId, 0, message.hashedAccountId.length) : options.bytes === Array ? Array.prototype.slice.call(message.hashedAccountId) : message.hashedAccountId;
@@ -12133,6 +12197,10 @@
                                 for (var i = 0; i < object.reasons.length; ++i)
                                     switch (object.reasons[i]) {
                                     default:
+                                        if (typeof object.reasons[i] === "number") {
+                                            message.reasons[i] = object.reasons[i];
+                                            break;
+                                        }
                                     case "CLASSIFICATION_REASON_UNSPECIFIED":
                                     case 0:
                                         message.reasons[i] = 0;
@@ -12206,7 +12274,7 @@
                             if (message.reasons && message.reasons.length) {
                                 object.reasons = [];
                                 for (var j = 0; j < message.reasons.length; ++j)
-                                    object.reasons[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1beta1.Assessment.ClassificationReason[message.reasons[j]] : message.reasons[j];
+                                    object.reasons[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1beta1.Assessment.ClassificationReason[message.reasons[j]] === undefined ? message.reasons[j] : $root.google.cloud.recaptchaenterprise.v1beta1.Assessment.ClassificationReason[message.reasons[j]] : message.reasons[j];
                             }
                             if (message.passwordLeakVerification != null && message.hasOwnProperty("passwordLeakVerification"))
                                 object.passwordLeakVerification = $root.google.cloud.recaptchaenterprise.v1beta1.PasswordLeakVerification.toObject(message.passwordLeakVerification, options);
@@ -12831,6 +12899,12 @@
                             if (object.valid != null)
                                 message.valid = Boolean(object.valid);
                             switch (object.invalidReason) {
+                            default:
+                                if (typeof object.invalidReason === "number") {
+                                    message.invalidReason = object.invalidReason;
+                                    break;
+                                }
+                                break;
                             case "INVALID_REASON_UNSPECIFIED":
                             case 0:
                                 message.invalidReason = 0;
@@ -12899,7 +12973,7 @@
                             if (message.valid != null && message.hasOwnProperty("valid"))
                                 object.valid = message.valid;
                             if (message.invalidReason != null && message.hasOwnProperty("invalidReason"))
-                                object.invalidReason = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1beta1.TokenProperties.InvalidReason[message.invalidReason] : message.invalidReason;
+                                object.invalidReason = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1beta1.TokenProperties.InvalidReason[message.invalidReason] === undefined ? message.invalidReason : $root.google.cloud.recaptchaenterprise.v1beta1.TokenProperties.InvalidReason[message.invalidReason] : message.invalidReason;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.hostname != null && message.hasOwnProperty("hostname"))
@@ -13144,6 +13218,10 @@
                                 for (var i = 0; i < object.labels.length; ++i)
                                     switch (object.labels[i]) {
                                     default:
+                                        if (typeof object.labels[i] === "number") {
+                                            message.labels[i] = object.labels[i];
+                                            break;
+                                        }
                                     case "ACCOUNT_DEFENDER_LABEL_UNSPECIFIED":
                                     case 0:
                                         message.labels[i] = 0;
@@ -13187,7 +13265,7 @@
                             if (message.labels && message.labels.length) {
                                 object.labels = [];
                                 for (var j = 0; j < message.labels.length; ++j)
-                                    object.labels[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1beta1.AccountDefenderAssessment.AccountDefenderLabel[message.labels[j]] : message.labels[j];
+                                    object.labels[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1beta1.AccountDefenderAssessment.AccountDefenderLabel[message.labels[j]] === undefined ? message.labels[j] : $root.google.cloud.recaptchaenterprise.v1beta1.AccountDefenderAssessment.AccountDefenderLabel[message.labels[j]] : message.labels[j];
                             }
                             return object;
                         };
@@ -14552,6 +14630,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -14576,6 +14660,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -14623,7 +14711,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -14631,7 +14719,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -17442,6 +17530,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -17456,6 +17550,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -17582,9 +17682,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -19931,6 +20031,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -20039,7 +20145,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -20841,6 +20947,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -20857,6 +20969,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -20895,6 +21013,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -20965,7 +21087,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -20973,7 +21095,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -20986,7 +21108,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -22343,6 +22465,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -22406,7 +22534,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -24159,6 +24287,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -24208,7 +24342,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
