@@ -1,5 +1,6 @@
 {
   "name": "clouddms",
+  "aoi_shortname": "datamigration",
   "name_pretty": "Cloud Database Migration Service",
   "product_documentation": "https://cloud.google.com/database-migration/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dms/latest",
