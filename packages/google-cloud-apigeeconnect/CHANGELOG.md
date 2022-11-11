@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.3](https://github.com/googleapis/nodejs-apigee-connect/compare/v2.1.2...v2.1.3) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#108](https://github.com/googleapis/nodejs-apigee-connect/issues/108)) ([2f8d882](https://github.com/googleapis/nodejs-apigee-connect/commit/2f8d882d3309b578d48e8838beeab5a52829963f))
+* Preserve default values in x-goog-request-params header ([#101](https://github.com/googleapis/nodejs-apigee-connect/issues/101)) ([a88a102](https://github.com/googleapis/nodejs-apigee-connect/commit/a88a10218e6e3150495e1b47ae15b3895ed7ed5e))
+* Regenerated protos JS and TS definitions ([#111](https://github.com/googleapis/nodejs-apigee-connect/issues/111)) ([5092ed8](https://github.com/googleapis/nodejs-apigee-connect/commit/5092ed8134687cd0fd3be3a47b6f1e88ed1b2444))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-apigee-connect/compare/v2.1.1...v2.1.2) (2022-09-01)
 
 
