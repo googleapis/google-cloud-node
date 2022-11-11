@@ -27,7 +27,7 @@ describe('iot samples', () => {
   before(async () => {
     projectId = await client.getProjectId();
   });
-  
+
   it('should run the quickstart', async () => {
     const stdout = execSync(`node quickstart ${projectId}`);
     assert.match(stdout, /\d resource\(s\) found./);
