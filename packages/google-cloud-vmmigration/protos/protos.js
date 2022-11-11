@@ -2641,6 +2641,12 @@
                                 message.lastSync = $root.google.cloud.vmmigration.v1.ReplicationSync.fromObject(object.lastSync);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -2812,7 +2818,7 @@
                             if (message.stateTime != null && message.hasOwnProperty("stateTime"))
                                 object.stateTime = $root.google.protobuf.Timestamp.toObject(message.stateTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.MigratingVm.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.MigratingVm.State[message.state] === undefined ? message.state : $root.google.cloud.vmmigration.v1.MigratingVm.State[message.state] : message.state;
                             if (message.computeEngineTargetDefaults != null && message.hasOwnProperty("computeEngineTargetDefaults")) {
                                 object.computeEngineTargetDefaults = $root.google.cloud.vmmigration.v1.ComputeEngineTargetDefaults.toObject(message.computeEngineTargetDefaults, options);
                                 if (options.oneofs)
@@ -3198,6 +3204,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -3270,7 +3282,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.CloneJob.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.CloneJob.State[message.state] === undefined ? message.state : $root.google.cloud.vmmigration.v1.CloneJob.State[message.state] : message.state;
                             if (message.stateTime != null && message.hasOwnProperty("stateTime"))
                                 object.stateTime = $root.google.protobuf.Timestamp.toObject(message.stateTime, options);
                             if (message.error != null && message.hasOwnProperty("error"))
@@ -3690,6 +3702,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -3768,7 +3786,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.CutoverJob.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.CutoverJob.State[message.state] === undefined ? message.state : $root.google.cloud.vmmigration.v1.CutoverJob.State[message.state] : message.state;
                             if (message.stateTime != null && message.hasOwnProperty("stateTime"))
                                 object.stateTime = $root.google.protobuf.Timestamp.toObject(message.stateTime, options);
                             if (message.error != null && message.hasOwnProperty("error"))
@@ -6372,6 +6390,12 @@
                             if (object.bucket != null)
                                 message.bucket = String(object.bucket);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -6460,7 +6484,7 @@
                             if (message.version != null && message.hasOwnProperty("version"))
                                 object.version = message.version;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.DatacenterConnector.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.DatacenterConnector.State[message.state] === undefined ? message.state : $root.google.cloud.vmmigration.v1.DatacenterConnector.State[message.state] : message.state;
                             if (message.stateTime != null && message.hasOwnProperty("stateTime"))
                                 object.stateTime = $root.google.protobuf.Timestamp.toObject(message.stateTime, options);
                             if (message.bucket != null && message.hasOwnProperty("bucket"))
@@ -6764,6 +6788,12 @@
                             if (object.version != null)
                                 message.version = String(object.version);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -6819,7 +6849,7 @@
                             if (message.version != null && message.hasOwnProperty("version"))
                                 object.version = message.version;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.UpgradeStatus.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.UpgradeStatus.State[message.state] === undefined ? message.state : $root.google.cloud.vmmigration.v1.UpgradeStatus.State[message.state] : message.state;
                             if (message.error != null && message.hasOwnProperty("error"))
                                 object.error = $root.google.rpc.Status.toObject(message.error, options);
                             if (message.startTime != null && message.hasOwnProperty("startTime"))
@@ -9536,6 +9566,12 @@
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
                             switch (object.powerState) {
+                            default:
+                                if (typeof object.powerState === "number") {
+                                    message.powerState = object.powerState;
+                                    break;
+                                }
+                                break;
                             case "POWER_STATE_UNSPECIFIED":
                             case 0:
                                 message.powerState = 0;
@@ -9571,6 +9607,12 @@
                             if (object.guestDescription != null)
                                 message.guestDescription = String(object.guestDescription);
                             switch (object.bootOption) {
+                            default:
+                                if (typeof object.bootOption === "number") {
+                                    message.bootOption = object.bootOption;
+                                    break;
+                                }
+                                break;
                             case "BOOT_OPTION_UNSPECIFIED":
                             case 0:
                                 message.bootOption = 0;
@@ -9629,7 +9671,7 @@
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
                             if (message.powerState != null && message.hasOwnProperty("powerState"))
-                                object.powerState = options.enums === String ? $root.google.cloud.vmmigration.v1.VmwareVmDetails.PowerState[message.powerState] : message.powerState;
+                                object.powerState = options.enums === String ? $root.google.cloud.vmmigration.v1.VmwareVmDetails.PowerState[message.powerState] === undefined ? message.powerState : $root.google.cloud.vmmigration.v1.VmwareVmDetails.PowerState[message.powerState] : message.powerState;
                             if (message.cpuCount != null && message.hasOwnProperty("cpuCount"))
                                 object.cpuCount = message.cpuCount;
                             if (message.memoryMb != null && message.hasOwnProperty("memoryMb"))
@@ -9644,7 +9686,7 @@
                                 else
                                     object.committedStorageMb = options.longs === String ? $util.Long.prototype.toString.call(message.committedStorageMb) : options.longs === Number ? new $util.LongBits(message.committedStorageMb.low >>> 0, message.committedStorageMb.high >>> 0).toNumber() : message.committedStorageMb;
                             if (message.bootOption != null && message.hasOwnProperty("bootOption"))
-                                object.bootOption = options.enums === String ? $root.google.cloud.vmmigration.v1.VmwareVmDetails.BootOption[message.bootOption] : message.bootOption;
+                                object.bootOption = options.enums === String ? $root.google.cloud.vmmigration.v1.VmwareVmDetails.BootOption[message.bootOption] === undefined ? message.bootOption : $root.google.cloud.vmmigration.v1.VmwareVmDetails.BootOption[message.bootOption] : message.bootOption;
                             return object;
                         };
     
@@ -10539,6 +10581,12 @@
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -10572,6 +10620,12 @@
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
                             }
                             switch (object.timeFrame) {
+                            default:
+                                if (typeof object.timeFrame === "number") {
+                                    message.timeFrame = object.timeFrame;
+                                    break;
+                                }
+                                break;
                             case "TIME_FRAME_UNSPECIFIED":
                             case 0:
                                 message.timeFrame = 0;
@@ -10640,7 +10694,7 @@
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.UtilizationReport.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.vmmigration.v1.UtilizationReport.State[message.state] === undefined ? message.state : $root.google.cloud.vmmigration.v1.UtilizationReport.State[message.state] : message.state;
                             if (message.stateTime != null && message.hasOwnProperty("stateTime"))
                                 object.stateTime = $root.google.protobuf.Timestamp.toObject(message.stateTime, options);
                             if (message.error != null && message.hasOwnProperty("error"))
@@ -10648,7 +10702,7 @@
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.timeFrame != null && message.hasOwnProperty("timeFrame"))
-                                object.timeFrame = options.enums === String ? $root.google.cloud.vmmigration.v1.UtilizationReport.TimeFrame[message.timeFrame] : message.timeFrame;
+                                object.timeFrame = options.enums === String ? $root.google.cloud.vmmigration.v1.UtilizationReport.TimeFrame[message.timeFrame] === undefined ? message.timeFrame : $root.google.cloud.vmmigration.v1.UtilizationReport.TimeFrame[message.timeFrame] : message.timeFrame;
                             if (message.frameEndTime != null && message.hasOwnProperty("frameEndTime"))
                                 object.frameEndTime = $root.google.protobuf.Timestamp.toObject(message.frameEndTime, options);
                             if (message.vmCount != null && message.hasOwnProperty("vmCount"))
@@ -11675,6 +11729,12 @@
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "UTILIZATION_REPORT_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -11723,7 +11783,7 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.vmmigration.v1.UtilizationReportView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.cloud.vmmigration.v1.UtilizationReportView[message.view] === undefined ? message.view : $root.google.cloud.vmmigration.v1.UtilizationReportView[message.view] : message.view;
                             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
@@ -12228,6 +12288,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "UTILIZATION_REPORT_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -12264,7 +12330,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.vmmigration.v1.UtilizationReportView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.cloud.vmmigration.v1.UtilizationReportView[message.view] === undefined ? message.view : $root.google.cloud.vmmigration.v1.UtilizationReportView[message.view] : message.view;
                             return object;
                         };
     
@@ -15082,6 +15148,12 @@
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
                             switch (object.diskType) {
+                            default:
+                                if (typeof object.diskType === "number") {
+                                    message.diskType = object.diskType;
+                                    break;
+                                }
+                                break;
                             case "COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED":
                             case 0:
                                 message.diskType = 0;
@@ -15107,6 +15179,12 @@
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
                             switch (object.licenseType) {
+                            default:
+                                if (typeof object.licenseType === "number") {
+                                    message.licenseType = object.licenseType;
+                                    break;
+                                }
+                                break;
                             case "COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT":
                             case 0:
                                 message.licenseType = 0;
@@ -15133,6 +15211,12 @@
                             if (object.secureBoot != null)
                                 message.secureBoot = Boolean(object.secureBoot);
                             switch (object.bootOption) {
+                            default:
+                                if (typeof object.bootOption === "number") {
+                                    message.bootOption = object.bootOption;
+                                    break;
+                                }
+                                break;
                             case "COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED":
                             case 0:
                                 message.bootOption = 0;
@@ -15225,7 +15309,7 @@
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
                             if (message.diskType != null && message.hasOwnProperty("diskType"))
-                                object.diskType = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineDiskType[message.diskType] : message.diskType;
+                                object.diskType = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineDiskType[message.diskType] === undefined ? message.diskType : $root.google.cloud.vmmigration.v1.ComputeEngineDiskType[message.diskType] : message.diskType;
                             var keys2;
                             if (message.labels && (keys2 = Object.keys(message.labels)).length) {
                                 object.labels = {};
@@ -15233,7 +15317,7 @@
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
                             if (message.licenseType != null && message.hasOwnProperty("licenseType"))
-                                object.licenseType = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineLicenseType[message.licenseType] : message.licenseType;
+                                object.licenseType = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineLicenseType[message.licenseType] === undefined ? message.licenseType : $root.google.cloud.vmmigration.v1.ComputeEngineLicenseType[message.licenseType] : message.licenseType;
                             if (message.appliedLicense != null && message.hasOwnProperty("appliedLicense"))
                                 object.appliedLicense = $root.google.cloud.vmmigration.v1.AppliedLicense.toObject(message.appliedLicense, options);
                             if (message.computeScheduling != null && message.hasOwnProperty("computeScheduling"))
@@ -15241,7 +15325,7 @@
                             if (message.secureBoot != null && message.hasOwnProperty("secureBoot"))
                                 object.secureBoot = message.secureBoot;
                             if (message.bootOption != null && message.hasOwnProperty("bootOption"))
-                                object.bootOption = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineBootOption[message.bootOption] : message.bootOption;
+                                object.bootOption = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineBootOption[message.bootOption] === undefined ? message.bootOption : $root.google.cloud.vmmigration.v1.ComputeEngineBootOption[message.bootOption] : message.bootOption;
                             if (message.metadata && (keys2 = Object.keys(message.metadata)).length) {
                                 object.metadata = {};
                                 for (var j = 0; j < keys2.length; ++j)
@@ -15872,6 +15956,12 @@
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
                             switch (object.diskType) {
+                            default:
+                                if (typeof object.diskType === "number") {
+                                    message.diskType = object.diskType;
+                                    break;
+                                }
+                                break;
                             case "COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED":
                             case 0:
                                 message.diskType = 0;
@@ -15897,6 +15987,12 @@
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
                             switch (object.licenseType) {
+                            default:
+                                if (typeof object.licenseType === "number") {
+                                    message.licenseType = object.licenseType;
+                                    break;
+                                }
+                                break;
                             case "COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT":
                             case 0:
                                 message.licenseType = 0;
@@ -15923,6 +16019,12 @@
                             if (object.secureBoot != null)
                                 message.secureBoot = Boolean(object.secureBoot);
                             switch (object.bootOption) {
+                            default:
+                                if (typeof object.bootOption === "number") {
+                                    message.bootOption = object.bootOption;
+                                    break;
+                                }
+                                break;
                             case "COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED":
                             case 0:
                                 message.bootOption = 0;
@@ -16015,7 +16117,7 @@
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
                             if (message.diskType != null && message.hasOwnProperty("diskType"))
-                                object.diskType = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineDiskType[message.diskType] : message.diskType;
+                                object.diskType = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineDiskType[message.diskType] === undefined ? message.diskType : $root.google.cloud.vmmigration.v1.ComputeEngineDiskType[message.diskType] : message.diskType;
                             var keys2;
                             if (message.labels && (keys2 = Object.keys(message.labels)).length) {
                                 object.labels = {};
@@ -16023,7 +16125,7 @@
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
                             if (message.licenseType != null && message.hasOwnProperty("licenseType"))
-                                object.licenseType = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineLicenseType[message.licenseType] : message.licenseType;
+                                object.licenseType = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineLicenseType[message.licenseType] === undefined ? message.licenseType : $root.google.cloud.vmmigration.v1.ComputeEngineLicenseType[message.licenseType] : message.licenseType;
                             if (message.appliedLicense != null && message.hasOwnProperty("appliedLicense"))
                                 object.appliedLicense = $root.google.cloud.vmmigration.v1.AppliedLicense.toObject(message.appliedLicense, options);
                             if (message.computeScheduling != null && message.hasOwnProperty("computeScheduling"))
@@ -16031,7 +16133,7 @@
                             if (message.secureBoot != null && message.hasOwnProperty("secureBoot"))
                                 object.secureBoot = message.secureBoot;
                             if (message.bootOption != null && message.hasOwnProperty("bootOption"))
-                                object.bootOption = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineBootOption[message.bootOption] : message.bootOption;
+                                object.bootOption = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeEngineBootOption[message.bootOption] === undefined ? message.bootOption : $root.google.cloud.vmmigration.v1.ComputeEngineBootOption[message.bootOption] : message.bootOption;
                             if (message.metadata && (keys2 = Object.keys(message.metadata)).length) {
                                 object.metadata = {};
                                 for (var j = 0; j < keys2.length; ++j)
@@ -16524,6 +16626,12 @@
                                 return object;
                             var message = new $root.google.cloud.vmmigration.v1.AppliedLicense();
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -16564,7 +16672,7 @@
                                 object.osLicense = "";
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.vmmigration.v1.AppliedLicense.Type[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.vmmigration.v1.AppliedLicense.Type[message.type] === undefined ? message.type : $root.google.cloud.vmmigration.v1.AppliedLicense.Type[message.type] : message.type;
                             if (message.osLicense != null && message.hasOwnProperty("osLicense"))
                                 object.osLicense = message.osLicense;
                             return object;
@@ -16819,6 +16927,12 @@
                             if (object.key != null)
                                 message.key = String(object.key);
                             switch (object.operator) {
+                            default:
+                                if (typeof object.operator === "number") {
+                                    message.operator = object.operator;
+                                    break;
+                                }
+                                break;
                             case "OPERATOR_UNSPECIFIED":
                             case 0:
                                 message.operator = 0;
@@ -16864,7 +16978,7 @@
                             if (message.key != null && message.hasOwnProperty("key"))
                                 object.key = message.key;
                             if (message.operator != null && message.hasOwnProperty("operator"))
-                                object.operator = options.enums === String ? $root.google.cloud.vmmigration.v1.SchedulingNodeAffinity.Operator[message.operator] : message.operator;
+                                object.operator = options.enums === String ? $root.google.cloud.vmmigration.v1.SchedulingNodeAffinity.Operator[message.operator] === undefined ? message.operator : $root.google.cloud.vmmigration.v1.SchedulingNodeAffinity.Operator[message.operator] : message.operator;
                             if (message.values && message.values.length) {
                                 object.values = [];
                                 for (var j = 0; j < message.values.length; ++j)
@@ -17144,6 +17258,12 @@
                                 return object;
                             var message = new $root.google.cloud.vmmigration.v1.ComputeScheduling();
                             switch (object.onHostMaintenance) {
+                            default:
+                                if (typeof object.onHostMaintenance === "number") {
+                                    message.onHostMaintenance = object.onHostMaintenance;
+                                    break;
+                                }
+                                break;
                             case "ON_HOST_MAINTENANCE_UNSPECIFIED":
                             case 0:
                                 message.onHostMaintenance = 0;
@@ -17158,6 +17278,12 @@
                                 break;
                             }
                             switch (object.restartType) {
+                            default:
+                                if (typeof object.restartType === "number") {
+                                    message.restartType = object.restartType;
+                                    break;
+                                }
+                                break;
                             case "RESTART_TYPE_UNSPECIFIED":
                             case 0:
                                 message.restartType = 0;
@@ -17207,7 +17333,7 @@
                                 object.restartType = options.enums === String ? "RESTART_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.onHostMaintenance != null && message.hasOwnProperty("onHostMaintenance"))
-                                object.onHostMaintenance = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeScheduling.OnHostMaintenance[message.onHostMaintenance] : message.onHostMaintenance;
+                                object.onHostMaintenance = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeScheduling.OnHostMaintenance[message.onHostMaintenance] === undefined ? message.onHostMaintenance : $root.google.cloud.vmmigration.v1.ComputeScheduling.OnHostMaintenance[message.onHostMaintenance] : message.onHostMaintenance;
                             if (message.nodeAffinities && message.nodeAffinities.length) {
                                 object.nodeAffinities = [];
                                 for (var j = 0; j < message.nodeAffinities.length; ++j)
@@ -17216,7 +17342,7 @@
                             if (message.minNodeCpus != null && message.hasOwnProperty("minNodeCpus"))
                                 object.minNodeCpus = message.minNodeCpus;
                             if (message.restartType != null && message.hasOwnProperty("restartType"))
-                                object.restartType = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeScheduling.RestartType[message.restartType] : message.restartType;
+                                object.restartType = options.enums === String ? $root.google.cloud.vmmigration.v1.ComputeScheduling.RestartType[message.restartType] === undefined ? message.restartType : $root.google.cloud.vmmigration.v1.ComputeScheduling.RestartType[message.restartType] : message.restartType;
                             return object;
                         };
     
@@ -18047,6 +18173,12 @@
                             if (object.orderBy != null)
                                 message.orderBy = String(object.orderBy);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "MIGRATING_VM_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -18095,7 +18227,7 @@
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.vmmigration.v1.MigratingVmView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.cloud.vmmigration.v1.MigratingVmView[message.view] === undefined ? message.view : $root.google.cloud.vmmigration.v1.MigratingVmView[message.view] : message.view;
                             return object;
                         };
     
@@ -18592,6 +18724,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "MIGRATING_VM_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -18628,7 +18766,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.vmmigration.v1.MigratingVmView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.cloud.vmmigration.v1.MigratingVmView[message.view] === undefined ? message.view : $root.google.cloud.vmmigration.v1.MigratingVmView[message.view] : message.view;
                             return object;
                         };
     
@@ -27202,6 +27340,12 @@
                                 return object;
                             var message = new $root.google.cloud.vmmigration.v1.MigrationError();
                             switch (object.code) {
+                            default:
+                                if (typeof object.code === "number") {
+                                    message.code = object.code;
+                                    break;
+                                }
+                                break;
                             case "ERROR_CODE_UNSPECIFIED":
                             case 0:
                                 message.code = 0;
@@ -27293,7 +27437,7 @@
                                 object.errorTime = null;
                             }
                             if (message.code != null && message.hasOwnProperty("code"))
-                                object.code = options.enums === String ? $root.google.cloud.vmmigration.v1.MigrationError.ErrorCode[message.code] : message.code;
+                                object.code = options.enums === String ? $root.google.cloud.vmmigration.v1.MigrationError.ErrorCode[message.code] === undefined ? message.code : $root.google.cloud.vmmigration.v1.MigrationError.ErrorCode[message.code] : message.code;
                             if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
                                 object.errorMessage = $root.google.rpc.LocalizedMessage.toObject(message.errorMessage, options);
                             if (message.actionItem != null && message.hasOwnProperty("actionItem"))
@@ -28678,6 +28822,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -28702,6 +28852,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -28749,7 +28903,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -28757,7 +28911,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -31568,6 +31722,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -31582,6 +31742,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -31708,9 +31874,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -34057,6 +34223,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -34165,7 +34337,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -34967,6 +35139,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -34983,6 +35161,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -35021,6 +35205,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -35091,7 +35279,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -35099,7 +35287,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -35112,7 +35300,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -36489,6 +36677,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -36558,7 +36752,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -38313,6 +38507,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -38362,7 +38562,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
