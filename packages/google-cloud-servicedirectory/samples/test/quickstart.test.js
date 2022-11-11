@@ -16,23 +16,28 @@
 'use strict';
 
 const path = require('path');
-const {assert} = require('chai');
+const assert = require('assert');
 const cp = require('child_process');
-const {describe, it} = require('mocha');
+const {describe, it, before} = require('mocha');
+const {RegistrationServiceClient} = require('@google-cloud/service-directory');
+const registrationServiceClient = new RegistrationServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-const projectId = process.env.GCLOUD_PROJECT;
 const locationId = 'us-central1';
 
 describe('Service Directory Quickstart', () => {
+  let projectId;
+  before(async () => {
+    projectId = await registrationServiceClient.getProjectId();
+  });
   it('should run quickstart.js', async () => {
     const stdout = execSync(`node quickstart.js ${projectId} ${locationId}`, {
       cwd,
     });
     // build should have exited with success status.
-    assert(stdout);
+    assert(stdout !== null);
   });
 });
