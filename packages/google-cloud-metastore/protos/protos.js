@@ -1123,6 +1123,12 @@
                             if (object.port != null)
                                 message.port = object.port | 0;
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -1161,6 +1167,12 @@
                             if (object.artifactGcsUri != null)
                                 message.artifactGcsUri = String(object.artifactGcsUri);
                             switch (object.tier) {
+                            default:
+                                if (typeof object.tier === "number") {
+                                    message.tier = object.tier;
+                                    break;
+                                }
+                                break;
                             case "TIER_UNSPECIFIED":
                             case 0:
                                 message.tier = 0;
@@ -1187,6 +1199,12 @@
                                 message.metadataManagementActivity = $root.google.cloud.metastore.v1.MetadataManagementActivity.fromObject(object.metadataManagementActivity);
                             }
                             switch (object.releaseChannel) {
+                            default:
+                                if (typeof object.releaseChannel === "number") {
+                                    message.releaseChannel = object.releaseChannel;
+                                    break;
+                                }
+                                break;
                             case "RELEASE_CHANNEL_UNSPECIFIED":
                             case 0:
                                 message.releaseChannel = 0;
@@ -1258,13 +1276,13 @@
                             if (message.port != null && message.hasOwnProperty("port"))
                                 object.port = message.port;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1.Service.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1.Service.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1.Service.State[message.state] : message.state;
                             if (message.stateMessage != null && message.hasOwnProperty("stateMessage"))
                                 object.stateMessage = message.stateMessage;
                             if (message.artifactGcsUri != null && message.hasOwnProperty("artifactGcsUri"))
                                 object.artifactGcsUri = message.artifactGcsUri;
                             if (message.tier != null && message.hasOwnProperty("tier"))
-                                object.tier = options.enums === String ? $root.google.cloud.metastore.v1.Service.Tier[message.tier] : message.tier;
+                                object.tier = options.enums === String ? $root.google.cloud.metastore.v1.Service.Tier[message.tier] === undefined ? message.tier : $root.google.cloud.metastore.v1.Service.Tier[message.tier] : message.tier;
                             if (message.maintenanceWindow != null && message.hasOwnProperty("maintenanceWindow"))
                                 object.maintenanceWindow = $root.google.cloud.metastore.v1.MaintenanceWindow.toObject(message.maintenanceWindow, options);
                             if (message.uid != null && message.hasOwnProperty("uid"))
@@ -1272,7 +1290,7 @@
                             if (message.metadataManagementActivity != null && message.hasOwnProperty("metadataManagementActivity"))
                                 object.metadataManagementActivity = $root.google.cloud.metastore.v1.MetadataManagementActivity.toObject(message.metadataManagementActivity, options);
                             if (message.releaseChannel != null && message.hasOwnProperty("releaseChannel"))
-                                object.releaseChannel = options.enums === String ? $root.google.cloud.metastore.v1.Service.ReleaseChannel[message.releaseChannel] : message.releaseChannel;
+                                object.releaseChannel = options.enums === String ? $root.google.cloud.metastore.v1.Service.ReleaseChannel[message.releaseChannel] === undefined ? message.releaseChannel : $root.google.cloud.metastore.v1.Service.ReleaseChannel[message.releaseChannel] : message.releaseChannel;
                             return object;
                         };
     
@@ -1549,6 +1567,12 @@
                                 message.hourOfDay = $root.google.protobuf.Int32Value.fromObject(object.hourOfDay);
                             }
                             switch (object.dayOfWeek) {
+                            default:
+                                if (typeof object.dayOfWeek === "number") {
+                                    message.dayOfWeek = object.dayOfWeek;
+                                    break;
+                                }
+                                break;
                             case "DAY_OF_WEEK_UNSPECIFIED":
                             case 0:
                                 message.dayOfWeek = 0;
@@ -1605,7 +1629,7 @@
                             if (message.hourOfDay != null && message.hasOwnProperty("hourOfDay"))
                                 object.hourOfDay = $root.google.protobuf.Int32Value.toObject(message.hourOfDay, options);
                             if (message.dayOfWeek != null && message.hasOwnProperty("dayOfWeek"))
-                                object.dayOfWeek = options.enums === String ? $root.google.type.DayOfWeek[message.dayOfWeek] : message.dayOfWeek;
+                                object.dayOfWeek = options.enums === String ? $root.google.type.DayOfWeek[message.dayOfWeek] === undefined ? message.dayOfWeek : $root.google.type.DayOfWeek[message.dayOfWeek] : message.dayOfWeek;
                             return object;
                         };
     
@@ -2990,6 +3014,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -3044,7 +3074,7 @@
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1.MetadataImport.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1.MetadataImport.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1.MetadataImport.State[message.state] : message.state;
                             if (message.databaseDump != null && message.hasOwnProperty("databaseDump")) {
                                 object.databaseDump = $root.google.cloud.metastore.v1.MetadataImport.DatabaseDump.toObject(message.databaseDump, options);
                                 if (options.oneofs)
@@ -3278,6 +3308,12 @@
                                     return object;
                                 var message = new $root.google.cloud.metastore.v1.MetadataImport.DatabaseDump();
                                 switch (object.databaseType) {
+                                default:
+                                    if (typeof object.databaseType === "number") {
+                                        message.databaseType = object.databaseType;
+                                        break;
+                                    }
+                                    break;
                                 case "DATABASE_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.databaseType = 0;
@@ -3290,6 +3326,12 @@
                                 if (object.gcsUri != null)
                                     message.gcsUri = String(object.gcsUri);
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -3325,11 +3367,11 @@
                                     object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                                 }
                                 if (message.databaseType != null && message.hasOwnProperty("databaseType"))
-                                    object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1.MetadataImport.DatabaseDump.DatabaseType[message.databaseType] : message.databaseType;
+                                    object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1.MetadataImport.DatabaseDump.DatabaseType[message.databaseType] === undefined ? message.databaseType : $root.google.cloud.metastore.v1.MetadataImport.DatabaseDump.DatabaseType[message.databaseType] : message.databaseType;
                                 if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
                                     object.gcsUri = message.gcsUri;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.metastore.v1.DatabaseDumpSpec.Type[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.metastore.v1.DatabaseDumpSpec.Type[message.type] === undefined ? message.type : $root.google.cloud.metastore.v1.DatabaseDumpSpec.Type[message.type] : message.type;
                                 return object;
                             };
     
@@ -3668,6 +3710,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -3690,6 +3738,12 @@
                                 break;
                             }
                             switch (object.databaseDumpType) {
+                            default:
+                                if (typeof object.databaseDumpType === "number") {
+                                    message.databaseDumpType = object.databaseDumpType;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.databaseDumpType = 0;
@@ -3730,14 +3784,14 @@
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1.MetadataExport.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1.MetadataExport.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1.MetadataExport.State[message.state] : message.state;
                             if (message.destinationGcsUri != null && message.hasOwnProperty("destinationGcsUri")) {
                                 object.destinationGcsUri = message.destinationGcsUri;
                                 if (options.oneofs)
                                     object.destination = "destinationGcsUri";
                             }
                             if (message.databaseDumpType != null && message.hasOwnProperty("databaseDumpType"))
-                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
+                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1.DatabaseDumpSpec.Type[message.databaseDumpType] === undefined ? message.databaseDumpType : $root.google.cloud.metastore.v1.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
                             return object;
                         };
     
@@ -4083,6 +4137,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -4155,7 +4215,7 @@
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1.Backup.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1.Backup.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1.Backup.State[message.state] : message.state;
                             if (message.serviceRevision != null && message.hasOwnProperty("serviceRevision"))
                                 object.serviceRevision = $root.google.cloud.metastore.v1.Service.toObject(message.serviceRevision, options);
                             if (message.description != null && message.hasOwnProperty("description"))
@@ -4487,6 +4547,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -4511,6 +4577,12 @@
                             if (object.backup != null)
                                 message.backup = String(object.backup);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "RESTORE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -4555,11 +4627,11 @@
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1.Restore.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1.Restore.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1.Restore.State[message.state] : message.state;
                             if (message.backup != null && message.hasOwnProperty("backup"))
                                 object.backup = message.backup;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.metastore.v1.Restore.RestoreType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.metastore.v1.Restore.RestoreType[message.type] === undefined ? message.type : $root.google.cloud.metastore.v1.Restore.RestoreType[message.type] : message.type;
                             if (message.details != null && message.hasOwnProperty("details"))
                                 object.details = message.details;
                             return object;
@@ -9032,6 +9104,12 @@
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
                             switch (object.databaseDumpType) {
+                            default:
+                                if (typeof object.databaseDumpType === "number") {
+                                    message.databaseDumpType = object.databaseDumpType;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.databaseDumpType = 0;
@@ -9076,7 +9154,7 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
                             if (message.databaseDumpType != null && message.hasOwnProperty("databaseDumpType"))
-                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
+                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1.DatabaseDumpSpec.Type[message.databaseDumpType] === undefined ? message.databaseDumpType : $root.google.cloud.metastore.v1.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
                             return object;
                         };
     
@@ -9323,6 +9401,12 @@
                             if (object.backup != null)
                                 message.backup = String(object.backup);
                             switch (object.restoreType) {
+                            default:
+                                if (typeof object.restoreType === "number") {
+                                    message.restoreType = object.restoreType;
+                                    break;
+                                }
+                                break;
                             case "RESTORE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.restoreType = 0;
@@ -9365,7 +9449,7 @@
                             if (message.backup != null && message.hasOwnProperty("backup"))
                                 object.backup = message.backup;
                             if (message.restoreType != null && message.hasOwnProperty("restoreType"))
-                                object.restoreType = options.enums === String ? $root.google.cloud.metastore.v1.Restore.RestoreType[message.restoreType] : message.restoreType;
+                                object.restoreType = options.enums === String ? $root.google.cloud.metastore.v1.Restore.RestoreType[message.restoreType] === undefined ? message.restoreType : $root.google.cloud.metastore.v1.Restore.RestoreType[message.restoreType] : message.restoreType;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
                             return object;
@@ -11547,6 +11631,12 @@
                             if (object.port != null)
                                 message.port = object.port | 0;
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -11585,6 +11675,12 @@
                             if (object.artifactGcsUri != null)
                                 message.artifactGcsUri = String(object.artifactGcsUri);
                             switch (object.tier) {
+                            default:
+                                if (typeof object.tier === "number") {
+                                    message.tier = object.tier;
+                                    break;
+                                }
+                                break;
                             case "TIER_UNSPECIFIED":
                             case 0:
                                 message.tier = 0;
@@ -11616,6 +11712,12 @@
                                 message.metadataManagementActivity = $root.google.cloud.metastore.v1alpha.MetadataManagementActivity.fromObject(object.metadataManagementActivity);
                             }
                             switch (object.releaseChannel) {
+                            default:
+                                if (typeof object.releaseChannel === "number") {
+                                    message.releaseChannel = object.releaseChannel;
+                                    break;
+                                }
+                                break;
                             case "RELEASE_CHANNEL_UNSPECIFIED":
                             case 0:
                                 message.releaseChannel = 0;
@@ -11640,6 +11742,12 @@
                                 message.networkConfig = $root.google.cloud.metastore.v1alpha.NetworkConfig.fromObject(object.networkConfig);
                             }
                             switch (object.databaseType) {
+                            default:
+                                if (typeof object.databaseType === "number") {
+                                    message.databaseType = object.databaseType;
+                                    break;
+                                }
+                                break;
                             case "DATABASE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.databaseType = 0;
@@ -11715,13 +11823,13 @@
                             if (message.port != null && message.hasOwnProperty("port"))
                                 object.port = message.port;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1alpha.Service.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1alpha.Service.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1alpha.Service.State[message.state] : message.state;
                             if (message.stateMessage != null && message.hasOwnProperty("stateMessage"))
                                 object.stateMessage = message.stateMessage;
                             if (message.artifactGcsUri != null && message.hasOwnProperty("artifactGcsUri"))
                                 object.artifactGcsUri = message.artifactGcsUri;
                             if (message.tier != null && message.hasOwnProperty("tier"))
-                                object.tier = options.enums === String ? $root.google.cloud.metastore.v1alpha.Service.Tier[message.tier] : message.tier;
+                                object.tier = options.enums === String ? $root.google.cloud.metastore.v1alpha.Service.Tier[message.tier] === undefined ? message.tier : $root.google.cloud.metastore.v1alpha.Service.Tier[message.tier] : message.tier;
                             if (message.metadataIntegration != null && message.hasOwnProperty("metadataIntegration"))
                                 object.metadataIntegration = $root.google.cloud.metastore.v1alpha.MetadataIntegration.toObject(message.metadataIntegration, options);
                             if (message.maintenanceWindow != null && message.hasOwnProperty("maintenanceWindow"))
@@ -11731,13 +11839,13 @@
                             if (message.metadataManagementActivity != null && message.hasOwnProperty("metadataManagementActivity"))
                                 object.metadataManagementActivity = $root.google.cloud.metastore.v1alpha.MetadataManagementActivity.toObject(message.metadataManagementActivity, options);
                             if (message.releaseChannel != null && message.hasOwnProperty("releaseChannel"))
-                                object.releaseChannel = options.enums === String ? $root.google.cloud.metastore.v1alpha.Service.ReleaseChannel[message.releaseChannel] : message.releaseChannel;
+                                object.releaseChannel = options.enums === String ? $root.google.cloud.metastore.v1alpha.Service.ReleaseChannel[message.releaseChannel] === undefined ? message.releaseChannel : $root.google.cloud.metastore.v1alpha.Service.ReleaseChannel[message.releaseChannel] : message.releaseChannel;
                             if (message.encryptionConfig != null && message.hasOwnProperty("encryptionConfig"))
                                 object.encryptionConfig = $root.google.cloud.metastore.v1alpha.EncryptionConfig.toObject(message.encryptionConfig, options);
                             if (message.networkConfig != null && message.hasOwnProperty("networkConfig"))
                                 object.networkConfig = $root.google.cloud.metastore.v1alpha.NetworkConfig.toObject(message.networkConfig, options);
                             if (message.databaseType != null && message.hasOwnProperty("databaseType"))
-                                object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1alpha.Service.DatabaseType[message.databaseType] : message.databaseType;
+                                object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1alpha.Service.DatabaseType[message.databaseType] === undefined ? message.databaseType : $root.google.cloud.metastore.v1alpha.Service.DatabaseType[message.databaseType] : message.databaseType;
                             return object;
                         };
     
@@ -12918,6 +13026,12 @@
                                 message.hourOfDay = $root.google.protobuf.Int32Value.fromObject(object.hourOfDay);
                             }
                             switch (object.dayOfWeek) {
+                            default:
+                                if (typeof object.dayOfWeek === "number") {
+                                    message.dayOfWeek = object.dayOfWeek;
+                                    break;
+                                }
+                                break;
                             case "DAY_OF_WEEK_UNSPECIFIED":
                             case 0:
                                 message.dayOfWeek = 0;
@@ -12974,7 +13088,7 @@
                             if (message.hourOfDay != null && message.hasOwnProperty("hourOfDay"))
                                 object.hourOfDay = $root.google.protobuf.Int32Value.toObject(message.hourOfDay, options);
                             if (message.dayOfWeek != null && message.hasOwnProperty("dayOfWeek"))
-                                object.dayOfWeek = options.enums === String ? $root.google.type.DayOfWeek[message.dayOfWeek] : message.dayOfWeek;
+                                object.dayOfWeek = options.enums === String ? $root.google.type.DayOfWeek[message.dayOfWeek] === undefined ? message.dayOfWeek : $root.google.type.DayOfWeek[message.dayOfWeek] : message.dayOfWeek;
                             return object;
                         };
     
@@ -13307,6 +13421,12 @@
                                 message.kerberosConfig = $root.google.cloud.metastore.v1alpha.KerberosConfig.fromObject(object.kerberosConfig);
                             }
                             switch (object.endpointProtocol) {
+                            default:
+                                if (typeof object.endpointProtocol === "number") {
+                                    message.endpointProtocol = object.endpointProtocol;
+                                    break;
+                                }
+                                break;
                             case "ENDPOINT_PROTOCOL_UNSPECIFIED":
                             case 0:
                                 message.endpointProtocol = 0;
@@ -13366,7 +13486,7 @@
                             if (message.kerberosConfig != null && message.hasOwnProperty("kerberosConfig"))
                                 object.kerberosConfig = $root.google.cloud.metastore.v1alpha.KerberosConfig.toObject(message.kerberosConfig, options);
                             if (message.endpointProtocol != null && message.hasOwnProperty("endpointProtocol"))
-                                object.endpointProtocol = options.enums === String ? $root.google.cloud.metastore.v1alpha.HiveMetastoreConfig.EndpointProtocol[message.endpointProtocol] : message.endpointProtocol;
+                                object.endpointProtocol = options.enums === String ? $root.google.cloud.metastore.v1alpha.HiveMetastoreConfig.EndpointProtocol[message.endpointProtocol] === undefined ? message.endpointProtocol : $root.google.cloud.metastore.v1alpha.HiveMetastoreConfig.EndpointProtocol[message.endpointProtocol] : message.endpointProtocol;
                             if (message.auxiliaryVersions && (keys2 = Object.keys(message.auxiliaryVersions)).length) {
                                 object.auxiliaryVersions = {};
                                 for (var j = 0; j < keys2.length; ++j)
@@ -15444,6 +15564,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -15498,7 +15624,7 @@
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1alpha.MetadataImport.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1alpha.MetadataImport.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1alpha.MetadataImport.State[message.state] : message.state;
                             if (message.databaseDump != null && message.hasOwnProperty("databaseDump")) {
                                 object.databaseDump = $root.google.cloud.metastore.v1alpha.MetadataImport.DatabaseDump.toObject(message.databaseDump, options);
                                 if (options.oneofs)
@@ -15750,6 +15876,12 @@
                                     return object;
                                 var message = new $root.google.cloud.metastore.v1alpha.MetadataImport.DatabaseDump();
                                 switch (object.databaseType) {
+                                default:
+                                    if (typeof object.databaseType === "number") {
+                                        message.databaseType = object.databaseType;
+                                        break;
+                                    }
+                                    break;
                                 case "DATABASE_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.databaseType = 0;
@@ -15764,6 +15896,12 @@
                                 if (object.sourceDatabase != null)
                                     message.sourceDatabase = String(object.sourceDatabase);
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -15800,13 +15938,13 @@
                                     object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                                 }
                                 if (message.databaseType != null && message.hasOwnProperty("databaseType"))
-                                    object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1alpha.MetadataImport.DatabaseDump.DatabaseType[message.databaseType] : message.databaseType;
+                                    object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1alpha.MetadataImport.DatabaseDump.DatabaseType[message.databaseType] === undefined ? message.databaseType : $root.google.cloud.metastore.v1alpha.MetadataImport.DatabaseDump.DatabaseType[message.databaseType] : message.databaseType;
                                 if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
                                     object.gcsUri = message.gcsUri;
                                 if (message.sourceDatabase != null && message.hasOwnProperty("sourceDatabase"))
                                     object.sourceDatabase = message.sourceDatabase;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.metastore.v1alpha.DatabaseDumpSpec.Type[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.metastore.v1alpha.DatabaseDumpSpec.Type[message.type] === undefined ? message.type : $root.google.cloud.metastore.v1alpha.DatabaseDumpSpec.Type[message.type] : message.type;
                                 return object;
                             };
     
@@ -16145,6 +16283,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -16167,6 +16311,12 @@
                                 break;
                             }
                             switch (object.databaseDumpType) {
+                            default:
+                                if (typeof object.databaseDumpType === "number") {
+                                    message.databaseDumpType = object.databaseDumpType;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.databaseDumpType = 0;
@@ -16207,14 +16357,14 @@
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1alpha.MetadataExport.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1alpha.MetadataExport.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1alpha.MetadataExport.State[message.state] : message.state;
                             if (message.destinationGcsUri != null && message.hasOwnProperty("destinationGcsUri")) {
                                 object.destinationGcsUri = message.destinationGcsUri;
                                 if (options.oneofs)
                                     object.destination = "destinationGcsUri";
                             }
                             if (message.databaseDumpType != null && message.hasOwnProperty("databaseDumpType"))
-                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1alpha.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
+                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1alpha.DatabaseDumpSpec.Type[message.databaseDumpType] === undefined ? message.databaseDumpType : $root.google.cloud.metastore.v1alpha.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
                             return object;
                         };
     
@@ -16560,6 +16710,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -16632,7 +16788,7 @@
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1alpha.Backup.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1alpha.Backup.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1alpha.Backup.State[message.state] : message.state;
                             if (message.serviceRevision != null && message.hasOwnProperty("serviceRevision"))
                                 object.serviceRevision = $root.google.cloud.metastore.v1alpha.Service.toObject(message.serviceRevision, options);
                             if (message.description != null && message.hasOwnProperty("description"))
@@ -16964,6 +17120,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -16988,6 +17150,12 @@
                             if (object.backup != null)
                                 message.backup = String(object.backup);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "RESTORE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -17032,11 +17200,11 @@
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1alpha.Restore.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1alpha.Restore.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1alpha.Restore.State[message.state] : message.state;
                             if (message.backup != null && message.hasOwnProperty("backup"))
                                 object.backup = message.backup;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.metastore.v1alpha.Restore.RestoreType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.metastore.v1alpha.Restore.RestoreType[message.type] === undefined ? message.type : $root.google.cloud.metastore.v1alpha.Restore.RestoreType[message.type] : message.type;
                             if (message.details != null && message.hasOwnProperty("details"))
                                 object.details = message.details;
                             return object;
@@ -21509,6 +21677,12 @@
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
                             switch (object.databaseDumpType) {
+                            default:
+                                if (typeof object.databaseDumpType === "number") {
+                                    message.databaseDumpType = object.databaseDumpType;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.databaseDumpType = 0;
@@ -21553,7 +21727,7 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
                             if (message.databaseDumpType != null && message.hasOwnProperty("databaseDumpType"))
-                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1alpha.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
+                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1alpha.DatabaseDumpSpec.Type[message.databaseDumpType] === undefined ? message.databaseDumpType : $root.google.cloud.metastore.v1alpha.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
                             return object;
                         };
     
@@ -21800,6 +21974,12 @@
                             if (object.backup != null)
                                 message.backup = String(object.backup);
                             switch (object.restoreType) {
+                            default:
+                                if (typeof object.restoreType === "number") {
+                                    message.restoreType = object.restoreType;
+                                    break;
+                                }
+                                break;
                             case "RESTORE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.restoreType = 0;
@@ -21842,7 +22022,7 @@
                             if (message.backup != null && message.hasOwnProperty("backup"))
                                 object.backup = message.backup;
                             if (message.restoreType != null && message.hasOwnProperty("restoreType"))
-                                object.restoreType = options.enums === String ? $root.google.cloud.metastore.v1alpha.Restore.RestoreType[message.restoreType] : message.restoreType;
+                                object.restoreType = options.enums === String ? $root.google.cloud.metastore.v1alpha.Restore.RestoreType[message.restoreType] === undefined ? message.restoreType : $root.google.cloud.metastore.v1alpha.Restore.RestoreType[message.restoreType] : message.restoreType;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
                             return object;
@@ -23960,6 +24140,12 @@
                             if (object.port != null)
                                 message.port = object.port | 0;
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -23998,6 +24184,12 @@
                             if (object.artifactGcsUri != null)
                                 message.artifactGcsUri = String(object.artifactGcsUri);
                             switch (object.tier) {
+                            default:
+                                if (typeof object.tier === "number") {
+                                    message.tier = object.tier;
+                                    break;
+                                }
+                                break;
                             case "TIER_UNSPECIFIED":
                             case 0:
                                 message.tier = 0;
@@ -24029,6 +24221,12 @@
                                 message.metadataManagementActivity = $root.google.cloud.metastore.v1beta.MetadataManagementActivity.fromObject(object.metadataManagementActivity);
                             }
                             switch (object.releaseChannel) {
+                            default:
+                                if (typeof object.releaseChannel === "number") {
+                                    message.releaseChannel = object.releaseChannel;
+                                    break;
+                                }
+                                break;
                             case "RELEASE_CHANNEL_UNSPECIFIED":
                             case 0:
                                 message.releaseChannel = 0;
@@ -24101,13 +24299,13 @@
                             if (message.port != null && message.hasOwnProperty("port"))
                                 object.port = message.port;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.Service.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.Service.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1beta.Service.State[message.state] : message.state;
                             if (message.stateMessage != null && message.hasOwnProperty("stateMessage"))
                                 object.stateMessage = message.stateMessage;
                             if (message.artifactGcsUri != null && message.hasOwnProperty("artifactGcsUri"))
                                 object.artifactGcsUri = message.artifactGcsUri;
                             if (message.tier != null && message.hasOwnProperty("tier"))
-                                object.tier = options.enums === String ? $root.google.cloud.metastore.v1beta.Service.Tier[message.tier] : message.tier;
+                                object.tier = options.enums === String ? $root.google.cloud.metastore.v1beta.Service.Tier[message.tier] === undefined ? message.tier : $root.google.cloud.metastore.v1beta.Service.Tier[message.tier] : message.tier;
                             if (message.metadataIntegration != null && message.hasOwnProperty("metadataIntegration"))
                                 object.metadataIntegration = $root.google.cloud.metastore.v1beta.MetadataIntegration.toObject(message.metadataIntegration, options);
                             if (message.maintenanceWindow != null && message.hasOwnProperty("maintenanceWindow"))
@@ -24117,7 +24315,7 @@
                             if (message.metadataManagementActivity != null && message.hasOwnProperty("metadataManagementActivity"))
                                 object.metadataManagementActivity = $root.google.cloud.metastore.v1beta.MetadataManagementActivity.toObject(message.metadataManagementActivity, options);
                             if (message.releaseChannel != null && message.hasOwnProperty("releaseChannel"))
-                                object.releaseChannel = options.enums === String ? $root.google.cloud.metastore.v1beta.Service.ReleaseChannel[message.releaseChannel] : message.releaseChannel;
+                                object.releaseChannel = options.enums === String ? $root.google.cloud.metastore.v1beta.Service.ReleaseChannel[message.releaseChannel] === undefined ? message.releaseChannel : $root.google.cloud.metastore.v1beta.Service.ReleaseChannel[message.releaseChannel] : message.releaseChannel;
                             return object;
                         };
     
@@ -24805,6 +25003,12 @@
                                 message.hourOfDay = $root.google.protobuf.Int32Value.fromObject(object.hourOfDay);
                             }
                             switch (object.dayOfWeek) {
+                            default:
+                                if (typeof object.dayOfWeek === "number") {
+                                    message.dayOfWeek = object.dayOfWeek;
+                                    break;
+                                }
+                                break;
                             case "DAY_OF_WEEK_UNSPECIFIED":
                             case 0:
                                 message.dayOfWeek = 0;
@@ -24861,7 +25065,7 @@
                             if (message.hourOfDay != null && message.hasOwnProperty("hourOfDay"))
                                 object.hourOfDay = $root.google.protobuf.Int32Value.toObject(message.hourOfDay, options);
                             if (message.dayOfWeek != null && message.hasOwnProperty("dayOfWeek"))
-                                object.dayOfWeek = options.enums === String ? $root.google.type.DayOfWeek[message.dayOfWeek] : message.dayOfWeek;
+                                object.dayOfWeek = options.enums === String ? $root.google.type.DayOfWeek[message.dayOfWeek] === undefined ? message.dayOfWeek : $root.google.type.DayOfWeek[message.dayOfWeek] : message.dayOfWeek;
                             return object;
                         };
     
@@ -26221,6 +26425,12 @@
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -26274,7 +26484,7 @@
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.MetadataImport.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.MetadataImport.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1beta.MetadataImport.State[message.state] : message.state;
                             if (message.databaseDump != null && message.hasOwnProperty("databaseDump")) {
                                 object.databaseDump = $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.toObject(message.databaseDump, options);
                                 if (options.oneofs)
@@ -26523,6 +26733,12 @@
                                     return object;
                                 var message = new $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump();
                                 switch (object.databaseType) {
+                                default:
+                                    if (typeof object.databaseType === "number") {
+                                        message.databaseType = object.databaseType;
+                                        break;
+                                    }
+                                    break;
                                 case "DATABASE_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.databaseType = 0;
@@ -26537,6 +26753,12 @@
                                 if (object.sourceDatabase != null)
                                     message.sourceDatabase = String(object.sourceDatabase);
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -26569,13 +26791,13 @@
                                     object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                                 }
                                 if (message.databaseType != null && message.hasOwnProperty("databaseType"))
-                                    object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.DatabaseType[message.databaseType] : message.databaseType;
+                                    object.databaseType = options.enums === String ? $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.DatabaseType[message.databaseType] === undefined ? message.databaseType : $root.google.cloud.metastore.v1beta.MetadataImport.DatabaseDump.DatabaseType[message.databaseType] : message.databaseType;
                                 if (message.gcsUri != null && message.hasOwnProperty("gcsUri"))
                                     object.gcsUri = message.gcsUri;
                                 if (message.sourceDatabase != null && message.hasOwnProperty("sourceDatabase"))
                                     object.sourceDatabase = message.sourceDatabase;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.metastore.v1beta.DatabaseDumpSpec.Type[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.metastore.v1beta.DatabaseDumpSpec.Type[message.type] === undefined ? message.type : $root.google.cloud.metastore.v1beta.DatabaseDumpSpec.Type[message.type] : message.type;
                                 return object;
                             };
     
@@ -26913,6 +27135,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -26935,6 +27163,12 @@
                                 break;
                             }
                             switch (object.databaseDumpType) {
+                            default:
+                                if (typeof object.databaseDumpType === "number") {
+                                    message.databaseDumpType = object.databaseDumpType;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.databaseDumpType = 0;
@@ -26971,14 +27205,14 @@
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.MetadataExport.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.MetadataExport.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1beta.MetadataExport.State[message.state] : message.state;
                             if (message.destinationGcsUri != null && message.hasOwnProperty("destinationGcsUri")) {
                                 object.destinationGcsUri = message.destinationGcsUri;
                                 if (options.oneofs)
                                     object.destination = "destinationGcsUri";
                             }
                             if (message.databaseDumpType != null && message.hasOwnProperty("databaseDumpType"))
-                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1beta.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
+                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1beta.DatabaseDumpSpec.Type[message.databaseDumpType] === undefined ? message.databaseDumpType : $root.google.cloud.metastore.v1beta.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
                             return object;
                         };
     
@@ -27297,6 +27531,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -27356,7 +27596,7 @@
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.Backup.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.Backup.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1beta.Backup.State[message.state] : message.state;
                             if (message.serviceRevision != null && message.hasOwnProperty("serviceRevision"))
                                 object.serviceRevision = $root.google.cloud.metastore.v1beta.Service.toObject(message.serviceRevision, options);
                             if (message.description != null && message.hasOwnProperty("description"))
@@ -27681,6 +27921,12 @@
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -27705,6 +27951,12 @@
                             if (object.backup != null)
                                 message.backup = String(object.backup);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "RESTORE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -27749,11 +28001,11 @@
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.Restore.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.metastore.v1beta.Restore.State[message.state] === undefined ? message.state : $root.google.cloud.metastore.v1beta.Restore.State[message.state] : message.state;
                             if (message.backup != null && message.hasOwnProperty("backup"))
                                 object.backup = message.backup;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.metastore.v1beta.Restore.RestoreType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.metastore.v1beta.Restore.RestoreType[message.type] === undefined ? message.type : $root.google.cloud.metastore.v1beta.Restore.RestoreType[message.type] : message.type;
                             if (message.details != null && message.hasOwnProperty("details"))
                                 object.details = message.details;
                             return object;
@@ -32225,6 +32477,12 @@
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
                             switch (object.databaseDumpType) {
+                            default:
+                                if (typeof object.databaseDumpType === "number") {
+                                    message.databaseDumpType = object.databaseDumpType;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.databaseDumpType = 0;
@@ -32265,7 +32523,7 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
                             if (message.databaseDumpType != null && message.hasOwnProperty("databaseDumpType"))
-                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1beta.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
+                                object.databaseDumpType = options.enums === String ? $root.google.cloud.metastore.v1beta.DatabaseDumpSpec.Type[message.databaseDumpType] === undefined ? message.databaseDumpType : $root.google.cloud.metastore.v1beta.DatabaseDumpSpec.Type[message.databaseDumpType] : message.databaseDumpType;
                             return object;
                         };
     
@@ -32512,6 +32770,12 @@
                             if (object.backup != null)
                                 message.backup = String(object.backup);
                             switch (object.restoreType) {
+                            default:
+                                if (typeof object.restoreType === "number") {
+                                    message.restoreType = object.restoreType;
+                                    break;
+                                }
+                                break;
                             case "RESTORE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.restoreType = 0;
@@ -32554,7 +32818,7 @@
                             if (message.backup != null && message.hasOwnProperty("backup"))
                                 object.backup = message.backup;
                             if (message.restoreType != null && message.hasOwnProperty("restoreType"))
-                                object.restoreType = options.enums === String ? $root.google.cloud.metastore.v1beta.Restore.RestoreType[message.restoreType] : message.restoreType;
+                                object.restoreType = options.enums === String ? $root.google.cloud.metastore.v1beta.Restore.RestoreType[message.restoreType] === undefined ? message.restoreType : $root.google.cloud.metastore.v1beta.Restore.RestoreType[message.restoreType] : message.restoreType;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
                             return object;
@@ -34892,6 +35156,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -34916,6 +35186,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -34963,7 +35237,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -34971,7 +35245,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -37782,6 +38056,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -37796,6 +38076,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -37922,9 +38208,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -40271,6 +40557,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -40379,7 +40671,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -41181,6 +41473,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -41197,6 +41495,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -41235,6 +41539,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -41305,7 +41613,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -41313,7 +41621,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -41326,7 +41634,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -42703,6 +43011,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -42772,7 +43086,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -44527,6 +44841,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -44576,7 +44896,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
