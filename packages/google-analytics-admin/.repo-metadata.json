@@ -6,7 +6,7 @@
   "default_version": "v1alpha",
   "language": "nodejs",
   "name_pretty": "Google Analytics Admin",
-  "repo": "googleapis/nodejs-analytics-admin",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://developers.google.com/analytics",
   "requires_billing": false,
   "name": "analytics-admin",
