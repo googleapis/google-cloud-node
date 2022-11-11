@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.0.2](https://github.com/googleapis/nodejs-iam-credentials/compare/v2.0.1...v2.0.2) (2022-11-10)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#145](https://github.com/googleapis/nodejs-iam-credentials/issues/145)) ([e3cfeba](https://github.com/googleapis/nodejs-iam-credentials/commit/e3cfebad3d72c4e844d95758d8571f8969c94ab4))
+* better support for fallback mode ([e3cfeba](https://github.com/googleapis/nodejs-iam-credentials/commit/e3cfebad3d72c4e844d95758d8571f8969c94ab4))
+* Change import long to require ([#146](https://github.com/googleapis/nodejs-iam-credentials/issues/146)) ([cbd8f76](https://github.com/googleapis/nodejs-iam-credentials/commit/cbd8f76476b6ab2f37f47f1597375af2937f96e2))
+* **deps:** Use google-gax v3.5.2 ([#156](https://github.com/googleapis/nodejs-iam-credentials/issues/156)) ([4bd9f8b](https://github.com/googleapis/nodejs-iam-credentials/commit/4bd9f8b60e50ee6e6a3da08ef6d07999d81b39d7))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-iam-credentials/issues/1553)) ([#149](https://github.com/googleapis/nodejs-iam-credentials/issues/149)) ([ecd43bd](https://github.com/googleapis/nodejs-iam-credentials/commit/ecd43bdd58621e4d967d52d185fcda846b65e657))
+* Preserve default values in x-goog-request-params header ([#150](https://github.com/googleapis/nodejs-iam-credentials/issues/150)) ([0cb6540](https://github.com/googleapis/nodejs-iam-credentials/commit/0cb6540ed6efcc905547845d71dd923ba5743d0e))
+* Regenerated protos JS and TS definitions ([#159](https://github.com/googleapis/nodejs-iam-credentials/issues/159)) ([cece8c7](https://github.com/googleapis/nodejs-iam-credentials/commit/cece8c758df280204a4a1f4fd60b00c3161c1424))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-iam-credentials/issues/1546)) ([#148](https://github.com/googleapis/nodejs-iam-credentials/issues/148)) ([bc7ddbf](https://github.com/googleapis/nodejs-iam-credentials/commit/bc7ddbfbfb8151a6cdc6422bb345c6e993867539))
+* use google-gax v3.3.0 ([ecd43bd](https://github.com/googleapis/nodejs-iam-credentials/commit/ecd43bdd58621e4d967d52d185fcda846b65e657))
+
 ## [2.0.1](https://github.com/googleapis/nodejs-iam-credentials/compare/v2.0.0...v2.0.1) (2022-06-30)
 
 
