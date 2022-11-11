@@ -41,14 +41,14 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Budget_service.create_budget
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/budget_service.create_budget.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.create_budget.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/budget_service.create_budget.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.create_budget.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/budget_service.create_budget.js`
+`node packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.create_budget.js`
 
 
 -----
@@ -58,14 +58,14 @@ __Usage:__
 
 ### Budget_service.delete_budget
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/budget_service.delete_budget.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.delete_budget.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/budget_service.delete_budget.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.delete_budget.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/budget_service.delete_budget.js`
+`node packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.delete_budget.js`
 
 
 -----
@@ -75,14 +75,14 @@ __Usage:__
 
 ### Budget_service.get_budget
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/budget_service.get_budget.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.get_budget.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/budget_service.get_budget.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.get_budget.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/budget_service.get_budget.js`
+`node packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.get_budget.js`
 
 
 -----
@@ -92,14 +92,14 @@ __Usage:__
 
 ### Budget_service.list_budgets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/budget_service.list_budgets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.list_budgets.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/budget_service.list_budgets.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.list_budgets.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/budget_service.list_budgets.js`
+`node packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.list_budgets.js`
 
 
 -----
@@ -109,14 +109,14 @@ __Usage:__
 
 ### Budget_service.update_budget
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/budget_service.update_budget.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.update_budget.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/budget_service.update_budget.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.update_budget.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/budget_service.update_budget.js`
+`node packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.update_budget.js`
 
 
 -----
@@ -126,14 +126,14 @@ __Usage:__
 
 ### Budget_service.create_budget
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/budget_service.create_budget.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.create_budget.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/budget_service.create_budget.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.create_budget.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/budget_service.create_budget.js`
+`node packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.create_budget.js`
 
 
 -----
@@ -143,14 +143,14 @@ __Usage:__
 
 ### Budget_service.delete_budget
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/budget_service.delete_budget.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.delete_budget.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/budget_service.delete_budget.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.delete_budget.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/budget_service.delete_budget.js`
+`node packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.delete_budget.js`
 
 
 -----
@@ -160,14 +160,14 @@ __Usage:__
 
 ### Budget_service.get_budget
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/budget_service.get_budget.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.get_budget.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/budget_service.get_budget.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.get_budget.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/budget_service.get_budget.js`
+`node packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.get_budget.js`
 
 
 -----
@@ -177,14 +177,14 @@ __Usage:__
 
 ### Budget_service.list_budgets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/budget_service.list_budgets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.list_budgets.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/budget_service.list_budgets.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.list_budgets.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/budget_service.list_budgets.js`
+`node packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.list_budgets.js`
 
 
 -----
@@ -194,14 +194,14 @@ __Usage:__
 
 ### Budget_service.update_budget
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/budget_service.update_budget.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.update_budget.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/budget_service.update_budget.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.update_budget.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/budget_service.update_budget.js`
+`node packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.update_budget.js`
 
 
 -----
@@ -211,14 +211,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-billing-budgets/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/quickstart.js`
+`node packages/google-cloud-billing-budgets/samples/quickstart.js`
 
 
 
