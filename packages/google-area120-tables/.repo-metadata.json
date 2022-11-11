@@ -1,0 +1,17 @@
+{
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-area120-tables",
+  "name": "area120tables",
+  "issue_tracker": "",
+  "default_version": "v1alpha1",
+  "api_id": "area120tables.googleapis.com",
+  "distribution_name": "@google/area120-tables",
+  "requires_billing": true,
+  "product_documentation": "https://area120.google.com/",
+  "codeowner_team": "@googleapis/area120-tables",
+  "name_pretty": "Area120 Tables API",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/area120-tables/latest",
+  "release_level": "preview",
+  "api_shortname": "area120tables",
+  "library_type": "GAPIC_AUTO"
+}
