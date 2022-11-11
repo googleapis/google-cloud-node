@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START file_v1beta1_generated_CloudFilestoreManager_ListBackups_async]
+function main(share, updateMask) {
+  // [START file_v1beta1_generated_CloudFilestoreManager_UpdateShare_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,20 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location for which to retrieve backup information,
-   *  in the format `projects/{project_id}/locations/{location}`.
-   *  In Filestore, backup locations map to GCP regions,
-   *  for example **us-west1**.
-   *  To retrieve backup information for all locations, use "-" for the
-   *  `{location}` value.
+   *  Required. A share resource.
+   *  Only fields specified in update_mask are updated.
    */
-  // const parent = 'abc123'
+  // const share = {}
   /**
-   *  The maximum number of items to return.
+   *  Required. Mask of fields to update. At least one path must be supplied in this
+   *  field.
+   *  The elements of the repeated paths field may only include these fields:
+   *  * "description"
+   *  * "capacity_gb"
+   *  * "labels"
+   *  * "nfs_export_options"
    */
-  // const pageSize = 1234
-  /**
-   *  The next_page_token value to use if there are additional
-   *  results to retrieve for this list request.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Sort results. Supported values are "name", "name desc" or "" (unsorted).
-   */
-  // const orderBy = 'abc123'
-  /**
-   *  List filter.
-   */
-  // const filter = 'abc123'
+  // const updateMask = {}
 
   // Imports the Filestore library
   const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1beta1;
@@ -61,21 +50,21 @@ function main(parent) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function callListBackups() {
+  async function callUpdateShare() {
     // Construct request
     const request = {
-      parent,
+      share,
+      updateMask,
     };
 
     // Run request
-    const iterable = await filestoreClient.listBackupsAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await filestoreClient.updateShare(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListBackups();
-  // [END file_v1beta1_generated_CloudFilestoreManager_ListBackups_async]
+  callUpdateShare();
+  // [END file_v1beta1_generated_CloudFilestoreManager_UpdateShare_async]
 }
 
 process.on('unhandledRejection', err => {

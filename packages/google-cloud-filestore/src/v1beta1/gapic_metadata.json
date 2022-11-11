@@ -15,9 +15,19 @@
                 "getInstance"
               ]
             },
+            "GetSnapshot": {
+              "methods": [
+                "getSnapshot"
+              ]
+            },
             "GetBackup": {
               "methods": [
                 "getBackup"
+              ]
+            },
+            "GetShare": {
+              "methods": [
+                "getShare"
               ]
             },
             "CreateInstance": {
@@ -35,9 +45,29 @@
                 "restoreInstance"
               ]
             },
+            "RevertInstance": {
+              "methods": [
+                "revertInstance"
+              ]
+            },
             "DeleteInstance": {
               "methods": [
                 "deleteInstance"
+              ]
+            },
+            "CreateSnapshot": {
+              "methods": [
+                "createSnapshot"
+              ]
+            },
+            "DeleteSnapshot": {
+              "methods": [
+                "deleteSnapshot"
+              ]
+            },
+            "UpdateSnapshot": {
+              "methods": [
+                "updateSnapshot"
               ]
             },
             "CreateBackup": {
@@ -55,6 +85,21 @@
                 "updateBackup"
               ]
             },
+            "CreateShare": {
+              "methods": [
+                "createShare"
+              ]
+            },
+            "DeleteShare": {
+              "methods": [
+                "deleteShare"
+              ]
+            },
+            "UpdateShare": {
+              "methods": [
+                "updateShare"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
@@ -62,11 +107,25 @@
                 "listInstancesAsync"
               ]
             },
+            "ListSnapshots": {
+              "methods": [
+                "listSnapshots",
+                "listSnapshotsStream",
+                "listSnapshotsAsync"
+              ]
+            },
             "ListBackups": {
               "methods": [
                 "listBackups",
                 "listBackupsStream",
                 "listBackupsAsync"
+              ]
+            },
+            "ListShares": {
+              "methods": [
+                "listShares",
+                "listSharesStream",
+                "listSharesAsync"
               ]
             }
           }
@@ -79,9 +138,19 @@
                 "getInstance"
               ]
             },
+            "GetSnapshot": {
+              "methods": [
+                "getSnapshot"
+              ]
+            },
             "GetBackup": {
               "methods": [
                 "getBackup"
+              ]
+            },
+            "GetShare": {
+              "methods": [
+                "getShare"
               ]
             },
             "CreateInstance": {
@@ -99,9 +168,29 @@
                 "restoreInstance"
               ]
             },
+            "RevertInstance": {
+              "methods": [
+                "revertInstance"
+              ]
+            },
             "DeleteInstance": {
               "methods": [
                 "deleteInstance"
+              ]
+            },
+            "CreateSnapshot": {
+              "methods": [
+                "createSnapshot"
+              ]
+            },
+            "DeleteSnapshot": {
+              "methods": [
+                "deleteSnapshot"
+              ]
+            },
+            "UpdateSnapshot": {
+              "methods": [
+                "updateSnapshot"
               ]
             },
             "CreateBackup": {
@@ -119,6 +208,21 @@
                 "updateBackup"
               ]
             },
+            "CreateShare": {
+              "methods": [
+                "createShare"
+              ]
+            },
+            "DeleteShare": {
+              "methods": [
+                "deleteShare"
+              ]
+            },
+            "UpdateShare": {
+              "methods": [
+                "updateShare"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
@@ -126,11 +230,25 @@
                 "listInstancesAsync"
               ]
             },
+            "ListSnapshots": {
+              "methods": [
+                "listSnapshots",
+                "listSnapshotsStream",
+                "listSnapshotsAsync"
+              ]
+            },
             "ListBackups": {
               "methods": [
                 "listBackups",
                 "listBackupsStream",
                 "listBackupsAsync"
+              ]
+            },
+            "ListShares": {
+              "methods": [
+                "listShares",
+                "listSharesStream",
+                "listSharesAsync"
               ]
             }
           }

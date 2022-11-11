@@ -1028,6 +1028,30 @@
                             }
                           ]
                         },
+                        "RevertInstance": {
+                          "requestType": "RevertInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/instances/*}:revert",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/instances/*}:revert",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "google.cloud.common.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteInstance": {
                           "requestType": "DeleteInstanceRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1049,6 +1073,124 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.common.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListSnapshots": {
+                          "requestType": "ListSnapshotsRequest",
+                          "responseType": "ListSnapshotsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/instances/*}/snapshots",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/instances/*}/snapshots"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetSnapshot": {
+                          "requestType": "GetSnapshotRequest",
+                          "responseType": "Snapshot",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/instances/*/snapshots/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/instances/*/snapshots/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateSnapshot": {
+                          "requestType": "CreateSnapshotRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/instances/*}/snapshots",
+                            "(google.api.http).body": "snapshot",
+                            "(google.api.method_signature)": "parent,snapshot,snapshot_id",
+                            "(google.longrunning.operation_info).response_type": "Snapshot",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/instances/*}/snapshots",
+                                "body": "snapshot"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,snapshot,snapshot_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Snapshot",
+                                "metadata_type": "google.cloud.common.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteSnapshot": {
+                          "requestType": "DeleteSnapshotRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/instances/*/snapshots/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/instances/*/snapshots/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.common.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateSnapshot": {
+                          "requestType": "UpdateSnapshotRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{snapshot.name=projects/*/locations/*/instances/*/snapshots/*}",
+                            "(google.api.http).body": "snapshot",
+                            "(google.api.method_signature)": "snapshot,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Snapshot",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{snapshot.name=projects/*/locations/*/instances/*/snapshots/*}",
+                                "body": "snapshot"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "snapshot,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Snapshot",
                                 "metadata_type": "google.cloud.common.OperationMetadata"
                               }
                             }
@@ -1171,6 +1313,124 @@
                               }
                             }
                           ]
+                        },
+                        "ListShares": {
+                          "requestType": "ListSharesRequest",
+                          "responseType": "ListSharesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/instances/*}/shares",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/instances/*}/shares"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetShare": {
+                          "requestType": "GetShareRequest",
+                          "responseType": "Share",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/instances/*/shares/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/instances/*/shares/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateShare": {
+                          "requestType": "CreateShareRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/instances/*}/shares",
+                            "(google.api.http).body": "share",
+                            "(google.api.method_signature)": "parent,share,share_id",
+                            "(google.longrunning.operation_info).response_type": "Share",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/instances/*}/shares",
+                                "body": "share"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,share,share_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Share",
+                                "metadata_type": "google.cloud.common.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteShare": {
+                          "requestType": "DeleteShareRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/instances/*/shares/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/instances/*/shares/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.common.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateShare": {
+                          "requestType": "UpdateShareRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{share.name=projects/*/locations/*/instances/*/shares/*}",
+                            "(google.api.http).body": "share",
+                            "(google.api.method_signature)": "share,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Share",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.common.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{share.name=projects/*/locations/*/instances/*/shares/*}",
+                                "body": "share"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "share,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Share",
+                                "metadata_type": "google.cloud.common.OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1196,6 +1456,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "connectMode": {
+                          "type": "ConnectMode",
+                          "id": 6
                         }
                       },
                       "nested": {
@@ -1203,6 +1467,13 @@
                           "values": {
                             "ADDRESS_MODE_UNSPECIFIED": 0,
                             "MODE_IPV4": 1
+                          }
+                        },
+                        "ConnectMode": {
+                          "values": {
+                            "CONNECT_MODE_UNSPECIFIED": 0,
+                            "DIRECT_PEERING": 1,
+                            "PRIVATE_SERVICE_ACCESS": 2
                           }
                         }
                       }
@@ -1346,6 +1617,47 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 14
+                        },
+                        "suspensionReasons": {
+                          "rule": "repeated",
+                          "type": "SuspensionReason",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "maxCapacityGb": {
+                          "type": "int64",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "capacityStepSizeGb": {
+                          "type": "int64",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "maxShareCount": {
+                          "type": "int64",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "capacityGb": {
+                          "type": "int64",
+                          "id": 19
+                        },
+                        "multiShareEnabled": {
+                          "type": "bool",
+                          "id": 20
                         }
                       },
                       "nested": {
@@ -1357,7 +1669,11 @@
                             "REPAIRING": 3,
                             "DELETING": 4,
                             "ERROR": 6,
-                            "RESTORING": 7
+                            "RESTORING": 7,
+                            "SUSPENDED": 8,
+                            "REVERTING": 9,
+                            "SUSPENDING": 10,
+                            "RESUMING": 11
                           }
                         },
                         "Tier": {
@@ -1367,7 +1683,14 @@
                             "PREMIUM": 2,
                             "BASIC_HDD": 3,
                             "BASIC_SSD": 4,
-                            "HIGH_SCALE_SSD": 6
+                            "HIGH_SCALE_SSD": 6,
+                            "ENTERPRISE": 7
+                          }
+                        },
+                        "SuspensionReason": {
+                          "values": {
+                            "SUSPENSION_REASON_UNSPECIFIED": 0,
+                            "KMS_KEY_ISSUE": 1
                           }
                         }
                       }
@@ -1469,6 +1792,25 @@
                         }
                       }
                     },
+                    "RevertInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Instance"
+                          }
+                        },
+                        "targetSnapshotId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "DeleteInstanceRequest": {
                       "fields": {
                         "name": {
@@ -1478,6 +1820,10 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "file.googleapis.com/Instance"
                           }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2
                         }
                       }
                     },
@@ -1582,6 +1928,115 @@
                         }
                       }
                     },
+                    "CreateSnapshotRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Instance"
+                          }
+                        },
+                        "snapshotId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "snapshot": {
+                          "type": "Snapshot",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetSnapshotRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Snapshot"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteSnapshotRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Snapshot"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateSnapshotRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "snapshot": {
+                          "type": "Snapshot",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListSnapshotsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Instance"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListSnapshotsResponse": {
+                      "fields": {
+                        "snapshots": {
+                          "rule": "repeated",
+                          "type": "Snapshot",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Backup": {
                       "options": {
                         "(google.api.resource).type": "file.googleapis.com/Backup",
@@ -1662,6 +2117,13 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       },
@@ -1788,6 +2250,181 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "Share": {
+                      "options": {
+                        "(google.api.resource).type": "file.googleapis.com/Share",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/shares/{share}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "mountName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "capacityGb": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "nfsExportOptions": {
+                          "rule": "repeated",
+                          "type": "NfsExportOptions",
+                          "id": 5
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 3,
+                            "DELETING": 4
+                          }
+                        }
+                      }
+                    },
+                    "CreateShareRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Instance"
+                          }
+                        },
+                        "shareId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "share": {
+                          "type": "Share",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetShareRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Share"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteShareRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Share"
+                          }
+                        }
+                      }
+                    },
+                    "ListSharesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Instance"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListSharesResponse": {
+                      "fields": {
+                        "shares": {
+                          "rule": "repeated",
+                          "type": "Share",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UpdateShareRequest": {
+                      "fields": {
+                        "share": {
+                          "type": "Share",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     }

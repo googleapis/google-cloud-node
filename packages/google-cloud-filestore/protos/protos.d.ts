@@ -2633,6 +2633,20 @@ export namespace google {
                     public restoreInstance(request: google.cloud.filestore.v1beta1.IRestoreInstanceRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls RevertInstance.
+                     * @param request RevertInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public revertInstance(request: google.cloud.filestore.v1beta1.IRevertInstanceRequest, callback: google.cloud.filestore.v1beta1.CloudFilestoreManager.RevertInstanceCallback): void;
+
+                    /**
+                     * Calls RevertInstance.
+                     * @param request RevertInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public revertInstance(request: google.cloud.filestore.v1beta1.IRevertInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteInstance.
                      * @param request DeleteInstanceRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -2645,6 +2659,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteInstance(request: google.cloud.filestore.v1beta1.IDeleteInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListSnapshots.
+                     * @param request ListSnapshotsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSnapshotsResponse
+                     */
+                    public listSnapshots(request: google.cloud.filestore.v1beta1.IListSnapshotsRequest, callback: google.cloud.filestore.v1beta1.CloudFilestoreManager.ListSnapshotsCallback): void;
+
+                    /**
+                     * Calls ListSnapshots.
+                     * @param request ListSnapshotsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSnapshots(request: google.cloud.filestore.v1beta1.IListSnapshotsRequest): Promise<google.cloud.filestore.v1beta1.ListSnapshotsResponse>;
+
+                    /**
+                     * Calls GetSnapshot.
+                     * @param request GetSnapshotRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Snapshot
+                     */
+                    public getSnapshot(request: google.cloud.filestore.v1beta1.IGetSnapshotRequest, callback: google.cloud.filestore.v1beta1.CloudFilestoreManager.GetSnapshotCallback): void;
+
+                    /**
+                     * Calls GetSnapshot.
+                     * @param request GetSnapshotRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSnapshot(request: google.cloud.filestore.v1beta1.IGetSnapshotRequest): Promise<google.cloud.filestore.v1beta1.Snapshot>;
+
+                    /**
+                     * Calls CreateSnapshot.
+                     * @param request CreateSnapshotRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSnapshot(request: google.cloud.filestore.v1beta1.ICreateSnapshotRequest, callback: google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateSnapshotCallback): void;
+
+                    /**
+                     * Calls CreateSnapshot.
+                     * @param request CreateSnapshotRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSnapshot(request: google.cloud.filestore.v1beta1.ICreateSnapshotRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteSnapshot.
+                     * @param request DeleteSnapshotRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteSnapshot(request: google.cloud.filestore.v1beta1.IDeleteSnapshotRequest, callback: google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteSnapshotCallback): void;
+
+                    /**
+                     * Calls DeleteSnapshot.
+                     * @param request DeleteSnapshotRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSnapshot(request: google.cloud.filestore.v1beta1.IDeleteSnapshotRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateSnapshot.
+                     * @param request UpdateSnapshotRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateSnapshot(request: google.cloud.filestore.v1beta1.IUpdateSnapshotRequest, callback: google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateSnapshotCallback): void;
+
+                    /**
+                     * Calls UpdateSnapshot.
+                     * @param request UpdateSnapshotRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSnapshot(request: google.cloud.filestore.v1beta1.IUpdateSnapshotRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls ListBackups.
@@ -2715,6 +2799,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateBackup(request: google.cloud.filestore.v1beta1.IUpdateBackupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListShares.
+                     * @param request ListSharesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSharesResponse
+                     */
+                    public listShares(request: google.cloud.filestore.v1beta1.IListSharesRequest, callback: google.cloud.filestore.v1beta1.CloudFilestoreManager.ListSharesCallback): void;
+
+                    /**
+                     * Calls ListShares.
+                     * @param request ListSharesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listShares(request: google.cloud.filestore.v1beta1.IListSharesRequest): Promise<google.cloud.filestore.v1beta1.ListSharesResponse>;
+
+                    /**
+                     * Calls GetShare.
+                     * @param request GetShareRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Share
+                     */
+                    public getShare(request: google.cloud.filestore.v1beta1.IGetShareRequest, callback: google.cloud.filestore.v1beta1.CloudFilestoreManager.GetShareCallback): void;
+
+                    /**
+                     * Calls GetShare.
+                     * @param request GetShareRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getShare(request: google.cloud.filestore.v1beta1.IGetShareRequest): Promise<google.cloud.filestore.v1beta1.Share>;
+
+                    /**
+                     * Calls CreateShare.
+                     * @param request CreateShareRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createShare(request: google.cloud.filestore.v1beta1.ICreateShareRequest, callback: google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateShareCallback): void;
+
+                    /**
+                     * Calls CreateShare.
+                     * @param request CreateShareRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createShare(request: google.cloud.filestore.v1beta1.ICreateShareRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteShare.
+                     * @param request DeleteShareRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteShare(request: google.cloud.filestore.v1beta1.IDeleteShareRequest, callback: google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteShareCallback): void;
+
+                    /**
+                     * Calls DeleteShare.
+                     * @param request DeleteShareRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteShare(request: google.cloud.filestore.v1beta1.IDeleteShareRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateShare.
+                     * @param request UpdateShareRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateShare(request: google.cloud.filestore.v1beta1.IUpdateShareRequest, callback: google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateShareCallback): void;
+
+                    /**
+                     * Calls UpdateShare.
+                     * @param request UpdateShareRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateShare(request: google.cloud.filestore.v1beta1.IUpdateShareRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace CloudFilestoreManager {
@@ -2755,11 +2909,53 @@ export namespace google {
                     type RestoreInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|revertInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RevertInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|deleteInstance}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type DeleteInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|listSnapshots}.
+                     * @param error Error, if any
+                     * @param [response] ListSnapshotsResponse
+                     */
+                    type ListSnapshotsCallback = (error: (Error|null), response?: google.cloud.filestore.v1beta1.ListSnapshotsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|getSnapshot}.
+                     * @param error Error, if any
+                     * @param [response] Snapshot
+                     */
+                    type GetSnapshotCallback = (error: (Error|null), response?: google.cloud.filestore.v1beta1.Snapshot) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|createSnapshot}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSnapshotCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|deleteSnapshot}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteSnapshotCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|updateSnapshot}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateSnapshotCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|listBackups}.
@@ -2795,6 +2991,41 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type UpdateBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|listShares}.
+                     * @param error Error, if any
+                     * @param [response] ListSharesResponse
+                     */
+                    type ListSharesCallback = (error: (Error|null), response?: google.cloud.filestore.v1beta1.ListSharesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|getShare}.
+                     * @param error Error, if any
+                     * @param [response] Share
+                     */
+                    type GetShareCallback = (error: (Error|null), response?: google.cloud.filestore.v1beta1.Share) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|createShare}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateShareCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|deleteShare}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteShareCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|updateShare}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateShareCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a NetworkConfig. */
@@ -2811,6 +3042,9 @@ export namespace google {
 
                     /** NetworkConfig ipAddresses */
                     ipAddresses?: (string[]|null);
+
+                    /** NetworkConfig connectMode */
+                    connectMode?: (google.cloud.filestore.v1beta1.NetworkConfig.ConnectMode|keyof typeof google.cloud.filestore.v1beta1.NetworkConfig.ConnectMode|null);
                 }
 
                 /** Represents a NetworkConfig. */
@@ -2833,6 +3067,9 @@ export namespace google {
 
                     /** NetworkConfig ipAddresses. */
                     public ipAddresses: string[];
+
+                    /** NetworkConfig connectMode. */
+                    public connectMode: (google.cloud.filestore.v1beta1.NetworkConfig.ConnectMode|keyof typeof google.cloud.filestore.v1beta1.NetworkConfig.ConnectMode);
 
                     /**
                      * Creates a new NetworkConfig instance using the specified properties.
@@ -2918,6 +3155,13 @@ export namespace google {
                     enum AddressMode {
                         ADDRESS_MODE_UNSPECIFIED = 0,
                         MODE_IPV4 = 1
+                    }
+
+                    /** ConnectMode enum. */
+                    enum ConnectMode {
+                        CONNECT_MODE_UNSPECIFIED = 0,
+                        DIRECT_PEERING = 1,
+                        PRIVATE_SERVICE_ACCESS = 2
                     }
                 }
 
@@ -3212,6 +3456,27 @@ export namespace google {
 
                     /** Instance satisfiesPzs */
                     satisfiesPzs?: (google.protobuf.IBoolValue|null);
+
+                    /** Instance kmsKeyName */
+                    kmsKeyName?: (string|null);
+
+                    /** Instance suspensionReasons */
+                    suspensionReasons?: (google.cloud.filestore.v1beta1.Instance.SuspensionReason[]|null);
+
+                    /** Instance maxCapacityGb */
+                    maxCapacityGb?: (number|Long|string|null);
+
+                    /** Instance capacityStepSizeGb */
+                    capacityStepSizeGb?: (number|Long|string|null);
+
+                    /** Instance maxShareCount */
+                    maxShareCount?: (number|Long|string|null);
+
+                    /** Instance capacityGb */
+                    capacityGb?: (number|Long|string|null);
+
+                    /** Instance multiShareEnabled */
+                    multiShareEnabled?: (boolean|null);
                 }
 
                 /** Represents an Instance. */
@@ -3255,6 +3520,27 @@ export namespace google {
 
                     /** Instance satisfiesPzs. */
                     public satisfiesPzs?: (google.protobuf.IBoolValue|null);
+
+                    /** Instance kmsKeyName. */
+                    public kmsKeyName: string;
+
+                    /** Instance suspensionReasons. */
+                    public suspensionReasons: google.cloud.filestore.v1beta1.Instance.SuspensionReason[];
+
+                    /** Instance maxCapacityGb. */
+                    public maxCapacityGb: (number|Long|string);
+
+                    /** Instance capacityStepSizeGb. */
+                    public capacityStepSizeGb: (number|Long|string);
+
+                    /** Instance maxShareCount. */
+                    public maxShareCount: (number|Long|string);
+
+                    /** Instance capacityGb. */
+                    public capacityGb: (number|Long|string);
+
+                    /** Instance multiShareEnabled. */
+                    public multiShareEnabled: boolean;
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -3344,7 +3630,11 @@ export namespace google {
                         REPAIRING = 3,
                         DELETING = 4,
                         ERROR = 6,
-                        RESTORING = 7
+                        RESTORING = 7,
+                        SUSPENDED = 8,
+                        REVERTING = 9,
+                        SUSPENDING = 10,
+                        RESUMING = 11
                     }
 
                     /** Tier enum. */
@@ -3354,7 +3644,14 @@ export namespace google {
                         PREMIUM = 2,
                         BASIC_HDD = 3,
                         BASIC_SSD = 4,
-                        HIGH_SCALE_SSD = 6
+                        HIGH_SCALE_SSD = 6,
+                        ENTERPRISE = 7
+                    }
+
+                    /** SuspensionReason enum. */
+                    enum SuspensionReason {
+                        SUSPENSION_REASON_UNSPECIFIED = 0,
+                        KMS_KEY_ISSUE = 1
                     }
                 }
 
@@ -3785,11 +4082,117 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RevertInstanceRequest. */
+                interface IRevertInstanceRequest {
+
+                    /** RevertInstanceRequest name */
+                    name?: (string|null);
+
+                    /** RevertInstanceRequest targetSnapshotId */
+                    targetSnapshotId?: (string|null);
+                }
+
+                /** Represents a RevertInstanceRequest. */
+                class RevertInstanceRequest implements IRevertInstanceRequest {
+
+                    /**
+                     * Constructs a new RevertInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IRevertInstanceRequest);
+
+                    /** RevertInstanceRequest name. */
+                    public name: string;
+
+                    /** RevertInstanceRequest targetSnapshotId. */
+                    public targetSnapshotId: string;
+
+                    /**
+                     * Creates a new RevertInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RevertInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IRevertInstanceRequest): google.cloud.filestore.v1beta1.RevertInstanceRequest;
+
+                    /**
+                     * Encodes the specified RevertInstanceRequest message. Does not implicitly {@link google.cloud.filestore.v1beta1.RevertInstanceRequest.verify|verify} messages.
+                     * @param message RevertInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IRevertInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RevertInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.RevertInstanceRequest.verify|verify} messages.
+                     * @param message RevertInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IRevertInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RevertInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RevertInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.RevertInstanceRequest;
+
+                    /**
+                     * Decodes a RevertInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RevertInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.RevertInstanceRequest;
+
+                    /**
+                     * Verifies a RevertInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RevertInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RevertInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.RevertInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a RevertInstanceRequest message. Also converts values to other types if specified.
+                     * @param message RevertInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.RevertInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RevertInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RevertInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DeleteInstanceRequest. */
                 interface IDeleteInstanceRequest {
 
                     /** DeleteInstanceRequest name */
                     name?: (string|null);
+
+                    /** DeleteInstanceRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteInstanceRequest. */
@@ -3803,6 +4206,9 @@ export namespace google {
 
                     /** DeleteInstanceRequest name. */
                     public name: string;
+
+                    /** DeleteInstanceRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteInstanceRequest instance using the specified properties.
@@ -4250,6 +4656,636 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a CreateSnapshotRequest. */
+                interface ICreateSnapshotRequest {
+
+                    /** CreateSnapshotRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSnapshotRequest snapshotId */
+                    snapshotId?: (string|null);
+
+                    /** CreateSnapshotRequest snapshot */
+                    snapshot?: (google.cloud.filestore.v1beta1.ISnapshot|null);
+                }
+
+                /** Represents a CreateSnapshotRequest. */
+                class CreateSnapshotRequest implements ICreateSnapshotRequest {
+
+                    /**
+                     * Constructs a new CreateSnapshotRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.ICreateSnapshotRequest);
+
+                    /** CreateSnapshotRequest parent. */
+                    public parent: string;
+
+                    /** CreateSnapshotRequest snapshotId. */
+                    public snapshotId: string;
+
+                    /** CreateSnapshotRequest snapshot. */
+                    public snapshot?: (google.cloud.filestore.v1beta1.ISnapshot|null);
+
+                    /**
+                     * Creates a new CreateSnapshotRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSnapshotRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.ICreateSnapshotRequest): google.cloud.filestore.v1beta1.CreateSnapshotRequest;
+
+                    /**
+                     * Encodes the specified CreateSnapshotRequest message. Does not implicitly {@link google.cloud.filestore.v1beta1.CreateSnapshotRequest.verify|verify} messages.
+                     * @param message CreateSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.ICreateSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.CreateSnapshotRequest.verify|verify} messages.
+                     * @param message CreateSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.ICreateSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSnapshotRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.CreateSnapshotRequest;
+
+                    /**
+                     * Decodes a CreateSnapshotRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.CreateSnapshotRequest;
+
+                    /**
+                     * Verifies a CreateSnapshotRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSnapshotRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.CreateSnapshotRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSnapshotRequest message. Also converts values to other types if specified.
+                     * @param message CreateSnapshotRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.CreateSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSnapshotRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSnapshotRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSnapshotRequest. */
+                interface IGetSnapshotRequest {
+
+                    /** GetSnapshotRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSnapshotRequest. */
+                class GetSnapshotRequest implements IGetSnapshotRequest {
+
+                    /**
+                     * Constructs a new GetSnapshotRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IGetSnapshotRequest);
+
+                    /** GetSnapshotRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSnapshotRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSnapshotRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IGetSnapshotRequest): google.cloud.filestore.v1beta1.GetSnapshotRequest;
+
+                    /**
+                     * Encodes the specified GetSnapshotRequest message. Does not implicitly {@link google.cloud.filestore.v1beta1.GetSnapshotRequest.verify|verify} messages.
+                     * @param message GetSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IGetSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.GetSnapshotRequest.verify|verify} messages.
+                     * @param message GetSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IGetSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSnapshotRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.GetSnapshotRequest;
+
+                    /**
+                     * Decodes a GetSnapshotRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.GetSnapshotRequest;
+
+                    /**
+                     * Verifies a GetSnapshotRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSnapshotRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.GetSnapshotRequest;
+
+                    /**
+                     * Creates a plain object from a GetSnapshotRequest message. Also converts values to other types if specified.
+                     * @param message GetSnapshotRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.GetSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSnapshotRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSnapshotRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSnapshotRequest. */
+                interface IDeleteSnapshotRequest {
+
+                    /** DeleteSnapshotRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteSnapshotRequest. */
+                class DeleteSnapshotRequest implements IDeleteSnapshotRequest {
+
+                    /**
+                     * Constructs a new DeleteSnapshotRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IDeleteSnapshotRequest);
+
+                    /** DeleteSnapshotRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteSnapshotRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSnapshotRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IDeleteSnapshotRequest): google.cloud.filestore.v1beta1.DeleteSnapshotRequest;
+
+                    /**
+                     * Encodes the specified DeleteSnapshotRequest message. Does not implicitly {@link google.cloud.filestore.v1beta1.DeleteSnapshotRequest.verify|verify} messages.
+                     * @param message DeleteSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IDeleteSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.DeleteSnapshotRequest.verify|verify} messages.
+                     * @param message DeleteSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IDeleteSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSnapshotRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.DeleteSnapshotRequest;
+
+                    /**
+                     * Decodes a DeleteSnapshotRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.DeleteSnapshotRequest;
+
+                    /**
+                     * Verifies a DeleteSnapshotRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSnapshotRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.DeleteSnapshotRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSnapshotRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSnapshotRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.DeleteSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSnapshotRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSnapshotRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSnapshotRequest. */
+                interface IUpdateSnapshotRequest {
+
+                    /** UpdateSnapshotRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateSnapshotRequest snapshot */
+                    snapshot?: (google.cloud.filestore.v1beta1.ISnapshot|null);
+                }
+
+                /** Represents an UpdateSnapshotRequest. */
+                class UpdateSnapshotRequest implements IUpdateSnapshotRequest {
+
+                    /**
+                     * Constructs a new UpdateSnapshotRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IUpdateSnapshotRequest);
+
+                    /** UpdateSnapshotRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateSnapshotRequest snapshot. */
+                    public snapshot?: (google.cloud.filestore.v1beta1.ISnapshot|null);
+
+                    /**
+                     * Creates a new UpdateSnapshotRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSnapshotRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IUpdateSnapshotRequest): google.cloud.filestore.v1beta1.UpdateSnapshotRequest;
+
+                    /**
+                     * Encodes the specified UpdateSnapshotRequest message. Does not implicitly {@link google.cloud.filestore.v1beta1.UpdateSnapshotRequest.verify|verify} messages.
+                     * @param message UpdateSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IUpdateSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.UpdateSnapshotRequest.verify|verify} messages.
+                     * @param message UpdateSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IUpdateSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSnapshotRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.UpdateSnapshotRequest;
+
+                    /**
+                     * Decodes an UpdateSnapshotRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.UpdateSnapshotRequest;
+
+                    /**
+                     * Verifies an UpdateSnapshotRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSnapshotRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.UpdateSnapshotRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSnapshotRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSnapshotRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.UpdateSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSnapshotRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSnapshotRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSnapshotsRequest. */
+                interface IListSnapshotsRequest {
+
+                    /** ListSnapshotsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSnapshotsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSnapshotsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSnapshotsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListSnapshotsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListSnapshotsRequest. */
+                class ListSnapshotsRequest implements IListSnapshotsRequest {
+
+                    /**
+                     * Constructs a new ListSnapshotsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IListSnapshotsRequest);
+
+                    /** ListSnapshotsRequest parent. */
+                    public parent: string;
+
+                    /** ListSnapshotsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSnapshotsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSnapshotsRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListSnapshotsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListSnapshotsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSnapshotsRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IListSnapshotsRequest): google.cloud.filestore.v1beta1.ListSnapshotsRequest;
+
+                    /**
+                     * Encodes the specified ListSnapshotsRequest message. Does not implicitly {@link google.cloud.filestore.v1beta1.ListSnapshotsRequest.verify|verify} messages.
+                     * @param message ListSnapshotsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IListSnapshotsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSnapshotsRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.ListSnapshotsRequest.verify|verify} messages.
+                     * @param message ListSnapshotsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IListSnapshotsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSnapshotsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSnapshotsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.ListSnapshotsRequest;
+
+                    /**
+                     * Decodes a ListSnapshotsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSnapshotsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.ListSnapshotsRequest;
+
+                    /**
+                     * Verifies a ListSnapshotsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSnapshotsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSnapshotsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.ListSnapshotsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSnapshotsRequest message. Also converts values to other types if specified.
+                     * @param message ListSnapshotsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.ListSnapshotsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSnapshotsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSnapshotsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSnapshotsResponse. */
+                interface IListSnapshotsResponse {
+
+                    /** ListSnapshotsResponse snapshots */
+                    snapshots?: (google.cloud.filestore.v1beta1.ISnapshot[]|null);
+
+                    /** ListSnapshotsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSnapshotsResponse. */
+                class ListSnapshotsResponse implements IListSnapshotsResponse {
+
+                    /**
+                     * Constructs a new ListSnapshotsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IListSnapshotsResponse);
+
+                    /** ListSnapshotsResponse snapshots. */
+                    public snapshots: google.cloud.filestore.v1beta1.ISnapshot[];
+
+                    /** ListSnapshotsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSnapshotsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSnapshotsResponse instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IListSnapshotsResponse): google.cloud.filestore.v1beta1.ListSnapshotsResponse;
+
+                    /**
+                     * Encodes the specified ListSnapshotsResponse message. Does not implicitly {@link google.cloud.filestore.v1beta1.ListSnapshotsResponse.verify|verify} messages.
+                     * @param message ListSnapshotsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IListSnapshotsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSnapshotsResponse message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.ListSnapshotsResponse.verify|verify} messages.
+                     * @param message ListSnapshotsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IListSnapshotsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSnapshotsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSnapshotsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.ListSnapshotsResponse;
+
+                    /**
+                     * Decodes a ListSnapshotsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSnapshotsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.ListSnapshotsResponse;
+
+                    /**
+                     * Verifies a ListSnapshotsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSnapshotsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSnapshotsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.ListSnapshotsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSnapshotsResponse message. Also converts values to other types if specified.
+                     * @param message ListSnapshotsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.ListSnapshotsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSnapshotsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSnapshotsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Backup. */
                 interface IBackup {
 
@@ -4288,6 +5324,9 @@ export namespace google {
 
                     /** Backup satisfiesPzs */
                     satisfiesPzs?: (google.protobuf.IBoolValue|null);
+
+                    /** Backup kmsKeyName */
+                    kmsKeyName?: (string|null);
                 }
 
                 /** Represents a Backup. */
@@ -4334,6 +5373,9 @@ export namespace google {
 
                     /** Backup satisfiesPzs. */
                     public satisfiesPzs?: (google.protobuf.IBoolValue|null);
+
+                    /** Backup kmsKeyName. */
+                    public kmsKeyName: string;
 
                     /**
                      * Creates a new Backup instance using the specified properties.
@@ -5055,6 +6097,792 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListBackupsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Share. */
+                interface IShare {
+
+                    /** Share name */
+                    name?: (string|null);
+
+                    /** Share mountName */
+                    mountName?: (string|null);
+
+                    /** Share description */
+                    description?: (string|null);
+
+                    /** Share capacityGb */
+                    capacityGb?: (number|Long|string|null);
+
+                    /** Share nfsExportOptions */
+                    nfsExportOptions?: (google.cloud.filestore.v1beta1.INfsExportOptions[]|null);
+
+                    /** Share state */
+                    state?: (google.cloud.filestore.v1beta1.Share.State|keyof typeof google.cloud.filestore.v1beta1.Share.State|null);
+
+                    /** Share createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Share labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a Share. */
+                class Share implements IShare {
+
+                    /**
+                     * Constructs a new Share.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IShare);
+
+                    /** Share name. */
+                    public name: string;
+
+                    /** Share mountName. */
+                    public mountName: string;
+
+                    /** Share description. */
+                    public description: string;
+
+                    /** Share capacityGb. */
+                    public capacityGb: (number|Long|string);
+
+                    /** Share nfsExportOptions. */
+                    public nfsExportOptions: google.cloud.filestore.v1beta1.INfsExportOptions[];
+
+                    /** Share state. */
+                    public state: (google.cloud.filestore.v1beta1.Share.State|keyof typeof google.cloud.filestore.v1beta1.Share.State);
+
+                    /** Share createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Share labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new Share instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Share instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IShare): google.cloud.filestore.v1beta1.Share;
+
+                    /**
+                     * Encodes the specified Share message. Does not implicitly {@link google.cloud.filestore.v1beta1.Share.verify|verify} messages.
+                     * @param message Share message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IShare, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Share message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.Share.verify|verify} messages.
+                     * @param message Share message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IShare, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Share message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Share
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.Share;
+
+                    /**
+                     * Decodes a Share message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Share
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.Share;
+
+                    /**
+                     * Verifies a Share message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Share message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Share
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.Share;
+
+                    /**
+                     * Creates a plain object from a Share message. Also converts values to other types if specified.
+                     * @param message Share
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.Share, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Share to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Share
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Share {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 3,
+                        DELETING = 4
+                    }
+                }
+
+                /** Properties of a CreateShareRequest. */
+                interface ICreateShareRequest {
+
+                    /** CreateShareRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateShareRequest shareId */
+                    shareId?: (string|null);
+
+                    /** CreateShareRequest share */
+                    share?: (google.cloud.filestore.v1beta1.IShare|null);
+                }
+
+                /** Represents a CreateShareRequest. */
+                class CreateShareRequest implements ICreateShareRequest {
+
+                    /**
+                     * Constructs a new CreateShareRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.ICreateShareRequest);
+
+                    /** CreateShareRequest parent. */
+                    public parent: string;
+
+                    /** CreateShareRequest shareId. */
+                    public shareId: string;
+
+                    /** CreateShareRequest share. */
+                    public share?: (google.cloud.filestore.v1beta1.IShare|null);
+
+                    /**
+                     * Creates a new CreateShareRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateShareRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.ICreateShareRequest): google.cloud.filestore.v1beta1.CreateShareRequest;
+
+                    /**
+                     * Encodes the specified CreateShareRequest message. Does not implicitly {@link google.cloud.filestore.v1beta1.CreateShareRequest.verify|verify} messages.
+                     * @param message CreateShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.ICreateShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateShareRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.CreateShareRequest.verify|verify} messages.
+                     * @param message CreateShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.ICreateShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateShareRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.CreateShareRequest;
+
+                    /**
+                     * Decodes a CreateShareRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.CreateShareRequest;
+
+                    /**
+                     * Verifies a CreateShareRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateShareRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateShareRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.CreateShareRequest;
+
+                    /**
+                     * Creates a plain object from a CreateShareRequest message. Also converts values to other types if specified.
+                     * @param message CreateShareRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.CreateShareRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateShareRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateShareRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetShareRequest. */
+                interface IGetShareRequest {
+
+                    /** GetShareRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetShareRequest. */
+                class GetShareRequest implements IGetShareRequest {
+
+                    /**
+                     * Constructs a new GetShareRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IGetShareRequest);
+
+                    /** GetShareRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetShareRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetShareRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IGetShareRequest): google.cloud.filestore.v1beta1.GetShareRequest;
+
+                    /**
+                     * Encodes the specified GetShareRequest message. Does not implicitly {@link google.cloud.filestore.v1beta1.GetShareRequest.verify|verify} messages.
+                     * @param message GetShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IGetShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetShareRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.GetShareRequest.verify|verify} messages.
+                     * @param message GetShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IGetShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetShareRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.GetShareRequest;
+
+                    /**
+                     * Decodes a GetShareRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.GetShareRequest;
+
+                    /**
+                     * Verifies a GetShareRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetShareRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetShareRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.GetShareRequest;
+
+                    /**
+                     * Creates a plain object from a GetShareRequest message. Also converts values to other types if specified.
+                     * @param message GetShareRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.GetShareRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetShareRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetShareRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteShareRequest. */
+                interface IDeleteShareRequest {
+
+                    /** DeleteShareRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteShareRequest. */
+                class DeleteShareRequest implements IDeleteShareRequest {
+
+                    /**
+                     * Constructs a new DeleteShareRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IDeleteShareRequest);
+
+                    /** DeleteShareRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteShareRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteShareRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IDeleteShareRequest): google.cloud.filestore.v1beta1.DeleteShareRequest;
+
+                    /**
+                     * Encodes the specified DeleteShareRequest message. Does not implicitly {@link google.cloud.filestore.v1beta1.DeleteShareRequest.verify|verify} messages.
+                     * @param message DeleteShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IDeleteShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteShareRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.DeleteShareRequest.verify|verify} messages.
+                     * @param message DeleteShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IDeleteShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteShareRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.DeleteShareRequest;
+
+                    /**
+                     * Decodes a DeleteShareRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.DeleteShareRequest;
+
+                    /**
+                     * Verifies a DeleteShareRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteShareRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteShareRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.DeleteShareRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteShareRequest message. Also converts values to other types if specified.
+                     * @param message DeleteShareRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.DeleteShareRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteShareRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteShareRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSharesRequest. */
+                interface IListSharesRequest {
+
+                    /** ListSharesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSharesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSharesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSharesRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListSharesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListSharesRequest. */
+                class ListSharesRequest implements IListSharesRequest {
+
+                    /**
+                     * Constructs a new ListSharesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IListSharesRequest);
+
+                    /** ListSharesRequest parent. */
+                    public parent: string;
+
+                    /** ListSharesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSharesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSharesRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListSharesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListSharesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSharesRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IListSharesRequest): google.cloud.filestore.v1beta1.ListSharesRequest;
+
+                    /**
+                     * Encodes the specified ListSharesRequest message. Does not implicitly {@link google.cloud.filestore.v1beta1.ListSharesRequest.verify|verify} messages.
+                     * @param message ListSharesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IListSharesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSharesRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.ListSharesRequest.verify|verify} messages.
+                     * @param message ListSharesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IListSharesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSharesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSharesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.ListSharesRequest;
+
+                    /**
+                     * Decodes a ListSharesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSharesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.ListSharesRequest;
+
+                    /**
+                     * Verifies a ListSharesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSharesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSharesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.ListSharesRequest;
+
+                    /**
+                     * Creates a plain object from a ListSharesRequest message. Also converts values to other types if specified.
+                     * @param message ListSharesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.ListSharesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSharesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSharesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSharesResponse. */
+                interface IListSharesResponse {
+
+                    /** ListSharesResponse shares */
+                    shares?: (google.cloud.filestore.v1beta1.IShare[]|null);
+
+                    /** ListSharesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListSharesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListSharesResponse. */
+                class ListSharesResponse implements IListSharesResponse {
+
+                    /**
+                     * Constructs a new ListSharesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IListSharesResponse);
+
+                    /** ListSharesResponse shares. */
+                    public shares: google.cloud.filestore.v1beta1.IShare[];
+
+                    /** ListSharesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListSharesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListSharesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSharesResponse instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IListSharesResponse): google.cloud.filestore.v1beta1.ListSharesResponse;
+
+                    /**
+                     * Encodes the specified ListSharesResponse message. Does not implicitly {@link google.cloud.filestore.v1beta1.ListSharesResponse.verify|verify} messages.
+                     * @param message ListSharesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IListSharesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSharesResponse message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.ListSharesResponse.verify|verify} messages.
+                     * @param message ListSharesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IListSharesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSharesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSharesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.ListSharesResponse;
+
+                    /**
+                     * Decodes a ListSharesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSharesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.ListSharesResponse;
+
+                    /**
+                     * Verifies a ListSharesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSharesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSharesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.ListSharesResponse;
+
+                    /**
+                     * Creates a plain object from a ListSharesResponse message. Also converts values to other types if specified.
+                     * @param message ListSharesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.ListSharesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSharesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSharesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateShareRequest. */
+                interface IUpdateShareRequest {
+
+                    /** UpdateShareRequest share */
+                    share?: (google.cloud.filestore.v1beta1.IShare|null);
+
+                    /** UpdateShareRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateShareRequest. */
+                class UpdateShareRequest implements IUpdateShareRequest {
+
+                    /**
+                     * Constructs a new UpdateShareRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IUpdateShareRequest);
+
+                    /** UpdateShareRequest share. */
+                    public share?: (google.cloud.filestore.v1beta1.IShare|null);
+
+                    /** UpdateShareRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateShareRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateShareRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IUpdateShareRequest): google.cloud.filestore.v1beta1.UpdateShareRequest;
+
+                    /**
+                     * Encodes the specified UpdateShareRequest message. Does not implicitly {@link google.cloud.filestore.v1beta1.UpdateShareRequest.verify|verify} messages.
+                     * @param message UpdateShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IUpdateShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateShareRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.UpdateShareRequest.verify|verify} messages.
+                     * @param message UpdateShareRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IUpdateShareRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateShareRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.UpdateShareRequest;
+
+                    /**
+                     * Decodes an UpdateShareRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateShareRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.UpdateShareRequest;
+
+                    /**
+                     * Verifies an UpdateShareRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateShareRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateShareRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.UpdateShareRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateShareRequest message. Also converts values to other types if specified.
+                     * @param message UpdateShareRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.UpdateShareRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateShareRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateShareRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

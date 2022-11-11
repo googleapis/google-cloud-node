@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START file_v1beta1_generated_CloudFilestoreManager_ListBackups_async]
+  // [START file_v1beta1_generated_CloudFilestoreManager_ListShares_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,12 +29,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location for which to retrieve backup information,
-   *  in the format `projects/{project_id}/locations/{location}`.
-   *  In Filestore, backup locations map to GCP regions,
-   *  for example **us-west1**.
-   *  To retrieve backup information for all locations, use "-" for the
-   *  `{location}` value.
+   *  Required. The instance for which to retrieve share information,
+   *  in the format
+   *  `projects/{project_id}/locations/{location}/instances/{instance_id}`.
    */
   // const parent = 'abc123'
   /**
@@ -61,21 +58,21 @@ function main(parent) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function callListBackups() {
+  async function callListShares() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = await filestoreClient.listBackupsAsync(request);
+    const iterable = await filestoreClient.listSharesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListBackups();
-  // [END file_v1beta1_generated_CloudFilestoreManager_ListBackups_async]
+  callListShares();
+  // [END file_v1beta1_generated_CloudFilestoreManager_ListShares_async]
 }
 
 process.on('unhandledRejection', err => {

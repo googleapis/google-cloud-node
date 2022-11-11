@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START file_v1beta1_generated_CloudFilestoreManager_ListBackups_async]
+function main(parent, shareId, share) {
+  // [START file_v1beta1_generated_CloudFilestoreManager_CreateShare_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,21 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location for which to retrieve backup information,
-   *  in the format `projects/{project_id}/locations/{location}`.
-   *  In Filestore, backup locations map to GCP regions,
-   *  for example **us-west1**.
-   *  To retrieve backup information for all locations, use "-" for the
-   *  `{location}` value.
+   *  Required. The Filestore Instance to create the share for, in the format
+   *  `projects/{project_id}/locations/{location}/instances/{instance_id}`
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of items to return.
+   *  Required. The ID to use for the share.
+   *  The ID must be unique within the specified instance.
+   *  This value must start with a lowercase letter followed by up to 62
+   *  lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
    */
-  // const pageSize = 1234
+  // const shareId = 'abc123'
   /**
-   *  The next_page_token value to use if there are additional
-   *  results to retrieve for this list request.
+   *  Required. A share resource
    */
-  // const pageToken = 'abc123'
-  /**
-   *  Sort results. Supported values are "name", "name desc" or "" (unsorted).
-   */
-  // const orderBy = 'abc123'
-  /**
-   *  List filter.
-   */
-  // const filter = 'abc123'
+  // const share = {}
 
   // Imports the Filestore library
   const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1beta1;
@@ -61,21 +51,22 @@ function main(parent) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function callListBackups() {
+  async function callCreateShare() {
     // Construct request
     const request = {
       parent,
+      shareId,
+      share,
     };
 
     // Run request
-    const iterable = await filestoreClient.listBackupsAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await filestoreClient.createShare(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListBackups();
-  // [END file_v1beta1_generated_CloudFilestoreManager_ListBackups_async]
+  callCreateShare();
+  // [END file_v1beta1_generated_CloudFilestoreManager_CreateShare_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -57,7 +57,35 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "RevertInstance": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteInstance": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListSnapshots": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "9442ca297df43f7314712e1a19d003838e738a45"
+        },
+        "GetSnapshot": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateSnapshot": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteSnapshot": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateSnapshot": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -84,6 +112,26 @@
         },
         "UpdateBackup": {
           "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListShares": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetShare": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateShare": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteShare": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateShare": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START file_v1beta1_generated_CloudFilestoreManager_ListBackups_async]
+function main(name, targetSnapshotId) {
+  // [START file_v1beta1_generated_CloudFilestoreManager_RevertInstance_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,31 +29,16 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location for which to retrieve backup information,
-   *  in the format `projects/{project_id}/locations/{location}`.
-   *  In Filestore, backup locations map to GCP regions,
-   *  for example **us-west1**.
-   *  To retrieve backup information for all locations, use "-" for the
-   *  `{location}` value.
+   *  Required. projects/{project_id}/locations/{location_id}/instances/{instance_id}.
+   *  The resource name of the instance, in the format
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  The maximum number of items to return.
+   *  Required. The snapshot resource ID, in the format 'my-snapshot', where the specified
+   *  ID is the {snapshot_id} of the fully qualified name like
+   *  projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}
    */
-  // const pageSize = 1234
-  /**
-   *  The next_page_token value to use if there are additional
-   *  results to retrieve for this list request.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Sort results. Supported values are "name", "name desc" or "" (unsorted).
-   */
-  // const orderBy = 'abc123'
-  /**
-   *  List filter.
-   */
-  // const filter = 'abc123'
+  // const targetSnapshotId = 'abc123'
 
   // Imports the Filestore library
   const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1beta1;
@@ -61,21 +46,21 @@ function main(parent) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function callListBackups() {
+  async function callRevertInstance() {
     // Construct request
     const request = {
-      parent,
+      name,
+      targetSnapshotId,
     };
 
     // Run request
-    const iterable = await filestoreClient.listBackupsAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await filestoreClient.revertInstance(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListBackups();
-  // [END file_v1beta1_generated_CloudFilestoreManager_ListBackups_async]
+  callRevertInstance();
+  // [END file_v1beta1_generated_CloudFilestoreManager_RevertInstance_async]
 }
 
 process.on('unhandledRejection', err => {
