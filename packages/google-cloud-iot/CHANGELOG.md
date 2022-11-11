@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.2](https://github.com/googleapis/nodejs-iot/compare/v3.1.1...v3.1.2) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#593](https://github.com/googleapis/nodejs-iot/issues/593)) ([2f547e1](https://github.com/googleapis/nodejs-iot/commit/2f547e1c27006a201c9c7066befd35e043fb43c2))
+* update protos ([a8e8800](https://github.com/googleapis/nodejs-iot/commit/a8e88006f95594575a70494b1ca5f417e5985765))
+* Update protos ([#597](https://github.com/googleapis/nodejs-iot/issues/597)) ([a8e8800](https://github.com/googleapis/nodejs-iot/commit/a8e88006f95594575a70494b1ca5f417e5985765))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-iot/compare/v3.1.0...v3.1.1) (2022-09-22)
 
 
