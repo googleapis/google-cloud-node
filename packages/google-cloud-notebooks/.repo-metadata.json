@@ -1,5 +1,5 @@
 {
-  "repo": "googleapis/nodejs-notebooks",
+  "repo": "googleapis/google-cloud-node",
   "codeowner_team": "@googleapis/ml-apis",
   "requires_billing": true,
   "name": "notebooks",

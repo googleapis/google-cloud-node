@@ -23,6 +23,7 @@
   "packages/google-cloud-language": "5.1.2",
   "packages/google-cloud-memcache": "2.1.4",
   "packages/google-cloud-monitoring": "3.0.3",
+  "packages/google-cloud-notebooks": "2.1.2",
   "packages/google-cloud-oslogin": "4.0.4",
   "packages/google-cloud-phishingprotection": "3.0.6",
   "packages/google-cloud-policytroubleshooter": "2.0.6",
