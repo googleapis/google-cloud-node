@@ -1,0 +1,5 @@
+---
+rules:
+  no-console: off
+  node/no-missing-require: off
+  node/no-extraneous-require: off
