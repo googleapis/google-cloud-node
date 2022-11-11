@@ -1,0 +1,31 @@
+{
+  "name": "@google-cloud/iot-samples",
+  "description": "Samples for the Cloud IoT Client Library for Node.js.",
+  "files": [
+    "*.js"
+  ],
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "repository": "googleapis/nodejs-iot",
+  "private": true,
+  "scripts": {
+    "test": "mocha test"
+  },
+  "dependencies": {
+    "@google-cloud/iot": "^3.1.2",
+    "@google-cloud/pubsub": "^3.0.0",
+    "@google-cloud/storage": "^6.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "hash_file": "^0.1.1",
+    "jsonwebtoken": "^8.5.0",
+    "mocha": "^8.1.1",
+    "mqtt": "^4.0.0",
+    "uuid": "^9.0.0",
+    "yargs": "^16.0.0"
+  }
+}
