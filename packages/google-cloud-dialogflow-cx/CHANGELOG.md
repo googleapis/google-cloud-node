@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.2](https://github.com/googleapis/nodejs-dialogflow-cx/compare/v3.1.1...v3.1.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#320](https://github.com/googleapis/nodejs-dialogflow-cx/issues/320)) ([516e59d](https://github.com/googleapis/nodejs-dialogflow-cx/commit/516e59d6f6a4a9e16ed635900bd89d6c3a73ee10))
+* Regenerated protos JS and TS definitions ([#324](https://github.com/googleapis/nodejs-dialogflow-cx/issues/324)) ([c82e46a](https://github.com/googleapis/nodejs-dialogflow-cx/commit/c82e46a74aa30862e999ae37f16508f241792493))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-dialogflow-cx/compare/v3.1.0...v3.1.1) (2022-09-14)
 
 
