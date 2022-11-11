@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-contact-center-insights/compare/v2.1.1...v2.1.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#162](https://github.com/googleapis/nodejs-contact-center-insights/issues/162)) ([06d86b1](https://github.com/googleapis/nodejs-contact-center-insights/commit/06d86b138f000bcd5a3d0f909bff35c9d791420d))
+* Preserve default values in x-goog-request-params header ([#143](https://github.com/googleapis/nodejs-contact-center-insights/issues/143)) ([2ad9483](https://github.com/googleapis/nodejs-contact-center-insights/commit/2ad948341bab9ad17955c2186d9f72a82d22bc98))
+* Regenerated protos JS and TS definitions ([#165](https://github.com/googleapis/nodejs-contact-center-insights/issues/165)) ([7761efb](https://github.com/googleapis/nodejs-contact-center-insights/commit/7761efb115713545cb9f0a44983b207ca6ccedb0))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-contact-center-insights/compare/v2.1.0...v2.1.1) (2022-09-01)
 
 
