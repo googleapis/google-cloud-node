@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.3](https://github.com/googleapis/nodejs-iap/compare/v2.0.2...v2.0.3) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#86](https://github.com/googleapis/nodejs-iap/issues/86)) ([25edbb2](https://github.com/googleapis/nodejs-iap/commit/25edbb2d3a145365115f2f5ce185ba2fb33b9dc5))
+* Preserve default values in x-goog-request-params header ([#79](https://github.com/googleapis/nodejs-iap/issues/79)) ([f6f411d](https://github.com/googleapis/nodejs-iap/commit/f6f411d90318256d13736eeb42c3ada08b9fe79a))
+* Regenerated protos JS and TS definitions ([#89](https://github.com/googleapis/nodejs-iap/issues/89)) ([6572907](https://github.com/googleapis/nodejs-iap/commit/6572907ee249cb4081cd3312cb430839ca68a1de))
+
 ## [2.0.2](https://github.com/googleapis/nodejs-iap/compare/v2.0.1...v2.0.2) (2022-09-01)
 
 
