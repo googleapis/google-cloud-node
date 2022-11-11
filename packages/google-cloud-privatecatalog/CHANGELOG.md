@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.4](https://github.com/googleapis/nodejs-private-catalog/compare/v2.0.3...v2.0.4) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#111](https://github.com/googleapis/nodejs-private-catalog/issues/111)) ([8a0d368](https://github.com/googleapis/nodejs-private-catalog/commit/8a0d368277802a788989c270ad400117010c0855))
+* Preserve default values in x-goog-request-params header ([#104](https://github.com/googleapis/nodejs-private-catalog/issues/104)) ([4259f2f](https://github.com/googleapis/nodejs-private-catalog/commit/4259f2f26191b70e98cab9b2a75bef793ce3d7da))
+* Regenerated protos JS and TS definitions ([#114](https://github.com/googleapis/nodejs-private-catalog/issues/114)) ([ffce6dc](https://github.com/googleapis/nodejs-private-catalog/commit/ffce6dc1534a49c2ae7354f32c28d03b90cd69d7))
+
 ## [2.0.3](https://github.com/googleapis/nodejs-private-catalog/compare/v2.0.2...v2.0.3) (2022-09-01)
 
 
