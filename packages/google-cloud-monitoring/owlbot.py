@@ -15,11 +15,11 @@
 """This script is used to synthesize generated parts of this library."""
 
 import synthtool as s
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 import os
 
 
-node.owlbot_main(staging_excludes=["README.md", "package.json"])
+node.owlbot_main(relative_dir="packages/google-cloud-monitoring",staging_excludes=["README.md", "package.json"])
 
 # --------------------------------------------------------------------------
 # Modify test configs
