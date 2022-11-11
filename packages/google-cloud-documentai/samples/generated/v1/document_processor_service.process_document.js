@@ -52,6 +52,8 @@ function main(name) {
   // const skipHumanReview = true
   /**
    *  Specifies which fields to include in ProcessResponse's document.
+   *  Only supports top level document and pages field so it must be in the form
+   *  of `{document_field_name}` or `pages.{page_field_name}`.
    */
   // const fieldMask = {}
 

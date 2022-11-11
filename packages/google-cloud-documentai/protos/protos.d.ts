@@ -435,6 +435,9 @@ export namespace google {
 
                         /** Style fontSize */
                         fontSize?: (google.cloud.documentai.v1.Document.Style.IFontSize|null);
+
+                        /** Style fontFamily */
+                        fontFamily?: (string|null);
                     }
 
                     /** Represents a Style. */
@@ -466,6 +469,9 @@ export namespace google {
 
                         /** Style fontSize. */
                         public fontSize?: (google.cloud.documentai.v1.Document.Style.IFontSize|null);
+
+                        /** Style fontFamily. */
+                        public fontFamily: string;
 
                         /**
                          * Creates a new Style instance using the specified properties.
@@ -699,6 +705,9 @@ export namespace google {
                         /** Page detectedBarcodes */
                         detectedBarcodes?: (google.cloud.documentai.v1.Document.Page.IDetectedBarcode[]|null);
 
+                        /** Page imageQualityScores */
+                        imageQualityScores?: (google.cloud.documentai.v1.Document.Page.IImageQualityScores|null);
+
                         /** Page provenance */
                         provenance?: (google.cloud.documentai.v1.Document.IProvenance|null);
                     }
@@ -756,6 +765,9 @@ export namespace google {
 
                         /** Page detectedBarcodes. */
                         public detectedBarcodes: google.cloud.documentai.v1.Document.Page.IDetectedBarcode[];
+
+                        /** Page imageQualityScores. */
+                        public imageQualityScores?: (google.cloud.documentai.v1.Document.Page.IImageQualityScores|null);
 
                         /** Page provenance. */
                         public provenance?: (google.cloud.documentai.v1.Document.IProvenance|null);
@@ -2085,6 +2097,9 @@ export namespace google {
 
                             /** Table detectedLanguages */
                             detectedLanguages?: (google.cloud.documentai.v1.Document.Page.IDetectedLanguage[]|null);
+
+                            /** Table provenance */
+                            provenance?: (google.cloud.documentai.v1.Document.IProvenance|null);
                         }
 
                         /** Represents a Table. */
@@ -2107,6 +2122,9 @@ export namespace google {
 
                             /** Table detectedLanguages. */
                             public detectedLanguages: google.cloud.documentai.v1.Document.Page.IDetectedLanguage[];
+
+                            /** Table provenance. */
+                            public provenance?: (google.cloud.documentai.v1.Document.IProvenance|null);
 
                             /**
                              * Creates a new Table instance using the specified properties.
@@ -2744,6 +2762,215 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an ImageQualityScores. */
+                        interface IImageQualityScores {
+
+                            /** ImageQualityScores qualityScore */
+                            qualityScore?: (number|null);
+
+                            /** ImageQualityScores detectedDefects */
+                            detectedDefects?: (google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect[]|null);
+                        }
+
+                        /** Represents an ImageQualityScores. */
+                        class ImageQualityScores implements IImageQualityScores {
+
+                            /**
+                             * Constructs a new ImageQualityScores.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1.Document.Page.IImageQualityScores);
+
+                            /** ImageQualityScores qualityScore. */
+                            public qualityScore: number;
+
+                            /** ImageQualityScores detectedDefects. */
+                            public detectedDefects: google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect[];
+
+                            /**
+                             * Creates a new ImageQualityScores instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ImageQualityScores instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1.Document.Page.IImageQualityScores): google.cloud.documentai.v1.Document.Page.ImageQualityScores;
+
+                            /**
+                             * Encodes the specified ImageQualityScores message. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.ImageQualityScores.verify|verify} messages.
+                             * @param message ImageQualityScores message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1.Document.Page.IImageQualityScores, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ImageQualityScores message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.ImageQualityScores.verify|verify} messages.
+                             * @param message ImageQualityScores message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1.Document.Page.IImageQualityScores, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ImageQualityScores message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ImageQualityScores
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.Document.Page.ImageQualityScores;
+
+                            /**
+                             * Decodes an ImageQualityScores message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ImageQualityScores
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.Document.Page.ImageQualityScores;
+
+                            /**
+                             * Verifies an ImageQualityScores message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ImageQualityScores message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ImageQualityScores
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.Document.Page.ImageQualityScores;
+
+                            /**
+                             * Creates a plain object from an ImageQualityScores message. Also converts values to other types if specified.
+                             * @param message ImageQualityScores
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1.Document.Page.ImageQualityScores, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ImageQualityScores to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ImageQualityScores
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ImageQualityScores {
+
+                            /** Properties of a DetectedDefect. */
+                            interface IDetectedDefect {
+
+                                /** DetectedDefect type */
+                                type?: (string|null);
+
+                                /** DetectedDefect confidence */
+                                confidence?: (number|null);
+                            }
+
+                            /** Represents a DetectedDefect. */
+                            class DetectedDefect implements IDetectedDefect {
+
+                                /**
+                                 * Constructs a new DetectedDefect.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect);
+
+                                /** DetectedDefect type. */
+                                public type: string;
+
+                                /** DetectedDefect confidence. */
+                                public confidence: number;
+
+                                /**
+                                 * Creates a new DetectedDefect instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns DetectedDefect instance
+                                 */
+                                public static create(properties?: google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect): google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect;
+
+                                /**
+                                 * Encodes the specified DetectedDefect message. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.verify|verify} messages.
+                                 * @param message DetectedDefect message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified DetectedDefect message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.verify|verify} messages.
+                                 * @param message DetectedDefect message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a DetectedDefect message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns DetectedDefect
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect;
+
+                                /**
+                                 * Decodes a DetectedDefect message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns DetectedDefect
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect;
+
+                                /**
+                                 * Verifies a DetectedDefect message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a DetectedDefect message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns DetectedDefect
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect;
+
+                                /**
+                                 * Creates a plain object from a DetectedDefect message. Also converts values to other types if specified.
+                                 * @param message DetectedDefect
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this DetectedDefect to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for DetectedDefect
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
                         }
                     }
 
@@ -5115,6 +5342,9 @@ export namespace google {
 
                         /** GcsOutputConfig gcsUri */
                         gcsUri?: (string|null);
+
+                        /** GcsOutputConfig fieldMask */
+                        fieldMask?: (google.protobuf.IFieldMask|null);
                     }
 
                     /** Represents a GcsOutputConfig. */
@@ -5128,6 +5358,9 @@ export namespace google {
 
                         /** GcsOutputConfig gcsUri. */
                         public gcsUri: string;
+
+                        /** GcsOutputConfig fieldMask. */
+                        public fieldMask?: (google.protobuf.IFieldMask|null);
 
                         /**
                          * Creates a new GcsOutputConfig instance using the specified properties.
@@ -10415,6 +10648,9 @@ export namespace google {
                     /** ProcessorVersion displayName */
                     displayName?: (string|null);
 
+                    /** ProcessorVersion documentSchema */
+                    documentSchema?: (google.cloud.documentai.v1.IDocumentSchema|null);
+
                     /** ProcessorVersion state */
                     state?: (google.cloud.documentai.v1.ProcessorVersion.State|keyof typeof google.cloud.documentai.v1.ProcessorVersion.State|null);
 
@@ -10448,6 +10684,9 @@ export namespace google {
 
                     /** ProcessorVersion displayName. */
                     public displayName: string;
+
+                    /** ProcessorVersion documentSchema. */
+                    public documentSchema?: (google.cloud.documentai.v1.IDocumentSchema|null);
 
                     /** ProcessorVersion state. */
                     public state: (google.cloud.documentai.v1.ProcessorVersion.State|keyof typeof google.cloud.documentai.v1.ProcessorVersion.State);
@@ -36988,97 +37227,6 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of an Empty. */
-        interface IEmpty {
-        }
-
-        /** Represents an Empty. */
-        class Empty implements IEmpty {
-
-            /**
-             * Constructs a new Empty.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IEmpty);
-
-            /**
-             * Creates a new Empty instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Empty instance
-             */
-            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
-
-            /**
-             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
-
-            /**
-             * Verifies an Empty message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Empty
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
-
-            /**
-             * Creates a plain object from an Empty message. Also converts values to other types if specified.
-             * @param message Empty
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Empty to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Empty
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a FieldMask. */
         interface IFieldMask {
 
@@ -37170,6 +37318,97 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
