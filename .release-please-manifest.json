@@ -37,6 +37,7 @@
   "packages/google-container": "4.4.0",
   "packages/google-devtools-artifactregistry": "2.0.2",
   "packages/google-iam": "0.2.2",
+  "packages/google-identity-accesscontextmanager": "2.2.0",
   "packages/google-maps-addressvalidation": "0.1.0",
   "packages/google-maps-routing": "0.2.1",
   "packages/google-monitoring-dashboard": "2.8.0",
