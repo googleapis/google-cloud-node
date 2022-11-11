@@ -61,14 +61,14 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Ekm_service.create_ekm_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/ekm_service.create_ekm_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/ekm_service.create_ekm_connection.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/ekm_service.create_ekm_connection.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/ekm_service.create_ekm_connection.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/ekm_service.create_ekm_connection.js`
+`node packages/google-cloud-kms/samples/generated/v1/ekm_service.create_ekm_connection.js`
 
 
 -----
@@ -78,14 +78,14 @@ __Usage:__
 
 ### Ekm_service.get_ekm_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/ekm_service.get_ekm_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/ekm_service.get_ekm_connection.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/ekm_service.get_ekm_connection.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/ekm_service.get_ekm_connection.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/ekm_service.get_ekm_connection.js`
+`node packages/google-cloud-kms/samples/generated/v1/ekm_service.get_ekm_connection.js`
 
 
 -----
@@ -95,14 +95,14 @@ __Usage:__
 
 ### Ekm_service.list_ekm_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/ekm_service.list_ekm_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/ekm_service.list_ekm_connections.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/ekm_service.list_ekm_connections.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/ekm_service.list_ekm_connections.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/ekm_service.list_ekm_connections.js`
+`node packages/google-cloud-kms/samples/generated/v1/ekm_service.list_ekm_connections.js`
 
 
 -----
@@ -112,14 +112,14 @@ __Usage:__
 
 ### Ekm_service.update_ekm_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/ekm_service.update_ekm_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/ekm_service.update_ekm_connection.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/ekm_service.update_ekm_connection.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/ekm_service.update_ekm_connection.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/ekm_service.update_ekm_connection.js`
+`node packages/google-cloud-kms/samples/generated/v1/ekm_service.update_ekm_connection.js`
 
 
 -----
@@ -129,14 +129,14 @@ __Usage:__
 
 ### Key_management_service.asymmetric_decrypt
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.asymmetric_decrypt.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.asymmetric_decrypt.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.asymmetric_decrypt.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.asymmetric_decrypt.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.asymmetric_decrypt.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.asymmetric_decrypt.js`
 
 
 -----
@@ -146,14 +146,14 @@ __Usage:__
 
 ### Key_management_service.asymmetric_sign
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.asymmetric_sign.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.asymmetric_sign.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.asymmetric_sign.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.asymmetric_sign.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.asymmetric_sign.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.asymmetric_sign.js`
 
 
 -----
@@ -163,14 +163,14 @@ __Usage:__
 
 ### Key_management_service.create_crypto_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.create_crypto_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.create_crypto_key.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.create_crypto_key.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.create_crypto_key.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.create_crypto_key.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.create_crypto_key.js`
 
 
 -----
@@ -180,14 +180,14 @@ __Usage:__
 
 ### Key_management_service.create_crypto_key_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.create_crypto_key_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.create_crypto_key_version.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.create_crypto_key_version.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.create_crypto_key_version.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.create_crypto_key_version.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.create_crypto_key_version.js`
 
 
 -----
@@ -197,14 +197,14 @@ __Usage:__
 
 ### Key_management_service.create_import_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.create_import_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.create_import_job.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.create_import_job.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.create_import_job.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.create_import_job.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.create_import_job.js`
 
 
 -----
@@ -214,14 +214,14 @@ __Usage:__
 
 ### Key_management_service.create_key_ring
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.create_key_ring.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.create_key_ring.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.create_key_ring.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.create_key_ring.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.create_key_ring.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.create_key_ring.js`
 
 
 -----
@@ -231,14 +231,14 @@ __Usage:__
 
 ### Key_management_service.decrypt
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.decrypt.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.decrypt.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.decrypt.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.decrypt.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.decrypt.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.decrypt.js`
 
 
 -----
@@ -248,14 +248,14 @@ __Usage:__
 
 ### Key_management_service.destroy_crypto_key_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.destroy_crypto_key_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.destroy_crypto_key_version.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.destroy_crypto_key_version.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.destroy_crypto_key_version.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.destroy_crypto_key_version.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.destroy_crypto_key_version.js`
 
 
 -----
@@ -265,14 +265,14 @@ __Usage:__
 
 ### Key_management_service.encrypt
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.encrypt.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.encrypt.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.encrypt.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.encrypt.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.encrypt.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.encrypt.js`
 
 
 -----
@@ -282,14 +282,14 @@ __Usage:__
 
 ### Key_management_service.generate_random_bytes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.generate_random_bytes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.generate_random_bytes.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.generate_random_bytes.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.generate_random_bytes.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.generate_random_bytes.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.generate_random_bytes.js`
 
 
 -----
@@ -299,14 +299,14 @@ __Usage:__
 
 ### Key_management_service.get_crypto_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.get_crypto_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.get_crypto_key.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.get_crypto_key.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.get_crypto_key.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.get_crypto_key.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.get_crypto_key.js`
 
 
 -----
@@ -316,14 +316,14 @@ __Usage:__
 
 ### Key_management_service.get_crypto_key_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.get_crypto_key_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.get_crypto_key_version.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.get_crypto_key_version.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.get_crypto_key_version.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.get_crypto_key_version.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.get_crypto_key_version.js`
 
 
 -----
@@ -333,14 +333,14 @@ __Usage:__
 
 ### Key_management_service.get_import_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.get_import_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.get_import_job.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.get_import_job.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.get_import_job.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.get_import_job.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.get_import_job.js`
 
 
 -----
@@ -350,14 +350,14 @@ __Usage:__
 
 ### Key_management_service.get_key_ring
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.get_key_ring.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.get_key_ring.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.get_key_ring.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.get_key_ring.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.get_key_ring.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.get_key_ring.js`
 
 
 -----
@@ -367,14 +367,14 @@ __Usage:__
 
 ### Key_management_service.get_public_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.get_public_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.get_public_key.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.get_public_key.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.get_public_key.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.get_public_key.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.get_public_key.js`
 
 
 -----
@@ -384,14 +384,14 @@ __Usage:__
 
 ### Key_management_service.import_crypto_key_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.import_crypto_key_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.import_crypto_key_version.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.import_crypto_key_version.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.import_crypto_key_version.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.import_crypto_key_version.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.import_crypto_key_version.js`
 
 
 -----
@@ -401,14 +401,14 @@ __Usage:__
 
 ### Key_management_service.list_crypto_key_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.list_crypto_key_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.list_crypto_key_versions.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.list_crypto_key_versions.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.list_crypto_key_versions.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.list_crypto_key_versions.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.list_crypto_key_versions.js`
 
 
 -----
@@ -418,14 +418,14 @@ __Usage:__
 
 ### Key_management_service.list_crypto_keys
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.list_crypto_keys.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.list_crypto_keys.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.list_crypto_keys.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.list_crypto_keys.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.list_crypto_keys.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.list_crypto_keys.js`
 
 
 -----
@@ -435,14 +435,14 @@ __Usage:__
 
 ### Key_management_service.list_import_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.list_import_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.list_import_jobs.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.list_import_jobs.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.list_import_jobs.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.list_import_jobs.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.list_import_jobs.js`
 
 
 -----
@@ -452,14 +452,14 @@ __Usage:__
 
 ### Key_management_service.list_key_rings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.list_key_rings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.list_key_rings.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.list_key_rings.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.list_key_rings.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.list_key_rings.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.list_key_rings.js`
 
 
 -----
@@ -469,14 +469,14 @@ __Usage:__
 
 ### Key_management_service.mac_sign
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.mac_sign.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.mac_sign.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.mac_sign.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.mac_sign.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.mac_sign.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.mac_sign.js`
 
 
 -----
@@ -486,14 +486,14 @@ __Usage:__
 
 ### Key_management_service.mac_verify
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.mac_verify.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.mac_verify.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.mac_verify.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.mac_verify.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.mac_verify.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.mac_verify.js`
 
 
 -----
@@ -503,14 +503,14 @@ __Usage:__
 
 ### Key_management_service.restore_crypto_key_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.restore_crypto_key_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.restore_crypto_key_version.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.restore_crypto_key_version.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.restore_crypto_key_version.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.restore_crypto_key_version.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.restore_crypto_key_version.js`
 
 
 -----
@@ -520,14 +520,14 @@ __Usage:__
 
 ### Key_management_service.update_crypto_key
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.update_crypto_key.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.update_crypto_key.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.update_crypto_key.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key.js`
 
 
 -----
@@ -537,14 +537,14 @@ __Usage:__
 
 ### Key_management_service.update_crypto_key_primary_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.update_crypto_key_primary_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key_primary_version.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.update_crypto_key_primary_version.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key_primary_version.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.update_crypto_key_primary_version.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key_primary_version.js`
 
 
 -----
@@ -554,14 +554,14 @@ __Usage:__
 
 ### Key_management_service.update_crypto_key_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/key_management_service.update_crypto_key_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key_version.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/key_management_service.update_crypto_key_version.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key_version.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/key_management_service.update_crypto_key_version.js`
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.update_crypto_key_version.js`
 
 
 -----
@@ -571,14 +571,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/quickstart.js`
+`node packages/google-cloud-kms/samples/quickstart.js`
 
 
 
