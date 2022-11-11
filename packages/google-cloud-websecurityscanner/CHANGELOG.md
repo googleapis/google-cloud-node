@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.3](https://github.com/googleapis/nodejs-web-security-scanner/compare/v2.1.2...v2.1.3) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#148](https://github.com/googleapis/nodejs-web-security-scanner/issues/148)) ([6f6cf70](https://github.com/googleapis/nodejs-web-security-scanner/commit/6f6cf7089280129b7d8c8acd2acbeee5388da598))
+* Preserve default values in x-goog-request-params header ([#140](https://github.com/googleapis/nodejs-web-security-scanner/issues/140)) ([e16d06d](https://github.com/googleapis/nodejs-web-security-scanner/commit/e16d06d8e4ea03eee1eb3feddc57b3bc95678728))
+* Regenerated protos JS and TS definitions ([#151](https://github.com/googleapis/nodejs-web-security-scanner/issues/151)) ([7a6395a](https://github.com/googleapis/nodejs-web-security-scanner/commit/7a6395aedcad3a87738e6c38bc5880d66dc99e0c))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-web-security-scanner/compare/v2.1.1...v2.1.2) (2022-08-27)
 
 
