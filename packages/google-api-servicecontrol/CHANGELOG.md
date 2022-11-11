@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.3](https://github.com/googleapis/nodejs-service-control/compare/v2.0.2...v2.0.3) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#163](https://github.com/googleapis/nodejs-service-control/issues/163)) ([f883825](https://github.com/googleapis/nodejs-service-control/commit/f88382517737c02ea2f0f9fa4e6c624c7a67c6b8))
+* Preserve default values in x-goog-request-params header ([#156](https://github.com/googleapis/nodejs-service-control/issues/156)) ([0548559](https://github.com/googleapis/nodejs-service-control/commit/0548559a942b3f9830d49f9fa54aa75f259d355d))
+* Regenerated protos JS and TS definitions ([#166](https://github.com/googleapis/nodejs-service-control/issues/166)) ([f9348ff](https://github.com/googleapis/nodejs-service-control/commit/f9348ff6913fe16f8dcf30dc81c96748d445c328))
+
 ## [2.0.2](https://github.com/googleapis/nodejs-service-control/compare/v2.0.1...v2.0.2) (2022-09-01)
 
 
