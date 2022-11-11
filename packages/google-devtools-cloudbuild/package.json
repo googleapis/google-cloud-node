@@ -1,5 +1,9 @@
 {
-  "repository": "googleapis/nodejs-cloudbuild",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-devtools-cloudbuild",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "name": "@google-cloud/cloudbuild",
   "version": "3.2.0",
   "author": "Google LLC",
@@ -49,8 +53,8 @@
     "prepare": "npm run compile-protos && npm run compile",
     "pretest": "npm run compile",
     "test": "c8 mocha build/test",
-    "system-test": "c8 mocha --timeout=15000 system-test/*.js build/system-test/*.js",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "system-test": "npm run compile && c8 mocha build/system-test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
     "prelint": "cd samples; npm link ../; npm install",
@@ -62,5 +66,6 @@
   },
   "dependencies": {
     "google-gax": "^3.5.2"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-devtools-cloudbuild"
 }

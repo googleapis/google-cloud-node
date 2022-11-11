@@ -1,5 +1,5 @@
 {
-  "repo": "googleapis/nodejs-cloudbuild",
+  "repo": "googleapis/google-cloud-node",
   "codeowner_team": "@googleapis/aap-dpes",
   "requires_billing": true,
   "name": "cloudbuild",
