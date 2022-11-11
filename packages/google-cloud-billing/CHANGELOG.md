@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.3](https://github.com/googleapis/nodejs-billing/compare/v3.1.2...v3.1.3) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#255](https://github.com/googleapis/nodejs-billing/issues/255)) ([231ab13](https://github.com/googleapis/nodejs-billing/commit/231ab13fc1895dab416c10a7768f89d84557d10b))
+* Preserve default values in x-goog-request-params header ([#247](https://github.com/googleapis/nodejs-billing/issues/247)) ([d12b854](https://github.com/googleapis/nodejs-billing/commit/d12b854825eb1cc75426077979dd574ef08a5bf0))
+* Regenerated protos JS and TS definitions ([#258](https://github.com/googleapis/nodejs-billing/issues/258)) ([2a148e7](https://github.com/googleapis/nodejs-billing/commit/2a148e75a59ab48d405c40e8a549c4d257161332))
+
 ## [3.1.2](https://github.com/googleapis/nodejs-billing/compare/v3.1.1...v3.1.2) (2022-09-01)
 
 
