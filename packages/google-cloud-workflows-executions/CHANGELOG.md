@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-workflows/compare/v2.1.1...v2.2.0) (2022-11-11)
+
+
+### Features
+
+* Accept google-gax instance as a parameter ([#161](https://github.com/googleapis/nodejs-workflows/issues/161)) ([d0ae307](https://github.com/googleapis/nodejs-workflows/commit/d0ae307edf537b071b2425f718354414dcc1b3c4))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#172](https://github.com/googleapis/nodejs-workflows/issues/172)) ([9dc2c62](https://github.com/googleapis/nodejs-workflows/commit/9dc2c6267c90cc5d1273801645b182a73e745ff7))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-workflows/issues/1553)) ([#160](https://github.com/googleapis/nodejs-workflows/issues/160)) ([ce8fb0f](https://github.com/googleapis/nodejs-workflows/commit/ce8fb0f19788a4d7e95a3cdcc41432a7307e2275))
+* Preserve default values in x-goog-request-params header ([#165](https://github.com/googleapis/nodejs-workflows/issues/165)) ([741cf60](https://github.com/googleapis/nodejs-workflows/commit/741cf608e1b775a7d9529bbb0a42029bcac7e752))
+* Regenerated protos JS and TS definitions ([#175](https://github.com/googleapis/nodejs-workflows/issues/175)) ([2109309](https://github.com/googleapis/nodejs-workflows/commit/21093097fe481347737294d100ae9434a5c52845))
+* use google-gax v3.3.0 ([ce8fb0f](https://github.com/googleapis/nodejs-workflows/commit/ce8fb0f19788a4d7e95a3cdcc41432a7307e2275))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-workflows/compare/v2.1.0...v2.1.1) (2022-08-23)
 
 
