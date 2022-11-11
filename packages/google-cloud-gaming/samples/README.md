@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud Game Servers: Node.js Samples](https://github.com/googleapis/nodejs-game-servers)
+# [Google Cloud Game Servers: Node.js Samples](https://github.com/googleapis/google-cloud-node)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
@@ -12,36 +12,68 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Create_cluster](#create_cluster)
-  * [Create_config](#create_config)
-  * [Create_deployment](#create_deployment)
-  * [Create_realm](#create_realm)
-  * [Delete_cluster](#delete_cluster)
-  * [Delete_config](#delete_config)
-  * [Delete_deployment](#delete_deployment)
-  * [Delete_realm](#delete_realm)
-  * [Get_cluster](#get_cluster)
-  * [Get_config](#get_config)
-  * [Get_deployment](#get_deployment)
-  * [Get_realm](#get_realm)
-  * [Get_rollout](#get_rollout)
-  * [List_clusters](#list_clusters)
-  * [List_configs](#list_configs)
-  * [List_deployments](#list_deployments)
-  * [List_realms](#list_realms)
+  * [Game_server_clusters_service.create_game_server_cluster](#game_server_clusters_service.create_game_server_cluster)
+  * [Game_server_clusters_service.delete_game_server_cluster](#game_server_clusters_service.delete_game_server_cluster)
+  * [Game_server_clusters_service.get_game_server_cluster](#game_server_clusters_service.get_game_server_cluster)
+  * [Game_server_clusters_service.list_game_server_clusters](#game_server_clusters_service.list_game_server_clusters)
+  * [Game_server_clusters_service.preview_create_game_server_cluster](#game_server_clusters_service.preview_create_game_server_cluster)
+  * [Game_server_clusters_service.preview_delete_game_server_cluster](#game_server_clusters_service.preview_delete_game_server_cluster)
+  * [Game_server_clusters_service.preview_update_game_server_cluster](#game_server_clusters_service.preview_update_game_server_cluster)
+  * [Game_server_clusters_service.update_game_server_cluster](#game_server_clusters_service.update_game_server_cluster)
+  * [Game_server_configs_service.create_game_server_config](#game_server_configs_service.create_game_server_config)
+  * [Game_server_configs_service.delete_game_server_config](#game_server_configs_service.delete_game_server_config)
+  * [Game_server_configs_service.get_game_server_config](#game_server_configs_service.get_game_server_config)
+  * [Game_server_configs_service.list_game_server_configs](#game_server_configs_service.list_game_server_configs)
+  * [Game_server_deployments_service.create_game_server_deployment](#game_server_deployments_service.create_game_server_deployment)
+  * [Game_server_deployments_service.delete_game_server_deployment](#game_server_deployments_service.delete_game_server_deployment)
+  * [Game_server_deployments_service.fetch_deployment_state](#game_server_deployments_service.fetch_deployment_state)
+  * [Game_server_deployments_service.get_game_server_deployment](#game_server_deployments_service.get_game_server_deployment)
+  * [Game_server_deployments_service.get_game_server_deployment_rollout](#game_server_deployments_service.get_game_server_deployment_rollout)
+  * [Game_server_deployments_service.list_game_server_deployments](#game_server_deployments_service.list_game_server_deployments)
+  * [Game_server_deployments_service.preview_game_server_deployment_rollout](#game_server_deployments_service.preview_game_server_deployment_rollout)
+  * [Game_server_deployments_service.update_game_server_deployment](#game_server_deployments_service.update_game_server_deployment)
+  * [Game_server_deployments_service.update_game_server_deployment_rollout](#game_server_deployments_service.update_game_server_deployment_rollout)
+  * [Realms_service.create_realm](#realms_service.create_realm)
+  * [Realms_service.delete_realm](#realms_service.delete_realm)
+  * [Realms_service.get_realm](#realms_service.get_realm)
+  * [Realms_service.list_realms](#realms_service.list_realms)
+  * [Realms_service.preview_realm_update](#realms_service.preview_realm_update)
+  * [Realms_service.update_realm](#realms_service.update_realm)
+  * [Game_server_clusters_service.create_game_server_cluster](#game_server_clusters_service.create_game_server_cluster)
+  * [Game_server_clusters_service.delete_game_server_cluster](#game_server_clusters_service.delete_game_server_cluster)
+  * [Game_server_clusters_service.get_game_server_cluster](#game_server_clusters_service.get_game_server_cluster)
+  * [Game_server_clusters_service.list_game_server_clusters](#game_server_clusters_service.list_game_server_clusters)
+  * [Game_server_clusters_service.preview_create_game_server_cluster](#game_server_clusters_service.preview_create_game_server_cluster)
+  * [Game_server_clusters_service.preview_delete_game_server_cluster](#game_server_clusters_service.preview_delete_game_server_cluster)
+  * [Game_server_clusters_service.preview_update_game_server_cluster](#game_server_clusters_service.preview_update_game_server_cluster)
+  * [Game_server_clusters_service.update_game_server_cluster](#game_server_clusters_service.update_game_server_cluster)
+  * [Game_server_configs_service.create_game_server_config](#game_server_configs_service.create_game_server_config)
+  * [Game_server_configs_service.delete_game_server_config](#game_server_configs_service.delete_game_server_config)
+  * [Game_server_configs_service.get_game_server_config](#game_server_configs_service.get_game_server_config)
+  * [Game_server_configs_service.list_game_server_configs](#game_server_configs_service.list_game_server_configs)
+  * [Game_server_deployments_service.create_game_server_deployment](#game_server_deployments_service.create_game_server_deployment)
+  * [Game_server_deployments_service.delete_game_server_deployment](#game_server_deployments_service.delete_game_server_deployment)
+  * [Game_server_deployments_service.fetch_deployment_state](#game_server_deployments_service.fetch_deployment_state)
+  * [Game_server_deployments_service.get_game_server_deployment](#game_server_deployments_service.get_game_server_deployment)
+  * [Game_server_deployments_service.get_game_server_deployment_rollout](#game_server_deployments_service.get_game_server_deployment_rollout)
+  * [Game_server_deployments_service.list_game_server_deployments](#game_server_deployments_service.list_game_server_deployments)
+  * [Game_server_deployments_service.preview_game_server_deployment_rollout](#game_server_deployments_service.preview_game_server_deployment_rollout)
+  * [Game_server_deployments_service.update_game_server_deployment](#game_server_deployments_service.update_game_server_deployment)
+  * [Game_server_deployments_service.update_game_server_deployment_rollout](#game_server_deployments_service.update_game_server_deployment_rollout)
+  * [Realms_service.create_realm](#realms_service.create_realm)
+  * [Realms_service.delete_realm](#realms_service.delete_realm)
+  * [Realms_service.get_realm](#realms_service.get_realm)
+  * [Realms_service.list_realms](#realms_service.list_realms)
+  * [Realms_service.preview_realm_update](#realms_service.preview_realm_update)
+  * [Realms_service.update_realm](#realms_service.update_realm)
   * [Create Game Server Realm](#create-game-server-realm)
-  * [Update_cluster](#update_cluster)
-  * [Update_deployment](#update_deployment)
-  * [Update_realm](#update_realm)
-  * [Update_rollout_default](#update_rollout_default)
-  * [Update_rollout_override](#update_rollout_override)
-  * [Update_rollout_remove_default](#update_rollout_remove_default)
-  * [Update_rollout_remove_override](#update_rollout_remove_override)
+  * [Quickstart](#quickstart)
+  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/nodejs-game-servers#using-the-client-library).
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -53,16 +85,16 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Create_cluster
+### Game_server_clusters_service.create_game_server_cluster
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/create_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.create_game_server_cluster.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/create_cluster.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.create_game_server_cluster.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/create_cluster.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.create_game_server_cluster.js`
 
 
 -----
@@ -70,16 +102,16 @@ __Usage:__
 
 
 
-### Create_config
+### Game_server_clusters_service.delete_game_server_cluster
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/create_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.delete_game_server_cluster.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/create_config.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.delete_game_server_cluster.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/create_config.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.delete_game_server_cluster.js`
 
 
 -----
@@ -87,16 +119,16 @@ __Usage:__
 
 
 
-### Create_deployment
+### Game_server_clusters_service.get_game_server_cluster
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/create_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.get_game_server_cluster.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/create_deployment.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.get_game_server_cluster.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/create_deployment.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.get_game_server_cluster.js`
 
 
 -----
@@ -104,16 +136,16 @@ __Usage:__
 
 
 
-### Create_realm
+### Game_server_clusters_service.list_game_server_clusters
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/create_realm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.list_game_server_clusters.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/create_realm.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.list_game_server_clusters.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/create_realm.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.list_game_server_clusters.js`
 
 
 -----
@@ -121,16 +153,16 @@ __Usage:__
 
 
 
-### Delete_cluster
+### Game_server_clusters_service.preview_create_game_server_cluster
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/delete_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.preview_create_game_server_cluster.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/delete_cluster.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.preview_create_game_server_cluster.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/delete_cluster.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.preview_create_game_server_cluster.js`
 
 
 -----
@@ -138,16 +170,16 @@ __Usage:__
 
 
 
-### Delete_config
+### Game_server_clusters_service.preview_delete_game_server_cluster
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/delete_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.preview_delete_game_server_cluster.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/delete_config.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.preview_delete_game_server_cluster.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/delete_config.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.preview_delete_game_server_cluster.js`
 
 
 -----
@@ -155,16 +187,16 @@ __Usage:__
 
 
 
-### Delete_deployment
+### Game_server_clusters_service.preview_update_game_server_cluster
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/delete_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.preview_update_game_server_cluster.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/delete_deployment.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.preview_update_game_server_cluster.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/delete_deployment.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.preview_update_game_server_cluster.js`
 
 
 -----
@@ -172,16 +204,16 @@ __Usage:__
 
 
 
-### Delete_realm
+### Game_server_clusters_service.update_game_server_cluster
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/delete_realm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.update_game_server_cluster.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/delete_realm.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.update_game_server_cluster.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/delete_realm.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_clusters_service.update_game_server_cluster.js`
 
 
 -----
@@ -189,16 +221,16 @@ __Usage:__
 
 
 
-### Get_cluster
+### Game_server_configs_service.create_game_server_config
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/get_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_configs_service.create_game_server_config.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/get_cluster.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_configs_service.create_game_server_config.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/get_cluster.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_configs_service.create_game_server_config.js`
 
 
 -----
@@ -206,16 +238,16 @@ __Usage:__
 
 
 
-### Get_config
+### Game_server_configs_service.delete_game_server_config
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/get_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_configs_service.delete_game_server_config.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/get_config.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_configs_service.delete_game_server_config.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/get_config.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_configs_service.delete_game_server_config.js`
 
 
 -----
@@ -223,16 +255,16 @@ __Usage:__
 
 
 
-### Get_deployment
+### Game_server_configs_service.get_game_server_config
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/get_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_configs_service.get_game_server_config.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/get_deployment.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_configs_service.get_game_server_config.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/get_deployment.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_configs_service.get_game_server_config.js`
 
 
 -----
@@ -240,16 +272,16 @@ __Usage:__
 
 
 
-### Get_realm
+### Game_server_configs_service.list_game_server_configs
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/get_realm.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_configs_service.list_game_server_configs.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/get_realm.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_configs_service.list_game_server_configs.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/get_realm.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_configs_service.list_game_server_configs.js`
 
 
 -----
@@ -257,16 +289,16 @@ __Usage:__
 
 
 
-### Get_rollout
+### Game_server_deployments_service.create_game_server_deployment
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/get_rollout.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.create_game_server_deployment.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/get_rollout.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.create_game_server_deployment.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/get_rollout.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.create_game_server_deployment.js`
 
 
 -----
@@ -274,16 +306,16 @@ __Usage:__
 
 
 
-### List_clusters
+### Game_server_deployments_service.delete_game_server_deployment
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/list_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.delete_game_server_deployment.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/list_clusters.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.delete_game_server_deployment.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/list_clusters.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.delete_game_server_deployment.js`
 
 
 -----
@@ -291,16 +323,16 @@ __Usage:__
 
 
 
-### List_configs
+### Game_server_deployments_service.fetch_deployment_state
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/list_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.fetch_deployment_state.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/list_configs.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.fetch_deployment_state.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/list_configs.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.fetch_deployment_state.js`
 
 
 -----
@@ -308,16 +340,16 @@ __Usage:__
 
 
 
-### List_deployments
+### Game_server_deployments_service.get_game_server_deployment
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/list_deployments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.get_game_server_deployment.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/list_deployments.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.get_game_server_deployment.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/list_deployments.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.get_game_server_deployment.js`
 
 
 -----
@@ -325,16 +357,645 @@ __Usage:__
 
 
 
-### List_realms
+### Game_server_deployments_service.get_game_server_deployment_rollout
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/list_realms.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.get_game_server_deployment_rollout.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/list_realms.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.get_game_server_deployment_rollout.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/list_realms.js`
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.get_game_server_deployment_rollout.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.list_game_server_deployments
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.list_game_server_deployments.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.list_game_server_deployments.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.list_game_server_deployments.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.preview_game_server_deployment_rollout
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.preview_game_server_deployment_rollout.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.preview_game_server_deployment_rollout.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.preview_game_server_deployment_rollout.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.update_game_server_deployment
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.update_game_server_deployment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.update_game_server_deployment.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.update_game_server_deployment.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.update_game_server_deployment_rollout
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.update_game_server_deployment_rollout.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.update_game_server_deployment_rollout.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1/game_server_deployments_service.update_game_server_deployment_rollout.js`
+
+
+-----
+
+
+
+
+### Realms_service.create_realm
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/realms_service.create_realm.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/realms_service.create_realm.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1/realms_service.create_realm.js`
+
+
+-----
+
+
+
+
+### Realms_service.delete_realm
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/realms_service.delete_realm.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/realms_service.delete_realm.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1/realms_service.delete_realm.js`
+
+
+-----
+
+
+
+
+### Realms_service.get_realm
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/realms_service.get_realm.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/realms_service.get_realm.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1/realms_service.get_realm.js`
+
+
+-----
+
+
+
+
+### Realms_service.list_realms
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/realms_service.list_realms.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/realms_service.list_realms.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1/realms_service.list_realms.js`
+
+
+-----
+
+
+
+
+### Realms_service.preview_realm_update
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/realms_service.preview_realm_update.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/realms_service.preview_realm_update.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1/realms_service.preview_realm_update.js`
+
+
+-----
+
+
+
+
+### Realms_service.update_realm
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1/realms_service.update_realm.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1/realms_service.update_realm.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1/realms_service.update_realm.js`
+
+
+-----
+
+
+
+
+### Game_server_clusters_service.create_game_server_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.create_game_server_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.create_game_server_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.create_game_server_cluster.js`
+
+
+-----
+
+
+
+
+### Game_server_clusters_service.delete_game_server_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.delete_game_server_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.delete_game_server_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.delete_game_server_cluster.js`
+
+
+-----
+
+
+
+
+### Game_server_clusters_service.get_game_server_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.get_game_server_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.get_game_server_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.get_game_server_cluster.js`
+
+
+-----
+
+
+
+
+### Game_server_clusters_service.list_game_server_clusters
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.list_game_server_clusters.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.list_game_server_clusters.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.list_game_server_clusters.js`
+
+
+-----
+
+
+
+
+### Game_server_clusters_service.preview_create_game_server_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.preview_create_game_server_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.preview_create_game_server_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.preview_create_game_server_cluster.js`
+
+
+-----
+
+
+
+
+### Game_server_clusters_service.preview_delete_game_server_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.preview_delete_game_server_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.preview_delete_game_server_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.preview_delete_game_server_cluster.js`
+
+
+-----
+
+
+
+
+### Game_server_clusters_service.preview_update_game_server_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.preview_update_game_server_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.preview_update_game_server_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.preview_update_game_server_cluster.js`
+
+
+-----
+
+
+
+
+### Game_server_clusters_service.update_game_server_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.update_game_server_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.update_game_server_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_clusters_service.update_game_server_cluster.js`
+
+
+-----
+
+
+
+
+### Game_server_configs_service.create_game_server_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_configs_service.create_game_server_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_configs_service.create_game_server_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_configs_service.create_game_server_config.js`
+
+
+-----
+
+
+
+
+### Game_server_configs_service.delete_game_server_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_configs_service.delete_game_server_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_configs_service.delete_game_server_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_configs_service.delete_game_server_config.js`
+
+
+-----
+
+
+
+
+### Game_server_configs_service.get_game_server_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_configs_service.get_game_server_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_configs_service.get_game_server_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_configs_service.get_game_server_config.js`
+
+
+-----
+
+
+
+
+### Game_server_configs_service.list_game_server_configs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_configs_service.list_game_server_configs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_configs_service.list_game_server_configs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_configs_service.list_game_server_configs.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.create_game_server_deployment
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.create_game_server_deployment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.create_game_server_deployment.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.create_game_server_deployment.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.delete_game_server_deployment
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.delete_game_server_deployment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.delete_game_server_deployment.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.delete_game_server_deployment.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.fetch_deployment_state
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.fetch_deployment_state.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.fetch_deployment_state.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.fetch_deployment_state.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.get_game_server_deployment
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.get_game_server_deployment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.get_game_server_deployment.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.get_game_server_deployment.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.get_game_server_deployment_rollout
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.get_game_server_deployment_rollout.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.get_game_server_deployment_rollout.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.get_game_server_deployment_rollout.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.list_game_server_deployments
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.list_game_server_deployments.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.list_game_server_deployments.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.list_game_server_deployments.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.preview_game_server_deployment_rollout
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.preview_game_server_deployment_rollout.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.preview_game_server_deployment_rollout.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.preview_game_server_deployment_rollout.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.update_game_server_deployment
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.update_game_server_deployment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.update_game_server_deployment.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.update_game_server_deployment.js`
+
+
+-----
+
+
+
+
+### Game_server_deployments_service.update_game_server_deployment_rollout
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.update_game_server_deployment_rollout.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.update_game_server_deployment_rollout.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/game_server_deployments_service.update_game_server_deployment_rollout.js`
+
+
+-----
+
+
+
+
+### Realms_service.create_realm
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/realms_service.create_realm.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/realms_service.create_realm.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/realms_service.create_realm.js`
+
+
+-----
+
+
+
+
+### Realms_service.delete_realm
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/realms_service.delete_realm.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/realms_service.delete_realm.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/realms_service.delete_realm.js`
+
+
+-----
+
+
+
+
+### Realms_service.get_realm
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/realms_service.get_realm.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/realms_service.get_realm.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/realms_service.get_realm.js`
+
+
+-----
+
+
+
+
+### Realms_service.list_realms
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/realms_service.list_realms.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/realms_service.list_realms.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/realms_service.list_realms.js`
+
+
+-----
+
+
+
+
+### Realms_service.preview_realm_update
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/realms_service.preview_realm_update.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/realms_service.preview_realm_update.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/realms_service.preview_realm_update.js`
+
+
+-----
+
+
+
+
+### Realms_service.update_realm
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/generated/v1beta/realms_service.update_realm.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/generated/v1beta/realms_service.update_realm.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gaming/samples/generated/v1beta/realms_service.update_realm.js`
 
 
 -----
@@ -346,9 +1007,9 @@ __Usage:__
 
 Creates a new Realm within Cloud Game Servers
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
@@ -361,16 +1022,16 @@ __Usage:__
 
 
 
-### Update_cluster
+### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/update_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/test/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_cluster.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/test/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/update_cluster.js`
+`node packages/google-cloud-gaming/samples/test/quickstart.js`
 
 
 -----
@@ -378,101 +1039,16 @@ __Usage:__
 
 
 
-### Update_deployment
+### Quickstart.test
 
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/update_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/test/quickstart.test.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_deployment.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/update_deployment.js`
-
-
------
-
-
-
-
-### Update_realm
-
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/update_realm.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_realm.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/test/quickstart.test.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/update_realm.js`
-
-
------
-
-
-
-
-### Update_rollout_default
-
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/update_rollout_default.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_rollout_default.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/update_rollout_default.js`
-
-
------
-
-
-
-
-### Update_rollout_override
-
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/update_rollout_override.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_rollout_override.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/update_rollout_override.js`
-
-
------
-
-
-
-
-### Update_rollout_remove_default
-
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/update_rollout_remove_default.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_rollout_remove_default.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/update_rollout_remove_default.js`
-
-
------
-
-
-
-
-### Update_rollout_remove_override
-
-View the [source code](https://github.com/googleapis/nodejs-game-servers/blob/main/samples/update_rollout_remove_override.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/update_rollout_remove_override.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/update_rollout_remove_override.js`
+`node packages/google-cloud-gaming/samples/test/quickstart.test.js`
 
 
 
@@ -480,5 +1056,5 @@ __Usage:__
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-game-servers&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
 [product-docs]: https://cloud.google.com/game-servers/
