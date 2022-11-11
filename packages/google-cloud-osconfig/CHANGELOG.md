@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-os-config/compare/v2.1.1...v2.1.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#220](https://github.com/googleapis/nodejs-os-config/issues/220)) ([13ef9fc](https://github.com/googleapis/nodejs-os-config/commit/13ef9fc7804fe21d200d3053196371f5a621c18a))
+* **deps:** Use google-gax v3.5.2 ([#228](https://github.com/googleapis/nodejs-os-config/issues/228)) ([c02bb82](https://github.com/googleapis/nodejs-os-config/commit/c02bb8288378280736343c0022ec8c7693285738))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-os-config/issues/1553)) ([#219](https://github.com/googleapis/nodejs-os-config/issues/219)) ([7c06e21](https://github.com/googleapis/nodejs-os-config/commit/7c06e2122f41f730d746c68b5ddaa2e93e5972dd))
+* Preserve default values in x-goog-request-params header ([#222](https://github.com/googleapis/nodejs-os-config/issues/222)) ([19a88d1](https://github.com/googleapis/nodejs-os-config/commit/19a88d1d760b3235df81afe04d0de9ead31b55d1))
+* Regenerated protos JS and TS definitions ([#231](https://github.com/googleapis/nodejs-os-config/issues/231)) ([9c1c5ee](https://github.com/googleapis/nodejs-os-config/commit/9c1c5ee464ca93f974e88d52cd8045cfd54b6872))
+* use google-gax v3.3.0 ([7c06e21](https://github.com/googleapis/nodejs-os-config/commit/7c06e2122f41f730d746c68b5ddaa2e93e5972dd))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-os-config/compare/v2.1.0...v2.1.1) (2022-08-23)
 
 
