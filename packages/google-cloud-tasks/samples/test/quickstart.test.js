@@ -22,17 +22,13 @@ const {CloudTasksClient} = require('@google-cloud/tasks');
 
 const exec = cmd => execSync(cmd, {encoding: 'utf-8'});
 const queueName = `gcloud-${uuid.v4().split('-')[0]}`;
-const SERVICE_ACCOUNT =
-  'test-run-invoker@long-door-651.iam.gserviceaccount.com';
 
 describe('Cloud Task Sample Tests', () => {
-  let url;
   let projectId;
 
   before(async () => {
     const client = new CloudTasksClient();
     projectId = await client.getProjectId();
-    url = 'https://example.com/taskhandler';
   });
 
   it('quickstart sample should create a task', () => {
