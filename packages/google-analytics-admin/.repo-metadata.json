@@ -1,0 +1,16 @@
+{
+  "client_documentation": "https://googleapis.dev/nodejs/analytics-admin/latest/index.html",
+  "api_id": "analyticsadmin.googleapis.com",
+  "distribution_name": "@google-analytics/admin",
+  "release_level": "preview",
+  "default_version": "v1alpha",
+  "language": "nodejs",
+  "name_pretty": "Google Analytics Admin",
+  "repo": "googleapis/nodejs-analytics-admin",
+  "product_documentation": "https://developers.google.com/analytics",
+  "requires_billing": false,
+  "name": "analytics-admin",
+  "issue_tracker": "",
+  "api_shortname": "analyticsadmin",
+  "library_type": "GAPIC_AUTO"
+}
