@@ -1,5 +1,26 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/nodejs-analytics-admin/compare/v4.2.0...v4.3.0) (2022-11-11)
+
+
+### Features
+
+* add `GetAttributionSettings`, `UpdateAttributionSettings` methods to the Admin API v1alpha ([6d911ce](https://github.com/googleapis/nodejs-analytics-admin/commit/6d911cea4e0a1a1201847dba549634e535b078b0))
+* add `GetAudience`, 'ListAudience', 'CreateAudience', 'UpdateAudience', 'ArchiveAudience' methods to the Admin API v1alpha ([6d911ce](https://github.com/googleapis/nodejs-analytics-admin/commit/6d911cea4e0a1a1201847dba549634e535b078b0))
+* add `RunAccessReport` method to the Admin API v1alpha ([6d911ce](https://github.com/googleapis/nodejs-analytics-admin/commit/6d911cea4e0a1a1201847dba549634e535b078b0))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#222](https://github.com/googleapis/nodejs-analytics-admin/issues/222)) ([c17ef19](https://github.com/googleapis/nodejs-analytics-admin/commit/c17ef19c7ca0c1e8514229f5341d339123a64c03))
+* Better support for fallback mode ([#216](https://github.com/googleapis/nodejs-analytics-admin/issues/216)) ([6d911ce](https://github.com/googleapis/nodejs-analytics-admin/commit/6d911cea4e0a1a1201847dba549634e535b078b0))
+* Change import long to require ([#217](https://github.com/googleapis/nodejs-analytics-admin/issues/217)) ([77aaecb](https://github.com/googleapis/nodejs-analytics-admin/commit/77aaecb625ca557207e3fdbad906d4d50e9b4704))
+* **deps:** Use google-gax v3.5.2 ([#230](https://github.com/googleapis/nodejs-analytics-admin/issues/230)) ([7bbe484](https://github.com/googleapis/nodejs-analytics-admin/commit/7bbe4845a8b2e70bdd55f739c6af57eb080ea5e7))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-analytics-admin/issues/1553)) ([#221](https://github.com/googleapis/nodejs-analytics-admin/issues/221)) ([2341928](https://github.com/googleapis/nodejs-analytics-admin/commit/23419288e37ce931b72bbeb3e5f6d229f1b249fa))
+* Preserve default values in x-goog-request-params header ([#224](https://github.com/googleapis/nodejs-analytics-admin/issues/224)) ([22f8b45](https://github.com/googleapis/nodejs-analytics-admin/commit/22f8b45606451281e237c4625b1248cb65ec02e6))
+* Regenerated protos JS and TS definitions ([#233](https://github.com/googleapis/nodejs-analytics-admin/issues/233)) ([3a1d10c](https://github.com/googleapis/nodejs-analytics-admin/commit/3a1d10cc4cffb56dbb86a74ac4cc2d6d179268cf))
+* use google-gax v3.3.0 ([2341928](https://github.com/googleapis/nodejs-analytics-admin/commit/23419288e37ce931b72bbeb3e5f6d229f1b249fa))
+
 ## [4.2.0](https://github.com/googleapis/nodejs-analytics-admin/compare/v4.1.0...v4.2.0) (2022-07-04)
 
 
