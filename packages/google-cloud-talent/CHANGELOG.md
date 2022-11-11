@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [5.0.1](https://github.com/googleapis/nodejs-talent/compare/v5.0.0...v5.0.1) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#447](https://github.com/googleapis/nodejs-talent/issues/447)) ([49c2e64](https://github.com/googleapis/nodejs-talent/commit/49c2e64b364328a145899af100bf4e3c38f24548))
+* Regenerated protos JS and TS definitions ([#451](https://github.com/googleapis/nodejs-talent/issues/451)) ([adfce28](https://github.com/googleapis/nodejs-talent/commit/adfce2881da0f9c86279ed4cde0a9227072f0e19))
+
 ## [5.0.0](https://github.com/googleapis/nodejs-talent/compare/v4.1.1...v5.0.0) (2022-09-22)
 
 

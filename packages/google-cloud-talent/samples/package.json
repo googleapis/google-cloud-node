@@ -17,7 +17,7 @@
     "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
-    "@google-cloud/talent": "^5.0.0",
+    "@google-cloud/talent": "^5.0.1",
     "uuid": "^9.0.0",
     "yargs": "^16.0.3"
   },
