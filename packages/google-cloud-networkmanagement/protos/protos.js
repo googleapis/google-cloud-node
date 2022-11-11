@@ -872,6 +872,12 @@
                             if (object.network != null)
                                 message.network = String(object.network);
                             switch (object.networkType) {
+                            default:
+                                if (typeof object.networkType === "number") {
+                                    message.networkType = object.networkType;
+                                    break;
+                                }
+                                break;
                             case "NETWORK_TYPE_UNSPECIFIED":
                             case 0:
                                 message.networkType = 0;
@@ -922,7 +928,7 @@
                             if (message.network != null && message.hasOwnProperty("network"))
                                 object.network = message.network;
                             if (message.networkType != null && message.hasOwnProperty("networkType"))
-                                object.networkType = options.enums === String ? $root.google.cloud.networkmanagement.v1.Endpoint.NetworkType[message.networkType] : message.networkType;
+                                object.networkType = options.enums === String ? $root.google.cloud.networkmanagement.v1.Endpoint.NetworkType[message.networkType] === undefined ? message.networkType : $root.google.cloud.networkmanagement.v1.Endpoint.NetworkType[message.networkType] : message.networkType;
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
                             if (message.gkeMasterCluster != null && message.hasOwnProperty("gkeMasterCluster"))
@@ -1203,6 +1209,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1.ReachabilityDetails();
                             switch (object.result) {
+                            default:
+                                if (typeof object.result === "number") {
+                                    message.result = object.result;
+                                    break;
+                                }
+                                break;
                             case "RESULT_UNSPECIFIED":
                             case 0:
                                 message.result = 0;
@@ -1268,7 +1280,7 @@
                                 object.error = null;
                             }
                             if (message.result != null && message.hasOwnProperty("result"))
-                                object.result = options.enums === String ? $root.google.cloud.networkmanagement.v1.ReachabilityDetails.Result[message.result] : message.result;
+                                object.result = options.enums === String ? $root.google.cloud.networkmanagement.v1.ReachabilityDetails.Result[message.result] === undefined ? message.result : $root.google.cloud.networkmanagement.v1.ReachabilityDetails.Result[message.result] : message.result;
                             if (message.verifyTime != null && message.hasOwnProperty("verifyTime"))
                                 object.verifyTime = $root.google.protobuf.Timestamp.toObject(message.verifyTime, options);
                             if (message.error != null && message.hasOwnProperty("error"))
@@ -2203,6 +2215,12 @@
                             if (object.description != null)
                                 message.description = String(object.description);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -2400,7 +2418,7 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.networkmanagement.v1.Step.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.networkmanagement.v1.Step.State[message.state] === undefined ? message.state : $root.google.cloud.networkmanagement.v1.Step.State[message.state] : message.state;
                             if (message.causesDrop != null && message.hasOwnProperty("causesDrop"))
                                 object.causesDrop = message.causesDrop;
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
@@ -3563,6 +3581,12 @@
                             if (object.policy != null)
                                 message.policy = String(object.policy);
                             switch (object.firewallRuleType) {
+                            default:
+                                if (typeof object.firewallRuleType === "number") {
+                                    message.firewallRuleType = object.firewallRuleType;
+                                    break;
+                                }
+                                break;
                             case "FIREWALL_RULE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.firewallRuleType = 0;
@@ -3635,7 +3659,7 @@
                             if (message.policy != null && message.hasOwnProperty("policy"))
                                 object.policy = message.policy;
                             if (message.firewallRuleType != null && message.hasOwnProperty("firewallRuleType"))
-                                object.firewallRuleType = options.enums === String ? $root.google.cloud.networkmanagement.v1.FirewallInfo.FirewallRuleType[message.firewallRuleType] : message.firewallRuleType;
+                                object.firewallRuleType = options.enums === String ? $root.google.cloud.networkmanagement.v1.FirewallInfo.FirewallRuleType[message.firewallRuleType] === undefined ? message.firewallRuleType : $root.google.cloud.networkmanagement.v1.FirewallInfo.FirewallRuleType[message.firewallRuleType] : message.firewallRuleType;
                             return object;
                         };
     
@@ -4013,6 +4037,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1.RouteInfo();
                             switch (object.routeType) {
+                            default:
+                                if (typeof object.routeType === "number") {
+                                    message.routeType = object.routeType;
+                                    break;
+                                }
+                                break;
                             case "ROUTE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.routeType = 0;
@@ -4043,6 +4073,12 @@
                                 break;
                             }
                             switch (object.nextHopType) {
+                            default:
+                                if (typeof object.nextHopType === "number") {
+                                    message.nextHopType = object.nextHopType;
+                                    break;
+                                }
+                                break;
                             case "NEXT_HOP_TYPE_UNSPECIFIED":
                             case 0:
                                 message.nextHopType = 0;
@@ -4157,9 +4193,9 @@
                                     object.instanceTags[j] = message.instanceTags[j];
                             }
                             if (message.routeType != null && message.hasOwnProperty("routeType"))
-                                object.routeType = options.enums === String ? $root.google.cloud.networkmanagement.v1.RouteInfo.RouteType[message.routeType] : message.routeType;
+                                object.routeType = options.enums === String ? $root.google.cloud.networkmanagement.v1.RouteInfo.RouteType[message.routeType] === undefined ? message.routeType : $root.google.cloud.networkmanagement.v1.RouteInfo.RouteType[message.routeType] : message.routeType;
                             if (message.nextHopType != null && message.hasOwnProperty("nextHopType"))
-                                object.nextHopType = options.enums === String ? $root.google.cloud.networkmanagement.v1.RouteInfo.NextHopType[message.nextHopType] : message.nextHopType;
+                                object.nextHopType = options.enums === String ? $root.google.cloud.networkmanagement.v1.RouteInfo.NextHopType[message.nextHopType] === undefined ? message.nextHopType : $root.google.cloud.networkmanagement.v1.RouteInfo.NextHopType[message.nextHopType] : message.nextHopType;
                             return object;
                         };
     
@@ -4839,6 +4875,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1.LoadBalancerInfo();
                             switch (object.loadBalancerType) {
+                            default:
+                                if (typeof object.loadBalancerType === "number") {
+                                    message.loadBalancerType = object.loadBalancerType;
+                                    break;
+                                }
+                                break;
                             case "LOAD_BALANCER_TYPE_UNSPECIFIED":
                             case 0:
                                 message.loadBalancerType = 0;
@@ -4877,6 +4919,12 @@
                                 }
                             }
                             switch (object.backendType) {
+                            default:
+                                if (typeof object.backendType === "number") {
+                                    message.backendType = object.backendType;
+                                    break;
+                                }
+                                break;
                             case "BACKEND_TYPE_UNSPECIFIED":
                             case 0:
                                 message.backendType = 0;
@@ -4917,7 +4965,7 @@
                                 object.backendUri = "";
                             }
                             if (message.loadBalancerType != null && message.hasOwnProperty("loadBalancerType"))
-                                object.loadBalancerType = options.enums === String ? $root.google.cloud.networkmanagement.v1.LoadBalancerInfo.LoadBalancerType[message.loadBalancerType] : message.loadBalancerType;
+                                object.loadBalancerType = options.enums === String ? $root.google.cloud.networkmanagement.v1.LoadBalancerInfo.LoadBalancerType[message.loadBalancerType] === undefined ? message.loadBalancerType : $root.google.cloud.networkmanagement.v1.LoadBalancerInfo.LoadBalancerType[message.loadBalancerType] : message.loadBalancerType;
                             if (message.healthCheckUri != null && message.hasOwnProperty("healthCheckUri"))
                                 object.healthCheckUri = message.healthCheckUri;
                             if (message.backends && message.backends.length) {
@@ -4926,7 +4974,7 @@
                                     object.backends[j] = $root.google.cloud.networkmanagement.v1.LoadBalancerBackend.toObject(message.backends[j], options);
                             }
                             if (message.backendType != null && message.hasOwnProperty("backendType"))
-                                object.backendType = options.enums === String ? $root.google.cloud.networkmanagement.v1.LoadBalancerInfo.BackendType[message.backendType] : message.backendType;
+                                object.backendType = options.enums === String ? $root.google.cloud.networkmanagement.v1.LoadBalancerInfo.BackendType[message.backendType] === undefined ? message.backendType : $root.google.cloud.networkmanagement.v1.LoadBalancerInfo.BackendType[message.backendType] : message.backendType;
                             if (message.backendUri != null && message.hasOwnProperty("backendUri"))
                                 object.backendUri = message.backendUri;
                             return object;
@@ -5247,6 +5295,12 @@
                             if (object.uri != null)
                                 message.uri = String(object.uri);
                             switch (object.healthCheckFirewallState) {
+                            default:
+                                if (typeof object.healthCheckFirewallState === "number") {
+                                    message.healthCheckFirewallState = object.healthCheckFirewallState;
+                                    break;
+                                }
+                                break;
                             case "HEALTH_CHECK_FIREWALL_STATE_UNSPECIFIED":
                             case 0:
                                 message.healthCheckFirewallState = 0;
@@ -5304,7 +5358,7 @@
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
                             if (message.healthCheckFirewallState != null && message.hasOwnProperty("healthCheckFirewallState"))
-                                object.healthCheckFirewallState = options.enums === String ? $root.google.cloud.networkmanagement.v1.LoadBalancerBackend.HealthCheckFirewallState[message.healthCheckFirewallState] : message.healthCheckFirewallState;
+                                object.healthCheckFirewallState = options.enums === String ? $root.google.cloud.networkmanagement.v1.LoadBalancerBackend.HealthCheckFirewallState[message.healthCheckFirewallState] === undefined ? message.healthCheckFirewallState : $root.google.cloud.networkmanagement.v1.LoadBalancerBackend.HealthCheckFirewallState[message.healthCheckFirewallState] : message.healthCheckFirewallState;
                             if (message.healthCheckAllowingFirewallRules && message.healthCheckAllowingFirewallRules.length) {
                                 object.healthCheckAllowingFirewallRules = [];
                                 for (var j = 0; j < message.healthCheckAllowingFirewallRules.length; ++j)
@@ -5999,6 +6053,12 @@
                             if (object.region != null)
                                 message.region = String(object.region);
                             switch (object.routingType) {
+                            default:
+                                if (typeof object.routingType === "number") {
+                                    message.routingType = object.routingType;
+                                    break;
+                                }
+                                break;
                             case "ROUTING_TYPE_UNSPECIFIED":
                             case 0:
                                 message.routingType = 0;
@@ -6060,7 +6120,7 @@
                             if (message.region != null && message.hasOwnProperty("region"))
                                 object.region = message.region;
                             if (message.routingType != null && message.hasOwnProperty("routingType"))
-                                object.routingType = options.enums === String ? $root.google.cloud.networkmanagement.v1.VpnTunnelInfo.RoutingType[message.routingType] : message.routingType;
+                                object.routingType = options.enums === String ? $root.google.cloud.networkmanagement.v1.VpnTunnelInfo.RoutingType[message.routingType] === undefined ? message.routingType : $root.google.cloud.networkmanagement.v1.VpnTunnelInfo.RoutingType[message.routingType] : message.routingType;
                             return object;
                         };
     
@@ -6630,6 +6690,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1.DeliverInfo();
                             switch (object.target) {
+                            default:
+                                if (typeof object.target === "number") {
+                                    message.target = object.target;
+                                    break;
+                                }
+                                break;
                             case "TARGET_UNSPECIFIED":
                             case 0:
                                 message.target = 0;
@@ -6678,7 +6744,7 @@
                                 object.resourceUri = "";
                             }
                             if (message.target != null && message.hasOwnProperty("target"))
-                                object.target = options.enums === String ? $root.google.cloud.networkmanagement.v1.DeliverInfo.Target[message.target] : message.target;
+                                object.target = options.enums === String ? $root.google.cloud.networkmanagement.v1.DeliverInfo.Target[message.target] === undefined ? message.target : $root.google.cloud.networkmanagement.v1.DeliverInfo.Target[message.target] : message.target;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
                             return object;
@@ -6913,6 +6979,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1.ForwardInfo();
                             switch (object.target) {
+                            default:
+                                if (typeof object.target === "number") {
+                                    message.target = object.target;
+                                    break;
+                                }
+                                break;
                             case "TARGET_UNSPECIFIED":
                             case 0:
                                 message.target = 0;
@@ -6965,7 +7037,7 @@
                                 object.resourceUri = "";
                             }
                             if (message.target != null && message.hasOwnProperty("target"))
-                                object.target = options.enums === String ? $root.google.cloud.networkmanagement.v1.ForwardInfo.Target[message.target] : message.target;
+                                object.target = options.enums === String ? $root.google.cloud.networkmanagement.v1.ForwardInfo.Target[message.target] === undefined ? message.target : $root.google.cloud.networkmanagement.v1.ForwardInfo.Target[message.target] : message.target;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
                             return object;
@@ -7237,6 +7309,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1.AbortInfo();
                             switch (object.cause) {
+                            default:
+                                if (typeof object.cause === "number") {
+                                    message.cause = object.cause;
+                                    break;
+                                }
+                                break;
                             case "CAUSE_UNSPECIFIED":
                             case 0:
                                 message.cause = 0;
@@ -7334,7 +7412,7 @@
                                 object.resourceUri = "";
                             }
                             if (message.cause != null && message.hasOwnProperty("cause"))
-                                object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1.AbortInfo.Cause[message.cause] : message.cause;
+                                object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1.AbortInfo.Cause[message.cause] === undefined ? message.cause : $root.google.cloud.networkmanagement.v1.AbortInfo.Cause[message.cause] : message.cause;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
                             if (message.projectsMissingPermission && message.projectsMissingPermission.length) {
@@ -7609,6 +7687,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1.DropInfo();
                             switch (object.cause) {
+                            default:
+                                if (typeof object.cause === "number") {
+                                    message.cause = object.cause;
+                                    break;
+                                }
+                                break;
                             case "CAUSE_UNSPECIFIED":
                             case 0:
                                 message.cause = 0;
@@ -7721,7 +7805,7 @@
                                 object.resourceUri = "";
                             }
                             if (message.cause != null && message.hasOwnProperty("cause"))
-                                object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1.DropInfo.Cause[message.cause] : message.cause;
+                                object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1.DropInfo.Cause[message.cause] === undefined ? message.cause : $root.google.cloud.networkmanagement.v1.DropInfo.Cause[message.cause] : message.cause;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
                             return object;
@@ -11543,6 +11627,12 @@
                             if (object.network != null)
                                 message.network = String(object.network);
                             switch (object.networkType) {
+                            default:
+                                if (typeof object.networkType === "number") {
+                                    message.networkType = object.networkType;
+                                    break;
+                                }
+                                break;
                             case "NETWORK_TYPE_UNSPECIFIED":
                             case 0:
                                 message.networkType = 0;
@@ -11594,7 +11684,7 @@
                             if (message.network != null && message.hasOwnProperty("network"))
                                 object.network = message.network;
                             if (message.networkType != null && message.hasOwnProperty("networkType"))
-                                object.networkType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.Endpoint.NetworkType[message.networkType] : message.networkType;
+                                object.networkType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.Endpoint.NetworkType[message.networkType] === undefined ? message.networkType : $root.google.cloud.networkmanagement.v1beta1.Endpoint.NetworkType[message.networkType] : message.networkType;
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
                             if (message.gkeMasterCluster != null && message.hasOwnProperty("gkeMasterCluster"))
@@ -12080,6 +12170,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails();
                             switch (object.result) {
+                            default:
+                                if (typeof object.result === "number") {
+                                    message.result = object.result;
+                                    break;
+                                }
+                                break;
                             case "RESULT_UNSPECIFIED":
                             case 0:
                                 message.result = 0;
@@ -12145,7 +12241,7 @@
                                 object.error = null;
                             }
                             if (message.result != null && message.hasOwnProperty("result"))
-                                object.result = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails.Result[message.result] : message.result;
+                                object.result = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails.Result[message.result] === undefined ? message.result : $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails.Result[message.result] : message.result;
                             if (message.verifyTime != null && message.hasOwnProperty("verifyTime"))
                                 object.verifyTime = $root.google.protobuf.Timestamp.toObject(message.verifyTime, options);
                             if (message.error != null && message.hasOwnProperty("error"))
@@ -12990,6 +13086,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1beta1.ProbingDetails();
                             switch (object.result) {
+                            default:
+                                if (typeof object.result === "number") {
+                                    message.result = object.result;
+                                    break;
+                                }
+                                break;
                             case "PROBING_RESULT_UNSPECIFIED":
                             case 0:
                                 message.result = 0;
@@ -13022,6 +13124,12 @@
                                 message.error = $root.google.rpc.Status.fromObject(object.error);
                             }
                             switch (object.abortCause) {
+                            default:
+                                if (typeof object.abortCause === "number") {
+                                    message.abortCause = object.abortCause;
+                                    break;
+                                }
+                                break;
                             case "PROBING_ABORT_CAUSE_UNSPECIFIED":
                             case 0:
                                 message.abortCause = 0;
@@ -13082,13 +13190,13 @@
                                 object.destinationEgressLocation = null;
                             }
                             if (message.result != null && message.hasOwnProperty("result"))
-                                object.result = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult[message.result] : message.result;
+                                object.result = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult[message.result] === undefined ? message.result : $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult[message.result] : message.result;
                             if (message.verifyTime != null && message.hasOwnProperty("verifyTime"))
                                 object.verifyTime = $root.google.protobuf.Timestamp.toObject(message.verifyTime, options);
                             if (message.error != null && message.hasOwnProperty("error"))
                                 object.error = $root.google.rpc.Status.toObject(message.error, options);
                             if (message.abortCause != null && message.hasOwnProperty("abortCause"))
-                                object.abortCause = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingAbortCause[message.abortCause] : message.abortCause;
+                                object.abortCause = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingAbortCause[message.abortCause] === undefined ? message.abortCause : $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingAbortCause[message.abortCause] : message.abortCause;
                             if (message.sentProbeCount != null && message.hasOwnProperty("sentProbeCount"))
                                 object.sentProbeCount = message.sentProbeCount;
                             if (message.successfulProbeCount != null && message.hasOwnProperty("successfulProbeCount"))
@@ -14295,6 +14403,12 @@
                             if (object.description != null)
                                 message.description = String(object.description);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -14510,7 +14624,7 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.Step.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.Step.State[message.state] === undefined ? message.state : $root.google.cloud.networkmanagement.v1beta1.Step.State[message.state] : message.state;
                             if (message.causesDrop != null && message.hasOwnProperty("causesDrop"))
                                 object.causesDrop = message.causesDrop;
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
@@ -15688,6 +15802,12 @@
                             if (object.policy != null)
                                 message.policy = String(object.policy);
                             switch (object.firewallRuleType) {
+                            default:
+                                if (typeof object.firewallRuleType === "number") {
+                                    message.firewallRuleType = object.firewallRuleType;
+                                    break;
+                                }
+                                break;
                             case "FIREWALL_RULE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.firewallRuleType = 0;
@@ -15764,7 +15884,7 @@
                             if (message.policy != null && message.hasOwnProperty("policy"))
                                 object.policy = message.policy;
                             if (message.firewallRuleType != null && message.hasOwnProperty("firewallRuleType"))
-                                object.firewallRuleType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.FirewallInfo.FirewallRuleType[message.firewallRuleType] : message.firewallRuleType;
+                                object.firewallRuleType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.FirewallInfo.FirewallRuleType[message.firewallRuleType] === undefined ? message.firewallRuleType : $root.google.cloud.networkmanagement.v1beta1.FirewallInfo.FirewallRuleType[message.firewallRuleType] : message.firewallRuleType;
                             return object;
                         };
     
@@ -16144,6 +16264,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1beta1.RouteInfo();
                             switch (object.routeType) {
+                            default:
+                                if (typeof object.routeType === "number") {
+                                    message.routeType = object.routeType;
+                                    break;
+                                }
+                                break;
                             case "ROUTE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.routeType = 0;
@@ -16174,6 +16300,12 @@
                                 break;
                             }
                             switch (object.nextHopType) {
+                            default:
+                                if (typeof object.nextHopType === "number") {
+                                    message.nextHopType = object.nextHopType;
+                                    break;
+                                }
+                                break;
                             case "NEXT_HOP_TYPE_UNSPECIFIED":
                             case 0:
                                 message.nextHopType = 0;
@@ -16288,9 +16420,9 @@
                                     object.instanceTags[j] = message.instanceTags[j];
                             }
                             if (message.routeType != null && message.hasOwnProperty("routeType"))
-                                object.routeType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.RouteInfo.RouteType[message.routeType] : message.routeType;
+                                object.routeType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.RouteInfo.RouteType[message.routeType] === undefined ? message.routeType : $root.google.cloud.networkmanagement.v1beta1.RouteInfo.RouteType[message.routeType] : message.routeType;
                             if (message.nextHopType != null && message.hasOwnProperty("nextHopType"))
-                                object.nextHopType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType[message.nextHopType] : message.nextHopType;
+                                object.nextHopType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType[message.nextHopType] === undefined ? message.nextHopType : $root.google.cloud.networkmanagement.v1beta1.RouteInfo.NextHopType[message.nextHopType] : message.nextHopType;
                             return object;
                         };
     
@@ -16970,6 +17102,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1beta1.LoadBalancerInfo();
                             switch (object.loadBalancerType) {
+                            default:
+                                if (typeof object.loadBalancerType === "number") {
+                                    message.loadBalancerType = object.loadBalancerType;
+                                    break;
+                                }
+                                break;
                             case "LOAD_BALANCER_TYPE_UNSPECIFIED":
                             case 0:
                                 message.loadBalancerType = 0;
@@ -17008,6 +17146,12 @@
                                 }
                             }
                             switch (object.backendType) {
+                            default:
+                                if (typeof object.backendType === "number") {
+                                    message.backendType = object.backendType;
+                                    break;
+                                }
+                                break;
                             case "BACKEND_TYPE_UNSPECIFIED":
                             case 0:
                                 message.backendType = 0;
@@ -17048,7 +17192,7 @@
                                 object.backendUri = "";
                             }
                             if (message.loadBalancerType != null && message.hasOwnProperty("loadBalancerType"))
-                                object.loadBalancerType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.LoadBalancerInfo.LoadBalancerType[message.loadBalancerType] : message.loadBalancerType;
+                                object.loadBalancerType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.LoadBalancerInfo.LoadBalancerType[message.loadBalancerType] === undefined ? message.loadBalancerType : $root.google.cloud.networkmanagement.v1beta1.LoadBalancerInfo.LoadBalancerType[message.loadBalancerType] : message.loadBalancerType;
                             if (message.healthCheckUri != null && message.hasOwnProperty("healthCheckUri"))
                                 object.healthCheckUri = message.healthCheckUri;
                             if (message.backends && message.backends.length) {
@@ -17057,7 +17201,7 @@
                                     object.backends[j] = $root.google.cloud.networkmanagement.v1beta1.LoadBalancerBackend.toObject(message.backends[j], options);
                             }
                             if (message.backendType != null && message.hasOwnProperty("backendType"))
-                                object.backendType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.LoadBalancerInfo.BackendType[message.backendType] : message.backendType;
+                                object.backendType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.LoadBalancerInfo.BackendType[message.backendType] === undefined ? message.backendType : $root.google.cloud.networkmanagement.v1beta1.LoadBalancerInfo.BackendType[message.backendType] : message.backendType;
                             if (message.backendUri != null && message.hasOwnProperty("backendUri"))
                                 object.backendUri = message.backendUri;
                             return object;
@@ -17378,6 +17522,12 @@
                             if (object.uri != null)
                                 message.uri = String(object.uri);
                             switch (object.healthCheckFirewallState) {
+                            default:
+                                if (typeof object.healthCheckFirewallState === "number") {
+                                    message.healthCheckFirewallState = object.healthCheckFirewallState;
+                                    break;
+                                }
+                                break;
                             case "HEALTH_CHECK_FIREWALL_STATE_UNSPECIFIED":
                             case 0:
                                 message.healthCheckFirewallState = 0;
@@ -17435,7 +17585,7 @@
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
                             if (message.healthCheckFirewallState != null && message.hasOwnProperty("healthCheckFirewallState"))
-                                object.healthCheckFirewallState = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.LoadBalancerBackend.HealthCheckFirewallState[message.healthCheckFirewallState] : message.healthCheckFirewallState;
+                                object.healthCheckFirewallState = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.LoadBalancerBackend.HealthCheckFirewallState[message.healthCheckFirewallState] === undefined ? message.healthCheckFirewallState : $root.google.cloud.networkmanagement.v1beta1.LoadBalancerBackend.HealthCheckFirewallState[message.healthCheckFirewallState] : message.healthCheckFirewallState;
                             if (message.healthCheckAllowingFirewallRules && message.healthCheckAllowingFirewallRules.length) {
                                 object.healthCheckAllowingFirewallRules = [];
                                 for (var j = 0; j < message.healthCheckAllowingFirewallRules.length; ++j)
@@ -18130,6 +18280,12 @@
                             if (object.region != null)
                                 message.region = String(object.region);
                             switch (object.routingType) {
+                            default:
+                                if (typeof object.routingType === "number") {
+                                    message.routingType = object.routingType;
+                                    break;
+                                }
+                                break;
                             case "ROUTING_TYPE_UNSPECIFIED":
                             case 0:
                                 message.routingType = 0;
@@ -18191,7 +18347,7 @@
                             if (message.region != null && message.hasOwnProperty("region"))
                                 object.region = message.region;
                             if (message.routingType != null && message.hasOwnProperty("routingType"))
-                                object.routingType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.VpnTunnelInfo.RoutingType[message.routingType] : message.routingType;
+                                object.routingType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.VpnTunnelInfo.RoutingType[message.routingType] === undefined ? message.routingType : $root.google.cloud.networkmanagement.v1beta1.VpnTunnelInfo.RoutingType[message.routingType] : message.routingType;
                             return object;
                         };
     
@@ -18787,6 +18943,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1beta1.DeliverInfo();
                             switch (object.target) {
+                            default:
+                                if (typeof object.target === "number") {
+                                    message.target = object.target;
+                                    break;
+                                }
+                                break;
                             case "TARGET_UNSPECIFIED":
                             case 0:
                                 message.target = 0;
@@ -18847,7 +19009,7 @@
                                 object.resourceUri = "";
                             }
                             if (message.target != null && message.hasOwnProperty("target"))
-                                object.target = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.DeliverInfo.Target[message.target] : message.target;
+                                object.target = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.DeliverInfo.Target[message.target] === undefined ? message.target : $root.google.cloud.networkmanagement.v1beta1.DeliverInfo.Target[message.target] : message.target;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
                             return object;
@@ -19088,6 +19250,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1beta1.ForwardInfo();
                             switch (object.target) {
+                            default:
+                                if (typeof object.target === "number") {
+                                    message.target = object.target;
+                                    break;
+                                }
+                                break;
                             case "TARGET_UNSPECIFIED":
                             case 0:
                                 message.target = 0;
@@ -19140,7 +19308,7 @@
                                 object.resourceUri = "";
                             }
                             if (message.target != null && message.hasOwnProperty("target"))
-                                object.target = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.ForwardInfo.Target[message.target] : message.target;
+                                object.target = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.ForwardInfo.Target[message.target] === undefined ? message.target : $root.google.cloud.networkmanagement.v1beta1.ForwardInfo.Target[message.target] : message.target;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
                             return object;
@@ -19412,6 +19580,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1beta1.AbortInfo();
                             switch (object.cause) {
+                            default:
+                                if (typeof object.cause === "number") {
+                                    message.cause = object.cause;
+                                    break;
+                                }
+                                break;
                             case "CAUSE_UNSPECIFIED":
                             case 0:
                                 message.cause = 0;
@@ -19509,7 +19683,7 @@
                                 object.resourceUri = "";
                             }
                             if (message.cause != null && message.hasOwnProperty("cause"))
-                                object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.AbortInfo.Cause[message.cause] : message.cause;
+                                object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.AbortInfo.Cause[message.cause] === undefined ? message.cause : $root.google.cloud.networkmanagement.v1beta1.AbortInfo.Cause[message.cause] : message.cause;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
                             if (message.projectsMissingPermission && message.projectsMissingPermission.length) {
@@ -19789,6 +19963,12 @@
                                 return object;
                             var message = new $root.google.cloud.networkmanagement.v1beta1.DropInfo();
                             switch (object.cause) {
+                            default:
+                                if (typeof object.cause === "number") {
+                                    message.cause = object.cause;
+                                    break;
+                                }
+                                break;
                             case "CAUSE_UNSPECIFIED":
                             case 0:
                                 message.cause = 0;
@@ -19921,7 +20101,7 @@
                                 object.resourceUri = "";
                             }
                             if (message.cause != null && message.hasOwnProperty("cause"))
-                                object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.DropInfo.Cause[message.cause] : message.cause;
+                                object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.DropInfo.Cause[message.cause] === undefined ? message.cause : $root.google.cloud.networkmanagement.v1beta1.DropInfo.Cause[message.cause] : message.cause;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
                             return object;
@@ -23767,6 +23947,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -23791,6 +23977,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -23838,7 +24028,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -23846,7 +24036,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -27620,6 +27810,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -27634,6 +27830,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -27760,9 +27962,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -30109,6 +30311,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -30217,7 +30425,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -31019,6 +31227,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -31035,6 +31249,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -31073,6 +31293,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -31143,7 +31367,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -31151,7 +31375,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -31164,7 +31388,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -32541,6 +32765,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -32610,7 +32840,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -34365,6 +34595,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -34414,7 +34650,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
