@@ -16,12 +16,12 @@
 import os
 import synthtool as s
 import synthtool.gcp as gcp
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 import json
 import logging
 from pathlib import Path
 
-node.owlbot_main()
+node.owlbot_main(relative_dir="packages/google-cloud-documentai",)
 
 ## Note: this API only supports regional endpoints and does not support default scopes.
 s.replace(f"src/*/document_*_service_client.ts",
