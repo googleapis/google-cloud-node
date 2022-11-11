@@ -1394,6 +1394,12 @@
                                 message.eventTrigger = $root.google.cloud.functions.v1.EventTrigger.fromObject(object.eventTrigger);
                             }
                             switch (object.status) {
+                            default:
+                                if (typeof object.status === "number") {
+                                    message.status = object.status;
+                                    break;
+                                }
+                                break;
                             case "CLOUD_FUNCTION_STATUS_UNSPECIFIED":
                             case 0:
                                 message.status = 0;
@@ -1476,6 +1482,12 @@
                             if (object.vpcConnector != null)
                                 message.vpcConnector = String(object.vpcConnector);
                             switch (object.vpcConnectorEgressSettings) {
+                            default:
+                                if (typeof object.vpcConnectorEgressSettings === "number") {
+                                    message.vpcConnectorEgressSettings = object.vpcConnectorEgressSettings;
+                                    break;
+                                }
+                                break;
                             case "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED":
                             case 0:
                                 message.vpcConnectorEgressSettings = 0;
@@ -1490,6 +1502,12 @@
                                 break;
                             }
                             switch (object.ingressSettings) {
+                            default:
+                                if (typeof object.ingressSettings === "number") {
+                                    message.ingressSettings = object.ingressSettings;
+                                    break;
+                                }
+                                break;
                             case "INGRESS_SETTINGS_UNSPECIFIED":
                             case 0:
                                 message.ingressSettings = 0;
@@ -1540,6 +1558,12 @@
                             if (object.dockerRepository != null)
                                 message.dockerRepository = String(object.dockerRepository);
                             switch (object.dockerRegistry) {
+                            default:
+                                if (typeof object.dockerRegistry === "number") {
+                                    message.dockerRegistry = object.dockerRegistry;
+                                    break;
+                                }
+                                break;
                             case "DOCKER_REGISTRY_UNSPECIFIED":
                             case 0:
                                 message.dockerRegistry = 0;
@@ -1632,7 +1656,7 @@
                                     object.trigger = "eventTrigger";
                             }
                             if (message.status != null && message.hasOwnProperty("status"))
-                                object.status = options.enums === String ? $root.google.cloud.functions.v1.CloudFunctionStatus[message.status] : message.status;
+                                object.status = options.enums === String ? $root.google.cloud.functions.v1.CloudFunctionStatus[message.status] === undefined ? message.status : $root.google.cloud.functions.v1.CloudFunctionStatus[message.status] : message.status;
                             if (message.entryPoint != null && message.hasOwnProperty("entryPoint"))
                                 object.entryPoint = message.entryPoint;
                             if (message.timeout != null && message.hasOwnProperty("timeout"))
@@ -1673,9 +1697,9 @@
                             if (message.vpcConnector != null && message.hasOwnProperty("vpcConnector"))
                                 object.vpcConnector = message.vpcConnector;
                             if (message.vpcConnectorEgressSettings != null && message.hasOwnProperty("vpcConnectorEgressSettings"))
-                                object.vpcConnectorEgressSettings = options.enums === String ? $root.google.cloud.functions.v1.CloudFunction.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] : message.vpcConnectorEgressSettings;
+                                object.vpcConnectorEgressSettings = options.enums === String ? $root.google.cloud.functions.v1.CloudFunction.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] === undefined ? message.vpcConnectorEgressSettings : $root.google.cloud.functions.v1.CloudFunction.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] : message.vpcConnectorEgressSettings;
                             if (message.ingressSettings != null && message.hasOwnProperty("ingressSettings"))
-                                object.ingressSettings = options.enums === String ? $root.google.cloud.functions.v1.CloudFunction.IngressSettings[message.ingressSettings] : message.ingressSettings;
+                                object.ingressSettings = options.enums === String ? $root.google.cloud.functions.v1.CloudFunction.IngressSettings[message.ingressSettings] === undefined ? message.ingressSettings : $root.google.cloud.functions.v1.CloudFunction.IngressSettings[message.ingressSettings] : message.ingressSettings;
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 object.kmsKeyName = message.kmsKeyName;
                             if (message.buildWorkerPool != null && message.hasOwnProperty("buildWorkerPool"))
@@ -1706,7 +1730,7 @@
                             if (message.dockerRepository != null && message.hasOwnProperty("dockerRepository"))
                                 object.dockerRepository = message.dockerRepository;
                             if (message.dockerRegistry != null && message.hasOwnProperty("dockerRegistry"))
-                                object.dockerRegistry = options.enums === String ? $root.google.cloud.functions.v1.CloudFunction.DockerRegistry[message.dockerRegistry] : message.dockerRegistry;
+                                object.dockerRegistry = options.enums === String ? $root.google.cloud.functions.v1.CloudFunction.DockerRegistry[message.dockerRegistry] === undefined ? message.dockerRegistry : $root.google.cloud.functions.v1.CloudFunction.DockerRegistry[message.dockerRegistry] : message.dockerRegistry;
                             return object;
                         };
     
@@ -2192,6 +2216,12 @@
                             if (object.url != null)
                                 message.url = String(object.url);
                             switch (object.securityLevel) {
+                            default:
+                                if (typeof object.securityLevel === "number") {
+                                    message.securityLevel = object.securityLevel;
+                                    break;
+                                }
+                                break;
                             case "SECURITY_LEVEL_UNSPECIFIED":
                             case 0:
                                 message.securityLevel = 0;
@@ -2228,7 +2258,7 @@
                             if (message.url != null && message.hasOwnProperty("url"))
                                 object.url = message.url;
                             if (message.securityLevel != null && message.hasOwnProperty("securityLevel"))
-                                object.securityLevel = options.enums === String ? $root.google.cloud.functions.v1.HttpsTrigger.SecurityLevel[message.securityLevel] : message.securityLevel;
+                                object.securityLevel = options.enums === String ? $root.google.cloud.functions.v1.HttpsTrigger.SecurityLevel[message.securityLevel] === undefined ? message.securityLevel : $root.google.cloud.functions.v1.HttpsTrigger.SecurityLevel[message.securityLevel] : message.securityLevel;
                             return object;
                         };
     
@@ -6845,6 +6875,12 @@
                             if (object.target != null)
                                 message.target = String(object.target);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "OPERATION_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -6920,7 +6956,7 @@
                             if (message.target != null && message.hasOwnProperty("target"))
                                 object.target = message.target;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.functions.v1.OperationType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.functions.v1.OperationType[message.type] === undefined ? message.type : $root.google.cloud.functions.v1.OperationType[message.type] : message.type;
                             if (message.request != null && message.hasOwnProperty("request"))
                                 object.request = $root.google.protobuf.Any.toObject(message.request, options);
                             if (message.versionId != null && message.hasOwnProperty("versionId"))
@@ -7668,6 +7704,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.environment) {
+                            default:
+                                if (typeof object.environment === "number") {
+                                    message.environment = object.environment;
+                                    break;
+                                }
+                                break;
                             case "ENVIRONMENT_UNSPECIFIED":
                             case 0:
                                 message.environment = 0;
@@ -7699,6 +7741,12 @@
                                 message.eventTrigger = $root.google.cloud.functions.v2.EventTrigger.fromObject(object.eventTrigger);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -7787,7 +7835,7 @@
                             if (message.eventTrigger != null && message.hasOwnProperty("eventTrigger"))
                                 object.eventTrigger = $root.google.cloud.functions.v2.EventTrigger.toObject(message.eventTrigger, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.functions.v2.Function.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.functions.v2.Function.State[message.state] === undefined ? message.state : $root.google.cloud.functions.v2.Function.State[message.state] : message.state;
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             var keys2;
@@ -7802,7 +7850,7 @@
                                     object.stateMessages[j] = $root.google.cloud.functions.v2.StateMessage.toObject(message.stateMessages[j], options);
                             }
                             if (message.environment != null && message.hasOwnProperty("environment"))
-                                object.environment = options.enums === String ? $root.google.cloud.functions.v2.Environment[message.environment] : message.environment;
+                                object.environment = options.enums === String ? $root.google.cloud.functions.v2.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2.Environment[message.environment] : message.environment;
                             return object;
                         };
     
@@ -8050,6 +8098,12 @@
                                 return object;
                             var message = new $root.google.cloud.functions.v2.StateMessage();
                             switch (object.severity) {
+                            default:
+                                if (typeof object.severity === "number") {
+                                    message.severity = object.severity;
+                                    break;
+                                }
+                                break;
                             case "SEVERITY_UNSPECIFIED":
                             case 0:
                                 message.severity = 0;
@@ -8093,7 +8147,7 @@
                                 object.message = "";
                             }
                             if (message.severity != null && message.hasOwnProperty("severity"))
-                                object.severity = options.enums === String ? $root.google.cloud.functions.v2.StateMessage.Severity[message.severity] : message.severity;
+                                object.severity = options.enums === String ? $root.google.cloud.functions.v2.StateMessage.Severity[message.severity] === undefined ? message.severity : $root.google.cloud.functions.v2.StateMessage.Severity[message.severity] : message.severity;
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = message.type;
                             if (message.message != null && message.hasOwnProperty("message"))
@@ -10175,6 +10229,12 @@
                             if (object.vpcConnector != null)
                                 message.vpcConnector = String(object.vpcConnector);
                             switch (object.vpcConnectorEgressSettings) {
+                            default:
+                                if (typeof object.vpcConnectorEgressSettings === "number") {
+                                    message.vpcConnectorEgressSettings = object.vpcConnectorEgressSettings;
+                                    break;
+                                }
+                                break;
                             case "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED":
                             case 0:
                                 message.vpcConnectorEgressSettings = 0;
@@ -10189,6 +10249,12 @@
                                 break;
                             }
                             switch (object.ingressSettings) {
+                            default:
+                                if (typeof object.ingressSettings === "number") {
+                                    message.ingressSettings = object.ingressSettings;
+                                    break;
+                                }
+                                break;
                             case "INGRESS_SETTINGS_UNSPECIFIED":
                             case 0:
                                 message.ingressSettings = 0;
@@ -10285,9 +10351,9 @@
                             if (message.vpcConnector != null && message.hasOwnProperty("vpcConnector"))
                                 object.vpcConnector = message.vpcConnector;
                             if (message.vpcConnectorEgressSettings != null && message.hasOwnProperty("vpcConnectorEgressSettings"))
-                                object.vpcConnectorEgressSettings = options.enums === String ? $root.google.cloud.functions.v2.ServiceConfig.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] : message.vpcConnectorEgressSettings;
+                                object.vpcConnectorEgressSettings = options.enums === String ? $root.google.cloud.functions.v2.ServiceConfig.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] === undefined ? message.vpcConnectorEgressSettings : $root.google.cloud.functions.v2.ServiceConfig.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] : message.vpcConnectorEgressSettings;
                             if (message.ingressSettings != null && message.hasOwnProperty("ingressSettings"))
-                                object.ingressSettings = options.enums === String ? $root.google.cloud.functions.v2.ServiceConfig.IngressSettings[message.ingressSettings] : message.ingressSettings;
+                                object.ingressSettings = options.enums === String ? $root.google.cloud.functions.v2.ServiceConfig.IngressSettings[message.ingressSettings] === undefined ? message.ingressSettings : $root.google.cloud.functions.v2.ServiceConfig.IngressSettings[message.ingressSettings] : message.ingressSettings;
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
                             if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
@@ -11483,6 +11549,12 @@
                             if (object.serviceAccountEmail != null)
                                 message.serviceAccountEmail = String(object.serviceAccountEmail);
                             switch (object.retryPolicy) {
+                            default:
+                                if (typeof object.retryPolicy === "number") {
+                                    message.retryPolicy = object.retryPolicy;
+                                    break;
+                                }
+                                break;
                             case "RETRY_POLICY_UNSPECIFIED":
                             case 0:
                                 message.retryPolicy = 0;
@@ -11541,7 +11613,7 @@
                             if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
                                 object.serviceAccountEmail = message.serviceAccountEmail;
                             if (message.retryPolicy != null && message.hasOwnProperty("retryPolicy"))
-                                object.retryPolicy = options.enums === String ? $root.google.cloud.functions.v2.EventTrigger.RetryPolicy[message.retryPolicy] : message.retryPolicy;
+                                object.retryPolicy = options.enums === String ? $root.google.cloud.functions.v2.EventTrigger.RetryPolicy[message.retryPolicy] === undefined ? message.retryPolicy : $root.google.cloud.functions.v2.EventTrigger.RetryPolicy[message.retryPolicy] : message.retryPolicy;
                             if (message.channel != null && message.hasOwnProperty("channel"))
                                 object.channel = message.channel;
                             return object;
@@ -14863,6 +14935,12 @@
                                 if (object.displayName != null)
                                     message.displayName = String(object.displayName);
                                 switch (object.stage) {
+                                default:
+                                    if (typeof object.stage === "number") {
+                                        message.stage = object.stage;
+                                        break;
+                                    }
+                                    break;
                                 case "RUNTIME_STAGE_UNSPECIFIED":
                                 case 0:
                                     message.stage = 0;
@@ -14900,6 +14978,12 @@
                                         message.warnings[i] = String(object.warnings[i]);
                                 }
                                 switch (object.environment) {
+                                default:
+                                    if (typeof object.environment === "number") {
+                                        message.environment = object.environment;
+                                        break;
+                                    }
+                                    break;
                                 case "ENVIRONMENT_UNSPECIFIED":
                                 case 0:
                                     message.environment = 0;
@@ -14940,14 +15024,14 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.stage != null && message.hasOwnProperty("stage"))
-                                    object.stage = options.enums === String ? $root.google.cloud.functions.v2.ListRuntimesResponse.RuntimeStage[message.stage] : message.stage;
+                                    object.stage = options.enums === String ? $root.google.cloud.functions.v2.ListRuntimesResponse.RuntimeStage[message.stage] === undefined ? message.stage : $root.google.cloud.functions.v2.ListRuntimesResponse.RuntimeStage[message.stage] : message.stage;
                                 if (message.warnings && message.warnings.length) {
                                     object.warnings = [];
                                     for (var j = 0; j < message.warnings.length; ++j)
                                         object.warnings[j] = message.warnings[j];
                                 }
                                 if (message.environment != null && message.hasOwnProperty("environment"))
-                                    object.environment = options.enums === String ? $root.google.cloud.functions.v2.Environment[message.environment] : message.environment;
+                                    object.environment = options.enums === String ? $root.google.cloud.functions.v2.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2.Environment[message.environment] : message.environment;
                                 if (message.displayName != null && message.hasOwnProperty("displayName"))
                                     object.displayName = message.displayName;
                                 return object;
@@ -15701,6 +15785,12 @@
                                 return object;
                             var message = new $root.google.cloud.functions.v2.Stage();
                             switch (object.name) {
+                            default:
+                                if (typeof object.name === "number") {
+                                    message.name = object.name;
+                                    break;
+                                }
+                                break;
                             case "NAME_UNSPECIFIED":
                             case 0:
                                 message.name = 0;
@@ -15733,6 +15823,12 @@
                             if (object.message != null)
                                 message.message = String(object.message);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -15790,11 +15886,11 @@
                                 object.resourceUri = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = options.enums === String ? $root.google.cloud.functions.v2.Stage.Name[message.name] : message.name;
+                                object.name = options.enums === String ? $root.google.cloud.functions.v2.Stage.Name[message.name] === undefined ? message.name : $root.google.cloud.functions.v2.Stage.Name[message.name] : message.name;
                             if (message.message != null && message.hasOwnProperty("message"))
                                 object.message = message.message;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.functions.v2.Stage.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.functions.v2.Stage.State[message.state] === undefined ? message.state : $root.google.cloud.functions.v2.Stage.State[message.state] : message.state;
                             if (message.resource != null && message.hasOwnProperty("resource"))
                                 object.resource = message.resource;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -16578,6 +16674,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.environment) {
+                            default:
+                                if (typeof object.environment === "number") {
+                                    message.environment = object.environment;
+                                    break;
+                                }
+                                break;
                             case "ENVIRONMENT_UNSPECIFIED":
                             case 0:
                                 message.environment = 0;
@@ -16609,6 +16711,12 @@
                                 message.eventTrigger = $root.google.cloud.functions.v2alpha.EventTrigger.fromObject(object.eventTrigger);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -16697,7 +16805,7 @@
                             if (message.eventTrigger != null && message.hasOwnProperty("eventTrigger"))
                                 object.eventTrigger = $root.google.cloud.functions.v2alpha.EventTrigger.toObject(message.eventTrigger, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.functions.v2alpha.Function.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.functions.v2alpha.Function.State[message.state] === undefined ? message.state : $root.google.cloud.functions.v2alpha.Function.State[message.state] : message.state;
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             var keys2;
@@ -16712,7 +16820,7 @@
                                     object.stateMessages[j] = $root.google.cloud.functions.v2alpha.StateMessage.toObject(message.stateMessages[j], options);
                             }
                             if (message.environment != null && message.hasOwnProperty("environment"))
-                                object.environment = options.enums === String ? $root.google.cloud.functions.v2alpha.Environment[message.environment] : message.environment;
+                                object.environment = options.enums === String ? $root.google.cloud.functions.v2alpha.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2alpha.Environment[message.environment] : message.environment;
                             return object;
                         };
     
@@ -16960,6 +17068,12 @@
                                 return object;
                             var message = new $root.google.cloud.functions.v2alpha.StateMessage();
                             switch (object.severity) {
+                            default:
+                                if (typeof object.severity === "number") {
+                                    message.severity = object.severity;
+                                    break;
+                                }
+                                break;
                             case "SEVERITY_UNSPECIFIED":
                             case 0:
                                 message.severity = 0;
@@ -17003,7 +17117,7 @@
                                 object.message = "";
                             }
                             if (message.severity != null && message.hasOwnProperty("severity"))
-                                object.severity = options.enums === String ? $root.google.cloud.functions.v2alpha.StateMessage.Severity[message.severity] : message.severity;
+                                object.severity = options.enums === String ? $root.google.cloud.functions.v2alpha.StateMessage.Severity[message.severity] === undefined ? message.severity : $root.google.cloud.functions.v2alpha.StateMessage.Severity[message.severity] : message.severity;
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = message.type;
                             if (message.message != null && message.hasOwnProperty("message"))
@@ -19085,6 +19199,12 @@
                             if (object.vpcConnector != null)
                                 message.vpcConnector = String(object.vpcConnector);
                             switch (object.vpcConnectorEgressSettings) {
+                            default:
+                                if (typeof object.vpcConnectorEgressSettings === "number") {
+                                    message.vpcConnectorEgressSettings = object.vpcConnectorEgressSettings;
+                                    break;
+                                }
+                                break;
                             case "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED":
                             case 0:
                                 message.vpcConnectorEgressSettings = 0;
@@ -19099,6 +19219,12 @@
                                 break;
                             }
                             switch (object.ingressSettings) {
+                            default:
+                                if (typeof object.ingressSettings === "number") {
+                                    message.ingressSettings = object.ingressSettings;
+                                    break;
+                                }
+                                break;
                             case "INGRESS_SETTINGS_UNSPECIFIED":
                             case 0:
                                 message.ingressSettings = 0;
@@ -19195,9 +19321,9 @@
                             if (message.vpcConnector != null && message.hasOwnProperty("vpcConnector"))
                                 object.vpcConnector = message.vpcConnector;
                             if (message.vpcConnectorEgressSettings != null && message.hasOwnProperty("vpcConnectorEgressSettings"))
-                                object.vpcConnectorEgressSettings = options.enums === String ? $root.google.cloud.functions.v2alpha.ServiceConfig.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] : message.vpcConnectorEgressSettings;
+                                object.vpcConnectorEgressSettings = options.enums === String ? $root.google.cloud.functions.v2alpha.ServiceConfig.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] === undefined ? message.vpcConnectorEgressSettings : $root.google.cloud.functions.v2alpha.ServiceConfig.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] : message.vpcConnectorEgressSettings;
                             if (message.ingressSettings != null && message.hasOwnProperty("ingressSettings"))
-                                object.ingressSettings = options.enums === String ? $root.google.cloud.functions.v2alpha.ServiceConfig.IngressSettings[message.ingressSettings] : message.ingressSettings;
+                                object.ingressSettings = options.enums === String ? $root.google.cloud.functions.v2alpha.ServiceConfig.IngressSettings[message.ingressSettings] === undefined ? message.ingressSettings : $root.google.cloud.functions.v2alpha.ServiceConfig.IngressSettings[message.ingressSettings] : message.ingressSettings;
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
                             if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
@@ -20393,6 +20519,12 @@
                             if (object.serviceAccountEmail != null)
                                 message.serviceAccountEmail = String(object.serviceAccountEmail);
                             switch (object.retryPolicy) {
+                            default:
+                                if (typeof object.retryPolicy === "number") {
+                                    message.retryPolicy = object.retryPolicy;
+                                    break;
+                                }
+                                break;
                             case "RETRY_POLICY_UNSPECIFIED":
                             case 0:
                                 message.retryPolicy = 0;
@@ -20451,7 +20583,7 @@
                             if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
                                 object.serviceAccountEmail = message.serviceAccountEmail;
                             if (message.retryPolicy != null && message.hasOwnProperty("retryPolicy"))
-                                object.retryPolicy = options.enums === String ? $root.google.cloud.functions.v2alpha.EventTrigger.RetryPolicy[message.retryPolicy] : message.retryPolicy;
+                                object.retryPolicy = options.enums === String ? $root.google.cloud.functions.v2alpha.EventTrigger.RetryPolicy[message.retryPolicy] === undefined ? message.retryPolicy : $root.google.cloud.functions.v2alpha.EventTrigger.RetryPolicy[message.retryPolicy] : message.retryPolicy;
                             if (message.channel != null && message.hasOwnProperty("channel"))
                                 object.channel = message.channel;
                             return object;
@@ -23773,6 +23905,12 @@
                                 if (object.displayName != null)
                                     message.displayName = String(object.displayName);
                                 switch (object.stage) {
+                                default:
+                                    if (typeof object.stage === "number") {
+                                        message.stage = object.stage;
+                                        break;
+                                    }
+                                    break;
                                 case "RUNTIME_STAGE_UNSPECIFIED":
                                 case 0:
                                     message.stage = 0;
@@ -23810,6 +23948,12 @@
                                         message.warnings[i] = String(object.warnings[i]);
                                 }
                                 switch (object.environment) {
+                                default:
+                                    if (typeof object.environment === "number") {
+                                        message.environment = object.environment;
+                                        break;
+                                    }
+                                    break;
                                 case "ENVIRONMENT_UNSPECIFIED":
                                 case 0:
                                     message.environment = 0;
@@ -23850,14 +23994,14 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.stage != null && message.hasOwnProperty("stage"))
-                                    object.stage = options.enums === String ? $root.google.cloud.functions.v2alpha.ListRuntimesResponse.RuntimeStage[message.stage] : message.stage;
+                                    object.stage = options.enums === String ? $root.google.cloud.functions.v2alpha.ListRuntimesResponse.RuntimeStage[message.stage] === undefined ? message.stage : $root.google.cloud.functions.v2alpha.ListRuntimesResponse.RuntimeStage[message.stage] : message.stage;
                                 if (message.warnings && message.warnings.length) {
                                     object.warnings = [];
                                     for (var j = 0; j < message.warnings.length; ++j)
                                         object.warnings[j] = message.warnings[j];
                                 }
                                 if (message.environment != null && message.hasOwnProperty("environment"))
-                                    object.environment = options.enums === String ? $root.google.cloud.functions.v2alpha.Environment[message.environment] : message.environment;
+                                    object.environment = options.enums === String ? $root.google.cloud.functions.v2alpha.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2alpha.Environment[message.environment] : message.environment;
                                 if (message.displayName != null && message.hasOwnProperty("displayName"))
                                     object.displayName = message.displayName;
                                 return object;
@@ -24611,6 +24755,12 @@
                                 return object;
                             var message = new $root.google.cloud.functions.v2alpha.Stage();
                             switch (object.name) {
+                            default:
+                                if (typeof object.name === "number") {
+                                    message.name = object.name;
+                                    break;
+                                }
+                                break;
                             case "NAME_UNSPECIFIED":
                             case 0:
                                 message.name = 0;
@@ -24643,6 +24793,12 @@
                             if (object.message != null)
                                 message.message = String(object.message);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -24700,11 +24856,11 @@
                                 object.resourceUri = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = options.enums === String ? $root.google.cloud.functions.v2alpha.Stage.Name[message.name] : message.name;
+                                object.name = options.enums === String ? $root.google.cloud.functions.v2alpha.Stage.Name[message.name] === undefined ? message.name : $root.google.cloud.functions.v2alpha.Stage.Name[message.name] : message.name;
                             if (message.message != null && message.hasOwnProperty("message"))
                                 object.message = message.message;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.functions.v2alpha.Stage.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.functions.v2alpha.Stage.State[message.state] === undefined ? message.state : $root.google.cloud.functions.v2alpha.Stage.State[message.state] : message.state;
                             if (message.resource != null && message.hasOwnProperty("resource"))
                                 object.resource = message.resource;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -25488,6 +25644,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.environment) {
+                            default:
+                                if (typeof object.environment === "number") {
+                                    message.environment = object.environment;
+                                    break;
+                                }
+                                break;
                             case "ENVIRONMENT_UNSPECIFIED":
                             case 0:
                                 message.environment = 0;
@@ -25519,6 +25681,12 @@
                                 message.eventTrigger = $root.google.cloud.functions.v2beta.EventTrigger.fromObject(object.eventTrigger);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -25607,7 +25775,7 @@
                             if (message.eventTrigger != null && message.hasOwnProperty("eventTrigger"))
                                 object.eventTrigger = $root.google.cloud.functions.v2beta.EventTrigger.toObject(message.eventTrigger, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.functions.v2beta.Function.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.functions.v2beta.Function.State[message.state] === undefined ? message.state : $root.google.cloud.functions.v2beta.Function.State[message.state] : message.state;
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             var keys2;
@@ -25622,7 +25790,7 @@
                                     object.stateMessages[j] = $root.google.cloud.functions.v2beta.StateMessage.toObject(message.stateMessages[j], options);
                             }
                             if (message.environment != null && message.hasOwnProperty("environment"))
-                                object.environment = options.enums === String ? $root.google.cloud.functions.v2beta.Environment[message.environment] : message.environment;
+                                object.environment = options.enums === String ? $root.google.cloud.functions.v2beta.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2beta.Environment[message.environment] : message.environment;
                             return object;
                         };
     
@@ -25870,6 +26038,12 @@
                                 return object;
                             var message = new $root.google.cloud.functions.v2beta.StateMessage();
                             switch (object.severity) {
+                            default:
+                                if (typeof object.severity === "number") {
+                                    message.severity = object.severity;
+                                    break;
+                                }
+                                break;
                             case "SEVERITY_UNSPECIFIED":
                             case 0:
                                 message.severity = 0;
@@ -25913,7 +26087,7 @@
                                 object.message = "";
                             }
                             if (message.severity != null && message.hasOwnProperty("severity"))
-                                object.severity = options.enums === String ? $root.google.cloud.functions.v2beta.StateMessage.Severity[message.severity] : message.severity;
+                                object.severity = options.enums === String ? $root.google.cloud.functions.v2beta.StateMessage.Severity[message.severity] === undefined ? message.severity : $root.google.cloud.functions.v2beta.StateMessage.Severity[message.severity] : message.severity;
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = message.type;
                             if (message.message != null && message.hasOwnProperty("message"))
@@ -27995,6 +28169,12 @@
                             if (object.vpcConnector != null)
                                 message.vpcConnector = String(object.vpcConnector);
                             switch (object.vpcConnectorEgressSettings) {
+                            default:
+                                if (typeof object.vpcConnectorEgressSettings === "number") {
+                                    message.vpcConnectorEgressSettings = object.vpcConnectorEgressSettings;
+                                    break;
+                                }
+                                break;
                             case "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED":
                             case 0:
                                 message.vpcConnectorEgressSettings = 0;
@@ -28009,6 +28189,12 @@
                                 break;
                             }
                             switch (object.ingressSettings) {
+                            default:
+                                if (typeof object.ingressSettings === "number") {
+                                    message.ingressSettings = object.ingressSettings;
+                                    break;
+                                }
+                                break;
                             case "INGRESS_SETTINGS_UNSPECIFIED":
                             case 0:
                                 message.ingressSettings = 0;
@@ -28105,9 +28291,9 @@
                             if (message.vpcConnector != null && message.hasOwnProperty("vpcConnector"))
                                 object.vpcConnector = message.vpcConnector;
                             if (message.vpcConnectorEgressSettings != null && message.hasOwnProperty("vpcConnectorEgressSettings"))
-                                object.vpcConnectorEgressSettings = options.enums === String ? $root.google.cloud.functions.v2beta.ServiceConfig.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] : message.vpcConnectorEgressSettings;
+                                object.vpcConnectorEgressSettings = options.enums === String ? $root.google.cloud.functions.v2beta.ServiceConfig.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] === undefined ? message.vpcConnectorEgressSettings : $root.google.cloud.functions.v2beta.ServiceConfig.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] : message.vpcConnectorEgressSettings;
                             if (message.ingressSettings != null && message.hasOwnProperty("ingressSettings"))
-                                object.ingressSettings = options.enums === String ? $root.google.cloud.functions.v2beta.ServiceConfig.IngressSettings[message.ingressSettings] : message.ingressSettings;
+                                object.ingressSettings = options.enums === String ? $root.google.cloud.functions.v2beta.ServiceConfig.IngressSettings[message.ingressSettings] === undefined ? message.ingressSettings : $root.google.cloud.functions.v2beta.ServiceConfig.IngressSettings[message.ingressSettings] : message.ingressSettings;
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
                             if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
@@ -29303,6 +29489,12 @@
                             if (object.serviceAccountEmail != null)
                                 message.serviceAccountEmail = String(object.serviceAccountEmail);
                             switch (object.retryPolicy) {
+                            default:
+                                if (typeof object.retryPolicy === "number") {
+                                    message.retryPolicy = object.retryPolicy;
+                                    break;
+                                }
+                                break;
                             case "RETRY_POLICY_UNSPECIFIED":
                             case 0:
                                 message.retryPolicy = 0;
@@ -29361,7 +29553,7 @@
                             if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
                                 object.serviceAccountEmail = message.serviceAccountEmail;
                             if (message.retryPolicy != null && message.hasOwnProperty("retryPolicy"))
-                                object.retryPolicy = options.enums === String ? $root.google.cloud.functions.v2beta.EventTrigger.RetryPolicy[message.retryPolicy] : message.retryPolicy;
+                                object.retryPolicy = options.enums === String ? $root.google.cloud.functions.v2beta.EventTrigger.RetryPolicy[message.retryPolicy] === undefined ? message.retryPolicy : $root.google.cloud.functions.v2beta.EventTrigger.RetryPolicy[message.retryPolicy] : message.retryPolicy;
                             if (message.channel != null && message.hasOwnProperty("channel"))
                                 object.channel = message.channel;
                             return object;
@@ -32683,6 +32875,12 @@
                                 if (object.displayName != null)
                                     message.displayName = String(object.displayName);
                                 switch (object.stage) {
+                                default:
+                                    if (typeof object.stage === "number") {
+                                        message.stage = object.stage;
+                                        break;
+                                    }
+                                    break;
                                 case "RUNTIME_STAGE_UNSPECIFIED":
                                 case 0:
                                     message.stage = 0;
@@ -32720,6 +32918,12 @@
                                         message.warnings[i] = String(object.warnings[i]);
                                 }
                                 switch (object.environment) {
+                                default:
+                                    if (typeof object.environment === "number") {
+                                        message.environment = object.environment;
+                                        break;
+                                    }
+                                    break;
                                 case "ENVIRONMENT_UNSPECIFIED":
                                 case 0:
                                     message.environment = 0;
@@ -32760,14 +32964,14 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.stage != null && message.hasOwnProperty("stage"))
-                                    object.stage = options.enums === String ? $root.google.cloud.functions.v2beta.ListRuntimesResponse.RuntimeStage[message.stage] : message.stage;
+                                    object.stage = options.enums === String ? $root.google.cloud.functions.v2beta.ListRuntimesResponse.RuntimeStage[message.stage] === undefined ? message.stage : $root.google.cloud.functions.v2beta.ListRuntimesResponse.RuntimeStage[message.stage] : message.stage;
                                 if (message.warnings && message.warnings.length) {
                                     object.warnings = [];
                                     for (var j = 0; j < message.warnings.length; ++j)
                                         object.warnings[j] = message.warnings[j];
                                 }
                                 if (message.environment != null && message.hasOwnProperty("environment"))
-                                    object.environment = options.enums === String ? $root.google.cloud.functions.v2beta.Environment[message.environment] : message.environment;
+                                    object.environment = options.enums === String ? $root.google.cloud.functions.v2beta.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2beta.Environment[message.environment] : message.environment;
                                 if (message.displayName != null && message.hasOwnProperty("displayName"))
                                     object.displayName = message.displayName;
                                 return object;
@@ -33521,6 +33725,12 @@
                                 return object;
                             var message = new $root.google.cloud.functions.v2beta.Stage();
                             switch (object.name) {
+                            default:
+                                if (typeof object.name === "number") {
+                                    message.name = object.name;
+                                    break;
+                                }
+                                break;
                             case "NAME_UNSPECIFIED":
                             case 0:
                                 message.name = 0;
@@ -33553,6 +33763,12 @@
                             if (object.message != null)
                                 message.message = String(object.message);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -33610,11 +33826,11 @@
                                 object.resourceUri = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = options.enums === String ? $root.google.cloud.functions.v2beta.Stage.Name[message.name] : message.name;
+                                object.name = options.enums === String ? $root.google.cloud.functions.v2beta.Stage.Name[message.name] === undefined ? message.name : $root.google.cloud.functions.v2beta.Stage.Name[message.name] : message.name;
                             if (message.message != null && message.hasOwnProperty("message"))
                                 object.message = message.message;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.functions.v2beta.Stage.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.functions.v2beta.Stage.State[message.state] === undefined ? message.state : $root.google.cloud.functions.v2beta.Stage.State[message.state] : message.state;
                             if (message.resource != null && message.hasOwnProperty("resource"))
                                 object.resource = message.resource;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -35009,6 +35225,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -35033,6 +35255,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -35080,7 +35306,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -35088,7 +35314,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -37899,6 +38125,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -37913,6 +38145,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -38039,9 +38277,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -40388,6 +40626,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -40496,7 +40740,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -41298,6 +41542,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -41314,6 +41564,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -41352,6 +41608,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -41422,7 +41682,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -41430,7 +41690,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -41443,7 +41703,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -42820,6 +43080,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -42889,7 +43155,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -44644,6 +44910,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -44693,7 +44965,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -48198,6 +48470,12 @@
                             return object;
                         var message = new $root.google.iam.v1.AuditLogConfig();
                         switch (object.logType) {
+                        default:
+                            if (typeof object.logType === "number") {
+                                message.logType = object.logType;
+                                break;
+                            }
+                            break;
                         case "LOG_TYPE_UNSPECIFIED":
                         case 0:
                             message.logType = 0;
@@ -48243,7 +48521,7 @@
                         if (options.defaults)
                             object.logType = options.enums === String ? "LOG_TYPE_UNSPECIFIED" : 0;
                         if (message.logType != null && message.hasOwnProperty("logType"))
-                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
+                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] === undefined ? message.logType : $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
                         if (message.exemptedMembers && message.exemptedMembers.length) {
                             object.exemptedMembers = [];
                             for (var j = 0; j < message.exemptedMembers.length; ++j)
@@ -48780,6 +49058,12 @@
                             return object;
                         var message = new $root.google.iam.v1.BindingDelta();
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "ACTION_UNSPECIFIED":
                         case 0:
                             message.action = 0;
@@ -48825,7 +49109,7 @@
                             object.condition = null;
                         }
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
                         if (message.role != null && message.hasOwnProperty("role"))
                             object.role = message.role;
                         if (message.member != null && message.hasOwnProperty("member"))
@@ -49090,6 +49374,12 @@
                             return object;
                         var message = new $root.google.iam.v1.AuditConfigDelta();
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "ACTION_UNSPECIFIED":
                         case 0:
                             message.action = 0;
@@ -49132,7 +49422,7 @@
                             object.logType = "";
                         }
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
                         if (message.service != null && message.hasOwnProperty("service"))
                             object.service = message.service;
                         if (message.exemptedMember != null && message.hasOwnProperty("exemptedMember"))
