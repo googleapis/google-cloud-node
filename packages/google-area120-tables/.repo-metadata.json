@@ -1,6 +1,6 @@
 {
   "language": "nodejs",
-  "repo": "googleapis/nodejs-area120-tables",
+  "repo": "googleapis/google-cloud-node",
   "name": "area120tables",
   "issue_tracker": "",
   "default_version": "v1alpha1",
