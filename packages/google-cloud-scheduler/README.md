@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -52,43 +52,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/scheduler
 ```
 
-
-### Using the client library
-
-```javascript
-// const projectId = "PROJECT_ID"
-// const locationId = "LOCATION_ID" // see: https://cloud.google.com/about/locations/
-// const url = "https://postb.in/..." // where should we say hello?
-
-const scheduler = require('@google-cloud/scheduler');
-
-// Create a client.
-const client = new scheduler.CloudSchedulerClient();
-
-// Construct the fully qualified location path.
-const parent = client.locationPath(projectId, locationId);
-
-// Construct the request body.
-const job = {
-  httpTarget: {
-    uri: url,
-    httpMethod: 'POST',
-    body: Buffer.from('Hello World'),
-  },
-  schedule: '* * * * *',
-  timeZone: 'America/Los_Angeles',
-};
-
-const request = {
-  parent: parent,
-  job: job,
-};
-
-// Use the client to send the job creation request.
-const [response] = await client.createJob(request);
-console.log(`Created job: ${response.name}`);
-
-```
 
 
 
@@ -115,6 +78,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Cloud_scheduler.run_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.run_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.run_job.js,samples/README.md) |
 | Cloud_scheduler.update_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.update_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.update_job.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/quickstart.js,samples/README.md) |
+| Quickstart.test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/test/quickstart.test.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/test/quickstart.test.js,samples/README.md) |
 
 
 
