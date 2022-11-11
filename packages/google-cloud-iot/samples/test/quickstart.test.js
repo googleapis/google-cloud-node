@@ -14,12 +14,14 @@
 
 'use strict';
 
-const {assert} = require('chai');
+const assert = require('assert');
+const path = require('path');
 const {describe, it, before} = require('mocha');
 const cp = require('child_process');
 const iot = require('@google-cloud/iot');
 const client = new iot.v1.DeviceManagerClient();
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const cwd = path.join(__dirname, '..');
 
 describe('iot samples', () => {
   let projectId;
@@ -29,7 +31,7 @@ describe('iot samples', () => {
   });
 
   it('should run the quickstart', async () => {
-    const stdout = execSync(`node quickstart ${projectId}`);
-    assert.match(stdout, /\d resource\(s\) found./);
+    const stdout = execSync(`node quickstart projects/${projectId}/locations/us-central1`, {cwd});
+    assert(stdout !== null);
   });
 });
