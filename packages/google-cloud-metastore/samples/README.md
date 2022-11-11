@@ -77,14 +77,14 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Dataproc_metastore.create_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.create_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.create_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.create_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.create_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.create_backup.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.create_backup.js`
 
 
 -----
@@ -94,14 +94,14 @@ __Usage:__
 
 ### Dataproc_metastore.create_metadata_import
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.create_metadata_import.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.create_metadata_import.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.create_metadata_import.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.create_metadata_import.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.create_metadata_import.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.create_metadata_import.js`
 
 
 -----
@@ -111,14 +111,14 @@ __Usage:__
 
 ### Dataproc_metastore.create_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.create_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.create_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.create_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.create_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.create_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.create_service.js`
 
 
 -----
@@ -128,14 +128,14 @@ __Usage:__
 
 ### Dataproc_metastore.delete_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.delete_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.delete_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.delete_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.delete_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.delete_backup.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.delete_backup.js`
 
 
 -----
@@ -145,14 +145,14 @@ __Usage:__
 
 ### Dataproc_metastore.delete_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.delete_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.delete_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.delete_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.delete_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.delete_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.delete_service.js`
 
 
 -----
@@ -162,14 +162,14 @@ __Usage:__
 
 ### Dataproc_metastore.export_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.export_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.export_metadata.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.export_metadata.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.export_metadata.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.export_metadata.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.export_metadata.js`
 
 
 -----
@@ -179,14 +179,14 @@ __Usage:__
 
 ### Dataproc_metastore.get_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.get_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.get_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.get_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.get_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.get_backup.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.get_backup.js`
 
 
 -----
@@ -196,14 +196,14 @@ __Usage:__
 
 ### Dataproc_metastore.get_metadata_import
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.get_metadata_import.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.get_metadata_import.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.get_metadata_import.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.get_metadata_import.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.get_metadata_import.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.get_metadata_import.js`
 
 
 -----
@@ -213,14 +213,14 @@ __Usage:__
 
 ### Dataproc_metastore.get_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.get_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.get_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.get_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.get_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.get_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.get_service.js`
 
 
 -----
@@ -230,14 +230,14 @@ __Usage:__
 
 ### Dataproc_metastore.list_backups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.list_backups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.list_backups.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.list_backups.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.list_backups.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.list_backups.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.list_backups.js`
 
 
 -----
@@ -247,14 +247,14 @@ __Usage:__
 
 ### Dataproc_metastore.list_metadata_imports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.list_metadata_imports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.list_metadata_imports.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.list_metadata_imports.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.list_metadata_imports.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.list_metadata_imports.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.list_metadata_imports.js`
 
 
 -----
@@ -264,14 +264,14 @@ __Usage:__
 
 ### Dataproc_metastore.list_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.list_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.list_services.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.list_services.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.list_services.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.list_services.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.list_services.js`
 
 
 -----
@@ -281,14 +281,14 @@ __Usage:__
 
 ### Dataproc_metastore.restore_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.restore_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.restore_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.restore_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.restore_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.restore_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.restore_service.js`
 
 
 -----
@@ -298,14 +298,14 @@ __Usage:__
 
 ### Dataproc_metastore.update_metadata_import
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.update_metadata_import.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.update_metadata_import.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.update_metadata_import.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.update_metadata_import.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.update_metadata_import.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.update_metadata_import.js`
 
 
 -----
@@ -315,14 +315,14 @@ __Usage:__
 
 ### Dataproc_metastore.update_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.update_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.update_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.update_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.update_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/dataproc_metastore.update_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore.update_service.js`
 
 
 -----
@@ -332,14 +332,14 @@ __Usage:__
 
 ### Dataproc_metastore.create_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.create_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.create_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.create_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.create_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.create_backup.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.create_backup.js`
 
 
 -----
@@ -349,14 +349,14 @@ __Usage:__
 
 ### Dataproc_metastore.create_metadata_import
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.create_metadata_import.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.create_metadata_import.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.create_metadata_import.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.create_metadata_import.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.create_metadata_import.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.create_metadata_import.js`
 
 
 -----
@@ -366,14 +366,14 @@ __Usage:__
 
 ### Dataproc_metastore.create_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.create_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.create_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.create_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.create_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.create_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.create_service.js`
 
 
 -----
@@ -383,14 +383,14 @@ __Usage:__
 
 ### Dataproc_metastore.delete_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.delete_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.delete_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.delete_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.delete_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.delete_backup.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.delete_backup.js`
 
 
 -----
@@ -400,14 +400,14 @@ __Usage:__
 
 ### Dataproc_metastore.delete_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.delete_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.delete_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.delete_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.delete_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.delete_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.delete_service.js`
 
 
 -----
@@ -417,14 +417,14 @@ __Usage:__
 
 ### Dataproc_metastore.export_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.export_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.export_metadata.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.export_metadata.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.export_metadata.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.export_metadata.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.export_metadata.js`
 
 
 -----
@@ -434,14 +434,14 @@ __Usage:__
 
 ### Dataproc_metastore.get_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.get_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.get_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.get_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.get_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.get_backup.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.get_backup.js`
 
 
 -----
@@ -451,14 +451,14 @@ __Usage:__
 
 ### Dataproc_metastore.get_metadata_import
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.get_metadata_import.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.get_metadata_import.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.get_metadata_import.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.get_metadata_import.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.get_metadata_import.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.get_metadata_import.js`
 
 
 -----
@@ -468,14 +468,14 @@ __Usage:__
 
 ### Dataproc_metastore.get_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.get_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.get_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.get_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.get_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.get_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.get_service.js`
 
 
 -----
@@ -485,14 +485,14 @@ __Usage:__
 
 ### Dataproc_metastore.list_backups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.list_backups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.list_backups.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.list_backups.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.list_backups.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.list_backups.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.list_backups.js`
 
 
 -----
@@ -502,14 +502,14 @@ __Usage:__
 
 ### Dataproc_metastore.list_metadata_imports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.list_metadata_imports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.list_metadata_imports.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.list_metadata_imports.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.list_metadata_imports.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.list_metadata_imports.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.list_metadata_imports.js`
 
 
 -----
@@ -519,14 +519,14 @@ __Usage:__
 
 ### Dataproc_metastore.list_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.list_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.list_services.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.list_services.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.list_services.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.list_services.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.list_services.js`
 
 
 -----
@@ -536,14 +536,14 @@ __Usage:__
 
 ### Dataproc_metastore.restore_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.restore_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.restore_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.restore_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.restore_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.restore_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.restore_service.js`
 
 
 -----
@@ -553,14 +553,14 @@ __Usage:__
 
 ### Dataproc_metastore.update_metadata_import
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.update_metadata_import.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.update_metadata_import.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.update_metadata_import.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.update_metadata_import.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.update_metadata_import.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.update_metadata_import.js`
 
 
 -----
@@ -570,14 +570,14 @@ __Usage:__
 
 ### Dataproc_metastore.update_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.update_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.update_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.update_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.update_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/dataproc_metastore.update_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.update_service.js`
 
 
 -----
@@ -587,14 +587,14 @@ __Usage:__
 
 ### Dataproc_metastore.create_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.create_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.create_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.create_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.create_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.create_backup.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.create_backup.js`
 
 
 -----
@@ -604,14 +604,14 @@ __Usage:__
 
 ### Dataproc_metastore.create_metadata_import
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.create_metadata_import.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.create_metadata_import.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.create_metadata_import.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.create_metadata_import.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.create_metadata_import.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.create_metadata_import.js`
 
 
 -----
@@ -621,14 +621,14 @@ __Usage:__
 
 ### Dataproc_metastore.create_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.create_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.create_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.create_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.create_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.create_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.create_service.js`
 
 
 -----
@@ -638,14 +638,14 @@ __Usage:__
 
 ### Dataproc_metastore.delete_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.delete_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.delete_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.delete_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.delete_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.delete_backup.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.delete_backup.js`
 
 
 -----
@@ -655,14 +655,14 @@ __Usage:__
 
 ### Dataproc_metastore.delete_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.delete_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.delete_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.delete_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.delete_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.delete_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.delete_service.js`
 
 
 -----
@@ -672,14 +672,14 @@ __Usage:__
 
 ### Dataproc_metastore.export_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.export_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.export_metadata.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.export_metadata.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.export_metadata.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.export_metadata.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.export_metadata.js`
 
 
 -----
@@ -689,14 +689,14 @@ __Usage:__
 
 ### Dataproc_metastore.get_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.get_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.get_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.get_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.get_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.get_backup.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.get_backup.js`
 
 
 -----
@@ -706,14 +706,14 @@ __Usage:__
 
 ### Dataproc_metastore.get_metadata_import
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.get_metadata_import.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.get_metadata_import.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.get_metadata_import.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.get_metadata_import.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.get_metadata_import.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.get_metadata_import.js`
 
 
 -----
@@ -723,14 +723,14 @@ __Usage:__
 
 ### Dataproc_metastore.get_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.get_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.get_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.get_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.get_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.get_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.get_service.js`
 
 
 -----
@@ -740,14 +740,14 @@ __Usage:__
 
 ### Dataproc_metastore.list_backups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.list_backups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.list_backups.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.list_backups.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.list_backups.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.list_backups.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.list_backups.js`
 
 
 -----
@@ -757,14 +757,14 @@ __Usage:__
 
 ### Dataproc_metastore.list_metadata_imports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.list_metadata_imports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.list_metadata_imports.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.list_metadata_imports.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.list_metadata_imports.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.list_metadata_imports.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.list_metadata_imports.js`
 
 
 -----
@@ -774,14 +774,14 @@ __Usage:__
 
 ### Dataproc_metastore.list_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.list_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.list_services.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.list_services.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.list_services.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.list_services.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.list_services.js`
 
 
 -----
@@ -791,14 +791,14 @@ __Usage:__
 
 ### Dataproc_metastore.restore_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.restore_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.restore_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.restore_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.restore_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.restore_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.restore_service.js`
 
 
 -----
@@ -808,14 +808,14 @@ __Usage:__
 
 ### Dataproc_metastore.update_metadata_import
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.update_metadata_import.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.update_metadata_import.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.update_metadata_import.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.update_metadata_import.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.update_metadata_import.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.update_metadata_import.js`
 
 
 -----
@@ -825,14 +825,14 @@ __Usage:__
 
 ### Dataproc_metastore.update_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.update_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.update_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.update_service.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.update_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta/dataproc_metastore.update_service.js`
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.update_service.js`
 
 
 -----
@@ -842,14 +842,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/quickstart.js`
+`node packages/google-cloud-metastore/samples/quickstart.js`
 
 
 -----
@@ -859,14 +859,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/test/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/test/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/test/quickstart.js`
+`node packages/google-cloud-metastore/samples/test/quickstart.js`
 
 
 
