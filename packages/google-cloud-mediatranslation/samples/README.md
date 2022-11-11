@@ -13,6 +13,7 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Speech_translation_service.streaming_translate_speech](#speech_translation_service.streaming_translate_speech)
+  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -31,14 +32,31 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Speech_translation_service.streaming_translate_speech
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-mediatranslation/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-mediatranslation/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js`
+`node packages/google-cloud-mediatranslation/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-mediatranslation/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-mediatranslation/samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-mediatranslation/samples/quickstart.js`
 
 
 
