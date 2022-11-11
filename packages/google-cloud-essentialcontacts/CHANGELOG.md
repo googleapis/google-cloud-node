@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.0.2](https://github.com/googleapis/nodejs-essential-contacts/compare/v2.0.1...v2.0.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#110](https://github.com/googleapis/nodejs-essential-contacts/issues/110)) ([fb3d596](https://github.com/googleapis/nodejs-essential-contacts/commit/fb3d596a8dee0ab338485a862955757cfbcd99c2))
+* Better support for fallback mode ([#105](https://github.com/googleapis/nodejs-essential-contacts/issues/105)) ([c23259b](https://github.com/googleapis/nodejs-essential-contacts/commit/c23259b0a493e5bcdabf408902ffe16be76e7cb0))
+* Change import long to require ([#106](https://github.com/googleapis/nodejs-essential-contacts/issues/106)) ([f009752](https://github.com/googleapis/nodejs-essential-contacts/commit/f009752ac7a8267ef6444fa9eb7338e70e6687d6))
+* **deps:** Use google-gax v3.5.2 ([#117](https://github.com/googleapis/nodejs-essential-contacts/issues/117)) ([f90a6e7](https://github.com/googleapis/nodejs-essential-contacts/commit/f90a6e75af5c23754bf67bea1b8fd55c96a1330f))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-essential-contacts/issues/1553)) ([#109](https://github.com/googleapis/nodejs-essential-contacts/issues/109)) ([c7e8827](https://github.com/googleapis/nodejs-essential-contacts/commit/c7e8827859caa1c23bc38f43ca71cfe8d6784dfd))
+* Preserve default values in x-goog-request-params header ([#111](https://github.com/googleapis/nodejs-essential-contacts/issues/111)) ([5074ba2](https://github.com/googleapis/nodejs-essential-contacts/commit/5074ba241d3e5ac5dc4a47ef7fc9cc3761f406cb))
+* Regenerated protos JS and TS definitions ([#120](https://github.com/googleapis/nodejs-essential-contacts/issues/120)) ([4989df1](https://github.com/googleapis/nodejs-essential-contacts/commit/4989df17b1c7d0deb7907f7659b0fd2032833e8f))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-essential-contacts/issues/1546)) ([#108](https://github.com/googleapis/nodejs-essential-contacts/issues/108)) ([9fb4d1c](https://github.com/googleapis/nodejs-essential-contacts/commit/9fb4d1c253480086fe101cef0817874b313d076a))
+* use google-gax v3.3.0 ([c7e8827](https://github.com/googleapis/nodejs-essential-contacts/commit/c7e8827859caa1c23bc38f43ca71cfe8d6784dfd))
+
 ## [2.0.1](https://github.com/googleapis/nodejs-essential-contacts/compare/v2.0.0...v2.0.1) (2022-06-30)
 
 
