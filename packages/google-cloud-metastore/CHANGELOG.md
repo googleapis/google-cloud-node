@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.2](https://github.com/googleapis/nodejs-dataproc-metastore/compare/v3.1.1...v3.1.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#161](https://github.com/googleapis/nodejs-dataproc-metastore/issues/161)) ([805456b](https://github.com/googleapis/nodejs-dataproc-metastore/commit/805456ba20ea8ab7186de272fdf1496e33eed184))
+* Preserve default values in x-goog-request-params header ([#154](https://github.com/googleapis/nodejs-dataproc-metastore/issues/154)) ([f4b5e70](https://github.com/googleapis/nodejs-dataproc-metastore/commit/f4b5e703688084a52b34aacb1c7794cad34612b6))
+* Regenerated protos JS and TS definitions ([#164](https://github.com/googleapis/nodejs-dataproc-metastore/issues/164)) ([6240505](https://github.com/googleapis/nodejs-dataproc-metastore/commit/6240505d07404d92e255fbf8fefa67fbb133016f))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-dataproc-metastore/compare/v3.1.0...v3.1.1) (2022-09-01)
 
 
