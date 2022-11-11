@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Secret Manager: Node.js Client](https://github.com/googleapis/nodejs-secret-manager)
+# [Secret Manager: Node.js Client](https://github.com/googleapis/google-cloud-node)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/secret-manager.svg)](https://www.npmjs.org/package/@google-cloud/secret-manager)
@@ -14,11 +14,11 @@ Secrets client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-secret-manager/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-secretmanager/CHANGELOG.md).
 
 * [Secret Manager Node.js Client API Reference][client-docs]
 * [Secret Manager Documentation][product-docs]
-* [github.com/googleapis/nodejs-secret-manager](https://github.com/googleapis/nodejs-secret-manager)
+* [github.com/googleapis/google-cloud-node/packages/google-cloud-secretmanager](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-secretmanager)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -109,27 +109,26 @@ createAndAccessSecret();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-secret-manager/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Access Secret Version | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/accessSecretVersion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/accessSecretVersion.js,samples/README.md) |
-| Add Secret Version | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/addSecretVersion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/addSecretVersion.js,samples/README.md) |
-| Create Secret | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/createSecret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/createSecret.js,samples/README.md) |
-| Create Ummr Secret | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/createUmmrSecret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/createUmmrSecret.js,samples/README.md) |
-| Delete Secret | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/deleteSecret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/deleteSecret.js,samples/README.md) |
-| Destroy Secret Version | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/destroySecretVersion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/destroySecretVersion.js,samples/README.md) |
-| Disable Secret Version | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/disableSecretVersion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/disableSecretVersion.js,samples/README.md) |
-| Enable Secret Version | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/enableSecretVersion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/enableSecretVersion.js,samples/README.md) |
-| Get Secret | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/getSecret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/getSecret.js,samples/README.md) |
-| Get Secret Version | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/getSecretVersion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/getSecretVersion.js,samples/README.md) |
-| Iam Grant Access | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/iamGrantAccess.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/iamGrantAccess.js,samples/README.md) |
-| Iam Revoke Access | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/iamRevokeAccess.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/iamRevokeAccess.js,samples/README.md) |
-| List Secret Versions | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/listSecretVersions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/listSecretVersions.js,samples/README.md) |
-| List Secrets | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/listSecrets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/listSecrets.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Update Secret | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/updateSecret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/updateSecret.js,samples/README.md) |
-| Update Secret With Alias | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/main/samples/updateSecretWithAlias.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/updateSecretWithAlias.js,samples/README.md) |
+| Secret_manager_service.access_secret_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.access_secret_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.access_secret_version.js,samples/README.md) |
+| Secret_manager_service.add_secret_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.add_secret_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.add_secret_version.js,samples/README.md) |
+| Secret_manager_service.create_secret | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.create_secret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.create_secret.js,samples/README.md) |
+| Secret_manager_service.delete_secret | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.delete_secret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.delete_secret.js,samples/README.md) |
+| Secret_manager_service.destroy_secret_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.destroy_secret_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.destroy_secret_version.js,samples/README.md) |
+| Secret_manager_service.disable_secret_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.disable_secret_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.disable_secret_version.js,samples/README.md) |
+| Secret_manager_service.enable_secret_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.enable_secret_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.enable_secret_version.js,samples/README.md) |
+| Secret_manager_service.get_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.get_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.get_iam_policy.js,samples/README.md) |
+| Secret_manager_service.get_secret | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.get_secret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.get_secret.js,samples/README.md) |
+| Secret_manager_service.get_secret_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.get_secret_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.get_secret_version.js,samples/README.md) |
+| Secret_manager_service.list_secret_versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.list_secret_versions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.list_secret_versions.js,samples/README.md) |
+| Secret_manager_service.list_secrets | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.list_secrets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.list_secrets.js,samples/README.md) |
+| Secret_manager_service.set_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.set_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.set_iam_policy.js,samples/README.md) |
+| Secret_manager_service.test_iam_permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.test_iam_permissions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.test_iam_permissions.js,samples/README.md) |
+| Secret_manager_service.update_secret | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/secret_manager_service.update_secret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/secret_manager_service.update_secret.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md) |
 
 
 
@@ -179,7 +178,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-secret-manager/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -191,7 +190,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-secret-manager/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/secret-manager/latest
 [product-docs]: https://cloud.google.com/secret-manager/docs
