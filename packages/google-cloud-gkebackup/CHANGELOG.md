@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2](https://github.com/googleapis/nodejs-gke-backup/compare/v0.2.1...v0.2.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#27](https://github.com/googleapis/nodejs-gke-backup/issues/27)) ([9fe267c](https://github.com/googleapis/nodejs-gke-backup/commit/9fe267cbad703730c43dc039b36dfc17184c518b))
+* Regenerated protos JS and TS definitions ([#31](https://github.com/googleapis/nodejs-gke-backup/issues/31)) ([bb11ae0](https://github.com/googleapis/nodejs-gke-backup/commit/bb11ae024de98de8ac530c9746eaa00705318de6))
+
 ## [0.2.1](https://github.com/googleapis/nodejs-gke-backup/compare/v0.2.0...v0.2.1) (2022-10-06)
 
 
