@@ -21,6 +21,7 @@
   "packages/google-cloud-gkeconnect-gateway": "2.0.5",
   "packages/google-cloud-gkemulticloud": "0.1.4",
   "packages/google-cloud-language": "5.1.2",
+  "packages/google-cloud-lifesciences": "2.1.2",
   "packages/google-cloud-memcache": "2.1.4",
   "packages/google-cloud-monitoring": "3.0.3",
   "packages/google-cloud-oslogin": "4.0.4",
