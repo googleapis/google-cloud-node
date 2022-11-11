@@ -23,7 +23,7 @@ const {CloudTasksClient} = require('@google-cloud/tasks');
 const exec = cmd => execSync(cmd, {encoding: 'utf-8'});
 const queueName = `gcloud-${uuid.v4().split('-')[0]}`;
 
-describe('Cloud Task Sample Tests', async() => {
+describe('Cloud Task Sample Tests', async () => {
   let projectId;
 
   before(async () => {
