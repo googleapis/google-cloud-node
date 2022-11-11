@@ -1178,6 +1178,12 @@
                                 message.reportTime = $root.google.protobuf.Timestamp.fromObject(object.reportTime);
                             }
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "EVENT_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -1231,7 +1237,7 @@
                             if (message.reportTime != null && message.hasOwnProperty("reportTime"))
                                 object.reportTime = $root.google.protobuf.Timestamp.toObject(message.reportTime, options);
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.Event.EventType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.Event.EventType[message.type] === undefined ? message.type : $root.google.cloud.notebooks.v1.Event.EventType[message.type] : message.type;
                             var keys2;
                             if (message.details && (keys2 = Object.keys(message.details)).length) {
                                 object.details = {};
@@ -1763,6 +1769,12 @@
                                 return object;
                             var message = new $root.google.cloud.notebooks.v1.ExecutionTemplate();
                             switch (object.scaleTier) {
+                            default:
+                                if (typeof object.scaleTier === "number") {
+                                    message.scaleTier = object.scaleTier;
+                                    break;
+                                }
+                                break;
                             case "SCALE_TIER_UNSPECIFIED":
                             case 0:
                                 message.scaleTier = 0;
@@ -1819,6 +1831,12 @@
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
                             switch (object.jobType) {
+                            default:
+                                if (typeof object.jobType === "number") {
+                                    message.jobType = object.jobType;
+                                    break;
+                                }
+                                break;
                             case "JOB_TYPE_UNSPECIFIED":
                             case 0:
                                 message.jobType = 0;
@@ -1879,7 +1897,7 @@
                                 object.tensorboard = "";
                             }
                             if (message.scaleTier != null && message.hasOwnProperty("scaleTier"))
-                                object.scaleTier = options.enums === String ? $root.google.cloud.notebooks.v1.ExecutionTemplate.ScaleTier[message.scaleTier] : message.scaleTier;
+                                object.scaleTier = options.enums === String ? $root.google.cloud.notebooks.v1.ExecutionTemplate.ScaleTier[message.scaleTier] === undefined ? message.scaleTier : $root.google.cloud.notebooks.v1.ExecutionTemplate.ScaleTier[message.scaleTier] : message.scaleTier;
                             if (message.masterType != null && message.hasOwnProperty("masterType"))
                                 object.masterType = message.masterType;
                             if (message.acceleratorConfig != null && message.hasOwnProperty("acceleratorConfig"))
@@ -1903,7 +1921,7 @@
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
                             if (message.jobType != null && message.hasOwnProperty("jobType"))
-                                object.jobType = options.enums === String ? $root.google.cloud.notebooks.v1.ExecutionTemplate.JobType[message.jobType] : message.jobType;
+                                object.jobType = options.enums === String ? $root.google.cloud.notebooks.v1.ExecutionTemplate.JobType[message.jobType] === undefined ? message.jobType : $root.google.cloud.notebooks.v1.ExecutionTemplate.JobType[message.jobType] : message.jobType;
                             if (message.dataprocParameters != null && message.hasOwnProperty("dataprocParameters")) {
                                 object.dataprocParameters = $root.google.cloud.notebooks.v1.ExecutionTemplate.DataprocParameters.toObject(message.dataprocParameters, options);
                                 if (options.oneofs)
@@ -2179,6 +2197,12 @@
                                     return object;
                                 var message = new $root.google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorConfig();
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -2250,7 +2274,7 @@
                                         object.coreCount = options.longs === String ? "0" : 0;
                                 }
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorType[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorType[message.type] === undefined ? message.type : $root.google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorType[message.type] : message.type;
                                 if (message.coreCount != null && message.hasOwnProperty("coreCount"))
                                     if (typeof message.coreCount === "number")
                                         object.coreCount = options.longs === String ? String(message.coreCount) : message.coreCount;
@@ -3106,6 +3130,12 @@
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -3191,7 +3221,7 @@
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.notebooks.v1.Execution.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.notebooks.v1.Execution.State[message.state] === undefined ? message.state : $root.google.cloud.notebooks.v1.Execution.State[message.state] : message.state;
                             if (message.outputNotebookFile != null && message.hasOwnProperty("outputNotebookFile"))
                                 object.outputNotebookFile = message.outputNotebookFile;
                             if (message.jobUri != null && message.hasOwnProperty("jobUri"))
@@ -3459,6 +3489,12 @@
                                 return object;
                             var message = new $root.google.cloud.notebooks.v1.ReservationAffinity();
                             switch (object.consumeReservationType) {
+                            default:
+                                if (typeof object.consumeReservationType === "number") {
+                                    message.consumeReservationType = object.consumeReservationType;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.consumeReservationType = 0;
@@ -3508,7 +3544,7 @@
                                 object.key = "";
                             }
                             if (message.consumeReservationType != null && message.hasOwnProperty("consumeReservationType"))
-                                object.consumeReservationType = options.enums === String ? $root.google.cloud.notebooks.v1.ReservationAffinity.Type[message.consumeReservationType] : message.consumeReservationType;
+                                object.consumeReservationType = options.enums === String ? $root.google.cloud.notebooks.v1.ReservationAffinity.Type[message.consumeReservationType] === undefined ? message.consumeReservationType : $root.google.cloud.notebooks.v1.ReservationAffinity.Type[message.consumeReservationType] : message.consumeReservationType;
                             if (message.key != null && message.hasOwnProperty("key"))
                                 object.key = message.key;
                             if (message.values && message.values.length) {
@@ -4561,6 +4597,12 @@
                                 message.acceleratorConfig = $root.google.cloud.notebooks.v1.Instance.AcceleratorConfig.fromObject(object.acceleratorConfig);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -4615,6 +4657,12 @@
                             if (object.customGpuDriverPath != null)
                                 message.customGpuDriverPath = String(object.customGpuDriverPath);
                             switch (object.bootDiskType) {
+                            default:
+                                if (typeof object.bootDiskType === "number") {
+                                    message.bootDiskType = object.bootDiskType;
+                                    break;
+                                }
+                                break;
                             case "DISK_TYPE_UNSPECIFIED":
                             case 0:
                                 message.bootDiskType = 0;
@@ -4646,6 +4694,12 @@
                                 else if (typeof object.bootDiskSizeGb === "object")
                                     message.bootDiskSizeGb = new $util.LongBits(object.bootDiskSizeGb.low >>> 0, object.bootDiskSizeGb.high >>> 0).toNumber();
                             switch (object.dataDiskType) {
+                            default:
+                                if (typeof object.dataDiskType === "number") {
+                                    message.dataDiskType = object.dataDiskType;
+                                    break;
+                                }
+                                break;
                             case "DISK_TYPE_UNSPECIFIED":
                             case 0:
                                 message.dataDiskType = 0;
@@ -4679,6 +4733,12 @@
                             if (object.noRemoveDataDisk != null)
                                 message.noRemoveDataDisk = Boolean(object.noRemoveDataDisk);
                             switch (object.diskEncryption) {
+                            default:
+                                if (typeof object.diskEncryption === "number") {
+                                    message.diskEncryption = object.diskEncryption;
+                                    break;
+                                }
+                                break;
                             case "DISK_ENCRYPTION_UNSPECIFIED":
                             case 0:
                                 message.diskEncryption = 0;
@@ -4749,6 +4809,12 @@
                                 }
                             }
                             switch (object.nicType) {
+                            default:
+                                if (typeof object.nicType === "number") {
+                                    message.nicType = object.nicType;
+                                    break;
+                                }
+                                break;
                             case "UNSPECIFIED_NIC_TYPE":
                             case 0:
                                 message.nicType = 0;
@@ -4873,20 +4939,20 @@
                             if (message.acceleratorConfig != null && message.hasOwnProperty("acceleratorConfig"))
                                 object.acceleratorConfig = $root.google.cloud.notebooks.v1.Instance.AcceleratorConfig.toObject(message.acceleratorConfig, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.State[message.state] === undefined ? message.state : $root.google.cloud.notebooks.v1.Instance.State[message.state] : message.state;
                             if (message.installGpuDriver != null && message.hasOwnProperty("installGpuDriver"))
                                 object.installGpuDriver = message.installGpuDriver;
                             if (message.customGpuDriverPath != null && message.hasOwnProperty("customGpuDriverPath"))
                                 object.customGpuDriverPath = message.customGpuDriverPath;
                             if (message.bootDiskType != null && message.hasOwnProperty("bootDiskType"))
-                                object.bootDiskType = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.DiskType[message.bootDiskType] : message.bootDiskType;
+                                object.bootDiskType = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.DiskType[message.bootDiskType] === undefined ? message.bootDiskType : $root.google.cloud.notebooks.v1.Instance.DiskType[message.bootDiskType] : message.bootDiskType;
                             if (message.bootDiskSizeGb != null && message.hasOwnProperty("bootDiskSizeGb"))
                                 if (typeof message.bootDiskSizeGb === "number")
                                     object.bootDiskSizeGb = options.longs === String ? String(message.bootDiskSizeGb) : message.bootDiskSizeGb;
                                 else
                                     object.bootDiskSizeGb = options.longs === String ? $util.Long.prototype.toString.call(message.bootDiskSizeGb) : options.longs === Number ? new $util.LongBits(message.bootDiskSizeGb.low >>> 0, message.bootDiskSizeGb.high >>> 0).toNumber() : message.bootDiskSizeGb;
                             if (message.diskEncryption != null && message.hasOwnProperty("diskEncryption"))
-                                object.diskEncryption = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.DiskEncryption[message.diskEncryption] : message.diskEncryption;
+                                object.diskEncryption = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.DiskEncryption[message.diskEncryption] === undefined ? message.diskEncryption : $root.google.cloud.notebooks.v1.Instance.DiskEncryption[message.diskEncryption] : message.diskEncryption;
                             if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
                                 object.kmsKey = message.kmsKey;
                             if (message.noPublicIp != null && message.hasOwnProperty("noPublicIp"))
@@ -4913,7 +4979,7 @@
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.dataDiskType != null && message.hasOwnProperty("dataDiskType"))
-                                object.dataDiskType = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.DiskType[message.dataDiskType] : message.dataDiskType;
+                                object.dataDiskType = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.DiskType[message.dataDiskType] === undefined ? message.dataDiskType : $root.google.cloud.notebooks.v1.Instance.DiskType[message.dataDiskType] : message.dataDiskType;
                             if (message.dataDiskSizeGb != null && message.hasOwnProperty("dataDiskSizeGb"))
                                 if (typeof message.dataDiskSizeGb === "number")
                                     object.dataDiskSizeGb = options.longs === String ? String(message.dataDiskSizeGb) : message.dataDiskSizeGb;
@@ -4944,7 +5010,7 @@
                                     object.tags[j] = message.tags[j];
                             }
                             if (message.nicType != null && message.hasOwnProperty("nicType"))
-                                object.nicType = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.NicType[message.nicType] : message.nicType;
+                                object.nicType = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.NicType[message.nicType] === undefined ? message.nicType : $root.google.cloud.notebooks.v1.Instance.NicType[message.nicType] : message.nicType;
                             if (message.reservationAffinity != null && message.hasOwnProperty("reservationAffinity"))
                                 object.reservationAffinity = $root.google.cloud.notebooks.v1.ReservationAffinity.toObject(message.reservationAffinity, options);
                             if (message.creator != null && message.hasOwnProperty("creator"))
@@ -5197,6 +5263,12 @@
                                     return object;
                                 var message = new $root.google.cloud.notebooks.v1.Instance.AcceleratorConfig();
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "ACCELERATOR_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -5280,7 +5352,7 @@
                                         object.coreCount = options.longs === String ? "0" : 0;
                                 }
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.AcceleratorType[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.AcceleratorType[message.type] === undefined ? message.type : $root.google.cloud.notebooks.v1.Instance.AcceleratorType[message.type] : message.type;
                                 if (message.coreCount != null && message.hasOwnProperty("coreCount"))
                                     if (typeof message.coreCount === "number")
                                         object.coreCount = options.longs === String ? String(message.coreCount) : message.coreCount;
@@ -6702,6 +6774,12 @@
                                 if (object.version != null)
                                     message.version = String(object.version);
                                 switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
                                 case "STATE_UNSPECIFIED":
                                 case 0:
                                     message.state = 0;
@@ -6727,6 +6805,12 @@
                                 if (object.targetImage != null)
                                     message.targetImage = String(object.targetImage);
                                 switch (object.action) {
+                                default:
+                                    if (typeof object.action === "number") {
+                                        message.action = object.action;
+                                        break;
+                                    }
+                                    break;
                                 case "ACTION_UNSPECIFIED":
                                 case 0:
                                     message.action = 0;
@@ -6781,13 +6865,13 @@
                                 if (message.version != null && message.hasOwnProperty("version"))
                                     object.version = message.version;
                                 if (message.state != null && message.hasOwnProperty("state"))
-                                    object.state = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.UpgradeHistoryEntry.State[message.state] : message.state;
+                                    object.state = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.UpgradeHistoryEntry.State[message.state] === undefined ? message.state : $root.google.cloud.notebooks.v1.Instance.UpgradeHistoryEntry.State[message.state] : message.state;
                                 if (message.createTime != null && message.hasOwnProperty("createTime"))
                                     object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                                 if (message.targetImage != null && message.hasOwnProperty("targetImage"))
                                     object.targetImage = message.targetImage;
                                 if (message.action != null && message.hasOwnProperty("action"))
-                                    object.action = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.UpgradeHistoryEntry.Action[message.action] : message.action;
+                                    object.action = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.UpgradeHistoryEntry.Action[message.action] === undefined ? message.action : $root.google.cloud.notebooks.v1.Instance.UpgradeHistoryEntry.Action[message.action] : message.action;
                                 if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
                                     object.targetVersion = message.targetVersion;
                                 return object;
@@ -10737,6 +10821,12 @@
                                 message.virtualMachine = $root.google.cloud.notebooks.v1.VirtualMachine.fromObject(object.virtualMachine);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -10775,6 +10865,12 @@
                                 break;
                             }
                             switch (object.healthState) {
+                            default:
+                                if (typeof object.healthState === "number") {
+                                    message.healthState = object.healthState;
+                                    break;
+                                }
+                                break;
                             case "HEALTH_STATE_UNSPECIFIED":
                             case 0:
                                 message.healthState = 0;
@@ -10855,9 +10951,9 @@
                                     object.runtimeType = "virtualMachine";
                             }
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.notebooks.v1.Runtime.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.notebooks.v1.Runtime.State[message.state] === undefined ? message.state : $root.google.cloud.notebooks.v1.Runtime.State[message.state] : message.state;
                             if (message.healthState != null && message.hasOwnProperty("healthState"))
-                                object.healthState = options.enums === String ? $root.google.cloud.notebooks.v1.Runtime.HealthState[message.healthState] : message.healthState;
+                                object.healthState = options.enums === String ? $root.google.cloud.notebooks.v1.Runtime.HealthState[message.healthState] === undefined ? message.healthState : $root.google.cloud.notebooks.v1.Runtime.HealthState[message.healthState] : message.healthState;
                             if (message.accessConfig != null && message.hasOwnProperty("accessConfig"))
                                 object.accessConfig = $root.google.cloud.notebooks.v1.RuntimeAccessConfig.toObject(message.accessConfig, options);
                             if (message.softwareConfig != null && message.hasOwnProperty("softwareConfig"))
@@ -11131,6 +11227,12 @@
                                 return object;
                             var message = new $root.google.cloud.notebooks.v1.RuntimeAcceleratorConfig();
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "ACCELERATOR_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -11214,7 +11316,7 @@
                                     object.coreCount = options.longs === String ? "0" : 0;
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.RuntimeAcceleratorConfig.AcceleratorType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.RuntimeAcceleratorConfig.AcceleratorType[message.type] === undefined ? message.type : $root.google.cloud.notebooks.v1.RuntimeAcceleratorConfig.AcceleratorType[message.type] : message.type;
                             if (message.coreCount != null && message.hasOwnProperty("coreCount"))
                                 if (typeof message.coreCount === "number")
                                     object.coreCount = options.longs === String ? String(message.coreCount) : message.coreCount;
@@ -12462,6 +12564,12 @@
                                 else if (typeof object.diskSizeGb === "object")
                                     message.diskSizeGb = new $util.LongBits(object.diskSizeGb.low >>> 0, object.diskSizeGb.high >>> 0).toNumber();
                             switch (object.diskType) {
+                            default:
+                                if (typeof object.diskType === "number") {
+                                    message.diskType = object.diskType;
+                                    break;
+                                }
+                                break;
                             case "DISK_TYPE_UNSPECIFIED":
                             case 0:
                                 message.diskType = 0;
@@ -12528,7 +12636,7 @@
                                 else
                                     object.diskSizeGb = options.longs === String ? $util.Long.prototype.toString.call(message.diskSizeGb) : options.longs === Number ? new $util.LongBits(message.diskSizeGb.low >>> 0, message.diskSizeGb.high >>> 0).toNumber() : message.diskSizeGb;
                             if (message.diskType != null && message.hasOwnProperty("diskType"))
-                                object.diskType = options.enums === String ? $root.google.cloud.notebooks.v1.LocalDiskInitializeParams.DiskType[message.diskType] : message.diskType;
+                                object.diskType = options.enums === String ? $root.google.cloud.notebooks.v1.LocalDiskInitializeParams.DiskType[message.diskType] === undefined ? message.diskType : $root.google.cloud.notebooks.v1.LocalDiskInitializeParams.DiskType[message.diskType] : message.diskType;
                             var keys2;
                             if (message.labels && (keys2 = Object.keys(message.labels)).length) {
                                 object.labels = {};
@@ -12779,6 +12887,12 @@
                                 return object;
                             var message = new $root.google.cloud.notebooks.v1.RuntimeAccessConfig();
                             switch (object.accessType) {
+                            default:
+                                if (typeof object.accessType === "number") {
+                                    message.accessType = object.accessType;
+                                    break;
+                                }
+                                break;
                             case "RUNTIME_ACCESS_TYPE_UNSPECIFIED":
                             case 0:
                                 message.accessType = 0;
@@ -12818,7 +12932,7 @@
                                 object.proxyUri = "";
                             }
                             if (message.accessType != null && message.hasOwnProperty("accessType"))
-                                object.accessType = options.enums === String ? $root.google.cloud.notebooks.v1.RuntimeAccessConfig.RuntimeAccessType[message.accessType] : message.accessType;
+                                object.accessType = options.enums === String ? $root.google.cloud.notebooks.v1.RuntimeAccessConfig.RuntimeAccessType[message.accessType] === undefined ? message.accessType : $root.google.cloud.notebooks.v1.RuntimeAccessConfig.RuntimeAccessType[message.accessType] : message.accessType;
                             if (message.runtimeOwner != null && message.hasOwnProperty("runtimeOwner"))
                                 object.runtimeOwner = message.runtimeOwner;
                             if (message.proxyUri != null && message.hasOwnProperty("proxyUri"))
@@ -14691,6 +14805,12 @@
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
                             switch (object.nicType) {
+                            default:
+                                if (typeof object.nicType === "number") {
+                                    message.nicType = object.nicType;
+                                    break;
+                                }
+                                break;
                             case "UNSPECIFIED_NIC_TYPE":
                             case 0:
                                 message.nicType = 0;
@@ -14795,7 +14915,7 @@
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
                             if (message.nicType != null && message.hasOwnProperty("nicType"))
-                                object.nicType = options.enums === String ? $root.google.cloud.notebooks.v1.VirtualMachineConfig.NicType[message.nicType] : message.nicType;
+                                object.nicType = options.enums === String ? $root.google.cloud.notebooks.v1.VirtualMachineConfig.NicType[message.nicType] === undefined ? message.nicType : $root.google.cloud.notebooks.v1.VirtualMachineConfig.NicType[message.nicType] : message.nicType;
                             if (message.reservedIpRange != null && message.hasOwnProperty("reservedIpRange"))
                                 object.reservedIpRange = message.reservedIpRange;
                             if (message.bootImage != null && message.hasOwnProperty("bootImage"))
@@ -15367,6 +15487,12 @@
                             if (object.description != null)
                                 message.description = String(object.description);
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -15461,7 +15587,7 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.notebooks.v1.Schedule.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.notebooks.v1.Schedule.State[message.state] === undefined ? message.state : $root.google.cloud.notebooks.v1.Schedule.State[message.state] : message.state;
                             if (message.cronSchedule != null && message.hasOwnProperty("cronSchedule"))
                                 object.cronSchedule = message.cronSchedule;
                             if (message.timeZone != null && message.hasOwnProperty("timeZone"))
@@ -18458,6 +18584,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "ACCELERATOR_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -18544,7 +18676,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.AcceleratorType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.Instance.AcceleratorType[message.type] === undefined ? message.type : $root.google.cloud.notebooks.v1.Instance.AcceleratorType[message.type] : message.type;
                             if (message.coreCount != null && message.hasOwnProperty("coreCount"))
                                 if (typeof message.coreCount === "number")
                                     object.coreCount = options.longs === String ? String(message.coreCount) : message.coreCount;
@@ -21311,6 +21443,12 @@
                             if (object.notebookInstance != null)
                                 message.notebookInstance = String(object.notebookInstance);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "UPGRADE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -21355,7 +21493,7 @@
                             if (message.notebookInstance != null && message.hasOwnProperty("notebookInstance"))
                                 object.notebookInstance = message.notebookInstance;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.UpgradeType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.UpgradeType[message.type] === undefined ? message.type : $root.google.cloud.notebooks.v1.UpgradeType[message.type] : message.type;
                             return object;
                         };
     
@@ -22066,6 +22204,12 @@
                                 return object;
                             var message = new $root.google.cloud.notebooks.v1.GetInstanceHealthResponse();
                             switch (object.healthState) {
+                            default:
+                                if (typeof object.healthState === "number") {
+                                    message.healthState = object.healthState;
+                                    break;
+                                }
+                                break;
                             case "HEALTH_STATE_UNSPECIFIED":
                             case 0:
                                 message.healthState = 0;
@@ -22115,7 +22259,7 @@
                             if (options.defaults)
                                 object.healthState = options.enums === String ? "HEALTH_STATE_UNSPECIFIED" : 0;
                             if (message.healthState != null && message.hasOwnProperty("healthState"))
-                                object.healthState = options.enums === String ? $root.google.cloud.notebooks.v1.GetInstanceHealthResponse.HealthState[message.healthState] : message.healthState;
+                                object.healthState = options.enums === String ? $root.google.cloud.notebooks.v1.GetInstanceHealthResponse.HealthState[message.healthState] === undefined ? message.healthState : $root.google.cloud.notebooks.v1.GetInstanceHealthResponse.HealthState[message.healthState] : message.healthState;
                             var keys2;
                             if (message.healthInfo && (keys2 = Object.keys(message.healthInfo)).length) {
                                 object.healthInfo = {};
@@ -22352,6 +22496,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "UPGRADE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -22396,7 +22546,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.UpgradeType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.UpgradeType[message.type] === undefined ? message.type : $root.google.cloud.notebooks.v1.UpgradeType[message.type] : message.type;
                             return object;
                         };
     
@@ -22854,6 +23004,12 @@
                             if (object.vmId != null)
                                 message.vmId = String(object.vmId);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "UPGRADE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -22901,7 +23057,7 @@
                             if (message.vmId != null && message.hasOwnProperty("vmId"))
                                 object.vmId = message.vmId;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.UpgradeType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1.UpgradeType[message.type] === undefined ? message.type : $root.google.cloud.notebooks.v1.UpgradeType[message.type] : message.type;
                             return object;
                         };
     
@@ -28519,6 +28675,12 @@
                                 message.acceleratorConfig = $root.google.cloud.notebooks.v1beta1.Instance.AcceleratorConfig.fromObject(object.acceleratorConfig);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -28565,6 +28727,12 @@
                             if (object.customGpuDriverPath != null)
                                 message.customGpuDriverPath = String(object.customGpuDriverPath);
                             switch (object.bootDiskType) {
+                            default:
+                                if (typeof object.bootDiskType === "number") {
+                                    message.bootDiskType = object.bootDiskType;
+                                    break;
+                                }
+                                break;
                             case "DISK_TYPE_UNSPECIFIED":
                             case 0:
                                 message.bootDiskType = 0;
@@ -28592,6 +28760,12 @@
                                 else if (typeof object.bootDiskSizeGb === "object")
                                     message.bootDiskSizeGb = new $util.LongBits(object.bootDiskSizeGb.low >>> 0, object.bootDiskSizeGb.high >>> 0).toNumber();
                             switch (object.dataDiskType) {
+                            default:
+                                if (typeof object.dataDiskType === "number") {
+                                    message.dataDiskType = object.dataDiskType;
+                                    break;
+                                }
+                                break;
                             case "DISK_TYPE_UNSPECIFIED":
                             case 0:
                                 message.dataDiskType = 0;
@@ -28621,6 +28795,12 @@
                             if (object.noRemoveDataDisk != null)
                                 message.noRemoveDataDisk = Boolean(object.noRemoveDataDisk);
                             switch (object.diskEncryption) {
+                            default:
+                                if (typeof object.diskEncryption === "number") {
+                                    message.diskEncryption = object.diskEncryption;
+                                    break;
+                                }
+                                break;
                             case "DISK_ENCRYPTION_UNSPECIFIED":
                             case 0:
                                 message.diskEncryption = 0;
@@ -28750,20 +28930,20 @@
                             if (message.acceleratorConfig != null && message.hasOwnProperty("acceleratorConfig"))
                                 object.acceleratorConfig = $root.google.cloud.notebooks.v1beta1.Instance.AcceleratorConfig.toObject(message.acceleratorConfig, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.notebooks.v1beta1.Instance.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.notebooks.v1beta1.Instance.State[message.state] === undefined ? message.state : $root.google.cloud.notebooks.v1beta1.Instance.State[message.state] : message.state;
                             if (message.installGpuDriver != null && message.hasOwnProperty("installGpuDriver"))
                                 object.installGpuDriver = message.installGpuDriver;
                             if (message.customGpuDriverPath != null && message.hasOwnProperty("customGpuDriverPath"))
                                 object.customGpuDriverPath = message.customGpuDriverPath;
                             if (message.bootDiskType != null && message.hasOwnProperty("bootDiskType"))
-                                object.bootDiskType = options.enums === String ? $root.google.cloud.notebooks.v1beta1.Instance.DiskType[message.bootDiskType] : message.bootDiskType;
+                                object.bootDiskType = options.enums === String ? $root.google.cloud.notebooks.v1beta1.Instance.DiskType[message.bootDiskType] === undefined ? message.bootDiskType : $root.google.cloud.notebooks.v1beta1.Instance.DiskType[message.bootDiskType] : message.bootDiskType;
                             if (message.bootDiskSizeGb != null && message.hasOwnProperty("bootDiskSizeGb"))
                                 if (typeof message.bootDiskSizeGb === "number")
                                     object.bootDiskSizeGb = options.longs === String ? String(message.bootDiskSizeGb) : message.bootDiskSizeGb;
                                 else
                                     object.bootDiskSizeGb = options.longs === String ? $util.Long.prototype.toString.call(message.bootDiskSizeGb) : options.longs === Number ? new $util.LongBits(message.bootDiskSizeGb.low >>> 0, message.bootDiskSizeGb.high >>> 0).toNumber() : message.bootDiskSizeGb;
                             if (message.diskEncryption != null && message.hasOwnProperty("diskEncryption"))
-                                object.diskEncryption = options.enums === String ? $root.google.cloud.notebooks.v1beta1.Instance.DiskEncryption[message.diskEncryption] : message.diskEncryption;
+                                object.diskEncryption = options.enums === String ? $root.google.cloud.notebooks.v1beta1.Instance.DiskEncryption[message.diskEncryption] === undefined ? message.diskEncryption : $root.google.cloud.notebooks.v1beta1.Instance.DiskEncryption[message.diskEncryption] : message.diskEncryption;
                             if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
                                 object.kmsKey = message.kmsKey;
                             if (message.noPublicIp != null && message.hasOwnProperty("noPublicIp"))
@@ -28790,7 +28970,7 @@
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.dataDiskType != null && message.hasOwnProperty("dataDiskType"))
-                                object.dataDiskType = options.enums === String ? $root.google.cloud.notebooks.v1beta1.Instance.DiskType[message.dataDiskType] : message.dataDiskType;
+                                object.dataDiskType = options.enums === String ? $root.google.cloud.notebooks.v1beta1.Instance.DiskType[message.dataDiskType] === undefined ? message.dataDiskType : $root.google.cloud.notebooks.v1beta1.Instance.DiskType[message.dataDiskType] : message.dataDiskType;
                             if (message.dataDiskSizeGb != null && message.hasOwnProperty("dataDiskSizeGb"))
                                 if (typeof message.dataDiskSizeGb === "number")
                                     object.dataDiskSizeGb = options.longs === String ? String(message.dataDiskSizeGb) : message.dataDiskSizeGb;
@@ -29009,6 +29189,12 @@
                                     return object;
                                 var message = new $root.google.cloud.notebooks.v1beta1.Instance.AcceleratorConfig();
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "ACCELERATOR_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -29088,7 +29274,7 @@
                                         object.coreCount = options.longs === String ? "0" : 0;
                                 }
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.notebooks.v1beta1.Instance.AcceleratorType[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.notebooks.v1beta1.Instance.AcceleratorType[message.type] === undefined ? message.type : $root.google.cloud.notebooks.v1beta1.Instance.AcceleratorType[message.type] : message.type;
                                 if (message.coreCount != null && message.hasOwnProperty("coreCount"))
                                     if (typeof message.coreCount === "number")
                                         object.coreCount = options.longs === String ? String(message.coreCount) : message.coreCount;
@@ -31687,6 +31873,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "ACCELERATOR_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -31769,7 +31961,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1beta1.Instance.AcceleratorType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.notebooks.v1beta1.Instance.AcceleratorType[message.type] === undefined ? message.type : $root.google.cloud.notebooks.v1beta1.Instance.AcceleratorType[message.type] : message.type;
                             if (message.coreCount != null && message.hasOwnProperty("coreCount"))
                                 if (typeof message.coreCount === "number")
                                     object.coreCount = options.longs === String ? String(message.coreCount) : message.coreCount;
@@ -35824,6 +36016,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -35848,6 +36046,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -35895,7 +36097,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -35903,7 +36105,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -39677,6 +39879,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -39691,6 +39899,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -39817,9 +40031,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -42166,6 +42380,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -42274,7 +42494,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -43076,6 +43296,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -43092,6 +43318,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -43130,6 +43362,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -43200,7 +43436,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -43208,7 +43444,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -43221,7 +43457,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -44598,6 +44834,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -44667,7 +44909,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -46422,6 +46664,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -46471,7 +46719,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
