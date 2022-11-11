@@ -7,7 +7,7 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5972217",
   "release_level": "stable",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-eventarc-publishing",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/eventarc-publishing",
   "api_id": "eventarcpublishing.googleapis.com",
   "default_version": "v1",
