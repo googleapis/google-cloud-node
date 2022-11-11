@@ -6,7 +6,7 @@
   "release_level": "stable",
   "language": "nodejs",
   "name_pretty": "Google Cloud Internet of Things (IoT) Core",
-  "repo": "googleapis/nodejs-iot",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/iot",
   "requires_billing": true,
   "name": "iot",
