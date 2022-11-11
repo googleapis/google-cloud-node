@@ -6,7 +6,7 @@
   "default_version": "v1beta1",
   "language": "nodejs",
   "name_pretty": "Cloud Media Translation",
-  "repo": "googleapis/nodejs-media-translation",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/translate/media/docs/",
   "requires_billing": true,
   "name": "mediatranslation",

@@ -22,6 +22,7 @@
     "packages/google-cloud-gkeconnect-gateway": {},
     "packages/google-cloud-gkemulticloud": {},
     "packages/google-cloud-language": {},
+    "packages/google-cloud-mediatranslation": {},
     "packages/google-cloud-memcache": {},
     "packages/google-cloud-oslogin": {},
     "packages/google-cloud-phishingprotection": {},
