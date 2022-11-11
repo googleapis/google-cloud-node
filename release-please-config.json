@@ -17,6 +17,7 @@
     "packages/google-cloud-contentwarehouse": {},
     "packages/google-cloud-dataplex": {},
     "packages/google-cloud-dataproc": {},
+    "packages/google-cloud-datastream": {},
     "packages/google-cloud-deploy": {},
     "packages/google-cloud-discoveryengine": {},
     "packages/google-cloud-gkeconnect-gateway": {},
