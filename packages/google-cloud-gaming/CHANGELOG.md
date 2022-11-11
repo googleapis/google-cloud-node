@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.3](https://github.com/googleapis/nodejs-game-servers/compare/v3.1.2...v3.1.3) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#349](https://github.com/googleapis/nodejs-game-servers/issues/349)) ([879eea3](https://github.com/googleapis/nodejs-game-servers/commit/879eea37422f58286d3e39e27f5c1b2f6aa4ae9c))
+* Regenerated protos JS and TS definitions ([#353](https://github.com/googleapis/nodejs-game-servers/issues/353)) ([21535e1](https://github.com/googleapis/nodejs-game-servers/commit/21535e16d9dc28888514414117e463271383a971))
+
 ## [3.1.2](https://github.com/googleapis/nodejs-game-servers/compare/v3.1.1...v3.1.2) (2022-09-22)
 
 
