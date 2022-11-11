@@ -8354,6 +8354,9 @@ export namespace google {
                     /** ResourceSearchResult kmsKey */
                     kmsKey?: (string|null);
 
+                    /** ResourceSearchResult kmsKeys */
+                    kmsKeys?: (string[]|null);
+
                     /** ResourceSearchResult createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
@@ -8432,6 +8435,9 @@ export namespace google {
 
                     /** ResourceSearchResult kmsKey. */
                     public kmsKey: string;
+
+                    /** ResourceSearchResult kmsKeys. */
+                    public kmsKeys: string[];
 
                     /** ResourceSearchResult createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);

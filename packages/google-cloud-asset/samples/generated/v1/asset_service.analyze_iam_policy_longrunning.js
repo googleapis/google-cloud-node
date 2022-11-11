@@ -49,8 +49,7 @@ function main(analysisQuery, outputConfig) {
    */
   // const savedAnalysisQuery = 'abc123'
   /**
-   *  Required. Output configuration indicating where the results will be output
-   *  to.
+   *  Required. Output configuration indicating where the results will be output to.
    */
   // const outputConfig = {}
 
