@@ -53,7 +53,7 @@ describe('execute the quickstart', () => {
   beforeEach(async () => {
     const [bucket] = await storage.createBucket(bucketName);
     await bucket.file(jobFileName).save(sortCode);
-    projectId = storage.getProjectId();
+    projectId = await storage.getProjectId();
   });
 
   it('should execute the quickstart', async function () {
