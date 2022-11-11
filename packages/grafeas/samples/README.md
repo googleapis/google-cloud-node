@@ -6,8 +6,7 @@
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
-A [Grafeas API Client](https://grafeas.io/) compatible with Google Cloud's
-[Container Analysis API](https://cloud.google.com/container-registry/docs/container-analysis).
+
 
 ## Table of Contents
 
@@ -47,14 +46,14 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Grafeas.batch_create_notes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.batch_create_notes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.batch_create_notes.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.batch_create_notes.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.batch_create_notes.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.batch_create_notes.js`
+`node packages/grafeas/samples/generated/v1/grafeas.batch_create_notes.js`
 
 
 -----
@@ -64,14 +63,14 @@ __Usage:__
 
 ### Grafeas.batch_create_occurrences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.batch_create_occurrences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.batch_create_occurrences.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.batch_create_occurrences.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.batch_create_occurrences.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.batch_create_occurrences.js`
+`node packages/grafeas/samples/generated/v1/grafeas.batch_create_occurrences.js`
 
 
 -----
@@ -81,14 +80,14 @@ __Usage:__
 
 ### Grafeas.create_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.create_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.create_note.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.create_note.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.create_note.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.create_note.js`
+`node packages/grafeas/samples/generated/v1/grafeas.create_note.js`
 
 
 -----
@@ -98,14 +97,14 @@ __Usage:__
 
 ### Grafeas.create_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.create_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.create_occurrence.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.create_occurrence.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.create_occurrence.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.create_occurrence.js`
+`node packages/grafeas/samples/generated/v1/grafeas.create_occurrence.js`
 
 
 -----
@@ -115,14 +114,14 @@ __Usage:__
 
 ### Grafeas.delete_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.delete_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.delete_note.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.delete_note.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.delete_note.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.delete_note.js`
+`node packages/grafeas/samples/generated/v1/grafeas.delete_note.js`
 
 
 -----
@@ -132,14 +131,14 @@ __Usage:__
 
 ### Grafeas.delete_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.delete_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.delete_occurrence.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.delete_occurrence.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.delete_occurrence.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.delete_occurrence.js`
+`node packages/grafeas/samples/generated/v1/grafeas.delete_occurrence.js`
 
 
 -----
@@ -149,14 +148,14 @@ __Usage:__
 
 ### Grafeas.get_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.get_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.get_note.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.get_note.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.get_note.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.get_note.js`
+`node packages/grafeas/samples/generated/v1/grafeas.get_note.js`
 
 
 -----
@@ -166,14 +165,14 @@ __Usage:__
 
 ### Grafeas.get_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.get_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.get_occurrence.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.get_occurrence.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.get_occurrence.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.get_occurrence.js`
+`node packages/grafeas/samples/generated/v1/grafeas.get_occurrence.js`
 
 
 -----
@@ -183,14 +182,14 @@ __Usage:__
 
 ### Grafeas.get_occurrence_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.get_occurrence_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.get_occurrence_note.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.get_occurrence_note.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.get_occurrence_note.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.get_occurrence_note.js`
+`node packages/grafeas/samples/generated/v1/grafeas.get_occurrence_note.js`
 
 
 -----
@@ -200,14 +199,14 @@ __Usage:__
 
 ### Grafeas.list_note_occurrences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.list_note_occurrences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.list_note_occurrences.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.list_note_occurrences.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.list_note_occurrences.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.list_note_occurrences.js`
+`node packages/grafeas/samples/generated/v1/grafeas.list_note_occurrences.js`
 
 
 -----
@@ -217,14 +216,14 @@ __Usage:__
 
 ### Grafeas.list_notes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.list_notes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.list_notes.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.list_notes.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.list_notes.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.list_notes.js`
+`node packages/grafeas/samples/generated/v1/grafeas.list_notes.js`
 
 
 -----
@@ -234,14 +233,14 @@ __Usage:__
 
 ### Grafeas.list_occurrences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.list_occurrences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.list_occurrences.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.list_occurrences.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.list_occurrences.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.list_occurrences.js`
+`node packages/grafeas/samples/generated/v1/grafeas.list_occurrences.js`
 
 
 -----
@@ -251,14 +250,14 @@ __Usage:__
 
 ### Grafeas.update_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.update_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.update_note.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.update_note.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.update_note.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.update_note.js`
+`node packages/grafeas/samples/generated/v1/grafeas.update_note.js`
 
 
 -----
@@ -268,14 +267,14 @@ __Usage:__
 
 ### Grafeas.update_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/grafeas.update_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/generated/v1/grafeas.update_occurrence.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/grafeas.update_occurrence.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/generated/v1/grafeas.update_occurrence.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/grafeas.update_occurrence.js`
+`node packages/grafeas/samples/generated/v1/grafeas.update_occurrence.js`
 
 
 -----
@@ -285,14 +284,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/quickstart.js`
+`node packages/grafeas/samples/quickstart.js`
 
 
 -----
@@ -302,14 +301,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/grafeas/samples/test/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/grafeas/samples/test/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/test/quickstart.js`
+`node packages/grafeas/samples/test/quickstart.js`
 
 
 
