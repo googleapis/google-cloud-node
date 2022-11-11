@@ -31,7 +31,10 @@ describe('iot samples', () => {
   });
 
   it('should run the quickstart', async () => {
-    const stdout = execSync(`node quickstart projects/${projectId}/locations/us-central1`, {cwd});
+    const stdout = execSync(
+      `node quickstart projects/${projectId}/locations/us-central1`,
+      {cwd}
+    );
     assert(stdout !== null);
   });
 });

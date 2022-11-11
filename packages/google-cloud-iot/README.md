@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,24 +53,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/iot
 ```
 
-
-### Using the client library
-
-```javascript
-const iot = require('@google-cloud/iot');
-const client = new iot.v1.DeviceManagerClient();
-
-async function quickstart() {
-  const parent = client.locationPath(projectId, 'us-central1');
-  const [resources] = await client.listDeviceRegistries({parent});
-  console.log(`${resources.length} resource(s) found.`);
-  for (const resource of resources) {
-    console.log(resource);
-  }
-}
-quickstart();
-
-```
 
 
 
