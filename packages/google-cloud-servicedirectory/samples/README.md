@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Service Directory: Node.js Samples](https://github.com/googleapis/nodejs-service-directory)
+# [Service Directory: Node.js Samples](https://github.com/googleapis/google-cloud-node)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
@@ -12,19 +12,51 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Create Endpoint](#create-endpoint)
-  * [Create Namespace](#create-namespace)
-  * [Create Service](#create-service)
-  * [Delete Endpoint](#delete-endpoint)
-  * [Delete Namespace](#delete-namespace)
-  * [Delete Service](#delete-service)
+  * [Lookup_service.resolve_service](#lookup_service.resolve_service)
+  * [Registration_service.create_endpoint](#registration_service.create_endpoint)
+  * [Registration_service.create_namespace](#registration_service.create_namespace)
+  * [Registration_service.create_service](#registration_service.create_service)
+  * [Registration_service.delete_endpoint](#registration_service.delete_endpoint)
+  * [Registration_service.delete_namespace](#registration_service.delete_namespace)
+  * [Registration_service.delete_service](#registration_service.delete_service)
+  * [Registration_service.get_endpoint](#registration_service.get_endpoint)
+  * [Registration_service.get_iam_policy](#registration_service.get_iam_policy)
+  * [Registration_service.get_namespace](#registration_service.get_namespace)
+  * [Registration_service.get_service](#registration_service.get_service)
+  * [Registration_service.list_endpoints](#registration_service.list_endpoints)
+  * [Registration_service.list_namespaces](#registration_service.list_namespaces)
+  * [Registration_service.list_services](#registration_service.list_services)
+  * [Registration_service.set_iam_policy](#registration_service.set_iam_policy)
+  * [Registration_service.test_iam_permissions](#registration_service.test_iam_permissions)
+  * [Registration_service.update_endpoint](#registration_service.update_endpoint)
+  * [Registration_service.update_namespace](#registration_service.update_namespace)
+  * [Registration_service.update_service](#registration_service.update_service)
+  * [Lookup_service.resolve_service](#lookup_service.resolve_service)
+  * [Registration_service.create_endpoint](#registration_service.create_endpoint)
+  * [Registration_service.create_namespace](#registration_service.create_namespace)
+  * [Registration_service.create_service](#registration_service.create_service)
+  * [Registration_service.delete_endpoint](#registration_service.delete_endpoint)
+  * [Registration_service.delete_namespace](#registration_service.delete_namespace)
+  * [Registration_service.delete_service](#registration_service.delete_service)
+  * [Registration_service.get_endpoint](#registration_service.get_endpoint)
+  * [Registration_service.get_iam_policy](#registration_service.get_iam_policy)
+  * [Registration_service.get_namespace](#registration_service.get_namespace)
+  * [Registration_service.get_service](#registration_service.get_service)
+  * [Registration_service.list_endpoints](#registration_service.list_endpoints)
+  * [Registration_service.list_namespaces](#registration_service.list_namespaces)
+  * [Registration_service.list_services](#registration_service.list_services)
+  * [Registration_service.set_iam_policy](#registration_service.set_iam_policy)
+  * [Registration_service.test_iam_permissions](#registration_service.test_iam_permissions)
+  * [Registration_service.update_endpoint](#registration_service.update_endpoint)
+  * [Registration_service.update_namespace](#registration_service.update_namespace)
+  * [Registration_service.update_service](#registration_service.update_service)
   * [Quickstart](#quickstart)
-  * [Resolve Service](#resolve-service)
+  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/nodejs-service-directory#using-the-client-library).
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -36,16 +68,16 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Create Endpoint
+### Lookup_service.resolve_service
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/createEndpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/lookup_service.resolve_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/createEndpoint.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/lookup_service.resolve_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/createEndpoint.js`
+`node /workspace/google-cloud-node/samples/generated/v1/lookup_service.resolve_service.js`
 
 
 -----
@@ -53,16 +85,16 @@ __Usage:__
 
 
 
-### Create Namespace
+### Registration_service.create_endpoint
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/createNamespace.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.create_endpoint.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/createNamespace.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.create_endpoint.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/createNamespace.js`
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.create_endpoint.js`
 
 
 -----
@@ -70,16 +102,16 @@ __Usage:__
 
 
 
-### Create Service
+### Registration_service.create_namespace
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/createService.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.create_namespace.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/createService.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.create_namespace.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/createService.js`
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.create_namespace.js`
 
 
 -----
@@ -87,16 +119,16 @@ __Usage:__
 
 
 
-### Delete Endpoint
+### Registration_service.create_service
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/deleteEndpoint.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.create_service.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/deleteEndpoint.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.create_service.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/deleteEndpoint.js`
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.create_service.js`
 
 
 -----
@@ -104,16 +136,16 @@ __Usage:__
 
 
 
-### Delete Namespace
+### Registration_service.delete_endpoint
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/deleteNamespace.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.delete_endpoint.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/deleteNamespace.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.delete_endpoint.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/deleteNamespace.js`
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.delete_endpoint.js`
 
 
 -----
@@ -121,16 +153,560 @@ __Usage:__
 
 
 
-### Delete Service
+### Registration_service.delete_namespace
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/deleteService.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.delete_namespace.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/deleteService.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.delete_namespace.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/deleteService.js`
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.delete_namespace.js`
+
+
+-----
+
+
+
+
+### Registration_service.delete_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.delete_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.delete_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.delete_service.js`
+
+
+-----
+
+
+
+
+### Registration_service.get_endpoint
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.get_endpoint.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.get_endpoint.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.get_endpoint.js`
+
+
+-----
+
+
+
+
+### Registration_service.get_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.get_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.get_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.get_iam_policy.js`
+
+
+-----
+
+
+
+
+### Registration_service.get_namespace
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.get_namespace.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.get_namespace.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.get_namespace.js`
+
+
+-----
+
+
+
+
+### Registration_service.get_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.get_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.get_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.get_service.js`
+
+
+-----
+
+
+
+
+### Registration_service.list_endpoints
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.list_endpoints.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.list_endpoints.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.list_endpoints.js`
+
+
+-----
+
+
+
+
+### Registration_service.list_namespaces
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.list_namespaces.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.list_namespaces.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.list_namespaces.js`
+
+
+-----
+
+
+
+
+### Registration_service.list_services
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.list_services.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.list_services.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.list_services.js`
+
+
+-----
+
+
+
+
+### Registration_service.set_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.set_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.set_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.set_iam_policy.js`
+
+
+-----
+
+
+
+
+### Registration_service.test_iam_permissions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.test_iam_permissions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.test_iam_permissions.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.test_iam_permissions.js`
+
+
+-----
+
+
+
+
+### Registration_service.update_endpoint
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.update_endpoint.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.update_endpoint.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.update_endpoint.js`
+
+
+-----
+
+
+
+
+### Registration_service.update_namespace
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.update_namespace.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.update_namespace.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.update_namespace.js`
+
+
+-----
+
+
+
+
+### Registration_service.update_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/registration_service.update_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/registration_service.update_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/registration_service.update_service.js`
+
+
+-----
+
+
+
+
+### Lookup_service.resolve_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/lookup_service.resolve_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/lookup_service.resolve_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/lookup_service.resolve_service.js`
+
+
+-----
+
+
+
+
+### Registration_service.create_endpoint
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.create_endpoint.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.create_endpoint.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.create_endpoint.js`
+
+
+-----
+
+
+
+
+### Registration_service.create_namespace
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.create_namespace.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.create_namespace.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.create_namespace.js`
+
+
+-----
+
+
+
+
+### Registration_service.create_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.create_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.create_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.create_service.js`
+
+
+-----
+
+
+
+
+### Registration_service.delete_endpoint
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.delete_endpoint.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.delete_endpoint.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.delete_endpoint.js`
+
+
+-----
+
+
+
+
+### Registration_service.delete_namespace
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.delete_namespace.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.delete_namespace.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.delete_namespace.js`
+
+
+-----
+
+
+
+
+### Registration_service.delete_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.delete_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.delete_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.delete_service.js`
+
+
+-----
+
+
+
+
+### Registration_service.get_endpoint
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.get_endpoint.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.get_endpoint.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.get_endpoint.js`
+
+
+-----
+
+
+
+
+### Registration_service.get_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.get_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.get_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.get_iam_policy.js`
+
+
+-----
+
+
+
+
+### Registration_service.get_namespace
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.get_namespace.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.get_namespace.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.get_namespace.js`
+
+
+-----
+
+
+
+
+### Registration_service.get_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.get_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.get_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.get_service.js`
+
+
+-----
+
+
+
+
+### Registration_service.list_endpoints
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.list_endpoints.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.list_endpoints.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.list_endpoints.js`
+
+
+-----
+
+
+
+
+### Registration_service.list_namespaces
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.list_namespaces.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.list_namespaces.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.list_namespaces.js`
+
+
+-----
+
+
+
+
+### Registration_service.list_services
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.list_services.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.list_services.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.list_services.js`
+
+
+-----
+
+
+
+
+### Registration_service.set_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.set_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.set_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.set_iam_policy.js`
+
+
+-----
+
+
+
+
+### Registration_service.test_iam_permissions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.test_iam_permissions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.test_iam_permissions.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.test_iam_permissions.js`
+
+
+-----
+
+
+
+
+### Registration_service.update_endpoint
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.update_endpoint.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.update_endpoint.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.update_endpoint.js`
+
+
+-----
+
+
+
+
+### Registration_service.update_namespace
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.update_namespace.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.update_namespace.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.update_namespace.js`
+
+
+-----
+
+
+
+
+### Registration_service.update_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/registration_service.update_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/registration_service.update_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/registration_service.update_service.js`
 
 
 -----
@@ -140,14 +716,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node /workspace/google-cloud-node/samples/quickstart.js`
 
 
 -----
@@ -155,16 +731,16 @@ __Usage:__
 
 
 
-### Resolve Service
+### Quickstart.test
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/resolveService.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.test.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/resolveService.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.test.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/resolveService.js`
+`node /workspace/google-cloud-node/samples/test/quickstart.test.js`
 
 
 
@@ -172,5 +748,5 @@ __Usage:__
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
 [product-docs]: 

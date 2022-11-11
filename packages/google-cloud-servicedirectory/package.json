@@ -2,7 +2,11 @@
   "name": "@google-cloud/service-directory",
   "version": "4.0.4",
   "description": "Servicedirectory client for Node.js",
-  "repository": "googleapis/nodejs-service-directory",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-servicedirectory",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "license": "Apache-2.0",
   "author": "Google LLC",
   "files": [
@@ -21,8 +25,8 @@
     "lint": "gts check",
     "predocs-test": "npm run docs",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "system-test": "npm run compile && c8 mocha build/system-test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "test": "c8 mocha build/test",
     "precompile": "gts clean"
   },
@@ -49,5 +53,6 @@
   },
   "engines": {
     "node": ">=12.0.0"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-servicedirectory"
 }
