@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.3](https://github.com/googleapis/nodejs-vpc-access/compare/v2.1.2...v2.1.3) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#110](https://github.com/googleapis/nodejs-vpc-access/issues/110)) ([020b641](https://github.com/googleapis/nodejs-vpc-access/commit/020b641f10c363a1baf208f307ddedd1bdde4a3c))
+* Preserve default values in x-goog-request-params header ([#103](https://github.com/googleapis/nodejs-vpc-access/issues/103)) ([b590af7](https://github.com/googleapis/nodejs-vpc-access/commit/b590af70193ec98814005f8d5fa87ee1882c2941))
+* Regenerated protos JS and TS definitions ([#113](https://github.com/googleapis/nodejs-vpc-access/issues/113)) ([61e2336](https://github.com/googleapis/nodejs-vpc-access/commit/61e233629539938ad3b9b285cd15cb8cba8450e5))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-vpc-access/compare/v2.1.1...v2.1.2) (2022-09-01)
 
 
