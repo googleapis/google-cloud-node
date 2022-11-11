@@ -17,7 +17,6 @@
 const {assert} = require('chai');
 const {describe, it, before} = require('mocha');
 const {execSync} = require('child_process');
-const uuid = require('uuid');
 const {CloudTasksClient} = require('@google-cloud/tasks');
 const client = new CloudTasksClient();
 
@@ -32,6 +31,6 @@ describe('Cloud Task Sample Tests', async () => {
 
   it('quickstart sample should create a task', async () => {
     const stdout = exec(`node quickstart.js ${projectId} us-central1`);
-    assert.match(stdout != null);
+    assert.match(stdout !== null);
   });
 });
