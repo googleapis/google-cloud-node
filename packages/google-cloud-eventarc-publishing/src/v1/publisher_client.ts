@@ -336,6 +336,13 @@ export class PublisherClient {
    *   `projects/{partner_project_id}/locations/{location}/channelConnections/{channel_connection_id}`.
    * @param {number[]} request.events
    *   The CloudEvents v1.0 events to publish. No other types are allowed.
+   *   If this field is set, then the `text_events` fields must not be set.
+   * @param {string[]} request.textEvents
+   *   The text representation of events to publish.
+   *   CloudEvent v1.0 in JSON format is the only allowed type. Refer to
+   *   https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md
+   *   for specification.
+   *   If this field is set, then the `events` fields must not be set.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -440,6 +447,13 @@ export class PublisherClient {
    *   `projects/{project}/locations/{location}/channels/{channel-id}`.
    * @param {number[]} request.events
    *   The CloudEvents v1.0 events to publish. No other types are allowed.
+   *   If this field is set, then the `text_events` fields must not be set.
+   * @param {string[]} request.textEvents
+   *   The text representation of events to publish.
+   *   CloudEvent v1.0 in JSON format is the only allowed type. Refer to
+   *   https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md
+   *   for specification.
+   *   If this field is set, then the `events` fields must not be set.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

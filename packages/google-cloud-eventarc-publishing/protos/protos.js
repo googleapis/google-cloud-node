@@ -184,6 +184,7 @@
                              * @interface IPublishChannelConnectionEventsRequest
                              * @property {string|null} [channelConnection] PublishChannelConnectionEventsRequest channelConnection
                              * @property {Array.<google.protobuf.IAny>|null} [events] PublishChannelConnectionEventsRequest events
+                             * @property {Array.<string>|null} [textEvents] PublishChannelConnectionEventsRequest textEvents
                              */
     
                             /**
@@ -196,6 +197,7 @@
                              */
                             function PublishChannelConnectionEventsRequest(properties) {
                                 this.events = [];
+                                this.textEvents = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -217,6 +219,14 @@
                              * @instance
                              */
                             PublishChannelConnectionEventsRequest.prototype.events = $util.emptyArray;
+    
+                            /**
+                             * PublishChannelConnectionEventsRequest textEvents.
+                             * @member {Array.<string>} textEvents
+                             * @memberof google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest
+                             * @instance
+                             */
+                            PublishChannelConnectionEventsRequest.prototype.textEvents = $util.emptyArray;
     
                             /**
                              * Creates a new PublishChannelConnectionEventsRequest instance using the specified properties.
@@ -247,6 +257,9 @@
                                 if (message.events != null && message.events.length)
                                     for (var i = 0; i < message.events.length; ++i)
                                         $root.google.protobuf.Any.encode(message.events[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.textEvents != null && message.textEvents.length)
+                                    for (var i = 0; i < message.textEvents.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.textEvents[i]);
                                 return writer;
                             };
     
@@ -289,6 +302,12 @@
                                             if (!(message.events && message.events.length))
                                                 message.events = [];
                                             message.events.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.textEvents && message.textEvents.length))
+                                                message.textEvents = [];
+                                            message.textEvents.push(reader.string());
                                             break;
                                         }
                                     default:
@@ -338,6 +357,13 @@
                                             return "events." + error;
                                     }
                                 }
+                                if (message.textEvents != null && message.hasOwnProperty("textEvents")) {
+                                    if (!Array.isArray(message.textEvents))
+                                        return "textEvents: array expected";
+                                    for (var i = 0; i < message.textEvents.length; ++i)
+                                        if (!$util.isString(message.textEvents[i]))
+                                            return "textEvents: string[] expected";
+                                }
                                 return null;
                             };
     
@@ -365,6 +391,13 @@
                                         message.events[i] = $root.google.protobuf.Any.fromObject(object.events[i]);
                                     }
                                 }
+                                if (object.textEvents) {
+                                    if (!Array.isArray(object.textEvents))
+                                        throw TypeError(".google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest.textEvents: array expected");
+                                    message.textEvents = [];
+                                    for (var i = 0; i < object.textEvents.length; ++i)
+                                        message.textEvents[i] = String(object.textEvents[i]);
+                                }
                                 return message;
                             };
     
@@ -381,8 +414,10 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.arrays || options.defaults)
+                                if (options.arrays || options.defaults) {
                                     object.events = [];
+                                    object.textEvents = [];
+                                }
                                 if (options.defaults)
                                     object.channelConnection = "";
                                 if (message.channelConnection != null && message.hasOwnProperty("channelConnection"))
@@ -391,6 +426,11 @@
                                     object.events = [];
                                     for (var j = 0; j < message.events.length; ++j)
                                         object.events[j] = $root.google.protobuf.Any.toObject(message.events[j], options);
+                                }
+                                if (message.textEvents && message.textEvents.length) {
+                                    object.textEvents = [];
+                                    for (var j = 0; j < message.textEvents.length; ++j)
+                                        object.textEvents[j] = message.textEvents[j];
                                 }
                                 return object;
                             };
@@ -607,6 +647,7 @@
                              * @interface IPublishEventsRequest
                              * @property {string|null} [channel] PublishEventsRequest channel
                              * @property {Array.<google.protobuf.IAny>|null} [events] PublishEventsRequest events
+                             * @property {Array.<string>|null} [textEvents] PublishEventsRequest textEvents
                              */
     
                             /**
@@ -619,6 +660,7 @@
                              */
                             function PublishEventsRequest(properties) {
                                 this.events = [];
+                                this.textEvents = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -640,6 +682,14 @@
                              * @instance
                              */
                             PublishEventsRequest.prototype.events = $util.emptyArray;
+    
+                            /**
+                             * PublishEventsRequest textEvents.
+                             * @member {Array.<string>} textEvents
+                             * @memberof google.cloud.eventarc.publishing.v1.PublishEventsRequest
+                             * @instance
+                             */
+                            PublishEventsRequest.prototype.textEvents = $util.emptyArray;
     
                             /**
                              * Creates a new PublishEventsRequest instance using the specified properties.
@@ -670,6 +720,9 @@
                                 if (message.events != null && message.events.length)
                                     for (var i = 0; i < message.events.length; ++i)
                                         $root.google.protobuf.Any.encode(message.events[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.textEvents != null && message.textEvents.length)
+                                    for (var i = 0; i < message.textEvents.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.textEvents[i]);
                                 return writer;
                             };
     
@@ -712,6 +765,12 @@
                                             if (!(message.events && message.events.length))
                                                 message.events = [];
                                             message.events.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.textEvents && message.textEvents.length))
+                                                message.textEvents = [];
+                                            message.textEvents.push(reader.string());
                                             break;
                                         }
                                     default:
@@ -761,6 +820,13 @@
                                             return "events." + error;
                                     }
                                 }
+                                if (message.textEvents != null && message.hasOwnProperty("textEvents")) {
+                                    if (!Array.isArray(message.textEvents))
+                                        return "textEvents: array expected";
+                                    for (var i = 0; i < message.textEvents.length; ++i)
+                                        if (!$util.isString(message.textEvents[i]))
+                                            return "textEvents: string[] expected";
+                                }
                                 return null;
                             };
     
@@ -788,6 +854,13 @@
                                         message.events[i] = $root.google.protobuf.Any.fromObject(object.events[i]);
                                     }
                                 }
+                                if (object.textEvents) {
+                                    if (!Array.isArray(object.textEvents))
+                                        throw TypeError(".google.cloud.eventarc.publishing.v1.PublishEventsRequest.textEvents: array expected");
+                                    message.textEvents = [];
+                                    for (var i = 0; i < object.textEvents.length; ++i)
+                                        message.textEvents[i] = String(object.textEvents[i]);
+                                }
                                 return message;
                             };
     
@@ -804,8 +877,10 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.arrays || options.defaults)
+                                if (options.arrays || options.defaults) {
                                     object.events = [];
+                                    object.textEvents = [];
+                                }
                                 if (options.defaults)
                                     object.channel = "";
                                 if (message.channel != null && message.hasOwnProperty("channel"))
@@ -814,6 +889,11 @@
                                     object.events = [];
                                     for (var j = 0; j < message.events.length; ++j)
                                         object.events[j] = $root.google.protobuf.Any.toObject(message.events[j], options);
+                                }
+                                if (message.textEvents && message.textEvents.length) {
+                                    object.textEvents = [];
+                                    for (var j = 0; j < message.textEvents.length; ++j)
+                                        object.textEvents[j] = message.textEvents[j];
                                 }
                                 return object;
                             };

@@ -103,6 +103,9 @@ export namespace google {
 
                         /** PublishChannelConnectionEventsRequest events */
                         events?: (google.protobuf.IAny[]|null);
+
+                        /** PublishChannelConnectionEventsRequest textEvents */
+                        textEvents?: (string[]|null);
                     }
 
                     /** Represents a PublishChannelConnectionEventsRequest. */
@@ -119,6 +122,9 @@ export namespace google {
 
                         /** PublishChannelConnectionEventsRequest events. */
                         public events: google.protobuf.IAny[];
+
+                        /** PublishChannelConnectionEventsRequest textEvents. */
+                        public textEvents: string[];
 
                         /**
                          * Creates a new PublishChannelConnectionEventsRequest instance using the specified properties.
@@ -297,6 +303,9 @@ export namespace google {
 
                         /** PublishEventsRequest events */
                         events?: (google.protobuf.IAny[]|null);
+
+                        /** PublishEventsRequest textEvents */
+                        textEvents?: (string[]|null);
                     }
 
                     /** Represents a PublishEventsRequest. */
@@ -313,6 +322,9 @@ export namespace google {
 
                         /** PublishEventsRequest events. */
                         public events: google.protobuf.IAny[];
+
+                        /** PublishEventsRequest textEvents. */
+                        public textEvents: string[];
 
                         /**
                          * Creates a new PublishEventsRequest instance using the specified properties.

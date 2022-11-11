@@ -69,6 +69,11 @@
                               "rule": "repeated",
                               "type": "google.protobuf.Any",
                               "id": 2
+                            },
+                            "textEvents": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         },
@@ -85,6 +90,11 @@
                               "rule": "repeated",
                               "type": "google.protobuf.Any",
                               "id": 2
+                            },
+                            "textEvents": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         },
