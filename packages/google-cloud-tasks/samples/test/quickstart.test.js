@@ -19,6 +19,7 @@ const {describe, it, before} = require('mocha');
 const {execSync} = require('child_process');
 const uuid = require('uuid');
 const {CloudTasksClient} = require('@google-cloud/tasks');
+const client = new CloudTasksClient();
 
 const exec = cmd => execSync(cmd, {encoding: 'utf-8'});
 const queueName = `gcloud-${uuid.v4().split('-')[0]}`;
@@ -27,7 +28,6 @@ describe('Cloud Task Sample Tests', async () => {
   let projectId;
 
   before(async () => {
-    const client = new CloudTasksClient();
     projectId = await client.getProjectId();
   });
 
