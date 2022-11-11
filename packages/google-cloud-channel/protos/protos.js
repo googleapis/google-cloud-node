@@ -396,6 +396,12 @@
                             if (object.resellerCloudIdentityId != null)
                                 message.resellerCloudIdentityId = String(object.resellerCloudIdentityId);
                             switch (object.linkState) {
+                            default:
+                                if (typeof object.linkState === "number") {
+                                    message.linkState = object.linkState;
+                                    break;
+                                }
+                                break;
                             case "CHANNEL_PARTNER_LINK_STATE_UNSPECIFIED":
                             case 0:
                                 message.linkState = 0;
@@ -467,7 +473,7 @@
                             if (message.resellerCloudIdentityId != null && message.hasOwnProperty("resellerCloudIdentityId"))
                                 object.resellerCloudIdentityId = message.resellerCloudIdentityId;
                             if (message.linkState != null && message.hasOwnProperty("linkState"))
-                                object.linkState = options.enums === String ? $root.google.cloud.channel.v1.ChannelPartnerLinkState[message.linkState] : message.linkState;
+                                object.linkState = options.enums === String ? $root.google.cloud.channel.v1.ChannelPartnerLinkState[message.linkState] === undefined ? message.linkState : $root.google.cloud.channel.v1.ChannelPartnerLinkState[message.linkState] : message.linkState;
                             if (message.inviteLinkUri != null && message.hasOwnProperty("inviteLinkUri"))
                                 object.inviteLinkUri = message.inviteLinkUri;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
@@ -713,6 +719,12 @@
                                 return object;
                             var message = new $root.google.cloud.channel.v1.EduData();
                             switch (object.instituteType) {
+                            default:
+                                if (typeof object.instituteType === "number") {
+                                    message.instituteType = object.instituteType;
+                                    break;
+                                }
+                                break;
                             case "INSTITUTE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.instituteType = 0;
@@ -727,6 +739,12 @@
                                 break;
                             }
                             switch (object.instituteSize) {
+                            default:
+                                if (typeof object.instituteSize === "number") {
+                                    message.instituteSize = object.instituteSize;
+                                    break;
+                                }
+                                break;
                             case "INSTITUTE_SIZE_UNSPECIFIED":
                             case 0:
                                 message.instituteSize = 0;
@@ -784,9 +802,9 @@
                                 object.website = "";
                             }
                             if (message.instituteType != null && message.hasOwnProperty("instituteType"))
-                                object.instituteType = options.enums === String ? $root.google.cloud.channel.v1.EduData.InstituteType[message.instituteType] : message.instituteType;
+                                object.instituteType = options.enums === String ? $root.google.cloud.channel.v1.EduData.InstituteType[message.instituteType] === undefined ? message.instituteType : $root.google.cloud.channel.v1.EduData.InstituteType[message.instituteType] : message.instituteType;
                             if (message.instituteSize != null && message.hasOwnProperty("instituteSize"))
-                                object.instituteSize = options.enums === String ? $root.google.cloud.channel.v1.EduData.InstituteSize[message.instituteSize] : message.instituteSize;
+                                object.instituteSize = options.enums === String ? $root.google.cloud.channel.v1.EduData.InstituteSize[message.instituteSize] === undefined ? message.instituteSize : $root.google.cloud.channel.v1.EduData.InstituteSize[message.instituteSize] : message.instituteSize;
                             if (message.website != null && message.hasOwnProperty("website"))
                                 object.website = message.website;
                             return object;
@@ -1147,6 +1165,12 @@
                                 return object;
                             var message = new $root.google.cloud.channel.v1.CloudIdentityInfo();
                             switch (object.customerType) {
+                            default:
+                                if (typeof object.customerType === "number") {
+                                    message.customerType = object.customerType;
+                                    break;
+                                }
+                                break;
                             case "CUSTOMER_TYPE_UNSPECIFIED":
                             case 0:
                                 message.customerType = 0;
@@ -1204,7 +1228,7 @@
                                 object.eduData = null;
                             }
                             if (message.customerType != null && message.hasOwnProperty("customerType"))
-                                object.customerType = options.enums === String ? $root.google.cloud.channel.v1.CloudIdentityInfo.CustomerType[message.customerType] : message.customerType;
+                                object.customerType = options.enums === String ? $root.google.cloud.channel.v1.CloudIdentityInfo.CustomerType[message.customerType] === undefined ? message.customerType : $root.google.cloud.channel.v1.CloudIdentityInfo.CustomerType[message.customerType] : message.customerType;
                             if (message.isDomainVerified != null && message.hasOwnProperty("isDomainVerified"))
                                 object.isDomainVerified = message.isDomainVerified;
                             if (message.alternateEmail != null && message.hasOwnProperty("alternateEmail"))
@@ -3091,6 +3115,12 @@
                                 message.commitmentSettings = $root.google.cloud.channel.v1.CommitmentSettings.fromObject(object.commitmentSettings);
                             }
                             switch (object.provisioningState) {
+                            default:
+                                if (typeof object.provisioningState === "number") {
+                                    message.provisioningState = object.provisioningState;
+                                    break;
+                                }
+                                break;
                             case "PROVISIONING_STATE_UNSPECIFIED":
                             case 0:
                                 message.provisioningState = 0;
@@ -3116,6 +3146,10 @@
                                 for (var i = 0; i < object.suspensionReasons.length; ++i)
                                     switch (object.suspensionReasons[i]) {
                                     default:
+                                        if (typeof object.suspensionReasons[i] === "number") {
+                                            message.suspensionReasons[i] = object.suspensionReasons[i];
+                                            break;
+                                        }
                                     case "SUSPENSION_REASON_UNSPECIFIED":
                                     case 0:
                                         message.suspensionReasons[i] = 0;
@@ -3207,13 +3241,13 @@
                             if (message.commitmentSettings != null && message.hasOwnProperty("commitmentSettings"))
                                 object.commitmentSettings = $root.google.cloud.channel.v1.CommitmentSettings.toObject(message.commitmentSettings, options);
                             if (message.provisioningState != null && message.hasOwnProperty("provisioningState"))
-                                object.provisioningState = options.enums === String ? $root.google.cloud.channel.v1.Entitlement.ProvisioningState[message.provisioningState] : message.provisioningState;
+                                object.provisioningState = options.enums === String ? $root.google.cloud.channel.v1.Entitlement.ProvisioningState[message.provisioningState] === undefined ? message.provisioningState : $root.google.cloud.channel.v1.Entitlement.ProvisioningState[message.provisioningState] : message.provisioningState;
                             if (message.provisionedService != null && message.hasOwnProperty("provisionedService"))
                                 object.provisionedService = $root.google.cloud.channel.v1.ProvisionedService.toObject(message.provisionedService, options);
                             if (message.suspensionReasons && message.suspensionReasons.length) {
                                 object.suspensionReasons = [];
                                 for (var j = 0; j < message.suspensionReasons.length; ++j)
-                                    object.suspensionReasons[j] = options.enums === String ? $root.google.cloud.channel.v1.Entitlement.SuspensionReason[message.suspensionReasons[j]] : message.suspensionReasons[j];
+                                    object.suspensionReasons[j] = options.enums === String ? $root.google.cloud.channel.v1.Entitlement.SuspensionReason[message.suspensionReasons[j]] === undefined ? message.suspensionReasons[j] : $root.google.cloud.channel.v1.Entitlement.SuspensionReason[message.suspensionReasons[j]] : message.suspensionReasons[j];
                             }
                             if (message.purchaseOrderId != null && message.hasOwnProperty("purchaseOrderId"))
                                 object.purchaseOrderId = message.purchaseOrderId;
@@ -4488,6 +4522,12 @@
                             if (object.resizeUnitCount != null)
                                 message.resizeUnitCount = Boolean(object.resizeUnitCount);
                             switch (object.paymentPlan) {
+                            default:
+                                if (typeof object.paymentPlan === "number") {
+                                    message.paymentPlan = object.paymentPlan;
+                                    break;
+                                }
+                                break;
                             case "PAYMENT_PLAN_UNSPECIFIED":
                             case 0:
                                 message.paymentPlan = 0;
@@ -4545,7 +4585,7 @@
                             if (message.resizeUnitCount != null && message.hasOwnProperty("resizeUnitCount"))
                                 object.resizeUnitCount = message.resizeUnitCount;
                             if (message.paymentPlan != null && message.hasOwnProperty("paymentPlan"))
-                                object.paymentPlan = options.enums === String ? $root.google.cloud.channel.v1.PaymentPlan[message.paymentPlan] : message.paymentPlan;
+                                object.paymentPlan = options.enums === String ? $root.google.cloud.channel.v1.PaymentPlan[message.paymentPlan] === undefined ? message.paymentPlan : $root.google.cloud.channel.v1.PaymentPlan[message.paymentPlan] : message.paymentPlan;
                             if (message.paymentCycle != null && message.hasOwnProperty("paymentCycle"))
                                 object.paymentCycle = $root.google.cloud.channel.v1.Period.toObject(message.paymentCycle, options);
                             return object;
@@ -5274,6 +5314,12 @@
                             if (object.description != null)
                                 message.description = String(object.description);
                             switch (object.ineligibilityReason) {
+                            default:
+                                if (typeof object.ineligibilityReason === "number") {
+                                    message.ineligibilityReason = object.ineligibilityReason;
+                                    break;
+                                }
+                                break;
                             case "REASON_UNSPECIFIED":
                             case 0:
                                 message.ineligibilityReason = 0;
@@ -5317,7 +5363,7 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             if (message.ineligibilityReason != null && message.hasOwnProperty("ineligibilityReason"))
-                                object.ineligibilityReason = options.enums === String ? $root.google.cloud.channel.v1.TransferEligibility.Reason[message.ineligibilityReason] : message.ineligibilityReason;
+                                object.ineligibilityReason = options.enums === String ? $root.google.cloud.channel.v1.TransferEligibility.Reason[message.ineligibilityReason] === undefined ? message.ineligibilityReason : $root.google.cloud.channel.v1.TransferEligibility.Reason[message.ineligibilityReason] : message.ineligibilityReason;
                             return object;
                         };
     
@@ -6216,6 +6262,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.parameterType) {
+                            default:
+                                if (typeof object.parameterType === "number") {
+                                    message.parameterType = object.parameterType;
+                                    break;
+                                }
+                                break;
                             case "PARAMETER_TYPE_UNSPECIFIED":
                             case 0:
                                 message.parameterType = 0;
@@ -6283,7 +6335,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.parameterType != null && message.hasOwnProperty("parameterType"))
-                                object.parameterType = options.enums === String ? $root.google.cloud.channel.v1.ParameterDefinition.ParameterType[message.parameterType] : message.parameterType;
+                                object.parameterType = options.enums === String ? $root.google.cloud.channel.v1.ParameterDefinition.ParameterType[message.parameterType] === undefined ? message.parameterType : $root.google.cloud.channel.v1.ParameterDefinition.ParameterType[message.parameterType] : message.parameterType;
                             if (message.minValue != null && message.hasOwnProperty("minValue"))
                                 object.minValue = $root.google.cloud.channel.v1.Value.toObject(message.minValue, options);
                             if (message.maxValue != null && message.hasOwnProperty("maxValue"))
@@ -6805,6 +6857,10 @@
                                 for (var i = 0; i < object.allowedCustomerTypes.length; ++i)
                                     switch (object.allowedCustomerTypes[i]) {
                                     default:
+                                        if (typeof object.allowedCustomerTypes[i] === "number") {
+                                            message.allowedCustomerTypes[i] = object.allowedCustomerTypes[i];
+                                            break;
+                                        }
                                     case "CUSTOMER_TYPE_UNSPECIFIED":
                                     case 0:
                                         message.allowedCustomerTypes[i] = 0;
@@ -6826,6 +6882,10 @@
                                 for (var i = 0; i < object.promotionalOrderTypes.length; ++i)
                                     switch (object.promotionalOrderTypes[i]) {
                                     default:
+                                        if (typeof object.promotionalOrderTypes[i] === "number") {
+                                            message.promotionalOrderTypes[i] = object.promotionalOrderTypes[i];
+                                            break;
+                                        }
                                     case "PROMOTIONAL_TYPE_UNSPECIFIED":
                                     case 0:
                                         message.promotionalOrderTypes[i] = 0;
@@ -6873,12 +6933,12 @@
                             if (message.allowedCustomerTypes && message.allowedCustomerTypes.length) {
                                 object.allowedCustomerTypes = [];
                                 for (var j = 0; j < message.allowedCustomerTypes.length; ++j)
-                                    object.allowedCustomerTypes[j] = options.enums === String ? $root.google.cloud.channel.v1.CloudIdentityInfo.CustomerType[message.allowedCustomerTypes[j]] : message.allowedCustomerTypes[j];
+                                    object.allowedCustomerTypes[j] = options.enums === String ? $root.google.cloud.channel.v1.CloudIdentityInfo.CustomerType[message.allowedCustomerTypes[j]] === undefined ? message.allowedCustomerTypes[j] : $root.google.cloud.channel.v1.CloudIdentityInfo.CustomerType[message.allowedCustomerTypes[j]] : message.allowedCustomerTypes[j];
                             }
                             if (message.promotionalOrderTypes && message.promotionalOrderTypes.length) {
                                 object.promotionalOrderTypes = [];
                                 for (var j = 0; j < message.promotionalOrderTypes.length; ++j)
-                                    object.promotionalOrderTypes[j] = options.enums === String ? $root.google.cloud.channel.v1.PromotionalOrderType[message.promotionalOrderTypes[j]] : message.promotionalOrderTypes[j];
+                                    object.promotionalOrderTypes[j] = options.enums === String ? $root.google.cloud.channel.v1.PromotionalOrderType[message.promotionalOrderTypes[j]] === undefined ? message.promotionalOrderTypes[j] : $root.google.cloud.channel.v1.PromotionalOrderType[message.promotionalOrderTypes[j]] : message.promotionalOrderTypes[j];
                             }
                             return object;
                         };
@@ -7153,6 +7213,12 @@
                                 return object;
                             var message = new $root.google.cloud.channel.v1.Plan();
                             switch (object.paymentPlan) {
+                            default:
+                                if (typeof object.paymentPlan === "number") {
+                                    message.paymentPlan = object.paymentPlan;
+                                    break;
+                                }
+                                break;
                             case "PAYMENT_PLAN_UNSPECIFIED":
                             case 0:
                                 message.paymentPlan = 0;
@@ -7179,6 +7245,12 @@
                                 break;
                             }
                             switch (object.paymentType) {
+                            default:
+                                if (typeof object.paymentType === "number") {
+                                    message.paymentType = object.paymentType;
+                                    break;
+                                }
+                                break;
                             case "PAYMENT_TYPE_UNSPECIFIED":
                             case 0:
                                 message.paymentType = 0;
@@ -7228,9 +7300,9 @@
                                 object.billingAccount = "";
                             }
                             if (message.paymentPlan != null && message.hasOwnProperty("paymentPlan"))
-                                object.paymentPlan = options.enums === String ? $root.google.cloud.channel.v1.PaymentPlan[message.paymentPlan] : message.paymentPlan;
+                                object.paymentPlan = options.enums === String ? $root.google.cloud.channel.v1.PaymentPlan[message.paymentPlan] === undefined ? message.paymentPlan : $root.google.cloud.channel.v1.PaymentPlan[message.paymentPlan] : message.paymentPlan;
                             if (message.paymentType != null && message.hasOwnProperty("paymentType"))
-                                object.paymentType = options.enums === String ? $root.google.cloud.channel.v1.PaymentType[message.paymentType] : message.paymentType;
+                                object.paymentType = options.enums === String ? $root.google.cloud.channel.v1.PaymentType[message.paymentType] === undefined ? message.paymentType : $root.google.cloud.channel.v1.PaymentType[message.paymentType] : message.paymentType;
                             if (message.paymentCycle != null && message.hasOwnProperty("paymentCycle"))
                                 object.paymentCycle = $root.google.cloud.channel.v1.Period.toObject(message.paymentCycle, options);
                             if (message.trialPeriod != null && message.hasOwnProperty("trialPeriod"))
@@ -7478,6 +7550,12 @@
                                 return object;
                             var message = new $root.google.cloud.channel.v1.PriceByResource();
                             switch (object.resourceType) {
+                            default:
+                                if (typeof object.resourceType === "number") {
+                                    message.resourceType = object.resourceType;
+                                    break;
+                                }
+                                break;
                             case "RESOURCE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.resourceType = 0;
@@ -7549,7 +7627,7 @@
                                 object.price = null;
                             }
                             if (message.resourceType != null && message.hasOwnProperty("resourceType"))
-                                object.resourceType = options.enums === String ? $root.google.cloud.channel.v1.ResourceType[message.resourceType] : message.resourceType;
+                                object.resourceType = options.enums === String ? $root.google.cloud.channel.v1.ResourceType[message.resourceType] === undefined ? message.resourceType : $root.google.cloud.channel.v1.ResourceType[message.resourceType] : message.resourceType;
                             if (message.price != null && message.hasOwnProperty("price"))
                                 object.price = $root.google.cloud.channel.v1.Price.toObject(message.price, options);
                             if (message.pricePhases && message.pricePhases.length) {
@@ -8113,6 +8191,12 @@
                                 return object;
                             var message = new $root.google.cloud.channel.v1.PricePhase();
                             switch (object.periodType) {
+                            default:
+                                if (typeof object.periodType === "number") {
+                                    message.periodType = object.periodType;
+                                    break;
+                                }
+                                break;
                             case "PERIOD_TYPE_UNSPECIFIED":
                             case 0:
                                 message.periodType = 0;
@@ -8174,7 +8258,7 @@
                                 object.price = null;
                             }
                             if (message.periodType != null && message.hasOwnProperty("periodType"))
-                                object.periodType = options.enums === String ? $root.google.cloud.channel.v1.PeriodType[message.periodType] : message.periodType;
+                                object.periodType = options.enums === String ? $root.google.cloud.channel.v1.PeriodType[message.periodType] === undefined ? message.periodType : $root.google.cloud.channel.v1.PeriodType[message.periodType] : message.periodType;
                             if (message.firstPeriod != null && message.hasOwnProperty("firstPeriod"))
                                 object.firstPeriod = message.firstPeriod;
                             if (message.lastPeriod != null && message.hasOwnProperty("lastPeriod"))
@@ -8650,6 +8734,12 @@
                             if (object.duration != null)
                                 message.duration = object.duration | 0;
                             switch (object.periodType) {
+                            default:
+                                if (typeof object.periodType === "number") {
+                                    message.periodType = object.periodType;
+                                    break;
+                                }
+                                break;
                             case "PERIOD_TYPE_UNSPECIFIED":
                             case 0:
                                 message.periodType = 0;
@@ -8690,7 +8780,7 @@
                             if (message.duration != null && message.hasOwnProperty("duration"))
                                 object.duration = message.duration;
                             if (message.periodType != null && message.hasOwnProperty("periodType"))
-                                object.periodType = options.enums === String ? $root.google.cloud.channel.v1.PeriodType[message.periodType] : message.periodType;
+                                object.periodType = options.enums === String ? $root.google.cloud.channel.v1.PeriodType[message.periodType] === undefined ? message.periodType : $root.google.cloud.channel.v1.PeriodType[message.periodType] : message.periodType;
                             return object;
                         };
     
@@ -9679,6 +9769,12 @@
                             if (object.content != null)
                                 message.content = String(object.content);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "MEDIA_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -9714,7 +9810,7 @@
                             if (message.content != null && message.hasOwnProperty("content"))
                                 object.content = message.content;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.channel.v1.MediaType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.channel.v1.MediaType[message.type] === undefined ? message.type : $root.google.cloud.channel.v1.MediaType[message.type] : message.type;
                             return object;
                         };
     
@@ -9912,6 +10008,12 @@
                                 return object;
                             var message = new $root.google.cloud.channel.v1.OperationMetadata();
                             switch (object.operationType) {
+                            default:
+                                if (typeof object.operationType === "number") {
+                                    message.operationType = object.operationType;
+                                    break;
+                                }
+                                break;
                             case "OPERATION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.operationType = 0;
@@ -9980,7 +10082,7 @@
                             if (options.defaults)
                                 object.operationType = options.enums === String ? "OPERATION_TYPE_UNSPECIFIED" : 0;
                             if (message.operationType != null && message.hasOwnProperty("operationType"))
-                                object.operationType = options.enums === String ? $root.google.cloud.channel.v1.OperationMetadata.OperationType[message.operationType] : message.operationType;
+                                object.operationType = options.enums === String ? $root.google.cloud.channel.v1.OperationMetadata.OperationType[message.operationType] === undefined ? message.operationType : $root.google.cloud.channel.v1.OperationMetadata.OperationType[message.operationType] : message.operationType;
                             return object;
                         };
     
@@ -12478,6 +12580,12 @@
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
                             switch (object.dataType) {
+                            default:
+                                if (typeof object.dataType === "number") {
+                                    message.dataType = object.dataType;
+                                    break;
+                                }
+                                break;
                             case "DATA_TYPE_UNSPECIFIED":
                             case 0:
                                 message.dataType = 0;
@@ -12533,7 +12641,7 @@
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
                             if (message.dataType != null && message.hasOwnProperty("dataType"))
-                                object.dataType = options.enums === String ? $root.google.cloud.channel.v1.Column.DataType[message.dataType] : message.dataType;
+                                object.dataType = options.enums === String ? $root.google.cloud.channel.v1.Column.DataType[message.dataType] === undefined ? message.dataType : $root.google.cloud.channel.v1.Column.DataType[message.dataType] : message.dataType;
                             return object;
                         };
     
@@ -13705,6 +13813,12 @@
                                 return object;
                             var message = new $root.google.cloud.channel.v1.ReportStatus();
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -13758,7 +13872,7 @@
                                 object.endTime = null;
                             }
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.channel.v1.ReportStatus.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.channel.v1.ReportStatus.State[message.state] === undefined ? message.state : $root.google.cloud.channel.v1.ReportStatus.State[message.state] : message.state;
                             if (message.startTime != null && message.hasOwnProperty("startTime"))
                                 object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
@@ -14925,6 +15039,12 @@
                                 message.adjustment = $root.google.cloud.channel.v1.RepricingAdjustment.fromObject(object.adjustment);
                             }
                             switch (object.rebillingBasis) {
+                            default:
+                                if (typeof object.rebillingBasis === "number") {
+                                    message.rebillingBasis = object.rebillingBasis;
+                                    break;
+                                }
+                                break;
                             case "REBILLING_BASIS_UNSPECIFIED":
                             case 0:
                                 message.rebillingBasis = 0;
@@ -14964,7 +15084,7 @@
                             if (message.adjustment != null && message.hasOwnProperty("adjustment"))
                                 object.adjustment = $root.google.cloud.channel.v1.RepricingAdjustment.toObject(message.adjustment, options);
                             if (message.rebillingBasis != null && message.hasOwnProperty("rebillingBasis"))
-                                object.rebillingBasis = options.enums === String ? $root.google.cloud.channel.v1.RebillingBasis[message.rebillingBasis] : message.rebillingBasis;
+                                object.rebillingBasis = options.enums === String ? $root.google.cloud.channel.v1.RebillingBasis[message.rebillingBasis] === undefined ? message.rebillingBasis : $root.google.cloud.channel.v1.RebillingBasis[message.rebillingBasis] : message.rebillingBasis;
                             if (message.entitlementGranularity != null && message.hasOwnProperty("entitlementGranularity")) {
                                 object.entitlementGranularity = $root.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.toObject(message.entitlementGranularity, options);
                                 if (options.oneofs)
@@ -22465,6 +22585,12 @@
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -22507,7 +22633,7 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.channel.v1.ChannelPartnerLinkView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.cloud.channel.v1.ChannelPartnerLinkView[message.view] === undefined ? message.view : $root.google.cloud.channel.v1.ChannelPartnerLinkView[message.view] : message.view;
                             return object;
                         };
     
@@ -22964,6 +23090,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -23000,7 +23132,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.channel.v1.ChannelPartnerLinkView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.cloud.channel.v1.ChannelPartnerLinkView[message.view] === undefined ? message.view : $root.google.cloud.channel.v1.ChannelPartnerLinkView[message.view] : message.view;
                             return object;
                         };
     
@@ -31625,6 +31757,12 @@
                                 if (object.entitlement != null)
                                     message.entitlement = String(object.entitlement);
                                 switch (object.changeType) {
+                                default:
+                                    if (typeof object.changeType === "number") {
+                                        message.changeType = object.changeType;
+                                        break;
+                                    }
+                                    break;
                                 case "CHANGE_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.changeType = 0;
@@ -31661,7 +31799,7 @@
                                 if (message.entitlement != null && message.hasOwnProperty("entitlement"))
                                     object.entitlement = message.entitlement;
                                 if (message.changeType != null && message.hasOwnProperty("changeType"))
-                                    object.changeType = options.enums === String ? $root.google.cloud.channel.v1.ListPurchasableSkusRequest.ChangeOfferPurchase.ChangeType[message.changeType] : message.changeType;
+                                    object.changeType = options.enums === String ? $root.google.cloud.channel.v1.ListPurchasableSkusRequest.ChangeOfferPurchase.ChangeType[message.changeType] === undefined ? message.changeType : $root.google.cloud.channel.v1.ListPurchasableSkusRequest.ChangeOfferPurchase.ChangeType[message.changeType] : message.changeType;
                                 return object;
                             };
     
@@ -34964,6 +35102,12 @@
                             if (object.customer != null)
                                 message.customer = String(object.customer);
                             switch (object.eventType) {
+                            default:
+                                if (typeof object.eventType === "number") {
+                                    message.eventType = object.eventType;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.eventType = 0;
@@ -35000,7 +35144,7 @@
                             if (message.customer != null && message.hasOwnProperty("customer"))
                                 object.customer = message.customer;
                             if (message.eventType != null && message.hasOwnProperty("eventType"))
-                                object.eventType = options.enums === String ? $root.google.cloud.channel.v1.CustomerEvent.Type[message.eventType] : message.eventType;
+                                object.eventType = options.enums === String ? $root.google.cloud.channel.v1.CustomerEvent.Type[message.eventType] === undefined ? message.eventType : $root.google.cloud.channel.v1.CustomerEvent.Type[message.eventType] : message.eventType;
                             return object;
                         };
     
@@ -35235,6 +35379,12 @@
                             if (object.entitlement != null)
                                 message.entitlement = String(object.entitlement);
                             switch (object.eventType) {
+                            default:
+                                if (typeof object.eventType === "number") {
+                                    message.eventType = object.eventType;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.eventType = 0;
@@ -35311,7 +35461,7 @@
                             if (message.entitlement != null && message.hasOwnProperty("entitlement"))
                                 object.entitlement = message.entitlement;
                             if (message.eventType != null && message.hasOwnProperty("eventType"))
-                                object.eventType = options.enums === String ? $root.google.cloud.channel.v1.EntitlementEvent.Type[message.eventType] : message.eventType;
+                                object.eventType = options.enums === String ? $root.google.cloud.channel.v1.EntitlementEvent.Type[message.eventType] === undefined ? message.eventType : $root.google.cloud.channel.v1.EntitlementEvent.Type[message.eventType] : message.eventType;
                             return object;
                         };
     
@@ -35990,6 +36140,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -36014,6 +36170,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -36061,7 +36221,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -36069,7 +36229,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -39843,6 +40003,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -39857,6 +40023,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -39983,9 +40155,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -42332,6 +42504,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -42440,7 +42618,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -43242,6 +43420,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -43258,6 +43442,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -43296,6 +43486,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -43366,7 +43560,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -43374,7 +43568,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -43387,7 +43581,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -44764,6 +44958,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -44833,7 +45033,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -46588,6 +46788,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -46637,7 +46843,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
