@@ -6,11 +6,11 @@
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Cloud Channel API",
-  "repo": "googleapis/nodejs-channel",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/channel/",
   "requires_billing": true,
   "name": "cloudchannel",
-  "issue_tracker": "https://github.com/googleapis/nodejs-channel/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "api_shortname": "cloudchannel",
   "library_type": "GAPIC_AUTO"
 }
