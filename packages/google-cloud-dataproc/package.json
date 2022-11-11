@@ -7,7 +7,11 @@
   "engines": {
     "node": ">=12.0.0"
   },
-  "repository": "googleapis/nodejs-dataproc",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-dataproc",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "main": "build/src/index.js",
   "files": [
     "build/protos",
@@ -28,10 +32,10 @@
   ],
   "scripts": {
     "test": "c8 mocha build/test",
-    "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "lint": "gts check",
     "docs": "jsdoc -c .jsdoc.js",
-    "system-test": "mocha build/system-test smoke-test/*.js",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "fix": "gts fix",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
@@ -64,5 +68,6 @@
     "typescript": "^4.6.4",
     "webpack": "^5.0.0",
     "webpack-cli": "^4.0.0"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataproc"
 }
