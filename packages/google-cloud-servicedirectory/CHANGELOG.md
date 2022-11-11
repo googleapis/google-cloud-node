@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.0.4](https://github.com/googleapis/nodejs-service-directory/compare/v4.0.3...v4.0.4) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency uuid to v9 ([#248](https://github.com/googleapis/nodejs-service-directory/issues/248)) ([5648d02](https://github.com/googleapis/nodejs-service-directory/commit/5648d02c86fe676ca022af4a3a3e546621b00530))
+* Preserve default values in x-goog-request-params header ([#250](https://github.com/googleapis/nodejs-service-directory/issues/250)) ([5c89781](https://github.com/googleapis/nodejs-service-directory/commit/5c897813076a08f2a2eb899cc05c71eb04ef87a6))
+* Regenerated protos JS and TS definitions ([#266](https://github.com/googleapis/nodejs-service-directory/issues/266)) ([7c7cec7](https://github.com/googleapis/nodejs-service-directory/commit/7c7cec7d4a4a324121ae1fd0a88cbba5b11567e3))
+
 ## [4.0.3](https://github.com/googleapis/nodejs-service-directory/compare/v4.0.2...v4.0.3) (2022-09-01)
 
 
