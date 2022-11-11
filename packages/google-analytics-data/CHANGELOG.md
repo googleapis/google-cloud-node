@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.1](https://github.com/googleapis/nodejs-analytics-data/compare/v3.1.0...v3.1.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#270](https://github.com/googleapis/nodejs-analytics-data/issues/270)) ([58e6661](https://github.com/googleapis/nodejs-analytics-data/commit/58e6661e58f109d2db30eefbd6e6902fc3b1022b))
+* Regenerated protos JS and TS definitions ([#274](https://github.com/googleapis/nodejs-analytics-data/issues/274)) ([690d304](https://github.com/googleapis/nodejs-analytics-data/commit/690d3048bb0e5fc238a018fac95f55f989d7fa03))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-analytics-data/compare/v3.0.3...v3.1.0) (2022-10-13)
 
 
