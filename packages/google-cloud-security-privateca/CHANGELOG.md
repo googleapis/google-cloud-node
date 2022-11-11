@@ -1,5 +1,20 @@
 # Changelog
 
+## [4.1.2](https://github.com/googleapis/nodejs-security-private-ca/compare/v4.1.1...v4.1.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#200](https://github.com/googleapis/nodejs-security-private-ca/issues/200)) ([49544f7](https://github.com/googleapis/nodejs-security-private-ca/commit/49544f7cb90fc6c069dc5e6ec069fd8461fe1474))
+* Better support for fallback mode ([#195](https://github.com/googleapis/nodejs-security-private-ca/issues/195)) ([1ade12a](https://github.com/googleapis/nodejs-security-private-ca/commit/1ade12ad4846ed1b5ecf59252f55ba5c78038c5e))
+* Change import long to require ([#196](https://github.com/googleapis/nodejs-security-private-ca/issues/196)) ([09700e4](https://github.com/googleapis/nodejs-security-private-ca/commit/09700e4bc33755d90b01c9723bfb1757f3c85d0e))
+* **deps:** Use google-gax v3.5.2 ([#207](https://github.com/googleapis/nodejs-security-private-ca/issues/207)) ([e8e4b6e](https://github.com/googleapis/nodejs-security-private-ca/commit/e8e4b6ef03b90b3d1d11f062fe5b80267cd6f267))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-security-private-ca/issues/1553)) ([#199](https://github.com/googleapis/nodejs-security-private-ca/issues/199)) ([f4a0948](https://github.com/googleapis/nodejs-security-private-ca/commit/f4a0948dcb2710eef28aeb2a38c122cde28e5681))
+* Preserve default values in x-goog-request-params header ([#201](https://github.com/googleapis/nodejs-security-private-ca/issues/201)) ([b897e4f](https://github.com/googleapis/nodejs-security-private-ca/commit/b897e4fd4cea66e673fe44029f9336cb6ecac5c3))
+* Regenerated protos JS and TS definitions ([#210](https://github.com/googleapis/nodejs-security-private-ca/issues/210)) ([13781d3](https://github.com/googleapis/nodejs-security-private-ca/commit/13781d3d11eaaf2cb04d80f2f48b1c48f28539a9))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-security-private-ca/issues/1546)) ([#198](https://github.com/googleapis/nodejs-security-private-ca/issues/198)) ([38691a1](https://github.com/googleapis/nodejs-security-private-ca/commit/38691a1aa932c6d9c77b7f6ab254feb4ece8c80e))
+* use google-gax v3.3.0 ([f4a0948](https://github.com/googleapis/nodejs-security-private-ca/commit/f4a0948dcb2710eef28aeb2a38c122cde28e5681))
+
 ## [4.1.1](https://github.com/googleapis/nodejs-security-private-ca/compare/v4.1.0...v4.1.1) (2022-07-04)
 
 
