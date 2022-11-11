@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/nodejs-kms/compare/v3.0.1...v3.1.0) (2022-11-11)
+
+
+### Features
+
+* **kms:** Enable generation of Locations mixin ([#578](https://github.com/googleapis/nodejs-kms/issues/578)) ([5205ddc](https://github.com/googleapis/nodejs-kms/commit/5205ddc20daa79b1d39b89e2c7ea7063a4f5d93e))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#570](https://github.com/googleapis/nodejs-kms/issues/570)) ([1072346](https://github.com/googleapis/nodejs-kms/commit/1072346f45496885a6cba33dbb5e72f500661656))
+* Better support for fallback mode ([#565](https://github.com/googleapis/nodejs-kms/issues/565)) ([ebb7caf](https://github.com/googleapis/nodejs-kms/commit/ebb7caf95716814af6e1f3d0b423f68dba289593))
+* Change import long to require ([#566](https://github.com/googleapis/nodejs-kms/issues/566)) ([ac44194](https://github.com/googleapis/nodejs-kms/commit/ac4419470711d19d30811e3ff88659e0484ce38d))
+* **deps:** Use google-gax v3.5.2 ([#581](https://github.com/googleapis/nodejs-kms/issues/581)) ([54c26f3](https://github.com/googleapis/nodejs-kms/commit/54c26f3f97c1e65ee2cc3f85cfed9c8a4b974432))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-kms/issues/1553)) ([#569](https://github.com/googleapis/nodejs-kms/issues/569)) ([c981d1a](https://github.com/googleapis/nodejs-kms/commit/c981d1a423c86a86b2b0ca47f09cedf26be1f28a))
+* Preserve default values in x-goog-request-params header ([#573](https://github.com/googleapis/nodejs-kms/issues/573)) ([2ab539d](https://github.com/googleapis/nodejs-kms/commit/2ab539dd02674f010c10e6933da8d06da0e983b5))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-kms/issues/1546)) ([#568](https://github.com/googleapis/nodejs-kms/issues/568)) ([e704093](https://github.com/googleapis/nodejs-kms/commit/e704093f79aefe6706bae5b62e78525705366fe6))
+* use google-gax v3.3.0 ([c981d1a](https://github.com/googleapis/nodejs-kms/commit/c981d1a423c86a86b2b0ca47f09cedf26be1f28a))
+
 ## [3.0.1](https://github.com/googleapis/nodejs-kms/compare/v3.0.0...v3.0.1) (2022-06-30)
 
 
