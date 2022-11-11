@@ -56,14 +56,14 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Backup_for_g_k_e.create_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.create_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.create_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.create_backup.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_backup.js`
 
 
 -----
@@ -73,14 +73,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.create_backup_plan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.create_backup_plan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_backup_plan.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.create_backup_plan.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_backup_plan.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.create_backup_plan.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_backup_plan.js`
 
 
 -----
@@ -90,14 +90,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.create_restore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.create_restore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_restore.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.create_restore.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_restore.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.create_restore.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_restore.js`
 
 
 -----
@@ -107,14 +107,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.create_restore_plan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.create_restore_plan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_restore_plan.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.create_restore_plan.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_restore_plan.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.create_restore_plan.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_restore_plan.js`
 
 
 -----
@@ -124,14 +124,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.delete_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.delete_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.delete_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.delete_backup.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_backup.js`
 
 
 -----
@@ -141,14 +141,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.delete_backup_plan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.delete_backup_plan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_backup_plan.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.delete_backup_plan.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_backup_plan.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.delete_backup_plan.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_backup_plan.js`
 
 
 -----
@@ -158,14 +158,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.delete_restore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.delete_restore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_restore.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.delete_restore.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_restore.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.delete_restore.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_restore.js`
 
 
 -----
@@ -175,14 +175,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.delete_restore_plan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.delete_restore_plan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_restore_plan.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.delete_restore_plan.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_restore_plan.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.delete_restore_plan.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_restore_plan.js`
 
 
 -----
@@ -192,14 +192,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.get_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_backup.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup.js`
 
 
 -----
@@ -209,14 +209,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.get_backup_plan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_backup_plan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup_plan.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_backup_plan.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup_plan.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_backup_plan.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup_plan.js`
 
 
 -----
@@ -226,14 +226,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.get_restore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_restore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_restore.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_restore.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore.js`
 
 
 -----
@@ -243,14 +243,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.get_restore_plan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_restore_plan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore_plan.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_restore_plan.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore_plan.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_restore_plan.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore_plan.js`
 
 
 -----
@@ -260,14 +260,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.get_volume_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_volume_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_volume_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_volume_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_volume_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_volume_backup.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_volume_backup.js`
 
 
 -----
@@ -277,14 +277,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.get_volume_restore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_volume_restore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_volume_restore.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_volume_restore.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_volume_restore.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.get_volume_restore.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_volume_restore.js`
 
 
 -----
@@ -294,14 +294,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.list_backup_plans
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_backup_plans.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backup_plans.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_backup_plans.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backup_plans.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_backup_plans.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backup_plans.js`
 
 
 -----
@@ -311,14 +311,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.list_backups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_backups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backups.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_backups.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backups.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_backups.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backups.js`
 
 
 -----
@@ -328,14 +328,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.list_restore_plans
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_restore_plans.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_restore_plans.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_restore_plans.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_restore_plans.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_restore_plans.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_restore_plans.js`
 
 
 -----
@@ -345,14 +345,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.list_restores
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_restores.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_restores.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_restores.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_restores.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_restores.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_restores.js`
 
 
 -----
@@ -362,14 +362,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.list_volume_backups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_volume_backups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_volume_backups.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_volume_backups.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_volume_backups.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_volume_backups.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_volume_backups.js`
 
 
 -----
@@ -379,14 +379,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.list_volume_restores
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_volume_restores.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_volume_restores.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_volume_restores.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_volume_restores.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.list_volume_restores.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_volume_restores.js`
 
 
 -----
@@ -396,14 +396,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.update_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.update_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_backup.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.update_backup.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_backup.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.update_backup.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_backup.js`
 
 
 -----
@@ -413,14 +413,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.update_backup_plan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.update_backup_plan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_backup_plan.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.update_backup_plan.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_backup_plan.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.update_backup_plan.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_backup_plan.js`
 
 
 -----
@@ -430,14 +430,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.update_restore
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.update_restore.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.update_restore.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.update_restore.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore.js`
 
 
 -----
@@ -447,14 +447,14 @@ __Usage:__
 
 ### Backup_for_g_k_e.update_restore_plan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.update_restore_plan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore_plan.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.update_restore_plan.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore_plan.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/backup_for_g_k_e.update_restore_plan.js`
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore_plan.js`
 
 
 -----
@@ -464,14 +464,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/quickstart.js`
+`node packages/google-cloud-gkebackup/samples/quickstart.js`
 
 
 -----
@@ -481,14 +481,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/test/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/test/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/test/quickstart.js`
+`node packages/google-cloud-gkebackup/samples/test/quickstart.js`
 
 
 
