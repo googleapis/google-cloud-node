@@ -35,14 +35,14 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Private_catalog.search_catalogs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/private_catalog.search_catalogs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_catalogs.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/private_catalog.search_catalogs.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_catalogs.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/private_catalog.search_catalogs.js`
+`node packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_catalogs.js`
 
 
 -----
@@ -52,14 +52,14 @@ __Usage:__
 
 ### Private_catalog.search_products
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/private_catalog.search_products.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_products.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/private_catalog.search_products.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_products.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/private_catalog.search_products.js`
+`node packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_products.js`
 
 
 -----
@@ -69,14 +69,14 @@ __Usage:__
 
 ### Private_catalog.search_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/private_catalog.search_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_versions.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/private_catalog.search_versions.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_versions.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/private_catalog.search_versions.js`
+`node packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_versions.js`
 
 
 -----
@@ -86,14 +86,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/quickstart.js`
+`node packages/google-cloud-privatecatalog/samples/quickstart.js`
 
 
 -----
@@ -103,14 +103,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/test/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/test/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/test/quickstart.js`
+`node packages/google-cloud-privatecatalog/samples/test/quickstart.js`
 
 
 
