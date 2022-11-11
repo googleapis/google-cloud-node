@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-eventarc/compare/v2.1.1...v2.2.0) (2022-11-11)
+
+
+### Features
+
+* Add CMEK support to Eventarc client library ([#108](https://github.com/googleapis/nodejs-eventarc/issues/108)) ([dc3435d](https://github.com/googleapis/nodejs-eventarc/commit/dc3435d0aa624ad5e72acf84e82d38c056a1227f))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#104](https://github.com/googleapis/nodejs-eventarc/issues/104)) ([29fc837](https://github.com/googleapis/nodejs-eventarc/commit/29fc83738cf6e9a5e55baedd89b2ed03dc49f4b0))
+* Preserve default values in x-goog-request-params header ([#97](https://github.com/googleapis/nodejs-eventarc/issues/97)) ([1a91d8e](https://github.com/googleapis/nodejs-eventarc/commit/1a91d8e7442d5336a862cb131b672d248a371aec))
+* Regenerated protos JS and TS definitions ([#107](https://github.com/googleapis/nodejs-eventarc/issues/107)) ([00fb085](https://github.com/googleapis/nodejs-eventarc/commit/00fb0854e7ba4c477437d9221086dccb88756a5c))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-eventarc/compare/v2.1.0...v2.1.1) (2022-09-01)
 
 
