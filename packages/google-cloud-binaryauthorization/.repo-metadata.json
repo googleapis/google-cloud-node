@@ -6,11 +6,11 @@
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Binary Authorization",
-  "repo": "googleapis/nodejs-binary-authorization",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/binary-authorization/",
   "requires_billing": true,
   "name": "binaryauthorization",
-  "issue_tracker": "https://github.com/googleapis/nodejs-binary-authorization/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "codeowner_team": "@googleapis/aap-dpes",
   "api_shortname": "binaryauthorization",
   "library_type": "GAPIC_AUTO"
