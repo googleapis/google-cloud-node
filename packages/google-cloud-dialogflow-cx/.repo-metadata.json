@@ -1,0 +1,17 @@
+{
+  "default_version": "v3",
+  "release_level": "stable",
+  "requires_billing": true,
+  "client_documentation": "https://googleapis.dev/nodejs/dialogflow-cx/latest",
+  "codeowner_team": "@googleapis/ml-apis",
+  "language": "nodejs",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5300385",
+  "product_documentation": "https://cloud.google.com/dialogflow-enterprise/",
+  "name": "dialogflow-cx",
+  "distribution_name": "@google-cloud/dialogflow-cx",
+  "name_pretty": "Dialogflow CX API",
+  "api_id": "dialogflow.googleapis.com",
+  "repo": "googleapis/nodejs-dialogflow-cx",
+  "api_shortname": "dialogflow",
+  "library_type": "GAPIC_AUTO"
+}
