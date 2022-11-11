@@ -18,6 +18,7 @@
     "packages/google-cloud-dataplex": {},
     "packages/google-cloud-dataproc": {},
     "packages/google-cloud-deploy": {},
+    "packages/google-cloud-dialogflow": {},
     "packages/google-cloud-discoveryengine": {},
     "packages/google-cloud-gkeconnect-gateway": {},
     "packages/google-cloud-gkemulticloud": {},
