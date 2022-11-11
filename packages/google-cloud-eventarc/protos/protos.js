@@ -80,6 +80,7 @@
                          * @property {string|null} [pubsubTopic] Channel pubsubTopic
                          * @property {google.cloud.eventarc.v1.Channel.State|null} [state] Channel state
                          * @property {string|null} [activationToken] Channel activationToken
+                         * @property {string|null} [cryptoKeyName] Channel cryptoKeyName
                          */
     
                         /**
@@ -161,6 +162,14 @@
                          */
                         Channel.prototype.activationToken = "";
     
+                        /**
+                         * Channel cryptoKeyName.
+                         * @member {string} cryptoKeyName
+                         * @memberof google.cloud.eventarc.v1.Channel
+                         * @instance
+                         */
+                        Channel.prototype.cryptoKeyName = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -215,6 +224,8 @@
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.state);
                             if (message.activationToken != null && Object.hasOwnProperty.call(message, "activationToken"))
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.activationToken);
+                            if (message.cryptoKeyName != null && Object.hasOwnProperty.call(message, "cryptoKeyName"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.cryptoKeyName);
                             return writer;
                         };
     
@@ -279,6 +290,10 @@
                                     }
                                 case 10: {
                                         message.activationToken = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.cryptoKeyName = reader.string();
                                         break;
                                     }
                                 default:
@@ -354,6 +369,9 @@
                             if (message.activationToken != null && message.hasOwnProperty("activationToken"))
                                 if (!$util.isString(message.activationToken))
                                     return "activationToken: string expected";
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                if (!$util.isString(message.cryptoKeyName))
+                                    return "cryptoKeyName: string expected";
                             return null;
                         };
     
@@ -413,6 +431,8 @@
                             }
                             if (object.activationToken != null)
                                 message.activationToken = String(object.activationToken);
+                            if (object.cryptoKeyName != null)
+                                message.cryptoKeyName = String(object.cryptoKeyName);
                             return message;
                         };
     
@@ -437,6 +457,7 @@
                                 object.provider = "";
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.activationToken = "";
+                                object.cryptoKeyName = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -457,6 +478,8 @@
                                 object.state = options.enums === String ? $root.google.cloud.eventarc.v1.Channel.State[message.state] === undefined ? message.state : $root.google.cloud.eventarc.v1.Channel.State[message.state] : message.state;
                             if (message.activationToken != null && message.hasOwnProperty("activationToken"))
                                 object.activationToken = message.activationToken;
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                object.cryptoKeyName = message.cryptoKeyName;
                             return object;
                         };
     
@@ -2236,6 +2259,72 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|getGoogleChannelConfig}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef GetGoogleChannelConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.GoogleChannelConfig} [response] GoogleChannelConfig
+                         */
+    
+                        /**
+                         * Calls GetGoogleChannelConfig.
+                         * @function getGoogleChannelConfig
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest} request GetGoogleChannelConfigRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.GetGoogleChannelConfigCallback} callback Node-style callback called with the error, if any, and GoogleChannelConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.getGoogleChannelConfig = function getGoogleChannelConfig(request, callback) {
+                            return this.rpcCall(getGoogleChannelConfig, $root.google.cloud.eventarc.v1.GetGoogleChannelConfigRequest, $root.google.cloud.eventarc.v1.GoogleChannelConfig, request, callback);
+                        }, "name", { value: "GetGoogleChannelConfig" });
+    
+                        /**
+                         * Calls GetGoogleChannelConfig.
+                         * @function getGoogleChannelConfig
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest} request GetGoogleChannelConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.GoogleChannelConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|updateGoogleChannelConfig}.
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @typedef UpdateGoogleChannelConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.eventarc.v1.GoogleChannelConfig} [response] GoogleChannelConfig
+                         */
+    
+                        /**
+                         * Calls UpdateGoogleChannelConfig.
+                         * @function updateGoogleChannelConfig
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest} request UpdateGoogleChannelConfigRequest message or plain object
+                         * @param {google.cloud.eventarc.v1.Eventarc.UpdateGoogleChannelConfigCallback} callback Node-style callback called with the error, if any, and GoogleChannelConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Eventarc.prototype.updateGoogleChannelConfig = function updateGoogleChannelConfig(request, callback) {
+                            return this.rpcCall(updateGoogleChannelConfig, $root.google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest, $root.google.cloud.eventarc.v1.GoogleChannelConfig, request, callback);
+                        }, "name", { value: "UpdateGoogleChannelConfig" });
+    
+                        /**
+                         * Calls UpdateGoogleChannelConfig.
+                         * @function updateGoogleChannelConfig
+                         * @memberof google.cloud.eventarc.v1.Eventarc
+                         * @instance
+                         * @param {google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest} request UpdateGoogleChannelConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.eventarc.v1.GoogleChannelConfig>} Promise
+                         * @variation 2
+                         */
+    
                         return Eventarc;
                     })();
     
@@ -2452,6 +2541,7 @@
                          * @property {number|null} [pageSize] ListTriggersRequest pageSize
                          * @property {string|null} [pageToken] ListTriggersRequest pageToken
                          * @property {string|null} [orderBy] ListTriggersRequest orderBy
+                         * @property {string|null} [filter] ListTriggersRequest filter
                          */
     
                         /**
@@ -2502,6 +2592,14 @@
                         ListTriggersRequest.prototype.orderBy = "";
     
                         /**
+                         * ListTriggersRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.eventarc.v1.ListTriggersRequest
+                         * @instance
+                         */
+                        ListTriggersRequest.prototype.filter = "";
+    
+                        /**
                          * Creates a new ListTriggersRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.eventarc.v1.ListTriggersRequest
@@ -2533,6 +2631,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                             if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
                             return writer;
                         };
     
@@ -2583,6 +2683,10 @@
                                         message.orderBy = reader.string();
                                         break;
                                     }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2630,6 +2734,9 @@
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 if (!$util.isString(message.orderBy))
                                     return "orderBy: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
                             return null;
                         };
     
@@ -2653,6 +2760,8 @@
                                 message.pageToken = String(object.pageToken);
                             if (object.orderBy != null)
                                 message.orderBy = String(object.orderBy);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
                             return message;
                         };
     
@@ -2674,6 +2783,7 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                                 object.orderBy = "";
+                                object.filter = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -2683,6 +2793,8 @@
                                 object.pageToken = message.pageToken;
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
                             return object;
                         };
     
@@ -7352,6 +7464,446 @@
                         return DeleteChannelConnectionRequest;
                     })();
     
+                    v1.UpdateGoogleChannelConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateGoogleChannelConfigRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IUpdateGoogleChannelConfigRequest
+                         * @property {google.cloud.eventarc.v1.IGoogleChannelConfig|null} [googleChannelConfig] UpdateGoogleChannelConfigRequest googleChannelConfig
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateGoogleChannelConfigRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateGoogleChannelConfigRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents an UpdateGoogleChannelConfigRequest.
+                         * @implements IUpdateGoogleChannelConfigRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateGoogleChannelConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateGoogleChannelConfigRequest googleChannelConfig.
+                         * @member {google.cloud.eventarc.v1.IGoogleChannelConfig|null|undefined} googleChannelConfig
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest
+                         * @instance
+                         */
+                        UpdateGoogleChannelConfigRequest.prototype.googleChannelConfig = null;
+    
+                        /**
+                         * UpdateGoogleChannelConfigRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest
+                         * @instance
+                         */
+                        UpdateGoogleChannelConfigRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateGoogleChannelConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest} UpdateGoogleChannelConfigRequest instance
+                         */
+                        UpdateGoogleChannelConfigRequest.create = function create(properties) {
+                            return new UpdateGoogleChannelConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateGoogleChannelConfigRequest message. Does not implicitly {@link google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest} message UpdateGoogleChannelConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateGoogleChannelConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.googleChannelConfig != null && Object.hasOwnProperty.call(message, "googleChannelConfig"))
+                                $root.google.cloud.eventarc.v1.GoogleChannelConfig.encode(message.googleChannelConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateGoogleChannelConfigRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest} message UpdateGoogleChannelConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateGoogleChannelConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateGoogleChannelConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest} UpdateGoogleChannelConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateGoogleChannelConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.googleChannelConfig = $root.google.cloud.eventarc.v1.GoogleChannelConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateGoogleChannelConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest} UpdateGoogleChannelConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateGoogleChannelConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateGoogleChannelConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateGoogleChannelConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.googleChannelConfig != null && message.hasOwnProperty("googleChannelConfig")) {
+                                var error = $root.google.cloud.eventarc.v1.GoogleChannelConfig.verify(message.googleChannelConfig);
+                                if (error)
+                                    return "googleChannelConfig." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateGoogleChannelConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest} UpdateGoogleChannelConfigRequest
+                         */
+                        UpdateGoogleChannelConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest();
+                            if (object.googleChannelConfig != null) {
+                                if (typeof object.googleChannelConfig !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest.googleChannelConfig: object expected");
+                                message.googleChannelConfig = $root.google.cloud.eventarc.v1.GoogleChannelConfig.fromObject(object.googleChannelConfig);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateGoogleChannelConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest} message UpdateGoogleChannelConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateGoogleChannelConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.googleChannelConfig = null;
+                                object.updateMask = null;
+                            }
+                            if (message.googleChannelConfig != null && message.hasOwnProperty("googleChannelConfig"))
+                                object.googleChannelConfig = $root.google.cloud.eventarc.v1.GoogleChannelConfig.toObject(message.googleChannelConfig, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateGoogleChannelConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateGoogleChannelConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateGoogleChannelConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateGoogleChannelConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest";
+                        };
+    
+                        return UpdateGoogleChannelConfigRequest;
+                    })();
+    
+                    v1.GetGoogleChannelConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetGoogleChannelConfigRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IGetGoogleChannelConfigRequest
+                         * @property {string|null} [name] GetGoogleChannelConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetGoogleChannelConfigRequest.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a GetGoogleChannelConfigRequest.
+                         * @implements IGetGoogleChannelConfigRequest
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest=} [properties] Properties to set
+                         */
+                        function GetGoogleChannelConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetGoogleChannelConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.GetGoogleChannelConfigRequest
+                         * @instance
+                         */
+                        GetGoogleChannelConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetGoogleChannelConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.GetGoogleChannelConfigRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.GetGoogleChannelConfigRequest} GetGoogleChannelConfigRequest instance
+                         */
+                        GetGoogleChannelConfigRequest.create = function create(properties) {
+                            return new GetGoogleChannelConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetGoogleChannelConfigRequest message. Does not implicitly {@link google.cloud.eventarc.v1.GetGoogleChannelConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.GetGoogleChannelConfigRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest} message GetGoogleChannelConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetGoogleChannelConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetGoogleChannelConfigRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GetGoogleChannelConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetGoogleChannelConfigRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest} message GetGoogleChannelConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetGoogleChannelConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetGoogleChannelConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.GetGoogleChannelConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.GetGoogleChannelConfigRequest} GetGoogleChannelConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetGoogleChannelConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.GetGoogleChannelConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetGoogleChannelConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GetGoogleChannelConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.GetGoogleChannelConfigRequest} GetGoogleChannelConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetGoogleChannelConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetGoogleChannelConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.GetGoogleChannelConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetGoogleChannelConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetGoogleChannelConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.GetGoogleChannelConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.GetGoogleChannelConfigRequest} GetGoogleChannelConfigRequest
+                         */
+                        GetGoogleChannelConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.GetGoogleChannelConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.GetGoogleChannelConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetGoogleChannelConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.GetGoogleChannelConfigRequest
+                         * @static
+                         * @param {google.cloud.eventarc.v1.GetGoogleChannelConfigRequest} message GetGoogleChannelConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetGoogleChannelConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetGoogleChannelConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.GetGoogleChannelConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetGoogleChannelConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetGoogleChannelConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.GetGoogleChannelConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetGoogleChannelConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.GetGoogleChannelConfigRequest";
+                        };
+    
+                        return GetGoogleChannelConfigRequest;
+                    })();
+    
                     v1.OperationMetadata = (function() {
     
                         /**
@@ -7704,6 +8256,261 @@
                         return OperationMetadata;
                     })();
     
+                    v1.GoogleChannelConfig = (function() {
+    
+                        /**
+                         * Properties of a GoogleChannelConfig.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IGoogleChannelConfig
+                         * @property {string|null} [name] GoogleChannelConfig name
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] GoogleChannelConfig updateTime
+                         * @property {string|null} [cryptoKeyName] GoogleChannelConfig cryptoKeyName
+                         */
+    
+                        /**
+                         * Constructs a new GoogleChannelConfig.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a GoogleChannelConfig.
+                         * @implements IGoogleChannelConfig
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IGoogleChannelConfig=} [properties] Properties to set
+                         */
+                        function GoogleChannelConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GoogleChannelConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @instance
+                         */
+                        GoogleChannelConfig.prototype.name = "";
+    
+                        /**
+                         * GoogleChannelConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @instance
+                         */
+                        GoogleChannelConfig.prototype.updateTime = null;
+    
+                        /**
+                         * GoogleChannelConfig cryptoKeyName.
+                         * @member {string} cryptoKeyName
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @instance
+                         */
+                        GoogleChannelConfig.prototype.cryptoKeyName = "";
+    
+                        /**
+                         * Creates a new GoogleChannelConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGoogleChannelConfig=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.GoogleChannelConfig} GoogleChannelConfig instance
+                         */
+                        GoogleChannelConfig.create = function create(properties) {
+                            return new GoogleChannelConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleChannelConfig message. Does not implicitly {@link google.cloud.eventarc.v1.GoogleChannelConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGoogleChannelConfig} message GoogleChannelConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleChannelConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.cryptoKeyName != null && Object.hasOwnProperty.call(message, "cryptoKeyName"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.cryptoKeyName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleChannelConfig message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GoogleChannelConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IGoogleChannelConfig} message GoogleChannelConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleChannelConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GoogleChannelConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.GoogleChannelConfig} GoogleChannelConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleChannelConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.GoogleChannelConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.cryptoKeyName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GoogleChannelConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.GoogleChannelConfig} GoogleChannelConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleChannelConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GoogleChannelConfig message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GoogleChannelConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                if (!$util.isString(message.cryptoKeyName))
+                                    return "cryptoKeyName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GoogleChannelConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.GoogleChannelConfig} GoogleChannelConfig
+                         */
+                        GoogleChannelConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.GoogleChannelConfig)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.GoogleChannelConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.GoogleChannelConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.cryptoKeyName != null)
+                                message.cryptoKeyName = String(object.cryptoKeyName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GoogleChannelConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @static
+                         * @param {google.cloud.eventarc.v1.GoogleChannelConfig} message GoogleChannelConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GoogleChannelConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.updateTime = null;
+                                object.cryptoKeyName = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                object.cryptoKeyName = message.cryptoKeyName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GoogleChannelConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GoogleChannelConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GoogleChannelConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.GoogleChannelConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GoogleChannelConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.GoogleChannelConfig";
+                        };
+    
+                        return GoogleChannelConfig;
+                    })();
+    
                     v1.Trigger = (function() {
     
                         /**
@@ -7720,6 +8527,7 @@
                          * @property {google.cloud.eventarc.v1.ITransport|null} [transport] Trigger transport
                          * @property {Object.<string,string>|null} [labels] Trigger labels
                          * @property {string|null} [channel] Trigger channel
+                         * @property {Object.<string,google.cloud.eventarc.v1.IStateCondition>|null} [conditions] Trigger conditions
                          * @property {string|null} [etag] Trigger etag
                          */
     
@@ -7734,6 +8542,7 @@
                         function Trigger(properties) {
                             this.eventFilters = [];
                             this.labels = {};
+                            this.conditions = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -7821,6 +8630,14 @@
                         Trigger.prototype.channel = "";
     
                         /**
+                         * Trigger conditions.
+                         * @member {Object.<string,google.cloud.eventarc.v1.IStateCondition>} conditions
+                         * @memberof google.cloud.eventarc.v1.Trigger
+                         * @instance
+                         */
+                        Trigger.prototype.conditions = $util.emptyObject;
+    
+                        /**
                          * Trigger etag.
                          * @member {string} etag
                          * @memberof google.cloud.eventarc.v1.Trigger
@@ -7874,6 +8691,11 @@
                                     writer.uint32(/* id 12, wireType 2 =*/98).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.channel);
+                            if (message.conditions != null && Object.hasOwnProperty.call(message, "conditions"))
+                                for (var keys = Object.keys(message.conditions), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 15, wireType 2 =*/122).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.eventarc.v1.StateCondition.encode(message.conditions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -7971,6 +8793,29 @@
                                         message.channel = reader.string();
                                         break;
                                     }
+                                case 15: {
+                                        if (message.conditions === $util.emptyObject)
+                                            message.conditions = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.eventarc.v1.StateCondition.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.conditions[key] = value;
+                                        break;
+                                    }
                                 case 99: {
                                         message.etag = reader.string();
                                         break;
@@ -8059,6 +8904,16 @@
                             if (message.channel != null && message.hasOwnProperty("channel"))
                                 if (!$util.isString(message.channel))
                                     return "channel: string expected";
+                            if (message.conditions != null && message.hasOwnProperty("conditions")) {
+                                if (!$util.isObject(message.conditions))
+                                    return "conditions: object expected";
+                                var key = Object.keys(message.conditions);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.eventarc.v1.StateCondition.verify(message.conditions[key[i]]);
+                                    if (error)
+                                        return "conditions." + error;
+                                }
+                            }
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -8122,6 +8977,16 @@
                             }
                             if (object.channel != null)
                                 message.channel = String(object.channel);
+                            if (object.conditions) {
+                                if (typeof object.conditions !== "object")
+                                    throw TypeError(".google.cloud.eventarc.v1.Trigger.conditions: object expected");
+                                message.conditions = {};
+                                for (var keys = Object.keys(object.conditions), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.conditions[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.eventarc.v1.Trigger.conditions: object expected");
+                                    message.conditions[keys[i]] = $root.google.cloud.eventarc.v1.StateCondition.fromObject(object.conditions[keys[i]]);
+                                }
+                            }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             return message;
@@ -8142,8 +9007,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.eventFilters = [];
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.labels = {};
+                                object.conditions = {};
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.uid = "";
@@ -8182,6 +9049,11 @@
                             }
                             if (message.channel != null && message.hasOwnProperty("channel"))
                                 object.channel = message.channel;
+                            if (message.conditions && (keys2 = Object.keys(message.conditions)).length) {
+                                object.conditions = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.conditions[keys2[j]] = $root.google.cloud.eventarc.v1.StateCondition.toObject(message.conditions[keys2[j]], options);
+                            }
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
@@ -8466,6 +9338,327 @@
                         return EventFilter;
                     })();
     
+                    v1.StateCondition = (function() {
+    
+                        /**
+                         * Properties of a StateCondition.
+                         * @memberof google.cloud.eventarc.v1
+                         * @interface IStateCondition
+                         * @property {google.rpc.Code|null} [code] StateCondition code
+                         * @property {string|null} [message] StateCondition message
+                         */
+    
+                        /**
+                         * Constructs a new StateCondition.
+                         * @memberof google.cloud.eventarc.v1
+                         * @classdesc Represents a StateCondition.
+                         * @implements IStateCondition
+                         * @constructor
+                         * @param {google.cloud.eventarc.v1.IStateCondition=} [properties] Properties to set
+                         */
+                        function StateCondition(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StateCondition code.
+                         * @member {google.rpc.Code} code
+                         * @memberof google.cloud.eventarc.v1.StateCondition
+                         * @instance
+                         */
+                        StateCondition.prototype.code = 0;
+    
+                        /**
+                         * StateCondition message.
+                         * @member {string} message
+                         * @memberof google.cloud.eventarc.v1.StateCondition
+                         * @instance
+                         */
+                        StateCondition.prototype.message = "";
+    
+                        /**
+                         * Creates a new StateCondition instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.eventarc.v1.StateCondition
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IStateCondition=} [properties] Properties to set
+                         * @returns {google.cloud.eventarc.v1.StateCondition} StateCondition instance
+                         */
+                        StateCondition.create = function create(properties) {
+                            return new StateCondition(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StateCondition message. Does not implicitly {@link google.cloud.eventarc.v1.StateCondition.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.eventarc.v1.StateCondition
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IStateCondition} message StateCondition message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StateCondition.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StateCondition message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.StateCondition.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.eventarc.v1.StateCondition
+                         * @static
+                         * @param {google.cloud.eventarc.v1.IStateCondition} message StateCondition message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StateCondition.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StateCondition message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.eventarc.v1.StateCondition
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.eventarc.v1.StateCondition} StateCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StateCondition.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.eventarc.v1.StateCondition();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.code = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.message = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StateCondition message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.eventarc.v1.StateCondition
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.eventarc.v1.StateCondition} StateCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StateCondition.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StateCondition message.
+                         * @function verify
+                         * @memberof google.cloud.eventarc.v1.StateCondition
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StateCondition.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.code != null && message.hasOwnProperty("code"))
+                                switch (message.code) {
+                                default:
+                                    return "code: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 16:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                    break;
+                                }
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StateCondition message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.eventarc.v1.StateCondition
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.eventarc.v1.StateCondition} StateCondition
+                         */
+                        StateCondition.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.eventarc.v1.StateCondition)
+                                return object;
+                            var message = new $root.google.cloud.eventarc.v1.StateCondition();
+                            switch (object.code) {
+                            default:
+                                if (typeof object.code === "number") {
+                                    message.code = object.code;
+                                    break;
+                                }
+                                break;
+                            case "OK":
+                            case 0:
+                                message.code = 0;
+                                break;
+                            case "CANCELLED":
+                            case 1:
+                                message.code = 1;
+                                break;
+                            case "UNKNOWN":
+                            case 2:
+                                message.code = 2;
+                                break;
+                            case "INVALID_ARGUMENT":
+                            case 3:
+                                message.code = 3;
+                                break;
+                            case "DEADLINE_EXCEEDED":
+                            case 4:
+                                message.code = 4;
+                                break;
+                            case "NOT_FOUND":
+                            case 5:
+                                message.code = 5;
+                                break;
+                            case "ALREADY_EXISTS":
+                            case 6:
+                                message.code = 6;
+                                break;
+                            case "PERMISSION_DENIED":
+                            case 7:
+                                message.code = 7;
+                                break;
+                            case "UNAUTHENTICATED":
+                            case 16:
+                                message.code = 16;
+                                break;
+                            case "RESOURCE_EXHAUSTED":
+                            case 8:
+                                message.code = 8;
+                                break;
+                            case "FAILED_PRECONDITION":
+                            case 9:
+                                message.code = 9;
+                                break;
+                            case "ABORTED":
+                            case 10:
+                                message.code = 10;
+                                break;
+                            case "OUT_OF_RANGE":
+                            case 11:
+                                message.code = 11;
+                                break;
+                            case "UNIMPLEMENTED":
+                            case 12:
+                                message.code = 12;
+                                break;
+                            case "INTERNAL":
+                            case 13:
+                                message.code = 13;
+                                break;
+                            case "UNAVAILABLE":
+                            case 14:
+                                message.code = 14;
+                                break;
+                            case "DATA_LOSS":
+                            case 15:
+                                message.code = 15;
+                                break;
+                            }
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StateCondition message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.eventarc.v1.StateCondition
+                         * @static
+                         * @param {google.cloud.eventarc.v1.StateCondition} message StateCondition
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StateCondition.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.code = options.enums === String ? "OK" : 0;
+                                object.message = "";
+                            }
+                            if (message.code != null && message.hasOwnProperty("code"))
+                                object.code = options.enums === String ? $root.google.rpc.Code[message.code] === undefined ? message.code : $root.google.rpc.Code[message.code] : message.code;
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                object.message = message.message;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StateCondition to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.eventarc.v1.StateCondition
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StateCondition.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StateCondition
+                         * @function getTypeUrl
+                         * @memberof google.cloud.eventarc.v1.StateCondition
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StateCondition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.eventarc.v1.StateCondition";
+                        };
+    
+                        return StateCondition;
+                    })();
+    
                     v1.Destination = (function() {
     
                         /**
@@ -8475,6 +9668,7 @@
                          * @property {google.cloud.eventarc.v1.ICloudRun|null} [cloudRun] Destination cloudRun
                          * @property {string|null} [cloudFunction] Destination cloudFunction
                          * @property {google.cloud.eventarc.v1.IGKE|null} [gke] Destination gke
+                         * @property {string|null} [workflow] Destination workflow
                          */
     
                         /**
@@ -8516,17 +9710,25 @@
                          */
                         Destination.prototype.gke = null;
     
+                        /**
+                         * Destination workflow.
+                         * @member {string|null|undefined} workflow
+                         * @memberof google.cloud.eventarc.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.workflow = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Destination descriptor.
-                         * @member {"cloudRun"|"cloudFunction"|"gke"|undefined} descriptor
+                         * @member {"cloudRun"|"cloudFunction"|"gke"|"workflow"|undefined} descriptor
                          * @memberof google.cloud.eventarc.v1.Destination
                          * @instance
                          */
                         Object.defineProperty(Destination.prototype, "descriptor", {
-                            get: $util.oneOfGetter($oneOfFields = ["cloudRun", "cloudFunction", "gke"]),
+                            get: $util.oneOfGetter($oneOfFields = ["cloudRun", "cloudFunction", "gke", "workflow"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -8560,6 +9762,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.cloudFunction);
                             if (message.gke != null && Object.hasOwnProperty.call(message, "gke"))
                                 $root.google.cloud.eventarc.v1.GKE.encode(message.gke, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.workflow != null && Object.hasOwnProperty.call(message, "workflow"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.workflow);
                             return writer;
                         };
     
@@ -8604,6 +9808,10 @@
                                     }
                                 case 3: {
                                         message.gke = $root.google.cloud.eventarc.v1.GKE.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.workflow = reader.string();
                                         break;
                                     }
                                 default:
@@ -8667,6 +9875,13 @@
                                         return "gke." + error;
                                 }
                             }
+                            if (message.workflow != null && message.hasOwnProperty("workflow")) {
+                                if (properties.descriptor === 1)
+                                    return "descriptor: multiple values";
+                                properties.descriptor = 1;
+                                if (!$util.isString(message.workflow))
+                                    return "workflow: string expected";
+                            }
                             return null;
                         };
     
@@ -8694,6 +9909,8 @@
                                     throw TypeError(".google.cloud.eventarc.v1.Destination.gke: object expected");
                                 message.gke = $root.google.cloud.eventarc.v1.GKE.fromObject(object.gke);
                             }
+                            if (object.workflow != null)
+                                message.workflow = String(object.workflow);
                             return message;
                         };
     
@@ -8724,6 +9941,11 @@
                                 object.gke = $root.google.cloud.eventarc.v1.GKE.toObject(message.gke, options);
                                 if (options.oneofs)
                                     object.descriptor = "gke";
+                            }
+                            if (message.workflow != null && message.hasOwnProperty("workflow")) {
+                                object.workflow = message.workflow;
+                                if (options.oneofs)
+                                    object.descriptor = "workflow";
                             }
                             return object;
                         };
@@ -21975,6 +23197,334 @@
             return protobuf;
         })();
     
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            /**
+             * Code enum.
+             * @name google.rpc.Code
+             * @enum {number}
+             * @property {number} OK=0 OK value
+             * @property {number} CANCELLED=1 CANCELLED value
+             * @property {number} UNKNOWN=2 UNKNOWN value
+             * @property {number} INVALID_ARGUMENT=3 INVALID_ARGUMENT value
+             * @property {number} DEADLINE_EXCEEDED=4 DEADLINE_EXCEEDED value
+             * @property {number} NOT_FOUND=5 NOT_FOUND value
+             * @property {number} ALREADY_EXISTS=6 ALREADY_EXISTS value
+             * @property {number} PERMISSION_DENIED=7 PERMISSION_DENIED value
+             * @property {number} UNAUTHENTICATED=16 UNAUTHENTICATED value
+             * @property {number} RESOURCE_EXHAUSTED=8 RESOURCE_EXHAUSTED value
+             * @property {number} FAILED_PRECONDITION=9 FAILED_PRECONDITION value
+             * @property {number} ABORTED=10 ABORTED value
+             * @property {number} OUT_OF_RANGE=11 OUT_OF_RANGE value
+             * @property {number} UNIMPLEMENTED=12 UNIMPLEMENTED value
+             * @property {number} INTERNAL=13 INTERNAL value
+             * @property {number} UNAVAILABLE=14 UNAVAILABLE value
+             * @property {number} DATA_LOSS=15 DATA_LOSS value
+             */
+            rpc.Code = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "OK"] = 0;
+                values[valuesById[1] = "CANCELLED"] = 1;
+                values[valuesById[2] = "UNKNOWN"] = 2;
+                values[valuesById[3] = "INVALID_ARGUMENT"] = 3;
+                values[valuesById[4] = "DEADLINE_EXCEEDED"] = 4;
+                values[valuesById[5] = "NOT_FOUND"] = 5;
+                values[valuesById[6] = "ALREADY_EXISTS"] = 6;
+                values[valuesById[7] = "PERMISSION_DENIED"] = 7;
+                values[valuesById[16] = "UNAUTHENTICATED"] = 16;
+                values[valuesById[8] = "RESOURCE_EXHAUSTED"] = 8;
+                values[valuesById[9] = "FAILED_PRECONDITION"] = 9;
+                values[valuesById[10] = "ABORTED"] = 10;
+                values[valuesById[11] = "OUT_OF_RANGE"] = 11;
+                values[valuesById[12] = "UNIMPLEMENTED"] = 12;
+                values[valuesById[13] = "INTERNAL"] = 13;
+                values[valuesById[14] = "UNAVAILABLE"] = 14;
+                values[valuesById[15] = "DATA_LOSS"] = 15;
+                return values;
+            })();
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
+        })();
+    
         google.longrunning = (function() {
     
             /**
@@ -24112,290 +25662,6 @@
             })();
     
             return longrunning;
-        })();
-    
-        google.rpc = (function() {
-    
-            /**
-             * Namespace rpc.
-             * @memberof google
-             * @namespace
-             */
-            var rpc = {};
-    
-            rpc.Status = (function() {
-    
-                /**
-                 * Properties of a Status.
-                 * @memberof google.rpc
-                 * @interface IStatus
-                 * @property {number|null} [code] Status code
-                 * @property {string|null} [message] Status message
-                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
-                 */
-    
-                /**
-                 * Constructs a new Status.
-                 * @memberof google.rpc
-                 * @classdesc Represents a Status.
-                 * @implements IStatus
-                 * @constructor
-                 * @param {google.rpc.IStatus=} [properties] Properties to set
-                 */
-                function Status(properties) {
-                    this.details = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Status code.
-                 * @member {number} code
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.code = 0;
-    
-                /**
-                 * Status message.
-                 * @member {string} message
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.message = "";
-    
-                /**
-                 * Status details.
-                 * @member {Array.<google.protobuf.IAny>} details
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.details = $util.emptyArray;
-    
-                /**
-                 * Creates a new Status instance using the specified properties.
-                 * @function create
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus=} [properties] Properties to set
-                 * @returns {google.rpc.Status} Status instance
-                 */
-                Status.create = function create(properties) {
-                    return new Status(properties);
-                };
-    
-                /**
-                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus} message Status message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Status.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
-                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
-                    if (message.details != null && message.details.length)
-                        for (var i = 0; i < message.details.length; ++i)
-                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus} message Status message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Status.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Status message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.rpc.Status} Status
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Status.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.code = reader.int32();
-                                break;
-                            }
-                        case 2: {
-                                message.message = reader.string();
-                                break;
-                            }
-                        case 3: {
-                                if (!(message.details && message.details.length))
-                                    message.details = [];
-                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Status message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.rpc.Status} Status
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Status.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Status message.
-                 * @function verify
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Status.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.code != null && message.hasOwnProperty("code"))
-                        if (!$util.isInteger(message.code))
-                            return "code: integer expected";
-                    if (message.message != null && message.hasOwnProperty("message"))
-                        if (!$util.isString(message.message))
-                            return "message: string expected";
-                    if (message.details != null && message.hasOwnProperty("details")) {
-                        if (!Array.isArray(message.details))
-                            return "details: array expected";
-                        for (var i = 0; i < message.details.length; ++i) {
-                            var error = $root.google.protobuf.Any.verify(message.details[i]);
-                            if (error)
-                                return "details." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.rpc.Status} Status
-                 */
-                Status.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.rpc.Status)
-                        return object;
-                    var message = new $root.google.rpc.Status();
-                    if (object.code != null)
-                        message.code = object.code | 0;
-                    if (object.message != null)
-                        message.message = String(object.message);
-                    if (object.details) {
-                        if (!Array.isArray(object.details))
-                            throw TypeError(".google.rpc.Status.details: array expected");
-                        message.details = [];
-                        for (var i = 0; i < object.details.length; ++i) {
-                            if (typeof object.details[i] !== "object")
-                                throw TypeError(".google.rpc.Status.details: object expected");
-                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Status message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.Status} message Status
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Status.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.details = [];
-                    if (options.defaults) {
-                        object.code = 0;
-                        object.message = "";
-                    }
-                    if (message.code != null && message.hasOwnProperty("code"))
-                        object.code = message.code;
-                    if (message.message != null && message.hasOwnProperty("message"))
-                        object.message = message.message;
-                    if (message.details && message.details.length) {
-                        object.details = [];
-                        for (var j = 0; j < message.details.length; ++j)
-                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this Status to JSON.
-                 * @function toJSON
-                 * @memberof google.rpc.Status
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Status.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Status
-                 * @function getTypeUrl
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.rpc.Status";
-                };
-    
-                return Status;
-            })();
-    
-            return rpc;
         })();
     
         return google;

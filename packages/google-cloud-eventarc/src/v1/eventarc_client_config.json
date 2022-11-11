@@ -83,6 +83,14 @@
         "DeleteChannelConnection": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "GetGoogleChannelConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateGoogleChannelConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

@@ -52,6 +52,9 @@ export namespace google {
 
                     /** Channel activationToken */
                     activationToken?: (string|null);
+
+                    /** Channel cryptoKeyName */
+                    cryptoKeyName?: (string|null);
                 }
 
                 /** Represents a Channel. */
@@ -86,6 +89,9 @@ export namespace google {
 
                     /** Channel activationToken. */
                     public activationToken: string;
+
+                    /** Channel cryptoKeyName. */
+                    public cryptoKeyName: string;
 
                     /** Channel transport. */
                     public transport?: "pubsubTopic";
@@ -888,6 +894,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteChannelConnection(request: google.cloud.eventarc.v1.IDeleteChannelConnectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetGoogleChannelConfig.
+                     * @param request GetGoogleChannelConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GoogleChannelConfig
+                     */
+                    public getGoogleChannelConfig(request: google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest, callback: google.cloud.eventarc.v1.Eventarc.GetGoogleChannelConfigCallback): void;
+
+                    /**
+                     * Calls GetGoogleChannelConfig.
+                     * @param request GetGoogleChannelConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getGoogleChannelConfig(request: google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest): Promise<google.cloud.eventarc.v1.GoogleChannelConfig>;
+
+                    /**
+                     * Calls UpdateGoogleChannelConfig.
+                     * @param request UpdateGoogleChannelConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GoogleChannelConfig
+                     */
+                    public updateGoogleChannelConfig(request: google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest, callback: google.cloud.eventarc.v1.Eventarc.UpdateGoogleChannelConfigCallback): void;
+
+                    /**
+                     * Calls UpdateGoogleChannelConfig.
+                     * @param request UpdateGoogleChannelConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateGoogleChannelConfig(request: google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest): Promise<google.cloud.eventarc.v1.GoogleChannelConfig>;
                 }
 
                 namespace Eventarc {
@@ -1003,6 +1037,20 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteChannelConnectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|getGoogleChannelConfig}.
+                     * @param error Error, if any
+                     * @param [response] GoogleChannelConfig
+                     */
+                    type GetGoogleChannelConfigCallback = (error: (Error|null), response?: google.cloud.eventarc.v1.GoogleChannelConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.eventarc.v1.Eventarc|updateGoogleChannelConfig}.
+                     * @param error Error, if any
+                     * @param [response] GoogleChannelConfig
+                     */
+                    type UpdateGoogleChannelConfigCallback = (error: (Error|null), response?: google.cloud.eventarc.v1.GoogleChannelConfig) => void;
                 }
 
                 /** Properties of a GetTriggerRequest. */
@@ -1116,6 +1164,9 @@ export namespace google {
 
                     /** ListTriggersRequest orderBy */
                     orderBy?: (string|null);
+
+                    /** ListTriggersRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListTriggersRequest. */
@@ -1138,6 +1189,9 @@ export namespace google {
 
                     /** ListTriggersRequest orderBy. */
                     public orderBy: string;
+
+                    /** ListTriggersRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListTriggersRequest instance using the specified properties.
@@ -3167,6 +3221,206 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpdateGoogleChannelConfigRequest. */
+                interface IUpdateGoogleChannelConfigRequest {
+
+                    /** UpdateGoogleChannelConfigRequest googleChannelConfig */
+                    googleChannelConfig?: (google.cloud.eventarc.v1.IGoogleChannelConfig|null);
+
+                    /** UpdateGoogleChannelConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateGoogleChannelConfigRequest. */
+                class UpdateGoogleChannelConfigRequest implements IUpdateGoogleChannelConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateGoogleChannelConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest);
+
+                    /** UpdateGoogleChannelConfigRequest googleChannelConfig. */
+                    public googleChannelConfig?: (google.cloud.eventarc.v1.IGoogleChannelConfig|null);
+
+                    /** UpdateGoogleChannelConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateGoogleChannelConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateGoogleChannelConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest): google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateGoogleChannelConfigRequest message. Does not implicitly {@link google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest.verify|verify} messages.
+                     * @param message UpdateGoogleChannelConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateGoogleChannelConfigRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest.verify|verify} messages.
+                     * @param message UpdateGoogleChannelConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IUpdateGoogleChannelConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateGoogleChannelConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateGoogleChannelConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest;
+
+                    /**
+                     * Decodes an UpdateGoogleChannelConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateGoogleChannelConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest;
+
+                    /**
+                     * Verifies an UpdateGoogleChannelConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateGoogleChannelConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateGoogleChannelConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateGoogleChannelConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateGoogleChannelConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateGoogleChannelConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateGoogleChannelConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetGoogleChannelConfigRequest. */
+                interface IGetGoogleChannelConfigRequest {
+
+                    /** GetGoogleChannelConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetGoogleChannelConfigRequest. */
+                class GetGoogleChannelConfigRequest implements IGetGoogleChannelConfigRequest {
+
+                    /**
+                     * Constructs a new GetGoogleChannelConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest);
+
+                    /** GetGoogleChannelConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetGoogleChannelConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGoogleChannelConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest): google.cloud.eventarc.v1.GetGoogleChannelConfigRequest;
+
+                    /**
+                     * Encodes the specified GetGoogleChannelConfigRequest message. Does not implicitly {@link google.cloud.eventarc.v1.GetGoogleChannelConfigRequest.verify|verify} messages.
+                     * @param message GetGoogleChannelConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGoogleChannelConfigRequest message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GetGoogleChannelConfigRequest.verify|verify} messages.
+                     * @param message GetGoogleChannelConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IGetGoogleChannelConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGoogleChannelConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGoogleChannelConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.GetGoogleChannelConfigRequest;
+
+                    /**
+                     * Decodes a GetGoogleChannelConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGoogleChannelConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.GetGoogleChannelConfigRequest;
+
+                    /**
+                     * Verifies a GetGoogleChannelConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGoogleChannelConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGoogleChannelConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.GetGoogleChannelConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetGoogleChannelConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetGoogleChannelConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.GetGoogleChannelConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGoogleChannelConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetGoogleChannelConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an OperationMetadata. */
                 interface IOperationMetadata {
 
@@ -3300,6 +3554,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GoogleChannelConfig. */
+                interface IGoogleChannelConfig {
+
+                    /** GoogleChannelConfig name */
+                    name?: (string|null);
+
+                    /** GoogleChannelConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoogleChannelConfig cryptoKeyName */
+                    cryptoKeyName?: (string|null);
+                }
+
+                /** Represents a GoogleChannelConfig. */
+                class GoogleChannelConfig implements IGoogleChannelConfig {
+
+                    /**
+                     * Constructs a new GoogleChannelConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IGoogleChannelConfig);
+
+                    /** GoogleChannelConfig name. */
+                    public name: string;
+
+                    /** GoogleChannelConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoogleChannelConfig cryptoKeyName. */
+                    public cryptoKeyName: string;
+
+                    /**
+                     * Creates a new GoogleChannelConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleChannelConfig instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IGoogleChannelConfig): google.cloud.eventarc.v1.GoogleChannelConfig;
+
+                    /**
+                     * Encodes the specified GoogleChannelConfig message. Does not implicitly {@link google.cloud.eventarc.v1.GoogleChannelConfig.verify|verify} messages.
+                     * @param message GoogleChannelConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IGoogleChannelConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleChannelConfig message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GoogleChannelConfig.verify|verify} messages.
+                     * @param message GoogleChannelConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IGoogleChannelConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleChannelConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleChannelConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.GoogleChannelConfig;
+
+                    /**
+                     * Decodes a GoogleChannelConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleChannelConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.GoogleChannelConfig;
+
+                    /**
+                     * Verifies a GoogleChannelConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleChannelConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleChannelConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.GoogleChannelConfig;
+
+                    /**
+                     * Creates a plain object from a GoogleChannelConfig message. Also converts values to other types if specified.
+                     * @param message GoogleChannelConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.GoogleChannelConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleChannelConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleChannelConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Trigger. */
                 interface ITrigger {
 
@@ -3332,6 +3695,9 @@ export namespace google {
 
                     /** Trigger channel */
                     channel?: (string|null);
+
+                    /** Trigger conditions */
+                    conditions?: ({ [k: string]: google.cloud.eventarc.v1.IStateCondition }|null);
 
                     /** Trigger etag */
                     etag?: (string|null);
@@ -3375,6 +3741,9 @@ export namespace google {
 
                     /** Trigger channel. */
                     public channel: string;
+
+                    /** Trigger conditions. */
+                    public conditions: { [k: string]: google.cloud.eventarc.v1.IStateCondition };
 
                     /** Trigger etag. */
                     public etag: string;
@@ -3566,6 +3935,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a StateCondition. */
+                interface IStateCondition {
+
+                    /** StateCondition code */
+                    code?: (google.rpc.Code|keyof typeof google.rpc.Code|null);
+
+                    /** StateCondition message */
+                    message?: (string|null);
+                }
+
+                /** Represents a StateCondition. */
+                class StateCondition implements IStateCondition {
+
+                    /**
+                     * Constructs a new StateCondition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.eventarc.v1.IStateCondition);
+
+                    /** StateCondition code. */
+                    public code: (google.rpc.Code|keyof typeof google.rpc.Code);
+
+                    /** StateCondition message. */
+                    public message: string;
+
+                    /**
+                     * Creates a new StateCondition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StateCondition instance
+                     */
+                    public static create(properties?: google.cloud.eventarc.v1.IStateCondition): google.cloud.eventarc.v1.StateCondition;
+
+                    /**
+                     * Encodes the specified StateCondition message. Does not implicitly {@link google.cloud.eventarc.v1.StateCondition.verify|verify} messages.
+                     * @param message StateCondition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.eventarc.v1.IStateCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StateCondition message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.StateCondition.verify|verify} messages.
+                     * @param message StateCondition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.eventarc.v1.IStateCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StateCondition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StateCondition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.StateCondition;
+
+                    /**
+                     * Decodes a StateCondition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StateCondition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.StateCondition;
+
+                    /**
+                     * Verifies a StateCondition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StateCondition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StateCondition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.StateCondition;
+
+                    /**
+                     * Creates a plain object from a StateCondition message. Also converts values to other types if specified.
+                     * @param message StateCondition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.eventarc.v1.StateCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StateCondition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StateCondition
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Destination. */
                 interface IDestination {
 
@@ -3577,6 +4049,9 @@ export namespace google {
 
                     /** Destination gke */
                     gke?: (google.cloud.eventarc.v1.IGKE|null);
+
+                    /** Destination workflow */
+                    workflow?: (string|null);
                 }
 
                 /** Represents a Destination. */
@@ -3597,8 +4072,11 @@ export namespace google {
                     /** Destination gke. */
                     public gke?: (google.cloud.eventarc.v1.IGKE|null);
 
+                    /** Destination workflow. */
+                    public workflow?: (string|null);
+
                     /** Destination descriptor. */
-                    public descriptor?: ("cloudRun"|"cloudFunction"|"gke");
+                    public descriptor?: ("cloudRun"|"cloudFunction"|"gke"|"workflow");
 
                     /**
                      * Creates a new Destination instance using the specified properties.
@@ -8589,6 +9067,140 @@ export namespace google {
         }
     }
 
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Code enum. */
+        enum Code {
+            OK = 0,
+            CANCELLED = 1,
+            UNKNOWN = 2,
+            INVALID_ARGUMENT = 3,
+            DEADLINE_EXCEEDED = 4,
+            NOT_FOUND = 5,
+            ALREADY_EXISTS = 6,
+            PERMISSION_DENIED = 7,
+            UNAUTHENTICATED = 16,
+            RESOURCE_EXHAUSTED = 8,
+            FAILED_PRECONDITION = 9,
+            ABORTED = 10,
+            OUT_OF_RANGE = 11,
+            UNIMPLEMENTED = 12,
+            INTERNAL = 13,
+            UNAVAILABLE = 14,
+            DATA_LOSS = 15
+        }
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
     /** Namespace longrunning. */
     namespace longrunning {
 
@@ -9554,119 +10166,6 @@ export namespace google {
 
             /**
              * Gets the default type url for OperationInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-    }
-
-    /** Namespace rpc. */
-    namespace rpc {
-
-        /** Properties of a Status. */
-        interface IStatus {
-
-            /** Status code */
-            code?: (number|null);
-
-            /** Status message */
-            message?: (string|null);
-
-            /** Status details */
-            details?: (google.protobuf.IAny[]|null);
-        }
-
-        /** Represents a Status. */
-        class Status implements IStatus {
-
-            /**
-             * Constructs a new Status.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.rpc.IStatus);
-
-            /** Status code. */
-            public code: number;
-
-            /** Status message. */
-            public message: string;
-
-            /** Status details. */
-            public details: google.protobuf.IAny[];
-
-            /**
-             * Creates a new Status instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Status instance
-             */
-            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
-
-            /**
-             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-             * @param message Status message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-             * @param message Status message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Status message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Status
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
-
-            /**
-             * Decodes a Status message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Status
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
-
-            /**
-             * Verifies a Status message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Status message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Status
-             */
-            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
-
-            /**
-             * Creates a plain object from a Status message. Also converts values to other types if specified.
-             * @param message Status
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Status to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

@@ -30,6 +30,16 @@
                 "getChannelConnection"
               ]
             },
+            "GetGoogleChannelConfig": {
+              "methods": [
+                "getGoogleChannelConfig"
+              ]
+            },
+            "UpdateGoogleChannelConfig": {
+              "methods": [
+                "updateGoogleChannelConfig"
+              ]
+            },
             "CreateTrigger": {
               "methods": [
                 "createTrigger"
@@ -121,6 +131,16 @@
             "GetChannelConnection": {
               "methods": [
                 "getChannelConnection"
+              ]
+            },
+            "GetGoogleChannelConfig": {
+              "methods": [
+                "getGoogleChannelConfig"
+              ]
+            },
+            "UpdateGoogleChannelConfig": {
+              "methods": [
+                "updateGoogleChannelConfig"
               ]
             },
             "CreateTrigger": {

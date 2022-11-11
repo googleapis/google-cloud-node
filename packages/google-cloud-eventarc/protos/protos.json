@@ -15,8 +15,8 @@
                     "java_package": "com.google.cloud.eventarc.v1",
                     "php_namespace": "Google\\Cloud\\Eventarc\\V1",
                     "ruby_package": "Google::Cloud::Eventarc::V1",
-                    "(google.api.resource_definition).type": "run.googleapis.com/Service",
-                    "(google.api.resource_definition).pattern": "*"
+                    "(google.api.resource_definition).type": "workflows.googleapis.com/Workflow",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/workflows/{workflow}"
                   },
                   "nested": {
                     "Channel": {
@@ -64,10 +64,7 @@
                         },
                         "provider": {
                           "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 7
                         },
                         "pubsubTopic": {
                           "type": "string",
@@ -88,6 +85,14 @@
                           "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cryptoKeyName": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
                         }
                       },
@@ -619,6 +624,44 @@
                               }
                             }
                           ]
+                        },
+                        "GetGoogleChannelConfig": {
+                          "requestType": "GetGoogleChannelConfigRequest",
+                          "responseType": "GoogleChannelConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/googleChannelConfig}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/googleChannelConfig}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateGoogleChannelConfig": {
+                          "requestType": "UpdateGoogleChannelConfigRequest",
+                          "responseType": "GoogleChannelConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{google_channel_config.name=projects/*/locations/*/googleChannelConfig}",
+                            "(google.api.http).body": "google_channel_config",
+                            "(google.api.method_signature)": "google_channel_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{google_channel_config.name=projects/*/locations/*/googleChannelConfig}",
+                                "body": "google_channel_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "google_channel_config,update_mask"
+                            }
+                          ]
                         }
                       }
                     },
@@ -655,6 +698,10 @@
                         "orderBy": {
                           "type": "string",
                           "id": 4
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -1030,6 +1077,33 @@
                         }
                       }
                     },
+                    "UpdateGoogleChannelConfigRequest": {
+                      "fields": {
+                        "googleChannelConfig": {
+                          "type": "GoogleChannelConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetGoogleChannelConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "eventarc.googleapis.com/GoogleChannelConfig"
+                          }
+                        }
+                      }
+                    },
                     "OperationMetadata": {
                       "fields": {
                         "createTime": {
@@ -1079,6 +1153,37 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GoogleChannelConfig": {
+                      "options": {
+                        "(google.api.resource).type": "eventarc.googleapis.com/GoogleChannelConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/googleChannelConfig",
+                        "(google.api.resource).singular": "googleChannelConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cryptoKeyName": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
                         }
                       }
@@ -1164,6 +1269,14 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "conditions": {
+                          "keyType": "string",
+                          "type": "StateCondition",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "etag": {
                           "type": "string",
                           "id": 99,
@@ -1198,13 +1311,26 @@
                         }
                       }
                     },
+                    "StateCondition": {
+                      "fields": {
+                        "code": {
+                          "type": "google.rpc.Code",
+                          "id": 1
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Destination": {
                       "oneofs": {
                         "descriptor": {
                           "oneof": [
                             "cloudRun",
                             "cloudFunction",
-                            "gke"
+                            "gke",
+                            "workflow"
                           ]
                         }
                       },
@@ -1223,6 +1349,13 @@
                         "gke": {
                           "type": "GKE",
                           "id": 3
+                        },
+                        "workflow": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).type": "workflows.googleapis.com/Workflow"
+                          }
                         }
                       }
                     },
@@ -2521,6 +2654,56 @@
             }
           }
         },
+        "rpc": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "Code": {
+              "values": {
+                "OK": 0,
+                "CANCELLED": 1,
+                "UNKNOWN": 2,
+                "INVALID_ARGUMENT": 3,
+                "DEADLINE_EXCEEDED": 4,
+                "NOT_FOUND": 5,
+                "ALREADY_EXISTS": 6,
+                "PERMISSION_DENIED": 7,
+                "UNAUTHENTICATED": 16,
+                "RESOURCE_EXHAUSTED": 8,
+                "FAILED_PRECONDITION": 9,
+                "ABORTED": 10,
+                "OUT_OF_RANGE": 11,
+                "UNIMPLEMENTED": 12,
+                "INTERNAL": 13,
+                "UNAVAILABLE": 14,
+                "DATA_LOSS": 15
+              }
+            },
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
+            }
+          }
+        },
         "longrunning": {
           "options": {
             "cc_enable_arenas": true,
@@ -2732,35 +2915,6 @@
                 "metadataType": {
                   "type": "string",
                   "id": 2
-                }
-              }
-            }
-          }
-        },
-        "rpc": {
-          "options": {
-            "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
-            "java_multiple_files": true,
-            "java_outer_classname": "StatusProto",
-            "java_package": "com.google.rpc",
-            "objc_class_prefix": "RPC"
-          },
-          "nested": {
-            "Status": {
-              "fields": {
-                "code": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "message": {
-                  "type": "string",
-                  "id": 2
-                },
-                "details": {
-                  "rule": "repeated",
-                  "type": "google.protobuf.Any",
-                  "id": 3
                 }
               }
             }

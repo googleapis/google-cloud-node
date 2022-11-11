@@ -62,7 +62,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -85,6 +85,10 @@
                     },
                     {
                         "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -760,6 +764,90 @@
                 "method": {
                     "shortName": "DeleteChannelConnection",
                     "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteChannelConnection",
+                    "service": {
+                        "shortName": "Eventarc",
+                        "fullName": "google.cloud.eventarc.v1.Eventarc"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "eventarc_v1_generated_Eventarc_GetGoogleChannelConfig_async",
+            "title": "Eventarc getGoogleChannelConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get a GoogleChannelConfig",
+            "canonical": true,
+            "file": "eventarc.get_google_channel_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetGoogleChannelConfig",
+                "fullName": "google.cloud.eventarc.v1.Eventarc.GetGoogleChannelConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.eventarc.v1.GoogleChannelConfig",
+                "client": {
+                    "shortName": "EventarcClient",
+                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
+                },
+                "method": {
+                    "shortName": "GetGoogleChannelConfig",
+                    "fullName": "google.cloud.eventarc.v1.Eventarc.GetGoogleChannelConfig",
+                    "service": {
+                        "shortName": "Eventarc",
+                        "fullName": "google.cloud.eventarc.v1.Eventarc"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "eventarc_v1_generated_Eventarc_UpdateGoogleChannelConfig_async",
+            "title": "Eventarc updateGoogleChannelConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update a single GoogleChannelConfig",
+            "canonical": true,
+            "file": "eventarc.update_google_channel_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateGoogleChannelConfig",
+                "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateGoogleChannelConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "google_channel_config",
+                        "type": ".google.cloud.eventarc.v1.GoogleChannelConfig"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.eventarc.v1.GoogleChannelConfig",
+                "client": {
+                    "shortName": "EventarcClient",
+                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
+                },
+                "method": {
+                    "shortName": "UpdateGoogleChannelConfig",
+                    "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateGoogleChannelConfig",
                     "service": {
                         "shortName": "Eventarc",
                         "fullName": "google.cloud.eventarc.v1.Eventarc"
