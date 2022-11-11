@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,60 +53,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/dialogflow
 ```
 
-
-### Using the client library
-
-```javascript
-
-/**
- * TODO(developer): Uncomment the following lines before running the sample.
- */
-// const projectId = 'The Project ID to use, e.g. 'YOUR_GCP_ID';
-
-// Imports the Dialogflow library
-const dialogflow = require('@google-cloud/dialogflow');
-
-// Instantiates clients
-const intentsClient = new dialogflow.IntentsClient();
-
-async function listIntents() {
-  // Construct request
-
-  // The path to identify the agent that owns the intents.
-  const projectAgentPath = intentsClient.projectAgentPath(projectId);
-
-  console.log(projectAgentPath);
-
-  const request = {
-    parent: projectAgentPath,
-  };
-
-  // Send the request for listing intents.
-  const [response] = await intentsClient.listIntents(request);
-  response.forEach(intent => {
-    console.log('====================');
-    console.log(`Intent name: ${intent.name}`);
-    console.log(`Intent display name: ${intent.displayName}`);
-    console.log(`Action: ${intent.action}`);
-    console.log(`Root folowup intent: ${intent.rootFollowupIntentName}`);
-    console.log(`Parent followup intent: ${intent.parentFollowupIntentName}`);
-
-    console.log('Input contexts:');
-    intent.inputContextNames.forEach(inputContextName => {
-      console.log(`\tName: ${inputContextName}`);
-    });
-
-    console.log('Output contexts:');
-    intent.outputContexts.forEach(outputContext => {
-      console.log(`\tName: ${outputContext.name}`);
-    });
-  });
-}
-
-listIntents();
-
-
-```
 
 
 
@@ -311,6 +257,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Versions.list_versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.list_versions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.list_versions.js,samples/README.md) |
 | Versions.update_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.update_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/versions.update_version.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/quickstart.js,samples/README.md) |
+| Quickstart.test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/test/quickstart.test.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/test/quickstart.test.js,samples/README.md) |
 
 
 
