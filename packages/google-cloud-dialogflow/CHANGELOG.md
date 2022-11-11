@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/nodejs-dialogflow/compare/v5.2.1...v5.3.0) (2022-11-11)
+
+
+### Features
+
+* Add Agent Assist Summarization API (https://cloud.google.com/agent-assist/docs/summarization) ([#1002](https://github.com/googleapis/nodejs-dialogflow/issues/1002)) ([3475fc1](https://github.com/googleapis/nodejs-dialogflow/commit/3475fc14909c451b10edb847101aed8efaa75988))
+* Added obfuscated_external_user_id to Participant ([2c98a57](https://github.com/googleapis/nodejs-dialogflow/commit/2c98a57248019054654ac686f204627cf0141c83))
+* Added StreamingAnalyzeContent API ([#1004](https://github.com/googleapis/nodejs-dialogflow/issues/1004)) ([2c98a57](https://github.com/googleapis/nodejs-dialogflow/commit/2c98a57248019054654ac686f204627cf0141c83))
+* Can directly set Cloud Speech model on the SpeechToTextConfig ([2c98a57](https://github.com/googleapis/nodejs-dialogflow/commit/2c98a57248019054654ac686f204627cf0141c83))
+* Can directly set Cloud Speech model on the SpeechToTextConfig ([2c98a57](https://github.com/googleapis/nodejs-dialogflow/commit/2c98a57248019054654ac686f204627cf0141c83))
+* Include conversation dataset name to be created with dataset creation metadata ([#1003](https://github.com/googleapis/nodejs-dialogflow/issues/1003)) ([fe73406](https://github.com/googleapis/nodejs-dialogflow/commit/fe734066be3d46337513e62a3846b4c19b361636))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency uuid to v9 ([#977](https://github.com/googleapis/nodejs-dialogflow/issues/977)) ([6c7ec11](https://github.com/googleapis/nodejs-dialogflow/commit/6c7ec117b01288734ddd67ad684bc9c03a5e7a8c))
+* **deps:** Use google-gax v3.5.2 ([#1007](https://github.com/googleapis/nodejs-dialogflow/issues/1007)) ([be3d1f3](https://github.com/googleapis/nodejs-dialogflow/commit/be3d1f3e1d80aea4edee6fa4b98de58a504f5ea3))
+* Preserve default values in x-goog-request-params header ([#979](https://github.com/googleapis/nodejs-dialogflow/issues/979)) ([2492264](https://github.com/googleapis/nodejs-dialogflow/commit/2492264ffa536521b794eff60c60bbe2def57b9b))
+* update proto definitions ([471c6a3](https://github.com/googleapis/nodejs-dialogflow/commit/471c6a30cb7d5dc00a96f5e84aefc8afe4d8ada3))
+* Update proto definitions ([#1010](https://github.com/googleapis/nodejs-dialogflow/issues/1010)) ([471c6a3](https://github.com/googleapis/nodejs-dialogflow/commit/471c6a30cb7d5dc00a96f5e84aefc8afe4d8ada3))
+
 ## [5.2.1](https://github.com/googleapis/nodejs-dialogflow/compare/v5.2.0...v5.2.1) (2022-09-01)
 
 
