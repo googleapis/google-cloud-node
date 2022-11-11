@@ -41,6 +41,7 @@
     "packages/google-maps-addressvalidation": {},
     "packages/google-maps-routing": {},
     "packages/google-monitoring-dashboard": {},
+    "packages/google-storagetransfer": {},
     "packages/typeless-sample-bot": {}
   },
   "plugins": [
