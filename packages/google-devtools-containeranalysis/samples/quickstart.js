@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent) {
@@ -48,7 +46,8 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Containeranalysis library
-  const {ContainerAnalysisClient} = require('@google-cloud/containeranalysis').v1;
+  const {ContainerAnalysisClient} =
+    require('@google-cloud/containeranalysis').v1;
 
   // Instantiates a client
   const containeranalysisClient = new ContainerAnalysisClient();
@@ -60,9 +59,11 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await containeranalysisClient.getGrafeasClient().listNotesAsync(request);
+    const iterable = await containeranalysisClient
+      .getGrafeasClient()
+      .listNotesAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
