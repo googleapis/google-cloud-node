@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [4.2.1](https://github.com/googleapis/nodejs-grafeas/compare/v4.2.0...v4.2.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#374](https://github.com/googleapis/nodejs-grafeas/issues/374)) ([620c235](https://github.com/googleapis/nodejs-grafeas/commit/620c23512940c1d18de7d5424ea2a765e13286f3))
+* Regenerated protos JS and TS definitions ([#378](https://github.com/googleapis/nodejs-grafeas/issues/378)) ([e6ec5ef](https://github.com/googleapis/nodejs-grafeas/commit/e6ec5efd1b20b0f1345fed651ce6f70c2af15e64))
+
 ## [4.2.0](https://github.com/googleapis/nodejs-grafeas/compare/v4.1.2...v4.2.0) (2022-10-06)
 
 
