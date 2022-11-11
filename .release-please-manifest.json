@@ -18,6 +18,7 @@
   "packages/google-cloud-dataproc": "4.1.1",
   "packages/google-cloud-deploy": "2.2.2",
   "packages/google-cloud-discoveryengine": "0.2.0",
+  "packages/google-cloud-eventarc": "2.2.0",
   "packages/google-cloud-gkeconnect-gateway": "2.0.5",
   "packages/google-cloud-gkemulticloud": "0.1.4",
   "packages/google-cloud-language": "5.1.2",
