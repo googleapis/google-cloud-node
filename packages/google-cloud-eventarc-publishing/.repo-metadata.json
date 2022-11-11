@@ -1,6 +1,6 @@
 {
   "name": "publishing",
-  "api_shortname": "publishing",
+  "api_shortname": "eventarcpublishing",
   "name_pretty": "Eventarc Publishing API",
   "product_documentation": "https://cloud.google.com/eventarc",
   "client_documentation": "https://googleapis.dev/nodejs/publishing/latest/",
@@ -9,7 +9,7 @@
   "language": "nodejs",
   "repo": "googleapis/nodejs-eventarc-publishing",
   "distribution_name": "@google-cloud/eventarc-publishing",
-  "api_id": "publishing.googleapis.com",
+  "api_id": "eventarcpublishing.googleapis.com",
   "default_version": "v1",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO"
