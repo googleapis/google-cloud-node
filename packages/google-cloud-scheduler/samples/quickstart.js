@@ -1,62 +1,77 @@
-// Copyright 2018 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
 
 'use strict';
 
-// sample-metadata:
-//   title: Quickstart
-//   description: POST "Hello World" to a URL every minute.
-//   usage: node quickstart.js [project-id] [location-id] [url]
+function main(parent) {
+  // [START cloudscheduler_v1_generated_CloudScheduler_ListJobs_async]
+  /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  /**
+   *  Required. The location name. For example:
+   *  `projects/PROJECT_ID/locations/LOCATION_ID`.
+   */
+  // const parent = 'abc123'
+  /**
+   *  Requested page size.
+   *  The maximum page size is 500. If unspecified, the page size will
+   *  be the maximum. Fewer jobs than requested might be returned,
+   *  even if more jobs exist; use next_page_token to determine if more
+   *  jobs exist.
+   */
+  // const pageSize = 1234
+  /**
+   *  A token identifying a page of results the server will return. To
+   *  request the first page results, page_token must be empty. To
+   *  request the next page of results, page_token must be the value of
+   *  next_page_token google.cloud.scheduler.v1.ListJobsResponse.next_page_token  returned from
+   *  the previous call to ListJobs google.cloud.scheduler.v1.CloudScheduler.ListJobs. It is an error to
+   *  switch the value of filter google.cloud.scheduler.v1.ListJobsRequest.filter  or
+   *  order_by google.cloud.scheduler.v1.ListJobsRequest.order_by  while iterating through pages.
+   */
+  // const pageToken = 'abc123'
 
-async function main(projectId, locationId, url) {
-  // [START scheduler_quickstart]
-  // const projectId = "PROJECT_ID"
-  // const locationId = "LOCATION_ID" // see: https://cloud.google.com/about/locations/
-  // const url = "https://postb.in/..." // where should we say hello?
+  // Imports the Scheduler library
+  const {CloudSchedulerClient} = require('@google-cloud/scheduler').v1;
 
-  const scheduler = require('@google-cloud/scheduler');
+  // Instantiates a client
+  const schedulerClient = new CloudSchedulerClient();
 
-  // Create a client.
-  const client = new scheduler.CloudSchedulerClient();
+  async function callListJobs() {
+    // Construct request
+    const request = {
+      parent,
+    };
 
-  // Construct the fully qualified location path.
-  const parent = client.locationPath(projectId, locationId);
+    // Run request
+    const iterable = await schedulerClient.listJobsAsync(request);
+    for await (const response of iterable) {
+      console.log(response);
+    }
+  }
 
-  // Construct the request body.
-  const job = {
-    httpTarget: {
-      uri: url,
-      httpMethod: 'POST',
-      body: Buffer.from('Hello World'),
-    },
-    schedule: '* * * * *',
-    timeZone: 'America/Los_Angeles',
-  };
-
-  const request = {
-    parent: parent,
-    job: job,
-  };
-
-  // Use the client to send the job creation request.
-  const [response] = await client.createJob(request);
-  console.log(`Created job: ${response.name}`);
-  // [END scheduler_quickstart]
+  callListJobs();
+  // [END cloudscheduler_v1_generated_CloudScheduler_ListJobs_async]
 }
 
-const args = process.argv.slice(2);
-main(...args).catch(err => {
+process.on('unhandledRejection', err => {
   console.error(err.message);
   process.exitCode = 1;
 });
+main(...process.argv.slice(2));
