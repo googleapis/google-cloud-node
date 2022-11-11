@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-channel/compare/v2.1.0...v2.2.0) (2022-11-11)
+
+
+### Features
+
+* Add CloudChannelReportsService to CloudChannel API ([56ab14f](https://github.com/googleapis/nodejs-channel/commit/56ab14fcfb242de8a767cb4c52444728404dc5ad))
+* Add deal_code field to message Offer ([#169](https://github.com/googleapis/nodejs-channel/issues/169)) ([56ab14f](https://github.com/googleapis/nodejs-channel/commit/56ab14fcfb242de8a767cb4c52444728404dc5ad))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#165](https://github.com/googleapis/nodejs-channel/issues/165)) ([f307d9f](https://github.com/googleapis/nodejs-channel/commit/f307d9f9560dc07a8e0c3e36972b1af2519f8aca))
+* Better support for fallback mode ([#160](https://github.com/googleapis/nodejs-channel/issues/160)) ([24e2202](https://github.com/googleapis/nodejs-channel/commit/24e220281861c3a1b4e4ee8931c53c478635ec8f))
+* Change import long to require ([#161](https://github.com/googleapis/nodejs-channel/issues/161)) ([6c79b81](https://github.com/googleapis/nodejs-channel/commit/6c79b81b8957826c264f44b68b972afd80bcbe6d))
+* **deps:** Use google-gax v3.5.2 ([#172](https://github.com/googleapis/nodejs-channel/issues/172)) ([05aa559](https://github.com/googleapis/nodejs-channel/commit/05aa5596a60309fa175b9f20068e722580e2fe42))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-channel/issues/1553)) ([#164](https://github.com/googleapis/nodejs-channel/issues/164)) ([f3c4901](https://github.com/googleapis/nodejs-channel/commit/f3c490112a9ceb5ff8c200290489cdb0fd971054))
+* Preserve default values in x-goog-request-params header ([#166](https://github.com/googleapis/nodejs-channel/issues/166)) ([c04c515](https://github.com/googleapis/nodejs-channel/commit/c04c515049598c1f4353e64e1e94731f8c72324e))
+* Regenerated protos JS and TS definitions ([#175](https://github.com/googleapis/nodejs-channel/issues/175)) ([fbbb62c](https://github.com/googleapis/nodejs-channel/commit/fbbb62c7b3cbaa36129412a7ca9aaa5613817260))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-channel/issues/1546)) ([#163](https://github.com/googleapis/nodejs-channel/issues/163)) ([a784132](https://github.com/googleapis/nodejs-channel/commit/a78413205e4b7a14897f439c4d37fe2d62a343e2))
+* use google-gax v3.3.0 ([f3c4901](https://github.com/googleapis/nodejs-channel/commit/f3c490112a9ceb5ff8c200290489cdb0fd971054))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-channel/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
