@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.3](https://github.com/googleapis/nodejs-org-policy/compare/v2.0.2...v2.0.3) (2022-11-11)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#126](https://github.com/googleapis/nodejs-org-policy/issues/126)) ([c7147d4](https://github.com/googleapis/nodejs-org-policy/commit/c7147d40a9ed114ec42997d49c2f5dfcff948aad))
+* **deps:** Use google-gax v3.5.2 ([#134](https://github.com/googleapis/nodejs-org-policy/issues/134)) ([0f1bfb0](https://github.com/googleapis/nodejs-org-policy/commit/0f1bfb0007ade736c2ec91f32ff187c80b2d6761))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-org-policy/issues/1553)) ([#125](https://github.com/googleapis/nodejs-org-policy/issues/125)) ([068b0a5](https://github.com/googleapis/nodejs-org-policy/commit/068b0a55fe805cedab9e66f62071c8be56f465ed))
+* Preserve default values in x-goog-request-params header ([#128](https://github.com/googleapis/nodejs-org-policy/issues/128)) ([3f80014](https://github.com/googleapis/nodejs-org-policy/commit/3f80014a3c75311555df6cfde8470ae1f72a686f))
+* Regenerated protos JS and TS definitions ([#137](https://github.com/googleapis/nodejs-org-policy/issues/137)) ([1606459](https://github.com/googleapis/nodejs-org-policy/commit/1606459c847f2ed945dccc8e43d57d273fac7ea9))
+* use google-gax v3.3.0 ([068b0a5](https://github.com/googleapis/nodejs-org-policy/commit/068b0a55fe805cedab9e66f62071c8be56f465ed))
+
 ## [2.0.2](https://github.com/googleapis/nodejs-org-policy/compare/v2.0.1...v2.0.2) (2022-08-23)
 
 
