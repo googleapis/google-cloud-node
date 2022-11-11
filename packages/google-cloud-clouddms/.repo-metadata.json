@@ -1,5 +1,5 @@
 {
-  "name": "dms",
+  "name": "clouddms",
   "name_pretty": "Cloud Database Migration Service",
   "product_documentation": "https://cloud.google.com/database-migration/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dms/latest",
