@@ -1,0 +1,68 @@
+{
+  "name": "@google-cloud/monitoring",
+  "description": "Stackdriver Monitoring API client for Node.js",
+  "version": "3.0.3",
+  "license": "Apache-2.0",
+  "author": "Google Inc",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "repository": "googleapis/nodejs-monitoring",
+  "main": "build/src/index.js",
+  "files": [
+    "build/src",
+    "build/protos"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google monitoring",
+    "monitoring",
+    "Stackdriver Monitoring API"
+  ],
+  "scripts": {
+    "docs": "jsdoc -c .jsdoc.js",
+    "lint": "gts check",
+    "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
+    "system-test": "mocha build/system-test",
+    "test": "c8 mocha build/test",
+    "fix": "gts fix",
+    "docs-test": "linkinator docs",
+    "predocs-test": "npm run docs",
+    "prelint": "cd samples; npm link ../; npm install",
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
+    "prepare": "npm run compile",
+    "precompile": "gts clean"
+  },
+  "dependencies": {
+    "google-gax": "^3.5.2"
+  },
+  "devDependencies": {
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^18.0.0",
+    "@types/sinon": "^10.0.0",
+    "c8": "^7.1.0",
+    "codecov": "^3.6.5",
+    "gts": "^3.1.0",
+    "jsdoc": "^4.0.0",
+    "jsdoc-fresh": "^2.0.0",
+    "jsdoc-region-tag": "^2.0.0",
+    "linkinator": "^4.0.0",
+    "mocha": "^9.2.2",
+    "null-loader": "^4.0.0",
+    "pack-n-play": "^1.0.0-2",
+    "sinon": "^14.0.0",
+    "ts-loader": "^9.0.0",
+    "typescript": "^4.6.4",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0"
+  }
+}
