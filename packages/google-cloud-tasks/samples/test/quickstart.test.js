@@ -31,9 +31,7 @@ describe('Cloud Task Sample Tests', async () => {
   });
 
   it('quickstart sample should create a task', async () => {
-    const stdout = exec(
-      `node quickstart.js ${projectId} us-central1`
-    );
+    const stdout = exec(`node quickstart.js ${projectId} us-central1`);
     assert.match(stdout != null);
   });
 });
