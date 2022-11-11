@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.3](https://github.com/googleapis/nodejs-video-transcoder/compare/v2.2.2...v2.2.3) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#218](https://github.com/googleapis/nodejs-video-transcoder/issues/218)) ([57badeb](https://github.com/googleapis/nodejs-video-transcoder/commit/57badebacaabed136b8cf2a1a3c77552a5ef249c))
+* Regenerated protos JS and TS definitions ([#222](https://github.com/googleapis/nodejs-video-transcoder/issues/222)) ([4ee236a](https://github.com/googleapis/nodejs-video-transcoder/commit/4ee236a3a7026daeead3eec97fc8c58f32aad86b))
+
 ## [2.2.2](https://github.com/googleapis/nodejs-video-transcoder/compare/v2.2.1...v2.2.2) (2022-09-23)
 
 
