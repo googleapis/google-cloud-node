@@ -1,0 +1,27 @@
+{
+  "name": "nodejs-docs-samples-conversation",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "repository": "googleapis/nodejs-dialogflow",
+  "files": [
+    "*.js",
+    "resources"
+  ],
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "scripts": {
+    "test": "mocha system-test --timeout=600000"
+  },
+  "dependencies": {
+    "@google-cloud/dialogflow": "^5.3.0",
+    "pb-util": "^1.0.0",
+    "uuid": "^9.0.0",
+    "yargs": "^16.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.0"
+  }
+}
