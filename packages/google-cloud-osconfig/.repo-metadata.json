@@ -1,7 +1,7 @@
 {
   "language": "nodejs",
   "product_documentation": "https://cloud.google.com/compute/docs/os-patch-management",
-  "repo": "googleapis/nodejs-os-config",
+  "repo": "googleapis/google-cloud-node",
   "repo_short": "nodejs-os-config",
   "default_version": "v1",
   "api_description": "provides OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances.",
