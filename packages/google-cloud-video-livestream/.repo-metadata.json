@@ -1,5 +1,6 @@
 {
   "name": "livestream",
+  "api_shortname": "livestream",
   "name_pretty": "Live Stream API",
   "product_documentation": "https://cloud.google.com/livestream/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/livestream/latest",
