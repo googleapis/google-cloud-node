@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-ids/compare/v2.1.1...v2.1.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#62](https://github.com/googleapis/nodejs-ids/issues/62)) ([a20c7ed](https://github.com/googleapis/nodejs-ids/commit/a20c7eda50cfcc1230760244a8cb433b1715fb60))
+* Preserve default values in x-goog-request-params header ([#55](https://github.com/googleapis/nodejs-ids/issues/55)) ([5077d92](https://github.com/googleapis/nodejs-ids/commit/5077d92010d2f94a889ee141fcce3c0cf5785e0f))
+* Regenerated protos JS and TS definitions ([#65](https://github.com/googleapis/nodejs-ids/issues/65)) ([8435d1d](https://github.com/googleapis/nodejs-ids/commit/8435d1d54111121b2dbbf5a9eaff92f67083680b))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-ids/compare/v2.1.0...v2.1.1) (2022-09-01)
 
 
