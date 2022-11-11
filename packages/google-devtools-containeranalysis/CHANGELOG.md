@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [4.4.1](https://github.com/googleapis/nodejs-containeranalysis/compare/v4.4.0...v4.4.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#447](https://github.com/googleapis/nodejs-containeranalysis/issues/447)) ([c0631d5](https://github.com/googleapis/nodejs-containeranalysis/commit/c0631d54928b9fe6df493f79883341e66d19f0ca))
+* Regenerated protos JS and TS definitions ([#451](https://github.com/googleapis/nodejs-containeranalysis/issues/451)) ([9710e71](https://github.com/googleapis/nodejs-containeranalysis/commit/9710e715ef10471e536b5329e1e71ffe8b7265ec))
+
 ## [4.4.0](https://github.com/googleapis/nodejs-containeranalysis/compare/v4.3.0...v4.4.0) (2022-10-06)
 
 
