@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """This script is used to synthesize generated parts of this library."""
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 
-node.owlbot_main(staging_excludes=['package.json', 'README.md'], templates_excludes=['.github/CODEOWNERS'])
+node.owlbot_main(relative_dir="packages/google-cloud-gaming",staging_excludes=['package.json', 'README.md'], templates_excludes=['.github/CODEOWNERS'])
 
