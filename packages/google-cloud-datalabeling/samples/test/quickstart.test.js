@@ -15,7 +15,7 @@
 'use strict';
 
 const {assert} = require('chai');
-const {describe, it} = require('mocha');
+const {describe, it, before} = require('mocha');
 const {execSync} = require('child_process');
 const {DataLabelingServiceClient} = require('@google-cloud/datalabeling');
 const client = new DataLabelingServiceClient();
