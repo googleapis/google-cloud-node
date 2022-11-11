@@ -6,7 +6,7 @@
   "default_version": "v1beta",
   "language": "nodejs",
   "name_pretty": "Google Analytics Data",
-  "repo": "googleapis/nodejs-analytics-data",
+  "repo": "googleapis/google-cloud-node",
   "codeowner_team": "@googleapis/ga-devrel",
   "product_documentation": "https://developers.google.com/analytics/trusted-testing/analytics-data",
   "requires_billing": false,

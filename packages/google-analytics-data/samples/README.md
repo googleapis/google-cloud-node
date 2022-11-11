@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Analytics Data: Node.js Samples](https://github.com/googleapis/nodejs-analytics-data)
+# [Google Analytics Data: Node.js Samples](https://github.com/googleapis/google-cloud-node)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
@@ -12,36 +12,21 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Get Common Metadata](#get-common-metadata)
-  * [Get Metadata By Property Id](#get-metadata-by-property-id)
+  * [Alpha_analytics_data.run_funnel_report](#alpha_analytics_data.run_funnel_report)
+  * [Beta_analytics_data.batch_run_pivot_reports](#beta_analytics_data.batch_run_pivot_reports)
+  * [Beta_analytics_data.batch_run_reports](#beta_analytics_data.batch_run_reports)
+  * [Beta_analytics_data.check_compatibility](#beta_analytics_data.check_compatibility)
+  * [Beta_analytics_data.get_metadata](#beta_analytics_data.get_metadata)
+  * [Beta_analytics_data.run_pivot_report](#beta_analytics_data.run_pivot_report)
+  * [Beta_analytics_data.run_realtime_report](#beta_analytics_data.run_realtime_report)
+  * [Beta_analytics_data.run_report](#beta_analytics_data.run_report)
   * [Quickstart](#quickstart)
-  * [Quickstart_json_credentials](#quickstart_json_credentials)
-  * [Quickstart_oauth2](#quickstart_oauth2)
-  * [Run Batch Report](#run-batch-report)
-  * [Run Pivot Report](#run-pivot-report)
-  * [Run Realtime Report](#run-realtime-report)
-  * [Run Realtime Report With Multiple Dimensions](#run-realtime-report-with-multiple-dimensions)
-  * [Run Realtime Report With Multiple Metrics](#run-realtime-report-with-multiple-metrics)
-  * [Run Report](#run-report)
-  * [Run Report With Aggregations](#run-report-with-aggregations)
-  * [Run Report With Cohorts](#run-report-with-cohorts)
-  * [Run Report With Date Ranges](#run-report-with-date-ranges)
-  * [Run Report With Dimension And Metric Filters](#run-report-with-dimension-and-metric-filters)
-  * [Run Report With Dimension Exclude Filter](#run-report-with-dimension-exclude-filter)
-  * [Run Report With Dimension Filter](#run-report-with-dimension-filter)
-  * [Run Report With Dimension In List Filter](#run-report-with-dimension-in-list-filter)
-  * [Run Report With Multiple Dimension Filters](#run-report-with-multiple-dimension-filters)
-  * [Run Report With Multiple Dimensions](#run-report-with-multiple-dimensions)
-  * [Run Report With Multiple Metrics](#run-report-with-multiple-metrics)
-  * [Run Report With Named Date Ranges](#run-report-with-named-date-ranges)
-  * [Run Report With Ordering](#run-report-with-ordering)
-  * [Run Report With Pagination](#run-report-with-pagination)
-  * [Run Report With Property Quota](#run-report-with-property-quota)
+  * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/nodejs-analytics-data#using-the-client-library).
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -53,16 +38,16 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Get Common Metadata
+### Alpha_analytics_data.run_funnel_report
 
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/getCommonMetadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/getCommonMetadata.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/getCommonMetadata.js`
+`node /workspace/google-cloud-node/samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js`
 
 
 -----
@@ -70,16 +55,118 @@ __Usage:__
 
 
 
-### Get Metadata By Property Id
+### Beta_analytics_data.batch_run_pivot_reports
 
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/getMetadataByPropertyId.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/getMetadataByPropertyId.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/getMetadataByPropertyId.js`
+`node /workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js`
+
+
+-----
+
+
+
+
+### Beta_analytics_data.batch_run_reports
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.batch_run_reports.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.batch_run_reports.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.batch_run_reports.js`
+
+
+-----
+
+
+
+
+### Beta_analytics_data.check_compatibility
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.check_compatibility.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.check_compatibility.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.check_compatibility.js`
+
+
+-----
+
+
+
+
+### Beta_analytics_data.get_metadata
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.get_metadata.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.get_metadata.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.get_metadata.js`
+
+
+-----
+
+
+
+
+### Beta_analytics_data.run_pivot_report
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.run_pivot_report.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.run_pivot_report.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.run_pivot_report.js`
+
+
+-----
+
+
+
+
+### Beta_analytics_data.run_realtime_report
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.run_realtime_report.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.run_realtime_report.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.run_realtime_report.js`
+
+
+-----
+
+
+
+
+### Beta_analytics_data.run_report
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.run_report.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.run_report.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta/beta_analytics_data.run_report.js`
 
 
 -----
@@ -89,14 +176,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node /workspace/google-cloud-node/samples/quickstart.js`
 
 
 -----
@@ -104,373 +191,16 @@ __Usage:__
 
 
 
-### Quickstart_json_credentials
+### Quickstart.test
 
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/quickstart_json_credentials.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.test.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/quickstart_json_credentials.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/quickstart_json_credentials.js`
-
-
------
-
-
-
-
-### Quickstart_oauth2
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/quickstart_oauth2.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/quickstart_oauth2.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.test.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/quickstart_oauth2.js`
-
-
------
-
-
-
-
-### Run Batch Report
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runBatchReport.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runBatchReport.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runBatchReport.js`
-
-
------
-
-
-
-
-### Run Pivot Report
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runPivotReport.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runPivotReport.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runPivotReport.js`
-
-
------
-
-
-
-
-### Run Realtime Report
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runRealtimeReport.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runRealtimeReport.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runRealtimeReport.js`
-
-
------
-
-
-
-
-### Run Realtime Report With Multiple Dimensions
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runRealtimeReportWithMultipleDimensions.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runRealtimeReportWithMultipleDimensions.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runRealtimeReportWithMultipleDimensions.js`
-
-
------
-
-
-
-
-### Run Realtime Report With Multiple Metrics
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runRealtimeReportWithMultipleMetrics.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runRealtimeReportWithMultipleMetrics.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runRealtimeReportWithMultipleMetrics.js`
-
-
------
-
-
-
-
-### Run Report
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReport.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReport.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReport.js`
-
-
------
-
-
-
-
-### Run Report With Aggregations
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithAggregations.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithAggregations.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithAggregations.js`
-
-
------
-
-
-
-
-### Run Report With Cohorts
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithCohorts.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithCohorts.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithCohorts.js`
-
-
------
-
-
-
-
-### Run Report With Date Ranges
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithDateRanges.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithDateRanges.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithDateRanges.js`
-
-
------
-
-
-
-
-### Run Report With Dimension And Metric Filters
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithDimensionAndMetricFilters.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithDimensionAndMetricFilters.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithDimensionAndMetricFilters.js`
-
-
------
-
-
-
-
-### Run Report With Dimension Exclude Filter
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithDimensionExcludeFilter.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithDimensionExcludeFilter.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithDimensionExcludeFilter.js`
-
-
------
-
-
-
-
-### Run Report With Dimension Filter
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithDimensionFilter.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithDimensionFilter.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithDimensionFilter.js`
-
-
------
-
-
-
-
-### Run Report With Dimension In List Filter
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithDimensionInListFilter.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithDimensionInListFilter.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithDimensionInListFilter.js`
-
-
------
-
-
-
-
-### Run Report With Multiple Dimension Filters
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithMultipleDimensionFilters.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithMultipleDimensionFilters.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithMultipleDimensionFilters.js`
-
-
------
-
-
-
-
-### Run Report With Multiple Dimensions
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithMultipleDimensions.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithMultipleDimensions.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithMultipleDimensions.js`
-
-
------
-
-
-
-
-### Run Report With Multiple Metrics
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithMultipleMetrics.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithMultipleMetrics.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithMultipleMetrics.js`
-
-
------
-
-
-
-
-### Run Report With Named Date Ranges
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithNamedDateRanges.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithNamedDateRanges.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithNamedDateRanges.js`
-
-
------
-
-
-
-
-### Run Report With Ordering
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithOrdering.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithOrdering.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithOrdering.js`
-
-
------
-
-
-
-
-### Run Report With Pagination
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithPagination.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithPagination.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithPagination.js`
-
-
------
-
-
-
-
-### Run Report With Property Quota
-
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/runReportWithPropertyQuota.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/runReportWithPropertyQuota.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/runReportWithPropertyQuota.js`
+`node /workspace/google-cloud-node/samples/test/quickstart.test.js`
 
 
 
@@ -478,5 +208,5 @@ __Usage:__
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
 [product-docs]: https://developers.google.com/analytics/trusted-testing/analytics-data
