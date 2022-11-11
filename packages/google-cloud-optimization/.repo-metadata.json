@@ -3,10 +3,10 @@
   "name_pretty": "Cloud Optimization AI",
   "product_documentation": "https://cloud.google.com/optimization/",
   "client_documentation": "https://googleapis.dev/nodejs/cloudoptimization/latest/",
-  "issue_tracker": "https://github.com/googleapis/nodejs-cloud-optimization/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "release_level": "stable",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-cloud-optimization",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/optimization",
   "api_id": "cloudoptimization.googleapis.com",
   "default_version": "v1",
@@ -14,4 +14,3 @@
   "api_shortname": "cloudoptimization",
   "library_type": "GAPIC_AUTO"
 }
-
