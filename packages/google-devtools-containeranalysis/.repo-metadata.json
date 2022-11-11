@@ -1,5 +1,5 @@
 {
-  "repo": "googleapis/nodejs-containeranalysis",
+  "repo": "googleapis/google-cloud-node",
   "default_version": "v1",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559742",
   "language": "nodejs",

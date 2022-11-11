@@ -16,7 +16,7 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 import logging
 import os
 import json
@@ -61,7 +61,7 @@ import {GrafeasClient} from '@google-cloud/grafeas';""")
             os.unlink(filePath)
 
 
-node.owlbot_main(staging_excludes=[
+node.owlbot_main(relative_dir="packages/google-devtools-containeranalysis",staging_excludes=[
     'package.json', 'README.md',
     'src/v1beta1/index.ts', 'src/v1/index.ts', 'tslint.json', 'src/index.ts'],
     patch_staging=patch)
