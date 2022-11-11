@@ -1,5 +1,6 @@
 {
   "name": "publishing",
+  "api_shortname": "publishing",
   "name_pretty": "Eventarc Publishing API",
   "product_documentation": "https://cloud.google.com/eventarc",
   "client_documentation": "https://googleapis.dev/nodejs/publishing/latest/",
