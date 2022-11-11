@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.3](https://github.com/googleapis/nodejs-service-management/compare/v1.1.2...v1.1.3) (2022-11-10)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#169](https://github.com/googleapis/nodejs-service-management/issues/169)) ([ef47431](https://github.com/googleapis/nodejs-service-management/commit/ef4743106afc35191647a626c8f3a8a08634ebd1))
+* Regenerated protos JS and TS definitions ([#178](https://github.com/googleapis/nodejs-service-management/issues/178)) ([9c00293](https://github.com/googleapis/nodejs-service-management/commit/9c00293b6213b8ba0e2d56fd2208d90b60c38d0d))
+
 ## [1.1.2](https://github.com/googleapis/nodejs-service-management/compare/v1.1.1...v1.1.2) (2022-09-01)
 
 
