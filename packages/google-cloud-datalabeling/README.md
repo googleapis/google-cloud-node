@@ -61,7 +61,6 @@ const {DataLabelingServiceClient} = require('@google-cloud/datalabeling');
 const client = new DataLabelingServiceClient();
 
 async function quickstart() {
-  const projectId = await client.getProjectId();
   const parent = client.projectPath(projectId);
   const [result] = await client.listDatasets({parent});
   console.log('Datasets:');
@@ -114,6 +113,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Data_labeling_service.search_example_comparisons | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.search_example_comparisons.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.search_example_comparisons.js,samples/README.md) |
 | Data_labeling_service.update_evaluation_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.update_evaluation_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/generated/v1beta1/data_labeling_service.update_evaluation_job.js,samples/README.md) |
 | Get Datasets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/quickstart.js,samples/README.md) |
+| Quickstart.test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datalabeling/samples/test/quickstart.test.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-datalabeling/samples/test/quickstart.test.js,samples/README.md) |
 
 
 
