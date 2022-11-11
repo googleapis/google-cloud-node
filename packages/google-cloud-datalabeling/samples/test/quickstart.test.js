@@ -14,23 +14,23 @@
 
 'use strict';
 
-// sample-metadata:
-//   title: Get Datasets
-//   description: Gets all available Datasets.
-//   usage: node quickstart.js
+const {assert} = require('chai');
+const {describe, it} = require('mocha');
+const {execSync} = require('child_process');
+const {DataLabelingServiceClient} = require('@google-cloud/datalabeling');
+const client = new DataLabelingServiceClient();
 
-function main(projectId) {
-  // [START datalabeling_quickstart]
-  const {DataLabelingServiceClient} = require('@google-cloud/datalabeling');
-  const client = new DataLabelingServiceClient();
+const exec = cmd => execSync(cmd, {encoding: 'utf8'});
 
-  async function quickstart() {
-    const parent = client.projectPath(projectId);
-    const [result] = await client.listDatasets({parent});
-    console.log('Datasets:');
-    console.log(result);
-  }
-  quickstart();
-  // [END datalabeling_quickstart]
-}
-main(...process.argv.slice(2));
+describe('quickstart', () => {
+  let projectId;
+
+  before(async () => {
+    projectId = await client.getProjectId();
+  });
+
+  it('should run the quickstart', () => {
+    const stdout = exec(`node quickstart.js ${projectId}`);
+    assert.include(stdout, 'Datasets:');
+  });
+});
