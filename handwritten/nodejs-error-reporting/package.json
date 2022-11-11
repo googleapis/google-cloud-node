@@ -19,8 +19,6 @@
     "lint": "gts check",
     "presystem-test": "npm run compile",
     "system-test": "MOCHA_THROW_DEPRECATION=false c8 mocha build/system-test",
-    "presamples-test": "npm run compile",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "test": "c8 mocha --recursive build/test/unit",
     "clean": "gts clean",
     "compile": "tsc -p .",
@@ -30,7 +28,6 @@
     "license-check": "jsgl --local .",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
   "dependencies": {
