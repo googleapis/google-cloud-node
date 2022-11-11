@@ -6,7 +6,7 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5300385",
   "release_level": "stable",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-dialogflow",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/dialogflow",
   "api_id": "dialogflow.googleapis.com",
   "requires_billing": true,
