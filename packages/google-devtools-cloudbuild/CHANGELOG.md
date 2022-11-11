@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/nodejs-cloudbuild/compare/v3.1.2...v3.2.0) (2022-11-11)
+
+
+### Features
+
+* Add allow_failure, exit_code, and allow_exit_code to BuildStep message ([84c7dd7](https://github.com/googleapis/nodejs-cloudbuild/commit/84c7dd75501fea0d9c351904d40f4abd99e51e1a))
+* Integration of Cloud Build with Artifact Registry ([#352](https://github.com/googleapis/nodejs-cloudbuild/issues/352)) ([84c7dd7](https://github.com/googleapis/nodejs-cloudbuild/commit/84c7dd75501fea0d9c351904d40f4abd99e51e1a))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#354](https://github.com/googleapis/nodejs-cloudbuild/issues/354)) ([9570dc0](https://github.com/googleapis/nodejs-cloudbuild/commit/9570dc04db9e1722052c5515bd616ddf87d569a5))
+* Regenerated protos JS and TS definitions ([#358](https://github.com/googleapis/nodejs-cloudbuild/issues/358)) ([1e7a054](https://github.com/googleapis/nodejs-cloudbuild/commit/1e7a0540a78383c7dfd2b957e282a21dea1fc02c))
+
 ## [3.1.2](https://github.com/googleapis/nodejs-cloudbuild/compare/v3.1.1...v3.1.2) (2022-09-22)
 
 
