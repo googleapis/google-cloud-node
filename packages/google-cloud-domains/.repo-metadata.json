@@ -6,11 +6,11 @@
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Cloud Domains",
-  "repo": "googleapis/nodejs-domains",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/domains/",
   "requires_billing": true,
   "name": "domains",
-  "issue_tracker": "https://github.com/googleapis/nodejs-domains/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "api_shortname": "domains",
   "library_type": "GAPIC_AUTO"
 }
