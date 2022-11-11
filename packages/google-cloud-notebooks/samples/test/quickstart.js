@@ -20,17 +20,20 @@
 const path = require('path');
 const {assert} = require('chai');
 const cp = require('child_process');
-const {describe, it} = require('mocha');
-
+const {describe, it, before} = require('mocha');
+const {NotebookServiceClient} = require('@google-cloud/notebooks');
+const client = new NotebookServiceClient();
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-const project = process.env.GCLOUD_PROJECT;
-
 describe('Quickstart', () => {
+  let projectId;
+  before(async () => {
+    projectId = await client.getProjectId();
+  });
   it('should run quickstart', async () => {
-    const output = execSync(`node ./quickstart.js ${project} us-west1-b`, {
+    const output = execSync(`node ./quickstart.js ${projectId} us-west1-b`, {
       cwd,
     });
     assert.match(output, /instance: projects/);
