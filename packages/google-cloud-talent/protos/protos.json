@@ -498,7 +498,10 @@
                         "keywordSearchableJobCustomAttributes": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "derivedInfo": {
                           "type": "DerivedInfo",
@@ -2749,7 +2752,10 @@
                         "keywordSearchableJobCustomAttributes": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "derivedInfo": {
                           "type": "DerivedInfo",
