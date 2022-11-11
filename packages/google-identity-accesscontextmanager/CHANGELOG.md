@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-access-context-manager/compare/v2.1.1...v2.2.0) (2022-11-11)
+
+
+### Features
+
+* Added AccessPolicy.scopes, EgressTo.external_resources, and IAM methods ([#78](https://github.com/googleapis/nodejs-access-context-manager/issues/78)) ([a35b05f](https://github.com/googleapis/nodejs-access-context-manager/commit/a35b05ff0a3a67d167ab11c6f90c1aee08290c1e))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#67](https://github.com/googleapis/nodejs-access-context-manager/issues/67)) ([41905db](https://github.com/googleapis/nodejs-access-context-manager/commit/41905db97be6c0f3d6f4da125fc84c68a4f322ac))
+* **deps:** Use google-gax v3.5.2 ([#74](https://github.com/googleapis/nodejs-access-context-manager/issues/74)) ([f6d2ff5](https://github.com/googleapis/nodejs-access-context-manager/commit/f6d2ff532b5ec98daeb88caa4474947662f109b5))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-access-context-manager/issues/1553)) ([#66](https://github.com/googleapis/nodejs-access-context-manager/issues/66)) ([48df277](https://github.com/googleapis/nodejs-access-context-manager/commit/48df27751cc269c9220532b56b71751b463ce33e))
+* Preserve default values in x-goog-request-params header ([#69](https://github.com/googleapis/nodejs-access-context-manager/issues/69)) ([695b8ca](https://github.com/googleapis/nodejs-access-context-manager/commit/695b8caf46174de399adf92aa1a9ea6770835d21))
+* Regenerated protos JS and TS definitions ([#77](https://github.com/googleapis/nodejs-access-context-manager/issues/77)) ([fb66a21](https://github.com/googleapis/nodejs-access-context-manager/commit/fb66a2100f0c92c54e1c07b0b3398f19f040342d))
+* use google-gax v3.3.0 ([48df277](https://github.com/googleapis/nodejs-access-context-manager/commit/48df27751cc269c9220532b56b71751b463ce33e))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-access-context-manager/compare/v2.1.0...v2.1.1) (2022-08-23)
 
 
