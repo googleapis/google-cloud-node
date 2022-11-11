@@ -49,7 +49,7 @@ const {delay} = require('./util');
 
 describe('execute the quickstart', () => {
   let projectId;
-  
+
   beforeEach(async () => {
     const [bucket] = await storage.createBucket(bucketName);
     await bucket.file(jobFileName).save(sortCode);
