@@ -8,9 +8,9 @@
   "language": "nodejs",
   "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
   "default_version": "v1",
-  "issue_tracker": "https://github.com/googleapis/nodejs-service-control/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "name_pretty": "Service Control API",
-  "repo": "googleapis/nodejs-service-control",
+  "repo": "googleapis/google-cloud-node",
   "api_shortname": "servicecontrol",
   "library_type": "GAPIC_AUTO"
 }

@@ -11,15 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-docker:
-  image: gcr.io/cloud-devrel-public-resources/owlbot-nodejs:latest
 
 deep-remove-regex:
   - /owl-bot-staging
 
 deep-copy-regex:
-  - source: /google/api/servicecontrol/(.*)/.*-nodejs/(.*)
-    dest: /owl-bot-staging/$1/$2
+  - source: /google/api/servicecontrol/(.*)/.*-nodejs
+    dest: /owl-bot-staging/google-api-servicecontrol/$1
 
 begin-after-commit-hash: ef7685951dedbb18bce99dcbc0dfd8bdac0fec86
 
