@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [3.2.0](https://github.com/googleapis/nodejs-web-risk/compare/v3.1.1...v3.2.0) (2022-11-10)
+
+
+### Features
+
+* Accept google-gax instance as a parameter ([#342](https://github.com/googleapis/nodejs-web-risk/issues/342)) ([b61e98b](https://github.com/googleapis/nodejs-web-risk/commit/b61e98b2837644cd1991990742f9932eaba1712d))
+* Add SOCIAL_ENGINEERING_EXTENDED_COVERAGE threat type ([#350](https://github.com/googleapis/nodejs-web-risk/issues/350)) ([ba8a366](https://github.com/googleapis/nodejs-web-risk/commit/ba8a36677ca9e82c49e66ddbfdbab421555da167))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#353](https://github.com/googleapis/nodejs-web-risk/issues/353)) ([caa5a26](https://github.com/googleapis/nodejs-web-risk/commit/caa5a269ed08cd049fd2458fde235d652e847afe))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-web-risk/issues/1553)) ([#341](https://github.com/googleapis/nodejs-web-risk/issues/341)) ([5b2e449](https://github.com/googleapis/nodejs-web-risk/commit/5b2e4491384cb2956ed9b88f7ec30e16fbbbc7cf))
+* Regenerated protos JS and TS definitions ([#356](https://github.com/googleapis/nodejs-web-risk/issues/356)) ([75b917a](https://github.com/googleapis/nodejs-web-risk/commit/75b917afd49769039d3c4eb8bb1b8852dd857970))
+* use google-gax v3.3.0 ([5b2e449](https://github.com/googleapis/nodejs-web-risk/commit/5b2e4491384cb2956ed9b88f7ec30e16fbbbc7cf))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-web-risk/compare/v3.1.0...v3.1.1) (2022-08-23)
 
 
