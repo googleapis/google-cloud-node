@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.2](https://github.com/googleapis/nodejs-data-qna/compare/v2.0.1...v2.0.2) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#133](https://github.com/googleapis/nodejs-data-qna/issues/133)) ([22faab9](https://github.com/googleapis/nodejs-data-qna/commit/22faab9ab9bcaee1c4bd71f7fce4ba8a1a824aa7))
+* Preserve default values in x-goog-request-params header ([#127](https://github.com/googleapis/nodejs-data-qna/issues/127)) ([0bd099f](https://github.com/googleapis/nodejs-data-qna/commit/0bd099f012c187b567465812db08533cc624b755))
+* Regenerated protos JS and TS definitions ([#136](https://github.com/googleapis/nodejs-data-qna/issues/136)) ([7f5f180](https://github.com/googleapis/nodejs-data-qna/commit/7f5f180f250a347dddb9fc95baaa2b5337e16fcf))
+
 ## [2.0.1](https://github.com/googleapis/nodejs-data-qna/compare/v2.0.0...v2.0.1) (2022-09-01)
 
 
