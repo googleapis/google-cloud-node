@@ -1,5 +1,20 @@
 # Changelog
 
+## [6.1.0](https://github.com/googleapis/nodejs-document-ai/compare/v6.0.0...v6.1.0) (2022-11-11)
+
+
+### Features
+
+* Added font_family to document.proto ([#377](https://github.com/googleapis/nodejs-document-ai/issues/377)) ([7ded563](https://github.com/googleapis/nodejs-document-ai/commit/7ded5630ed4e589d7a77a91722531fc4f62810b6))
+* added ImageQualityScores message to document.proto ([7ded563](https://github.com/googleapis/nodejs-document-ai/commit/7ded5630ed4e589d7a77a91722531fc4f62810b6))
+* added PropertyMetadata and EntityTypeMetadata to document_schema.proto ([7ded563](https://github.com/googleapis/nodejs-document-ai/commit/7ded5630ed4e589d7a77a91722531fc4f62810b6))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#372](https://github.com/googleapis/nodejs-document-ai/issues/372)) ([a612f68](https://github.com/googleapis/nodejs-document-ai/commit/a612f68401bdd63eba38f4830db1d83ab7d5bef2))
+* Regenerated protos JS and TS definitions ([#376](https://github.com/googleapis/nodejs-document-ai/issues/376)) ([64223b5](https://github.com/googleapis/nodejs-document-ai/commit/64223b5d6b5fe5ee4d3922162dbbc63a9401c41a))
+
 ## [6.0.0](https://github.com/googleapis/nodejs-document-ai/compare/v5.0.0...v6.0.0) (2022-09-22)
 
 
