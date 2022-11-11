@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-cloud-optimization/compare/v2.1.0...v2.1.1) (2022-11-11)
+
+
+### Bug Fixes
+
+* Better support for fallback mode ([#30](https://github.com/googleapis/nodejs-cloud-optimization/issues/30)) ([05b1532](https://github.com/googleapis/nodejs-cloud-optimization/commit/05b153292444a83b39975482bc836acd8a1932c2))
+* **deps:** Use google-gax v3.5.2 ([#46](https://github.com/googleapis/nodejs-cloud-optimization/issues/46)) ([6c3dda7](https://github.com/googleapis/nodejs-cloud-optimization/commit/6c3dda7ac623dd6079c49520b69de92989323744))
+* Preserve default values in x-goog-request-params header ([#35](https://github.com/googleapis/nodejs-cloud-optimization/issues/35)) ([7108aba](https://github.com/googleapis/nodejs-cloud-optimization/commit/7108abaa353591fcddef959dbe1d3e89a8f9619b))
+* Use _gaxModule when accessing gax for bundling ([#32](https://github.com/googleapis/nodejs-cloud-optimization/issues/32)) ([ae16ecb](https://github.com/googleapis/nodejs-cloud-optimization/commit/ae16ecb6b7c6202c7a5c705ca11e1b1a77baa027))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-cloud-optimization/compare/v2.0.0...v2.1.0) (2022-06-30)
 
 
