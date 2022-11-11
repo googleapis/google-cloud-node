@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.3](https://github.com/googleapis/nodejs-functions/compare/v2.2.2...v2.2.3) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#201](https://github.com/googleapis/nodejs-functions/issues/201)) ([727c86a](https://github.com/googleapis/nodejs-functions/commit/727c86a475f3405a86259e9ff1f2946e09ae81d3))
+* Regenerated protos JS and TS definitions ([#205](https://github.com/googleapis/nodejs-functions/issues/205)) ([c2a42c6](https://github.com/googleapis/nodejs-functions/commit/c2a42c6eb29eea880d6c15ee85dc7a8b84f65eb9))
+
 ## [2.2.2](https://github.com/googleapis/nodejs-functions/compare/v2.2.1...v2.2.2) (2022-09-21)
 
 
