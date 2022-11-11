@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.1](https://github.com/googleapis/nodejs-storage-transfer/compare/v2.2.0...v2.2.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#121](https://github.com/googleapis/nodejs-storage-transfer/issues/121)) ([ee66be0](https://github.com/googleapis/nodejs-storage-transfer/commit/ee66be0297f1665298912c641fa9f2e1b3c2a1a7))
+* Regenerated protos JS and TS definitions ([#125](https://github.com/googleapis/nodejs-storage-transfer/issues/125)) ([21ad9a7](https://github.com/googleapis/nodejs-storage-transfer/commit/21ad9a7190881ecdb8cf68fabcdc4fb42ffc626b))
+
 ## [2.2.0](https://github.com/googleapis/nodejs-storage-transfer/compare/v2.1.2...v2.2.0) (2022-09-23)
 
 
