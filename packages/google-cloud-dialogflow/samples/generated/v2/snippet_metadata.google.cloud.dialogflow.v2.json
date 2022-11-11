@@ -3936,6 +3936,86 @@
             }
         },
         {
+            "regionTag": "dialogflow_v2_generated_Participants_StreamingAnalyzeContent_async",
+            "title": "dialogflow streamingAnalyzeContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Adds a text (chat, for example), or audio (phone recording, for example) message from a participant into the conversation. Note: This method is only available through the gRPC API (not REST). The top-level message sent to the client by the server is `StreamingAnalyzeContentResponse`. Multiple response messages can be returned in order. The first one or more messages contain the `recognition_result` field. Each result represents a more complete transcript of what the user said. The next message contains the `reply_text` field and potentially the `reply_audio` field. The message can also contain the `automated_agent_reply` field. Note: Always use agent versions for production traffic sent to virtual agents. See [Versions and environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).",
+            "canonical": true,
+            "file": "participants.streaming_analyze_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 117,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamingAnalyzeContent",
+                "fullName": "google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "participant",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "audio_config",
+                        "type": ".google.cloud.dialogflow.v2.InputAudioConfig"
+                    },
+                    {
+                        "name": "text_config",
+                        "type": ".google.cloud.dialogflow.v2.InputTextConfig"
+                    },
+                    {
+                        "name": "reply_audio_config",
+                        "type": ".google.cloud.dialogflow.v2.OutputAudioConfig"
+                    },
+                    {
+                        "name": "input_audio",
+                        "type": "TYPE_BYTES"
+                    },
+                    {
+                        "name": "input_text",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "input_dtmf",
+                        "type": ".google.cloud.dialogflow.v2.TelephonyDtmfEvents"
+                    },
+                    {
+                        "name": "query_params",
+                        "type": ".google.cloud.dialogflow.v2.QueryParameters"
+                    },
+                    {
+                        "name": "assist_query_params",
+                        "type": ".google.cloud.dialogflow.v2.AssistQueryParameters"
+                    },
+                    {
+                        "name": "cx_parameters",
+                        "type": ".google.protobuf.Struct"
+                    },
+                    {
+                        "name": "enable_partial_automated_agent_reply",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.v2.StreamingAnalyzeContentResponse",
+                "client": {
+                    "shortName": "ParticipantsClient",
+                    "fullName": "google.cloud.dialogflow.v2.ParticipantsClient"
+                },
+                "method": {
+                    "shortName": "StreamingAnalyzeContent",
+                    "fullName": "google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent",
+                    "service": {
+                        "shortName": "Participants",
+                        "fullName": "google.cloud.dialogflow.v2.Participants"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "dialogflow_v2_generated_Participants_SuggestArticles_async",
             "title": "dialogflow suggestArticles Sample",
             "origin": "API_DEFINITION",

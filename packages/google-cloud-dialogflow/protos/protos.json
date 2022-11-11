@@ -1035,6 +1035,12 @@
                             }
                           ]
                         },
+                        "StreamingAnalyzeContent": {
+                          "requestType": "StreamingAnalyzeContentRequest",
+                          "requestStream": true,
+                          "responseType": "StreamingAnalyzeContentResponse",
+                          "responseStream": true
+                        },
                         "SuggestArticles": {
                           "requestType": "SuggestArticlesRequest",
                           "responseType": "SuggestArticlesResponse",
@@ -1138,6 +1144,13 @@
                         "sipRecordingMediaLabel": {
                           "type": "string",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "obfuscatedExternalUserId": {
+                          "type": "string",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1408,6 +1421,111 @@
                         "dtmfParameters": {
                           "type": "DtmfParameters",
                           "id": 9
+                        }
+                      }
+                    },
+                    "StreamingAnalyzeContentRequest": {
+                      "oneofs": {
+                        "config": {
+                          "oneof": [
+                            "audioConfig",
+                            "textConfig"
+                          ]
+                        },
+                        "input": {
+                          "oneof": [
+                            "inputAudio",
+                            "inputText",
+                            "inputDtmf"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "participant": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Participant"
+                          }
+                        },
+                        "audioConfig": {
+                          "type": "InputAudioConfig",
+                          "id": 2
+                        },
+                        "textConfig": {
+                          "type": "InputTextConfig",
+                          "id": 3
+                        },
+                        "replyAudioConfig": {
+                          "type": "OutputAudioConfig",
+                          "id": 4
+                        },
+                        "inputAudio": {
+                          "type": "bytes",
+                          "id": 5
+                        },
+                        "inputText": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "inputDtmf": {
+                          "type": "TelephonyDtmfEvents",
+                          "id": 9
+                        },
+                        "queryParams": {
+                          "type": "QueryParameters",
+                          "id": 7
+                        },
+                        "assistQueryParams": {
+                          "type": "AssistQueryParameters",
+                          "id": 8
+                        },
+                        "cxParameters": {
+                          "type": "google.protobuf.Struct",
+                          "id": 13
+                        },
+                        "enablePartialAutomatedAgentReply": {
+                          "type": "bool",
+                          "id": 12
+                        }
+                      }
+                    },
+                    "StreamingAnalyzeContentResponse": {
+                      "fields": {
+                        "recognitionResult": {
+                          "type": "StreamingRecognitionResult",
+                          "id": 1
+                        },
+                        "replyText": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "replyAudio": {
+                          "type": "OutputAudio",
+                          "id": 3
+                        },
+                        "automatedAgentReply": {
+                          "type": "AutomatedAgentReply",
+                          "id": 4
+                        },
+                        "message": {
+                          "type": "Message",
+                          "id": 6
+                        },
+                        "humanAgentSuggestionResults": {
+                          "rule": "repeated",
+                          "type": "SuggestionResult",
+                          "id": 7
+                        },
+                        "endUserSuggestionResults": {
+                          "rule": "repeated",
+                          "type": "SuggestionResult",
+                          "id": 8
+                        },
+                        "dtmfParameters": {
+                          "type": "DtmfParameters",
+                          "id": 10
                         }
                       }
                     },
@@ -1702,6 +1820,17 @@
                         }
                       }
                     },
+                    "InputTextConfig": {
+                      "fields": {
+                        "languageCode": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "AnnotatedMessagePart": {
                       "fields": {
                         "text": {
@@ -1916,11 +2045,45 @@
                         }
                       }
                     },
+                    "TelephonyDtmf": {
+                      "values": {
+                        "TELEPHONY_DTMF_UNSPECIFIED": 0,
+                        "DTMF_ONE": 1,
+                        "DTMF_TWO": 2,
+                        "DTMF_THREE": 3,
+                        "DTMF_FOUR": 4,
+                        "DTMF_FIVE": 5,
+                        "DTMF_SIX": 6,
+                        "DTMF_SEVEN": 7,
+                        "DTMF_EIGHT": 8,
+                        "DTMF_NINE": 9,
+                        "DTMF_ZERO": 10,
+                        "DTMF_A": 11,
+                        "DTMF_B": 12,
+                        "DTMF_C": 13,
+                        "DTMF_D": 14,
+                        "DTMF_STAR": 15,
+                        "DTMF_POUND": 16
+                      }
+                    },
+                    "TelephonyDtmfEvents": {
+                      "fields": {
+                        "dtmfEvents": {
+                          "rule": "repeated",
+                          "type": "TelephonyDtmf",
+                          "id": 1
+                        }
+                      }
+                    },
                     "SpeechToTextConfig": {
                       "fields": {
                         "speechModelVariant": {
                           "type": "SpeechModelVariant",
                           "id": 1
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -11910,6 +12073,10 @@
                         "speechModelVariant": {
                           "type": "SpeechModelVariant",
                           "id": 1
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },

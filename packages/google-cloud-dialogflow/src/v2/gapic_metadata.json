@@ -1097,6 +1097,11 @@
                 "suggestSmartReplies"
               ]
             },
+            "StreamingAnalyzeContent": {
+              "methods": [
+                "streamingAnalyzeContent"
+              ]
+            },
             "ListParticipants": {
               "methods": [
                 "listParticipants",

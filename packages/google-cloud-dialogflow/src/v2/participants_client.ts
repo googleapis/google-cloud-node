@@ -23,13 +23,12 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
-  GrpcClientOptions,
   PaginationCallback,
   GaxCall,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import {Transform} from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -64,7 +63,6 @@ export class ParticipantsClient {
   innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
-  operationsClient: gax.OperationsClient;
   participantsStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -337,53 +335,14 @@ export class ParticipantsClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
-    // This API contains "long-running operations", which return a
-    // an Operation object that allows for tracking of the operation,
-    // rather than holding a request open.
-    const lroOptions: GrpcClientOptions = {
-      auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    // Some of the methods on this service provide streaming responses.
+    // Provide descriptors for these.
+    this.descriptors.stream = {
+      streamingAnalyzeContent: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.BIDI_STREAMING,
+        opts.fallback === 'rest'
+      ),
     };
-    if (opts.fallback === 'rest') {
-      lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v2/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v2/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v2/{name=projects/*/operations/*}:cancel',
-          additional_bindings: [
-            {post: '/v2/{name=projects/*/locations/*/operations/*}:cancel'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2/{name=projects/*/operations/*}',
-          additional_bindings: [
-            {get: '/v2/{name=projects/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2/{name=projects/*}/operations',
-          additional_bindings: [
-            {get: '/v2/{name=projects/*/locations/*}/operations'},
-          ],
-        },
-      ];
-    }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
-
-    this.descriptors.longrunning = {};
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -440,6 +399,7 @@ export class ParticipantsClient {
       'listParticipants',
       'updateParticipant',
       'analyzeContent',
+      'streamingAnalyzeContent',
       'suggestArticles',
       'suggestFaqAnswers',
       'suggestSmartReplies',
@@ -449,6 +409,18 @@ export class ParticipantsClient {
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough();
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new this._gaxModule.GoogleError(
+                      'The client has already been closed.'
+                    )
+                  );
+                });
+                return stream;
+              }
               return Promise.reject('The client has already been closed.');
             }
             const func = stub[methodName];
@@ -459,7 +431,10 @@ export class ParticipantsClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.stream[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -1255,6 +1230,40 @@ export class ParticipantsClient {
   }
 
   /**
+   * Adds a text (chat, for example), or audio (phone recording, for example)
+   * message from a participant into the conversation.
+   * Note: This method is only available through the gRPC API (not REST).
+   *
+   * The top-level message sent to the client by the server is
+   * `StreamingAnalyzeContentResponse`. Multiple response messages can be
+   * returned in order. The first one or more messages contain the
+   * `recognition_result` field. Each result represents a more complete
+   * transcript of what the user said. The next message contains the
+   * `reply_text` field and potentially the `reply_audio` field. The message can
+   * also contain the `automated_agent_reply` field.
+   *
+   * Note: Always use agent versions for production traffic
+   * sent to virtual agents. See [Versions and
+   * environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
+   *
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which is both readable and writable. It accepts objects
+   *   representing [StreamingAnalyzeContentRequest]{@link google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest} for write() method, and
+   *   will emit objects representing [StreamingAnalyzeContentResponse]{@link google.cloud.dialogflow.v2.StreamingAnalyzeContentResponse} on 'data' event asynchronously.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/participants.streaming_analyze_content.js</caption>
+   * region_tag:dialogflow_v2_generated_Participants_StreamingAnalyzeContent_async
+   */
+  streamingAnalyzeContent(options?: CallOptions): gax.CancellableStream {
+    this.initialize();
+    return this.innerApiCalls.streamingAnalyzeContent(null, options);
+  }
+
+  /**
    * Returns the list of all participants in the specified conversation.
    *
    * @param {Object} request
@@ -1530,183 +1539,6 @@ export class ParticipantsClient {
     options?: CallOptions
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
-  }
-
-  /**
-   * Gets the latest state of a long-running operation.  Clients can use this
-   * method to poll the operation result at intervals as recommended by the API
-   * service.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   *   details.
-   * @param {function(?Error, ?Object)=} callback
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}.
-   * @return {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   * [google.longrunning.Operation]{@link
-   * external:"google.longrunning.Operation"}. The promise has a method named
-   * "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * const name = '';
-   * const [response] = await client.getOperation({name});
-   * // doThingsWith(response)
-   * ```
-   */
-  getOperation(
-    request: protos.google.longrunning.GetOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.longrunning.Operation,
-          protos.google.longrunning.GetOperationRequest,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.longrunning.Operation,
-      protos.google.longrunning.GetOperationRequest,
-      {} | null | undefined
-    >
-  ): Promise<[protos.google.longrunning.Operation]> {
-    return this.operationsClient.getOperation(request, options, callback);
-  }
-  /**
-   * Lists operations that match the specified filter in the request. If the
-   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
-   *
-   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation collection.
-   * @param {string} request.filter - The standard list filter.
-   * @param {number=} request.pageSize -
-   *   The maximum number of resources contained in the underlying API
-   *   response. If page streaming is performed per-resource, this
-   *   parameter does not affect the return value. If page streaming is
-   *   performed per-page, this determines the maximum number of
-   *   resources in a page.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   *   details.
-   * @returns {Object}
-   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * for await (const response of client.listOperationsAsync(request));
-   * // doThingsWith(response)
-   * ```
-   */
-  listOperationsAsync(
-    request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
-    return this.operationsClient.listOperationsAsync(request, options);
-  }
-  /**
-   * Starts asynchronous cancellation on a long-running operation.  The server
-   * makes a best effort to cancel the operation, but success is not
-   * guaranteed.  If the server doesn't support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-   * {@link Operations.GetOperation} or
-   * other methods to check whether the cancellation succeeded or whether the
-   * operation completed despite cancellation. On successful cancellation,
-   * the operation is not deleted; instead, it becomes an operation with
-   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
-   * 1, corresponding to `Code.CANCELLED`.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource to be cancelled.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   * details.
-   * @param {function(?Error)=} callback
-   *   The function which will be called with the result of the API call.
-   * @return {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API
-   * call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * await client.cancelOperation({name: ''});
-   * ```
-   */
-  cancelOperation(
-    request: protos.google.longrunning.CancelOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.protobuf.Empty,
-          protos.google.longrunning.CancelOperationRequest,
-          {} | undefined | null
-        >,
-    callback?: Callback<
-      protos.google.longrunning.CancelOperationRequest,
-      protos.google.protobuf.Empty,
-      {} | undefined | null
-    >
-  ): Promise<protos.google.protobuf.Empty> {
-    return this.operationsClient.cancelOperation(request, options, callback);
-  }
-
-  /**
-   * Deletes a long-running operation. This method indicates that the client is
-   * no longer interested in the operation result. It does not cancel the
-   * operation. If the server doesn't support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource to be deleted.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
-   * details.
-   * @param {function(?Error)=} callback
-   *   The function which will be called with the result of the API call.
-   * @return {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API
-   * call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * await client.deleteOperation({name: ''});
-   * ```
-   */
-  deleteOperation(
-    request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.protobuf.Empty,
-          protos.google.longrunning.DeleteOperationRequest,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.Empty,
-      protos.google.longrunning.DeleteOperationRequest,
-      {} | null | undefined
-    >
-  ): Promise<protos.google.protobuf.Empty> {
-    return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
@@ -4273,7 +4105,6 @@ export class ParticipantsClient {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
-        this.operationsClient.close();
       });
     }
     return Promise.resolve();
