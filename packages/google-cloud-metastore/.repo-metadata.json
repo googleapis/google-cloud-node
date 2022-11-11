@@ -6,11 +6,11 @@
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Dataproc Metastore",
-  "repo": "googleapis/nodejs-dataproc-metastore",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/dataproc-metastore/",
   "requires_billing": true,
   "name": "metastore",
-  "issue_tracker": "https://github.com/googleapis/nodejs-dataproc-metastore/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "api_shortname": "metastore",
   "library_type": "GAPIC_AUTO"
 }
