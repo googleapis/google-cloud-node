@@ -23,7 +23,7 @@ const {CloudTasksClient} = require('@google-cloud/tasks');
 const exec = cmd => execSync(cmd, {encoding: 'utf-8'});
 const queueName = `gcloud-${uuid.v4().split('-')[0]}`;
 
-describe('Cloud Task Sample Tests', () => {
+describe('Cloud Task Sample Tests', async() => {
   let projectId;
 
   before(async () => {
@@ -31,7 +31,7 @@ describe('Cloud Task Sample Tests', () => {
     projectId = await client.getProjectId();
   });
 
-  it('quickstart sample should create a task', () => {
+  it('quickstart sample should create a task', async () => {
     const stdout = exec(
       `node quickstart ${projectId} us-central1 ${queueName}`
     );
