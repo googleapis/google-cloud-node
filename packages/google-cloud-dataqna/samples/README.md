@@ -38,14 +38,14 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Auto_suggestion_service.suggest_queries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/auto_suggestion_service.suggest_queries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/auto_suggestion_service.suggest_queries.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/auto_suggestion_service.suggest_queries.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/generated/v1alpha/auto_suggestion_service.suggest_queries.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/auto_suggestion_service.suggest_queries.js`
+`node packages/google-cloud-dataqna/samples/generated/v1alpha/auto_suggestion_service.suggest_queries.js`
 
 
 -----
@@ -55,14 +55,14 @@ __Usage:__
 
 ### Question_service.create_question
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/question_service.create_question.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.create_question.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/question_service.create_question.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.create_question.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/question_service.create_question.js`
+`node packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.create_question.js`
 
 
 -----
@@ -72,14 +72,14 @@ __Usage:__
 
 ### Question_service.execute_question
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/question_service.execute_question.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.execute_question.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/question_service.execute_question.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.execute_question.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/question_service.execute_question.js`
+`node packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.execute_question.js`
 
 
 -----
@@ -89,14 +89,14 @@ __Usage:__
 
 ### Question_service.get_question
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/question_service.get_question.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_question.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/question_service.get_question.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_question.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/question_service.get_question.js`
+`node packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_question.js`
 
 
 -----
@@ -106,14 +106,14 @@ __Usage:__
 
 ### Question_service.get_user_feedback
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/question_service.get_user_feedback.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_user_feedback.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/question_service.get_user_feedback.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_user_feedback.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/question_service.get_user_feedback.js`
+`node packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_user_feedback.js`
 
 
 -----
@@ -123,14 +123,14 @@ __Usage:__
 
 ### Question_service.update_user_feedback
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha/question_service.update_user_feedback.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.update_user_feedback.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha/question_service.update_user_feedback.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.update_user_feedback.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha/question_service.update_user_feedback.js`
+`node packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.update_user_feedback.js`
 
 
 -----
@@ -140,14 +140,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/quickstart.js`
+`node packages/google-cloud-dataqna/samples/quickstart.js`
 
 
 -----
@@ -157,14 +157,14 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/test/quickstart.test.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.test.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/test/quickstart.test.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/test/quickstart.test.js`
+`node packages/google-cloud-dataqna/samples/test/quickstart.test.js`
 
 
 
