@@ -1,0 +1,16 @@
+{
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-cloud-container",
+  "name": "container",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559746",
+  "default_version": "v1",
+  "api_id": "container.googleapis.com",
+  "distribution_name": "@google-cloud/container",
+  "requires_billing": true,
+  "product_documentation": "https://cloud.google.com/kubernetes-engine",
+  "name_pretty": "Kubernetes Engine Cluster Manager API",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/container/latest",
+  "release_level": "stable",
+  "api_shortname": "container",
+  "library_type": "GAPIC_AUTO"
+}
