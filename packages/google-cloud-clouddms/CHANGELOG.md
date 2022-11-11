@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-dms/compare/v2.1.1...v2.1.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#115](https://github.com/googleapis/nodejs-dms/issues/115)) ([d260ba2](https://github.com/googleapis/nodejs-dms/commit/d260ba2ae215ed5f8fefc67c2208e3597aa3c90c))
+* Preserve default values in x-goog-request-params header ([#108](https://github.com/googleapis/nodejs-dms/issues/108)) ([78512f5](https://github.com/googleapis/nodejs-dms/commit/78512f56e32dd9758653220c5751dda5f03f9dab))
+* Regenerated protos JS and TS definitions ([#118](https://github.com/googleapis/nodejs-dms/issues/118)) ([64fdb51](https://github.com/googleapis/nodejs-dms/commit/64fdb51490a9b16182b20509710b637848a00409))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-dms/compare/v2.1.0...v2.1.1) (2022-09-01)
 
 
