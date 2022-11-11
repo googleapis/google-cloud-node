@@ -44,14 +44,14 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Tables_service.batch_create_rows
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.batch_create_rows.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_create_rows.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.batch_create_rows.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_create_rows.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.batch_create_rows.js`
+`node packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_create_rows.js`
 
 
 -----
@@ -61,14 +61,14 @@ __Usage:__
 
 ### Tables_service.batch_delete_rows
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.batch_delete_rows.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_delete_rows.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.batch_delete_rows.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_delete_rows.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.batch_delete_rows.js`
+`node packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_delete_rows.js`
 
 
 -----
@@ -78,14 +78,14 @@ __Usage:__
 
 ### Tables_service.batch_update_rows
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.batch_update_rows.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_update_rows.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.batch_update_rows.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_update_rows.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.batch_update_rows.js`
+`node packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_update_rows.js`
 
 
 -----
@@ -95,14 +95,14 @@ __Usage:__
 
 ### Tables_service.create_row
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.create_row.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.create_row.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.create_row.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.create_row.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.create_row.js`
+`node packages/google-area120-tables/samples/generated/v1alpha1/tables_service.create_row.js`
 
 
 -----
@@ -112,14 +112,14 @@ __Usage:__
 
 ### Tables_service.delete_row
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.delete_row.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.delete_row.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.delete_row.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.delete_row.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.delete_row.js`
+`node packages/google-area120-tables/samples/generated/v1alpha1/tables_service.delete_row.js`
 
 
 -----
@@ -129,14 +129,14 @@ __Usage:__
 
 ### Tables_service.get_row
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.get_row.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_row.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.get_row.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_row.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.get_row.js`
+`node packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_row.js`
 
 
 -----
@@ -146,14 +146,14 @@ __Usage:__
 
 ### Tables_service.get_table
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.get_table.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_table.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.get_table.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_table.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.get_table.js`
+`node packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_table.js`
 
 
 -----
@@ -163,14 +163,14 @@ __Usage:__
 
 ### Tables_service.get_workspace
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.get_workspace.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_workspace.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.get_workspace.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_workspace.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.get_workspace.js`
+`node packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_workspace.js`
 
 
 -----
@@ -180,14 +180,14 @@ __Usage:__
 
 ### Tables_service.list_rows
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.list_rows.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_rows.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.list_rows.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_rows.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.list_rows.js`
+`node packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_rows.js`
 
 
 -----
@@ -197,14 +197,14 @@ __Usage:__
 
 ### Tables_service.list_tables
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.list_tables.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_tables.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.list_tables.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_tables.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.list_tables.js`
+`node packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_tables.js`
 
 
 -----
@@ -214,14 +214,14 @@ __Usage:__
 
 ### Tables_service.list_workspaces
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.list_workspaces.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_workspaces.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.list_workspaces.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_workspaces.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.list_workspaces.js`
+`node packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_workspaces.js`
 
 
 -----
@@ -231,14 +231,14 @@ __Usage:__
 
 ### Tables_service.update_row
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.update_row.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.update_row.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.update_row.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.update_row.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1alpha1/tables_service.update_row.js`
+`node packages/google-area120-tables/samples/generated/v1alpha1/tables_service.update_row.js`
 
 
 -----
@@ -248,14 +248,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/quickstart.js`
+`node packages/google-area120-tables/samples/quickstart.js`
 
 
 -----
@@ -265,14 +265,14 @@ __Usage:__
 
 ### Quickstart.test
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.test.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/test/quickstart.test.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.test.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/test/quickstart.test.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/test/quickstart.test.js`
+`node packages/google-area120-tables/samples/test/quickstart.test.js`
 
 
 
