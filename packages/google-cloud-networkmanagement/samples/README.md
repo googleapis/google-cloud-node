@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Network Management API: Node.js Samples](https://github.com/googleapis/nodejs-network-management)
+# [Network Management API: Node.js Samples](https://github.com/googleapis/google-cloud-node)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
@@ -12,12 +12,25 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Reachability_service.create_connectivity_test](#reachability_service.create_connectivity_test)
+  * [Reachability_service.delete_connectivity_test](#reachability_service.delete_connectivity_test)
+  * [Reachability_service.get_connectivity_test](#reachability_service.get_connectivity_test)
+  * [Reachability_service.list_connectivity_tests](#reachability_service.list_connectivity_tests)
+  * [Reachability_service.rerun_connectivity_test](#reachability_service.rerun_connectivity_test)
+  * [Reachability_service.update_connectivity_test](#reachability_service.update_connectivity_test)
+  * [Reachability_service.create_connectivity_test](#reachability_service.create_connectivity_test)
+  * [Reachability_service.delete_connectivity_test](#reachability_service.delete_connectivity_test)
+  * [Reachability_service.get_connectivity_test](#reachability_service.get_connectivity_test)
+  * [Reachability_service.list_connectivity_tests](#reachability_service.list_connectivity_tests)
+  * [Reachability_service.rerun_connectivity_test](#reachability_service.rerun_connectivity_test)
+  * [Reachability_service.update_connectivity_test](#reachability_service.update_connectivity_test)
+  * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/nodejs-network-management#using-the-client-library).
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -29,16 +42,237 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Quickstart
+### Reachability_service.create_connectivity_test
 
-View the [source code](https://github.com/googleapis/nodejs-network-management/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/reachability_service.create_connectivity_test.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-network-management&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/reachability_service.create_connectivity_test.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node /workspace/google-cloud-node/samples/generated/v1/reachability_service.create_connectivity_test.js`
+
+
+-----
+
+
+
+
+### Reachability_service.delete_connectivity_test
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/reachability_service.delete_connectivity_test.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/reachability_service.delete_connectivity_test.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/reachability_service.delete_connectivity_test.js`
+
+
+-----
+
+
+
+
+### Reachability_service.get_connectivity_test
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/reachability_service.get_connectivity_test.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/reachability_service.get_connectivity_test.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/reachability_service.get_connectivity_test.js`
+
+
+-----
+
+
+
+
+### Reachability_service.list_connectivity_tests
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/reachability_service.list_connectivity_tests.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/reachability_service.list_connectivity_tests.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/reachability_service.list_connectivity_tests.js`
+
+
+-----
+
+
+
+
+### Reachability_service.rerun_connectivity_test
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/reachability_service.rerun_connectivity_test.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/reachability_service.rerun_connectivity_test.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/reachability_service.rerun_connectivity_test.js`
+
+
+-----
+
+
+
+
+### Reachability_service.update_connectivity_test
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/reachability_service.update_connectivity_test.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/reachability_service.update_connectivity_test.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/reachability_service.update_connectivity_test.js`
+
+
+-----
+
+
+
+
+### Reachability_service.create_connectivity_test
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.create_connectivity_test.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.create_connectivity_test.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.create_connectivity_test.js`
+
+
+-----
+
+
+
+
+### Reachability_service.delete_connectivity_test
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.delete_connectivity_test.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.delete_connectivity_test.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.delete_connectivity_test.js`
+
+
+-----
+
+
+
+
+### Reachability_service.get_connectivity_test
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.get_connectivity_test.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.get_connectivity_test.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.get_connectivity_test.js`
+
+
+-----
+
+
+
+
+### Reachability_service.list_connectivity_tests
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.list_connectivity_tests.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.list_connectivity_tests.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.list_connectivity_tests.js`
+
+
+-----
+
+
+
+
+### Reachability_service.rerun_connectivity_test
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.rerun_connectivity_test.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.rerun_connectivity_test.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.rerun_connectivity_test.js`
+
+
+-----
+
+
+
+
+### Reachability_service.update_connectivity_test
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.update_connectivity_test.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.update_connectivity_test.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1beta1/reachability_service.update_connectivity_test.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/quickstart.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/test/quickstart.js`
 
 
 
@@ -46,5 +280,5 @@ __Usage:__
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-network-management&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
 [product-docs]: https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest/

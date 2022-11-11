@@ -24,6 +24,7 @@
     "packages/google-cloud-language": {},
     "packages/google-cloud-memcache": {},
     "packages/google-cloud-monitoring": {},
+    "packages/google-cloud-networkmanagement": {},
     "packages/google-cloud-oslogin": {},
     "packages/google-cloud-phishingprotection": {},
     "packages/google-cloud-policytroubleshooter": {},
