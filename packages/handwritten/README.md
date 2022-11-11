@@ -33,8 +33,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,20 +54,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/error-reporting
 ```
 
-
-### Using the client library
-
-```javascript
-// Imports the Google Cloud client library
-const {ErrorReporting} = require('@google-cloud/error-reporting');
-
-// Instantiates a client
-const errors = new ErrorReporting();
-
-// Reports a simple error
-errors.report('Something broke!');
-
-```
 This module provides custom Error Reporting support for Node.js applications.
 [Error Reporting](https://cloud.google.com/error-reporting/) is a feature of
 Google Cloud Platform that allows in-depth monitoring and viewing of errors reported by
@@ -345,19 +331,6 @@ err.stack = (err.stack || '').split('\n')
                             .join('\n');
 errors.report(err);
 ```
-
-
-## Samples
-
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-error-reporting/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
-
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Explicit setup | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/explicitSetup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/explicitSetup.js,samples/README.md) |
-| Express integration | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/express.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/express.js,samples/README.md) |
-| Implicit setup | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/implicitSetup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/implicitSetup.js,samples/README.md) |
-| Manual reporting | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/manual.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/manual.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
