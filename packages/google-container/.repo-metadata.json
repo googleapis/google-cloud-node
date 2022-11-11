@@ -1,6 +1,6 @@
 {
   "language": "nodejs",
-  "repo": "googleapis/nodejs-cloud-container",
+  "repo": "googleapis/google-cloud-node",
   "name": "container",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559746",
   "default_version": "v1",
