@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-data-fusion/compare/v2.1.1...v2.1.2) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#74](https://github.com/googleapis/nodejs-data-fusion/issues/74)) ([764335c](https://github.com/googleapis/nodejs-data-fusion/commit/764335ce183a3f2557cc6555c87ebe6a2b4f2251))
+* Preserve default values in x-goog-request-params header ([#67](https://github.com/googleapis/nodejs-data-fusion/issues/67)) ([2a4981c](https://github.com/googleapis/nodejs-data-fusion/commit/2a4981c4677c451783b309669abd93138fcde971))
+* Regenerated protos JS and TS definitions ([#77](https://github.com/googleapis/nodejs-data-fusion/issues/77)) ([8e36541](https://github.com/googleapis/nodejs-data-fusion/commit/8e365416725258222a210c3e2b5731b9f1fab48f))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-data-fusion/compare/v2.1.0...v2.1.1) (2022-09-01)
 
 
