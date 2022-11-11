@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-binary-authorization/compare/v2.1.0...v2.1.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#192](https://github.com/googleapis/nodejs-binary-authorization/issues/192)) ([09d6652](https://github.com/googleapis/nodejs-binary-authorization/commit/09d665200e6cc8fec5e026a2234990e48a3a94d4))
+* Regenerated protos JS and TS definitions ([#196](https://github.com/googleapis/nodejs-binary-authorization/issues/196)) ([c03bdba](https://github.com/googleapis/nodejs-binary-authorization/commit/c03bdbadea89865d7975e797a6f8d2cb22765252))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-binary-authorization/compare/v2.0.0...v2.1.0) (2022-10-06)
 
 
