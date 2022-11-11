@@ -3223,6 +3223,12 @@
                             if (object.filter != null)
                                 message.filter = String(object.filter);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "CONVERSATION_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -3268,7 +3274,7 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationView[message.view] === undefined ? message.view : $root.google.cloud.contactcenterinsights.v1.ConversationView[message.view] : message.view;
                             return object;
                         };
     
@@ -3725,6 +3731,12 @@
                             if (object.name != null)
                                 message.name = String(object.name);
                             switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
                             case "CONVERSATION_VIEW_UNSPECIFIED":
                             case 0:
                                 message.view = 0;
@@ -3761,7 +3773,7 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.view != null && message.hasOwnProperty("view"))
-                                object.view = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationView[message.view] : message.view;
+                                object.view = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationView[message.view] === undefined ? message.view : $root.google.cloud.contactcenterinsights.v1.ConversationView[message.view] : message.view;
                             return object;
                         };
     
@@ -5676,6 +5688,12 @@
                             if (object.kmsKey != null)
                                 message.kmsKey = String(object.kmsKey);
                             switch (object.writeDisposition) {
+                            default:
+                                if (typeof object.writeDisposition === "number") {
+                                    message.writeDisposition = object.writeDisposition;
+                                    break;
+                                }
+                                break;
                             case "WRITE_DISPOSITION_UNSPECIFIED":
                             case 0:
                                 message.writeDisposition = 0;
@@ -5723,7 +5741,7 @@
                             if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
                                 object.kmsKey = message.kmsKey;
                             if (message.writeDisposition != null && message.hasOwnProperty("writeDisposition"))
-                                object.writeDisposition = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition[message.writeDisposition] : message.writeDisposition;
+                                object.writeDisposition = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition[message.writeDisposition] === undefined ? message.writeDisposition : $root.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition[message.writeDisposition] : message.writeDisposition;
                             return object;
                         };
     
@@ -14768,6 +14786,12 @@
                                 message.transcript = $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.fromObject(object.transcript);
                             }
                             switch (object.medium) {
+                            default:
+                                if (typeof object.medium === "number") {
+                                    message.medium = object.medium;
+                                    break;
+                                }
+                                break;
                             case "MEDIUM_UNSPECIFIED":
                             case 0:
                                 message.medium = 0;
@@ -14876,7 +14900,7 @@
                             if (message.transcript != null && message.hasOwnProperty("transcript"))
                                 object.transcript = $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.toObject(message.transcript, options);
                             if (message.medium != null && message.hasOwnProperty("medium"))
-                                object.medium = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.Conversation.Medium[message.medium] : message.medium;
+                                object.medium = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.Conversation.Medium[message.medium] === undefined ? message.medium : $root.google.cloud.contactcenterinsights.v1.Conversation.Medium[message.medium] : message.medium;
                             if (message.duration != null && message.hasOwnProperty("duration"))
                                 object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
                             if (message.turnCount != null && message.hasOwnProperty("turnCount"))
@@ -19838,6 +19862,12 @@
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -19932,7 +19962,7 @@
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.Entity.Type[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.Entity.Type[message.type] === undefined ? message.type : $root.google.cloud.contactcenterinsights.v1.Entity.Type[message.type] : message.type;
                             var keys2;
                             if (message.metadata && (keys2 = Object.keys(message.metadata)).length) {
                                 object.metadata = {};
@@ -21389,6 +21419,12 @@
                             if (object.entityUniqueId != null)
                                 message.entityUniqueId = String(object.entityUniqueId);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "MENTION_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -21431,7 +21467,7 @@
                             if (message.entityUniqueId != null && message.hasOwnProperty("entityUniqueId"))
                                 object.entityUniqueId = message.entityUniqueId;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.EntityMentionData.MentionType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.EntityMentionData.MentionType[message.type] === undefined ? message.type : $root.google.cloud.contactcenterinsights.v1.EntityMentionData.MentionType[message.type] : message.type;
                             if (message.sentiment != null && message.hasOwnProperty("sentiment"))
                                 object.sentiment = $root.google.cloud.contactcenterinsights.v1.SentimentData.toObject(message.sentiment, options);
                             return object;
@@ -22201,6 +22237,12 @@
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -22270,7 +22312,7 @@
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.IssueModel.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.IssueModel.State[message.state] === undefined ? message.state : $root.google.cloud.contactcenterinsights.v1.IssueModel.State[message.state] : message.state;
                             if (message.inputDataConfig != null && message.hasOwnProperty("inputDataConfig"))
                                 object.inputDataConfig = $root.google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig.toObject(message.inputDataConfig, options);
                             if (message.trainingStats != null && message.hasOwnProperty("trainingStats"))
@@ -22496,6 +22538,12 @@
                                     return object;
                                 var message = new $root.google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig();
                                 switch (object.medium) {
+                                default:
+                                    if (typeof object.medium === "number") {
+                                        message.medium = object.medium;
+                                        break;
+                                    }
+                                    break;
                                 case "MEDIUM_UNSPECIFIED":
                                 case 0:
                                     message.medium = 0;
@@ -22546,7 +22594,7 @@
                                     object.filter = "";
                                 }
                                 if (message.medium != null && message.hasOwnProperty("medium"))
-                                    object.medium = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.Conversation.Medium[message.medium] : message.medium;
+                                    object.medium = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.Conversation.Medium[message.medium] === undefined ? message.medium : $root.google.cloud.contactcenterinsights.v1.Conversation.Medium[message.medium] : message.medium;
                                 if (message.trainingConversationsCount != null && message.hasOwnProperty("trainingConversationsCount"))
                                     if (typeof message.trainingConversationsCount === "number")
                                         object.trainingConversationsCount = options.longs === String ? String(message.trainingConversationsCount) : message.trainingConversationsCount;
@@ -23852,6 +23900,12 @@
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "PHRASE_MATCHER_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -23883,6 +23937,12 @@
                                 message.activationUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.activationUpdateTime);
                             }
                             switch (object.roleMatch) {
+                            default:
+                                if (typeof object.roleMatch === "number") {
+                                    message.roleMatch = object.roleMatch;
+                                    break;
+                                }
+                                break;
                             case "ROLE_UNSPECIFIED":
                             case 0:
                                 message.roleMatch = 0;
@@ -23950,7 +24010,7 @@
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.PhraseMatcher.PhraseMatcherType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.PhraseMatcher.PhraseMatcherType[message.type] === undefined ? message.type : $root.google.cloud.contactcenterinsights.v1.PhraseMatcher.PhraseMatcherType[message.type] : message.type;
                             if (message.active != null && message.hasOwnProperty("active"))
                                 object.active = message.active;
                             if (message.phraseMatchRuleGroups && message.phraseMatchRuleGroups.length) {
@@ -23961,7 +24021,7 @@
                             if (message.activationUpdateTime != null && message.hasOwnProperty("activationUpdateTime"))
                                 object.activationUpdateTime = $root.google.protobuf.Timestamp.toObject(message.activationUpdateTime, options);
                             if (message.roleMatch != null && message.hasOwnProperty("roleMatch"))
-                                object.roleMatch = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.Role[message.roleMatch] : message.roleMatch;
+                                object.roleMatch = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.Role[message.roleMatch] === undefined ? message.roleMatch : $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.Role[message.roleMatch] : message.roleMatch;
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             return object;
@@ -24196,6 +24256,12 @@
                                 return object;
                             var message = new $root.google.cloud.contactcenterinsights.v1.PhraseMatchRuleGroup();
                             switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
                             case "PHRASE_MATCH_RULE_GROUP_TYPE_UNSPECIFIED":
                             case 0:
                                 message.type = 0;
@@ -24240,7 +24306,7 @@
                             if (options.defaults)
                                 object.type = options.enums === String ? "PHRASE_MATCH_RULE_GROUP_TYPE_UNSPECIFIED" : 0;
                             if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.PhraseMatchRuleGroup.PhraseMatchRuleGroupType[message.type] : message.type;
+                                object.type = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.PhraseMatchRuleGroup.PhraseMatchRuleGroupType[message.type] === undefined ? message.type : $root.google.cloud.contactcenterinsights.v1.PhraseMatchRuleGroup.PhraseMatchRuleGroupType[message.type] : message.type;
                             if (message.phraseMatchRules && message.phraseMatchRules.length) {
                                 object.phraseMatchRules = [];
                                 for (var j = 0; j < message.phraseMatchRules.length; ++j)
@@ -26277,6 +26343,12 @@
                                 return object;
                             var message = new $root.google.cloud.contactcenterinsights.v1.AnswerFeedback();
                             switch (object.correctnessLevel) {
+                            default:
+                                if (typeof object.correctnessLevel === "number") {
+                                    message.correctnessLevel = object.correctnessLevel;
+                                    break;
+                                }
+                                break;
                             case "CORRECTNESS_LEVEL_UNSPECIFIED":
                             case 0:
                                 message.correctnessLevel = 0;
@@ -26320,7 +26392,7 @@
                                 object.displayed = false;
                             }
                             if (message.correctnessLevel != null && message.hasOwnProperty("correctnessLevel"))
-                                object.correctnessLevel = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.AnswerFeedback.CorrectnessLevel[message.correctnessLevel] : message.correctnessLevel;
+                                object.correctnessLevel = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.AnswerFeedback.CorrectnessLevel[message.correctnessLevel] === undefined ? message.correctnessLevel : $root.google.cloud.contactcenterinsights.v1.AnswerFeedback.CorrectnessLevel[message.correctnessLevel] : message.correctnessLevel;
                             if (message.clicked != null && message.hasOwnProperty("clicked"))
                                 object.clicked = message.clicked;
                             if (message.displayed != null && message.hasOwnProperty("displayed"))
@@ -28189,6 +28261,12 @@
                             if (object.obfuscatedExternalUserId != null)
                                 message.obfuscatedExternalUserId = String(object.obfuscatedExternalUserId);
                             switch (object.role) {
+                            default:
+                                if (typeof object.role === "number") {
+                                    message.role = object.role;
+                                    break;
+                                }
+                                break;
                             case "ROLE_UNSPECIFIED":
                             case 0:
                                 message.role = 0;
@@ -28234,7 +28312,7 @@
                             if (message.dialogflowParticipant != null && message.hasOwnProperty("dialogflowParticipant"))
                                 object.dialogflowParticipant = message.dialogflowParticipant;
                             if (message.role != null && message.hasOwnProperty("role"))
-                                object.role = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.Role[message.role] : message.role;
+                                object.role = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.Role[message.role] === undefined ? message.role : $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.Role[message.role] : message.role;
                             if (message.obfuscatedExternalUserId != null && message.hasOwnProperty("obfuscatedExternalUserId"))
                                 object.obfuscatedExternalUserId = message.obfuscatedExternalUserId;
                             if (message.dialogflowParticipantName != null && message.hasOwnProperty("dialogflowParticipantName")) {
@@ -29916,6 +29994,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -29940,6 +30024,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -29987,7 +30075,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -29995,7 +30083,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -32806,6 +32894,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -32820,6 +32914,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -32946,9 +33046,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -35295,6 +35395,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -35403,7 +35509,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -36205,6 +36311,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -36221,6 +36333,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -36259,6 +36377,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -36329,7 +36451,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -36337,7 +36459,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -36350,7 +36472,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -37727,6 +37849,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -37796,7 +37924,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -39551,6 +39679,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -39600,7 +39734,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
