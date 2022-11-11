@@ -11,8 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-docker:
-  image: gcr.io/cloud-devrel-public-resources/owlbot-nodejs:latest
 
 deep-remove-regex:
   - /owl-bot-staging
@@ -21,5 +19,5 @@ deep-preserve-regex:
   - /owl-bot-staging/v1p7beta1
 
 deep-copy-regex:
-  - source: /google/cloud/asset/(.*)/.*-nodejs/(.*)
-    dest: /owl-bot-staging/$1/$2
+  - source: /google/cloud/asset/(.*)/.*-nodejs
+    dest: /owl-bot-staging/google-cloud-asset/$1
