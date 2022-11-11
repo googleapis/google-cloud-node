@@ -14,11 +14,11 @@ Mediatranslation client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-mediatranslation/CHANGELOG.md).
+[the CHANGELOG](googleapis/nodejs-media-translation/CHANGELOG.md).
 
 * [Cloud Media Translation Node.js Client API Reference][client-docs]
 * [Cloud Media Translation Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-mediatranslation](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-mediatranslation)
+* [github.com/googleapis/nodejs-media-translation](googleapis/nodejs-media-translation)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -54,6 +54,83 @@ npm install @google-cloud/media-translation
 ```
 
 
+### Using the client library
+
+```javascript
+const fs = require('fs');
+
+// Imports the CLoud Media Translation client library
+const {
+  SpeechTranslationServiceClient,
+} = require('@google-cloud/media-translation');
+
+// Creates a client
+const client = new SpeechTranslationServiceClient();
+
+async function quickstart() {
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const filename = 'Local path to audio file, e.g. /path/to/audio.raw';
+  // const encoding = 'Encoding of the audio file, e.g. LINEAR16';
+  // const sourceLanguage = 'BCP-47 source language code, e.g. en-US';
+  // const targetLanguage = 'BCP-47 target language code, e.g. es-ES';
+
+  const config = {
+    audioConfig: {
+      audioEncoding: encoding,
+      sourceLanguageCode: sourceLanguage,
+      targetLanguageCode: targetLanguage,
+    },
+  };
+
+  // First request needs to have only a streaming config, no data.
+  const initialRequest = {
+    streamingConfig: config,
+    audioContent: null,
+  };
+
+  const readStream = fs.createReadStream(filename, {
+    highWaterMark: 4096,
+    encoding: 'base64',
+  });
+
+  const chunks = [];
+  readStream
+    .on('data', chunk => {
+      const request = {
+        streamingConfig: config,
+        audioContent: chunk.toString(),
+      };
+      chunks.push(request);
+    })
+    .on('close', () => {
+      // Config-only request should be first in stream of requests
+      stream.write(initialRequest);
+      for (let i = 0; i < chunks.length; i++) {
+        stream.write(chunks[i]);
+      }
+      stream.end();
+    });
+
+  const stream = client.streamingTranslateSpeech().on('data', response => {
+    const {result} = response;
+    if (result.textTranslationResult.isFinal) {
+      console.log(
+        `\nFinal translation: ${result.textTranslationResult.translation}`
+      );
+      console.log(`Final recognition result: ${result.recognitionResult}`);
+    } else {
+      console.log(
+        `\nPartial translation: ${result.textTranslationResult.translation}`
+      );
+      console.log(`Partial recognition result: ${result.recognitionResult}`);
+    }
+  });
+
+
+```
+
 
 
 ## Samples
@@ -64,6 +141,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | --------------------------- | --------------------------------- | ------ |
 | Speech_translation_service.streaming_translate_speech | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-mediatranslation/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-mediatranslation/samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-mediatranslation/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-mediatranslation/samples/quickstart.js,samples/README.md) |
+| Quickstart.test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-mediatranslation/samples/test/quickstart.test.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-mediatranslation/samples/test/quickstart.test.js,samples/README.md) |
 
 
 
