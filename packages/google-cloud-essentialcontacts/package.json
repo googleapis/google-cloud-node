@@ -2,7 +2,11 @@
   "name": "@google-cloud/essential-contacts",
   "version": "2.0.2",
   "description": "Essential contacts client for Node.js",
-  "repository": "googleapis/nodejs-essential-contacts",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-essentialcontacts",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
@@ -28,14 +32,14 @@
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
-    "samples-test": "cd samples/ && npm link ../ && npm test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "prelint": "cd samples; npm link ../; npm i",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test"
   },
   "dependencies": {
@@ -62,5 +66,6 @@
   },
   "engines": {
     "node": ">=12.0.0"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-essentialcontacts"
 }
