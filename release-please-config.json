@@ -16,6 +16,7 @@
     "packages/google-cloud-certificatemanager": {},
     "packages/google-cloud-contentwarehouse": {},
     "packages/google-cloud-dataplex": {},
+    "packages/google-cloud-dataproc": {},
     "packages/google-cloud-deploy": {},
     "packages/google-cloud-discoveryengine": {},
     "packages/google-cloud-gkeconnect-gateway": {},
