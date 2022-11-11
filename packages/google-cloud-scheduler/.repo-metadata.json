@@ -11,7 +11,7 @@
   "distribution_name": "@google-cloud/scheduler",
   "name_pretty": "Google Cloud Scheduler",
   "api_id": "cloudscheduler.googleapis.com",
-  "repo": "googleapis/nodejs-scheduler",
+  "repo": "googleapis/google-cloud-node",
   "api_shortname": "cloudscheduler",
   "library_type": "GAPIC_AUTO"
 }
