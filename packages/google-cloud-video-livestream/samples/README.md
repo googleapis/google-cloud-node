@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Live Stream API: Node.js Samples](https://github.com/googleapis/nodejs-video-live-stream)
+# [Live Stream API: Node.js Samples](https://github.com/googleapis/google-cloud-node)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
@@ -12,29 +12,29 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Create Channel](#create-channel)
-  * [Create Channel Event](#create-channel-event)
-  * [Create Channel With Backup Input](#create-channel-with-backup-input)
-  * [Create Input](#create-input)
-  * [Delete Channel](#delete-channel)
-  * [Delete Channel Event](#delete-channel-event)
-  * [Delete Input](#delete-input)
-  * [Get Channel](#get-channel)
-  * [Get Channel Event](#get-channel-event)
-  * [Get Input](#get-input)
-  * [List Channel Events](#list-channel-events)
-  * [List Channels](#list-channels)
-  * [List Inputs](#list-inputs)
+  * [Livestream_service.create_channel](#livestream_service.create_channel)
+  * [Livestream_service.create_event](#livestream_service.create_event)
+  * [Livestream_service.create_input](#livestream_service.create_input)
+  * [Livestream_service.delete_channel](#livestream_service.delete_channel)
+  * [Livestream_service.delete_event](#livestream_service.delete_event)
+  * [Livestream_service.delete_input](#livestream_service.delete_input)
+  * [Livestream_service.get_channel](#livestream_service.get_channel)
+  * [Livestream_service.get_event](#livestream_service.get_event)
+  * [Livestream_service.get_input](#livestream_service.get_input)
+  * [Livestream_service.list_channels](#livestream_service.list_channels)
+  * [Livestream_service.list_events](#livestream_service.list_events)
+  * [Livestream_service.list_inputs](#livestream_service.list_inputs)
+  * [Livestream_service.start_channel](#livestream_service.start_channel)
+  * [Livestream_service.stop_channel](#livestream_service.stop_channel)
+  * [Livestream_service.update_channel](#livestream_service.update_channel)
+  * [Livestream_service.update_input](#livestream_service.update_input)
   * [Quickstart](#quickstart)
-  * [Start Channel](#start-channel)
-  * [Stop Channel](#stop-channel)
-  * [Update Channel](#update-channel)
-  * [Update Input](#update-input)
+  * [Quickstart](#quickstart)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/nodejs-video-live-stream#using-the-client-library).
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -46,16 +46,16 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Create Channel
+### Livestream_service.create_channel
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/createChannel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.create_channel.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/createChannel.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.create_channel.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/createChannel.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.create_channel.js`
 
 
 -----
@@ -63,16 +63,16 @@ __Usage:__
 
 
 
-### Create Channel Event
+### Livestream_service.create_event
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/createChannelEvent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.create_event.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/createChannelEvent.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.create_event.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/createChannelEvent.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.create_event.js`
 
 
 -----
@@ -80,16 +80,16 @@ __Usage:__
 
 
 
-### Create Channel With Backup Input
+### Livestream_service.create_input
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/createChannelWithBackupInput.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.create_input.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/createChannelWithBackupInput.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.create_input.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/createChannelWithBackupInput.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.create_input.js`
 
 
 -----
@@ -97,16 +97,16 @@ __Usage:__
 
 
 
-### Create Input
+### Livestream_service.delete_channel
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/createInput.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.delete_channel.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/createInput.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.delete_channel.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/createInput.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.delete_channel.js`
 
 
 -----
@@ -114,16 +114,16 @@ __Usage:__
 
 
 
-### Delete Channel
+### Livestream_service.delete_event
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/deleteChannel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.delete_event.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/deleteChannel.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.delete_event.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/deleteChannel.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.delete_event.js`
 
 
 -----
@@ -131,16 +131,16 @@ __Usage:__
 
 
 
-### Delete Channel Event
+### Livestream_service.delete_input
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/deleteChannelEvent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.delete_input.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/deleteChannelEvent.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.delete_input.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/deleteChannelEvent.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.delete_input.js`
 
 
 -----
@@ -148,16 +148,16 @@ __Usage:__
 
 
 
-### Delete Input
+### Livestream_service.get_channel
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/deleteInput.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.get_channel.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/deleteInput.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.get_channel.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/deleteInput.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.get_channel.js`
 
 
 -----
@@ -165,16 +165,16 @@ __Usage:__
 
 
 
-### Get Channel
+### Livestream_service.get_event
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/getChannel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.get_event.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/getChannel.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.get_event.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/getChannel.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.get_event.js`
 
 
 -----
@@ -182,16 +182,16 @@ __Usage:__
 
 
 
-### Get Channel Event
+### Livestream_service.get_input
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/getChannelEvent.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.get_input.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/getChannelEvent.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.get_input.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/getChannelEvent.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.get_input.js`
 
 
 -----
@@ -199,16 +199,16 @@ __Usage:__
 
 
 
-### Get Input
+### Livestream_service.list_channels
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/getInput.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.list_channels.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/getInput.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.list_channels.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/getInput.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.list_channels.js`
 
 
 -----
@@ -216,16 +216,16 @@ __Usage:__
 
 
 
-### List Channel Events
+### Livestream_service.list_events
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/listChannelEvents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.list_events.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/listChannelEvents.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.list_events.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/listChannelEvents.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.list_events.js`
 
 
 -----
@@ -233,16 +233,16 @@ __Usage:__
 
 
 
-### List Channels
+### Livestream_service.list_inputs
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/listChannels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.list_inputs.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/listChannels.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.list_inputs.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/listChannels.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.list_inputs.js`
 
 
 -----
@@ -250,16 +250,67 @@ __Usage:__
 
 
 
-### List Inputs
+### Livestream_service.start_channel
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/listInputs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.start_channel.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/listInputs.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.start_channel.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/listInputs.js`
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.start_channel.js`
+
+
+-----
+
+
+
+
+### Livestream_service.stop_channel
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.stop_channel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.stop_channel.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.stop_channel.js`
+
+
+-----
+
+
+
+
+### Livestream_service.update_channel
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.update_channel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.update_channel.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.update_channel.js`
+
+
+-----
+
+
+
+
+### Livestream_service.update_input
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/livestream_service.update_input.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/livestream_service.update_input.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v1/livestream_service.update_input.js`
 
 
 -----
@@ -269,14 +320,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node /workspace/google-cloud-node/samples/quickstart.js`
 
 
 -----
@@ -284,67 +335,16 @@ __Usage:__
 
 
 
-### Start Channel
+### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/startChannel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/startChannel.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/startChannel.js`
-
-
------
-
-
-
-
-### Stop Channel
-
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/stopChannel.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/stopChannel.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/stopChannel.js`
-
-
------
-
-
-
-
-### Update Channel
-
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/updateChannel.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/updateChannel.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/updateChannel.js`
-
-
------
-
-
-
-
-### Update Input
-
-View the [source code](https://github.com/googleapis/nodejs-video-live-stream/blob/main/samples/updateInput.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/updateInput.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/updateInput.js`
+`node /workspace/google-cloud-node/samples/test/quickstart.js`
 
 
 
@@ -352,5 +352,5 @@ __Usage:__
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-live-stream&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
 [product-docs]: https://cloud.google.com/livestream/
