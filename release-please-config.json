@@ -32,6 +32,7 @@
     "packages/google-cloud-functions": {},
     "packages/google-cloud-documentai": {},
     "packages/google-cloud-gkeconnect-gateway": {},
+    "packages/google-cloud-gkehub": {},
     "packages/google-cloud-gkemulticloud": {},
     "packages/google-cloud-iot": {},
     "packages/google-cloud-language": {},
