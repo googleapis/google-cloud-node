@@ -15,6 +15,7 @@
     "packages/google-cloud-bigquery-datapolicies": {},
     "packages/google-cloud-bigquery-datatransfer": {},
     "packages/google-cloud-bigquery-reservation": {},
+    "packages/google-cloud-binaryauthorization": {},
     "packages/google-cloud-billing": {},
     "packages/google-cloud-billing-budgets": {},
     "packages/google-cloud-certificatemanager": {},
