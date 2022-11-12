@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,41 +15,49 @@
 'use strict';
 
 // sample-metadata:
-//   title: Asset History Quickstart
-//   description: Batch get history of assets.
-//   usage: node getBatchAssetHistory "//storage.googleapis.com/<BUCKET_NAME>"
+//   title: List Assets
+//   description: List assets under the current project.
+//   usage: node listAssets <ASSET_TYPES> <content_type>
+//   example: node listAssets "storage.googleapis.com/Bucket,bigquery.googleapis.com/Table" 'RESOURCE'
 
-async function main(assetNames) {
-  // [START asset_quickstart]
+async function main(assetTypes, contentType, projectId) {
+  // [START asset_quickstart_list_assets]
+  /**
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  // const assetTypes = 'storage.googleapis.com/Bucket,bigquery.googleapis.com/Table';
+  // const contentType = 'RESOURCE';
+
   const util = require('util');
-  const {AssetServiceClient} = require('@google-cloud/asset');
+  const {v1} = require('@google-cloud/asset');
+  const client = new v1.AssetServiceClient();
 
-  const client = new AssetServiceClient();
+  const projectResource = `projects/${projectId}`;
+  // TODO(developer): Choose types of assets to list, such as 'storage.googleapis.com/Bucket':
+  //   const assetTypes = 'storage.googleapis.com/Bucket,bigquery.googleapis.com/Table';
+  // Or simply use empty string to list all types of assets:
+  //   const assetTypes = '';
+  const assetTypesList = assetTypes ? assetTypes.split(',') : [];
 
-  async function quickstart() {
-    const projectId = await client.getProjectId();
-    const projectResource = `projects/${projectId}`;
-    // TODO(developer): Choose asset names, such as //storage.googleapis.com/[YOUR_BUCKET_NAME].
-    // const assetNames = ['ASSET_NAME1', 'ASSET_NAME2', ...];
-
+  async function listAssets() {
     const request = {
       parent: projectResource,
-      assetNames: assetNames.split(','),
-      contentType: 'RESOURCE',
-      readTimeWindow: {
-        startTime: {
-          seconds: Math.floor(new Date().getTime() / 1000),
-        },
-      },
+      assetTypes: assetTypesList,
+      contentType: contentType,
+      // (Optional) Add readTime parameter to list assets at the given time instead of current time:
+      //   readTime: { seconds: 1593988758 },
     };
 
-    // Handle the operation using the promise pattern.
-    const result = await client.batchGetAssetsHistory(request);
-    // Do things with with the response.
+    // Call cloud.assets.v1.ListAssets API.
+    const result = await client.listAssets(request);
+    // Handle the response.
     console.log(util.inspect(result, {depth: null}));
-    // [END asset_quickstart]
   }
-  await quickstart();
+  listAssets();
+  // [END asset_quickstart_list_assets]
 }
 
-main(...process.argv.slice(2));
+main(...process.argv.slice(2)).catch(err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
