@@ -21,6 +21,7 @@
   "packages/google-cloud-certificatemanager": "0.6.2",
   "packages/google-cloud-channel": "2.2.0",
   "packages/google-cloud-contentwarehouse": "0.1.2",
+  "packages/google-cloud-datafusion": "2.1.2",
   "packages/google-cloud-datalabeling": "3.1.1",
   "packages/google-cloud-dataplex": "2.2.2",
   "packages/google-cloud-dataproc": "4.1.1",

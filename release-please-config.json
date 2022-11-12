@@ -22,6 +22,7 @@
     "packages/google-cloud-certificatemanager": {},
     "packages/google-cloud-channel": {},
     "packages/google-cloud-contentwarehouse": {},
+    "packages/google-cloud-datafusion": {},
     "packages/google-cloud-datalabeling": {},
     "packages/google-cloud-dataplex": {},
     "packages/google-cloud-dataproc": {},
