@@ -1,0 +1,11 @@
+[
+  "../../protos/google/cloud/notebooks/v1/environment.proto",
+  "../../protos/google/cloud/notebooks/v1/event.proto",
+  "../../protos/google/cloud/notebooks/v1/execution.proto",
+  "../../protos/google/cloud/notebooks/v1/instance.proto",
+  "../../protos/google/cloud/notebooks/v1/instance_config.proto",
+  "../../protos/google/cloud/notebooks/v1/managed_service.proto",
+  "../../protos/google/cloud/notebooks/v1/runtime.proto",
+  "../../protos/google/cloud/notebooks/v1/schedule.proto",
+  "../../protos/google/cloud/notebooks/v1/service.proto"
+]
