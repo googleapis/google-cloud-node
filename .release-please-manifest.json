@@ -60,6 +60,7 @@
   "packages/google-cloud-memcache": "2.1.4",
   "packages/google-cloud-metastore": "3.1.2",
   "packages/google-cloud-monitoring": "3.0.3",
+  "packages/google-cloud-orgpolicy": "2.0.3",
   "packages/google-cloud-optimization": "2.1.1",
   "packages/google-cloud-networksecurity": "1.0.2",
   "packages/google-cloud-networkmanagement": "2.3.1",
