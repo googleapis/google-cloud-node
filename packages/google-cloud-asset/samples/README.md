@@ -42,7 +42,7 @@
   * [Asset_service.analyze_iam_policy](#asset_service.analyze_iam_policy)
   * [Asset_service.export_iam_policy_analysis](#asset_service.export_iam_policy_analysis)
   * [Asset_service.list_assets](#asset_service.list_assets)
-  * [Asset History Quickstart](#asset-history-quickstart)
+  * [List Assets](#list-assets)
   * [Sample.test](#sample.test)
 
 ## Before you begin
@@ -570,9 +570,9 @@ __Usage:__
 
 
 
-### Asset History Quickstart
+### List Assets
 
-Batch get history of assets.
+List assets under the current project.
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/quickstart.js).
 
@@ -581,7 +581,7 @@ View the [source code](https://github.com/googleapis/google-cloud-node/blob/main
 __Usage:__
 
 
-`node getBatchAssetHistory "storage.googleapis.com/<BUCKET_NAME>"`
+`node listAssets <ASSET_TYPES> <content_type>`
 
 
 -----

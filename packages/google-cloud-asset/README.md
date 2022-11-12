@@ -57,32 +57,38 @@ npm install @google-cloud/asset
 ### Using the client library
 
 ```javascript
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+// const assetTypes = 'storage.googleapis.com/Bucket,bigquery.googleapis.com/Table';
+// const contentType = 'RESOURCE';
+
 const util = require('util');
-const {AssetServiceClient} = require('@google-cloud/asset');
+const {v1} = require('@google-cloud/asset');
+const client = new v1.AssetServiceClient();
 
-const client = new AssetServiceClient();
+const projectResource = `projects/${projectId}`;
+// TODO(developer): Choose types of assets to list, such as 'storage.googleapis.com/Bucket':
+//   const assetTypes = 'storage.googleapis.com/Bucket,bigquery.googleapis.com/Table';
+// Or simply use empty string to list all types of assets:
+//   const assetTypes = '';
+const assetTypesList = assetTypes ? assetTypes.split(',') : [];
 
-async function quickstart() {
-  const projectId = await client.getProjectId();
-  const projectResource = `projects/${projectId}`;
-  // TODO(developer): Choose asset names, such as //storage.googleapis.com/[YOUR_BUCKET_NAME].
-  // const assetNames = ['ASSET_NAME1', 'ASSET_NAME2', ...];
-
+async function listAssets() {
   const request = {
     parent: projectResource,
-    assetNames: assetNames.split(','),
-    contentType: 'RESOURCE',
-    readTimeWindow: {
-      startTime: {
-        seconds: Math.floor(new Date().getTime() / 1000),
-      },
-    },
+    assetTypes: assetTypesList,
+    contentType: contentType,
+    // (Optional) Add readTime parameter to list assets at the given time instead of current time:
+    //   readTime: { seconds: 1593988758 },
   };
 
-  // Handle the operation using the promise pattern.
-  const result = await client.batchGetAssetsHistory(request);
-  // Do things with with the response.
+  // Call cloud.assets.v1.ListAssets API.
+  const result = await client.listAssets(request);
+  // Handle the response.
   console.log(util.inspect(result, {depth: null}));
+}
+listAssets();
 
 ```
 
@@ -124,7 +130,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Asset_service.analyze_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p4beta1/asset_service.analyze_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-asset/samples/generated/v1p4beta1/asset_service.analyze_iam_policy.js,samples/README.md) |
 | Asset_service.export_iam_policy_analysis | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p4beta1/asset_service.export_iam_policy_analysis.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-asset/samples/generated/v1p4beta1/asset_service.export_iam_policy_analysis.js,samples/README.md) |
 | Asset_service.list_assets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p5beta1/asset_service.list_assets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-asset/samples/generated/v1p5beta1/asset_service.list_assets.js,samples/README.md) |
-| Asset History Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-asset/samples/quickstart.js,samples/README.md) |
+| List Assets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-asset/samples/quickstart.js,samples/README.md) |
 | Sample.test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/test/sample.test.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-asset/samples/test/sample.test.js,samples/README.md) |
 
 
