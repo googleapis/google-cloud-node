@@ -1,0 +1,16 @@
+{
+  "language": "nodejs",
+  "requires_billing": true,
+  "product_documentation": "https://cloud.google.com/billing/docs",
+  "repo": "googleapis/google-cloud-node",
+  "default_version": "v1",
+  "name_pretty": "Cloud Billing",
+  "release_level": "stable",
+  "distribution_name": "@google-cloud/billing",
+  "name": "billing",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/billing/latest",
+  "api_id": "cloudbilling.googleapis.com",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559770",
+  "api_shortname": "cloudbilling",
+  "library_type": "GAPIC_AUTO"
+}
