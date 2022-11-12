@@ -52,6 +52,7 @@
     "packages/google-cloud-translate": {},
     "packages/google-cloud-video-transcoder": {},
     "packages/google-cloud-videointelligence": {},
+    "packages/google-cloud-workflows-executions": {},
     "packages/google-cloud-webrisk": {},
     "packages/google-container": {},
     "packages/google-devtools-artifactregistry": {},
