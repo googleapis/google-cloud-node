@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/scheduler/v1/cloudscheduler.proto",
+  "../../protos/google/cloud/scheduler/v1/job.proto",
+  "../../protos/google/cloud/scheduler/v1/target.proto"
+]
