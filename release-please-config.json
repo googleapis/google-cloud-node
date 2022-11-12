@@ -89,6 +89,7 @@
     "packages/google-cloud-video-livestream": {},
     "packages/google-cloud-video-transcoder": {},
     "packages/google-cloud-videointelligence": {},
+    "packages/google-cloud-vpcaccess": {},
     "packages/google-cloud-vmmigration": {},
     "packages/google-cloud-websecurityscanner": {},
     "packages/google-cloud-workflows-executions": {},
