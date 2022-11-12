@@ -2,6 +2,7 @@
   "initial-version": "0.1.0",
   "packages": {
     "packages/google-api-apikeys": {},
+    "packages/google-cloud-assuredworkloads": {},
     "packages/google-cloud-batch": {},
     "packages/google-cloud-beyondcorp-appconnections": {},
     "packages/google-cloud-beyondcorp-appconnectors": {},
@@ -31,6 +32,7 @@
     "packages/google-cloud-language": {},
     "packages/google-cloud-memcache": {},
     "packages/google-cloud-monitoring": {},
+    "packages/google-cloud-notebooks": {},
     "packages/google-cloud-osconfig": {},
     "packages/google-cloud-oslogin": {},
     "packages/google-cloud-phishingprotection": {},
