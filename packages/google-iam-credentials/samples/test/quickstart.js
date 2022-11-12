@@ -21,12 +21,6 @@ const path = require('path');
 const cp = require('child_process');
 const {describe, it} = require('mocha');
 const {assert} = require('chai');
-const fs = require('fs');
-const credentials = fs.readFileSync(
-  process.env.GOOGLE_APPLICATION_CREDENTIALS,
-  'utf8'
-);
-const serviceAccount = JSON.parse(credentials).client_email;
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -34,10 +28,17 @@ const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
   it('should run quickstart', async () => {
-    const stdout = execSync(
-      `node ./quickstart.js ${serviceAccount} https://www.googleapis.com/auth/iam`,
-      {cwd}
-    );
-    assert.match(stdout, /accessToken:/);
+    // We no longer use service account credentials, so we must assert an error
+    try {
+      execSync(
+        'node ./quickstart.js fake_account@long-door-651.iam.gserviceaccount.com https://www.googleapis.com/auth/iam',
+        {cwd}
+      );
+    } catch (err) {
+      assert.match(
+        err,
+        /Gaia id not found for email fake_account@long-door-651.iam.gserviceaccount.com/
+      );
+    }
   });
 });
