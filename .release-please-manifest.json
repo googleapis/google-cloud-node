@@ -22,6 +22,7 @@
   "packages/google-cloud-deploy": "2.2.2",
   "packages/google-cloud-dialogflow": "5.3.0",
   "packages/google-cloud-discoveryengine": "0.2.0",
+  "packages/google-cloud-documentai": "6.1.0",
   "packages/google-cloud-gkeconnect-gateway": "2.0.5",
   "packages/google-cloud-gkemulticloud": "0.1.4",
   "packages/google-cloud-iot": "3.1.2",

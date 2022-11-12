@@ -23,6 +23,7 @@
     "packages/google-cloud-deploy": {},
     "packages/google-cloud-dialogflow": {},
     "packages/google-cloud-discoveryengine": {},
+    "packages/google-cloud-documentai": {},
     "packages/google-cloud-gkeconnect-gateway": {},
     "packages/google-cloud-gkemulticloud": {},
     "packages/google-cloud-iot": {},
