@@ -17,17 +17,20 @@
 const path = require('path');
 const assert = require('assert');
 const cp = require('child_process');
-const {describe, it} = require('mocha');
-
+const {describe, it, before} = require('mocha');
+const {TranscoderServiceClient} = require('@google-cloud/video-transcoder').v1;
+const client = new TranscoderServiceClient();
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-const project = process.env.GCLOUD_PROJECT;
-
 describe('Quickstart', () => {
+  let projectId;
+  before(async () => {
+    projectId = await client.getProjectId();
+  });
   it('should run quickstart', async () => {
-    const output = execSync(`node ./quickstart.js ${project} us-west1`, {
+    const output = execSync(`node ./quickstart.js ${projectId} us-west1`, {
       cwd,
     });
     assert(output.match(/jobs:/));
