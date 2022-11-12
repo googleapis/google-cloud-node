@@ -2,6 +2,7 @@
   "initial-version": "0.1.0",
   "packages": {
     "packages/google-api-apikeys": {},
+    "packages/google-cloud-asset": {},
     "packages/google-cloud-assuredworkloads": {},
     "packages/google-cloud-batch": {},
     "packages/google-cloud-beyondcorp-appconnections": {},
@@ -24,6 +25,7 @@
     "packages/google-cloud-deploy": {},
     "packages/google-cloud-dialogflow": {},
     "packages/google-cloud-discoveryengine": {},
+    "packages/google-cloud-functions": {},
     "packages/google-cloud-documentai": {},
     "packages/google-cloud-gkeconnect-gateway": {},
     "packages/google-cloud-gkemulticloud": {},
