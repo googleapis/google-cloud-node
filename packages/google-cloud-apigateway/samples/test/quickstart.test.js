@@ -17,14 +17,18 @@
 const path = require('path');
 const assert = require('assert');
 const {execSync} = require('child_process');
-const {describe, it} = require('mocha');
+const {describe, it, before} = require('mocha');
 const cwd = path.join(__dirname, '..');
-
-const project = process.env.GCLOUD_PROJECT;
+const {ApiGatewayServiceClient} = require('@google-cloud/api-gateway');
+const client = new ApiGatewayServiceClient();
 
 describe('Quickstart', () => {
+  let projectId;
+  before(async () => {
+    projectId = await client.getProjectId();
+  });
   it('should run quickstart', async () => {
-    const stdout = execSync(`node ./quickstart.js ${project}`, {
+    const stdout = execSync(`node ./quickstart.js ${projectId}`, {
       cwd,
     }).toString('utf8');
     assert(stdout.match(/name: projects.*/));
