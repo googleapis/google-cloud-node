@@ -47,6 +47,7 @@
     "packages/google-cloud-security-publicca": {},
     "packages/google-cloud-servicedirectory": {},
     "packages/google-cloud-shell": {},
+    "packages/google-cloud-talent": {},
     "packages/google-cloud-texttospeech": {},
     "packages/google-cloud-translate": {},
     "packages/google-cloud-videointelligence": {},
