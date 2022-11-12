@@ -37,6 +37,7 @@
   "packages/google-cloud-dialogflow-cx": "3.1.2",
   "packages/google-cloud-dialogflow": "5.3.0",
   "packages/google-cloud-discoveryengine": "0.2.0",
+  "packages/google-cloud-essentialcontacts": "2.0.2",
   "packages/google-cloud-eventarc": "2.2.0",
   "packages/google-cloud-domains": "2.1.2",
   "packages/google-cloud-gaming": "3.1.3",
