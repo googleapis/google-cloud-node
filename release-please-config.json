@@ -28,6 +28,7 @@
     "packages/google-cloud-deploy": {},
     "packages/google-cloud-dialogflow": {},
     "packages/google-cloud-discoveryengine": {},
+    "packages/google-cloud-domains": {},
     "packages/google-cloud-gaming": {},
     "packages/google-cloud-functions": {},
     "packages/google-cloud-documentai": {},
