@@ -1,0 +1,16 @@
+{
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/iam-credentials/latest",
+  "api_id": "iamcredentials.googleapis.com",
+  "distribution_name": "@google-cloud/iam-credentials",
+  "release_level": "stable",
+  "default_version": "v1",
+  "language": "nodejs",
+  "name_pretty": "IAM Service Account Credentials API",
+  "repo": "googleapis/google-cloud-node",
+  "product_documentation": "",
+  "requires_billing": true,
+  "name": "iamcredentials",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "api_shortname": "iamcredentials",
+  "library_type": "GAPIC_AUTO"
+}
