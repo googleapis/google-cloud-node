@@ -1,0 +1,17 @@
+{
+  "name": "filestore",
+  "api_shortname": "file",
+  "name_pretty": "Filestore",
+  "product_documentation": "https://cloud.google.com/filestore/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/filestore/latest",
+  "issue_tracker": "https://github.com/googleapis/nodejs-filestore/issues",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-filestore",
+  "distribution_name": "@google-cloud/filestore",
+  "api_id": "file.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "api_shortname": "filestore",
+  "library_type": "GAPIC_AUTO"
+}
