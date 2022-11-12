@@ -61,6 +61,7 @@
   "packages/google-cloud-oslogin": "4.0.4",
   "packages/google-cloud-phishingprotection": "3.0.6",
   "packages/google-cloud-policytroubleshooter": "2.0.6",
+  "packages/google-cloud-privatecatalog": "2.0.4",
   "packages/google-cloud-recommender": "5.0.4",
   "packages/google-cloud-redis": "3.1.5",
   "packages/google-cloud-resourcemanager": "4.1.3",
