@@ -24,6 +24,7 @@
     "packages/google-cloud-billing": {},
     "packages/google-cloud-billing-budgets": {},
     "packages/google-cloud-certificatemanager": {},
+    "packages/google-cloud-clouddms": {},
     "packages/google-cloud-contactcenterinsights": {},
     "packages/google-cloud-channel": {},
     "packages/google-cloud-contentwarehouse": {},
