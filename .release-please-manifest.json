@@ -66,6 +66,7 @@
   "packages/google-cloud-talent": "5.0.1",
   "packages/google-cloud-texttospeech": "4.0.4",
   "packages/google-cloud-translate": "7.0.4",
+  "packages/google-cloud-video-livestream": "0.3.4",
   "packages/google-cloud-video-transcoder": "2.2.3",
   "packages/google-cloud-videointelligence": "4.1.1",
   "packages/google-cloud-websecurityscanner": "2.1.3",
