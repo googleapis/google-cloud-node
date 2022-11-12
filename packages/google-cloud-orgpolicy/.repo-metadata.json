@@ -2,7 +2,7 @@
   "language": "nodejs",
   "requires_billing": true,
   "product_documentation": "https://cloud.google.com/resource-manager/docs/organization-policy/overview",
-  "repo": "googleapis/nodejs-org-policy",
+  "repo": "googleapis/google-cloud-node",
   "default_version": "v2",
   "name_pretty": "Organization Policy",
   "release_level": "stable",
@@ -10,7 +10,7 @@
   "name": "org-policy",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/org-policy/latest",
   "api_id": "orgpolicy.googleapis.com",
-  "issue_tracker": "https://github.com/googleapis/nodejs-org-policy/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "api_shortname": "orgpolicy",
   "library_type": "GAPIC_AUTO"
 }

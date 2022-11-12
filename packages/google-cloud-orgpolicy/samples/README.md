@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Organization Policy: Node.js Samples](https://github.com/googleapis/nodejs-org-policy)
+# [Organization Policy: Node.js Samples](https://github.com/googleapis/google-cloud-node)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
@@ -12,12 +12,20 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Org_policy.create_policy](#org_policy.create_policy)
+  * [Org_policy.delete_policy](#org_policy.delete_policy)
+  * [Org_policy.get_effective_policy](#org_policy.get_effective_policy)
+  * [Org_policy.get_policy](#org_policy.get_policy)
+  * [Org_policy.list_constraints](#org_policy.list_constraints)
+  * [Org_policy.list_policies](#org_policy.list_policies)
+  * [Org_policy.update_policy](#org_policy.update_policy)
+  * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/nodejs-org-policy#using-the-client-library).
+[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
 
 `cd samples`
 
@@ -29,16 +37,152 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Quickstart
+### Org_policy.create_policy
 
-View the [source code](https://github.com/googleapis/nodejs-org-policy/blob/main/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v2/org_policy.create_policy.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-org-policy&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v2/org_policy.create_policy.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node /workspace/google-cloud-node/samples/generated/v2/org_policy.create_policy.js`
+
+
+-----
+
+
+
+
+### Org_policy.delete_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v2/org_policy.delete_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v2/org_policy.delete_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v2/org_policy.delete_policy.js`
+
+
+-----
+
+
+
+
+### Org_policy.get_effective_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v2/org_policy.get_effective_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v2/org_policy.get_effective_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v2/org_policy.get_effective_policy.js`
+
+
+-----
+
+
+
+
+### Org_policy.get_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v2/org_policy.get_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v2/org_policy.get_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v2/org_policy.get_policy.js`
+
+
+-----
+
+
+
+
+### Org_policy.list_constraints
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v2/org_policy.list_constraints.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v2/org_policy.list_constraints.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v2/org_policy.list_constraints.js`
+
+
+-----
+
+
+
+
+### Org_policy.list_policies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v2/org_policy.list_policies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v2/org_policy.list_policies.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v2/org_policy.list_policies.js`
+
+
+-----
+
+
+
+
+### Org_policy.update_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v2/org_policy.update_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v2/org_policy.update_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/generated/v2/org_policy.update_policy.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/quickstart.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node /workspace/google-cloud-node/samples/test/quickstart.js`
 
 
 
@@ -46,5 +190,5 @@ __Usage:__
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-org-policy&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
 [product-docs]: https://cloud.google.com/resource-manager/docs/organization-policy/overview
