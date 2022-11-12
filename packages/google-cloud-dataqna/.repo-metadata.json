@@ -1,0 +1,16 @@
+{
+  "language": "nodejs",
+  "requires_billing": true,
+  "product_documentation": "https://cloud.google.com/bigquery/docs",
+  "repo": "googleapis/google-cloud-node",
+  "default_version": "v1alpha",
+  "name_pretty": "Data QnA",
+  "release_level": "preview",
+  "distribution_name": "@google-cloud/data-qna",
+  "name": "dataqna",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/data-qna/latest",
+  "api_id": "dataqna.googleapis.com",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "api_shortname": "dataqna",
+  "library_type": "GAPIC_AUTO"
+}
