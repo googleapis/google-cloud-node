@@ -1,0 +1,4 @@
+---
+rules:
+  no-console: off
+  node/no-unsupported-features/node-builtins: off
