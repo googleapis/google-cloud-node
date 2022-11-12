@@ -50,6 +50,7 @@
     "packages/google-cloud-talent": {},
     "packages/google-cloud-texttospeech": {},
     "packages/google-cloud-translate": {},
+    "packages/google-cloud-video-transcoder": {},
     "packages/google-cloud-videointelligence": {},
     "packages/google-cloud-workflows-executions": {},
     "packages/google-cloud-webrisk": {},
