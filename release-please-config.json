@@ -2,6 +2,7 @@
   "initial-version": "0.1.0",
   "packages": {
     "packages/google-api-apikeys": {},
+    "packages/google-api-serviceusage": {},
     "packages/google-api-servicecontrol": {},
     "packages/google-appengine": {},
     "packages/google-cloud-accessapproval": {},
