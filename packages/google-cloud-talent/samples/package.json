@@ -1,0 +1,30 @@
+{
+  "name": "@google-cloud/talent-samples",
+  "description": "Samples for the Cloud Talent Solution client library for Node.js",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "repository": "googleapis/nodejs-talent",
+  "private": true,
+  "files": [
+    "*.js"
+  ],
+  "scripts": {
+    "test": "mocha --timeout 600000",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "dependencies": {
+    "@google-cloud/talent": "^5.0.1",
+    "uuid": "^9.0.0",
+    "yargs": "^16.0.3"
+  },
+  "devDependencies": {
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^18.0.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3"
+  }
+}
