@@ -74,6 +74,7 @@
     "packages/google-devtools-artifactregistry": {},
     "packages/google-devtools-cloudbuild": {},
     "packages/google-iam": {},
+    "packages/google-identity-accesscontextmanager": {},
     "packages/google-iam-credentials": {},
     "packages/google-maps-addressvalidation": {},
     "packages/google-maps-routing": {},
