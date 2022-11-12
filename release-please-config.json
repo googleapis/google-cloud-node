@@ -34,6 +34,7 @@
     "packages/google-cloud-recommender": {},
     "packages/google-cloud-redis": {},
     "packages/google-cloud-resourcemanager": {},
+    "packages/google-cloud-secretmanager": {},
     "packages/google-cloud-scheduler": {},
     "packages/google-cloud-security-publicca": {},
     "packages/google-cloud-shell": {},
