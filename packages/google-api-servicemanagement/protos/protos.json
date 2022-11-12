@@ -1,0 +1,3502 @@
+{
+  "nested": {
+    "google": {
+      "nested": {
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+            "java_multiple_files": true,
+            "java_outer_classname": "UsageProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "servicemanagement": {
+              "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.ServiceManagement.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/api/servicemanagement/v1;servicemanagement",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "ServiceManagerProto",
+                    "java_package": "com.google.api.servicemanagement.v1",
+                    "objc_class_prefix": "GASM",
+                    "php_namespace": "Google\\Cloud\\ServiceManagement\\V1",
+                    "ruby_package": "Google::Cloud::ServiceManagement::V1"
+                  },
+                  "nested": {
+                    "ManagedService": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "producerProjectId": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "OperationMetadata": {
+                      "fields": {
+                        "resourceNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "steps": {
+                          "rule": "repeated",
+                          "type": "Step",
+                          "id": 2
+                        },
+                        "progressPercentage": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Step": {
+                          "fields": {
+                            "description": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "status": {
+                              "type": "Status",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "Status": {
+                          "values": {
+                            "STATUS_UNSPECIFIED": 0,
+                            "DONE": 1,
+                            "NOT_STARTED": 2,
+                            "IN_PROGRESS": 3,
+                            "FAILED": 4,
+                            "CANCELLED": 5
+                          }
+                        }
+                      }
+                    },
+                    "Diagnostic": {
+                      "fields": {
+                        "location": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "kind": {
+                          "type": "Kind",
+                          "id": 2
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Kind": {
+                          "values": {
+                            "WARNING": 0,
+                            "ERROR": 1
+                          }
+                        }
+                      }
+                    },
+                    "ConfigSource": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "files": {
+                          "rule": "repeated",
+                          "type": "ConfigFile",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ConfigFile": {
+                      "fields": {
+                        "filePath": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fileContents": {
+                          "type": "bytes",
+                          "id": 3
+                        },
+                        "fileType": {
+                          "type": "FileType",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "FileType": {
+                          "values": {
+                            "FILE_TYPE_UNSPECIFIED": 0,
+                            "SERVICE_CONFIG_YAML": 1,
+                            "OPEN_API_JSON": 2,
+                            "OPEN_API_YAML": 3,
+                            "FILE_DESCRIPTOR_SET_PROTO": 4,
+                            "PROTO_FILE": 6
+                          }
+                        }
+                      }
+                    },
+                    "ConfigRef": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ChangeReport": {
+                      "fields": {
+                        "configChanges": {
+                          "rule": "repeated",
+                          "type": "google.api.ConfigChange",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Rollout": {
+                      "oneofs": {
+                        "strategy": {
+                          "oneof": [
+                            "trafficPercentStrategy",
+                            "deleteServiceStrategy"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "rolloutId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "createdBy": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "status": {
+                          "type": "RolloutStatus",
+                          "id": 4
+                        },
+                        "trafficPercentStrategy": {
+                          "type": "TrafficPercentStrategy",
+                          "id": 5
+                        },
+                        "deleteServiceStrategy": {
+                          "type": "DeleteServiceStrategy",
+                          "id": 200
+                        },
+                        "serviceName": {
+                          "type": "string",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "TrafficPercentStrategy": {
+                          "fields": {
+                            "percentages": {
+                              "keyType": "string",
+                              "type": "double",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "DeleteServiceStrategy": {
+                          "fields": {}
+                        },
+                        "RolloutStatus": {
+                          "values": {
+                            "ROLLOUT_STATUS_UNSPECIFIED": 0,
+                            "IN_PROGRESS": 1,
+                            "SUCCESS": 2,
+                            "CANCELLED": 3,
+                            "FAILED": 4,
+                            "PENDING": 5,
+                            "FAILED_ROLLED_BACK": 6
+                          }
+                        }
+                      }
+                    },
+                    "ServiceManager": {
+                      "options": {
+                        "(google.api.default_host)": "servicemanagement.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/service.management,https://www.googleapis.com/auth/service.management.readonly"
+                      },
+                      "methods": {
+                        "ListServices": {
+                          "requestType": "ListServicesRequest",
+                          "responseType": "ListServicesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/services",
+                            "(google.api.method_signature)": "producer_project_id,consumer_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/services"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "producer_project_id,consumer_id"
+                            }
+                          ]
+                        },
+                        "GetService": {
+                          "requestType": "GetServiceRequest",
+                          "responseType": "ManagedService",
+                          "options": {
+                            "(google.api.http).get": "/v1/services/{service_name}",
+                            "(google.api.method_signature)": "service_name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/services/{service_name}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_name"
+                            }
+                          ]
+                        },
+                        "CreateService": {
+                          "requestType": "CreateServiceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/services",
+                            "(google.api.http).body": "service",
+                            "(google.api.method_signature)": "service",
+                            "(google.longrunning.operation_info).response_type": "google.api.servicemanagement.v1.ManagedService",
+                            "(google.longrunning.operation_info).metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/services",
+                                "body": "service"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.api.servicemanagement.v1.ManagedService",
+                                "metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteService": {
+                          "requestType": "DeleteServiceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/services/{service_name}",
+                            "(google.api.method_signature)": "service_name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/services/{service_name}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UndeleteService": {
+                          "requestType": "UndeleteServiceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/services/{service_name}:undelete",
+                            "(google.api.method_signature)": "service_name",
+                            "(google.longrunning.operation_info).response_type": "google.api.servicemanagement.v1.UndeleteServiceResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/services/{service_name}:undelete"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.api.servicemanagement.v1.UndeleteServiceResponse",
+                                "metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListServiceConfigs": {
+                          "requestType": "ListServiceConfigsRequest",
+                          "responseType": "ListServiceConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/services/{service_name}/configs",
+                            "(google.api.method_signature)": "service_name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/services/{service_name}/configs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_name"
+                            }
+                          ]
+                        },
+                        "GetServiceConfig": {
+                          "requestType": "GetServiceConfigRequest",
+                          "responseType": "google.api.Service",
+                          "options": {
+                            "(google.api.http).get": "/v1/services/{service_name}/configs/{config_id}",
+                            "(google.api.http).additional_bindings.get": "/v1/services/{service_name}/config",
+                            "(google.api.method_signature)": "service_name,config_id,view"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/services/{service_name}/configs/{config_id}",
+                                "additional_bindings": {
+                                  "get": "/v1/services/{service_name}/config"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_name,config_id,view"
+                            }
+                          ]
+                        },
+                        "CreateServiceConfig": {
+                          "requestType": "CreateServiceConfigRequest",
+                          "responseType": "google.api.Service",
+                          "options": {
+                            "(google.api.http).post": "/v1/services/{service_name}/configs",
+                            "(google.api.http).body": "service_config",
+                            "(google.api.method_signature)": "service_name,service_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/services/{service_name}/configs",
+                                "body": "service_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_name,service_config"
+                            }
+                          ]
+                        },
+                        "SubmitConfigSource": {
+                          "requestType": "SubmitConfigSourceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/services/{service_name}/configs:submit",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "service_name,config_source,validate_only",
+                            "(google.longrunning.operation_info).response_type": "google.api.servicemanagement.v1.SubmitConfigSourceResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/services/{service_name}/configs:submit",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_name,config_source,validate_only"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.api.servicemanagement.v1.SubmitConfigSourceResponse",
+                                "metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListServiceRollouts": {
+                          "requestType": "ListServiceRolloutsRequest",
+                          "responseType": "ListServiceRolloutsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/services/{service_name}/rollouts",
+                            "(google.api.method_signature)": "service_name,filter"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/services/{service_name}/rollouts"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_name,filter"
+                            }
+                          ]
+                        },
+                        "GetServiceRollout": {
+                          "requestType": "GetServiceRolloutRequest",
+                          "responseType": "Rollout",
+                          "options": {
+                            "(google.api.http).get": "/v1/services/{service_name}/rollouts/{rollout_id}",
+                            "(google.api.method_signature)": "service_name,rollout_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/services/{service_name}/rollouts/{rollout_id}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_name,rollout_id"
+                            }
+                          ]
+                        },
+                        "CreateServiceRollout": {
+                          "requestType": "CreateServiceRolloutRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/services/{service_name}/rollouts",
+                            "(google.api.http).body": "rollout",
+                            "(google.api.method_signature)": "service_name,rollout",
+                            "(google.longrunning.operation_info).response_type": "google.api.servicemanagement.v1.Rollout",
+                            "(google.longrunning.operation_info).metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/services/{service_name}/rollouts",
+                                "body": "rollout"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_name,rollout"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.api.servicemanagement.v1.Rollout",
+                                "metadata_type": "google.api.servicemanagement.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GenerateConfigReport": {
+                          "requestType": "GenerateConfigReportRequest",
+                          "responseType": "GenerateConfigReportResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/services:generateConfigReport",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "new_config,old_config"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/services:generateConfigReport",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "new_config,old_config"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListServicesRequest": {
+                      "fields": {
+                        "producerProjectId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "consumerId": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "deprecated": true
+                          }
+                        }
+                      }
+                    },
+                    "ListServicesResponse": {
+                      "fields": {
+                        "services": {
+                          "rule": "repeated",
+                          "type": "ManagedService",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetServiceRequest": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateServiceRequest": {
+                      "fields": {
+                        "service": {
+                          "type": "ManagedService",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteServiceRequest": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UndeleteServiceRequest": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UndeleteServiceResponse": {
+                      "fields": {
+                        "service": {
+                          "type": "ManagedService",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetServiceConfigRequest": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "configId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "view": {
+                          "type": "ConfigView",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "ConfigView": {
+                          "values": {
+                            "BASIC": 0,
+                            "FULL": 1
+                          }
+                        }
+                      }
+                    },
+                    "ListServiceConfigsRequest": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListServiceConfigsResponse": {
+                      "fields": {
+                        "serviceConfigs": {
+                          "rule": "repeated",
+                          "type": "google.api.Service",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateServiceConfigRequest": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "serviceConfig": {
+                          "type": "google.api.Service",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SubmitConfigSourceRequest": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "configSource": {
+                          "type": "ConfigSource",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SubmitConfigSourceResponse": {
+                      "fields": {
+                        "serviceConfig": {
+                          "type": "google.api.Service",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CreateServiceRolloutRequest": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rollout": {
+                          "type": "Rollout",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListServiceRolloutsRequest": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListServiceRolloutsResponse": {
+                      "fields": {
+                        "rollouts": {
+                          "rule": "repeated",
+                          "type": "Rollout",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetServiceRolloutRequest": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rolloutId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateConfigReportRequest": {
+                      "fields": {
+                        "newConfig": {
+                          "type": "google.protobuf.Any",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "oldConfig": {
+                          "type": "google.protobuf.Any",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateConfigReportResponse": {
+                      "fields": {
+                        "serviceName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "changeReports": {
+                          "rule": "repeated",
+                          "type": "ChangeReport",
+                          "id": 3
+                        },
+                        "diagnostics": {
+                          "rule": "repeated",
+                          "type": "Diagnostic",
+                          "id": 4
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "ConfigChange": {
+              "fields": {
+                "element": {
+                  "type": "string",
+                  "id": 1
+                },
+                "oldValue": {
+                  "type": "string",
+                  "id": 2
+                },
+                "newValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "changeType": {
+                  "type": "ChangeType",
+                  "id": 4
+                },
+                "advices": {
+                  "rule": "repeated",
+                  "type": "Advice",
+                  "id": 5
+                }
+              }
+            },
+            "Advice": {
+              "fields": {
+                "description": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "ChangeType": {
+              "values": {
+                "CHANGE_TYPE_UNSPECIFIED": 0,
+                "ADDED": 1,
+                "REMOVED": 2,
+                "MODIFIED": 3
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
+              }
+            },
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "Service": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "title": {
+                  "type": "string",
+                  "id": 2
+                },
+                "producerProjectId": {
+                  "type": "string",
+                  "id": 22
+                },
+                "id": {
+                  "type": "string",
+                  "id": 33
+                },
+                "apis": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Api",
+                  "id": 3
+                },
+                "types": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Type",
+                  "id": 4
+                },
+                "enums": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Enum",
+                  "id": 5
+                },
+                "documentation": {
+                  "type": "Documentation",
+                  "id": 6
+                },
+                "backend": {
+                  "type": "Backend",
+                  "id": 8
+                },
+                "http": {
+                  "type": "Http",
+                  "id": 9
+                },
+                "quota": {
+                  "type": "Quota",
+                  "id": 10
+                },
+                "authentication": {
+                  "type": "Authentication",
+                  "id": 11
+                },
+                "context": {
+                  "type": "Context",
+                  "id": 12
+                },
+                "usage": {
+                  "type": "Usage",
+                  "id": 15
+                },
+                "endpoints": {
+                  "rule": "repeated",
+                  "type": "Endpoint",
+                  "id": 18
+                },
+                "control": {
+                  "type": "Control",
+                  "id": 21
+                },
+                "logs": {
+                  "rule": "repeated",
+                  "type": "LogDescriptor",
+                  "id": 23
+                },
+                "metrics": {
+                  "rule": "repeated",
+                  "type": "MetricDescriptor",
+                  "id": 24
+                },
+                "monitoredResources": {
+                  "rule": "repeated",
+                  "type": "MonitoredResourceDescriptor",
+                  "id": 25
+                },
+                "billing": {
+                  "type": "Billing",
+                  "id": 26
+                },
+                "logging": {
+                  "type": "Logging",
+                  "id": 27
+                },
+                "monitoring": {
+                  "type": "Monitoring",
+                  "id": 28
+                },
+                "systemParameters": {
+                  "type": "SystemParameters",
+                  "id": 29
+                },
+                "sourceInfo": {
+                  "type": "SourceInfo",
+                  "id": 37
+                },
+                "configVersion": {
+                  "type": "google.protobuf.UInt32Value",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                }
+              }
+            },
+            "Authentication": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "AuthenticationRule",
+                  "id": 3
+                },
+                "providers": {
+                  "rule": "repeated",
+                  "type": "AuthProvider",
+                  "id": 4
+                }
+              }
+            },
+            "AuthenticationRule": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "oauth": {
+                  "type": "OAuthRequirements",
+                  "id": 2
+                },
+                "allowWithoutCredential": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "requirements": {
+                  "rule": "repeated",
+                  "type": "AuthRequirement",
+                  "id": 7
+                }
+              }
+            },
+            "JwtLocation": {
+              "oneofs": {
+                "in": {
+                  "oneof": [
+                    "header",
+                    "query"
+                  ]
+                }
+              },
+              "fields": {
+                "header": {
+                  "type": "string",
+                  "id": 1
+                },
+                "query": {
+                  "type": "string",
+                  "id": 2
+                },
+                "valuePrefix": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "AuthProvider": {
+              "fields": {
+                "id": {
+                  "type": "string",
+                  "id": 1
+                },
+                "issuer": {
+                  "type": "string",
+                  "id": 2
+                },
+                "jwksUri": {
+                  "type": "string",
+                  "id": 3
+                },
+                "audiences": {
+                  "type": "string",
+                  "id": 4
+                },
+                "authorizationUrl": {
+                  "type": "string",
+                  "id": 5
+                },
+                "jwtLocations": {
+                  "rule": "repeated",
+                  "type": "JwtLocation",
+                  "id": 6
+                }
+              }
+            },
+            "OAuthRequirements": {
+              "fields": {
+                "canonicalScopes": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "AuthRequirement": {
+              "fields": {
+                "providerId": {
+                  "type": "string",
+                  "id": 1
+                },
+                "audiences": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "Backend": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "BackendRule",
+                  "id": 1
+                }
+              }
+            },
+            "BackendRule": {
+              "oneofs": {
+                "authentication": {
+                  "oneof": [
+                    "jwtAudience",
+                    "disableAuth"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "address": {
+                  "type": "string",
+                  "id": 2
+                },
+                "deadline": {
+                  "type": "double",
+                  "id": 3
+                },
+                "minDeadline": {
+                  "type": "double",
+                  "id": 4
+                },
+                "operationDeadline": {
+                  "type": "double",
+                  "id": 5
+                },
+                "pathTranslation": {
+                  "type": "PathTranslation",
+                  "id": 6
+                },
+                "jwtAudience": {
+                  "type": "string",
+                  "id": 7
+                },
+                "disableAuth": {
+                  "type": "bool",
+                  "id": 8
+                },
+                "protocol": {
+                  "type": "string",
+                  "id": 9
+                }
+              },
+              "nested": {
+                "PathTranslation": {
+                  "values": {
+                    "PATH_TRANSLATION_UNSPECIFIED": 0,
+                    "CONSTANT_ADDRESS": 1,
+                    "APPEND_PATH_TO_ADDRESS": 2
+                  }
+                }
+              }
+            },
+            "Billing": {
+              "fields": {
+                "consumerDestinations": {
+                  "rule": "repeated",
+                  "type": "BillingDestination",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "BillingDestination": {
+                  "fields": {
+                    "monitoredResource": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "metrics": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "Context": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "ContextRule",
+                  "id": 1
+                }
+              }
+            },
+            "ContextRule": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "requested": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "provided": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "allowedRequestExtensions": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 4
+                },
+                "allowedResponseExtensions": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                }
+              }
+            },
+            "Control": {
+              "fields": {
+                "environment": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Documentation": {
+              "fields": {
+                "summary": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pages": {
+                  "rule": "repeated",
+                  "type": "Page",
+                  "id": 5
+                },
+                "rules": {
+                  "rule": "repeated",
+                  "type": "DocumentationRule",
+                  "id": 3
+                },
+                "documentationRootUrl": {
+                  "type": "string",
+                  "id": 4
+                },
+                "serviceRootUrl": {
+                  "type": "string",
+                  "id": 6
+                },
+                "overview": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "DocumentationRule": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "description": {
+                  "type": "string",
+                  "id": 2
+                },
+                "deprecationDescription": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "Page": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "content": {
+                  "type": "string",
+                  "id": 2
+                },
+                "subpages": {
+                  "rule": "repeated",
+                  "type": "Page",
+                  "id": 3
+                }
+              }
+            },
+            "Endpoint": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "aliases": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "target": {
+                  "type": "string",
+                  "id": 101
+                },
+                "allowCors": {
+                  "type": "bool",
+                  "id": 5
+                }
+              }
+            },
+            "LogDescriptor": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "labels": {
+                  "rule": "repeated",
+                  "type": "LabelDescriptor",
+                  "id": 2
+                },
+                "description": {
+                  "type": "string",
+                  "id": 3
+                },
+                "displayName": {
+                  "type": "string",
+                  "id": 4
+                }
+              }
+            },
+            "LabelDescriptor": {
+              "fields": {
+                "key": {
+                  "type": "string",
+                  "id": 1
+                },
+                "valueType": {
+                  "type": "ValueType",
+                  "id": 2
+                },
+                "description": {
+                  "type": "string",
+                  "id": 3
+                }
+              },
+              "nested": {
+                "ValueType": {
+                  "values": {
+                    "STRING": 0,
+                    "BOOL": 1,
+                    "INT64": 2
+                  }
+                }
+              }
+            },
+            "Logging": {
+              "fields": {
+                "producerDestinations": {
+                  "rule": "repeated",
+                  "type": "LoggingDestination",
+                  "id": 1
+                },
+                "consumerDestinations": {
+                  "rule": "repeated",
+                  "type": "LoggingDestination",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "LoggingDestination": {
+                  "fields": {
+                    "monitoredResource": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "logs": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                }
+              }
+            },
+            "MetricDescriptor": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "type": {
+                  "type": "string",
+                  "id": 8
+                },
+                "labels": {
+                  "rule": "repeated",
+                  "type": "LabelDescriptor",
+                  "id": 2
+                },
+                "metricKind": {
+                  "type": "MetricKind",
+                  "id": 3
+                },
+                "valueType": {
+                  "type": "ValueType",
+                  "id": 4
+                },
+                "unit": {
+                  "type": "string",
+                  "id": 5
+                },
+                "description": {
+                  "type": "string",
+                  "id": 6
+                },
+                "displayName": {
+                  "type": "string",
+                  "id": 7
+                },
+                "metadata": {
+                  "type": "MetricDescriptorMetadata",
+                  "id": 10
+                },
+                "launchStage": {
+                  "type": "LaunchStage",
+                  "id": 12
+                },
+                "monitoredResourceTypes": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 13
+                }
+              },
+              "nested": {
+                "MetricDescriptorMetadata": {
+                  "fields": {
+                    "launchStage": {
+                      "type": "LaunchStage",
+                      "id": 1,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "samplePeriod": {
+                      "type": "google.protobuf.Duration",
+                      "id": 2
+                    },
+                    "ingestDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 3
+                    }
+                  }
+                },
+                "MetricKind": {
+                  "values": {
+                    "METRIC_KIND_UNSPECIFIED": 0,
+                    "GAUGE": 1,
+                    "DELTA": 2,
+                    "CUMULATIVE": 3
+                  }
+                },
+                "ValueType": {
+                  "values": {
+                    "VALUE_TYPE_UNSPECIFIED": 0,
+                    "BOOL": 1,
+                    "INT64": 2,
+                    "DOUBLE": 3,
+                    "STRING": 4,
+                    "DISTRIBUTION": 5,
+                    "MONEY": 6
+                  }
+                }
+              }
+            },
+            "Metric": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 3
+                },
+                "labels": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "LaunchStage": {
+              "values": {
+                "LAUNCH_STAGE_UNSPECIFIED": 0,
+                "UNIMPLEMENTED": 6,
+                "PRELAUNCH": 7,
+                "EARLY_ACCESS": 1,
+                "ALPHA": 2,
+                "BETA": 3,
+                "GA": 4,
+                "DEPRECATED": 5
+              }
+            },
+            "MonitoredResourceDescriptor": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 5
+                },
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "displayName": {
+                  "type": "string",
+                  "id": 2
+                },
+                "description": {
+                  "type": "string",
+                  "id": 3
+                },
+                "labels": {
+                  "rule": "repeated",
+                  "type": "LabelDescriptor",
+                  "id": 4
+                },
+                "launchStage": {
+                  "type": "LaunchStage",
+                  "id": 7
+                }
+              }
+            },
+            "MonitoredResource": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "labels": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "MonitoredResourceMetadata": {
+              "fields": {
+                "systemLabels": {
+                  "type": "google.protobuf.Struct",
+                  "id": 1
+                },
+                "userLabels": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "Monitoring": {
+              "fields": {
+                "producerDestinations": {
+                  "rule": "repeated",
+                  "type": "MonitoringDestination",
+                  "id": 1
+                },
+                "consumerDestinations": {
+                  "rule": "repeated",
+                  "type": "MonitoringDestination",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "MonitoringDestination": {
+                  "fields": {
+                    "monitoredResource": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "metrics": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "Quota": {
+              "fields": {
+                "limits": {
+                  "rule": "repeated",
+                  "type": "QuotaLimit",
+                  "id": 3
+                },
+                "metricRules": {
+                  "rule": "repeated",
+                  "type": "MetricRule",
+                  "id": 4
+                }
+              }
+            },
+            "MetricRule": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metricCosts": {
+                  "keyType": "string",
+                  "type": "int64",
+                  "id": 2
+                }
+              }
+            },
+            "QuotaLimit": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 6
+                },
+                "description": {
+                  "type": "string",
+                  "id": 2
+                },
+                "defaultLimit": {
+                  "type": "int64",
+                  "id": 3
+                },
+                "maxLimit": {
+                  "type": "int64",
+                  "id": 4
+                },
+                "freeTier": {
+                  "type": "int64",
+                  "id": 7
+                },
+                "duration": {
+                  "type": "string",
+                  "id": 5
+                },
+                "metric": {
+                  "type": "string",
+                  "id": 8
+                },
+                "unit": {
+                  "type": "string",
+                  "id": 9
+                },
+                "values": {
+                  "keyType": "string",
+                  "type": "int64",
+                  "id": 10
+                },
+                "displayName": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "SourceInfo": {
+              "fields": {
+                "sourceFiles": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 1
+                }
+              }
+            },
+            "SystemParameters": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "SystemParameterRule",
+                  "id": 1
+                }
+              }
+            },
+            "SystemParameterRule": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "parameters": {
+                  "rule": "repeated",
+                  "type": "SystemParameter",
+                  "id": 2
+                }
+              }
+            },
+            "SystemParameter": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "httpHeader": {
+                  "type": "string",
+                  "id": 2
+                },
+                "urlQueryParameter": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "Usage": {
+              "fields": {
+                "requirements": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "rules": {
+                  "rule": "repeated",
+                  "type": "UsageRule",
+                  "id": 6
+                },
+                "producerNotificationChannel": {
+                  "type": "string",
+                  "id": 7
+                }
+              }
+            },
+            "UsageRule": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "allowUnregisteredCalls": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "skipServiceControl": {
+                  "type": "bool",
+                  "id": 3
+                }
+              }
+            }
+          }
+        },
+        "protobuf": {
+          "options": {
+            "go_package": "google.golang.org/protobuf/types/known/typepb",
+            "java_package": "com.google.protobuf",
+            "java_outer_classname": "TypeProto",
+            "csharp_namespace": "Google.Protobuf.WellKnownTypes",
+            "objc_class_prefix": "GPB",
+            "cc_enable_arenas": true,
+            "optimize_for": "SPEED",
+            "java_multiple_files": true
+          },
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "publicDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weakDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "messageType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "sourceCodeInfo": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                },
+                "edition": {
+                  "type": "string",
+                  "id": 13
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nestedType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extensionRange": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneofDecl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "options": {
+                      "type": "ExtensionRangeOptions",
+                      "id": 3
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "ExtensionRangeOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "typeName": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "defaultValue": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneofIndex": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "jsonName": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                },
+                "proto3Optional": {
+                  "type": "bool",
+                  "id": 17
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "EnumReservedRange",
+                  "id": 4
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "EnumReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "inputType": {
+                  "type": "string",
+                  "id": 2
+                },
+                "outputType": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "clientStreaming": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "serverStreaming": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "default": false
+                  }
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "javaPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "javaOuterClassname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "javaMultipleFiles": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenerateEqualsAndHash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "javaStringCheckUtf8": {
+                  "type": "bool",
+                  "id": 27,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "optimizeFor": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "goPackage": {
+                  "type": "string",
+                  "id": 11
+                },
+                "ccGenericServices": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenericServices": {
+                  "type": "bool",
+                  "id": 17,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "pyGenericServices": {
+                  "type": "bool",
+                  "id": 18,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "phpGenericServices": {
+                  "type": "bool",
+                  "id": 42,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "ccEnableArenas": {
+                  "type": "bool",
+                  "id": 31,
+                  "options": {
+                    "default": true
+                  }
+                },
+                "objcClassPrefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharpNamespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "swiftPrefix": {
+                  "type": "string",
+                  "id": 39
+                },
+                "phpClassPrefix": {
+                  "type": "string",
+                  "id": 40
+                },
+                "phpNamespace": {
+                  "type": "string",
+                  "id": 41
+                },
+                "phpMetadataNamespace": {
+                  "type": "string",
+                  "id": 44
+                },
+                "rubyPackage": {
+                  "type": "string",
+                  "id": 45
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "messageSetWireFormat": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "noStandardDescriptorAccessor": {
+                  "type": "bool",
+                  "id": 2,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "mapEntry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
+                [
+                  8,
+                  8
+                ],
+                [
+                  9,
+                  9
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "unverifiedLazy": {
+                  "type": "bool",
+                  "id": 15,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allowAlias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  5,
+                  5
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "idempotencyLevel": {
+                  "type": "IdempotencyLevel",
+                  "id": 34,
+                  "options": {
+                    "default": "IDEMPOTENCY_UNKNOWN"
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "nested": {
+                "IdempotencyLevel": {
+                  "values": {
+                    "IDEMPOTENCY_UNKNOWN": 0,
+                    "NO_SIDE_EFFECTS": 1,
+                    "IDEMPOTENT": 2
+                  }
+                }
+              }
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifierValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positiveIntValue": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negativeIntValue": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "doubleValue": {
+                  "type": "double",
+                  "id": 6
+                },
+                "stringValue": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregateValue": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "namePart": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "isExtension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leadingComments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailingComments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leadingDetachedComments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "sourceFile": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    },
+                    "semantic": {
+                      "type": "Semantic",
+                      "id": 5
+                    }
+                  },
+                  "nested": {
+                    "Semantic": {
+                      "values": {
+                        "NONE": 0,
+                        "SET": 1,
+                        "ALIAS": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Api": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "methods": {
+                  "rule": "repeated",
+                  "type": "Method",
+                  "id": 2
+                },
+                "options": {
+                  "rule": "repeated",
+                  "type": "Option",
+                  "id": 3
+                },
+                "version": {
+                  "type": "string",
+                  "id": 4
+                },
+                "sourceContext": {
+                  "type": "SourceContext",
+                  "id": 5
+                },
+                "mixins": {
+                  "rule": "repeated",
+                  "type": "Mixin",
+                  "id": 6
+                },
+                "syntax": {
+                  "type": "Syntax",
+                  "id": 7
+                }
+              }
+            },
+            "Method": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "requestTypeUrl": {
+                  "type": "string",
+                  "id": 2
+                },
+                "requestStreaming": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "responseTypeUrl": {
+                  "type": "string",
+                  "id": 4
+                },
+                "responseStreaming": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "options": {
+                  "rule": "repeated",
+                  "type": "Option",
+                  "id": 6
+                },
+                "syntax": {
+                  "type": "Syntax",
+                  "id": 7
+                }
+              }
+            },
+            "Mixin": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "root": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "SourceContext": {
+              "fields": {
+                "fileName": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Type": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "fields": {
+                  "rule": "repeated",
+                  "type": "Field",
+                  "id": 2
+                },
+                "oneofs": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "rule": "repeated",
+                  "type": "Option",
+                  "id": 4
+                },
+                "sourceContext": {
+                  "type": "SourceContext",
+                  "id": 5
+                },
+                "syntax": {
+                  "type": "Syntax",
+                  "id": 6
+                }
+              }
+            },
+            "Field": {
+              "fields": {
+                "kind": {
+                  "type": "Kind",
+                  "id": 1
+                },
+                "cardinality": {
+                  "type": "Cardinality",
+                  "id": 2
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "name": {
+                  "type": "string",
+                  "id": 4
+                },
+                "typeUrl": {
+                  "type": "string",
+                  "id": 6
+                },
+                "oneofIndex": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 8
+                },
+                "options": {
+                  "rule": "repeated",
+                  "type": "Option",
+                  "id": 9
+                },
+                "jsonName": {
+                  "type": "string",
+                  "id": 10
+                },
+                "defaultValue": {
+                  "type": "string",
+                  "id": 11
+                }
+              },
+              "nested": {
+                "Kind": {
+                  "values": {
+                    "TYPE_UNKNOWN": 0,
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Cardinality": {
+                  "values": {
+                    "CARDINALITY_UNKNOWN": 0,
+                    "CARDINALITY_OPTIONAL": 1,
+                    "CARDINALITY_REQUIRED": 2,
+                    "CARDINALITY_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "Enum": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "enumvalue": {
+                  "rule": "repeated",
+                  "type": "EnumValue",
+                  "id": 2
+                },
+                "options": {
+                  "rule": "repeated",
+                  "type": "Option",
+                  "id": 3
+                },
+                "sourceContext": {
+                  "type": "SourceContext",
+                  "id": 4
+                },
+                "syntax": {
+                  "type": "Syntax",
+                  "id": 5
+                }
+              }
+            },
+            "EnumValue": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "rule": "repeated",
+                  "type": "Option",
+                  "id": 3
+                }
+              }
+            },
+            "Option": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "Any",
+                  "id": 2
+                }
+              }
+            },
+            "Syntax": {
+              "values": {
+                "SYNTAX_PROTO2": 0,
+                "SYNTAX_PROTO3": 1
+              }
+            },
+            "DoubleValue": {
+              "fields": {
+                "value": {
+                  "type": "double",
+                  "id": 1
+                }
+              }
+            },
+            "FloatValue": {
+              "fields": {
+                "value": {
+                  "type": "float",
+                  "id": 1
+                }
+              }
+            },
+            "Int64Value": {
+              "fields": {
+                "value": {
+                  "type": "int64",
+                  "id": 1
+                }
+              }
+            },
+            "UInt64Value": {
+              "fields": {
+                "value": {
+                  "type": "uint64",
+                  "id": 1
+                }
+              }
+            },
+            "Int32Value": {
+              "fields": {
+                "value": {
+                  "type": "int32",
+                  "id": 1
+                }
+              }
+            },
+            "UInt32Value": {
+              "fields": {
+                "value": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "BoolValue": {
+              "fields": {
+                "value": {
+                  "type": "bool",
+                  "id": 1
+                }
+              }
+            },
+            "StringValue": {
+              "fields": {
+                "value": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "BytesValue": {
+              "fields": {
+                "value": {
+                  "type": "bytes",
+                  "id": 1
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            }
+          }
+        },
+        "longrunning": {
+          "options": {
+            "cc_enable_arenas": true,
+            "csharp_namespace": "Google.LongRunning",
+            "go_package": "google.golang.org/genproto/googleapis/longrunning;longrunning",
+            "java_multiple_files": true,
+            "java_outer_classname": "OperationsProto",
+            "java_package": "com.google.longrunning",
+            "php_namespace": "Google\\LongRunning"
+          },
+          "nested": {
+            "operationInfo": {
+              "type": "google.longrunning.OperationInfo",
+              "id": 1049,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Operations": {
+              "options": {
+                "(google.api.default_host)": "longrunning.googleapis.com"
+              },
+              "methods": {
+                "ListOperations": {
+                  "requestType": "ListOperationsRequest",
+                  "responseType": "ListOperationsResponse",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations}",
+                    "(google.api.method_signature)": "name,filter"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
+                },
+                "GetOperation": {
+                  "requestType": "GetOperationRequest",
+                  "responseType": "Operation",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "DeleteOperation": {
+                  "requestType": "DeleteOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).delete": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "CancelOperation": {
+                  "requestType": "CancelOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).post": "/v1/{name=operations/**}:cancel",
+                    "(google.api.http).body": "*",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "WaitOperation": {
+                  "requestType": "WaitOperationRequest",
+                  "responseType": "Operation"
+                }
+              }
+            },
+            "Operation": {
+              "oneofs": {
+                "result": {
+                  "oneof": [
+                    "error",
+                    "response"
+                  ]
+                }
+              },
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadata": {
+                  "type": "google.protobuf.Any",
+                  "id": 2
+                },
+                "done": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "error": {
+                  "type": "google.rpc.Status",
+                  "id": 4
+                },
+                "response": {
+                  "type": "google.protobuf.Any",
+                  "id": 5
+                }
+              }
+            },
+            "GetOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "ListOperationsRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 4
+                },
+                "filter": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pageSize": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "pageToken": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "ListOperationsResponse": {
+              "fields": {
+                "operations": {
+                  "rule": "repeated",
+                  "type": "Operation",
+                  "id": 1
+                },
+                "nextPageToken": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "CancelOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "DeleteOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "WaitOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "timeout": {
+                  "type": "google.protobuf.Duration",
+                  "id": 2
+                }
+              }
+            },
+            "OperationInfo": {
+              "fields": {
+                "responseType": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadataType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
