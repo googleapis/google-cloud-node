@@ -20,15 +20,18 @@
 
 const {assert} = require('chai');
 const cp = require('child_process');
-const {describe, it} = require('mocha');
-
+const {describe, it, before} = require('mocha');
+const {AutoSuggestionServiceClient} = require('@google-cloud/data-qna');
+const client = new AutoSuggestionServiceClient();
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const project = process.env.GCLOUD_PROJECT;
-
 describe('Quickstart', () => {
+  let projectId;
+  before(async () => {
+    projectId = await client.getProjectId();
+  });
   it('should run quickstart', async () => {
     const stdout = execSync('node ./quickstart.js');
-    assert.include(stdout, `Project: ${project}`);
+    assert.include(stdout, `Project: ${projectId}`);
   });
 });
