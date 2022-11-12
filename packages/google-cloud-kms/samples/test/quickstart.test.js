@@ -23,9 +23,8 @@ const client = new KeyManagementServiceClient();
 const locationId = 'us-east1';
 const originalConsoleLog = console.log;
 
-
 describe('Cloud KMS samples', () => {
-let projectId;
+  let projectId;
   before(async () => {
     projectId = await client.getProjectId();
   });
@@ -44,5 +43,4 @@ let projectId;
 
     assert.isNotEmpty(keyRings);
   });
-
 });
