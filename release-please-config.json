@@ -38,6 +38,7 @@
     "packages/google-cloud-dialogflow-cx": {},
     "packages/google-cloud-dialogflow": {},
     "packages/google-cloud-discoveryengine": {},
+    "packages/google-cloud-eventarc-publishing": {},
     "packages/google-cloud-essentialcontacts": {},
     "packages/google-cloud-eventarc": {},
     "packages/google-cloud-domains": {},
