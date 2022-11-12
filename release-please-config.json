@@ -30,6 +30,7 @@
     "packages/google-cloud-language": {},
     "packages/google-cloud-memcache": {},
     "packages/google-cloud-monitoring": {},
+    "packages/google-cloud-notebooks": {},
     "packages/google-cloud-osconfig": {},
     "packages/google-cloud-oslogin": {},
     "packages/google-cloud-phishingprotection": {},
