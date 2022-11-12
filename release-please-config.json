@@ -42,6 +42,7 @@
     "packages/google-cloud-memcache": {},
     "packages/google-cloud-metastore": {},
     "packages/google-cloud-monitoring": {},
+    "packages/google-cloud-networkmanagement": {},
     "packages/google-cloud-notebooks": {},
     "packages/google-cloud-osconfig": {},
     "packages/google-cloud-oslogin": {},
