@@ -18,6 +18,7 @@
 const path = require('path');
 const assert = require('assert');
 const cp = require('child_process');
+const {describe, it, before} = require('mocha');
 
 const {DocumentProcessorServiceClient} =
   require('@google-cloud/documentai').v1beta3;
