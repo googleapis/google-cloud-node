@@ -66,6 +66,7 @@
     "packages/google-cloud-workflows-executions": {},
     "packages/google-cloud-webrisk": {},
     "packages/google-container": {},
+    "packages/google-dataflow": {},
     "packages/google-devtools-artifactregistry": {},
     "packages/google-devtools-cloudbuild": {},
     "packages/google-iam": {},

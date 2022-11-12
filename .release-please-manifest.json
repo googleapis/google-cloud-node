@@ -65,6 +65,7 @@
   "packages/google-cloud-workflows-executions": "2.2.0",
   "packages/google-cloud-webrisk": "3.2.0",
   "packages/google-container": "4.4.0",
+  "packages/google-dataflow": "2.0.1",
   "packages/google-devtools-artifactregistry": "2.0.2",
   "packages/google-devtools-cloudbuild": "3.2.0",
   "packages/google-iam": "0.2.2",
