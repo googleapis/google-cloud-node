@@ -67,7 +67,6 @@
   * [Realms_service.preview_realm_update](#realms_service.preview_realm_update)
   * [Realms_service.update_realm](#realms_service.update_realm)
   * [Create Game Server Realm](#create-game-server-realm)
-  * [Quickstart](#quickstart)
   * [Quickstart.test](#quickstart.test)
 
 ## Before you begin
@@ -1015,23 +1014,6 @@ __Usage:__
 
 
 `node quickstart.js <project_id> <location> <realmId>`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gaming/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gaming/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-gaming/samples/test/quickstart.js`
 
 
 -----
