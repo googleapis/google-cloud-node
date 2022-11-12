@@ -26,6 +26,7 @@
     "packages/google-cloud-datalabeling": {},
     "packages/google-cloud-dataplex": {},
     "packages/google-cloud-dataproc": {},
+    "packages/google-cloud-datastream": {},
     "packages/google-cloud-dataqna": {},
     "packages/google-cloud-deploy": {},
     "packages/google-cloud-dialogflow": {},

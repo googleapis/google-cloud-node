@@ -25,6 +25,7 @@
   "packages/google-cloud-datalabeling": "3.1.1",
   "packages/google-cloud-dataplex": "2.2.2",
   "packages/google-cloud-dataproc": "4.1.1",
+  "packages/google-cloud-datastream": "2.1.2",
   "packages/google-cloud-dataqna": "2.0.2",
   "packages/google-cloud-deploy": "2.2.2",
   "packages/google-cloud-dialogflow": "5.3.0",
