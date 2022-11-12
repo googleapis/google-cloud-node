@@ -1,0 +1,5 @@
+body: |-
+        ### Using TypeScript
+
+        `@google-cloud/billing-budgets` provides TypeScript type definitions.
+
