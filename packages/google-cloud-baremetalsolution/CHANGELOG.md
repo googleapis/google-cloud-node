@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.2](https://github.com/googleapis/nodejs-bare-metal-solution/compare/v0.2.1...v0.2.2) (2022-11-12)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#13](https://github.com/googleapis/nodejs-bare-metal-solution/issues/13)) ([8dfa096](https://github.com/googleapis/nodejs-bare-metal-solution/commit/8dfa096456b9b8c54e403f2d1a77ac6c1e0779be))
+* **deps:** Use google-gax v3.5.2 ([#25](https://github.com/googleapis/nodejs-bare-metal-solution/issues/25)) ([2c44b88](https://github.com/googleapis/nodejs-bare-metal-solution/commit/2c44b884ee043e275279c26fc8712846b303f657))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-bare-metal-solution/issues/1553)) ([#17](https://github.com/googleapis/nodejs-bare-metal-solution/issues/17)) ([a67a504](https://github.com/googleapis/nodejs-bare-metal-solution/commit/a67a504aa6994103c329e00856aafabee68076bf))
+* Preserve default values in x-goog-request-params header ([#19](https://github.com/googleapis/nodejs-bare-metal-solution/issues/19)) ([55bbf49](https://github.com/googleapis/nodejs-bare-metal-solution/commit/55bbf49df595242d106047ff3685d5328ee45bd9))
+* Regenerated protos JS and TS definitions ([#28](https://github.com/googleapis/nodejs-bare-metal-solution/issues/28)) ([2ec02c8](https://github.com/googleapis/nodejs-bare-metal-solution/commit/2ec02c83b0d681d12f4db137f8f1cdc7a74449a9))
+* use google-gax v3.3.0 ([a67a504](https://github.com/googleapis/nodejs-bare-metal-solution/commit/a67a504aa6994103c329e00856aafabee68076bf))
+
 ## [0.2.1](https://github.com/googleapis/nodejs-bare-metal-solution/compare/v0.2.0...v0.2.1) (2022-08-23)
 
 
