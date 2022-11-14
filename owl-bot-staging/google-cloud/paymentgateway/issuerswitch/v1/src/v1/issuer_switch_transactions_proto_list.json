@@ -1,0 +1,6 @@
+[
+  "../../protos/google/cloud/paymentgateway/issuerswitch/v1/common_fields.proto",
+  "../../protos/google/cloud/paymentgateway/issuerswitch/v1/resolutions.proto",
+  "../../protos/google/cloud/paymentgateway/issuerswitch/v1/rules.proto",
+  "../../protos/google/cloud/paymentgateway/issuerswitch/v1/transactions.proto"
+]

@@ -1,0 +1,165 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.tpu.v2alpha1",
+  "libraryPackage": "@google-cloud/tpu",
+  "services": {
+    "Tpu": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TpuClient",
+          "rpcs": {
+            "GetNode": {
+              "methods": [
+                "getNode"
+              ]
+            },
+            "GenerateServiceIdentity": {
+              "methods": [
+                "generateServiceIdentity"
+              ]
+            },
+            "GetAcceleratorType": {
+              "methods": [
+                "getAcceleratorType"
+              ]
+            },
+            "GetRuntimeVersion": {
+              "methods": [
+                "getRuntimeVersion"
+              ]
+            },
+            "GetGuestAttributes": {
+              "methods": [
+                "getGuestAttributes"
+              ]
+            },
+            "CreateNode": {
+              "methods": [
+                "createNode"
+              ]
+            },
+            "DeleteNode": {
+              "methods": [
+                "deleteNode"
+              ]
+            },
+            "StopNode": {
+              "methods": [
+                "stopNode"
+              ]
+            },
+            "StartNode": {
+              "methods": [
+                "startNode"
+              ]
+            },
+            "UpdateNode": {
+              "methods": [
+                "updateNode"
+              ]
+            },
+            "ListNodes": {
+              "methods": [
+                "listNodes",
+                "listNodesStream",
+                "listNodesAsync"
+              ]
+            },
+            "ListAcceleratorTypes": {
+              "methods": [
+                "listAcceleratorTypes",
+                "listAcceleratorTypesStream",
+                "listAcceleratorTypesAsync"
+              ]
+            },
+            "ListRuntimeVersions": {
+              "methods": [
+                "listRuntimeVersions",
+                "listRuntimeVersionsStream",
+                "listRuntimeVersionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TpuClient",
+          "rpcs": {
+            "GetNode": {
+              "methods": [
+                "getNode"
+              ]
+            },
+            "GenerateServiceIdentity": {
+              "methods": [
+                "generateServiceIdentity"
+              ]
+            },
+            "GetAcceleratorType": {
+              "methods": [
+                "getAcceleratorType"
+              ]
+            },
+            "GetRuntimeVersion": {
+              "methods": [
+                "getRuntimeVersion"
+              ]
+            },
+            "GetGuestAttributes": {
+              "methods": [
+                "getGuestAttributes"
+              ]
+            },
+            "CreateNode": {
+              "methods": [
+                "createNode"
+              ]
+            },
+            "DeleteNode": {
+              "methods": [
+                "deleteNode"
+              ]
+            },
+            "StopNode": {
+              "methods": [
+                "stopNode"
+              ]
+            },
+            "StartNode": {
+              "methods": [
+                "startNode"
+              ]
+            },
+            "UpdateNode": {
+              "methods": [
+                "updateNode"
+              ]
+            },
+            "ListNodes": {
+              "methods": [
+                "listNodes",
+                "listNodesStream",
+                "listNodesAsync"
+              ]
+            },
+            "ListAcceleratorTypes": {
+              "methods": [
+                "listAcceleratorTypes",
+                "listAcceleratorTypesStream",
+                "listAcceleratorTypesAsync"
+              ]
+            },
+            "ListRuntimeVersions": {
+              "methods": [
+                "listRuntimeVersions",
+                "listRuntimeVersionsStream",
+                "listRuntimeVersionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

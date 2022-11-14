@@ -1,0 +1,831 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-issuerswitch",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.paymentgateway.issuerswitch.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchResolutions_CreateComplaint_async",
+      "title": "IssuerSwitchResolutions createComplaint Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a complaint. The returned `Operation` type has the following method-specific fields: - `metadata`: [CreateComplaintMetadata][google.cloud.paymentgateway.issuerswitch.v1.CreateComplaintMetadata] - `response`: [Complaint][google.cloud.paymentgateway.issuerswitch.v1.Complaint]",
+      "canonical": true,
+      "file": "issuer_switch_resolutions.create_complaint.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateComplaint",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutions.CreateComplaint",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "complaint",
+            "type": ".google.cloud.paymentgateway.issuerswitch.v1.Complaint"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "IssuerSwitchResolutionsClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutionsClient"
+        },
+        "method": {
+          "shortName": "CreateComplaint",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutions.CreateComplaint",
+          "service": {
+            "shortName": "IssuerSwitchResolutions",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchResolutions_ResolveComplaint_async",
+      "title": "IssuerSwitchResolutions resolveComplaint Sample",
+      "origin": "API_DEFINITION",
+      "description": " Resolve a complaint. The returned `Operation` type has the following method-specific fields: - `metadata`: [ResolveComplaintMetadata][google.cloud.paymentgateway.issuerswitch.v1.ResolveComplaintMetadata] - `response`: [Complaint][google.cloud.paymentgateway.issuerswitch.v1.Complaint]",
+      "canonical": true,
+      "file": "issuer_switch_resolutions.resolve_complaint.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResolveComplaint",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutions.ResolveComplaint",
+        "async": true,
+        "parameters": [
+          {
+            "name": "complaint",
+            "type": ".google.cloud.paymentgateway.issuerswitch.v1.Complaint"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "IssuerSwitchResolutionsClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutionsClient"
+        },
+        "method": {
+          "shortName": "ResolveComplaint",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutions.ResolveComplaint",
+          "service": {
+            "shortName": "IssuerSwitchResolutions",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchResolutions_CreateDispute_async",
+      "title": "IssuerSwitchResolutions createDispute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a dispute. The returned `Operation` type has the following method-specific fields: - `metadata`: [CreateDisputeMetadata][google.cloud.paymentgateway.issuerswitch.v1.CreateDisputeMetadata] - `response`: [Dispute][google.cloud.paymentgateway.issuerswitch.v1.Dispute]",
+      "canonical": true,
+      "file": "issuer_switch_resolutions.create_dispute.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDispute",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutions.CreateDispute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dispute",
+            "type": ".google.cloud.paymentgateway.issuerswitch.v1.Dispute"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "IssuerSwitchResolutionsClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutionsClient"
+        },
+        "method": {
+          "shortName": "CreateDispute",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutions.CreateDispute",
+          "service": {
+            "shortName": "IssuerSwitchResolutions",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchResolutions_ResolveDispute_async",
+      "title": "IssuerSwitchResolutions resolveDispute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Resolve a dispute. The returned `Operation` type has the following method-specific fields: - `metadata`: [ResolveDisputeMetadata][google.cloud.paymentgateway.issuerswitch.v1.ResolveDisputeMetadata] - `response`: [Dispute][google.cloud.paymentgateway.issuerswitch.v1.Dispute]",
+      "canonical": true,
+      "file": "issuer_switch_resolutions.resolve_dispute.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResolveDispute",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutions.ResolveDispute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "dispute",
+            "type": ".google.cloud.paymentgateway.issuerswitch.v1.Dispute"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "IssuerSwitchResolutionsClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutionsClient"
+        },
+        "method": {
+          "shortName": "ResolveDispute",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutions.ResolveDispute",
+          "service": {
+            "shortName": "IssuerSwitchResolutions",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchResolutions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchRules_ListRules_async",
+      "title": "IssuerSwitchResolutions listRules Sample",
+      "origin": "API_DEFINITION",
+      "description": " List all rules that are applied on transactions by the issuer switch. Rules can be filtered on API type and transaction type.",
+      "canonical": true,
+      "file": "issuer_switch_rules.list_rules.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRules",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules.ListRules",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.paymentgateway.issuerswitch.v1.ListRulesResponse",
+        "client": {
+          "shortName": "IssuerSwitchRulesClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRulesClient"
+        },
+        "method": {
+          "shortName": "ListRules",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules.ListRules",
+          "service": {
+            "shortName": "IssuerSwitchRules",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchRules_ListRuleMetadata_async",
+      "title": "IssuerSwitchResolutions listRuleMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " List all rule metadata for a given rule identifier.",
+      "canonical": true,
+      "file": "issuer_switch_rules.list_rule_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRuleMetadata",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules.ListRuleMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.paymentgateway.issuerswitch.v1.ListRuleMetadataResponse",
+        "client": {
+          "shortName": "IssuerSwitchRulesClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRulesClient"
+        },
+        "method": {
+          "shortName": "ListRuleMetadata",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules.ListRuleMetadata",
+          "service": {
+            "shortName": "IssuerSwitchRules",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchRules_ListRuleMetadataValues_async",
+      "title": "IssuerSwitchResolutions listRuleMetadataValues Sample",
+      "origin": "API_DEFINITION",
+      "description": " List all metadata values for a rule metadata identifier.",
+      "canonical": true,
+      "file": "issuer_switch_rules.list_rule_metadata_values.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRuleMetadataValues",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules.ListRuleMetadataValues",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.paymentgateway.issuerswitch.v1.ListRuleMetadataValuesResponse",
+        "client": {
+          "shortName": "IssuerSwitchRulesClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRulesClient"
+        },
+        "method": {
+          "shortName": "ListRuleMetadataValues",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules.ListRuleMetadataValues",
+          "service": {
+            "shortName": "IssuerSwitchRules",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchRules_BatchCreateRuleMetadataValues_async",
+      "title": "IssuerSwitchResolutions batchCreateRuleMetadataValues Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create (add) multiple values to the list of values under the specified rule metadata resource.",
+      "canonical": true,
+      "file": "issuer_switch_rules.batch_create_rule_metadata_values.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchCreateRuleMetadataValues",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules.BatchCreateRuleMetadataValues",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.paymentgateway.issuerswitch.v1.BatchCreateRuleMetadataValuesResponse",
+        "client": {
+          "shortName": "IssuerSwitchRulesClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRulesClient"
+        },
+        "method": {
+          "shortName": "BatchCreateRuleMetadataValues",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules.BatchCreateRuleMetadataValues",
+          "service": {
+            "shortName": "IssuerSwitchRules",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchRules_BatchDeleteRuleMetadataValues_async",
+      "title": "IssuerSwitchResolutions batchDeleteRuleMetadataValues Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete (remove) multiple values from the list of values under the specified rules metadata resource.",
+      "canonical": true,
+      "file": "issuer_switch_rules.batch_delete_rule_metadata_values.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchDeleteRuleMetadataValues",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules.BatchDeleteRuleMetadataValues",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "IssuerSwitchRulesClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRulesClient"
+        },
+        "method": {
+          "shortName": "BatchDeleteRuleMetadataValues",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules.BatchDeleteRuleMetadataValues",
+          "service": {
+            "shortName": "IssuerSwitchRules",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchRules"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchTransactions_ListMetadataTransactions_async",
+      "title": "IssuerSwitchResolutions listMetadataTransactions Sample",
+      "origin": "API_DEFINITION",
+      "description": " List metadata transactions that satisfy the specified filter criteria.",
+      "canonical": true,
+      "file": "issuer_switch_transactions.list_metadata_transactions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 112,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMetadataTransactions",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ListMetadataTransactions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.paymentgateway.issuerswitch.v1.ListMetadataTransactionsResponse",
+        "client": {
+          "shortName": "IssuerSwitchTransactionsClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactionsClient"
+        },
+        "method": {
+          "shortName": "ListMetadataTransactions",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ListMetadataTransactions",
+          "service": {
+            "shortName": "IssuerSwitchTransactions",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchTransactions_ListFinancialTransactions_async",
+      "title": "IssuerSwitchResolutions listFinancialTransactions Sample",
+      "origin": "API_DEFINITION",
+      "description": " List financial transactions that satisfy specified filter criteria.",
+      "canonical": true,
+      "file": "issuer_switch_transactions.list_financial_transactions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 126,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListFinancialTransactions",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ListFinancialTransactions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.paymentgateway.issuerswitch.v1.ListFinancialTransactionsResponse",
+        "client": {
+          "shortName": "IssuerSwitchTransactionsClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactionsClient"
+        },
+        "method": {
+          "shortName": "ListFinancialTransactions",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ListFinancialTransactions",
+          "service": {
+            "shortName": "IssuerSwitchTransactions",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchTransactions_ListMandateTransactions_async",
+      "title": "IssuerSwitchResolutions listMandateTransactions Sample",
+      "origin": "API_DEFINITION",
+      "description": " List mandate transactions that satisfy specified filter criteria.",
+      "canonical": true,
+      "file": "issuer_switch_transactions.list_mandate_transactions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 138,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMandateTransactions",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ListMandateTransactions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.paymentgateway.issuerswitch.v1.ListMandateTransactionsResponse",
+        "client": {
+          "shortName": "IssuerSwitchTransactionsClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactionsClient"
+        },
+        "method": {
+          "shortName": "ListMandateTransactions",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ListMandateTransactions",
+          "service": {
+            "shortName": "IssuerSwitchTransactions",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchTransactions_ListComplaintTransactions_async",
+      "title": "IssuerSwitchResolutions listComplaintTransactions Sample",
+      "origin": "API_DEFINITION",
+      "description": " List complaint transactions that satisfy specified filter criteria.",
+      "canonical": true,
+      "file": "issuer_switch_transactions.list_complaint_transactions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 113,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListComplaintTransactions",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ListComplaintTransactions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.paymentgateway.issuerswitch.v1.ListComplaintTransactionsResponse",
+        "client": {
+          "shortName": "IssuerSwitchTransactionsClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactionsClient"
+        },
+        "method": {
+          "shortName": "ListComplaintTransactions",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ListComplaintTransactions",
+          "service": {
+            "shortName": "IssuerSwitchTransactions",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchTransactions_ExportFinancialTransactions_async",
+      "title": "IssuerSwitchResolutions exportFinancialTransactions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Export financial transactions received within the specified time range as a file into a configured target location. The returned `Operation` type has the following method-specific fields: - `metadata`: [ExportFinancialTransactionsMetadata][google.cloud.paymentgateway.issuerswitch.v1.ExportFinancialTransactionsMetadata] - `response`: [ExportFinancialTransactionsResponse][google.cloud.paymentgateway.issuerswitch.v1.ExportFinancialTransactionsResponse] The exported file will be in the standard CSV format where each row in the file represents a transaction. The file has the following fields in order: - `TransactionID` - UPI transaction ID. - `TransactionType` - Type of the transaction. This will be one of `TRANSACTION_TYPE_CREDIT`, `TRANSACTION_TYPE_DEBIT` or `TRANSACTION_TYPE_REVERSAL`. - `TransactionSubType` - Subtype of the transaction. This will be one of `COLLECT`, `DEBIT` or `PAY`. - `RequestReceivedTimestamp` - Timestamp (in UTC) indicating when the transaction API request was received by the issuer switch. - `CreationTime` - Timestamp (in UTC) indicating when the issuer switch created the transaction resource for processing the transaction. - `State` - State of the transaction. This will be one of `FAILED` or `SUCCEEDED`. - `RRN` - Retrieval reference number associated with the transaction. - `PayerVPA` - Virtual Payment Address (VPA) of the payer. - `PayerMobileNumber` - Mobile number of the payer. - `PayerIFSCCode` - IFSC code of the payer's bank account. - `PayerAccountNumber` - Payer's bank account number. - `PayerAccountType` - Payer's bank account type. - `PayeeVPA` - Virtual Payment Address (VPA) of the payee. - `PayeeMobileNumber` - Payee's mobile number. - `PayeeIFSCCode` - IFSC code of the payee's bank account. - `PayeeAccountNumber` - Payee's bank account number. - `PayeeAccountType` - Payee's bank account type. - `PayeeMerchantID` - Payee's merchant ID, only if the payee is a merchant. - `PayeeMerchantName` - Payee's merchant name, only if the payee is a merchant. - `PayeeMCC` - Payee's Merchant Category Code (MCC), only if the payee is a merchant. - `Currency` - Currency of the amount involved in the transaction. - `Amount` - Amount involved in the transaction. - `BankAdapterRequestIDs` - List of Request IDs (colon separated) used when invoking the Bank Adapter APIs for fulfilling a transaction request. - `ErrorCode` - Error code of the failed transaction. - `ErrorMessage` - Error description for the failed transaction. - `UPIErrorCode` - Error code as per the UPI specification. The issuer switch maps the ErrorCode to an appropriate error code that complies with the UPI specification.",
+      "canonical": true,
+      "file": "issuer_switch_transactions.export_financial_transactions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportFinancialTransactions",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ExportFinancialTransactions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "transaction_type",
+            "type": ".google.cloud.paymentgateway.issuerswitch.v1.TransactionType"
+          },
+          {
+            "name": "start_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "end_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "IssuerSwitchTransactionsClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactionsClient"
+        },
+        "method": {
+          "shortName": "ExportFinancialTransactions",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ExportFinancialTransactions",
+          "service": {
+            "shortName": "IssuerSwitchTransactions",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchTransactions_ExportMetadataTransactions_async",
+      "title": "IssuerSwitchResolutions exportMetadataTransactions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Export metadata transactions received within the specified time range as a file into a configured target location. The returned `Operation` type has the following method-specific fields: - `metadata`: [ExportMetadataTransactionsMetadata][google.cloud.paymentgateway.issuerswitch.v1.ExportMetadataTransactionsMetadata] - `response`: [ExportMetadataTransactionsResponse][google.cloud.paymentgateway.issuerswitch.v1.ExportMetadataTransactionsResponse] The exported file will be in the standard CSV format where each row in the file represents a transaction. The file has the following fields in order: - `TransactionID` - UPI transaction ID. - `APIType` - The transaction's API type. The value will be of the [ApiType][google.cloud.paymentgateway.issuerswitch.v1.ApiType] enum. - `TransactionType` - Type of the transaction. The value will be of the [TransactionType][google.cloud.paymentgateway.issuerswitch.v1.TransactionType] enum. - `RequestReceivedTimestamp` - Timestamp (in UTC) indicating when the transaction's API request was received by the issuer switch. - `CreationTime` - Timestamp (in UTC) indicating when the issuer switch created the transaction resource for processing the transaction. - `State` - State of transaction. This will be one of `FAILED` or `SUCCEEDED`. - `OriginVPA` - Virtual Payment Address (VPA) of the originator of the transaction. - `BankAdapterRequestIDs` - List of Request IDs (colon separated) used when invoking the Bank Adapter APIs for fulfilling a transaction request. - `ErrorCode` - Error code of the failed transaction. - `ErrorMessage` - Error description for the failed transaction. - `UPIErrorCode` - Error code as per the UPI specification. The issuer switch maps the ErrorCode to an appropriate error code that complies with the UPI specification.",
+      "canonical": true,
+      "file": "issuer_switch_transactions.export_metadata_transactions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportMetadataTransactions",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ExportMetadataTransactions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "api_type",
+            "type": ".google.cloud.paymentgateway.issuerswitch.v1.ApiType"
+          },
+          {
+            "name": "start_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "end_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "IssuerSwitchTransactionsClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactionsClient"
+        },
+        "method": {
+          "shortName": "ExportMetadataTransactions",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ExportMetadataTransactions",
+          "service": {
+            "shortName": "IssuerSwitchTransactions",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchTransactions_ExportMandateTransactions_async",
+      "title": "IssuerSwitchResolutions exportMandateTransactions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Export mandate transactions received within the specified time range as a file into a configured target location. The returned `Operation` type has the following method-specific fields: - `metadata`: [ExportMandateTransactionsMetadata][google.cloud.paymentgateway.issuerswitch.v1.ExportMandateTransactionsMetadata] - `response`: [ExportMandateTransactionsResponse][google.cloud.paymentgateway.issuerswitch.v1.ExportMandateTransactionsResponse] The exported file will be in the standard CSV format where each row in the file represents a transaction. The file has the following fields in order: - `TransactionID` - UPI transaction ID. - `UniqueMandateNumber` - UPI Unique Mandate Number. - `TransactionType` - Type of the transaction. This will be one of `TRANSACTION_TYPE_CREATE`, `TRANSACTION_TYPE_REVOKE` or `TRANSACTION_TYPE_UPDATE`. - `RequestReceivedTimestamp` - Timestamp (in UTC) indicating when the mandate API request was received by the issuer switch. - `CreationTime` - Timestamp (in UTC) indicating when the issuer switch created the transaction resource for processing the transaction. - `State` - State of the transaction. This will be one of `FAILED` or `SUCCEEDED`. - `PayerVPA` - Virtual Payment Address (VPA) of the payer. - `PayerMobileNumber` - Mobile number of the payer. - `PayeeVPA` - Virtual Payment Address (VPA) of the payee. - `PayeeMobileNumber` - Mobile number of the payee. - `PayeeMerchantID` - Payee's merchant ID. - `Amount` - Amount specified in the mandate. - `RecurrencePattern` - Reccurence pattern of the mandate. The value will be of the [MandateTransaction.RecurrencePattern][] enum. - `RecurrenceRuleType` - Reccurrence rule type of the mandate. The value will be of the [MandateTransaction.RecurrenceRuleType][google.cloud.paymentgateway.issuerswitch.v1.MandateTransaction.RecurrenceRuleType] enum. - `RecurrenceRuleValue` - Recurrence rule value of the mandate. - `Revokeable` - Boolean value specifying if the mandate is revokable. - `StartDate` - The start date of the mandate in `YYYY-MM-DD` format. - `EndDate` - The end date of the mandate in `YYYY-MM-DD` format. - `AmountRuleType` - The amount rule of the mandate. The value will be of the [MandateTransaction.AmountRuleType][google.cloud.paymentgateway.issuerswitch.v1.MandateTransaction.AmountRuleType] enum. - `ApprovalReference` - The block funds reference generated by the bank, if funds have been blocked for the mandate. This column have a value only when the RecurrencePattern is ONETIME. - `BlockFunds` - Boolean value specifying if the mandate transaction requested to block funds. - `LastUpdateTime` - Timestamp (in UTC) indicating when was the last modification made to the mandate. - `BankAdapterRequestIDs` - List of Request IDs (colon separated) used when invoking the Bank Adapter APIs for fulfilling a transaction request. - `ErrorCode` - Error code of the failed transaction. - `ErrorMessage` - Error description for the failed transaction. - `UPIErrorCode` - Error code as per the UPI specification. The issuer switch maps the ErrorCode to an appropriate error code that complies with the UPI specification.",
+      "canonical": true,
+      "file": "issuer_switch_transactions.export_mandate_transactions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportMandateTransactions",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ExportMandateTransactions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "transaction_type",
+            "type": ".google.cloud.paymentgateway.issuerswitch.v1.TransactionType"
+          },
+          {
+            "name": "start_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "end_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "IssuerSwitchTransactionsClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactionsClient"
+        },
+        "method": {
+          "shortName": "ExportMandateTransactions",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ExportMandateTransactions",
+          "service": {
+            "shortName": "IssuerSwitchTransactions",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "issuerswitch_v1_generated_IssuerSwitchTransactions_ExportComplaintTransactions_async",
+      "title": "IssuerSwitchResolutions exportComplaintTransactions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Export complaint transactions received within the specified time range as a file into a configured target location. The returned `Operation` type has the following method-specific fields: - `metadata`: [ExportComplaintTransactionsMetadata][google.cloud.paymentgateway.issuerswitch.v1.ExportComplaintTransactionsMetadata] - `response`: [ExportComplaintTransactionsResponse][google.cloud.paymentgateway.issuerswitch.v1.ExportComplaintTransactionsResponse] The exported file will be in the standard CSV format where each row in the file represents a transaction. The file has the following fields in order: - `TransactionID` - UPI transaction ID. - `TransactionType` - Type of the transaction. This will be one of `TRANSACTION_TYPE_CHECK_STATUS`, `TRANSACTION_TYPE_COMPLAINT`, `TRANSACTION_TYPE_REVERSAL`, `TRANSACTION_TYPE_DISPUTE`, `TRANSACTION_TYPE_REFUND` or `TRANSACTION_TYPE_STATUS_UPDATE`. - `CreationTime` - Timestamp (in UTC) indicating when the issuer switch created the transaction resource for processing the transaction. - `State` - State of the transaction. This will be one of `FAILED` or `SUCCEEDED`. - `OriginalRRN` - RRN of the original payment transaction. - `BankType` - The subtype of the transaction based on the bank involved. - `OriginalTransactionID` - Transaction ID of the original unresolved transaction. - `RaiseComplaintAdjFlag` - Indicates the type of action to raise the complaint. - `RaiseComplaintAdjCode` - Indicates the reason of action to raise the complaint. - `ResolveComplaintAdjFlag` - Indicates the type of action to resolve the complaint. - `ResolveComplaintAdjCode` - Indicates the reason of action to resolve the complaint. - `RaiseDisputeAdjFlag` - Indicates the type of action to raise the dispute. - `RaiseDisputeAdjCode` - Indicates the reason of action to raise the dispute. - `ResolveDisputeAdjFlag` - Indicates the type of action to resolve the dispute. - `ResolveDisputeAdjCode` - Indicates the reason of action to resolve the dispute. - `Amount` - Amount to be resolved. - `CurrentCycle` - Boolean value specifying if the complaint / dispute belongs to current settlement cycle or not. - `CRN` - Defines the Complaint Reference number. - `AdjTime` - Indicates the time when the resolution was done. - `RespAdjFlag` - Indicates the response category type. - `RespAdjCode` - Indicates the response reason used. - `AdjRemarks` - Indicates the additional remarks for the complaint / dispute. - `BankAdapterRequestIDs` - List of Request IDs (colon separated) used when invoking the Bank Adapter APIs for fulfilling a transaction request. - `ErrorCode` - Error code of the failed transaction. - `ErrorMessage` - Error description for the failed transaction. - `UPIErrorCode` - Error code as per the UPI specification. The issuer switch service maps the ErrorCode to an appropriate error code that complies with the UPI specification.",
+      "canonical": true,
+      "file": "issuer_switch_transactions.export_complaint_transactions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportComplaintTransactions",
+        "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ExportComplaintTransactions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "transaction_type",
+            "type": ".google.cloud.paymentgateway.issuerswitch.v1.TransactionType"
+          },
+          {
+            "name": "start_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "end_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "IssuerSwitchTransactionsClient",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactionsClient"
+        },
+        "method": {
+          "shortName": "ExportComplaintTransactions",
+          "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions.ExportComplaintTransactions",
+          "service": {
+            "shortName": "IssuerSwitchTransactions",
+            "fullName": "google.cloud.paymentgateway.issuerswitch.v1.IssuerSwitchTransactions"
+          }
+        }
+      }
+    }
+  ]
+}

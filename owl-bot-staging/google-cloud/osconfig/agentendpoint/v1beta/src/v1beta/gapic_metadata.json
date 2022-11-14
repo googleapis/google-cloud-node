@@ -1,0 +1,78 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.osconfig.agentendpoint.v1beta",
+  "libraryPackage": "@google-cloud/agentendpoint",
+  "services": {
+    "AgentEndpointService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AgentEndpointServiceClient",
+          "rpcs": {
+            "StartNextTask": {
+              "methods": [
+                "startNextTask"
+              ]
+            },
+            "ReportTaskProgress": {
+              "methods": [
+                "reportTaskProgress"
+              ]
+            },
+            "ReportTaskComplete": {
+              "methods": [
+                "reportTaskComplete"
+              ]
+            },
+            "LookupEffectiveGuestPolicy": {
+              "methods": [
+                "lookupEffectiveGuestPolicy"
+              ]
+            },
+            "RegisterAgent": {
+              "methods": [
+                "registerAgent"
+              ]
+            },
+            "ReceiveTaskNotification": {
+              "methods": [
+                "receiveTaskNotification"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AgentEndpointServiceClient",
+          "rpcs": {
+            "StartNextTask": {
+              "methods": [
+                "startNextTask"
+              ]
+            },
+            "ReportTaskProgress": {
+              "methods": [
+                "reportTaskProgress"
+              ]
+            },
+            "ReportTaskComplete": {
+              "methods": [
+                "reportTaskComplete"
+              ]
+            },
+            "LookupEffectiveGuestPolicy": {
+              "methods": [
+                "lookupEffectiveGuestPolicy"
+              ]
+            },
+            "RegisterAgent": {
+              "methods": [
+                "registerAgent"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
