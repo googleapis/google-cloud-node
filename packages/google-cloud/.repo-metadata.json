@@ -1,0 +1,16 @@
+{
+  "name": "vmwareengine",
+  "name_pretty": "VMware Engine API",
+  "product_documentation": "cloud.google.com/vmware-engine/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vmwareengine/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/vmwareengine",
+  "api_id": "vmwareengine.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}
+
