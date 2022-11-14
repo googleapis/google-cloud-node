@@ -1,0 +1,16 @@
+{
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "distribution_name": "@google-cloud/service-management",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/service-management/latest",
+  "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
+  "name_pretty": "Service Management API",
+  "release_level": "stable",
+  "default_version": "v1",
+  "name": "service-management",
+  "api_id": "servicemanagement.googleapis.com",
+  "requires_billing": true,
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "api_shortname": "servicemanagement",
+  "library_type": "GAPIC_AUTO"
+}
