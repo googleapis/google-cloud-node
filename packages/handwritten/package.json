@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@compodoc/compodoc": "^1.1.10",
-    "@hapi/hapi": "^20.1.0",
+    "@hapi/hapi": "^21.0.0",
     "@types/boom": "^7.2.1",
     "@types/console-log-level": "^1.4.0",
     "@types/express": "^4.17.0",
