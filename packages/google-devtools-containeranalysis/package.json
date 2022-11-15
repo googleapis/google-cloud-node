@@ -1,10 +1,10 @@
 {
+  "name": "@google-cloud/containeranalysis",
   "repository": {
     "type": "git",
     "directory": "packages/google-devtools-containeranalysis",
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
-  "name": "@google-cloud/containeranalysis",
   "version": "4.4.1",
   "author": "Google LLC",
   "description": "Container Analysis API client for Node.js",

@@ -27,7 +27,9 @@ describe('📦 pack-n-play test', () => {
       packageDir: process.cwd(),
       sample: {
         description: 'TypeScript user can use the type definitions',
-        ts: readFileSync('./system-test/fixtures/src/index.ts').toString(),
+        ts: readFileSync(
+          './system-test/fixtures/sample/src/index.ts'
+        ).toString(),
       },
     };
     await packNTest(options);
@@ -39,7 +41,9 @@ describe('📦 pack-n-play test', () => {
       packageDir: process.cwd(),
       sample: {
         description: 'JavaScript user can use the library',
-        ts: readFileSync('./system-test/fixtures/src/index.js').toString(),
+        ts: readFileSync(
+          './system-test/fixtures/sample/src/index.js'
+        ).toString(),
       },
     };
     await packNTest(options);

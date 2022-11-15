@@ -62,8 +62,8 @@ import {GrafeasClient} from '@google-cloud/grafeas';""")
 
 
 node.owlbot_main(relative_dir="packages/google-devtools-containeranalysis",staging_excludes=[
-    'package.json', 'README.md',
-    'src/v1beta1/index.ts', 'src/v1/index.ts', 'tslint.json', 'src/index.ts'],
+    'packages/google-devtools-containeranalysis/package.json', 'packages/google-devtools-containeranalysis/README.md',
+    'packages/google-devtools-containeranalysis/src/v1beta1/index.ts', 'packages/google-devtools-containeranalysis/src/v1/index.ts', 'packages/google-devtools-containeranalysis/tslint.json', 'packages/google-devtools-containeranalysis/src/index.ts'],
     patch_staging=patch)
 
 # Add beta version GrafeasClient to export
