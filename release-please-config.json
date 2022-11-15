@@ -78,7 +78,6 @@
     "packages/google-cloud-security-privateca": {},
     "packages/google-cloud-secretmanager": {},
     "packages/google-cloud-scheduler": {},
-    "packages/google-cloud-secretmanager": {},
     "packages/google-cloud-security-publicca": {},
     "packages/google-cloud-servicedirectory": {},
     "packages/google-cloud-shell": {},
