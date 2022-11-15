@@ -67,7 +67,7 @@ node.owlbot_main(relative_dir="packages/google-devtools-containeranalysis",stagi
     patch_staging=patch)
 
 # Add beta version GrafeasClient to export
-s.replace('src/index.ts',
+s.replace('packages/google-devtools-containeranalysis/src/index.ts',
         r"""
 export \{v1, v1beta1, ContainerAnalysisClient\};
 export default \{v1, v1beta1, ContainerAnalysisClient\};""",
