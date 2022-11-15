@@ -47,6 +47,7 @@ function main(parent) {
 
   // Imports the Containeranalysis library
   const {ContainerAnalysisClient} =
+    // eslint-disable-next-line node/no-missing-require
     require('@google-cloud/containeranalysis').v1;
 
   // Instantiates a client
