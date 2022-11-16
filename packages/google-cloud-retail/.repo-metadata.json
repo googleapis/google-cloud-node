@@ -6,11 +6,11 @@
   "default_version": "v2beta",
   "language": "nodejs",
   "name_pretty": "Retail API",
-  "repo": "googleapis/nodejs-retail",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/recommendations/",
   "requires_billing": true,
   "name": "retail",
-  "issue_tracker": "https://github.com/googleapis/nodejs-retail/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "api_shortname": "retail",
   "library_type": "GAPIC_AUTO",
   "codeowner_team": "@googleapis/cloud-retail-team"
