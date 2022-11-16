@@ -1,0 +1,74 @@
+{
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-recaptchaenterprise",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
+  "name": "@google-cloud/recaptcha-enterprise",
+  "version": "3.1.1",
+  "author": "Google LLC",
+  "description": "reCAPTCHA Enterprise API client for Node.js",
+  "main": "build/src/index.js",
+  "files": [
+    "build/protos",
+    "build/src",
+    "AUTHORS",
+    "COPYING"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google recaptchaenterprise",
+    "recaptchaenterprise",
+    "reCAPTCHA Enterprise API"
+  ],
+  "dependencies": {
+    "google-gax": "^3.5.2"
+  },
+  "devDependencies": {
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^18.0.0",
+    "@types/sinon": "^10.0.0",
+    "c8": "^7.0.0",
+    "gts": "^3.1.0",
+    "jsdoc": "^4.0.0",
+    "jsdoc-fresh": "^2.0.0",
+    "jsdoc-region-tag": "^2.0.0",
+    "linkinator": "^4.0.0",
+    "mocha": "^9.2.2",
+    "null-loader": "^4.0.0",
+    "pack-n-play": "^1.0.0-2",
+    "sinon": "^14.0.0",
+    "ts-loader": "^9.0.0",
+    "typescript": "^4.6.4",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0"
+  },
+  "scripts": {
+    "lint": "gts check",
+    "fix": "gts fix",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
+    "docs": "jsdoc -c .jsdoc.js",
+    "test": "c8 mocha build/test",
+    "docs-test": "linkinator docs",
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
+    "predocs-test": "npm run docs",
+    "prepare": "npm run compile",
+    "prelint": "cd samples; npm link ../; npm install",
+    "precompile": "gts clean"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-recaptchaenterprise"
+}
