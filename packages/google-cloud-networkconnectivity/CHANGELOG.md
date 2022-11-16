@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-network-connectivity/compare/v2.1.2...v2.2.0) (2022-11-15)
+
+
+### Features
+
+* Add policy based routing" will work ([#160](https://github.com/googleapis/nodejs-network-connectivity/issues/160)) ([d6b9ce3](https://github.com/googleapis/nodejs-network-connectivity/commit/d6b9ce3a71b644fe957ace9ce571c50bd89b0781))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#161](https://github.com/googleapis/nodejs-network-connectivity/issues/161)) ([fe9160f](https://github.com/googleapis/nodejs-network-connectivity/commit/fe9160f050ee1f05fcdc3d119df4af86872e73c6))
+* Preserve default values in x-goog-request-params header ([#153](https://github.com/googleapis/nodejs-network-connectivity/issues/153)) ([67f13e1](https://github.com/googleapis/nodejs-network-connectivity/commit/67f13e161733f86ce61af222f91222cc481cc149))
+* Regenerated protos JS and TS definitions ([#164](https://github.com/googleapis/nodejs-network-connectivity/issues/164)) ([dfbaab3](https://github.com/googleapis/nodejs-network-connectivity/commit/dfbaab3ded7b89bf7a79da8aca28637e73298b54))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-network-connectivity/compare/v2.1.1...v2.1.2) (2022-09-01)
 
 
