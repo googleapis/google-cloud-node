@@ -1495,6 +1495,11 @@
                             "ipVersion"
                           ]
                         },
+                        "_ipv6EndpointType": {
+                          "oneof": [
+                            "ipv6EndpointType"
+                          ]
+                        },
                         "_kind": {
                           "oneof": [
                             "kind"
@@ -1585,6 +1590,13 @@
                         "ipVersion": {
                           "type": "string",
                           "id": 294959552,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ipv6EndpointType": {
+                          "type": "string",
+                          "id": 97501004,
                           "options": {
                             "proto3_optional": true
                           }
@@ -1680,6 +1692,13 @@
                             "IPV4": 2254341,
                             "IPV6": 2254343,
                             "UNSPECIFIED_VERSION": 21850000
+                          }
+                        },
+                        "Ipv6EndpointType": {
+                          "values": {
+                            "UNDEFINED_IPV6_ENDPOINT_TYPE": 0,
+                            "NETLB": 74173363,
+                            "VM": 2743
                           }
                         },
                         "NetworkTier": {
@@ -15226,6 +15245,11 @@
                           "oneof": [
                             "localizedMessage"
                           ]
+                        },
+                        "_quotaInfo": {
+                          "oneof": [
+                            "quotaInfo"
+                          ]
                         }
                       },
                       "fields": {
@@ -15246,6 +15270,13 @@
                         "localizedMessage": {
                           "type": "LocalizedMessage",
                           "id": 404537155,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "quotaInfo": {
+                          "type": "QuotaExceededInfo",
+                          "id": 93923861,
                           "options": {
                             "proto3_optional": true
                           }
@@ -26449,6 +26480,11 @@
                             "reservationAffinity"
                           ]
                         },
+                        "_resourceStatus": {
+                          "oneof": [
+                            "resourceStatus"
+                          ]
+                        },
                         "_satisfiesPzs": {
                           "oneof": [
                             "satisfiesPzs"
@@ -26710,6 +26746,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 22220385
+                        },
+                        "resourceStatus": {
+                          "type": "ResourceStatus",
+                          "id": 249429315,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "satisfiesPzs": {
                           "type": "bool",
@@ -27349,6 +27392,11 @@
                             "kind"
                           ]
                         },
+                        "_listManagedInstancesResults": {
+                          "oneof": [
+                            "listManagedInstancesResults"
+                          ]
+                        },
                         "_name": {
                           "oneof": [
                             "name"
@@ -27466,6 +27514,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "listManagedInstancesResults": {
+                          "type": "string",
+                          "id": 296047156,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "name": {
                           "type": "string",
                           "id": 3373707,
@@ -27535,6 +27590,15 @@
                           "id": 3744684,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ListManagedInstancesResults": {
+                          "values": {
+                            "UNDEFINED_LIST_MANAGED_INSTANCES_RESULTS": 0,
+                            "PAGELESS": 32183464,
+                            "PAGINATED": 40190637
                           }
                         }
                       }
@@ -41843,6 +41907,11 @@
                             "networkEndpointType"
                           ]
                         },
+                        "_pscData": {
+                          "oneof": [
+                            "pscData"
+                          ]
+                        },
                         "_pscTargetService": {
                           "oneof": [
                             "pscTargetService"
@@ -41953,6 +42022,13 @@
                         "networkEndpointType": {
                           "type": "string",
                           "id": 118301523,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pscData": {
+                          "type": "NetworkEndpointGroupPscData",
+                          "id": 71937481,
                           "options": {
                             "proto3_optional": true
                           }
@@ -42272,6 +42348,61 @@
                           "id": 50704284,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "NetworkEndpointGroupPscData": {
+                      "oneofs": {
+                        "_consumerPscAddress": {
+                          "oneof": [
+                            "consumerPscAddress"
+                          ]
+                        },
+                        "_pscConnectionId": {
+                          "oneof": [
+                            "pscConnectionId"
+                          ]
+                        },
+                        "_pscConnectionStatus": {
+                          "oneof": [
+                            "pscConnectionStatus"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "consumerPscAddress": {
+                          "type": "string",
+                          "id": 452646572,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pscConnectionId": {
+                          "type": "uint64",
+                          "id": 292082397,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pscConnectionStatus": {
+                          "type": "string",
+                          "id": 184149172,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PscConnectionStatus": {
+                          "values": {
+                            "UNDEFINED_PSC_CONNECTION_STATUS": 0,
+                            "ACCEPTED": 246714279,
+                            "CLOSED": 380163436,
+                            "NEEDS_ATTENTION": 344491452,
+                            "PENDING": 35394935,
+                            "REJECTED": 174130302,
+                            "STATUS_UNSPECIFIED": 42133066
                           }
                         }
                       }
@@ -49644,6 +49775,7 @@
                             "SSL_CERTIFICATES": 378372399,
                             "STATIC_ADDRESSES": 93624049,
                             "STATIC_BYOIP_ADDRESSES": 275809649,
+                            "STATIC_EXTERNAL_IPV6_ADDRESS_RANGES": 472346774,
                             "SUBNETWORKS": 421330469,
                             "T2A_CPUS": 522170599,
                             "T2D_CPUS": 71187140,
@@ -49658,6 +49790,53 @@
                             "VPN_GATEWAYS": 35620282,
                             "VPN_TUNNELS": 104327296,
                             "XPN_SERVICE_PROJECTS": 95191981
+                          }
+                        }
+                      }
+                    },
+                    "QuotaExceededInfo": {
+                      "oneofs": {
+                        "_limit": {
+                          "oneof": [
+                            "limit"
+                          ]
+                        },
+                        "_limitName": {
+                          "oneof": [
+                            "limitName"
+                          ]
+                        },
+                        "_metricName": {
+                          "oneof": [
+                            "metricName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dimensions": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 414334925
+                        },
+                        "limit": {
+                          "type": "double",
+                          "id": 102976443,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "limitName": {
+                          "type": "string",
+                          "id": 398197903,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "metricName": {
+                          "type": "string",
+                          "id": 409881530,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -53197,6 +53376,24 @@
                         }
                       }
                     },
+                    "ResourceStatus": {
+                      "oneofs": {
+                        "_physicalHost": {
+                          "oneof": [
+                            "physicalHost"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "physicalHost": {
+                          "type": "string",
+                          "id": 464370704,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ResumeInstanceRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -53706,6 +53903,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "md5AuthenticationKeys": {
+                          "rule": "repeated",
+                          "type": "RouterMd5AuthenticationKey",
+                          "id": 71063322
+                        },
                         "name": {
                           "type": "string",
                           "id": 3373707,
@@ -53961,6 +54163,11 @@
                             "managementType"
                           ]
                         },
+                        "_md5AuthenticationKeyName": {
+                          "oneof": [
+                            "md5AuthenticationKeyName"
+                          ]
+                        },
                         "_name": {
                           "oneof": [
                             "name"
@@ -54057,6 +54264,13 @@
                         "managementType": {
                           "type": "string",
                           "id": 173703606,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "md5AuthenticationKeyName": {
+                          "type": "string",
+                          "id": 281075345,
                           "options": {
                             "proto3_optional": true
                           }
@@ -54367,6 +54581,36 @@
                         "warning": {
                           "type": "Warning",
                           "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RouterMd5AuthenticationKey": {
+                      "oneofs": {
+                        "_key": {
+                          "oneof": [
+                            "key"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 106079,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
                           "options": {
                             "proto3_optional": true
                           }
@@ -54775,14 +55019,29 @@
                             "bfdStatus"
                           ]
                         },
+                        "_enableIpv6": {
+                          "oneof": [
+                            "enableIpv6"
+                          ]
+                        },
                         "_ipAddress": {
                           "oneof": [
                             "ipAddress"
                           ]
                         },
+                        "_ipv6NexthopAddress": {
+                          "oneof": [
+                            "ipv6NexthopAddress"
+                          ]
+                        },
                         "_linkedVpnTunnel": {
                           "oneof": [
                             "linkedVpnTunnel"
+                          ]
+                        },
+                        "_md5AuthEnabled": {
+                          "oneof": [
+                            "md5AuthEnabled"
                           ]
                         },
                         "_name": {
@@ -54800,6 +55059,11 @@
                             "peerIpAddress"
                           ]
                         },
+                        "_peerIpv6NexthopAddress": {
+                          "oneof": [
+                            "peerIpv6NexthopAddress"
+                          ]
+                        },
                         "_routerApplianceInstance": {
                           "oneof": [
                             "routerApplianceInstance"
@@ -54813,6 +55077,11 @@
                         "_status": {
                           "oneof": [
                             "status"
+                          ]
+                        },
+                        "_statusReason": {
+                          "oneof": [
+                            "statusReason"
                           ]
                         },
                         "_uptime": {
@@ -54839,6 +55108,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "enableIpv6": {
+                          "type": "bool",
+                          "id": 181467939,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "ipAddress": {
                           "type": "string",
                           "id": 406272220,
@@ -54846,9 +55122,23 @@
                             "proto3_optional": true
                           }
                         },
+                        "ipv6NexthopAddress": {
+                          "type": "string",
+                          "id": 27968211,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "linkedVpnTunnel": {
                           "type": "string",
                           "id": 352296953,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "md5AuthEnabled": {
+                          "type": "bool",
+                          "id": 451152075,
                           "options": {
                             "proto3_optional": true
                           }
@@ -54874,6 +55164,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "peerIpv6NexthopAddress": {
+                          "type": "string",
+                          "id": 491486608,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "routerApplianceInstance": {
                           "type": "string",
                           "id": 468312989,
@@ -54891,6 +55188,13 @@
                         "status": {
                           "type": "string",
                           "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "statusReason": {
+                          "type": "string",
+                          "id": 342706993,
                           "options": {
                             "proto3_optional": true
                           }
@@ -54917,6 +55221,13 @@
                             "DOWN": 2104482,
                             "UNKNOWN": 433141802,
                             "UP": 2715
+                          }
+                        },
+                        "StatusReason": {
+                          "values": {
+                            "UNDEFINED_STATUS_REASON": 0,
+                            "MD5_AUTH_INTERNAL_PROBLEM": 140462259,
+                            "STATUS_REASON_UNSPECIFIED": 394331913
                           }
                         }
                       }
@@ -56731,7 +57042,10 @@
                             "ALL": 64897,
                             "HTTP_COOKIE": 494981627,
                             "HTTP_HEADER": 91597348,
+                            "HTTP_PATH": 311503228,
                             "IP": 2343,
+                            "REGION_CODE": 79559768,
+                            "SNI": 82254,
                             "XFF_IP": 438707118
                           }
                         }
