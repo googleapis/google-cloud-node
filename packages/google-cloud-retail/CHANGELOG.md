@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/nodejs-retail/compare/v2.1.0...v2.1.1) (2022-11-16)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#221](https://github.com/googleapis/nodejs-retail/issues/221)) ([5eb17fc](https://github.com/googleapis/nodejs-retail/commit/5eb17fc9c340cacbb8627442c58597015a2d4134))
+
 ## [2.1.0](https://github.com/googleapis/nodejs-retail/compare/v2.0.0...v2.1.0) (2022-09-20)
 
 
