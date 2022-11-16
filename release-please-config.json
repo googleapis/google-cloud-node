@@ -54,6 +54,7 @@
     "packages/google-cloud-gkeconnect-gateway": {},
     "packages/google-cloud-gkehub": {},
     "packages/google-cloud-gkemulticloud": {},
+    "packages/google-cloud-kms": {},
     "packages/google-cloud-ids": {},
     "packages/google-cloud-iap": {},
     "packages/google-cloud-iot": {},
