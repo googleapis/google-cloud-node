@@ -14,7 +14,7 @@
 
 'use strict';
 
-const {describe, it, before, after, beforeEach, afterEach} = require('mocha');
+const {describe, it, before, beforeEach, afterEach} = require('mocha');
 const {assert} = require('chai');
 
 const {KeyManagementServiceClient} = require('@google-cloud/kms');
