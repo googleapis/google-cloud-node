@@ -52,14 +52,14 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Managed_identities_service.attach_trust
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/managed_identities_service.attach_trust.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.attach_trust.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/managed_identities_service.attach_trust.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.attach_trust.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/managed_identities_service.attach_trust.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.attach_trust.js`
 
 
 -----
@@ -69,14 +69,14 @@ __Usage:__
 
 ### Managed_identities_service.create_microsoft_ad_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/managed_identities_service.create_microsoft_ad_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.create_microsoft_ad_domain.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/managed_identities_service.create_microsoft_ad_domain.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.create_microsoft_ad_domain.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/managed_identities_service.create_microsoft_ad_domain.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.create_microsoft_ad_domain.js`
 
 
 -----
@@ -86,14 +86,14 @@ __Usage:__
 
 ### Managed_identities_service.delete_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/managed_identities_service.delete_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.delete_domain.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/managed_identities_service.delete_domain.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.delete_domain.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/managed_identities_service.delete_domain.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.delete_domain.js`
 
 
 -----
@@ -103,14 +103,14 @@ __Usage:__
 
 ### Managed_identities_service.detach_trust
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/managed_identities_service.detach_trust.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.detach_trust.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/managed_identities_service.detach_trust.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.detach_trust.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/managed_identities_service.detach_trust.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.detach_trust.js`
 
 
 -----
@@ -120,14 +120,14 @@ __Usage:__
 
 ### Managed_identities_service.get_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/managed_identities_service.get_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.get_domain.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/managed_identities_service.get_domain.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.get_domain.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/managed_identities_service.get_domain.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.get_domain.js`
 
 
 -----
@@ -137,14 +137,14 @@ __Usage:__
 
 ### Managed_identities_service.list_domains
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/managed_identities_service.list_domains.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.list_domains.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/managed_identities_service.list_domains.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.list_domains.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/managed_identities_service.list_domains.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.list_domains.js`
 
 
 -----
@@ -154,14 +154,14 @@ __Usage:__
 
 ### Managed_identities_service.reconfigure_trust
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/managed_identities_service.reconfigure_trust.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.reconfigure_trust.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/managed_identities_service.reconfigure_trust.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.reconfigure_trust.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/managed_identities_service.reconfigure_trust.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.reconfigure_trust.js`
 
 
 -----
@@ -171,14 +171,14 @@ __Usage:__
 
 ### Managed_identities_service.reset_admin_password
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/managed_identities_service.reset_admin_password.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.reset_admin_password.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/managed_identities_service.reset_admin_password.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.reset_admin_password.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/managed_identities_service.reset_admin_password.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.reset_admin_password.js`
 
 
 -----
@@ -188,14 +188,14 @@ __Usage:__
 
 ### Managed_identities_service.update_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/managed_identities_service.update_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.update_domain.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/managed_identities_service.update_domain.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.update_domain.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/managed_identities_service.update_domain.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.update_domain.js`
 
 
 -----
@@ -205,14 +205,14 @@ __Usage:__
 
 ### Managed_identities_service.validate_trust
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/managed_identities_service.validate_trust.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.validate_trust.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/managed_identities_service.validate_trust.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.validate_trust.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1/managed_identities_service.validate_trust.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1/managed_identities_service.validate_trust.js`
 
 
 -----
@@ -222,14 +222,14 @@ __Usage:__
 
 ### Managed_identities_service.attach_trust
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.attach_trust.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.attach_trust.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.attach_trust.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.attach_trust.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.attach_trust.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.attach_trust.js`
 
 
 -----
@@ -239,14 +239,14 @@ __Usage:__
 
 ### Managed_identities_service.create_microsoft_ad_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.create_microsoft_ad_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.create_microsoft_ad_domain.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.create_microsoft_ad_domain.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.create_microsoft_ad_domain.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.create_microsoft_ad_domain.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.create_microsoft_ad_domain.js`
 
 
 -----
@@ -256,14 +256,14 @@ __Usage:__
 
 ### Managed_identities_service.delete_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.delete_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.delete_domain.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.delete_domain.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.delete_domain.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.delete_domain.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.delete_domain.js`
 
 
 -----
@@ -273,14 +273,14 @@ __Usage:__
 
 ### Managed_identities_service.detach_trust
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.detach_trust.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.detach_trust.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.detach_trust.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.detach_trust.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.detach_trust.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.detach_trust.js`
 
 
 -----
@@ -290,14 +290,14 @@ __Usage:__
 
 ### Managed_identities_service.get_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.get_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.get_domain.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.get_domain.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.get_domain.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.get_domain.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.get_domain.js`
 
 
 -----
@@ -307,14 +307,14 @@ __Usage:__
 
 ### Managed_identities_service.list_domains
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.list_domains.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.list_domains.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.list_domains.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.list_domains.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.list_domains.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.list_domains.js`
 
 
 -----
@@ -324,14 +324,14 @@ __Usage:__
 
 ### Managed_identities_service.reconfigure_trust
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.reconfigure_trust.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.reconfigure_trust.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.reconfigure_trust.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.reconfigure_trust.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.reconfigure_trust.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.reconfigure_trust.js`
 
 
 -----
@@ -341,14 +341,14 @@ __Usage:__
 
 ### Managed_identities_service.reset_admin_password
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.reset_admin_password.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.reset_admin_password.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.reset_admin_password.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.reset_admin_password.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.reset_admin_password.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.reset_admin_password.js`
 
 
 -----
@@ -358,14 +358,14 @@ __Usage:__
 
 ### Managed_identities_service.update_domain
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.update_domain.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.update_domain.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.update_domain.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.update_domain.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.update_domain.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.update_domain.js`
 
 
 -----
@@ -375,14 +375,14 @@ __Usage:__
 
 ### Managed_identities_service.validate_trust
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.validate_trust.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.validate_trust.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.validate_trust.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.validate_trust.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/generated/v1beta1/managed_identities_service.validate_trust.js`
+`node packages/google-cloud-managedidentities/samples/generated/v1beta1/managed_identities_service.validate_trust.js`
 
 
 -----
@@ -392,14 +392,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/quickstart.js`
+`node packages/google-cloud-managedidentities/samples/quickstart.js`
 
 
 -----
@@ -409,14 +409,14 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/test/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedidentities/samples/test/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/test/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedidentities/samples/test/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/samples/test/quickstart.js`
+`node packages/google-cloud-managedidentities/samples/test/quickstart.js`
 
 
 
