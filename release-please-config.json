@@ -56,7 +56,6 @@
     "packages/google-cloud-kms": {},
     "packages/google-cloud-ids": {},
     "packages/google-cloud-iap": {},
-    "packages/google-cloud-ids": {},
     "packages/google-cloud-iot": {},
     "packages/google-cloud-language": {},
     "packages/google-cloud-lifesciences": {},
