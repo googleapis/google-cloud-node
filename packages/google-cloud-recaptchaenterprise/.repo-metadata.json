@@ -6,11 +6,11 @@
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Google Cloud reCAPTCHA Enterprise",
-  "repo": "googleapis/nodejs-recaptcha-enterprise",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/recaptcha-enterprise/docs/",
   "requires_billing": true,
   "name": "recaptcha-enterprise",
-  "issue_tracker": "https://github.com/googleapis/nodejs-recaptcha-enterprise/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "api_shortname": "recaptchaenterprise",
   "library_type": "GAPIC_AUTO"
 }

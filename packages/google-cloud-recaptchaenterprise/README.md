@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud reCAPTCHA Enterprise: Node.js Client](https://github.com/googleapis/nodejs-recaptcha-enterprise)
+# [Google Cloud reCAPTCHA Enterprise: Node.js Client](https://github.com/googleapis/google-cloud-node)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/recaptcha-enterprise.svg)](https://www.npmjs.org/package/@google-cloud/recaptcha-enterprise)
@@ -14,11 +14,11 @@ reCAPTCHA Enterprise API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-recaptcha-enterprise/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-recaptchaenterprise/CHANGELOG.md).
 
 * [Google Cloud reCAPTCHA Enterprise Node.js Client API Reference][client-docs]
 * [Google Cloud reCAPTCHA Enterprise Documentation][product-docs]
-* [github.com/googleapis/nodejs-recaptcha-enterprise](https://github.com/googleapis/nodejs-recaptcha-enterprise)
+* [github.com/googleapis/google-cloud-node/packages/google-cloud-recaptchaenterprise](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-recaptchaenterprise)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -32,7 +32,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
 
-
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,34 @@ npm install @google-cloud/recaptcha-enterprise
 ```
 
 
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Recaptcha_enterprise_service.annotate_assessment | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.annotate_assessment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.annotate_assessment.js,samples/README.md) |
+| Recaptcha_enterprise_service.create_assessment | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.create_assessment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.create_assessment.js,samples/README.md) |
+| Recaptcha_enterprise_service.create_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.create_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.create_key.js,samples/README.md) |
+| Recaptcha_enterprise_service.delete_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.delete_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.delete_key.js,samples/README.md) |
+| Recaptcha_enterprise_service.get_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.get_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.get_key.js,samples/README.md) |
+| Recaptcha_enterprise_service.get_metrics | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.get_metrics.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.get_metrics.js,samples/README.md) |
+| Recaptcha_enterprise_service.list_keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.list_keys.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.list_keys.js,samples/README.md) |
+| Recaptcha_enterprise_service.list_related_account_group_memberships | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.list_related_account_group_memberships.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.list_related_account_group_memberships.js,samples/README.md) |
+| Recaptcha_enterprise_service.list_related_account_groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.list_related_account_groups.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.list_related_account_groups.js,samples/README.md) |
+| Recaptcha_enterprise_service.migrate_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.migrate_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.migrate_key.js,samples/README.md) |
+| Recaptcha_enterprise_service.retrieve_legacy_secret_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.retrieve_legacy_secret_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.retrieve_legacy_secret_key.js,samples/README.md) |
+| Recaptcha_enterprise_service.search_related_account_group_memberships | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.search_related_account_group_memberships.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.search_related_account_group_memberships.js,samples/README.md) |
+| Recaptcha_enterprise_service.update_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.update_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1/recaptcha_enterprise_service.update_key.js,samples/README.md) |
+| Recaptcha_enterprise_service_v1_beta1.annotate_assessment | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.annotate_assessment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.annotate_assessment.js,samples/README.md) |
+| Recaptcha_enterprise_service_v1_beta1.create_assessment | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_assessment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_assessment.js,samples/README.md) |
+| Recaptcha_enterprise_service_v1_beta1.create_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_key.js,samples/README.md) |
+| Recaptcha_enterprise_service_v1_beta1.delete_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.delete_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.delete_key.js,samples/README.md) |
+| Recaptcha_enterprise_service_v1_beta1.get_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.get_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.get_key.js,samples/README.md) |
+| Recaptcha_enterprise_service_v1_beta1.list_keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.list_keys.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.list_keys.js,samples/README.md) |
+| Recaptcha_enterprise_service_v1_beta1.update_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.update_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.update_key.js,samples/README.md) |
 
 
 
@@ -103,7 +131,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-recaptcha-enterprise/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -115,7 +143,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-recaptcha-enterprise/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/recaptcha-enterprise/latest
 [product-docs]: https://cloud.google.com/recaptcha-enterprise/docs/
