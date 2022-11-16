@@ -65,6 +65,7 @@
     "packages/google-cloud-iot": {},
     "packages/google-cloud-language": {},
     "packages/google-cloud-lifesciences": {},
+    "packages/google-cloud-managedidentities": {},
     "packages/google-cloud-mediatranslation": {},
     "packages/google-cloud-memcache": {},
     "packages/google-cloud-metastore": {},
