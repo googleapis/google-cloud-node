@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/video/livestream/v1/outputs.proto",
+  "../../protos/google/cloud/video/livestream/v1/resources.proto",
+  "../../protos/google/cloud/video/livestream/v1/service.proto"
+]

@@ -1,0 +1,16 @@
+{
+  "name": "vpcaccess",
+  "name_pretty": "Virtual Private Cloud",
+  "product_documentation": "https://cloud.google.com/vpc/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vpc-access/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/vpc-access",
+  "api_id": "vpcaccess.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "api_shortname": "vpcaccess",
+  "library_type": "GAPIC_AUTO"
+}
