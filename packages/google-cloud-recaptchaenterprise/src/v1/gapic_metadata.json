@@ -1,0 +1,169 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.recaptchaenterprise.v1",
+  "libraryPackage": "@google-cloud/recaptcha-enterprise",
+  "services": {
+    "RecaptchaEnterpriseService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RecaptchaEnterpriseServiceClient",
+          "rpcs": {
+            "CreateAssessment": {
+              "methods": [
+                "createAssessment"
+              ]
+            },
+            "AnnotateAssessment": {
+              "methods": [
+                "annotateAssessment"
+              ]
+            },
+            "CreateKey": {
+              "methods": [
+                "createKey"
+              ]
+            },
+            "RetrieveLegacySecretKey": {
+              "methods": [
+                "retrieveLegacySecretKey"
+              ]
+            },
+            "GetKey": {
+              "methods": [
+                "getKey"
+              ]
+            },
+            "UpdateKey": {
+              "methods": [
+                "updateKey"
+              ]
+            },
+            "DeleteKey": {
+              "methods": [
+                "deleteKey"
+              ]
+            },
+            "MigrateKey": {
+              "methods": [
+                "migrateKey"
+              ]
+            },
+            "GetMetrics": {
+              "methods": [
+                "getMetrics"
+              ]
+            },
+            "ListKeys": {
+              "methods": [
+                "listKeys",
+                "listKeysStream",
+                "listKeysAsync"
+              ]
+            },
+            "ListRelatedAccountGroups": {
+              "methods": [
+                "listRelatedAccountGroups",
+                "listRelatedAccountGroupsStream",
+                "listRelatedAccountGroupsAsync"
+              ]
+            },
+            "ListRelatedAccountGroupMemberships": {
+              "methods": [
+                "listRelatedAccountGroupMemberships",
+                "listRelatedAccountGroupMembershipsStream",
+                "listRelatedAccountGroupMembershipsAsync"
+              ]
+            },
+            "SearchRelatedAccountGroupMemberships": {
+              "methods": [
+                "searchRelatedAccountGroupMemberships",
+                "searchRelatedAccountGroupMembershipsStream",
+                "searchRelatedAccountGroupMembershipsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RecaptchaEnterpriseServiceClient",
+          "rpcs": {
+            "CreateAssessment": {
+              "methods": [
+                "createAssessment"
+              ]
+            },
+            "AnnotateAssessment": {
+              "methods": [
+                "annotateAssessment"
+              ]
+            },
+            "CreateKey": {
+              "methods": [
+                "createKey"
+              ]
+            },
+            "RetrieveLegacySecretKey": {
+              "methods": [
+                "retrieveLegacySecretKey"
+              ]
+            },
+            "GetKey": {
+              "methods": [
+                "getKey"
+              ]
+            },
+            "UpdateKey": {
+              "methods": [
+                "updateKey"
+              ]
+            },
+            "DeleteKey": {
+              "methods": [
+                "deleteKey"
+              ]
+            },
+            "MigrateKey": {
+              "methods": [
+                "migrateKey"
+              ]
+            },
+            "GetMetrics": {
+              "methods": [
+                "getMetrics"
+              ]
+            },
+            "ListKeys": {
+              "methods": [
+                "listKeys",
+                "listKeysStream",
+                "listKeysAsync"
+              ]
+            },
+            "ListRelatedAccountGroups": {
+              "methods": [
+                "listRelatedAccountGroups",
+                "listRelatedAccountGroupsStream",
+                "listRelatedAccountGroupsAsync"
+              ]
+            },
+            "ListRelatedAccountGroupMemberships": {
+              "methods": [
+                "listRelatedAccountGroupMemberships",
+                "listRelatedAccountGroupMembershipsStream",
+                "listRelatedAccountGroupMembershipsAsync"
+              ]
+            },
+            "SearchRelatedAccountGroupMemberships": {
+              "methods": [
+                "searchRelatedAccountGroupMemberships",
+                "searchRelatedAccountGroupMembershipsStream",
+                "searchRelatedAccountGroupMembershipsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
