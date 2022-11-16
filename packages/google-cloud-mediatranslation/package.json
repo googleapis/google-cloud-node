@@ -4,7 +4,7 @@
   "description": "Mediatranslation client for Node.js",
   "repository": {
     "type": "git",
-    "directory": "packages/media-translatation", 
+    "directory": "packages/media-translatation",
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "license": "Apache-2.0",
@@ -23,12 +23,12 @@
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
     "prepare": "npm run compile && npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha build/test",
     "fix": "gts fix",
     "lint": "gts check",
     "prelint": "cd samples; npm link ../; npm install",
-    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm test && cd ../",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test && cd ../",
     "precompile": "gts clean"
   },
   "dependencies": {
