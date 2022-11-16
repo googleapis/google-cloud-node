@@ -1,6 +1,6 @@
 {
   "language": "nodejs",
-  "repo": "googleapis/nodejs-bigquery-connection",
+  "repo": "googleapis/google-cloud-node",
   "name": "bigqueryconnection",
   "issue_tracker": "https://b.corp.google.com/savedsearches/559654",
   "default_version": "v1",
