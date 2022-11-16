@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-orchestration-airflow/compare/v2.1.1...v2.1.2) (2022-11-15)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#76](https://github.com/googleapis/nodejs-orchestration-airflow/issues/76)) ([5d9c78a](https://github.com/googleapis/nodejs-orchestration-airflow/commit/5d9c78a81d9ae07244f696ac7a9d211964fd62b2))
+* Preserve default values in x-goog-request-params header ([#69](https://github.com/googleapis/nodejs-orchestration-airflow/issues/69)) ([cdef154](https://github.com/googleapis/nodejs-orchestration-airflow/commit/cdef154d8a51c446cdc16b61660f18e6123b8168))
+* Regenerated protos JS and TS definitions ([#79](https://github.com/googleapis/nodejs-orchestration-airflow/issues/79)) ([b0ef563](https://github.com/googleapis/nodejs-orchestration-airflow/commit/b0ef56303b2e61a7a1a8fb505916682631e8beec))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-orchestration-airflow/compare/v2.1.0...v2.1.1) (2022-09-01)
 
 
