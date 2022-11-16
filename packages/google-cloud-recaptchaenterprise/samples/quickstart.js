@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent) {
@@ -45,7 +43,9 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Recaptchaenterprise library
-  const {RecaptchaEnterpriseServiceClient} = require('@google-cloud/recaptcha-enterprise').v1;
+  const {RecaptchaEnterpriseServiceClient} =
+    // eslint-disable-next-line node/no-missing-require
+    require('@google-cloud/recaptcha-enterprise').v1;
 
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
@@ -59,7 +59,7 @@ function main(parent) {
     // Run request
     const iterable = await recaptchaenterpriseClient.listKeysAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
