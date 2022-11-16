@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.3](https://github.com/googleapis/nodejs-managed-identities/compare/v2.1.2...v2.1.3) (2022-11-10)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#159](https://github.com/googleapis/nodejs-managed-identities/issues/159)) ([ab386b4](https://github.com/googleapis/nodejs-managed-identities/commit/ab386b4589b7af19af35eca216cb631d897d9165))
+* Preserve default values in x-goog-request-params header ([#152](https://github.com/googleapis/nodejs-managed-identities/issues/152)) ([4edac89](https://github.com/googleapis/nodejs-managed-identities/commit/4edac89ee75fe538793b63ab0c5bff2afe0df944))
+* Regenerated protos JS and TS definitions ([#162](https://github.com/googleapis/nodejs-managed-identities/issues/162)) ([6c5072d](https://github.com/googleapis/nodejs-managed-identities/commit/6c5072d141a6a37ca1cc89ae2ad53e173eac5188))
+
 ## [2.1.2](https://github.com/googleapis/nodejs-managed-identities/compare/v2.1.1...v2.1.2) (2022-09-01)
 
 
