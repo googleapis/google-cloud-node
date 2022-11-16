@@ -57,6 +57,7 @@
   "packages/google-cloud-iap": "2.0.3",
   "packages/google-cloud-iot": "3.1.2",
   "packages/google-cloud-language": "5.1.2",
+  "packages/google-cloud-mediatranslation": "3.0.5",
   "packages/google-cloud-lifesciences": "2.1.2",
   "packages/google-cloud-memcache": "2.1.4",
   "packages/google-cloud-metastore": "3.1.2",
