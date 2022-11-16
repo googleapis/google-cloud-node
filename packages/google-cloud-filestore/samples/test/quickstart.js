@@ -17,16 +17,21 @@
 const path = require('path');
 const assert = require('assert');
 const cp = require('child_process');
-const {describe, it} = require('mocha');
+const {describe, it, before} = require('mocha');
+const {CloudFilestoreManagerClient} = require('@google-cloud/filestore');
+const client = new CloudFilestoreManagerClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-const project = process.env.GCLOUD_PROJECT;
 const location = 'us-central1-a';
 
 describe('Quickstart', () => {
+  let project;
+  before(async () => {
+    project = await client.getProjectId();
+  });
   it('should run quickstart', async () => {
     const out = execSync(`node ./quickstart.js ${project} ${location}`, {cwd});
     assert.strictEqual(out.includes('fileShares'), true);
