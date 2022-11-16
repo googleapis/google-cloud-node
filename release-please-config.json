@@ -50,6 +50,8 @@
     "packages/google-cloud-functions": {},
     "packages/google-cloud-gaming": {},
     "packages/google-cloud-gkebackup": {},
+    "packages/google-cloud-documentai": {},
+    "packages/google-cloud-filestore": {},
     "packages/google-cloud-gkeconnect-gateway": {},
     "packages/google-cloud-gkehub": {},
     "packages/google-cloud-gkemulticloud": {},
