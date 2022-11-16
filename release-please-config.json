@@ -74,6 +74,7 @@
     "packages/google-cloud-networksecurity": {},
     "packages/google-cloud-notebooks": {},
     "packages/google-cloud-optimization": {},
+    "packages/google-cloud-orchestration-airflow-service": {},
     "packages/google-cloud-orgpolicy": {},
     "packages/google-cloud-osconfig": {},
     "packages/google-cloud-oslogin": {},
