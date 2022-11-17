@@ -1,0 +1,4 @@
+[
+  "../../protos/google/cloud/common/operation_metadata.proto",
+  "../../protos/google/cloud/filestore/v1beta1/cloud_filestore_service.proto"
+]
