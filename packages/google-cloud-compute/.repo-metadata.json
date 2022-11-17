@@ -6,7 +6,7 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559755",
   "release_level": "stable",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-compute",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/compute",
   "api_id": "compute.googleapis.com",
   "requires_billing": true,
