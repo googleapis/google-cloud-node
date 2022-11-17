@@ -7309,6 +7309,71 @@ describe('v1.SecurityCenterClient', () => {
       });
     });
 
+    describe('folderNotificationConfig', () => {
+      const fakePath = '/rendered/path/folderNotificationConfig';
+      const expectedParameters = {
+        folder: 'folderValue',
+        notification_config: 'notificationConfigValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderNotificationConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.folderNotificationConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('folderNotificationConfigPath', () => {
+        const result = client.folderNotificationConfigPath(
+          'folderValue',
+          'notificationConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderNotificationConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderNotificationConfigName', () => {
+        const result =
+          client.matchFolderFromFolderNotificationConfigName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderNotificationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotificationConfigFromFolderNotificationConfigName', () => {
+        const result =
+          client.matchNotificationConfigFromFolderNotificationConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'notificationConfigValue');
+        assert(
+          (
+            client.pathTemplates.folderNotificationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('folderSource', () => {
       const fakePath = '/rendered/path/folderSource';
       const expectedParameters = {
@@ -7608,69 +7673,6 @@ describe('v1.SecurityCenterClient', () => {
       });
     });
 
-    describe('notificationConfig', () => {
-      const fakePath = '/rendered/path/notificationConfig';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        notification_config: 'notificationConfigValue',
-      };
-      const client = new securitycenterModule.v1.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.notificationConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.notificationConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('notificationConfigPath', () => {
-        const result = client.notificationConfigPath(
-          'organizationValue',
-          'notificationConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.notificationConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromNotificationConfigName', () => {
-        const result =
-          client.matchOrganizationFromNotificationConfigName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.notificationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNotificationConfigFromNotificationConfigName', () => {
-        const result =
-          client.matchNotificationConfigFromNotificationConfigName(fakePath);
-        assert.strictEqual(result, 'notificationConfigValue');
-        assert(
-          (
-            client.pathTemplates.notificationConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('organization', () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
@@ -7951,6 +7953,71 @@ describe('v1.SecurityCenterClient', () => {
         assert(
           (
             client.pathTemplates.organizationMuteConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationNotificationConfig', () => {
+      const fakePath = '/rendered/path/organizationNotificationConfig';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        notification_config: 'notificationConfigValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationNotificationConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationNotificationConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationNotificationConfigPath', () => {
+        const result = client.organizationNotificationConfigPath(
+          'organizationValue',
+          'notificationConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationNotificationConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationNotificationConfigName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationNotificationConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationNotificationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotificationConfigFromOrganizationNotificationConfigName', () => {
+        const result =
+          client.matchNotificationConfigFromOrganizationNotificationConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'notificationConfigValue');
+        assert(
+          (
+            client.pathTemplates.organizationNotificationConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -8553,6 +8620,71 @@ describe('v1.SecurityCenterClient', () => {
         assert(
           (
             client.pathTemplates.projectMuteConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectNotificationConfig', () => {
+      const fakePath = '/rendered/path/projectNotificationConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        notification_config: 'notificationConfigValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectNotificationConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectNotificationConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectNotificationConfigPath', () => {
+        const result = client.projectNotificationConfigPath(
+          'projectValue',
+          'notificationConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectNotificationConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectNotificationConfigName', () => {
+        const result =
+          client.matchProjectFromProjectNotificationConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectNotificationConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotificationConfigFromProjectNotificationConfigName', () => {
+        const result =
+          client.matchNotificationConfigFromProjectNotificationConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'notificationConfigValue');
+        assert(
+          (
+            client.pathTemplates.projectNotificationConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

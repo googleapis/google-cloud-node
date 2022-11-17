@@ -630,6 +630,11 @@
                         "database": {
                           "type": "Database",
                           "id": 44
+                        },
+                        "files": {
+                          "rule": "repeated",
+                          "type": "File",
+                          "id": 46
                         }
                       },
                       "nested": {
@@ -1042,7 +1047,8 @@
                             "IMPAIR_DEFENSES": 31,
                             "NETWORK_SERVICE_DISCOVERY": 32,
                             "ACCESS_TOKEN_MANIPULATION": 33,
-                            "ABUSE_ELEVATION_CONTROL_MECHANISM": 34
+                            "ABUSE_ELEVATION_CONTROL_MECHANISM": 34,
+                            "DEFAULT_ACCOUNTS": 35
                           }
                         }
                       }
@@ -1289,7 +1295,7 @@
                     "NotificationConfig": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/NotificationConfig",
-                        "(google.api.resource).pattern": "organizations/{organization}/notificationConfigs/{notification_config}"
+                        "(google.api.resource).pattern": "projects/{project}/notificationConfigs/{notification_config}"
                       },
                       "oneofs": {
                         "notifyConfig": {
@@ -1598,13 +1604,25 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=organizations/*}/notificationConfigs",
                             "(google.api.http).body": "notification_config",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/notificationConfigs",
+                            "(google.api.http).additional_bindings.body": "notification_config",
                             "(google.api.method_signature)": "parent,notification_config"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=organizations/*}/notificationConfigs",
-                                "body": "notification_config"
+                                "body": "notification_config",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{parent=folders/*}/notificationConfigs",
+                                    "body": "notification_config"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=projects/*}/notificationConfigs",
+                                    "body": "notification_config"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -1647,12 +1665,21 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v1/{name=organizations/*/notificationConfigs/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/notificationConfigs/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1/{name=organizations/*/notificationConfigs/*}"
+                                "delete": "/v1/{name=organizations/*/notificationConfigs/*}",
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v1/{name=folders/*/notificationConfigs/*}"
+                                  },
+                                  {
+                                    "delete": "/v1/{name=projects/*/notificationConfigs/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -1739,12 +1766,21 @@
                           "responseType": "NotificationConfig",
                           "options": {
                             "(google.api.http).get": "/v1/{name=organizations/*/notificationConfigs/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/notificationConfigs/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{name=organizations/*/notificationConfigs/*}"
+                                "get": "/v1/{name=organizations/*/notificationConfigs/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/notificationConfigs/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=projects/*/notificationConfigs/*}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -1926,12 +1962,21 @@
                           "responseType": "ListNotificationConfigsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=organizations/*}/notificationConfigs",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*}/notificationConfigs",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{parent=organizations/*}/notificationConfigs"
+                                "get": "/v1/{parent=organizations/*}/notificationConfigs",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*}/notificationConfigs"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=projects/*}/notificationConfigs"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -2200,13 +2245,25 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{notification_config.name=organizations/*/notificationConfigs/*}",
                             "(google.api.http).body": "notification_config",
+                            "(google.api.http).additional_bindings.patch": "/v1/{notification_config.name=projects/*/notificationConfigs/*}",
+                            "(google.api.http).additional_bindings.body": "notification_config",
                             "(google.api.method_signature)": "notification_config,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v1/{notification_config.name=organizations/*/notificationConfigs/*}",
-                                "body": "notification_config"
+                                "body": "notification_config",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{notification_config.name=folders/*/notificationConfigs/*}",
+                                    "body": "notification_config"
+                                  },
+                                  {
+                                    "patch": "/v1/{notification_config.name=projects/*/notificationConfigs/*}",
+                                    "body": "notification_config"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -2506,7 +2563,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/NotificationConfig"
                           }
                         },
                         "configId": {
@@ -2801,7 +2858,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/NotificationConfig"
                           }
                         },
                         "pageToken": {

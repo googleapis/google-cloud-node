@@ -32,7 +32,7 @@ function main(name, state, startTime) {
    *  Required. The relative resource name of the finding. See:
    *  https://cloud.google.com/apis/design/resource_names#relative_resource_name
    *  Example:
-   *  "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}".
+   *  "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}".
    */
   // const name = 'abc123'
   /**

@@ -190,6 +190,9 @@ export class SecurityCenterClient {
       folderMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/muteConfigs/{mute_config}'
       ),
+      folderNotificationConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/notificationConfigs/{notification_config}'
+      ),
       folderSourcePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/sources/{source}'
       ),
@@ -204,9 +207,6 @@ export class SecurityCenterClient {
         new this._gaxModule.PathTemplate(
           'folders/{folder}/sources/{source}/findings/{finding}/securityMarks'
         ),
-      notificationConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationConfigs/{notification_config}'
-      ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
@@ -223,6 +223,10 @@ export class SecurityCenterClient {
       organizationMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/muteConfigs/{mute_config}'
       ),
+      organizationNotificationConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationConfigs/{notification_config}'
+        ),
       organizationSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/organizationSettings'
       ),
@@ -251,6 +255,9 @@ export class SecurityCenterClient {
       ),
       projectMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/muteConfigs/{mute_config}'
+      ),
+      projectNotificationConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/notificationConfigs/{notification_config}'
       ),
       projectSourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/sources/{source}'
@@ -553,8 +560,8 @@ export class SecurityCenterClient {
    *   Required. Resource name of the new source's parent. Its format should be
    *   "organizations/[organization_id]".
    * @param {google.cloud.securitycenter.v1.Source} request.source
-   *   Required. The Source being created, only the display_name and description will be
-   *   used. All other fields will be ignored.
+   *   Required. The Source being created, only the display_name and description
+   *   will be used. All other fields will be ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -653,8 +660,8 @@ export class SecurityCenterClient {
    *   It must be alphanumeric and less than or equal to 32 characters and
    *   greater than 0 characters in length.
    * @param {google.cloud.securitycenter.v1.Finding} request.finding
-   *   Required. The Finding being created. The name and security_marks will be ignored as
-   *   they are both output only fields on this resource.
+   *   Required. The Finding being created. The name and security_marks will be
+   *   ignored as they are both output only fields on this resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -851,16 +858,18 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the new notification config's parent. Its format is
-   *   "organizations/[organization_id]".
+   *   Required. Resource name of the new notification config's parent. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.configId
    *   Required.
    *   Unique identifier provided by the client within the parent scope.
    *   It must be between 1 and 128 characters, and contains alphanumeric
    *   characters, underscores or hyphens only.
    * @param {google.cloud.securitycenter.v1.NotificationConfig} request.notificationConfig
-   *   Required. The notification config being created. The name and the service account
-   *   will be ignored as they are both output only fields on this resource.
+   *   Required. The notification config being created. The name and the service
+   *   account will be ignored as they are both output only fields on this
+   *   resource.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1542,8 +1551,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Name of the organization to get organization settings for. Its format is
-   *   "organizations/[organization_id]/organizationSettings".
+   *   Required. Name of the organization to get organization settings for. Its
+   *   format is "organizations/[organization_id]/organizationSettings".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1739,7 +1748,7 @@ export class SecurityCenterClient {
    *   Required. The relative resource name of the finding. See:
    *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
    *   Example:
-   *   "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}".
+   *   "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}".
    * @param {google.cloud.securitycenter.v1.Finding.State} request.state
    *   Required. The desired State of the finding.
    * @param {google.protobuf.Timestamp} request.startTime
@@ -1837,9 +1846,9 @@ export class SecurityCenterClient {
    *   Required. The relative resource name of the finding. See:
    *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
    *   Example:
-   *   "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}",
-   *   "folders/{folder_id}/sources/{source_id}/finding/{finding_id}",
-   *   "projects/{project_id}/sources/{source_id}/finding/{finding_id}".
+   *   "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}",
+   *   "folders/{folder_id}/sources/{source_id}/findings/{finding_id}",
+   *   "projects/{project_id}/sources/{source_id}/findings/{finding_id}".
    * @param {google.cloud.securitycenter.v1.Finding.Mute} request.mute
    *   Required. The desired state of the Mute.
    * @param {object} [options]
@@ -2212,8 +2221,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.securitycenter.v1.Finding} request.finding
-   *   Required. The finding resource to update or create if it does not already exist.
-   *   parent, security_marks, and update_time will be ignored.
+   *   Required. The finding resource to update or create if it does not already
+   *   exist. parent, security_marks, and update_time will be ignored.
    *
    *   In the case of creation, the finding id portion of the name must be
    *   alphanumeric and less than or equal to 32 characters and greater than 0
@@ -3140,8 +3149,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, at which bulk action needs to be applied. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   Required. The parent, at which bulk action needs to be applied. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]",
    *   "projects/[project_id]".
    * @param {string} request.filter
    *   Expression that identifies findings that should be updated.
@@ -3309,8 +3318,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the organization to run asset discovery for. Its format is
-   *   "organizations/[organization_id]".
+   *   Required. Name of the organization to run asset discovery for. Its format
+   *   is "organizations/[organization_id]".
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3516,9 +3525,9 @@ export class SecurityCenterClient {
    *   Use a negated partial match on the empty string to filter based on a
    *   property not existing: `-resource_properties.my_property : ""`
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping. The string
-   *   value should follow SQL syntax: comma separated list of fields. For
-   *   example:
+   *   Required. Expression that defines what assets fields to use for grouping.
+   *   The string value should follow SQL syntax: comma separated list of fields.
+   *   For example:
    *   "security_center_properties.resource_project,security_center_properties.project".
    *
    *   The following fields are supported when compare_duration is not set:
@@ -3734,9 +3743,9 @@ export class SecurityCenterClient {
    *   Use a negated partial match on the empty string to filter based on a
    *   property not existing: `-resource_properties.my_property : ""`
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping. The string
-   *   value should follow SQL syntax: comma separated list of fields. For
-   *   example:
+   *   Required. Expression that defines what assets fields to use for grouping.
+   *   The string value should follow SQL syntax: comma separated list of fields.
+   *   For example:
    *   "security_center_properties.resource_project,security_center_properties.project".
    *
    *   The following fields are supported when compare_duration is not set:
@@ -3900,9 +3909,9 @@ export class SecurityCenterClient {
    *   Use a negated partial match on the empty string to filter based on a
    *   property not existing: `-resource_properties.my_property : ""`
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping. The string
-   *   value should follow SQL syntax: comma separated list of fields. For
-   *   example:
+   *   Required. Expression that defines what assets fields to use for grouping.
+   *   The string value should follow SQL syntax: comma separated list of fields.
+   *   For example:
    *   "security_center_properties.resource_project,security_center_properties.project".
    *
    *   The following fields are supported when compare_duration is not set:
@@ -4072,9 +4081,9 @@ export class SecurityCenterClient {
    *     * resource.project_display_name: `=`, `:`
    *     * resource.type: `=`, `:`
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping (including
-   *   `state_change`). The string value should follow SQL syntax: comma separated
-   *   list of fields. For example: "parent,resource_name".
+   *   Required. Expression that defines what assets fields to use for grouping
+   *   (including `state_change`). The string value should follow SQL syntax:
+   *   comma separated list of fields. For example: "parent,resource_name".
    *
    *   The following fields are supported:
    *
@@ -4293,9 +4302,9 @@ export class SecurityCenterClient {
    *     * resource.project_display_name: `=`, `:`
    *     * resource.type: `=`, `:`
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping (including
-   *   `state_change`). The string value should follow SQL syntax: comma separated
-   *   list of fields. For example: "parent,resource_name".
+   *   Required. Expression that defines what assets fields to use for grouping
+   *   (including `state_change`). The string value should follow SQL syntax:
+   *   comma separated list of fields. For example: "parent,resource_name".
    *
    *   The following fields are supported:
    *
@@ -4462,9 +4471,9 @@ export class SecurityCenterClient {
    *     * resource.project_display_name: `=`, `:`
    *     * resource.type: `=`, `:`
    * @param {string} request.groupBy
-   *   Required. Expression that defines what assets fields to use for grouping (including
-   *   `state_change`). The string value should follow SQL syntax: comma separated
-   *   list of fields. For example: "parent,resource_name".
+   *   Required. Expression that defines what assets fields to use for grouping
+   *   (including `state_change`). The string value should follow SQL syntax:
+   *   comma separated list of fields. For example: "parent,resource_name".
    *
    *   The following fields are supported:
    *
@@ -5702,8 +5711,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns the collection of mute configs. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   Required. The parent, which owns the collection of mute configs. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]",
    *   "projects/[project_id]".
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
@@ -5809,8 +5818,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns the collection of mute configs. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   Required. The parent, which owns the collection of mute configs. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]",
    *   "projects/[project_id]".
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
@@ -5864,8 +5873,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns the collection of mute configs. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   Required. The parent, which owns the collection of mute configs. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]",
    *   "projects/[project_id]".
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
@@ -5918,8 +5927,9 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the organization to list notification configs.
-   *   Its format is "organizations/[organization_id]".
+   *   Required. Name of the organization to list notification configs. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListNotificationConfigsResponse`; indicates
    *   that this is a continuation of a prior `ListNotificationConfigs` call, and
@@ -6024,8 +6034,9 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the organization to list notification configs.
-   *   Its format is "organizations/[organization_id]".
+   *   Required. Name of the organization to list notification configs. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListNotificationConfigsResponse`; indicates
    *   that this is a continuation of a prior `ListNotificationConfigs` call, and
@@ -6074,8 +6085,9 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the organization to list notification configs.
-   *   Its format is "organizations/[organization_id]".
+   *   Required. Name of the organization to list notification configs. Its format
+   *   is "organizations/[organization_id]", "folders/[folder_id]", or
+   *   "projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListNotificationConfigsResponse`; indicates
    *   that this is a continuation of a prior `ListNotificationConfigs` call, and
@@ -6123,8 +6135,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should be
-   *   "organizations/[organization_id], folders/[folder_id], or
+   *   Required. Resource name of the parent of sources to list. Its format should
+   *   be "organizations/[organization_id], folders/[folder_id], or
    *   projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
@@ -6226,8 +6238,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should be
-   *   "organizations/[organization_id], folders/[folder_id], or
+   *   Required. Resource name of the parent of sources to list. Its format should
+   *   be "organizations/[organization_id], folders/[folder_id], or
    *   projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
@@ -6277,8 +6289,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should be
-   *   "organizations/[organization_id], folders/[folder_id], or
+   *   Required. Resource name of the parent of sources to list. Its format should
+   *   be "organizations/[organization_id], folders/[folder_id], or
    *   projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
@@ -6331,8 +6343,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns the collection of BigQuery exports. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   Required. The parent, which owns the collection of BigQuery exports. Its
+   *   format is "organizations/[organization_id]", "folders/[folder_id]",
    *   "projects/[project_id]".
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
@@ -6437,8 +6449,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns the collection of BigQuery exports. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   Required. The parent, which owns the collection of BigQuery exports. Its
+   *   format is "organizations/[organization_id]", "folders/[folder_id]",
    *   "projects/[project_id]".
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
@@ -6491,8 +6503,8 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent, which owns the collection of BigQuery exports. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]",
+   *   Required. The parent, which owns the collection of BigQuery exports. Its
+   *   format is "organizations/[organization_id]", "folders/[folder_id]",
    *   "projects/[project_id]".
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
@@ -6880,6 +6892,50 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified folderNotificationConfig resource name string.
+   *
+   * @param {string} folder
+   * @param {string} notification_config
+   * @returns {string} Resource name string.
+   */
+  folderNotificationConfigPath(folder: string, notificationConfig: string) {
+    return this.pathTemplates.folderNotificationConfigPathTemplate.render({
+      folder: folder,
+      notification_config: notificationConfig,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderNotificationConfig resource.
+   *
+   * @param {string} folderNotificationConfigName
+   *   A fully-qualified path representing folder_notification_config resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderNotificationConfigName(
+    folderNotificationConfigName: string
+  ) {
+    return this.pathTemplates.folderNotificationConfigPathTemplate.match(
+      folderNotificationConfigName
+    ).folder;
+  }
+
+  /**
+   * Parse the notification_config from FolderNotificationConfig resource.
+   *
+   * @param {string} folderNotificationConfigName
+   *   A fully-qualified path representing folder_notification_config resource.
+   * @returns {string} A string representing the notification_config.
+   */
+  matchNotificationConfigFromFolderNotificationConfigName(
+    folderNotificationConfigName: string
+  ) {
+    return this.pathTemplates.folderNotificationConfigPathTemplate.match(
+      folderNotificationConfigName
+    ).notification_config;
+  }
+
+  /**
    * Return a fully-qualified folderSource resource name string.
    *
    * @param {string} folder
@@ -7125,48 +7181,6 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Return a fully-qualified notificationConfig resource name string.
-   *
-   * @param {string} organization
-   * @param {string} notification_config
-   * @returns {string} Resource name string.
-   */
-  notificationConfigPath(organization: string, notificationConfig: string) {
-    return this.pathTemplates.notificationConfigPathTemplate.render({
-      organization: organization,
-      notification_config: notificationConfig,
-    });
-  }
-
-  /**
-   * Parse the organization from NotificationConfig resource.
-   *
-   * @param {string} notificationConfigName
-   *   A fully-qualified path representing NotificationConfig resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromNotificationConfigName(notificationConfigName: string) {
-    return this.pathTemplates.notificationConfigPathTemplate.match(
-      notificationConfigName
-    ).organization;
-  }
-
-  /**
-   * Parse the notification_config from NotificationConfig resource.
-   *
-   * @param {string} notificationConfigName
-   *   A fully-qualified path representing NotificationConfig resource.
-   * @returns {string} A string representing the notification_config.
-   */
-  matchNotificationConfigFromNotificationConfigName(
-    notificationConfigName: string
-  ) {
-    return this.pathTemplates.notificationConfigPathTemplate.match(
-      notificationConfigName
-    ).notification_config;
-  }
-
-  /**
    * Return a fully-qualified organization resource name string.
    *
    * @param {string} organization
@@ -7358,6 +7372,55 @@ export class SecurityCenterClient {
     return this.pathTemplates.organizationMuteConfigPathTemplate.match(
       organizationMuteConfigName
     ).mute_config;
+  }
+
+  /**
+   * Return a fully-qualified organizationNotificationConfig resource name string.
+   *
+   * @param {string} organization
+   * @param {string} notification_config
+   * @returns {string} Resource name string.
+   */
+  organizationNotificationConfigPath(
+    organization: string,
+    notificationConfig: string
+  ) {
+    return this.pathTemplates.organizationNotificationConfigPathTemplate.render(
+      {
+        organization: organization,
+        notification_config: notificationConfig,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationNotificationConfig resource.
+   *
+   * @param {string} organizationNotificationConfigName
+   *   A fully-qualified path representing organization_notification_config resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationNotificationConfigName(
+    organizationNotificationConfigName: string
+  ) {
+    return this.pathTemplates.organizationNotificationConfigPathTemplate.match(
+      organizationNotificationConfigName
+    ).organization;
+  }
+
+  /**
+   * Parse the notification_config from OrganizationNotificationConfig resource.
+   *
+   * @param {string} organizationNotificationConfigName
+   *   A fully-qualified path representing organization_notification_config resource.
+   * @returns {string} A string representing the notification_config.
+   */
+  matchNotificationConfigFromOrganizationNotificationConfigName(
+    organizationNotificationConfigName: string
+  ) {
+    return this.pathTemplates.organizationNotificationConfigPathTemplate.match(
+      organizationNotificationConfigName
+    ).notification_config;
   }
 
   /**
@@ -7802,6 +7865,50 @@ export class SecurityCenterClient {
     return this.pathTemplates.projectMuteConfigPathTemplate.match(
       projectMuteConfigName
     ).mute_config;
+  }
+
+  /**
+   * Return a fully-qualified projectNotificationConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} notification_config
+   * @returns {string} Resource name string.
+   */
+  projectNotificationConfigPath(project: string, notificationConfig: string) {
+    return this.pathTemplates.projectNotificationConfigPathTemplate.render({
+      project: project,
+      notification_config: notificationConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectNotificationConfig resource.
+   *
+   * @param {string} projectNotificationConfigName
+   *   A fully-qualified path representing project_notification_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectNotificationConfigName(
+    projectNotificationConfigName: string
+  ) {
+    return this.pathTemplates.projectNotificationConfigPathTemplate.match(
+      projectNotificationConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the notification_config from ProjectNotificationConfig resource.
+   *
+   * @param {string} projectNotificationConfigName
+   *   A fully-qualified path representing project_notification_config resource.
+   * @returns {string} A string representing the notification_config.
+   */
+  matchNotificationConfigFromProjectNotificationConfigName(
+    projectNotificationConfigName: string
+  ) {
+    return this.pathTemplates.projectNotificationConfigPathTemplate.match(
+      projectNotificationConfigName
+    ).notification_config;
   }
 
   /**

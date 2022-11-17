@@ -29,8 +29,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the organization to list notification configs.
-   *  Its format is "organizations/[organization_id]".
+   *  Required. Name of the organization to list notification configs. Its format
+   *  is "organizations/[organization_id]", "folders/[folder_id]", or
+   *  "projects/[project_id]".
    */
   // const parent = 'abc123'
   /**

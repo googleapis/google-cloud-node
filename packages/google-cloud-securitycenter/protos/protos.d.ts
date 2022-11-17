@@ -2437,6 +2437,9 @@ export namespace google {
 
                     /** Finding database */
                     database?: (google.cloud.securitycenter.v1.IDatabase|null);
+
+                    /** Finding files */
+                    files?: (google.cloud.securitycenter.v1.IFile[]|null);
                 }
 
                 /** Represents a Finding. */
@@ -2546,6 +2549,9 @@ export namespace google {
 
                     /** Finding database. */
                     public database?: (google.cloud.securitycenter.v1.IDatabase|null);
+
+                    /** Finding files. */
+                    public files: google.cloud.securitycenter.v1.IFile[];
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -4424,7 +4430,8 @@ export namespace google {
                         IMPAIR_DEFENSES = 31,
                         NETWORK_SERVICE_DISCOVERY = 32,
                         ACCESS_TOKEN_MANIPULATION = 33,
-                        ABUSE_ELEVATION_CONTROL_MECHANISM = 34
+                        ABUSE_ELEVATION_CONTROL_MECHANISM = 34,
+                        DEFAULT_ACCOUNTS = 35
                     }
                 }
 
