@@ -18,6 +18,7 @@
   "packages/google-cloud-beyondcorp-clientconnectorservices": "0.2.3",
   "packages/google-cloud-beyondcorp-clientgateways": "0.2.3",
   "packages/google-cloud-bigquery-analyticshub": "0.1.2",
+  "packages/google-cloud-bigquery-connection": "2.0.2",
   "packages/google-cloud-bigquery-dataexchange": "0.3.2",
   "packages/google-cloud-bigquery-datapolicies": "0.1.2",
   "packages/google-cloud-bigquery-datatransfer": "3.1.5",
