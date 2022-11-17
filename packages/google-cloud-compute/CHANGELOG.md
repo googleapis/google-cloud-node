@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [3.6.0](https://github.com/googleapis/nodejs-compute/compare/v3.5.1...v3.6.0) (2022-11-17)
+
+
+### Features
+
+* Update Compute Engine API to revision 20221011 ([#736](https://github.com/googleapis/nodejs-compute/issues/736)) ([#856](https://github.com/googleapis/nodejs-compute/issues/856)) ([2c5e8e6](https://github.com/googleapis/nodejs-compute/commit/2c5e8e64153358161538a8f7366f760c03faa833))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#859](https://github.com/googleapis/nodejs-compute/issues/859)) ([6a1d0d6](https://github.com/googleapis/nodejs-compute/commit/6a1d0d60f75fed5c824278d977ba7513f580450c))
+* update proto definitions ([64bb3e5](https://github.com/googleapis/nodejs-compute/commit/64bb3e53eb86682b08a354cca46efe84ee5fa9a8))
+* Update proto definitions ([#863](https://github.com/googleapis/nodejs-compute/issues/863)) ([64bb3e5](https://github.com/googleapis/nodejs-compute/commit/64bb3e53eb86682b08a354cca46efe84ee5fa9a8))
+
 ## [3.5.1](https://github.com/googleapis/nodejs-compute/compare/v3.5.0...v3.5.1) (2022-09-22)
 
 
