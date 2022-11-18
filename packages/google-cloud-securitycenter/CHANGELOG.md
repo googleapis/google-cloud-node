@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [7.0.0](https://github.com/googleapis/nodejs-security-center/compare/v6.3.1...v7.0.0) (2022-11-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* Add files field to finding's list of attributes (#515)
+
+### Features
+
+* Add files field to finding's list of attributes ([#515](https://github.com/googleapis/nodejs-security-center/issues/515)) ([dc37101](https://github.com/googleapis/nodejs-security-center/commit/dc37101f4d2bb86ffa5a554ce8537bcf912d3d31))
+* Added parent display name i.e. source display name for a finding as one of the finding attributes ([78f6033](https://github.com/googleapis/nodejs-security-center/commit/78f60334258c097ba7266fc89da14fa4972cfef9))
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#518](https://github.com/googleapis/nodejs-security-center/issues/518)) ([bd07a3f](https://github.com/googleapis/nodejs-security-center/commit/bd07a3fd5096642856c126fa7b7a62a48daae834))
+* Preserve default values in x-goog-request-params header ([#511](https://github.com/googleapis/nodejs-security-center/issues/511)) ([78f6033](https://github.com/googleapis/nodejs-security-center/commit/78f60334258c097ba7266fc89da14fa4972cfef9))
+* Regenerated protos JS and TS definitions ([#521](https://github.com/googleapis/nodejs-security-center/issues/521)) ([8969f05](https://github.com/googleapis/nodejs-security-center/commit/8969f058b475db04daa76f668fd64531a8379d10))
+
 ## [6.3.1](https://github.com/googleapis/nodejs-security-center/compare/v6.3.0...v6.3.1) (2022-09-01)
 
 
