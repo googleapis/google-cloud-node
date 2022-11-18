@@ -14,7 +14,9 @@
 
 'use strict';
 
+// eslint-disable-next-line node/no-unpublished-require
 const {assert} = require('chai');
+// eslint-disable-next-line node/no-unpublished-require
 const {describe, it} = require('mocha');
 const {execSync} = require('child_process');
 const exec = cmd => execSync(cmd, {encoding: 'utf8'});
