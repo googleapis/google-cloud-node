@@ -1,6 +1,7 @@
 {
   "initial-version": "0.1.0",
   "packages": {
+    "packages/google-analytics-admin": {},
     "packages/google-analytics-data": {},
     "packages/google-api-apikeys": {},
     "packages/google-area120-tables": {},
