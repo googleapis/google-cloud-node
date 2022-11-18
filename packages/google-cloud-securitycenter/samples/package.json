@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-security-center-samples",
+  "private": true,
+  "files": [
+    "**/*.js",
+    "!system-test/"
+  ],
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "scripts": {
+    "test": "mocha system-test/ --recursive --timeout 6000000"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google-cloud/pubsub": "^3.0.0",
+    "@google-cloud/security-center": "^7.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.0",
+    "uuid": "^9.0.0"
+  }
+}
