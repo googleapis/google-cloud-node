@@ -4,6 +4,7 @@
     "packages/google-analytics-admin": {},
     "packages/google-analytics-data": {},
     "packages/google-api-apikeys": {},
+    "packages/google-area120-tables": {},
     "packages/google-api-servicecontrol": {},
     "packages/google-api-servicemanagement": {},
     "packages/google-api-serviceusage": {},
