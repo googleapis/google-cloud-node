@@ -14,13 +14,11 @@
 
 'use strict';
 
-const {assert} = require('chai');
+const assert = require('assert');
 const {describe, it, before} = require('mocha');
 const {execSync} = require('child_process');
-const {CloudTasksClient} = require('@google-cloud/tasks');
+const {CloudTasksClient} = require('@google-cloud/tasks').v2;
 const client = new CloudTasksClient();
-
-const exec = cmd => execSync(cmd, {encoding: 'utf-8'});
 
 describe('Cloud Task Sample Tests', async () => {
   let projectId;
@@ -29,8 +27,10 @@ describe('Cloud Task Sample Tests', async () => {
     projectId = await client.getProjectId();
   });
 
-  it('quickstart sample should create a task', async () => {
-    const stdout = exec(`node quickstart.js ${projectId} us-central1`);
-    assert.match(stdout !== null);
+  it('quickstart sample should list tasks', async () => {
+    const stdout = execSync(
+      `node quickstart.js projects/${projectId}/locations/us-central1`
+    );
+    assert.ok(stdout !== null);
   });
 });
