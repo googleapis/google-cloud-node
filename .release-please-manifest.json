@@ -94,6 +94,7 @@
   "packages/google-cloud-securitycenter": "7.0.0",
   "packages/google-cloud-servicedirectory": "4.0.4",
   "packages/google-cloud-shell": "2.0.4",
+  "packages/google-cloud-tasks": "3.0.5",
   "packages/google-cloud-talent": "5.0.1",
   "packages/google-cloud-texttospeech": "4.0.4",
   "packages/google-cloud-tpu": "2.2.0",
