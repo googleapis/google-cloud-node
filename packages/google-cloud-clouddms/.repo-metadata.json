@@ -1,0 +1,17 @@
+{
+  "name": "clouddms",
+  "aoi_shortname": "datamigration",
+  "name_pretty": "Cloud Database Migration Service",
+  "product_documentation": "https://cloud.google.com/database-migration/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dms/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/dms",
+  "api_id": "datamigration.googleapis.com",
+  "requires_billing": true,
+  "default_version": "v1",
+  "api_shortname": "dms",
+  "library_type": "GAPIC_AUTO"
+}

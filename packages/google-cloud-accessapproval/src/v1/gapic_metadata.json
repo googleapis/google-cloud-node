@@ -1,0 +1,117 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.accessapproval.v1",
+  "libraryPackage": "@google-cloud/access-approval",
+  "services": {
+    "AccessApproval": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AccessApprovalClient",
+          "rpcs": {
+            "GetApprovalRequest": {
+              "methods": [
+                "getApprovalRequest"
+              ]
+            },
+            "ApproveApprovalRequest": {
+              "methods": [
+                "approveApprovalRequest"
+              ]
+            },
+            "DismissApprovalRequest": {
+              "methods": [
+                "dismissApprovalRequest"
+              ]
+            },
+            "InvalidateApprovalRequest": {
+              "methods": [
+                "invalidateApprovalRequest"
+              ]
+            },
+            "GetAccessApprovalSettings": {
+              "methods": [
+                "getAccessApprovalSettings"
+              ]
+            },
+            "UpdateAccessApprovalSettings": {
+              "methods": [
+                "updateAccessApprovalSettings"
+              ]
+            },
+            "DeleteAccessApprovalSettings": {
+              "methods": [
+                "deleteAccessApprovalSettings"
+              ]
+            },
+            "GetAccessApprovalServiceAccount": {
+              "methods": [
+                "getAccessApprovalServiceAccount"
+              ]
+            },
+            "ListApprovalRequests": {
+              "methods": [
+                "listApprovalRequests",
+                "listApprovalRequestsStream",
+                "listApprovalRequestsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AccessApprovalClient",
+          "rpcs": {
+            "GetApprovalRequest": {
+              "methods": [
+                "getApprovalRequest"
+              ]
+            },
+            "ApproveApprovalRequest": {
+              "methods": [
+                "approveApprovalRequest"
+              ]
+            },
+            "DismissApprovalRequest": {
+              "methods": [
+                "dismissApprovalRequest"
+              ]
+            },
+            "InvalidateApprovalRequest": {
+              "methods": [
+                "invalidateApprovalRequest"
+              ]
+            },
+            "GetAccessApprovalSettings": {
+              "methods": [
+                "getAccessApprovalSettings"
+              ]
+            },
+            "UpdateAccessApprovalSettings": {
+              "methods": [
+                "updateAccessApprovalSettings"
+              ]
+            },
+            "DeleteAccessApprovalSettings": {
+              "methods": [
+                "deleteAccessApprovalSettings"
+              ]
+            },
+            "GetAccessApprovalServiceAccount": {
+              "methods": [
+                "getAccessApprovalServiceAccount"
+              ]
+            },
+            "ListApprovalRequests": {
+              "methods": [
+                "listApprovalRequests",
+                "listApprovalRequestsStream",
+                "listApprovalRequestsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
