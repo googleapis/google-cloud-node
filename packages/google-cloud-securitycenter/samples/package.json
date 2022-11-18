@@ -9,7 +9,7 @@
     "node": ">=12.0.0"
   },
   "scripts": {
-    "test": "mocha system-test/ --recursive --timeout 6000000"
+    "test": "mocha test/ --recursive --timeout 6000000"
   },
   "license": "Apache-2.0",
   "dependencies": {
