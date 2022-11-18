@@ -1,7 +1,7 @@
 {
   "language": "nodejs",
   "api_id": "securitycenter.googleapis.com",
-  "repo": "googleapis/nodejs-security-center",
+  "repo": "googleapis/google-cloud-node",
   "release_level": "stable",
   "distribution_name": "@google-cloud/security-center",
   "default_version": "v1",
