@@ -25,7 +25,7 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const GA4_PROPERTY_ID = process.env.GA4_PROPERTY_ID || '222596558';
 
-describe('Quickstart', () => {
+describe.skip('Quickstart', () => {
   it('should run quickstart', async () => {
     // eslint-disable-next-line no-unused-vars
     const stdout = execSync(`node ./quickstart.js ${GA4_PROPERTY_ID}`);
