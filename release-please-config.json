@@ -92,6 +92,7 @@
     "packages/google-cloud-secretmanager": {},
     "packages/google-cloud-security-privateca": {},
     "packages/google-cloud-security-publicca": {},
+    "packages/google-cloud-securitycenter": {},
     "packages/google-cloud-servicedirectory": {},
     "packages/google-cloud-shell": {},
     "packages/google-cloud-talent": {},
