@@ -26,7 +26,7 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-describe('Quickstart', async () => {
+describe.skip('Quickstart', async () => {
   it('should run quickstart', async () => {
     try {
       execSync('node quickstart.js', {cwd});
