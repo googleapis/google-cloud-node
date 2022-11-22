@@ -29,8 +29,7 @@ function main(scope, names) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Only {{iam_name_short}} policies on or below the scope will be
-   *  returned.
+   *  Required. Only IAM policies on or below the scope will be returned.
    *  This can only be an organization number (such as "organizations/123"), a
    *  folder number (such as "folders/123"), a project ID (such as
    *  "projects/my-project-id"), or a project number (such as "projects/12345").

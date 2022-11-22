@@ -70,9 +70,9 @@ function main(parent) {
    *  it outputs the supported relationships' history on the asset_names  or
    *  returns an error if any of the asset_names's types has no relationship
    *  support.
-   *  See Introduction to
-   *  {{cai_name}} (https://cloud.google.com/asset-inventory/docs/overview) for
-   *  all supported asset types and relationship types.
+   *  See Introduction to Cloud Asset
+   *  Inventory (https://cloud.google.com/asset-inventory/docs/overview) for all
+   *  supported asset types and relationship types.
    */
   // const relationshipTypes = 'abc123'
 

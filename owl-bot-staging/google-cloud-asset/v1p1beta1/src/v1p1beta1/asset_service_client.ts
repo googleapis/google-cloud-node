@@ -297,7 +297,7 @@ export class AssetServiceClient {
   // -------------------
 
  /**
- * Searches all the resources under a given accessible {{crm_name}} scope
+ * Searches all the resources under a given accessible CRM scope
  * (project/folder/organization). This RPC gives callers
  * especially admins the ability to search all the resources under a scope,
  * even if they don't have .get permission of all the resources. Callers
@@ -307,8 +307,8 @@ export class AssetServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.scope
- *   Required. The relative name of an asset. The search is limited to the
- *   resources within the `scope`. The allowed value must be:
+ *   Required. The relative name of an asset. The search is limited to the resources
+ *   within the `scope`. The allowed value must be:
  *   * Organization number (such as "organizations/123")
  *   * Folder number(such as "folders/1234")
  *   * Project number (such as "projects/12345")
@@ -316,24 +316,23 @@ export class AssetServiceClient {
  * @param {string} [request.query]
  *   Optional. The query statement.
  * @param {string[]} [request.assetTypes]
- *   Optional. A list of asset types that this request searches for. If empty,
- *   it will search all the supported asset types.
+ *   Optional. A list of asset types that this request searches for. If empty, it will
+ *   search all the supported asset types.
  * @param {number} [request.pageSize]
- *   Optional. The page size for search result pagination. Page size is capped
- *   at 500 even if a larger value is given. If set to zero, server will pick an
- *   appropriate default. Returned results may be fewer than requested. When
- *   this happens, there could be more results as long as `next_page_token` is
- *   returned.
+ *   Optional. The page size for search result pagination. Page size is capped at 500 even
+ *   if a larger value is given. If set to zero, server will pick an appropriate
+ *   default. Returned results may be fewer than requested. When this happens,
+ *   there could be more results as long as `next_page_token` is returned.
  * @param {string} [request.pageToken]
- *   Optional. If present, then retrieve the next batch of results from the
- *   preceding call to this method.  `page_token` must be the value of
- *   `next_page_token` from the previous response. The values of all other
- *   method parameters, must be identical to those in the previous call.
+ *   Optional. If present, then retrieve the next batch of results from the preceding call
+ *   to this method.  `page_token` must be the value of `next_page_token` from
+ *   the previous response. The values of all other method parameters, must be
+ *   identical to those in the previous call.
  * @param {string} [request.orderBy]
- *   Optional. A comma separated list of fields specifying the sorting order of
- *   the results. The default order is ascending. Add " desc" after the field
- *   name to indicate descending order. Redundant space characters are ignored.
- *   For example, "  foo ,  bar  desc  ".
+ *   Optional. A comma separated list of fields specifying the sorting order of the
+ *   results. The default order is ascending. Add " desc" after the field name
+ *   to indicate descending order. Redundant space characters are ignored. For
+ *   example, "  foo ,  bar  desc  ".
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -409,8 +408,8 @@ export class AssetServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.scope
- *   Required. The relative name of an asset. The search is limited to the
- *   resources within the `scope`. The allowed value must be:
+ *   Required. The relative name of an asset. The search is limited to the resources
+ *   within the `scope`. The allowed value must be:
  *   * Organization number (such as "organizations/123")
  *   * Folder number(such as "folders/1234")
  *   * Project number (such as "projects/12345")
@@ -418,24 +417,23 @@ export class AssetServiceClient {
  * @param {string} [request.query]
  *   Optional. The query statement.
  * @param {string[]} [request.assetTypes]
- *   Optional. A list of asset types that this request searches for. If empty,
- *   it will search all the supported asset types.
+ *   Optional. A list of asset types that this request searches for. If empty, it will
+ *   search all the supported asset types.
  * @param {number} [request.pageSize]
- *   Optional. The page size for search result pagination. Page size is capped
- *   at 500 even if a larger value is given. If set to zero, server will pick an
- *   appropriate default. Returned results may be fewer than requested. When
- *   this happens, there could be more results as long as `next_page_token` is
- *   returned.
+ *   Optional. The page size for search result pagination. Page size is capped at 500 even
+ *   if a larger value is given. If set to zero, server will pick an appropriate
+ *   default. Returned results may be fewer than requested. When this happens,
+ *   there could be more results as long as `next_page_token` is returned.
  * @param {string} [request.pageToken]
- *   Optional. If present, then retrieve the next batch of results from the
- *   preceding call to this method.  `page_token` must be the value of
- *   `next_page_token` from the previous response. The values of all other
- *   method parameters, must be identical to those in the previous call.
+ *   Optional. If present, then retrieve the next batch of results from the preceding call
+ *   to this method.  `page_token` must be the value of `next_page_token` from
+ *   the previous response. The values of all other method parameters, must be
+ *   identical to those in the previous call.
  * @param {string} [request.orderBy]
- *   Optional. A comma separated list of fields specifying the sorting order of
- *   the results. The default order is ascending. Add " desc" after the field
- *   name to indicate descending order. Redundant space characters are ignored.
- *   For example, "  foo ,  bar  desc  ".
+ *   Optional. A comma separated list of fields specifying the sorting order of the
+ *   results. The default order is ascending. Add " desc" after the field name
+ *   to indicate descending order. Redundant space characters are ignored. For
+ *   example, "  foo ,  bar  desc  ".
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -478,8 +476,8 @@ export class AssetServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.scope
- *   Required. The relative name of an asset. The search is limited to the
- *   resources within the `scope`. The allowed value must be:
+ *   Required. The relative name of an asset. The search is limited to the resources
+ *   within the `scope`. The allowed value must be:
  *   * Organization number (such as "organizations/123")
  *   * Folder number(such as "folders/1234")
  *   * Project number (such as "projects/12345")
@@ -487,24 +485,23 @@ export class AssetServiceClient {
  * @param {string} [request.query]
  *   Optional. The query statement.
  * @param {string[]} [request.assetTypes]
- *   Optional. A list of asset types that this request searches for. If empty,
- *   it will search all the supported asset types.
+ *   Optional. A list of asset types that this request searches for. If empty, it will
+ *   search all the supported asset types.
  * @param {number} [request.pageSize]
- *   Optional. The page size for search result pagination. Page size is capped
- *   at 500 even if a larger value is given. If set to zero, server will pick an
- *   appropriate default. Returned results may be fewer than requested. When
- *   this happens, there could be more results as long as `next_page_token` is
- *   returned.
+ *   Optional. The page size for search result pagination. Page size is capped at 500 even
+ *   if a larger value is given. If set to zero, server will pick an appropriate
+ *   default. Returned results may be fewer than requested. When this happens,
+ *   there could be more results as long as `next_page_token` is returned.
  * @param {string} [request.pageToken]
- *   Optional. If present, then retrieve the next batch of results from the
- *   preceding call to this method.  `page_token` must be the value of
- *   `next_page_token` from the previous response. The values of all other
- *   method parameters, must be identical to those in the previous call.
+ *   Optional. If present, then retrieve the next batch of results from the preceding call
+ *   to this method.  `page_token` must be the value of `next_page_token` from
+ *   the previous response. The values of all other method parameters, must be
+ *   identical to those in the previous call.
  * @param {string} [request.orderBy]
- *   Optional. A comma separated list of fields specifying the sorting order of
- *   the results. The default order is ascending. Add " desc" after the field
- *   name to indicate descending order. Redundant space characters are ignored.
- *   For example, "  foo ,  bar  desc  ".
+ *   Optional. A comma separated list of fields specifying the sorting order of the
+ *   results. The default order is ascending. Add " desc" after the field name
+ *   to indicate descending order. Redundant space characters are ignored. For
+ *   example, "  foo ,  bar  desc  ".
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -541,19 +538,18 @@ export class AssetServiceClient {
     ) as AsyncIterable<protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata>;
   }
  /**
- * Searches all the {{iam_name_short}} policies under a given accessible
- * {{crm_name}} scope (project/folder/organization). This RPC gives callers
- * especially admins the ability to search all the {{iam_name_short}} policies
- * under a scope, even if they don't have .getIamPolicy permission of all the
- * {{iam_name_short}} policies. Callers should have
- * cloud.assets.SearchAllIamPolicies permission on the requested scope,
- * otherwise it will be rejected.
+ * Searches all the IAM policies under a given accessible CRM scope
+ * (project/folder/organization). This RPC gives callers
+ * especially admins the ability to search all the IAM policies under a scope,
+ * even if they don't have .getIamPolicy permission of all the IAM policies.
+ * Callers should have cloud.assets.SearchAllIamPolicies permission on the
+ * requested scope, otherwise it will be rejected.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.scope
- *   Required. The relative name of an asset. The search is limited to the
- *   resources within the `scope`. The allowed value must be:
+ *   Required. The relative name of an asset. The search is limited to the resources
+ *   within the `scope`. The allowed value must be:
  *   * Organization number (such as "organizations/123")
  *   * Folder number(such as "folders/1234")
  *   * Project number (such as "projects/12345")
@@ -564,16 +560,15 @@ export class AssetServiceClient {
  *   * "policy:myuser@mydomain.com"
  *   * "policy:(myuser@mydomain.com viewer)"
  * @param {number} [request.pageSize]
- *   Optional. The page size for search result pagination. Page size is capped
- *   at 500 even if a larger value is given. If set to zero, server will pick an
- *   appropriate default. Returned results may be fewer than requested. When
- *   this happens, there could be more results as long as `next_page_token` is
- *   returned.
+ *   Optional. The page size for search result pagination. Page size is capped at 500 even
+ *   if a larger value is given. If set to zero, server will pick an appropriate
+ *   default. Returned results may be fewer than requested. When this happens,
+ *   there could be more results as long as `next_page_token` is returned.
  * @param {string} [request.pageToken]
- *   Optional. If present, retrieve the next batch of results from the preceding
- *   call to this method. `page_token` must be the value of `next_page_token`
- *   from the previous response. The values of all other method parameters must
- *   be identical to those in the previous call.
+ *   Optional. If present, retrieve the next batch of results from the preceding call to
+ *   this method. `page_token` must be the value of `next_page_token` from the
+ *   previous response. The values of all other method parameters must be
+ *   identical to those in the previous call.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -649,8 +644,8 @@ export class AssetServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.scope
- *   Required. The relative name of an asset. The search is limited to the
- *   resources within the `scope`. The allowed value must be:
+ *   Required. The relative name of an asset. The search is limited to the resources
+ *   within the `scope`. The allowed value must be:
  *   * Organization number (such as "organizations/123")
  *   * Folder number(such as "folders/1234")
  *   * Project number (such as "projects/12345")
@@ -661,16 +656,15 @@ export class AssetServiceClient {
  *   * "policy:myuser@mydomain.com"
  *   * "policy:(myuser@mydomain.com viewer)"
  * @param {number} [request.pageSize]
- *   Optional. The page size for search result pagination. Page size is capped
- *   at 500 even if a larger value is given. If set to zero, server will pick an
- *   appropriate default. Returned results may be fewer than requested. When
- *   this happens, there could be more results as long as `next_page_token` is
- *   returned.
+ *   Optional. The page size for search result pagination. Page size is capped at 500 even
+ *   if a larger value is given. If set to zero, server will pick an appropriate
+ *   default. Returned results may be fewer than requested. When this happens,
+ *   there could be more results as long as `next_page_token` is returned.
  * @param {string} [request.pageToken]
- *   Optional. If present, retrieve the next batch of results from the preceding
- *   call to this method. `page_token` must be the value of `next_page_token`
- *   from the previous response. The values of all other method parameters must
- *   be identical to those in the previous call.
+ *   Optional. If present, retrieve the next batch of results from the preceding call to
+ *   this method. `page_token` must be the value of `next_page_token` from the
+ *   previous response. The values of all other method parameters must be
+ *   identical to those in the previous call.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -713,8 +707,8 @@ export class AssetServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.scope
- *   Required. The relative name of an asset. The search is limited to the
- *   resources within the `scope`. The allowed value must be:
+ *   Required. The relative name of an asset. The search is limited to the resources
+ *   within the `scope`. The allowed value must be:
  *   * Organization number (such as "organizations/123")
  *   * Folder number(such as "folders/1234")
  *   * Project number (such as "projects/12345")
@@ -725,16 +719,15 @@ export class AssetServiceClient {
  *   * "policy:myuser@mydomain.com"
  *   * "policy:(myuser@mydomain.com viewer)"
  * @param {number} [request.pageSize]
- *   Optional. The page size for search result pagination. Page size is capped
- *   at 500 even if a larger value is given. If set to zero, server will pick an
- *   appropriate default. Returned results may be fewer than requested. When
- *   this happens, there could be more results as long as `next_page_token` is
- *   returned.
+ *   Optional. The page size for search result pagination. Page size is capped at 500 even
+ *   if a larger value is given. If set to zero, server will pick an appropriate
+ *   default. Returned results may be fewer than requested. When this happens,
+ *   there could be more results as long as `next_page_token` is returned.
  * @param {string} [request.pageToken]
- *   Optional. If present, retrieve the next batch of results from the preceding
- *   call to this method. `page_token` must be the value of `next_page_token`
- *   from the previous response. The values of all other method parameters must
- *   be identical to those in the previous call.
+ *   Optional. If present, retrieve the next batch of results from the preceding call to
+ *   this method. `page_token` must be the value of `next_page_token` from the
+ *   previous response. The values of all other method parameters must be
+ *   identical to those in the previous call.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
