@@ -21,4 +21,4 @@ set -eo pipefail
 npm install
 
 # publish docs to devsite
-npx @google-cloud/cloud-rad
+npx @google-cloud/cloud-rad@0.2.19
