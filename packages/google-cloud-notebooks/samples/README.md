@@ -14,6 +14,7 @@
 * [Samples](#samples)
   * [Managed_notebook_service.create_runtime](#managed_notebook_service.create_runtime)
   * [Managed_notebook_service.delete_runtime](#managed_notebook_service.delete_runtime)
+  * [Managed_notebook_service.diagnose_runtime](#managed_notebook_service.diagnose_runtime)
   * [Managed_notebook_service.get_runtime](#managed_notebook_service.get_runtime)
   * [Managed_notebook_service.list_runtimes](#managed_notebook_service.list_runtimes)
   * [Managed_notebook_service.refresh_runtime_token_internal](#managed_notebook_service.refresh_runtime_token_internal)
@@ -22,6 +23,8 @@
   * [Managed_notebook_service.start_runtime](#managed_notebook_service.start_runtime)
   * [Managed_notebook_service.stop_runtime](#managed_notebook_service.stop_runtime)
   * [Managed_notebook_service.switch_runtime](#managed_notebook_service.switch_runtime)
+  * [Managed_notebook_service.update_runtime](#managed_notebook_service.update_runtime)
+  * [Managed_notebook_service.upgrade_runtime](#managed_notebook_service.upgrade_runtime)
   * [Notebook_service.create_environment](#notebook_service.create_environment)
   * [Notebook_service.create_execution](#notebook_service.create_execution)
   * [Notebook_service.create_instance](#notebook_service.create_instance)
@@ -30,6 +33,7 @@
   * [Notebook_service.delete_execution](#notebook_service.delete_execution)
   * [Notebook_service.delete_instance](#notebook_service.delete_instance)
   * [Notebook_service.delete_schedule](#notebook_service.delete_schedule)
+  * [Notebook_service.diagnose_instance](#notebook_service.diagnose_instance)
   * [Notebook_service.get_environment](#notebook_service.get_environment)
   * [Notebook_service.get_execution](#notebook_service.get_execution)
   * [Notebook_service.get_instance](#notebook_service.get_instance)
@@ -119,6 +123,23 @@ __Usage:__
 
 
 `node packages/google-cloud-notebooks/samples/generated/v1/managed_notebook_service.delete_runtime.js`
+
+
+-----
+
+
+
+
+### Managed_notebook_service.diagnose_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1/managed_notebook_service.diagnose_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v1/managed_notebook_service.diagnose_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v1/managed_notebook_service.diagnose_runtime.js`
 
 
 -----
@@ -262,6 +283,40 @@ __Usage:__
 
 
 
+### Managed_notebook_service.update_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1/managed_notebook_service.update_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v1/managed_notebook_service.update_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v1/managed_notebook_service.update_runtime.js`
+
+
+-----
+
+
+
+
+### Managed_notebook_service.upgrade_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1/managed_notebook_service.upgrade_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v1/managed_notebook_service.upgrade_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v1/managed_notebook_service.upgrade_runtime.js`
+
+
+-----
+
+
+
+
 ### Notebook_service.create_environment
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1/notebook_service.create_environment.js).
@@ -391,6 +446,23 @@ __Usage:__
 
 
 `node packages/google-cloud-notebooks/samples/generated/v1/notebook_service.delete_schedule.js`
+
+
+-----
+
+
+
+
+### Notebook_service.diagnose_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v1/notebook_service.diagnose_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v1/notebook_service.diagnose_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v1/notebook_service.diagnose_instance.js`
 
 
 -----
