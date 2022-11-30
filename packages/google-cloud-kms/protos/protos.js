@@ -3506,6 +3506,10 @@
                                 case 13:
                                 case 31:
                                 case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
                                 case 18:
                                     break;
                                 }
@@ -3654,6 +3658,22 @@
                             case "HMAC_SHA256":
                             case 32:
                                 message.algorithm = 32;
+                                break;
+                            case "HMAC_SHA1":
+                            case 33:
+                                message.algorithm = 33;
+                                break;
+                            case "HMAC_SHA384":
+                            case 34:
+                                message.algorithm = 34;
+                                break;
+                            case "HMAC_SHA512":
+                            case 35:
+                                message.algorithm = 35;
+                                break;
+                            case "HMAC_SHA224":
+                            case 36:
+                                message.algorithm = 36;
                                 break;
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
@@ -4700,6 +4720,10 @@
                                 case 13:
                                 case 31:
                                 case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
                                 case 18:
                                     break;
                                 }
@@ -4935,6 +4959,22 @@
                             case 32:
                                 message.algorithm = 32;
                                 break;
+                            case "HMAC_SHA1":
+                            case 33:
+                                message.algorithm = 33;
+                                break;
+                            case "HMAC_SHA384":
+                            case 34:
+                                message.algorithm = 34;
+                                break;
+                            case "HMAC_SHA512":
+                            case 35:
+                                message.algorithm = 35;
+                                break;
+                            case "HMAC_SHA224":
+                            case 36:
+                                message.algorithm = 36;
+                                break;
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
                                 message.algorithm = 18;
@@ -5098,6 +5138,10 @@
                          * @property {number} EC_SIGN_P384_SHA384=13 EC_SIGN_P384_SHA384 value
                          * @property {number} EC_SIGN_SECP256K1_SHA256=31 EC_SIGN_SECP256K1_SHA256 value
                          * @property {number} HMAC_SHA256=32 HMAC_SHA256 value
+                         * @property {number} HMAC_SHA1=33 HMAC_SHA1 value
+                         * @property {number} HMAC_SHA384=34 HMAC_SHA384 value
+                         * @property {number} HMAC_SHA512=35 HMAC_SHA512 value
+                         * @property {number} HMAC_SHA224=36 HMAC_SHA224 value
                          * @property {number} EXTERNAL_SYMMETRIC_ENCRYPTION=18 EXTERNAL_SYMMETRIC_ENCRYPTION value
                          */
                         CryptoKeyVersion.CryptoKeyVersionAlgorithm = (function() {
@@ -5126,6 +5170,10 @@
                             values[valuesById[13] = "EC_SIGN_P384_SHA384"] = 13;
                             values[valuesById[31] = "EC_SIGN_SECP256K1_SHA256"] = 31;
                             values[valuesById[32] = "HMAC_SHA256"] = 32;
+                            values[valuesById[33] = "HMAC_SHA1"] = 33;
+                            values[valuesById[34] = "HMAC_SHA384"] = 34;
+                            values[valuesById[35] = "HMAC_SHA512"] = 35;
+                            values[valuesById[36] = "HMAC_SHA224"] = 36;
                             values[valuesById[18] = "EXTERNAL_SYMMETRIC_ENCRYPTION"] = 18;
                             return values;
                         })();
@@ -5395,6 +5443,10 @@
                                 case 13:
                                 case 31:
                                 case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
                                 case 18:
                                     break;
                                 }
@@ -5536,6 +5588,22 @@
                             case "HMAC_SHA256":
                             case 32:
                                 message.algorithm = 32;
+                                break;
+                            case "HMAC_SHA1":
+                            case 33:
+                                message.algorithm = 33;
+                                break;
+                            case "HMAC_SHA384":
+                            case 34:
+                                message.algorithm = 34;
+                                break;
+                            case "HMAC_SHA512":
+                            case 35:
+                                message.algorithm = 35;
+                                break;
+                            case "HMAC_SHA224":
+                            case 36:
+                                message.algorithm = 36;
                                 break;
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
@@ -5918,6 +5986,10 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
@@ -6006,6 +6078,22 @@
                             case "RSA_OAEP_4096_SHA1_AES_256":
                             case 2:
                                 message.importMethod = 2;
+                                break;
+                            case "RSA_OAEP_3072_SHA256_AES_256":
+                            case 3:
+                                message.importMethod = 3;
+                                break;
+                            case "RSA_OAEP_4096_SHA256_AES_256":
+                            case 4:
+                                message.importMethod = 4;
+                                break;
+                            case "RSA_OAEP_3072_SHA256":
+                            case 5:
+                                message.importMethod = 5;
+                                break;
+                            case "RSA_OAEP_4096_SHA256":
+                            case 6:
+                                message.importMethod = 6;
                                 break;
                             }
                             switch (object.protectionLevel) {
@@ -6174,12 +6262,20 @@
                          * @property {number} IMPORT_METHOD_UNSPECIFIED=0 IMPORT_METHOD_UNSPECIFIED value
                          * @property {number} RSA_OAEP_3072_SHA1_AES_256=1 RSA_OAEP_3072_SHA1_AES_256 value
                          * @property {number} RSA_OAEP_4096_SHA1_AES_256=2 RSA_OAEP_4096_SHA1_AES_256 value
+                         * @property {number} RSA_OAEP_3072_SHA256_AES_256=3 RSA_OAEP_3072_SHA256_AES_256 value
+                         * @property {number} RSA_OAEP_4096_SHA256_AES_256=4 RSA_OAEP_4096_SHA256_AES_256 value
+                         * @property {number} RSA_OAEP_3072_SHA256=5 RSA_OAEP_3072_SHA256 value
+                         * @property {number} RSA_OAEP_4096_SHA256=6 RSA_OAEP_4096_SHA256 value
                          */
                         ImportJob.ImportMethod = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "IMPORT_METHOD_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "RSA_OAEP_3072_SHA1_AES_256"] = 1;
                             values[valuesById[2] = "RSA_OAEP_4096_SHA1_AES_256"] = 2;
+                            values[valuesById[3] = "RSA_OAEP_3072_SHA256_AES_256"] = 3;
+                            values[valuesById[4] = "RSA_OAEP_4096_SHA256_AES_256"] = 4;
+                            values[valuesById[5] = "RSA_OAEP_3072_SHA256"] = 5;
+                            values[valuesById[6] = "RSA_OAEP_4096_SHA256"] = 6;
                             return values;
                         })();
     
@@ -11693,6 +11789,7 @@
                          * @property {string|null} [cryptoKeyVersion] ImportCryptoKeyVersionRequest cryptoKeyVersion
                          * @property {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null} [algorithm] ImportCryptoKeyVersionRequest algorithm
                          * @property {string|null} [importJob] ImportCryptoKeyVersionRequest importJob
+                         * @property {Uint8Array|null} [wrappedKey] ImportCryptoKeyVersionRequest wrappedKey
                          * @property {Uint8Array|null} [rsaAesWrappedKey] ImportCryptoKeyVersionRequest rsaAesWrappedKey
                          */
     
@@ -11742,6 +11839,14 @@
                          * @instance
                          */
                         ImportCryptoKeyVersionRequest.prototype.importJob = "";
+    
+                        /**
+                         * ImportCryptoKeyVersionRequest wrappedKey.
+                         * @member {Uint8Array} wrappedKey
+                         * @memberof google.cloud.kms.v1.ImportCryptoKeyVersionRequest
+                         * @instance
+                         */
+                        ImportCryptoKeyVersionRequest.prototype.wrappedKey = $util.newBuffer([]);
     
                         /**
                          * ImportCryptoKeyVersionRequest rsaAesWrappedKey.
@@ -11799,6 +11904,8 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.rsaAesWrappedKey);
                             if (message.cryptoKeyVersion != null && Object.hasOwnProperty.call(message, "cryptoKeyVersion"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.cryptoKeyVersion);
+                            if (message.wrappedKey != null && Object.hasOwnProperty.call(message, "wrappedKey"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).bytes(message.wrappedKey);
                             return writer;
                         };
     
@@ -11847,6 +11954,10 @@
                                     }
                                 case 4: {
                                         message.importJob = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.wrappedKey = reader.bytes();
                                         break;
                                     }
                                 case 5: {
@@ -11923,12 +12034,19 @@
                                 case 13:
                                 case 31:
                                 case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
                                 case 18:
                                     break;
                                 }
                             if (message.importJob != null && message.hasOwnProperty("importJob"))
                                 if (!$util.isString(message.importJob))
                                     return "importJob: string expected";
+                            if (message.wrappedKey != null && message.hasOwnProperty("wrappedKey"))
+                                if (!(message.wrappedKey && typeof message.wrappedKey.length === "number" || $util.isString(message.wrappedKey)))
+                                    return "wrappedKey: buffer expected";
                             if (message.rsaAesWrappedKey != null && message.hasOwnProperty("rsaAesWrappedKey")) {
                                 properties.wrappedKeyMaterial = 1;
                                 if (!(message.rsaAesWrappedKey && typeof message.rsaAesWrappedKey.length === "number" || $util.isString(message.rsaAesWrappedKey)))
@@ -12056,6 +12174,22 @@
                             case 32:
                                 message.algorithm = 32;
                                 break;
+                            case "HMAC_SHA1":
+                            case 33:
+                                message.algorithm = 33;
+                                break;
+                            case "HMAC_SHA384":
+                            case 34:
+                                message.algorithm = 34;
+                                break;
+                            case "HMAC_SHA512":
+                            case 35:
+                                message.algorithm = 35;
+                                break;
+                            case "HMAC_SHA224":
+                            case 36:
+                                message.algorithm = 36;
+                                break;
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
                                 message.algorithm = 18;
@@ -12063,6 +12197,11 @@
                             }
                             if (object.importJob != null)
                                 message.importJob = String(object.importJob);
+                            if (object.wrappedKey != null)
+                                if (typeof object.wrappedKey === "string")
+                                    $util.base64.decode(object.wrappedKey, message.wrappedKey = $util.newBuffer($util.base64.length(object.wrappedKey)), 0);
+                                else if (object.wrappedKey.length >= 0)
+                                    message.wrappedKey = object.wrappedKey;
                             if (object.rsaAesWrappedKey != null)
                                 if (typeof object.rsaAesWrappedKey === "string")
                                     $util.base64.decode(object.rsaAesWrappedKey, message.rsaAesWrappedKey = $util.newBuffer($util.base64.length(object.rsaAesWrappedKey)), 0);
@@ -12089,6 +12228,13 @@
                                 object.algorithm = options.enums === String ? "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED" : 0;
                                 object.importJob = "";
                                 object.cryptoKeyVersion = "";
+                                if (options.bytes === String)
+                                    object.wrappedKey = "";
+                                else {
+                                    object.wrappedKey = [];
+                                    if (options.bytes !== Array)
+                                        object.wrappedKey = $util.newBuffer(object.wrappedKey);
+                                }
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -12103,6 +12249,8 @@
                             }
                             if (message.cryptoKeyVersion != null && message.hasOwnProperty("cryptoKeyVersion"))
                                 object.cryptoKeyVersion = message.cryptoKeyVersion;
+                            if (message.wrappedKey != null && message.hasOwnProperty("wrappedKey"))
+                                object.wrappedKey = options.bytes === String ? $util.base64.encode(message.wrappedKey, 0, message.wrappedKey.length) : options.bytes === Array ? Array.prototype.slice.call(message.wrappedKey) : message.wrappedKey;
                             return object;
                         };
     

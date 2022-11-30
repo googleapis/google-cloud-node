@@ -235,7 +235,7 @@
             "regionTag": "tpu_v1_generated_Tpu_StopNode_async",
             "title": "Tpu stopNode Sample",
             "origin": "API_DEFINITION",
-            "description": " Stops a node.",
+            "description": " Stops a node, this operation is only available with single TPU nodes.",
             "canonical": true,
             "file": "tpu.stop_node.js",
             "language": "JAVASCRIPT",
