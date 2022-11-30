@@ -17,3 +17,4 @@
 // ** All changes to this file may be overwritten. **
 
 export {DataprocMetastoreClient} from './dataproc_metastore_client';
+export {DataprocMetastoreFederationClient} from './dataproc_metastore_federation_client';

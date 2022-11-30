@@ -35,8 +35,8 @@ function main(parent, modelConfigs) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. Input/Output information each purchase model, such as file paths and data
-   *  formats.
+   *  Required. Input/Output information each purchase model, such as file paths
+   *  and data formats.
    */
   // const modelConfigs = 1234
 
