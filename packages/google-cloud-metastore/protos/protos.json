@@ -10,10 +10,11 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/metastore/v1;metastore",
                     "java_multiple_files": true,
-                    "java_outer_classname": "MetastoreProto",
+                    "java_outer_classname": "MetastoreFederationProto",
                     "java_package": "com.google.cloud.metastore.v1",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
-                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
+                    "php_namespace": "Google\\Cloud\\Metastore\\V1",
+                    "(google.api.resource_definition).type": "compute.googleapis.com/Subnetwork",
+                    "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}/subnetworks/{subnetwork}"
                   },
                   "nested": {
                     "DataprocMetastore": {
@@ -66,7 +67,7 @@
                             "(google.api.http).body": "service",
                             "(google.api.method_signature)": "parent,service,service_id",
                             "(google.longrunning.operation_info).response_type": "Service",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -81,7 +82,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Service",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                               }
                             }
                           ]
@@ -94,7 +95,7 @@
                             "(google.api.http).body": "service",
                             "(google.api.method_signature)": "service,update_mask",
                             "(google.longrunning.operation_info).response_type": "Service",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -109,7 +110,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Service",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                               }
                             }
                           ]
@@ -121,7 +122,7 @@
                             "(google.api.http).delete": "/v1/{name=projects/*/locations/*/services/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -135,7 +136,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                               }
                             }
                           ]
@@ -184,7 +185,7 @@
                             "(google.api.http).body": "metadata_import",
                             "(google.api.method_signature)": "parent,metadata_import,metadata_import_id",
                             "(google.longrunning.operation_info).response_type": "MetadataImport",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -199,7 +200,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "MetadataImport",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                               }
                             }
                           ]
@@ -212,7 +213,7 @@
                             "(google.api.http).body": "metadata_import",
                             "(google.api.method_signature)": "metadata_import,update_mask",
                             "(google.longrunning.operation_info).response_type": "MetadataImport",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -227,7 +228,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "MetadataImport",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                               }
                             }
                           ]
@@ -239,7 +240,7 @@
                             "(google.api.http).post": "/v1/{service=projects/*/locations/*/services/*}:exportMetadata",
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "MetadataExport",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -251,7 +252,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "MetadataExport",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                               }
                             }
                           ]
@@ -264,7 +265,7 @@
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "service,backup",
                             "(google.longrunning.operation_info).response_type": "Restore",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -279,7 +280,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Restore",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                               }
                             }
                           ]
@@ -328,7 +329,7 @@
                             "(google.api.http).body": "backup",
                             "(google.api.method_signature)": "parent,backup,backup_id",
                             "(google.longrunning.operation_info).response_type": "Backup",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -343,7 +344,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Backup",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                               }
                             }
                           ]
@@ -355,7 +356,7 @@
                             "(google.api.http).delete": "/v1/{name=projects/*/locations/*/services/*/backups/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -369,7 +370,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
                               }
                             }
                           ]
@@ -487,6 +488,28 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "encryptionConfig": {
+                          "type": "EncryptionConfig",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "networkConfig": {
+                          "type": "NetworkConfig",
+                          "id": 21
+                        },
+                        "databaseType": {
+                          "type": "DatabaseType",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "telemetryConfig": {
+                          "type": "TelemetryConfig",
+                          "id": 23
                         }
                       },
                       "nested": {
@@ -514,6 +537,13 @@
                             "RELEASE_CHANNEL_UNSPECIFIED": 0,
                             "CANARY": 1,
                             "STABLE": 2
+                          }
+                        },
+                        "DatabaseType": {
+                          "values": {
+                            "DATABASE_TYPE_UNSPECIFIED": 0,
+                            "MYSQL": 1,
+                            "SPANNER": 2
                           }
                         }
                       }
@@ -578,6 +608,71 @@
                         "cloudSecret": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "EncryptionConfig": {
+                      "fields": {
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "NetworkConfig": {
+                      "fields": {
+                        "consumers": {
+                          "rule": "repeated",
+                          "type": "Consumer",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Consumer": {
+                          "oneofs": {
+                            "vpcResource": {
+                              "oneof": [
+                                "subnetwork"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "subnetwork": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.resource_reference).type": "compute.googleapis.com/Subnetwork"
+                              }
+                            },
+                            "endpointUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TelemetryConfig": {
+                      "fields": {
+                        "logFormat": {
+                          "type": "LogFormat",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "LogFormat": {
+                          "values": {
+                            "LOG_FORMAT_UNSPECIFIED": 0,
+                            "LEGACY": 1,
+                            "JSON": 2
+                          }
                         }
                       }
                     },
@@ -899,7 +994,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Service"
                           }
                         },
                         "pageSize": {
@@ -969,7 +1064,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Service"
                           }
                         },
                         "serviceId": {
@@ -1046,7 +1141,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/MetadataImport"
                           }
                         },
                         "pageSize": {
@@ -1116,7 +1211,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/MetadataImport"
                           }
                         },
                         "metadataImportId": {
@@ -1174,7 +1269,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Backup"
                           }
                         },
                         "pageSize": {
@@ -1244,7 +1339,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Backup"
                           }
                         },
                         "backupId": {
@@ -1447,6 +1542,385 @@
                           }
                         }
                       }
+                    },
+                    "DataprocMetastoreFederation": {
+                      "options": {
+                        "(google.api.default_host)": "metastore.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListFederations": {
+                          "requestType": "ListFederationsRequest",
+                          "responseType": "ListFederationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/federations",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/federations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetFederation": {
+                          "requestType": "GetFederationRequest",
+                          "responseType": "Federation",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/federations/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/federations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateFederation": {
+                          "requestType": "CreateFederationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/federations",
+                            "(google.api.http).body": "federation",
+                            "(google.api.method_signature)": "parent,federation,federation_id",
+                            "(google.longrunning.operation_info).response_type": "Federation",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/federations",
+                                "body": "federation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,federation,federation_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Federation",
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateFederation": {
+                          "requestType": "UpdateFederationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{federation.name=projects/*/locations/*/federations/*}",
+                            "(google.api.http).body": "federation",
+                            "(google.api.method_signature)": "federation,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Federation",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{federation.name=projects/*/locations/*/federations/*}",
+                                "body": "federation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "federation,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Federation",
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteFederation": {
+                          "requestType": "DeleteFederationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/federations/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/federations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.metastore.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Federation": {
+                      "options": {
+                        "(google.api.resource).type": "metastore.googleapis.com/Federation",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/federations/{federation}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "backendMetastores": {
+                          "keyType": "int32",
+                          "type": "BackendMetastore",
+                          "id": 6
+                        },
+                        "endpointUri": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "stateMessage": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "ACTIVE": 2,
+                            "UPDATING": 3,
+                            "DELETING": 4,
+                            "ERROR": 5
+                          }
+                        }
+                      }
+                    },
+                    "BackendMetastore": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "metastoreType": {
+                          "type": "MetastoreType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "MetastoreType": {
+                          "values": {
+                            "METASTORE_TYPE_UNSPECIFIED": 0,
+                            "DATAPROC_METASTORE": 3
+                          }
+                        }
+                      }
+                    },
+                    "ListFederationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Federation"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListFederationsResponse": {
+                      "fields": {
+                        "federations": {
+                          "rule": "repeated",
+                          "type": "Federation",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetFederationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Federation"
+                          }
+                        }
+                      }
+                    },
+                    "CreateFederationRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Federation"
+                          }
+                        },
+                        "federationId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "federation": {
+                          "type": "Federation",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateFederationRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "federation": {
+                          "type": "Federation",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFederationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Federation"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -1454,7 +1928,7 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/metastore/v1alpha;metastore",
                     "java_multiple_files": true,
-                    "java_outer_classname": "MetastoreProto",
+                    "java_outer_classname": "MetastoreFederationProto",
                     "java_package": "com.google.cloud.metastore.v1alpha",
                     "php_namespace": "Google\\Cloud\\Metastore\\V1alpha",
                     "(google.api.resource_definition).type": "dataplex.googleapis.com/Lake",
@@ -1511,7 +1985,7 @@
                             "(google.api.http).body": "service",
                             "(google.api.method_signature)": "parent,service,service_id",
                             "(google.longrunning.operation_info).response_type": "Service",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -1526,7 +2000,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Service",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                               }
                             }
                           ]
@@ -1539,7 +2013,7 @@
                             "(google.api.http).body": "service",
                             "(google.api.method_signature)": "service,update_mask",
                             "(google.longrunning.operation_info).response_type": "Service",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -1554,7 +2028,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Service",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                               }
                             }
                           ]
@@ -1566,7 +2040,7 @@
                             "(google.api.http).delete": "/v1alpha/{name=projects/*/locations/*/services/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -1580,7 +2054,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                               }
                             }
                           ]
@@ -1629,7 +2103,7 @@
                             "(google.api.http).body": "metadata_import",
                             "(google.api.method_signature)": "parent,metadata_import,metadata_import_id",
                             "(google.longrunning.operation_info).response_type": "MetadataImport",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -1644,7 +2118,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "MetadataImport",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                               }
                             }
                           ]
@@ -1657,7 +2131,7 @@
                             "(google.api.http).body": "metadata_import",
                             "(google.api.method_signature)": "metadata_import,update_mask",
                             "(google.longrunning.operation_info).response_type": "MetadataImport",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -1672,7 +2146,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "MetadataImport",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                               }
                             }
                           ]
@@ -1684,7 +2158,7 @@
                             "(google.api.http).post": "/v1alpha/{service=projects/*/locations/*/services/*}:exportMetadata",
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "MetadataExport",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -1696,7 +2170,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "MetadataExport",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                               }
                             }
                           ]
@@ -1709,7 +2183,7 @@
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "service,backup",
                             "(google.longrunning.operation_info).response_type": "Restore",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -1724,7 +2198,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Restore",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                               }
                             }
                           ]
@@ -1773,7 +2247,7 @@
                             "(google.api.http).body": "backup",
                             "(google.api.method_signature)": "parent,backup,backup_id",
                             "(google.longrunning.operation_info).response_type": "Backup",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -1788,7 +2262,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Backup",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                               }
                             }
                           ]
@@ -1800,7 +2274,7 @@
                             "(google.api.http).delete": "/v1alpha/{name=projects/*/locations/*/services/*/backups/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -1814,7 +2288,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
                               }
                             }
                           ]
@@ -1946,10 +2420,7 @@
                         },
                         "networkConfig": {
                           "type": "NetworkConfig",
-                          "id": 21,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
+                          "id": 21
                         },
                         "databaseType": {
                           "type": "DatabaseType",
@@ -1957,6 +2428,10 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "telemetryConfig": {
+                          "type": "TelemetryConfig",
+                          "id": 23
                         }
                       },
                       "nested": {
@@ -2169,6 +2644,7 @@
                               "type": "string",
                               "id": 1,
                               "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
                                 "(google.api.resource_reference).type": "compute.googleapis.com/Subnetwork"
                               }
                             },
@@ -2179,6 +2655,23 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "TelemetryConfig": {
+                      "fields": {
+                        "logFormat": {
+                          "type": "LogFormat",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "LogFormat": {
+                          "values": {
+                            "LOG_FORMAT_UNSPECIFIED": 0,
+                            "LEGACY": 1,
+                            "JSON": 2
                           }
                         }
                       }
@@ -2508,7 +3001,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Service"
                           }
                         },
                         "pageSize": {
@@ -2578,7 +3071,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Service"
                           }
                         },
                         "serviceId": {
@@ -2655,7 +3148,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/MetadataImport"
                           }
                         },
                         "pageSize": {
@@ -2725,7 +3218,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/MetadataImport"
                           }
                         },
                         "metadataImportId": {
@@ -2783,7 +3276,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Backup"
                           }
                         },
                         "pageSize": {
@@ -2853,7 +3346,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Backup"
                           }
                         },
                         "backupId": {
@@ -3056,18 +3549,398 @@
                           }
                         }
                       }
+                    },
+                    "DataprocMetastoreFederation": {
+                      "options": {
+                        "(google.api.default_host)": "metastore.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListFederations": {
+                          "requestType": "ListFederationsRequest",
+                          "responseType": "ListFederationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=projects/*/locations/*}/federations",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=projects/*/locations/*}/federations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetFederation": {
+                          "requestType": "GetFederationRequest",
+                          "responseType": "Federation",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=projects/*/locations/*/federations/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=projects/*/locations/*/federations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateFederation": {
+                          "requestType": "CreateFederationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=projects/*/locations/*}/federations",
+                            "(google.api.http).body": "federation",
+                            "(google.api.method_signature)": "parent,federation,federation_id",
+                            "(google.longrunning.operation_info).response_type": "Federation",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=projects/*/locations/*}/federations",
+                                "body": "federation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,federation,federation_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Federation",
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateFederation": {
+                          "requestType": "UpdateFederationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{federation.name=projects/*/locations/*/federations/*}",
+                            "(google.api.http).body": "federation",
+                            "(google.api.method_signature)": "federation,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Federation",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{federation.name=projects/*/locations/*/federations/*}",
+                                "body": "federation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "federation,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Federation",
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteFederation": {
+                          "requestType": "DeleteFederationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=projects/*/locations/*/federations/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=projects/*/locations/*/federations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.metastore.v1alpha.OperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Federation": {
+                      "options": {
+                        "(google.api.resource).type": "metastore.googleapis.com/Federation",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/federations/{federation}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "backendMetastores": {
+                          "keyType": "int32",
+                          "type": "BackendMetastore",
+                          "id": 6
+                        },
+                        "endpointUri": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "stateMessage": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "ACTIVE": 2,
+                            "UPDATING": 3,
+                            "DELETING": 4,
+                            "ERROR": 5
+                          }
+                        }
+                      }
+                    },
+                    "BackendMetastore": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "metastoreType": {
+                          "type": "MetastoreType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "MetastoreType": {
+                          "values": {
+                            "METASTORE_TYPE_UNSPECIFIED": 0,
+                            "BIGQUERY": 2,
+                            "DATAPROC_METASTORE": 3
+                          }
+                        }
+                      }
+                    },
+                    "ListFederationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Federation"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListFederationsResponse": {
+                      "fields": {
+                        "federations": {
+                          "rule": "repeated",
+                          "type": "Federation",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetFederationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Federation"
+                          }
+                        }
+                      }
+                    },
+                    "CreateFederationRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Federation"
+                          }
+                        },
+                        "federationId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "federation": {
+                          "type": "Federation",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateFederationRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "federation": {
+                          "type": "Federation",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFederationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Federation"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
                     }
                   }
                 },
                 "v1beta": {
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/metastore/v1beta;metastore",
-                    "php_namespace": "Google\\Cloud\\Metastore\\V1beta",
                     "java_multiple_files": true,
-                    "java_outer_classname": "MetastoreProto",
+                    "java_outer_classname": "MetastoreFederationProto",
                     "java_package": "com.google.cloud.metastore.v1beta",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
-                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
+                    "php_namespace": "Google\\Cloud\\Metastore\\V1beta",
+                    "(google.api.resource_definition).type": "dataplex.googleapis.com/Lake",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/lakes/{lake}"
                   },
                   "nested": {
                     "DataprocMetastore": {
@@ -3120,7 +3993,7 @@
                             "(google.api.http).body": "service",
                             "(google.api.method_signature)": "parent,service,service_id",
                             "(google.longrunning.operation_info).response_type": "Service",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -3135,7 +4008,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Service",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                               }
                             }
                           ]
@@ -3148,7 +4021,7 @@
                             "(google.api.http).body": "service",
                             "(google.api.method_signature)": "service,update_mask",
                             "(google.longrunning.operation_info).response_type": "Service",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -3163,7 +4036,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Service",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                               }
                             }
                           ]
@@ -3175,7 +4048,7 @@
                             "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/services/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -3189,7 +4062,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                               }
                             }
                           ]
@@ -3238,7 +4111,7 @@
                             "(google.api.http).body": "metadata_import",
                             "(google.api.method_signature)": "parent,metadata_import,metadata_import_id",
                             "(google.longrunning.operation_info).response_type": "MetadataImport",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -3253,7 +4126,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "MetadataImport",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                               }
                             }
                           ]
@@ -3266,7 +4139,7 @@
                             "(google.api.http).body": "metadata_import",
                             "(google.api.method_signature)": "metadata_import,update_mask",
                             "(google.longrunning.operation_info).response_type": "MetadataImport",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -3281,7 +4154,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "MetadataImport",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                               }
                             }
                           ]
@@ -3293,7 +4166,7 @@
                             "(google.api.http).post": "/v1beta/{service=projects/*/locations/*/services/*}:exportMetadata",
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "MetadataExport",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -3305,7 +4178,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "MetadataExport",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                               }
                             }
                           ]
@@ -3318,7 +4191,7 @@
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "service,backup",
                             "(google.longrunning.operation_info).response_type": "Restore",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -3333,7 +4206,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Restore",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                               }
                             }
                           ]
@@ -3382,7 +4255,7 @@
                             "(google.api.http).body": "backup",
                             "(google.api.method_signature)": "parent,backup,backup_id",
                             "(google.longrunning.operation_info).response_type": "Backup",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -3397,7 +4270,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Backup",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                               }
                             }
                           ]
@@ -3409,7 +4282,7 @@
                             "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/services/*/backups/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                           },
                           "parsedOptions": [
                             {
@@ -3423,7 +4296,7 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "google.protobuf.Empty",
-                                "metadata_type": "OperationMetadata"
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
                               }
                             }
                           ]
@@ -3545,6 +4418,28 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "encryptionConfig": {
+                          "type": "EncryptionConfig",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "networkConfig": {
+                          "type": "NetworkConfig",
+                          "id": 21
+                        },
+                        "databaseType": {
+                          "type": "DatabaseType",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "telemetryConfig": {
+                          "type": "TelemetryConfig",
+                          "id": 23
                         }
                       },
                       "nested": {
@@ -3573,6 +4468,13 @@
                             "CANARY": 1,
                             "STABLE": 2
                           }
+                        },
+                        "DatabaseType": {
+                          "values": {
+                            "DATABASE_TYPE_UNSPECIFIED": 0,
+                            "MYSQL": 1,
+                            "SPANNER": 2
+                          }
                         }
                       }
                     },
@@ -3581,6 +4483,10 @@
                         "dataCatalogConfig": {
                           "type": "DataCatalogConfig",
                           "id": 1
+                        },
+                        "dataplexConfig": {
+                          "type": "DataplexConfig",
+                          "id": 2
                         }
                       }
                     },
@@ -3589,6 +4495,26 @@
                         "enabled": {
                           "type": "bool",
                           "id": 2
+                        }
+                      }
+                    },
+                    "DataplexConfig": {
+                      "fields": {
+                        "lakeResources": {
+                          "keyType": "string",
+                          "type": "Lake",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Lake": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "dataplex.googleapis.com/Lake"
+                          }
                         }
                       }
                     },
@@ -3621,6 +4547,24 @@
                         "kerberosConfig": {
                           "type": "KerberosConfig",
                           "id": 3
+                        },
+                        "endpointProtocol": {
+                          "type": "EndpointProtocol",
+                          "id": 4
+                        },
+                        "auxiliaryVersions": {
+                          "keyType": "string",
+                          "type": "AuxiliaryVersionConfig",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "EndpointProtocol": {
+                          "values": {
+                            "ENDPOINT_PROTOCOL_UNSPECIFIED": 0,
+                            "THRIFT": 1,
+                            "GRPC": 2
+                          }
                         }
                       }
                     },
@@ -3652,6 +4596,91 @@
                         "cloudSecret": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "EncryptionConfig": {
+                      "fields": {
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AuxiliaryVersionConfig": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "configOverrides": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkConfig": {
+                          "type": "NetworkConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "NetworkConfig": {
+                      "fields": {
+                        "consumers": {
+                          "rule": "repeated",
+                          "type": "Consumer",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Consumer": {
+                          "oneofs": {
+                            "vpcResource": {
+                              "oneof": [
+                                "subnetwork"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "subnetwork": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.resource_reference).type": "compute.googleapis.com/Subnetwork"
+                              }
+                            },
+                            "endpointUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TelemetryConfig": {
+                      "fields": {
+                        "logFormat": {
+                          "type": "LogFormat",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "LogFormat": {
+                          "values": {
+                            "LOG_FORMAT_UNSPECIFIED": 0,
+                            "LEGACY": 1,
+                            "JSON": 2
+                          }
                         }
                       }
                     },
@@ -3716,6 +4745,13 @@
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3878,6 +4914,14 @@
                         "description": {
                           "type": "string",
                           "id": 6
+                        },
+                        "restoringServices": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3887,7 +4931,8 @@
                             "CREATING": 1,
                             "DELETING": 2,
                             "ACTIVE": 3,
-                            "FAILED": 4
+                            "FAILED": 4,
+                            "RESTORING": 5
                           }
                         }
                       }
@@ -3964,7 +5009,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Service"
                           }
                         },
                         "pageSize": {
@@ -4034,7 +5079,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Service"
                           }
                         },
                         "serviceId": {
@@ -4111,7 +5156,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/MetadataImport"
                           }
                         },
                         "pageSize": {
@@ -4181,7 +5226,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/MetadataImport"
                           }
                         },
                         "metadataImportId": {
@@ -4239,7 +5284,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Backup"
                           }
                         },
                         "pageSize": {
@@ -4309,7 +5354,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Backup"
                           }
                         },
                         "backupId": {
@@ -4507,7 +5552,388 @@
                         "Type": {
                           "values": {
                             "TYPE_UNSPECIFIED": 0,
-                            "MYSQL": 1
+                            "MYSQL": 1,
+                            "AVRO": 2
+                          }
+                        }
+                      }
+                    },
+                    "DataprocMetastoreFederation": {
+                      "options": {
+                        "(google.api.default_host)": "metastore.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListFederations": {
+                          "requestType": "ListFederationsRequest",
+                          "responseType": "ListFederationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*}/federations",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*}/federations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetFederation": {
+                          "requestType": "GetFederationRequest",
+                          "responseType": "Federation",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/federations/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/federations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateFederation": {
+                          "requestType": "CreateFederationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*}/federations",
+                            "(google.api.http).body": "federation",
+                            "(google.api.method_signature)": "parent,federation,federation_id",
+                            "(google.longrunning.operation_info).response_type": "Federation",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*}/federations",
+                                "body": "federation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,federation,federation_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Federation",
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateFederation": {
+                          "requestType": "UpdateFederationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{federation.name=projects/*/locations/*/federations/*}",
+                            "(google.api.http).body": "federation",
+                            "(google.api.method_signature)": "federation,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Federation",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{federation.name=projects/*/locations/*/federations/*}",
+                                "body": "federation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "federation,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Federation",
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteFederation": {
+                          "requestType": "DeleteFederationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/federations/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/federations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.metastore.v1beta.OperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Federation": {
+                      "options": {
+                        "(google.api.resource).type": "metastore.googleapis.com/Federation",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/federations/{federation}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "backendMetastores": {
+                          "keyType": "int32",
+                          "type": "BackendMetastore",
+                          "id": 6
+                        },
+                        "endpointUri": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "stateMessage": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "ACTIVE": 2,
+                            "UPDATING": 3,
+                            "DELETING": 4,
+                            "ERROR": 5
+                          }
+                        }
+                      }
+                    },
+                    "BackendMetastore": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "metastoreType": {
+                          "type": "MetastoreType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "MetastoreType": {
+                          "values": {
+                            "METASTORE_TYPE_UNSPECIFIED": 0,
+                            "BIGQUERY": 2,
+                            "DATAPROC_METASTORE": 3
+                          }
+                        }
+                      }
+                    },
+                    "ListFederationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Federation"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListFederationsResponse": {
+                      "fields": {
+                        "federations": {
+                          "rule": "repeated",
+                          "type": "Federation",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetFederationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Federation"
+                          }
+                        }
+                      }
+                    },
+                    "CreateFederationRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "metastore.googleapis.com/Federation"
+                          }
+                        },
+                        "federationId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "federation": {
+                          "type": "Federation",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateFederationRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "federation": {
+                          "type": "Federation",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFederationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Federation"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
