@@ -311,7 +311,11 @@ export class CloudCatalogClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-billing',
+      'https://www.googleapis.com/auth/cloud-billing.readonly',
+      'https://www.googleapis.com/auth/cloud-platform',
+    ];
   }
 
   getProjectId(): Promise<string>;

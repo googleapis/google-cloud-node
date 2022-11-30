@@ -38,7 +38,8 @@ import * as gapicConfig from './cloud_billing_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Retrieves GCP Console billing accounts and associates them with projects.
+ *  Retrieves the Google Cloud Console billing accounts and associates them with
+ *  projects.
  * @class
  * @memberof v1
  */
@@ -323,7 +324,11 @@ export class CloudBillingClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-billing',
+      'https://www.googleapis.com/auth/cloud-billing.readonly',
+      'https://www.googleapis.com/auth/cloud-platform',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -541,15 +546,20 @@ export class CloudBillingClient {
     return this.innerApiCalls.updateBillingAccount(request, options, callback);
   }
   /**
-   * Creates a billing account.
-   * This method can only be used to create
-   * [billing subaccounts](https://cloud.google.com/billing/docs/concepts)
-   * by GCP resellers.
+   * This method creates [billing
+   * subaccounts](https://cloud.google.com/billing/docs/concepts#subaccounts).
+   *
+   * Google Cloud resellers should use the
+   * Channel Services APIs,
+   * [accounts.customers.create](https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers/create)
+   * and
+   * [accounts.customers.entitlements.create](https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers.entitlements/create).
+   *
    * When creating a subaccount, the current authenticated user must have the
-   * `billing.accounts.update` IAM permission on the master account, which is
+   * `billing.accounts.update` IAM permission on the parent account, which is
    * typically given to billing account
    * [administrators](https://cloud.google.com/billing/docs/how-to/billing-access).
-   * This method will return an error if the master account has not been
+   * This method will return an error if the parent account has not been
    * provisioned as a reseller account.
    *
    * @param {Object} request
@@ -557,7 +567,7 @@ export class CloudBillingClient {
    * @param {google.cloud.billing.v1.BillingAccount} request.billingAccount
    *   Required. The billing account resource to create.
    *   Currently CreateBillingAccount only supports subaccount creation, so
-   *   any created billing accounts must be under a provided master billing
+   *   any created billing accounts must be under a provided parent billing
    *   account.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -641,9 +651,10 @@ export class CloudBillingClient {
   }
   /**
    * Gets the billing information for a project. The current authenticated user
-   * must have [permission to view the
-   * project](https://cloud.google.com/docs/permissions-overview#h.bgs0oxofvnoo
-   * ).
+   * must have the `resourcemanager.projects.get` permission for the project,
+   * which can be granted by assigning the [Project
+   * Viewer](https://cloud.google.com/iam/docs/understanding-roles#predefined_roles)
+   * role.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -744,7 +755,7 @@ export class CloudBillingClient {
    * usage charges.
    *
    * *Note:* Incurred charges that have not yet been reported in the transaction
-   * history of the GCP Console might be billed to the new billing
+   * history of the Google Cloud Console might be billed to the new billing
    * account, even if the charge occurred before the new billing account was
    * assigned to the project.
    *
