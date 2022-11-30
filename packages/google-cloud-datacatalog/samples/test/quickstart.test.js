@@ -29,7 +29,7 @@ const generateUuid = () =>
   `${GCLOUD_TESTS_PREFIX}_${uuid.v4()}`.replace(/-/gi, '_');
 
 describe('Quickstart', async () => {
-  const projectId = process.env.GCLOUD_PROJECT;
+  let projectId;
   let datasetId;
   let tableId;
 
@@ -42,6 +42,7 @@ describe('Quickstart', async () => {
     tableId = generateUuid();
     await bigquery.createDataset(datasetId);
     await bigquery.dataset(datasetId).createTable(tableId);
+    projectId = await bigquery.getProjectId();
   });
 
   it('quickstart should attach tag to BigQuery table', async () => {
