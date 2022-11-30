@@ -1,3 +1,4 @@
 [
-  "../../protos/google/cloud/metastore/v1beta/metastore.proto"
+  "../../protos/google/cloud/metastore/v1beta/metastore.proto",
+  "../../protos/google/cloud/metastore/v1beta/metastore_federation.proto"
 ]
