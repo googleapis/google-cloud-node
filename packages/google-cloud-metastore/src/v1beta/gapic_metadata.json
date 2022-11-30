@@ -180,6 +180,74 @@
           }
         }
       }
+    },
+    "DataprocMetastoreFederation": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataprocMetastoreFederationClient",
+          "rpcs": {
+            "GetFederation": {
+              "methods": [
+                "getFederation"
+              ]
+            },
+            "CreateFederation": {
+              "methods": [
+                "createFederation"
+              ]
+            },
+            "UpdateFederation": {
+              "methods": [
+                "updateFederation"
+              ]
+            },
+            "DeleteFederation": {
+              "methods": [
+                "deleteFederation"
+              ]
+            },
+            "ListFederations": {
+              "methods": [
+                "listFederations",
+                "listFederationsStream",
+                "listFederationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataprocMetastoreFederationClient",
+          "rpcs": {
+            "GetFederation": {
+              "methods": [
+                "getFederation"
+              ]
+            },
+            "CreateFederation": {
+              "methods": [
+                "createFederation"
+              ]
+            },
+            "UpdateFederation": {
+              "methods": [
+                "updateFederation"
+              ]
+            },
+            "DeleteFederation": {
+              "methods": [
+                "deleteFederation"
+              ]
+            },
+            "ListFederations": {
+              "methods": [
+                "listFederations",
+                "listFederationsStream",
+                "listFederationsAsync"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }
