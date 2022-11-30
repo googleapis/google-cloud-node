@@ -1,0 +1,75 @@
+{
+    "clientLibrary": {
+        "name": "nodejs-asset",
+        "version": "4.5.0",
+        "language": "TYPESCRIPT",
+        "apis": [
+            {
+                "id": "google.cloud.asset.v1p7beta1",
+                "version": "v1p7beta1"
+            }
+        ]
+    },
+    "snippets": [
+        {
+            "regionTag": "cloudasset_v1p7beta1_generated_AssetService_ExportAssets_async",
+            "title": "AssetService exportAssets Sample",
+            "origin": "API_DEFINITION",
+            "description": " Exports assets with time and resource types to a given Cloud Storage location/BigQuery table. For Cloud Storage location destinations, the output format is newline-delimited JSON. Each line represents a [google.cloud.asset.v1p7beta1.Asset][google.cloud.asset.v1p7beta1.Asset] in the JSON format; for BigQuery table destinations, the output table stores the fields in asset proto as columns. This API implements the [google.longrunning.Operation][google.longrunning.Operation] API , which allows you to keep track of the export. We recommend intervals of at least 2 seconds with exponential retry to poll the export operation result. For regular-size resource parent, the export operation usually finishes within 5 minutes.",
+            "canonical": true,
+            "file": "asset_service.export_assets.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 106,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportAssets",
+                "fullName": "google.cloud.asset.v1p7beta1.AssetService.ExportAssets",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "read_time",
+                        "type": ".google.protobuf.Timestamp"
+                    },
+                    {
+                        "name": "asset_types",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "content_type",
+                        "type": ".google.cloud.asset.v1p7beta1.ContentType"
+                    },
+                    {
+                        "name": "output_config",
+                        "type": ".google.cloud.asset.v1p7beta1.OutputConfig"
+                    },
+                    {
+                        "name": "relationship_types",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "AssetServiceClient",
+                    "fullName": "google.cloud.asset.v1p7beta1.AssetServiceClient"
+                },
+                "method": {
+                    "shortName": "ExportAssets",
+                    "fullName": "google.cloud.asset.v1p7beta1.AssetService.ExportAssets",
+                    "service": {
+                        "shortName": "AssetService",
+                        "fullName": "google.cloud.asset.v1p7beta1.AssetService"
+                    }
+                }
+            }
+        }
+    ]
+}
