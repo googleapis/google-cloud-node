@@ -42,6 +42,7 @@
   * [Asset_service.analyze_iam_policy](#asset_service.analyze_iam_policy)
   * [Asset_service.export_iam_policy_analysis](#asset_service.export_iam_policy_analysis)
   * [Asset_service.list_assets](#asset_service.list_assets)
+  * [Asset_service.export_assets](#asset_service.export_assets)
   * [List Assets](#list-assets)
   * [Sample.test](#sample.test)
 
@@ -563,6 +564,23 @@ __Usage:__
 
 
 `node packages/google-cloud-asset/samples/generated/v1p5beta1/asset_service.list_assets.js`
+
+
+-----
+
+
+
+
+### Asset_service.export_assets
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p7beta1/asset_service.export_assets.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-asset/samples/generated/v1p7beta1/asset_service.export_assets.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-asset/samples/generated/v1p7beta1/asset_service.export_assets.js`
 
 
 -----
