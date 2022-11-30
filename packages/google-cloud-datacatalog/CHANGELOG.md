@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [3.1.1](https://github.com/googleapis/nodejs-datacatalog/compare/v3.1.0...v3.1.1) (2022-11-30)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#381](https://github.com/googleapis/nodejs-datacatalog/issues/381)) ([09e38fc](https://github.com/googleapis/nodejs-datacatalog/commit/09e38fc4bbe42f76c7048b58b4e749586ed8bd3a))
+* Better support for fallback mode ([#377](https://github.com/googleapis/nodejs-datacatalog/issues/377)) ([3cc0c79](https://github.com/googleapis/nodejs-datacatalog/commit/3cc0c79704459b18e71059986fa26a28ce6dca2f))
+* Change datacatalog resource name config ([#373](https://github.com/googleapis/nodejs-datacatalog/issues/373)) ([ee48f14](https://github.com/googleapis/nodejs-datacatalog/commit/ee48f149efa740286de5472d959025fca9d13341))
+* Change import long to require ([#378](https://github.com/googleapis/nodejs-datacatalog/issues/378)) ([e133668](https://github.com/googleapis/nodejs-datacatalog/commit/e13366806c759569f016b2813877d7295c6a5673))
+* **deps:** Update dependency uuid to v9 ([#382](https://github.com/googleapis/nodejs-datacatalog/issues/382)) ([86da005](https://github.com/googleapis/nodejs-datacatalog/commit/86da005a32c303017bfa4113535cb2f64dde1f79))
+* **deps:** Use google-gax v3.5.2 ([#391](https://github.com/googleapis/nodejs-datacatalog/issues/391)) ([0f96b18](https://github.com/googleapis/nodejs-datacatalog/commit/0f96b18f20f5a5e46a6de46558b74e06ff6b9cdc))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-datacatalog/issues/1553)) ([#380](https://github.com/googleapis/nodejs-datacatalog/issues/380)) ([d969272](https://github.com/googleapis/nodejs-datacatalog/commit/d969272a2414f75edbf0aed8fd2ccffb7daee5d7))
+* Preserve default values in x-goog-request-params header ([#384](https://github.com/googleapis/nodejs-datacatalog/issues/384)) ([6c1cb6b](https://github.com/googleapis/nodejs-datacatalog/commit/6c1cb6b278daaf1412eaaf9b37f6e717fea5dd70))
+* Regenerated protos JS and TS definitions ([#394](https://github.com/googleapis/nodejs-datacatalog/issues/394)) ([bd17961](https://github.com/googleapis/nodejs-datacatalog/commit/bd17961056fa07ec26faf7ff4227a951bb5d61d0))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-datacatalog/issues/1546)) ([#379](https://github.com/googleapis/nodejs-datacatalog/issues/379)) ([6244345](https://github.com/googleapis/nodejs-datacatalog/commit/6244345cf4d04c8ad567a734a496c979432c568d))
+* use google-gax v3.3.0 ([d969272](https://github.com/googleapis/nodejs-datacatalog/commit/d969272a2414f75edbf0aed8fd2ccffb7daee5d7))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-datacatalog/compare/v3.0.0...v3.1.0) (2022-07-05)
 
 
