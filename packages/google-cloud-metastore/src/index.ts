@@ -22,8 +22,22 @@ import * as v1beta from './v1beta';
 
 const DataprocMetastoreClient = v1.DataprocMetastoreClient;
 type DataprocMetastoreClient = v1.DataprocMetastoreClient;
+const DataprocMetastoreFederationClient = v1.DataprocMetastoreFederationClient;
+type DataprocMetastoreFederationClient = v1.DataprocMetastoreFederationClient;
 
-export {v1, v1alpha, v1beta, DataprocMetastoreClient};
-export default {v1, v1alpha, v1beta, DataprocMetastoreClient};
+export {
+  v1,
+  v1alpha,
+  v1beta,
+  DataprocMetastoreClient,
+  DataprocMetastoreFederationClient,
+};
+export default {
+  v1,
+  v1alpha,
+  v1beta,
+  DataprocMetastoreClient,
+  DataprocMetastoreFederationClient,
+};
 import * as protos from '../protos/protos';
 export {protos};
