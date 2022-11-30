@@ -29,8 +29,8 @@ function main(parent, backupId, backup) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The relative resource name of the service in which to create a backup
-   *  of the following form:
+   *  Required. The relative resource name of the service in which to create a
+   *  backup of the following form:
    *  `projects/{project_number}/locations/{location_id}/services/{service_id}`.
    */
   // const parent = 'abc123'
@@ -43,15 +43,15 @@ function main(parent, backupId, backup) {
    */
   // const backupId = 'abc123'
   /**
-   *  Required. The backup to create. The `name` field is ignored. The ID of the created
-   *  backup must be provided in the request's `backup_id` field.
+   *  Required. The backup to create. The `name` field is ignored. The ID of the
+   *  created backup must be provided in the request's `backup_id` field.
    */
   // const backup = {}
   /**
-   *  Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-   *  request if it has completed. The server will ignore subsequent requests
-   *  that provide a duplicate request ID for at least 60 minutes after the first
-   *  request.
+   *  Optional. A request ID. Specify a unique request ID to allow the server to
+   *  ignore the request if it has completed. The server will ignore subsequent
+   *  requests that provide a duplicate request ID for at least 60 minutes after
+   *  the first request.
    *  For example, if an initial request times out, followed by another request
    *  with the same request ID, the server ignores the second request to prevent
    *  the creation of duplicate commitments.
