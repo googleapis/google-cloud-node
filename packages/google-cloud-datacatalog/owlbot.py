@@ -15,9 +15,9 @@
 """This script is used to synthesize generated parts of this library."""
 
 import synthtool as s
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 
-node.owlbot_main(staging_excludes=[
+node.owlbot_main(relative_dir="packages/google-cloud-datacatalog",staging_excludes=[
            'README.md', 'linkinator.config.json', '.mocharc.json', 'package.json'])
 
 # TODO: Remove the following replace once Datacatalog is ready to release a break change
