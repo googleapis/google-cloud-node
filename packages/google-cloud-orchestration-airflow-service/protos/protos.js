@@ -281,6 +281,72 @@
                                  * @variation 2
                                  */
     
+                                /**
+                                 * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|saveSnapshot}.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.Environments
+                                 * @typedef SaveSnapshotCallback
+                                 * @type {function}
+                                 * @param {Error|null} error Error, if any
+                                 * @param {google.longrunning.Operation} [response] Operation
+                                 */
+    
+                                /**
+                                 * Calls SaveSnapshot.
+                                 * @function saveSnapshot
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.Environments
+                                 * @instance
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ISaveSnapshotRequest} request SaveSnapshotRequest message or plain object
+                                 * @param {google.cloud.orchestration.airflow.service.v1.Environments.SaveSnapshotCallback} callback Node-style callback called with the error, if any, and Operation
+                                 * @returns {undefined}
+                                 * @variation 1
+                                 */
+                                Object.defineProperty(Environments.prototype.saveSnapshot = function saveSnapshot(request, callback) {
+                                    return this.rpcCall(saveSnapshot, $root.google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest, $root.google.longrunning.Operation, request, callback);
+                                }, "name", { value: "SaveSnapshot" });
+    
+                                /**
+                                 * Calls SaveSnapshot.
+                                 * @function saveSnapshot
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.Environments
+                                 * @instance
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ISaveSnapshotRequest} request SaveSnapshotRequest message or plain object
+                                 * @returns {Promise<google.longrunning.Operation>} Promise
+                                 * @variation 2
+                                 */
+    
+                                /**
+                                 * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|loadSnapshot}.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.Environments
+                                 * @typedef LoadSnapshotCallback
+                                 * @type {function}
+                                 * @param {Error|null} error Error, if any
+                                 * @param {google.longrunning.Operation} [response] Operation
+                                 */
+    
+                                /**
+                                 * Calls LoadSnapshot.
+                                 * @function loadSnapshot
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.Environments
+                                 * @instance
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ILoadSnapshotRequest} request LoadSnapshotRequest message or plain object
+                                 * @param {google.cloud.orchestration.airflow.service.v1.Environments.LoadSnapshotCallback} callback Node-style callback called with the error, if any, and Operation
+                                 * @returns {undefined}
+                                 * @variation 1
+                                 */
+                                Object.defineProperty(Environments.prototype.loadSnapshot = function loadSnapshot(request, callback) {
+                                    return this.rpcCall(loadSnapshot, $root.google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest, $root.google.longrunning.Operation, request, callback);
+                                }, "name", { value: "LoadSnapshot" });
+    
+                                /**
+                                 * Calls LoadSnapshot.
+                                 * @function loadSnapshot
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.Environments
+                                 * @instance
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ILoadSnapshotRequest} request LoadSnapshotRequest message or plain object
+                                 * @returns {Promise<google.longrunning.Operation>} Promise
+                                 * @variation 2
+                                 */
+    
                                 return Environments;
                             })();
     
@@ -1680,6 +1746,930 @@
                                 return UpdateEnvironmentRequest;
                             })();
     
+                            v1.SaveSnapshotRequest = (function() {
+    
+                                /**
+                                 * Properties of a SaveSnapshotRequest.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @interface ISaveSnapshotRequest
+                                 * @property {string|null} [environment] SaveSnapshotRequest environment
+                                 * @property {string|null} [snapshotLocation] SaveSnapshotRequest snapshotLocation
+                                 */
+    
+                                /**
+                                 * Constructs a new SaveSnapshotRequest.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @classdesc Represents a SaveSnapshotRequest.
+                                 * @implements ISaveSnapshotRequest
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ISaveSnapshotRequest=} [properties] Properties to set
+                                 */
+                                function SaveSnapshotRequest(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SaveSnapshotRequest environment.
+                                 * @member {string} environment
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest
+                                 * @instance
+                                 */
+                                SaveSnapshotRequest.prototype.environment = "";
+    
+                                /**
+                                 * SaveSnapshotRequest snapshotLocation.
+                                 * @member {string} snapshotLocation
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest
+                                 * @instance
+                                 */
+                                SaveSnapshotRequest.prototype.snapshotLocation = "";
+    
+                                /**
+                                 * Creates a new SaveSnapshotRequest instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ISaveSnapshotRequest=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest} SaveSnapshotRequest instance
+                                 */
+                                SaveSnapshotRequest.create = function create(properties) {
+                                    return new SaveSnapshotRequest(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SaveSnapshotRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ISaveSnapshotRequest} message SaveSnapshotRequest message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SaveSnapshotRequest.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.environment);
+                                    if (message.snapshotLocation != null && Object.hasOwnProperty.call(message, "snapshotLocation"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.snapshotLocation);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SaveSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ISaveSnapshotRequest} message SaveSnapshotRequest message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SaveSnapshotRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SaveSnapshotRequest message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest} SaveSnapshotRequest
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SaveSnapshotRequest.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.environment = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.snapshotLocation = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SaveSnapshotRequest message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest} SaveSnapshotRequest
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SaveSnapshotRequest.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SaveSnapshotRequest message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SaveSnapshotRequest.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.environment != null && message.hasOwnProperty("environment"))
+                                        if (!$util.isString(message.environment))
+                                            return "environment: string expected";
+                                    if (message.snapshotLocation != null && message.hasOwnProperty("snapshotLocation"))
+                                        if (!$util.isString(message.snapshotLocation))
+                                            return "snapshotLocation: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SaveSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest} SaveSnapshotRequest
+                                 */
+                                SaveSnapshotRequest.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest();
+                                    if (object.environment != null)
+                                        message.environment = String(object.environment);
+                                    if (object.snapshotLocation != null)
+                                        message.snapshotLocation = String(object.snapshotLocation);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SaveSnapshotRequest message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest} message SaveSnapshotRequest
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SaveSnapshotRequest.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.environment = "";
+                                        object.snapshotLocation = "";
+                                    }
+                                    if (message.environment != null && message.hasOwnProperty("environment"))
+                                        object.environment = message.environment;
+                                    if (message.snapshotLocation != null && message.hasOwnProperty("snapshotLocation"))
+                                        object.snapshotLocation = message.snapshotLocation;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SaveSnapshotRequest to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SaveSnapshotRequest.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SaveSnapshotRequest
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SaveSnapshotRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest";
+                                };
+    
+                                return SaveSnapshotRequest;
+                            })();
+    
+                            v1.SaveSnapshotResponse = (function() {
+    
+                                /**
+                                 * Properties of a SaveSnapshotResponse.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @interface ISaveSnapshotResponse
+                                 * @property {string|null} [snapshotPath] SaveSnapshotResponse snapshotPath
+                                 */
+    
+                                /**
+                                 * Constructs a new SaveSnapshotResponse.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @classdesc Represents a SaveSnapshotResponse.
+                                 * @implements ISaveSnapshotResponse
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ISaveSnapshotResponse=} [properties] Properties to set
+                                 */
+                                function SaveSnapshotResponse(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SaveSnapshotResponse snapshotPath.
+                                 * @member {string} snapshotPath
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse
+                                 * @instance
+                                 */
+                                SaveSnapshotResponse.prototype.snapshotPath = "";
+    
+                                /**
+                                 * Creates a new SaveSnapshotResponse instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ISaveSnapshotResponse=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse} SaveSnapshotResponse instance
+                                 */
+                                SaveSnapshotResponse.create = function create(properties) {
+                                    return new SaveSnapshotResponse(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SaveSnapshotResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ISaveSnapshotResponse} message SaveSnapshotResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SaveSnapshotResponse.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.snapshotPath != null && Object.hasOwnProperty.call(message, "snapshotPath"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.snapshotPath);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SaveSnapshotResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ISaveSnapshotResponse} message SaveSnapshotResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SaveSnapshotResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SaveSnapshotResponse message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse} SaveSnapshotResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SaveSnapshotResponse.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.snapshotPath = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SaveSnapshotResponse message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse} SaveSnapshotResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SaveSnapshotResponse.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SaveSnapshotResponse message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SaveSnapshotResponse.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.snapshotPath != null && message.hasOwnProperty("snapshotPath"))
+                                        if (!$util.isString(message.snapshotPath))
+                                            return "snapshotPath: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SaveSnapshotResponse message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse} SaveSnapshotResponse
+                                 */
+                                SaveSnapshotResponse.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse();
+                                    if (object.snapshotPath != null)
+                                        message.snapshotPath = String(object.snapshotPath);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SaveSnapshotResponse message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse} message SaveSnapshotResponse
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SaveSnapshotResponse.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.snapshotPath = "";
+                                    if (message.snapshotPath != null && message.hasOwnProperty("snapshotPath"))
+                                        object.snapshotPath = message.snapshotPath;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SaveSnapshotResponse to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SaveSnapshotResponse.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SaveSnapshotResponse
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SaveSnapshotResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse";
+                                };
+    
+                                return SaveSnapshotResponse;
+                            })();
+    
+                            v1.LoadSnapshotRequest = (function() {
+    
+                                /**
+                                 * Properties of a LoadSnapshotRequest.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @interface ILoadSnapshotRequest
+                                 * @property {string|null} [environment] LoadSnapshotRequest environment
+                                 * @property {string|null} [snapshotPath] LoadSnapshotRequest snapshotPath
+                                 * @property {boolean|null} [skipPypiPackagesInstallation] LoadSnapshotRequest skipPypiPackagesInstallation
+                                 * @property {boolean|null} [skipEnvironmentVariablesSetting] LoadSnapshotRequest skipEnvironmentVariablesSetting
+                                 * @property {boolean|null} [skipAirflowOverridesSetting] LoadSnapshotRequest skipAirflowOverridesSetting
+                                 * @property {boolean|null} [skipGcsDataCopying] LoadSnapshotRequest skipGcsDataCopying
+                                 */
+    
+                                /**
+                                 * Constructs a new LoadSnapshotRequest.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @classdesc Represents a LoadSnapshotRequest.
+                                 * @implements ILoadSnapshotRequest
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ILoadSnapshotRequest=} [properties] Properties to set
+                                 */
+                                function LoadSnapshotRequest(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * LoadSnapshotRequest environment.
+                                 * @member {string} environment
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @instance
+                                 */
+                                LoadSnapshotRequest.prototype.environment = "";
+    
+                                /**
+                                 * LoadSnapshotRequest snapshotPath.
+                                 * @member {string} snapshotPath
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @instance
+                                 */
+                                LoadSnapshotRequest.prototype.snapshotPath = "";
+    
+                                /**
+                                 * LoadSnapshotRequest skipPypiPackagesInstallation.
+                                 * @member {boolean} skipPypiPackagesInstallation
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @instance
+                                 */
+                                LoadSnapshotRequest.prototype.skipPypiPackagesInstallation = false;
+    
+                                /**
+                                 * LoadSnapshotRequest skipEnvironmentVariablesSetting.
+                                 * @member {boolean} skipEnvironmentVariablesSetting
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @instance
+                                 */
+                                LoadSnapshotRequest.prototype.skipEnvironmentVariablesSetting = false;
+    
+                                /**
+                                 * LoadSnapshotRequest skipAirflowOverridesSetting.
+                                 * @member {boolean} skipAirflowOverridesSetting
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @instance
+                                 */
+                                LoadSnapshotRequest.prototype.skipAirflowOverridesSetting = false;
+    
+                                /**
+                                 * LoadSnapshotRequest skipGcsDataCopying.
+                                 * @member {boolean} skipGcsDataCopying
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @instance
+                                 */
+                                LoadSnapshotRequest.prototype.skipGcsDataCopying = false;
+    
+                                /**
+                                 * Creates a new LoadSnapshotRequest instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ILoadSnapshotRequest=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest} LoadSnapshotRequest instance
+                                 */
+                                LoadSnapshotRequest.create = function create(properties) {
+                                    return new LoadSnapshotRequest(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified LoadSnapshotRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ILoadSnapshotRequest} message LoadSnapshotRequest message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LoadSnapshotRequest.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.environment);
+                                    if (message.snapshotPath != null && Object.hasOwnProperty.call(message, "snapshotPath"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.snapshotPath);
+                                    if (message.skipPypiPackagesInstallation != null && Object.hasOwnProperty.call(message, "skipPypiPackagesInstallation"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.skipPypiPackagesInstallation);
+                                    if (message.skipEnvironmentVariablesSetting != null && Object.hasOwnProperty.call(message, "skipEnvironmentVariablesSetting"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).bool(message.skipEnvironmentVariablesSetting);
+                                    if (message.skipAirflowOverridesSetting != null && Object.hasOwnProperty.call(message, "skipAirflowOverridesSetting"))
+                                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.skipAirflowOverridesSetting);
+                                    if (message.skipGcsDataCopying != null && Object.hasOwnProperty.call(message, "skipGcsDataCopying"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.skipGcsDataCopying);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified LoadSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ILoadSnapshotRequest} message LoadSnapshotRequest message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LoadSnapshotRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a LoadSnapshotRequest message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest} LoadSnapshotRequest
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LoadSnapshotRequest.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.environment = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.snapshotPath = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.skipPypiPackagesInstallation = reader.bool();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.skipEnvironmentVariablesSetting = reader.bool();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.skipAirflowOverridesSetting = reader.bool();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.skipGcsDataCopying = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a LoadSnapshotRequest message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest} LoadSnapshotRequest
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LoadSnapshotRequest.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a LoadSnapshotRequest message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                LoadSnapshotRequest.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.environment != null && message.hasOwnProperty("environment"))
+                                        if (!$util.isString(message.environment))
+                                            return "environment: string expected";
+                                    if (message.snapshotPath != null && message.hasOwnProperty("snapshotPath"))
+                                        if (!$util.isString(message.snapshotPath))
+                                            return "snapshotPath: string expected";
+                                    if (message.skipPypiPackagesInstallation != null && message.hasOwnProperty("skipPypiPackagesInstallation"))
+                                        if (typeof message.skipPypiPackagesInstallation !== "boolean")
+                                            return "skipPypiPackagesInstallation: boolean expected";
+                                    if (message.skipEnvironmentVariablesSetting != null && message.hasOwnProperty("skipEnvironmentVariablesSetting"))
+                                        if (typeof message.skipEnvironmentVariablesSetting !== "boolean")
+                                            return "skipEnvironmentVariablesSetting: boolean expected";
+                                    if (message.skipAirflowOverridesSetting != null && message.hasOwnProperty("skipAirflowOverridesSetting"))
+                                        if (typeof message.skipAirflowOverridesSetting !== "boolean")
+                                            return "skipAirflowOverridesSetting: boolean expected";
+                                    if (message.skipGcsDataCopying != null && message.hasOwnProperty("skipGcsDataCopying"))
+                                        if (typeof message.skipGcsDataCopying !== "boolean")
+                                            return "skipGcsDataCopying: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a LoadSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest} LoadSnapshotRequest
+                                 */
+                                LoadSnapshotRequest.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest();
+                                    if (object.environment != null)
+                                        message.environment = String(object.environment);
+                                    if (object.snapshotPath != null)
+                                        message.snapshotPath = String(object.snapshotPath);
+                                    if (object.skipPypiPackagesInstallation != null)
+                                        message.skipPypiPackagesInstallation = Boolean(object.skipPypiPackagesInstallation);
+                                    if (object.skipEnvironmentVariablesSetting != null)
+                                        message.skipEnvironmentVariablesSetting = Boolean(object.skipEnvironmentVariablesSetting);
+                                    if (object.skipAirflowOverridesSetting != null)
+                                        message.skipAirflowOverridesSetting = Boolean(object.skipAirflowOverridesSetting);
+                                    if (object.skipGcsDataCopying != null)
+                                        message.skipGcsDataCopying = Boolean(object.skipGcsDataCopying);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a LoadSnapshotRequest message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest} message LoadSnapshotRequest
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                LoadSnapshotRequest.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.environment = "";
+                                        object.snapshotPath = "";
+                                        object.skipPypiPackagesInstallation = false;
+                                        object.skipEnvironmentVariablesSetting = false;
+                                        object.skipAirflowOverridesSetting = false;
+                                        object.skipGcsDataCopying = false;
+                                    }
+                                    if (message.environment != null && message.hasOwnProperty("environment"))
+                                        object.environment = message.environment;
+                                    if (message.snapshotPath != null && message.hasOwnProperty("snapshotPath"))
+                                        object.snapshotPath = message.snapshotPath;
+                                    if (message.skipPypiPackagesInstallation != null && message.hasOwnProperty("skipPypiPackagesInstallation"))
+                                        object.skipPypiPackagesInstallation = message.skipPypiPackagesInstallation;
+                                    if (message.skipEnvironmentVariablesSetting != null && message.hasOwnProperty("skipEnvironmentVariablesSetting"))
+                                        object.skipEnvironmentVariablesSetting = message.skipEnvironmentVariablesSetting;
+                                    if (message.skipAirflowOverridesSetting != null && message.hasOwnProperty("skipAirflowOverridesSetting"))
+                                        object.skipAirflowOverridesSetting = message.skipAirflowOverridesSetting;
+                                    if (message.skipGcsDataCopying != null && message.hasOwnProperty("skipGcsDataCopying"))
+                                        object.skipGcsDataCopying = message.skipGcsDataCopying;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this LoadSnapshotRequest to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                LoadSnapshotRequest.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for LoadSnapshotRequest
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                LoadSnapshotRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest";
+                                };
+    
+                                return LoadSnapshotRequest;
+                            })();
+    
+                            v1.LoadSnapshotResponse = (function() {
+    
+                                /**
+                                 * Properties of a LoadSnapshotResponse.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @interface ILoadSnapshotResponse
+                                 */
+    
+                                /**
+                                 * Constructs a new LoadSnapshotResponse.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @classdesc Represents a LoadSnapshotResponse.
+                                 * @implements ILoadSnapshotResponse
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ILoadSnapshotResponse=} [properties] Properties to set
+                                 */
+                                function LoadSnapshotResponse(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new LoadSnapshotResponse instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ILoadSnapshotResponse=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse} LoadSnapshotResponse instance
+                                 */
+                                LoadSnapshotResponse.create = function create(properties) {
+                                    return new LoadSnapshotResponse(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified LoadSnapshotResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ILoadSnapshotResponse} message LoadSnapshotResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LoadSnapshotResponse.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified LoadSnapshotResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ILoadSnapshotResponse} message LoadSnapshotResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LoadSnapshotResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a LoadSnapshotResponse message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse} LoadSnapshotResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LoadSnapshotResponse.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a LoadSnapshotResponse message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse} LoadSnapshotResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LoadSnapshotResponse.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a LoadSnapshotResponse message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                LoadSnapshotResponse.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a LoadSnapshotResponse message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse} LoadSnapshotResponse
+                                 */
+                                LoadSnapshotResponse.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse)
+                                        return object;
+                                    return new $root.google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a LoadSnapshotResponse message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse} message LoadSnapshotResponse
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                LoadSnapshotResponse.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this LoadSnapshotResponse to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                LoadSnapshotResponse.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for LoadSnapshotResponse
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                LoadSnapshotResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse";
+                                };
+    
+                                return LoadSnapshotResponse;
+                            })();
+    
                             v1.EnvironmentConfig = (function() {
     
                                 /**
@@ -1696,7 +2686,12 @@
                                  * @property {google.cloud.orchestration.airflow.service.v1.IDatabaseConfig|null} [databaseConfig] EnvironmentConfig databaseConfig
                                  * @property {google.cloud.orchestration.airflow.service.v1.IWebServerConfig|null} [webServerConfig] EnvironmentConfig webServerConfig
                                  * @property {google.cloud.orchestration.airflow.service.v1.IEncryptionConfig|null} [encryptionConfig] EnvironmentConfig encryptionConfig
+                                 * @property {google.cloud.orchestration.airflow.service.v1.IMaintenanceWindow|null} [maintenanceWindow] EnvironmentConfig maintenanceWindow
+                                 * @property {google.cloud.orchestration.airflow.service.v1.IWorkloadsConfig|null} [workloadsConfig] EnvironmentConfig workloadsConfig
+                                 * @property {google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize|null} [environmentSize] EnvironmentConfig environmentSize
                                  * @property {string|null} [airflowUri] EnvironmentConfig airflowUri
+                                 * @property {google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig|null} [masterAuthorizedNetworksConfig] EnvironmentConfig masterAuthorizedNetworksConfig
+                                 * @property {google.cloud.orchestration.airflow.service.v1.IRecoveryConfig|null} [recoveryConfig] EnvironmentConfig recoveryConfig
                                  */
     
                                 /**
@@ -1795,12 +2790,52 @@
                                 EnvironmentConfig.prototype.encryptionConfig = null;
     
                                 /**
+                                 * EnvironmentConfig maintenanceWindow.
+                                 * @member {google.cloud.orchestration.airflow.service.v1.IMaintenanceWindow|null|undefined} maintenanceWindow
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.EnvironmentConfig
+                                 * @instance
+                                 */
+                                EnvironmentConfig.prototype.maintenanceWindow = null;
+    
+                                /**
+                                 * EnvironmentConfig workloadsConfig.
+                                 * @member {google.cloud.orchestration.airflow.service.v1.IWorkloadsConfig|null|undefined} workloadsConfig
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.EnvironmentConfig
+                                 * @instance
+                                 */
+                                EnvironmentConfig.prototype.workloadsConfig = null;
+    
+                                /**
+                                 * EnvironmentConfig environmentSize.
+                                 * @member {google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize} environmentSize
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.EnvironmentConfig
+                                 * @instance
+                                 */
+                                EnvironmentConfig.prototype.environmentSize = 0;
+    
+                                /**
                                  * EnvironmentConfig airflowUri.
                                  * @member {string} airflowUri
                                  * @memberof google.cloud.orchestration.airflow.service.v1.EnvironmentConfig
                                  * @instance
                                  */
                                 EnvironmentConfig.prototype.airflowUri = "";
+    
+                                /**
+                                 * EnvironmentConfig masterAuthorizedNetworksConfig.
+                                 * @member {google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig|null|undefined} masterAuthorizedNetworksConfig
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.EnvironmentConfig
+                                 * @instance
+                                 */
+                                EnvironmentConfig.prototype.masterAuthorizedNetworksConfig = null;
+    
+                                /**
+                                 * EnvironmentConfig recoveryConfig.
+                                 * @member {google.cloud.orchestration.airflow.service.v1.IRecoveryConfig|null|undefined} recoveryConfig
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.EnvironmentConfig
+                                 * @instance
+                                 */
+                                EnvironmentConfig.prototype.recoveryConfig = null;
     
                                 /**
                                  * Creates a new EnvironmentConfig instance using the specified properties.
@@ -1848,6 +2883,16 @@
                                         $root.google.cloud.orchestration.airflow.service.v1.WebServerConfig.encode(message.webServerConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                                     if (message.encryptionConfig != null && Object.hasOwnProperty.call(message, "encryptionConfig"))
                                         $root.google.cloud.orchestration.airflow.service.v1.EncryptionConfig.encode(message.encryptionConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                    if (message.maintenanceWindow != null && Object.hasOwnProperty.call(message, "maintenanceWindow"))
+                                        $root.google.cloud.orchestration.airflow.service.v1.MaintenanceWindow.encode(message.maintenanceWindow, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                    if (message.workloadsConfig != null && Object.hasOwnProperty.call(message, "workloadsConfig"))
+                                        $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.encode(message.workloadsConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                                    if (message.environmentSize != null && Object.hasOwnProperty.call(message, "environmentSize"))
+                                        writer.uint32(/* id 16, wireType 0 =*/128).int32(message.environmentSize);
+                                    if (message.masterAuthorizedNetworksConfig != null && Object.hasOwnProperty.call(message, "masterAuthorizedNetworksConfig"))
+                                        $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.encode(message.masterAuthorizedNetworksConfig, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                                    if (message.recoveryConfig != null && Object.hasOwnProperty.call(message, "recoveryConfig"))
+                                        $root.google.cloud.orchestration.airflow.service.v1.RecoveryConfig.encode(message.recoveryConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -1922,8 +2967,28 @@
                                                 message.encryptionConfig = $root.google.cloud.orchestration.airflow.service.v1.EncryptionConfig.decode(reader, reader.uint32());
                                                 break;
                                             }
+                                        case 12: {
+                                                message.maintenanceWindow = $root.google.cloud.orchestration.airflow.service.v1.MaintenanceWindow.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 15: {
+                                                message.workloadsConfig = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 16: {
+                                                message.environmentSize = reader.int32();
+                                                break;
+                                            }
                                         case 6: {
                                                 message.airflowUri = reader.string();
+                                                break;
+                                            }
+                                        case 17: {
+                                                message.masterAuthorizedNetworksConfig = $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 18: {
+                                                message.recoveryConfig = $root.google.cloud.orchestration.airflow.service.v1.RecoveryConfig.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -2005,9 +3070,39 @@
                                         if (error)
                                             return "encryptionConfig." + error;
                                     }
+                                    if (message.maintenanceWindow != null && message.hasOwnProperty("maintenanceWindow")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1.MaintenanceWindow.verify(message.maintenanceWindow);
+                                        if (error)
+                                            return "maintenanceWindow." + error;
+                                    }
+                                    if (message.workloadsConfig != null && message.hasOwnProperty("workloadsConfig")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.verify(message.workloadsConfig);
+                                        if (error)
+                                            return "workloadsConfig." + error;
+                                    }
+                                    if (message.environmentSize != null && message.hasOwnProperty("environmentSize"))
+                                        switch (message.environmentSize) {
+                                        default:
+                                            return "environmentSize: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
                                     if (message.airflowUri != null && message.hasOwnProperty("airflowUri"))
                                         if (!$util.isString(message.airflowUri))
                                             return "airflowUri: string expected";
+                                    if (message.masterAuthorizedNetworksConfig != null && message.hasOwnProperty("masterAuthorizedNetworksConfig")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.verify(message.masterAuthorizedNetworksConfig);
+                                        if (error)
+                                            return "masterAuthorizedNetworksConfig." + error;
+                                    }
+                                    if (message.recoveryConfig != null && message.hasOwnProperty("recoveryConfig")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1.RecoveryConfig.verify(message.recoveryConfig);
+                                        if (error)
+                                            return "recoveryConfig." + error;
+                                    }
                                     return null;
                                 };
     
@@ -2064,8 +3159,52 @@
                                             throw TypeError(".google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.encryptionConfig: object expected");
                                         message.encryptionConfig = $root.google.cloud.orchestration.airflow.service.v1.EncryptionConfig.fromObject(object.encryptionConfig);
                                     }
+                                    if (object.maintenanceWindow != null) {
+                                        if (typeof object.maintenanceWindow !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.maintenanceWindow: object expected");
+                                        message.maintenanceWindow = $root.google.cloud.orchestration.airflow.service.v1.MaintenanceWindow.fromObject(object.maintenanceWindow);
+                                    }
+                                    if (object.workloadsConfig != null) {
+                                        if (typeof object.workloadsConfig !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.workloadsConfig: object expected");
+                                        message.workloadsConfig = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.fromObject(object.workloadsConfig);
+                                    }
+                                    switch (object.environmentSize) {
+                                    default:
+                                        if (typeof object.environmentSize === "number") {
+                                            message.environmentSize = object.environmentSize;
+                                            break;
+                                        }
+                                        break;
+                                    case "ENVIRONMENT_SIZE_UNSPECIFIED":
+                                    case 0:
+                                        message.environmentSize = 0;
+                                        break;
+                                    case "ENVIRONMENT_SIZE_SMALL":
+                                    case 1:
+                                        message.environmentSize = 1;
+                                        break;
+                                    case "ENVIRONMENT_SIZE_MEDIUM":
+                                    case 2:
+                                        message.environmentSize = 2;
+                                        break;
+                                    case "ENVIRONMENT_SIZE_LARGE":
+                                    case 3:
+                                        message.environmentSize = 3;
+                                        break;
+                                    }
                                     if (object.airflowUri != null)
                                         message.airflowUri = String(object.airflowUri);
+                                    if (object.masterAuthorizedNetworksConfig != null) {
+                                        if (typeof object.masterAuthorizedNetworksConfig !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.masterAuthorizedNetworksConfig: object expected");
+                                        message.masterAuthorizedNetworksConfig = $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.fromObject(object.masterAuthorizedNetworksConfig);
+                                    }
+                                    if (object.recoveryConfig != null) {
+                                        if (typeof object.recoveryConfig !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.recoveryConfig: object expected");
+                                        message.recoveryConfig = $root.google.cloud.orchestration.airflow.service.v1.RecoveryConfig.fromObject(object.recoveryConfig);
+                                    }
                                     return message;
                                 };
     
@@ -2094,6 +3233,11 @@
                                         object.databaseConfig = null;
                                         object.webServerConfig = null;
                                         object.encryptionConfig = null;
+                                        object.maintenanceWindow = null;
+                                        object.workloadsConfig = null;
+                                        object.environmentSize = options.enums === String ? "ENVIRONMENT_SIZE_UNSPECIFIED" : 0;
+                                        object.masterAuthorizedNetworksConfig = null;
+                                        object.recoveryConfig = null;
                                     }
                                     if (message.gkeCluster != null && message.hasOwnProperty("gkeCluster"))
                                         object.gkeCluster = message.gkeCluster;
@@ -2117,6 +3261,16 @@
                                         object.webServerConfig = $root.google.cloud.orchestration.airflow.service.v1.WebServerConfig.toObject(message.webServerConfig, options);
                                     if (message.encryptionConfig != null && message.hasOwnProperty("encryptionConfig"))
                                         object.encryptionConfig = $root.google.cloud.orchestration.airflow.service.v1.EncryptionConfig.toObject(message.encryptionConfig, options);
+                                    if (message.maintenanceWindow != null && message.hasOwnProperty("maintenanceWindow"))
+                                        object.maintenanceWindow = $root.google.cloud.orchestration.airflow.service.v1.MaintenanceWindow.toObject(message.maintenanceWindow, options);
+                                    if (message.workloadsConfig != null && message.hasOwnProperty("workloadsConfig"))
+                                        object.workloadsConfig = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.toObject(message.workloadsConfig, options);
+                                    if (message.environmentSize != null && message.hasOwnProperty("environmentSize"))
+                                        object.environmentSize = options.enums === String ? $root.google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize[message.environmentSize] === undefined ? message.environmentSize : $root.google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize[message.environmentSize] : message.environmentSize;
+                                    if (message.masterAuthorizedNetworksConfig != null && message.hasOwnProperty("masterAuthorizedNetworksConfig"))
+                                        object.masterAuthorizedNetworksConfig = $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.toObject(message.masterAuthorizedNetworksConfig, options);
+                                    if (message.recoveryConfig != null && message.hasOwnProperty("recoveryConfig"))
+                                        object.recoveryConfig = $root.google.cloud.orchestration.airflow.service.v1.RecoveryConfig.toObject(message.recoveryConfig, options);
                                     return object;
                                 };
     
@@ -2145,6 +3299,24 @@
                                     }
                                     return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.EnvironmentConfig";
                                 };
+    
+                                /**
+                                 * EnvironmentSize enum.
+                                 * @name google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize
+                                 * @enum {number}
+                                 * @property {number} ENVIRONMENT_SIZE_UNSPECIFIED=0 ENVIRONMENT_SIZE_UNSPECIFIED value
+                                 * @property {number} ENVIRONMENT_SIZE_SMALL=1 ENVIRONMENT_SIZE_SMALL value
+                                 * @property {number} ENVIRONMENT_SIZE_MEDIUM=2 ENVIRONMENT_SIZE_MEDIUM value
+                                 * @property {number} ENVIRONMENT_SIZE_LARGE=3 ENVIRONMENT_SIZE_LARGE value
+                                 */
+                                EnvironmentConfig.EnvironmentSize = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "ENVIRONMENT_SIZE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "ENVIRONMENT_SIZE_SMALL"] = 1;
+                                    values[valuesById[2] = "ENVIRONMENT_SIZE_MEDIUM"] = 2;
+                                    values[valuesById[3] = "ENVIRONMENT_SIZE_LARGE"] = 3;
+                                    return values;
+                                })();
     
                                 return EnvironmentConfig;
                             })();
@@ -3209,6 +4381,266 @@
                                 return EncryptionConfig;
                             })();
     
+                            v1.MaintenanceWindow = (function() {
+    
+                                /**
+                                 * Properties of a MaintenanceWindow.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @interface IMaintenanceWindow
+                                 * @property {google.protobuf.ITimestamp|null} [startTime] MaintenanceWindow startTime
+                                 * @property {google.protobuf.ITimestamp|null} [endTime] MaintenanceWindow endTime
+                                 * @property {string|null} [recurrence] MaintenanceWindow recurrence
+                                 */
+    
+                                /**
+                                 * Constructs a new MaintenanceWindow.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @classdesc Represents a MaintenanceWindow.
+                                 * @implements IMaintenanceWindow
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IMaintenanceWindow=} [properties] Properties to set
+                                 */
+                                function MaintenanceWindow(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MaintenanceWindow startTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @instance
+                                 */
+                                MaintenanceWindow.prototype.startTime = null;
+    
+                                /**
+                                 * MaintenanceWindow endTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @instance
+                                 */
+                                MaintenanceWindow.prototype.endTime = null;
+    
+                                /**
+                                 * MaintenanceWindow recurrence.
+                                 * @member {string} recurrence
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @instance
+                                 */
+                                MaintenanceWindow.prototype.recurrence = "";
+    
+                                /**
+                                 * Creates a new MaintenanceWindow instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IMaintenanceWindow=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.MaintenanceWindow} MaintenanceWindow instance
+                                 */
+                                MaintenanceWindow.create = function create(properties) {
+                                    return new MaintenanceWindow(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MaintenanceWindow message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.MaintenanceWindow.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IMaintenanceWindow} message MaintenanceWindow message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MaintenanceWindow.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.recurrence != null && Object.hasOwnProperty.call(message, "recurrence"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.recurrence);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.MaintenanceWindow.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IMaintenanceWindow} message MaintenanceWindow message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MaintenanceWindow.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MaintenanceWindow message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.MaintenanceWindow} MaintenanceWindow
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MaintenanceWindow.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.MaintenanceWindow();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.recurrence = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MaintenanceWindow message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.MaintenanceWindow} MaintenanceWindow
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MaintenanceWindow.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MaintenanceWindow message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MaintenanceWindow.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                        if (error)
+                                            return "startTime." + error;
+                                    }
+                                    if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                        if (error)
+                                            return "endTime." + error;
+                                    }
+                                    if (message.recurrence != null && message.hasOwnProperty("recurrence"))
+                                        if (!$util.isString(message.recurrence))
+                                            return "recurrence: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.MaintenanceWindow} MaintenanceWindow
+                                 */
+                                MaintenanceWindow.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.MaintenanceWindow)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1.MaintenanceWindow();
+                                    if (object.startTime != null) {
+                                        if (typeof object.startTime !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1.MaintenanceWindow.startTime: object expected");
+                                        message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                                    }
+                                    if (object.endTime != null) {
+                                        if (typeof object.endTime !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1.MaintenanceWindow.endTime: object expected");
+                                        message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                                    }
+                                    if (object.recurrence != null)
+                                        message.recurrence = String(object.recurrence);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MaintenanceWindow message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.MaintenanceWindow} message MaintenanceWindow
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MaintenanceWindow.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.startTime = null;
+                                        object.endTime = null;
+                                        object.recurrence = "";
+                                    }
+                                    if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                        object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                                    if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                        object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                                    if (message.recurrence != null && message.hasOwnProperty("recurrence"))
+                                        object.recurrence = message.recurrence;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MaintenanceWindow to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MaintenanceWindow.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for MaintenanceWindow
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MaintenanceWindow
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                MaintenanceWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.MaintenanceWindow";
+                                };
+    
+                                return MaintenanceWindow;
+                            })();
+    
                             v1.SoftwareConfig = (function() {
     
                                 /**
@@ -3220,6 +4652,7 @@
                                  * @property {Object.<string,string>|null} [pypiPackages] SoftwareConfig pypiPackages
                                  * @property {Object.<string,string>|null} [envVariables] SoftwareConfig envVariables
                                  * @property {string|null} [pythonVersion] SoftwareConfig pythonVersion
+                                 * @property {number|null} [schedulerCount] SoftwareConfig schedulerCount
                                  */
     
                                 /**
@@ -3281,6 +4714,14 @@
                                 SoftwareConfig.prototype.pythonVersion = "";
     
                                 /**
+                                 * SoftwareConfig schedulerCount.
+                                 * @member {number} schedulerCount
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.SoftwareConfig
+                                 * @instance
+                                 */
+                                SoftwareConfig.prototype.schedulerCount = 0;
+    
+                                /**
                                  * Creates a new SoftwareConfig instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.orchestration.airflow.service.v1.SoftwareConfig
@@ -3317,6 +4758,8 @@
                                             writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.envVariables[keys[i]]).ldelim();
                                     if (message.pythonVersion != null && Object.hasOwnProperty.call(message, "pythonVersion"))
                                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.pythonVersion);
+                                    if (message.schedulerCount != null && Object.hasOwnProperty.call(message, "schedulerCount"))
+                                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.schedulerCount);
                                     return writer;
                                 };
     
@@ -3428,6 +4871,10 @@
                                                 message.pythonVersion = reader.string();
                                                 break;
                                             }
+                                        case 7: {
+                                                message.schedulerCount = reader.int32();
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -3493,6 +4940,9 @@
                                     if (message.pythonVersion != null && message.hasOwnProperty("pythonVersion"))
                                         if (!$util.isString(message.pythonVersion))
                                             return "pythonVersion: string expected";
+                                    if (message.schedulerCount != null && message.hasOwnProperty("schedulerCount"))
+                                        if (!$util.isInteger(message.schedulerCount))
+                                            return "schedulerCount: integer expected";
                                     return null;
                                 };
     
@@ -3533,6 +4983,8 @@
                                     }
                                     if (object.pythonVersion != null)
                                         message.pythonVersion = String(object.pythonVersion);
+                                    if (object.schedulerCount != null)
+                                        message.schedulerCount = object.schedulerCount | 0;
                                     return message;
                                 };
     
@@ -3557,6 +5009,7 @@
                                     if (options.defaults) {
                                         object.imageVersion = "";
                                         object.pythonVersion = "";
+                                        object.schedulerCount = 0;
                                     }
                                     if (message.imageVersion != null && message.hasOwnProperty("imageVersion"))
                                         object.imageVersion = message.imageVersion;
@@ -3578,6 +5031,8 @@
                                     }
                                     if (message.pythonVersion != null && message.hasOwnProperty("pythonVersion"))
                                         object.pythonVersion = message.pythonVersion;
+                                    if (message.schedulerCount != null && message.hasOwnProperty("schedulerCount"))
+                                        object.schedulerCount = message.schedulerCount;
                                     return object;
                                 };
     
@@ -3966,6 +5421,7 @@
                                  * @property {string|null} [serviceAccount] NodeConfig serviceAccount
                                  * @property {Array.<string>|null} [tags] NodeConfig tags
                                  * @property {google.cloud.orchestration.airflow.service.v1.IIPAllocationPolicy|null} [ipAllocationPolicy] NodeConfig ipAllocationPolicy
+                                 * @property {boolean|null} [enableIpMasqAgent] NodeConfig enableIpMasqAgent
                                  */
     
                                 /**
@@ -4058,6 +5514,14 @@
                                 NodeConfig.prototype.ipAllocationPolicy = null;
     
                                 /**
+                                 * NodeConfig enableIpMasqAgent.
+                                 * @member {boolean} enableIpMasqAgent
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.NodeConfig
+                                 * @instance
+                                 */
+                                NodeConfig.prototype.enableIpMasqAgent = false;
+    
+                                /**
                                  * Creates a new NodeConfig instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.orchestration.airflow.service.v1.NodeConfig
@@ -4101,6 +5565,8 @@
                                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.tags[i]);
                                     if (message.ipAllocationPolicy != null && Object.hasOwnProperty.call(message, "ipAllocationPolicy"))
                                         $root.google.cloud.orchestration.airflow.service.v1.IPAllocationPolicy.encode(message.ipAllocationPolicy, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                    if (message.enableIpMasqAgent != null && Object.hasOwnProperty.call(message, "enableIpMasqAgent"))
+                                        writer.uint32(/* id 11, wireType 0 =*/88).bool(message.enableIpMasqAgent);
                                     return writer;
                                 };
     
@@ -4175,6 +5641,10 @@
                                                 message.ipAllocationPolicy = $root.google.cloud.orchestration.airflow.service.v1.IPAllocationPolicy.decode(reader, reader.uint32());
                                                 break;
                                             }
+                                        case 11: {
+                                                message.enableIpMasqAgent = reader.bool();
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -4247,6 +5717,9 @@
                                         if (error)
                                             return "ipAllocationPolicy." + error;
                                     }
+                                    if (message.enableIpMasqAgent != null && message.hasOwnProperty("enableIpMasqAgent"))
+                                        if (typeof message.enableIpMasqAgent !== "boolean")
+                                            return "enableIpMasqAgent: boolean expected";
                                     return null;
                                 };
     
@@ -4293,6 +5766,8 @@
                                             throw TypeError(".google.cloud.orchestration.airflow.service.v1.NodeConfig.ipAllocationPolicy: object expected");
                                         message.ipAllocationPolicy = $root.google.cloud.orchestration.airflow.service.v1.IPAllocationPolicy.fromObject(object.ipAllocationPolicy);
                                     }
+                                    if (object.enableIpMasqAgent != null)
+                                        message.enableIpMasqAgent = Boolean(object.enableIpMasqAgent);
                                     return message;
                                 };
     
@@ -4321,6 +5796,7 @@
                                         object.diskSizeGb = 0;
                                         object.serviceAccount = "";
                                         object.ipAllocationPolicy = null;
+                                        object.enableIpMasqAgent = false;
                                     }
                                     if (message.location != null && message.hasOwnProperty("location"))
                                         object.location = message.location;
@@ -4346,6 +5822,8 @@
                                     }
                                     if (message.ipAllocationPolicy != null && message.hasOwnProperty("ipAllocationPolicy"))
                                         object.ipAllocationPolicy = $root.google.cloud.orchestration.airflow.service.v1.IPAllocationPolicy.toObject(message.ipAllocationPolicy, options);
+                                    if (message.enableIpMasqAgent != null && message.hasOwnProperty("enableIpMasqAgent"))
+                                        object.enableIpMasqAgent = message.enableIpMasqAgent;
                                     return object;
                                 };
     
@@ -4628,6 +6106,249 @@
                                 return PrivateClusterConfig;
                             })();
     
+                            v1.NetworkingConfig = (function() {
+    
+                                /**
+                                 * Properties of a NetworkingConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @interface INetworkingConfig
+                                 * @property {google.cloud.orchestration.airflow.service.v1.NetworkingConfig.ConnectionType|null} [connectionType] NetworkingConfig connectionType
+                                 */
+    
+                                /**
+                                 * Constructs a new NetworkingConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @classdesc Represents a NetworkingConfig.
+                                 * @implements INetworkingConfig
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1.INetworkingConfig=} [properties] Properties to set
+                                 */
+                                function NetworkingConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * NetworkingConfig connectionType.
+                                 * @member {google.cloud.orchestration.airflow.service.v1.NetworkingConfig.ConnectionType} connectionType
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.NetworkingConfig
+                                 * @instance
+                                 */
+                                NetworkingConfig.prototype.connectionType = 0;
+    
+                                /**
+                                 * Creates a new NetworkingConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.NetworkingConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.INetworkingConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.NetworkingConfig} NetworkingConfig instance
+                                 */
+                                NetworkingConfig.create = function create(properties) {
+                                    return new NetworkingConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified NetworkingConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.NetworkingConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.NetworkingConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.INetworkingConfig} message NetworkingConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NetworkingConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.connectionType != null && Object.hasOwnProperty.call(message, "connectionType"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.connectionType);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified NetworkingConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.NetworkingConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.NetworkingConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.INetworkingConfig} message NetworkingConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NetworkingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a NetworkingConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.NetworkingConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.NetworkingConfig} NetworkingConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NetworkingConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.NetworkingConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.connectionType = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a NetworkingConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.NetworkingConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.NetworkingConfig} NetworkingConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NetworkingConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a NetworkingConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.NetworkingConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                NetworkingConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.connectionType != null && message.hasOwnProperty("connectionType"))
+                                        switch (message.connectionType) {
+                                        default:
+                                            return "connectionType: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a NetworkingConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.NetworkingConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.NetworkingConfig} NetworkingConfig
+                                 */
+                                NetworkingConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.NetworkingConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1.NetworkingConfig();
+                                    switch (object.connectionType) {
+                                    default:
+                                        if (typeof object.connectionType === "number") {
+                                            message.connectionType = object.connectionType;
+                                            break;
+                                        }
+                                        break;
+                                    case "CONNECTION_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.connectionType = 0;
+                                        break;
+                                    case "VPC_PEERING":
+                                    case 1:
+                                        message.connectionType = 1;
+                                        break;
+                                    case "PRIVATE_SERVICE_CONNECT":
+                                    case 2:
+                                        message.connectionType = 2;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a NetworkingConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.NetworkingConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.NetworkingConfig} message NetworkingConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                NetworkingConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.connectionType = options.enums === String ? "CONNECTION_TYPE_UNSPECIFIED" : 0;
+                                    if (message.connectionType != null && message.hasOwnProperty("connectionType"))
+                                        object.connectionType = options.enums === String ? $root.google.cloud.orchestration.airflow.service.v1.NetworkingConfig.ConnectionType[message.connectionType] === undefined ? message.connectionType : $root.google.cloud.orchestration.airflow.service.v1.NetworkingConfig.ConnectionType[message.connectionType] : message.connectionType;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this NetworkingConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.NetworkingConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                NetworkingConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for NetworkingConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.NetworkingConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                NetworkingConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.NetworkingConfig";
+                                };
+    
+                                /**
+                                 * ConnectionType enum.
+                                 * @name google.cloud.orchestration.airflow.service.v1.NetworkingConfig.ConnectionType
+                                 * @enum {number}
+                                 * @property {number} CONNECTION_TYPE_UNSPECIFIED=0 CONNECTION_TYPE_UNSPECIFIED value
+                                 * @property {number} VPC_PEERING=1 VPC_PEERING value
+                                 * @property {number} PRIVATE_SERVICE_CONNECT=2 PRIVATE_SERVICE_CONNECT value
+                                 */
+                                NetworkingConfig.ConnectionType = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "CONNECTION_TYPE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "VPC_PEERING"] = 1;
+                                    values[valuesById[2] = "PRIVATE_SERVICE_CONNECT"] = 2;
+                                    return values;
+                                })();
+    
+                                return NetworkingConfig;
+                            })();
+    
                             v1.PrivateEnvironmentConfig = (function() {
     
                                 /**
@@ -4639,6 +6360,11 @@
                                  * @property {string|null} [webServerIpv4CidrBlock] PrivateEnvironmentConfig webServerIpv4CidrBlock
                                  * @property {string|null} [cloudSqlIpv4CidrBlock] PrivateEnvironmentConfig cloudSqlIpv4CidrBlock
                                  * @property {string|null} [webServerIpv4ReservedRange] PrivateEnvironmentConfig webServerIpv4ReservedRange
+                                 * @property {string|null} [cloudComposerNetworkIpv4CidrBlock] PrivateEnvironmentConfig cloudComposerNetworkIpv4CidrBlock
+                                 * @property {string|null} [cloudComposerNetworkIpv4ReservedRange] PrivateEnvironmentConfig cloudComposerNetworkIpv4ReservedRange
+                                 * @property {boolean|null} [enablePrivatelyUsedPublicIps] PrivateEnvironmentConfig enablePrivatelyUsedPublicIps
+                                 * @property {string|null} [cloudComposerConnectionSubnetwork] PrivateEnvironmentConfig cloudComposerConnectionSubnetwork
+                                 * @property {google.cloud.orchestration.airflow.service.v1.INetworkingConfig|null} [networkingConfig] PrivateEnvironmentConfig networkingConfig
                                  */
     
                                 /**
@@ -4697,6 +6423,46 @@
                                 PrivateEnvironmentConfig.prototype.webServerIpv4ReservedRange = "";
     
                                 /**
+                                 * PrivateEnvironmentConfig cloudComposerNetworkIpv4CidrBlock.
+                                 * @member {string} cloudComposerNetworkIpv4CidrBlock
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.PrivateEnvironmentConfig
+                                 * @instance
+                                 */
+                                PrivateEnvironmentConfig.prototype.cloudComposerNetworkIpv4CidrBlock = "";
+    
+                                /**
+                                 * PrivateEnvironmentConfig cloudComposerNetworkIpv4ReservedRange.
+                                 * @member {string} cloudComposerNetworkIpv4ReservedRange
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.PrivateEnvironmentConfig
+                                 * @instance
+                                 */
+                                PrivateEnvironmentConfig.prototype.cloudComposerNetworkIpv4ReservedRange = "";
+    
+                                /**
+                                 * PrivateEnvironmentConfig enablePrivatelyUsedPublicIps.
+                                 * @member {boolean} enablePrivatelyUsedPublicIps
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.PrivateEnvironmentConfig
+                                 * @instance
+                                 */
+                                PrivateEnvironmentConfig.prototype.enablePrivatelyUsedPublicIps = false;
+    
+                                /**
+                                 * PrivateEnvironmentConfig cloudComposerConnectionSubnetwork.
+                                 * @member {string} cloudComposerConnectionSubnetwork
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.PrivateEnvironmentConfig
+                                 * @instance
+                                 */
+                                PrivateEnvironmentConfig.prototype.cloudComposerConnectionSubnetwork = "";
+    
+                                /**
+                                 * PrivateEnvironmentConfig networkingConfig.
+                                 * @member {google.cloud.orchestration.airflow.service.v1.INetworkingConfig|null|undefined} networkingConfig
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.PrivateEnvironmentConfig
+                                 * @instance
+                                 */
+                                PrivateEnvironmentConfig.prototype.networkingConfig = null;
+    
+                                /**
                                  * Creates a new PrivateEnvironmentConfig instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.orchestration.airflow.service.v1.PrivateEnvironmentConfig
@@ -4730,6 +6496,16 @@
                                         writer.uint32(/* id 4, wireType 2 =*/34).string(message.cloudSqlIpv4CidrBlock);
                                     if (message.webServerIpv4ReservedRange != null && Object.hasOwnProperty.call(message, "webServerIpv4ReservedRange"))
                                         writer.uint32(/* id 5, wireType 2 =*/42).string(message.webServerIpv4ReservedRange);
+                                    if (message.enablePrivatelyUsedPublicIps != null && Object.hasOwnProperty.call(message, "enablePrivatelyUsedPublicIps"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.enablePrivatelyUsedPublicIps);
+                                    if (message.cloudComposerNetworkIpv4CidrBlock != null && Object.hasOwnProperty.call(message, "cloudComposerNetworkIpv4CidrBlock"))
+                                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.cloudComposerNetworkIpv4CidrBlock);
+                                    if (message.cloudComposerNetworkIpv4ReservedRange != null && Object.hasOwnProperty.call(message, "cloudComposerNetworkIpv4ReservedRange"))
+                                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.cloudComposerNetworkIpv4ReservedRange);
+                                    if (message.cloudComposerConnectionSubnetwork != null && Object.hasOwnProperty.call(message, "cloudComposerConnectionSubnetwork"))
+                                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.cloudComposerConnectionSubnetwork);
+                                    if (message.networkingConfig != null && Object.hasOwnProperty.call(message, "networkingConfig"))
+                                        $root.google.cloud.orchestration.airflow.service.v1.NetworkingConfig.encode(message.networkingConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -4784,6 +6560,26 @@
                                                 message.webServerIpv4ReservedRange = reader.string();
                                                 break;
                                             }
+                                        case 7: {
+                                                message.cloudComposerNetworkIpv4CidrBlock = reader.string();
+                                                break;
+                                            }
+                                        case 8: {
+                                                message.cloudComposerNetworkIpv4ReservedRange = reader.string();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.enablePrivatelyUsedPublicIps = reader.bool();
+                                                break;
+                                            }
+                                        case 9: {
+                                                message.cloudComposerConnectionSubnetwork = reader.string();
+                                                break;
+                                            }
+                                        case 10: {
+                                                message.networkingConfig = $root.google.cloud.orchestration.airflow.service.v1.NetworkingConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -4836,6 +6632,23 @@
                                     if (message.webServerIpv4ReservedRange != null && message.hasOwnProperty("webServerIpv4ReservedRange"))
                                         if (!$util.isString(message.webServerIpv4ReservedRange))
                                             return "webServerIpv4ReservedRange: string expected";
+                                    if (message.cloudComposerNetworkIpv4CidrBlock != null && message.hasOwnProperty("cloudComposerNetworkIpv4CidrBlock"))
+                                        if (!$util.isString(message.cloudComposerNetworkIpv4CidrBlock))
+                                            return "cloudComposerNetworkIpv4CidrBlock: string expected";
+                                    if (message.cloudComposerNetworkIpv4ReservedRange != null && message.hasOwnProperty("cloudComposerNetworkIpv4ReservedRange"))
+                                        if (!$util.isString(message.cloudComposerNetworkIpv4ReservedRange))
+                                            return "cloudComposerNetworkIpv4ReservedRange: string expected";
+                                    if (message.enablePrivatelyUsedPublicIps != null && message.hasOwnProperty("enablePrivatelyUsedPublicIps"))
+                                        if (typeof message.enablePrivatelyUsedPublicIps !== "boolean")
+                                            return "enablePrivatelyUsedPublicIps: boolean expected";
+                                    if (message.cloudComposerConnectionSubnetwork != null && message.hasOwnProperty("cloudComposerConnectionSubnetwork"))
+                                        if (!$util.isString(message.cloudComposerConnectionSubnetwork))
+                                            return "cloudComposerConnectionSubnetwork: string expected";
+                                    if (message.networkingConfig != null && message.hasOwnProperty("networkingConfig")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1.NetworkingConfig.verify(message.networkingConfig);
+                                        if (error)
+                                            return "networkingConfig." + error;
+                                    }
                                     return null;
                                 };
     
@@ -4864,6 +6677,19 @@
                                         message.cloudSqlIpv4CidrBlock = String(object.cloudSqlIpv4CidrBlock);
                                     if (object.webServerIpv4ReservedRange != null)
                                         message.webServerIpv4ReservedRange = String(object.webServerIpv4ReservedRange);
+                                    if (object.cloudComposerNetworkIpv4CidrBlock != null)
+                                        message.cloudComposerNetworkIpv4CidrBlock = String(object.cloudComposerNetworkIpv4CidrBlock);
+                                    if (object.cloudComposerNetworkIpv4ReservedRange != null)
+                                        message.cloudComposerNetworkIpv4ReservedRange = String(object.cloudComposerNetworkIpv4ReservedRange);
+                                    if (object.enablePrivatelyUsedPublicIps != null)
+                                        message.enablePrivatelyUsedPublicIps = Boolean(object.enablePrivatelyUsedPublicIps);
+                                    if (object.cloudComposerConnectionSubnetwork != null)
+                                        message.cloudComposerConnectionSubnetwork = String(object.cloudComposerConnectionSubnetwork);
+                                    if (object.networkingConfig != null) {
+                                        if (typeof object.networkingConfig !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1.PrivateEnvironmentConfig.networkingConfig: object expected");
+                                        message.networkingConfig = $root.google.cloud.orchestration.airflow.service.v1.NetworkingConfig.fromObject(object.networkingConfig);
+                                    }
                                     return message;
                                 };
     
@@ -4886,6 +6712,11 @@
                                         object.webServerIpv4CidrBlock = "";
                                         object.cloudSqlIpv4CidrBlock = "";
                                         object.webServerIpv4ReservedRange = "";
+                                        object.enablePrivatelyUsedPublicIps = false;
+                                        object.cloudComposerNetworkIpv4CidrBlock = "";
+                                        object.cloudComposerNetworkIpv4ReservedRange = "";
+                                        object.cloudComposerConnectionSubnetwork = "";
+                                        object.networkingConfig = null;
                                     }
                                     if (message.enablePrivateEnvironment != null && message.hasOwnProperty("enablePrivateEnvironment"))
                                         object.enablePrivateEnvironment = message.enablePrivateEnvironment;
@@ -4897,6 +6728,16 @@
                                         object.cloudSqlIpv4CidrBlock = message.cloudSqlIpv4CidrBlock;
                                     if (message.webServerIpv4ReservedRange != null && message.hasOwnProperty("webServerIpv4ReservedRange"))
                                         object.webServerIpv4ReservedRange = message.webServerIpv4ReservedRange;
+                                    if (message.enablePrivatelyUsedPublicIps != null && message.hasOwnProperty("enablePrivatelyUsedPublicIps"))
+                                        object.enablePrivatelyUsedPublicIps = message.enablePrivatelyUsedPublicIps;
+                                    if (message.cloudComposerNetworkIpv4CidrBlock != null && message.hasOwnProperty("cloudComposerNetworkIpv4CidrBlock"))
+                                        object.cloudComposerNetworkIpv4CidrBlock = message.cloudComposerNetworkIpv4CidrBlock;
+                                    if (message.cloudComposerNetworkIpv4ReservedRange != null && message.hasOwnProperty("cloudComposerNetworkIpv4ReservedRange"))
+                                        object.cloudComposerNetworkIpv4ReservedRange = message.cloudComposerNetworkIpv4ReservedRange;
+                                    if (message.cloudComposerConnectionSubnetwork != null && message.hasOwnProperty("cloudComposerConnectionSubnetwork"))
+                                        object.cloudComposerConnectionSubnetwork = message.cloudComposerConnectionSubnetwork;
+                                    if (message.networkingConfig != null && message.hasOwnProperty("networkingConfig"))
+                                        object.networkingConfig = $root.google.cloud.orchestration.airflow.service.v1.NetworkingConfig.toObject(message.networkingConfig, options);
                                     return object;
                                 };
     
@@ -4927,6 +6768,2046 @@
                                 };
     
                                 return PrivateEnvironmentConfig;
+                            })();
+    
+                            v1.WorkloadsConfig = (function() {
+    
+                                /**
+                                 * Properties of a WorkloadsConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @interface IWorkloadsConfig
+                                 * @property {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ISchedulerResource|null} [scheduler] WorkloadsConfig scheduler
+                                 * @property {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWebServerResource|null} [webServer] WorkloadsConfig webServer
+                                 * @property {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource|null} [worker] WorkloadsConfig worker
+                                 */
+    
+                                /**
+                                 * Constructs a new WorkloadsConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @classdesc Represents a WorkloadsConfig.
+                                 * @implements IWorkloadsConfig
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IWorkloadsConfig=} [properties] Properties to set
+                                 */
+                                function WorkloadsConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * WorkloadsConfig scheduler.
+                                 * @member {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ISchedulerResource|null|undefined} scheduler
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @instance
+                                 */
+                                WorkloadsConfig.prototype.scheduler = null;
+    
+                                /**
+                                 * WorkloadsConfig webServer.
+                                 * @member {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWebServerResource|null|undefined} webServer
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @instance
+                                 */
+                                WorkloadsConfig.prototype.webServer = null;
+    
+                                /**
+                                 * WorkloadsConfig worker.
+                                 * @member {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource|null|undefined} worker
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @instance
+                                 */
+                                WorkloadsConfig.prototype.worker = null;
+    
+                                /**
+                                 * Creates a new WorkloadsConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IWorkloadsConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig} WorkloadsConfig instance
+                                 */
+                                WorkloadsConfig.create = function create(properties) {
+                                    return new WorkloadsConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified WorkloadsConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IWorkloadsConfig} message WorkloadsConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                WorkloadsConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.scheduler != null && Object.hasOwnProperty.call(message, "scheduler"))
+                                        $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource.encode(message.scheduler, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.webServer != null && Object.hasOwnProperty.call(message, "webServer"))
+                                        $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource.encode(message.webServer, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.worker != null && Object.hasOwnProperty.call(message, "worker"))
+                                        $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource.encode(message.worker, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified WorkloadsConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IWorkloadsConfig} message WorkloadsConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                WorkloadsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a WorkloadsConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig} WorkloadsConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                WorkloadsConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.scheduler = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.webServer = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.worker = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a WorkloadsConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig} WorkloadsConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                WorkloadsConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a WorkloadsConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                WorkloadsConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.scheduler != null && message.hasOwnProperty("scheduler")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource.verify(message.scheduler);
+                                        if (error)
+                                            return "scheduler." + error;
+                                    }
+                                    if (message.webServer != null && message.hasOwnProperty("webServer")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource.verify(message.webServer);
+                                        if (error)
+                                            return "webServer." + error;
+                                    }
+                                    if (message.worker != null && message.hasOwnProperty("worker")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource.verify(message.worker);
+                                        if (error)
+                                            return "worker." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a WorkloadsConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig} WorkloadsConfig
+                                 */
+                                WorkloadsConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig();
+                                    if (object.scheduler != null) {
+                                        if (typeof object.scheduler !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.scheduler: object expected");
+                                        message.scheduler = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource.fromObject(object.scheduler);
+                                    }
+                                    if (object.webServer != null) {
+                                        if (typeof object.webServer !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.webServer: object expected");
+                                        message.webServer = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource.fromObject(object.webServer);
+                                    }
+                                    if (object.worker != null) {
+                                        if (typeof object.worker !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.worker: object expected");
+                                        message.worker = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource.fromObject(object.worker);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a WorkloadsConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig} message WorkloadsConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                WorkloadsConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.scheduler = null;
+                                        object.webServer = null;
+                                        object.worker = null;
+                                    }
+                                    if (message.scheduler != null && message.hasOwnProperty("scheduler"))
+                                        object.scheduler = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource.toObject(message.scheduler, options);
+                                    if (message.webServer != null && message.hasOwnProperty("webServer"))
+                                        object.webServer = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource.toObject(message.webServer, options);
+                                    if (message.worker != null && message.hasOwnProperty("worker"))
+                                        object.worker = $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource.toObject(message.worker, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this WorkloadsConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                WorkloadsConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for WorkloadsConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                WorkloadsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.WorkloadsConfig";
+                                };
+    
+                                WorkloadsConfig.SchedulerResource = (function() {
+    
+                                    /**
+                                     * Properties of a SchedulerResource.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                     * @interface ISchedulerResource
+                                     * @property {number|null} [cpu] SchedulerResource cpu
+                                     * @property {number|null} [memoryGb] SchedulerResource memoryGb
+                                     * @property {number|null} [storageGb] SchedulerResource storageGb
+                                     * @property {number|null} [count] SchedulerResource count
+                                     */
+    
+                                    /**
+                                     * Constructs a new SchedulerResource.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                     * @classdesc Represents a SchedulerResource.
+                                     * @implements ISchedulerResource
+                                     * @constructor
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ISchedulerResource=} [properties] Properties to set
+                                     */
+                                    function SchedulerResource(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * SchedulerResource cpu.
+                                     * @member {number} cpu
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @instance
+                                     */
+                                    SchedulerResource.prototype.cpu = 0;
+    
+                                    /**
+                                     * SchedulerResource memoryGb.
+                                     * @member {number} memoryGb
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @instance
+                                     */
+                                    SchedulerResource.prototype.memoryGb = 0;
+    
+                                    /**
+                                     * SchedulerResource storageGb.
+                                     * @member {number} storageGb
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @instance
+                                     */
+                                    SchedulerResource.prototype.storageGb = 0;
+    
+                                    /**
+                                     * SchedulerResource count.
+                                     * @member {number} count
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @instance
+                                     */
+                                    SchedulerResource.prototype.count = 0;
+    
+                                    /**
+                                     * Creates a new SchedulerResource instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ISchedulerResource=} [properties] Properties to set
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource} SchedulerResource instance
+                                     */
+                                    SchedulerResource.create = function create(properties) {
+                                        return new SchedulerResource(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified SchedulerResource message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ISchedulerResource} message SchedulerResource message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    SchedulerResource.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.cpu != null && Object.hasOwnProperty.call(message, "cpu"))
+                                            writer.uint32(/* id 1, wireType 5 =*/13).float(message.cpu);
+                                        if (message.memoryGb != null && Object.hasOwnProperty.call(message, "memoryGb"))
+                                            writer.uint32(/* id 2, wireType 5 =*/21).float(message.memoryGb);
+                                        if (message.storageGb != null && Object.hasOwnProperty.call(message, "storageGb"))
+                                            writer.uint32(/* id 3, wireType 5 =*/29).float(message.storageGb);
+                                        if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.count);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified SchedulerResource message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ISchedulerResource} message SchedulerResource message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    SchedulerResource.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a SchedulerResource message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource} SchedulerResource
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    SchedulerResource.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.cpu = reader.float();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.memoryGb = reader.float();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.storageGb = reader.float();
+                                                    break;
+                                                }
+                                            case 4: {
+                                                    message.count = reader.int32();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a SchedulerResource message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource} SchedulerResource
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    SchedulerResource.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a SchedulerResource message.
+                                     * @function verify
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    SchedulerResource.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.cpu != null && message.hasOwnProperty("cpu"))
+                                            if (typeof message.cpu !== "number")
+                                                return "cpu: number expected";
+                                        if (message.memoryGb != null && message.hasOwnProperty("memoryGb"))
+                                            if (typeof message.memoryGb !== "number")
+                                                return "memoryGb: number expected";
+                                        if (message.storageGb != null && message.hasOwnProperty("storageGb"))
+                                            if (typeof message.storageGb !== "number")
+                                                return "storageGb: number expected";
+                                        if (message.count != null && message.hasOwnProperty("count"))
+                                            if (!$util.isInteger(message.count))
+                                                return "count: integer expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a SchedulerResource message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource} SchedulerResource
+                                     */
+                                    SchedulerResource.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource)
+                                            return object;
+                                        var message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource();
+                                        if (object.cpu != null)
+                                            message.cpu = Number(object.cpu);
+                                        if (object.memoryGb != null)
+                                            message.memoryGb = Number(object.memoryGb);
+                                        if (object.storageGb != null)
+                                            message.storageGb = Number(object.storageGb);
+                                        if (object.count != null)
+                                            message.count = object.count | 0;
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a SchedulerResource message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource} message SchedulerResource
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    SchedulerResource.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.cpu = 0;
+                                            object.memoryGb = 0;
+                                            object.storageGb = 0;
+                                            object.count = 0;
+                                        }
+                                        if (message.cpu != null && message.hasOwnProperty("cpu"))
+                                            object.cpu = options.json && !isFinite(message.cpu) ? String(message.cpu) : message.cpu;
+                                        if (message.memoryGb != null && message.hasOwnProperty("memoryGb"))
+                                            object.memoryGb = options.json && !isFinite(message.memoryGb) ? String(message.memoryGb) : message.memoryGb;
+                                        if (message.storageGb != null && message.hasOwnProperty("storageGb"))
+                                            object.storageGb = options.json && !isFinite(message.storageGb) ? String(message.storageGb) : message.storageGb;
+                                        if (message.count != null && message.hasOwnProperty("count"))
+                                            object.count = message.count;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this SchedulerResource to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    SchedulerResource.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for SchedulerResource
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    SchedulerResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource";
+                                    };
+    
+                                    return SchedulerResource;
+                                })();
+    
+                                WorkloadsConfig.WebServerResource = (function() {
+    
+                                    /**
+                                     * Properties of a WebServerResource.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                     * @interface IWebServerResource
+                                     * @property {number|null} [cpu] WebServerResource cpu
+                                     * @property {number|null} [memoryGb] WebServerResource memoryGb
+                                     * @property {number|null} [storageGb] WebServerResource storageGb
+                                     */
+    
+                                    /**
+                                     * Constructs a new WebServerResource.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                     * @classdesc Represents a WebServerResource.
+                                     * @implements IWebServerResource
+                                     * @constructor
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWebServerResource=} [properties] Properties to set
+                                     */
+                                    function WebServerResource(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * WebServerResource cpu.
+                                     * @member {number} cpu
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @instance
+                                     */
+                                    WebServerResource.prototype.cpu = 0;
+    
+                                    /**
+                                     * WebServerResource memoryGb.
+                                     * @member {number} memoryGb
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @instance
+                                     */
+                                    WebServerResource.prototype.memoryGb = 0;
+    
+                                    /**
+                                     * WebServerResource storageGb.
+                                     * @member {number} storageGb
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @instance
+                                     */
+                                    WebServerResource.prototype.storageGb = 0;
+    
+                                    /**
+                                     * Creates a new WebServerResource instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWebServerResource=} [properties] Properties to set
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource} WebServerResource instance
+                                     */
+                                    WebServerResource.create = function create(properties) {
+                                        return new WebServerResource(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified WebServerResource message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWebServerResource} message WebServerResource message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    WebServerResource.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.cpu != null && Object.hasOwnProperty.call(message, "cpu"))
+                                            writer.uint32(/* id 1, wireType 5 =*/13).float(message.cpu);
+                                        if (message.memoryGb != null && Object.hasOwnProperty.call(message, "memoryGb"))
+                                            writer.uint32(/* id 2, wireType 5 =*/21).float(message.memoryGb);
+                                        if (message.storageGb != null && Object.hasOwnProperty.call(message, "storageGb"))
+                                            writer.uint32(/* id 3, wireType 5 =*/29).float(message.storageGb);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified WebServerResource message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWebServerResource} message WebServerResource message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    WebServerResource.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a WebServerResource message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource} WebServerResource
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    WebServerResource.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.cpu = reader.float();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.memoryGb = reader.float();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.storageGb = reader.float();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a WebServerResource message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource} WebServerResource
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    WebServerResource.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a WebServerResource message.
+                                     * @function verify
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    WebServerResource.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.cpu != null && message.hasOwnProperty("cpu"))
+                                            if (typeof message.cpu !== "number")
+                                                return "cpu: number expected";
+                                        if (message.memoryGb != null && message.hasOwnProperty("memoryGb"))
+                                            if (typeof message.memoryGb !== "number")
+                                                return "memoryGb: number expected";
+                                        if (message.storageGb != null && message.hasOwnProperty("storageGb"))
+                                            if (typeof message.storageGb !== "number")
+                                                return "storageGb: number expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a WebServerResource message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource} WebServerResource
+                                     */
+                                    WebServerResource.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource)
+                                            return object;
+                                        var message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource();
+                                        if (object.cpu != null)
+                                            message.cpu = Number(object.cpu);
+                                        if (object.memoryGb != null)
+                                            message.memoryGb = Number(object.memoryGb);
+                                        if (object.storageGb != null)
+                                            message.storageGb = Number(object.storageGb);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a WebServerResource message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource} message WebServerResource
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    WebServerResource.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.cpu = 0;
+                                            object.memoryGb = 0;
+                                            object.storageGb = 0;
+                                        }
+                                        if (message.cpu != null && message.hasOwnProperty("cpu"))
+                                            object.cpu = options.json && !isFinite(message.cpu) ? String(message.cpu) : message.cpu;
+                                        if (message.memoryGb != null && message.hasOwnProperty("memoryGb"))
+                                            object.memoryGb = options.json && !isFinite(message.memoryGb) ? String(message.memoryGb) : message.memoryGb;
+                                        if (message.storageGb != null && message.hasOwnProperty("storageGb"))
+                                            object.storageGb = options.json && !isFinite(message.storageGb) ? String(message.storageGb) : message.storageGb;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this WebServerResource to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    WebServerResource.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for WebServerResource
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    WebServerResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource";
+                                    };
+    
+                                    return WebServerResource;
+                                })();
+    
+                                WorkloadsConfig.WorkerResource = (function() {
+    
+                                    /**
+                                     * Properties of a WorkerResource.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                     * @interface IWorkerResource
+                                     * @property {number|null} [cpu] WorkerResource cpu
+                                     * @property {number|null} [memoryGb] WorkerResource memoryGb
+                                     * @property {number|null} [storageGb] WorkerResource storageGb
+                                     * @property {number|null} [minCount] WorkerResource minCount
+                                     * @property {number|null} [maxCount] WorkerResource maxCount
+                                     */
+    
+                                    /**
+                                     * Constructs a new WorkerResource.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig
+                                     * @classdesc Represents a WorkerResource.
+                                     * @implements IWorkerResource
+                                     * @constructor
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource=} [properties] Properties to set
+                                     */
+                                    function WorkerResource(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * WorkerResource cpu.
+                                     * @member {number} cpu
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @instance
+                                     */
+                                    WorkerResource.prototype.cpu = 0;
+    
+                                    /**
+                                     * WorkerResource memoryGb.
+                                     * @member {number} memoryGb
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @instance
+                                     */
+                                    WorkerResource.prototype.memoryGb = 0;
+    
+                                    /**
+                                     * WorkerResource storageGb.
+                                     * @member {number} storageGb
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @instance
+                                     */
+                                    WorkerResource.prototype.storageGb = 0;
+    
+                                    /**
+                                     * WorkerResource minCount.
+                                     * @member {number} minCount
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @instance
+                                     */
+                                    WorkerResource.prototype.minCount = 0;
+    
+                                    /**
+                                     * WorkerResource maxCount.
+                                     * @member {number} maxCount
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @instance
+                                     */
+                                    WorkerResource.prototype.maxCount = 0;
+    
+                                    /**
+                                     * Creates a new WorkerResource instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource=} [properties] Properties to set
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource} WorkerResource instance
+                                     */
+                                    WorkerResource.create = function create(properties) {
+                                        return new WorkerResource(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified WorkerResource message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource} message WorkerResource message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    WorkerResource.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.cpu != null && Object.hasOwnProperty.call(message, "cpu"))
+                                            writer.uint32(/* id 1, wireType 5 =*/13).float(message.cpu);
+                                        if (message.memoryGb != null && Object.hasOwnProperty.call(message, "memoryGb"))
+                                            writer.uint32(/* id 2, wireType 5 =*/21).float(message.memoryGb);
+                                        if (message.storageGb != null && Object.hasOwnProperty.call(message, "storageGb"))
+                                            writer.uint32(/* id 3, wireType 5 =*/29).float(message.storageGb);
+                                        if (message.minCount != null && Object.hasOwnProperty.call(message, "minCount"))
+                                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.minCount);
+                                        if (message.maxCount != null && Object.hasOwnProperty.call(message, "maxCount"))
+                                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.maxCount);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified WorkerResource message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource} message WorkerResource message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    WorkerResource.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a WorkerResource message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource} WorkerResource
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    WorkerResource.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.cpu = reader.float();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.memoryGb = reader.float();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.storageGb = reader.float();
+                                                    break;
+                                                }
+                                            case 4: {
+                                                    message.minCount = reader.int32();
+                                                    break;
+                                                }
+                                            case 5: {
+                                                    message.maxCount = reader.int32();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a WorkerResource message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource} WorkerResource
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    WorkerResource.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a WorkerResource message.
+                                     * @function verify
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    WorkerResource.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.cpu != null && message.hasOwnProperty("cpu"))
+                                            if (typeof message.cpu !== "number")
+                                                return "cpu: number expected";
+                                        if (message.memoryGb != null && message.hasOwnProperty("memoryGb"))
+                                            if (typeof message.memoryGb !== "number")
+                                                return "memoryGb: number expected";
+                                        if (message.storageGb != null && message.hasOwnProperty("storageGb"))
+                                            if (typeof message.storageGb !== "number")
+                                                return "storageGb: number expected";
+                                        if (message.minCount != null && message.hasOwnProperty("minCount"))
+                                            if (!$util.isInteger(message.minCount))
+                                                return "minCount: integer expected";
+                                        if (message.maxCount != null && message.hasOwnProperty("maxCount"))
+                                            if (!$util.isInteger(message.maxCount))
+                                                return "maxCount: integer expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a WorkerResource message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource} WorkerResource
+                                     */
+                                    WorkerResource.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource)
+                                            return object;
+                                        var message = new $root.google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource();
+                                        if (object.cpu != null)
+                                            message.cpu = Number(object.cpu);
+                                        if (object.memoryGb != null)
+                                            message.memoryGb = Number(object.memoryGb);
+                                        if (object.storageGb != null)
+                                            message.storageGb = Number(object.storageGb);
+                                        if (object.minCount != null)
+                                            message.minCount = object.minCount | 0;
+                                        if (object.maxCount != null)
+                                            message.maxCount = object.maxCount | 0;
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a WorkerResource message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource} message WorkerResource
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    WorkerResource.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.cpu = 0;
+                                            object.memoryGb = 0;
+                                            object.storageGb = 0;
+                                            object.minCount = 0;
+                                            object.maxCount = 0;
+                                        }
+                                        if (message.cpu != null && message.hasOwnProperty("cpu"))
+                                            object.cpu = options.json && !isFinite(message.cpu) ? String(message.cpu) : message.cpu;
+                                        if (message.memoryGb != null && message.hasOwnProperty("memoryGb"))
+                                            object.memoryGb = options.json && !isFinite(message.memoryGb) ? String(message.memoryGb) : message.memoryGb;
+                                        if (message.storageGb != null && message.hasOwnProperty("storageGb"))
+                                            object.storageGb = options.json && !isFinite(message.storageGb) ? String(message.storageGb) : message.storageGb;
+                                        if (message.minCount != null && message.hasOwnProperty("minCount"))
+                                            object.minCount = message.minCount;
+                                        if (message.maxCount != null && message.hasOwnProperty("maxCount"))
+                                            object.maxCount = message.maxCount;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this WorkerResource to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    WorkerResource.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for WorkerResource
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    WorkerResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource";
+                                    };
+    
+                                    return WorkerResource;
+                                })();
+    
+                                return WorkloadsConfig;
+                            })();
+    
+                            v1.RecoveryConfig = (function() {
+    
+                                /**
+                                 * Properties of a RecoveryConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @interface IRecoveryConfig
+                                 * @property {google.cloud.orchestration.airflow.service.v1.IScheduledSnapshotsConfig|null} [scheduledSnapshotsConfig] RecoveryConfig scheduledSnapshotsConfig
+                                 */
+    
+                                /**
+                                 * Constructs a new RecoveryConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @classdesc Represents a RecoveryConfig.
+                                 * @implements IRecoveryConfig
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IRecoveryConfig=} [properties] Properties to set
+                                 */
+                                function RecoveryConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RecoveryConfig scheduledSnapshotsConfig.
+                                 * @member {google.cloud.orchestration.airflow.service.v1.IScheduledSnapshotsConfig|null|undefined} scheduledSnapshotsConfig
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.RecoveryConfig
+                                 * @instance
+                                 */
+                                RecoveryConfig.prototype.scheduledSnapshotsConfig = null;
+    
+                                /**
+                                 * Creates a new RecoveryConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.RecoveryConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IRecoveryConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.RecoveryConfig} RecoveryConfig instance
+                                 */
+                                RecoveryConfig.create = function create(properties) {
+                                    return new RecoveryConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RecoveryConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.RecoveryConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.RecoveryConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IRecoveryConfig} message RecoveryConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RecoveryConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.scheduledSnapshotsConfig != null && Object.hasOwnProperty.call(message, "scheduledSnapshotsConfig"))
+                                        $root.google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig.encode(message.scheduledSnapshotsConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RecoveryConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.RecoveryConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.RecoveryConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IRecoveryConfig} message RecoveryConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RecoveryConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RecoveryConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.RecoveryConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.RecoveryConfig} RecoveryConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RecoveryConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.RecoveryConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.scheduledSnapshotsConfig = $root.google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RecoveryConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.RecoveryConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.RecoveryConfig} RecoveryConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RecoveryConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RecoveryConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.RecoveryConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RecoveryConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.scheduledSnapshotsConfig != null && message.hasOwnProperty("scheduledSnapshotsConfig")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig.verify(message.scheduledSnapshotsConfig);
+                                        if (error)
+                                            return "scheduledSnapshotsConfig." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RecoveryConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.RecoveryConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.RecoveryConfig} RecoveryConfig
+                                 */
+                                RecoveryConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.RecoveryConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1.RecoveryConfig();
+                                    if (object.scheduledSnapshotsConfig != null) {
+                                        if (typeof object.scheduledSnapshotsConfig !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1.RecoveryConfig.scheduledSnapshotsConfig: object expected");
+                                        message.scheduledSnapshotsConfig = $root.google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig.fromObject(object.scheduledSnapshotsConfig);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RecoveryConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.RecoveryConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.RecoveryConfig} message RecoveryConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RecoveryConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.scheduledSnapshotsConfig = null;
+                                    if (message.scheduledSnapshotsConfig != null && message.hasOwnProperty("scheduledSnapshotsConfig"))
+                                        object.scheduledSnapshotsConfig = $root.google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig.toObject(message.scheduledSnapshotsConfig, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RecoveryConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.RecoveryConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RecoveryConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RecoveryConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.RecoveryConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RecoveryConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.RecoveryConfig";
+                                };
+    
+                                return RecoveryConfig;
+                            })();
+    
+                            v1.ScheduledSnapshotsConfig = (function() {
+    
+                                /**
+                                 * Properties of a ScheduledSnapshotsConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @interface IScheduledSnapshotsConfig
+                                 * @property {boolean|null} [enabled] ScheduledSnapshotsConfig enabled
+                                 * @property {string|null} [snapshotLocation] ScheduledSnapshotsConfig snapshotLocation
+                                 * @property {string|null} [snapshotCreationSchedule] ScheduledSnapshotsConfig snapshotCreationSchedule
+                                 * @property {string|null} [timeZone] ScheduledSnapshotsConfig timeZone
+                                 */
+    
+                                /**
+                                 * Constructs a new ScheduledSnapshotsConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @classdesc Represents a ScheduledSnapshotsConfig.
+                                 * @implements IScheduledSnapshotsConfig
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IScheduledSnapshotsConfig=} [properties] Properties to set
+                                 */
+                                function ScheduledSnapshotsConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ScheduledSnapshotsConfig enabled.
+                                 * @member {boolean} enabled
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @instance
+                                 */
+                                ScheduledSnapshotsConfig.prototype.enabled = false;
+    
+                                /**
+                                 * ScheduledSnapshotsConfig snapshotLocation.
+                                 * @member {string} snapshotLocation
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @instance
+                                 */
+                                ScheduledSnapshotsConfig.prototype.snapshotLocation = "";
+    
+                                /**
+                                 * ScheduledSnapshotsConfig snapshotCreationSchedule.
+                                 * @member {string} snapshotCreationSchedule
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @instance
+                                 */
+                                ScheduledSnapshotsConfig.prototype.snapshotCreationSchedule = "";
+    
+                                /**
+                                 * ScheduledSnapshotsConfig timeZone.
+                                 * @member {string} timeZone
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @instance
+                                 */
+                                ScheduledSnapshotsConfig.prototype.timeZone = "";
+    
+                                /**
+                                 * Creates a new ScheduledSnapshotsConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IScheduledSnapshotsConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig} ScheduledSnapshotsConfig instance
+                                 */
+                                ScheduledSnapshotsConfig.create = function create(properties) {
+                                    return new ScheduledSnapshotsConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ScheduledSnapshotsConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IScheduledSnapshotsConfig} message ScheduledSnapshotsConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ScheduledSnapshotsConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                    if (message.snapshotCreationSchedule != null && Object.hasOwnProperty.call(message, "snapshotCreationSchedule"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.snapshotCreationSchedule);
+                                    if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.timeZone);
+                                    if (message.snapshotLocation != null && Object.hasOwnProperty.call(message, "snapshotLocation"))
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.snapshotLocation);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ScheduledSnapshotsConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IScheduledSnapshotsConfig} message ScheduledSnapshotsConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ScheduledSnapshotsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ScheduledSnapshotsConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig} ScheduledSnapshotsConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ScheduledSnapshotsConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enabled = reader.bool();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.snapshotLocation = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.snapshotCreationSchedule = reader.string();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.timeZone = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ScheduledSnapshotsConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig} ScheduledSnapshotsConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ScheduledSnapshotsConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ScheduledSnapshotsConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ScheduledSnapshotsConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        if (typeof message.enabled !== "boolean")
+                                            return "enabled: boolean expected";
+                                    if (message.snapshotLocation != null && message.hasOwnProperty("snapshotLocation"))
+                                        if (!$util.isString(message.snapshotLocation))
+                                            return "snapshotLocation: string expected";
+                                    if (message.snapshotCreationSchedule != null && message.hasOwnProperty("snapshotCreationSchedule"))
+                                        if (!$util.isString(message.snapshotCreationSchedule))
+                                            return "snapshotCreationSchedule: string expected";
+                                    if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                        if (!$util.isString(message.timeZone))
+                                            return "timeZone: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ScheduledSnapshotsConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig} ScheduledSnapshotsConfig
+                                 */
+                                ScheduledSnapshotsConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig();
+                                    if (object.enabled != null)
+                                        message.enabled = Boolean(object.enabled);
+                                    if (object.snapshotLocation != null)
+                                        message.snapshotLocation = String(object.snapshotLocation);
+                                    if (object.snapshotCreationSchedule != null)
+                                        message.snapshotCreationSchedule = String(object.snapshotCreationSchedule);
+                                    if (object.timeZone != null)
+                                        message.timeZone = String(object.timeZone);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ScheduledSnapshotsConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig} message ScheduledSnapshotsConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ScheduledSnapshotsConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.enabled = false;
+                                        object.snapshotCreationSchedule = "";
+                                        object.timeZone = "";
+                                        object.snapshotLocation = "";
+                                    }
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        object.enabled = message.enabled;
+                                    if (message.snapshotCreationSchedule != null && message.hasOwnProperty("snapshotCreationSchedule"))
+                                        object.snapshotCreationSchedule = message.snapshotCreationSchedule;
+                                    if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                        object.timeZone = message.timeZone;
+                                    if (message.snapshotLocation != null && message.hasOwnProperty("snapshotLocation"))
+                                        object.snapshotLocation = message.snapshotLocation;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ScheduledSnapshotsConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ScheduledSnapshotsConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ScheduledSnapshotsConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ScheduledSnapshotsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig";
+                                };
+    
+                                return ScheduledSnapshotsConfig;
+                            })();
+    
+                            v1.MasterAuthorizedNetworksConfig = (function() {
+    
+                                /**
+                                 * Properties of a MasterAuthorizedNetworksConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @interface IMasterAuthorizedNetworksConfig
+                                 * @property {boolean|null} [enabled] MasterAuthorizedNetworksConfig enabled
+                                 * @property {Array.<google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.ICidrBlock>|null} [cidrBlocks] MasterAuthorizedNetworksConfig cidrBlocks
+                                 */
+    
+                                /**
+                                 * Constructs a new MasterAuthorizedNetworksConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1
+                                 * @classdesc Represents a MasterAuthorizedNetworksConfig.
+                                 * @implements IMasterAuthorizedNetworksConfig
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig=} [properties] Properties to set
+                                 */
+                                function MasterAuthorizedNetworksConfig(properties) {
+                                    this.cidrBlocks = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MasterAuthorizedNetworksConfig enabled.
+                                 * @member {boolean} enabled
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                 * @instance
+                                 */
+                                MasterAuthorizedNetworksConfig.prototype.enabled = false;
+    
+                                /**
+                                 * MasterAuthorizedNetworksConfig cidrBlocks.
+                                 * @member {Array.<google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.ICidrBlock>} cidrBlocks
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                 * @instance
+                                 */
+                                MasterAuthorizedNetworksConfig.prototype.cidrBlocks = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new MasterAuthorizedNetworksConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig} MasterAuthorizedNetworksConfig instance
+                                 */
+                                MasterAuthorizedNetworksConfig.create = function create(properties) {
+                                    return new MasterAuthorizedNetworksConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MasterAuthorizedNetworksConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig} message MasterAuthorizedNetworksConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MasterAuthorizedNetworksConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                    if (message.cidrBlocks != null && message.cidrBlocks.length)
+                                        for (var i = 0; i < message.cidrBlocks.length; ++i)
+                                            $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock.encode(message.cidrBlocks[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MasterAuthorizedNetworksConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig} message MasterAuthorizedNetworksConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MasterAuthorizedNetworksConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MasterAuthorizedNetworksConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig} MasterAuthorizedNetworksConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MasterAuthorizedNetworksConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enabled = reader.bool();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.cidrBlocks && message.cidrBlocks.length))
+                                                    message.cidrBlocks = [];
+                                                message.cidrBlocks.push($root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MasterAuthorizedNetworksConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig} MasterAuthorizedNetworksConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MasterAuthorizedNetworksConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MasterAuthorizedNetworksConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MasterAuthorizedNetworksConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        if (typeof message.enabled !== "boolean")
+                                            return "enabled: boolean expected";
+                                    if (message.cidrBlocks != null && message.hasOwnProperty("cidrBlocks")) {
+                                        if (!Array.isArray(message.cidrBlocks))
+                                            return "cidrBlocks: array expected";
+                                        for (var i = 0; i < message.cidrBlocks.length; ++i) {
+                                            var error = $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock.verify(message.cidrBlocks[i]);
+                                            if (error)
+                                                return "cidrBlocks." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MasterAuthorizedNetworksConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig} MasterAuthorizedNetworksConfig
+                                 */
+                                MasterAuthorizedNetworksConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig();
+                                    if (object.enabled != null)
+                                        message.enabled = Boolean(object.enabled);
+                                    if (object.cidrBlocks) {
+                                        if (!Array.isArray(object.cidrBlocks))
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.cidrBlocks: array expected");
+                                        message.cidrBlocks = [];
+                                        for (var i = 0; i < object.cidrBlocks.length; ++i) {
+                                            if (typeof object.cidrBlocks[i] !== "object")
+                                                throw TypeError(".google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.cidrBlocks: object expected");
+                                            message.cidrBlocks[i] = $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock.fromObject(object.cidrBlocks[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MasterAuthorizedNetworksConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig} message MasterAuthorizedNetworksConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MasterAuthorizedNetworksConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.cidrBlocks = [];
+                                    if (options.defaults)
+                                        object.enabled = false;
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        object.enabled = message.enabled;
+                                    if (message.cidrBlocks && message.cidrBlocks.length) {
+                                        object.cidrBlocks = [];
+                                        for (var j = 0; j < message.cidrBlocks.length; ++j)
+                                            object.cidrBlocks[j] = $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock.toObject(message.cidrBlocks[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MasterAuthorizedNetworksConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MasterAuthorizedNetworksConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for MasterAuthorizedNetworksConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                MasterAuthorizedNetworksConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig";
+                                };
+    
+                                MasterAuthorizedNetworksConfig.CidrBlock = (function() {
+    
+                                    /**
+                                     * Properties of a CidrBlock.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                     * @interface ICidrBlock
+                                     * @property {string|null} [displayName] CidrBlock displayName
+                                     * @property {string|null} [cidrBlock] CidrBlock cidrBlock
+                                     */
+    
+                                    /**
+                                     * Constructs a new CidrBlock.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig
+                                     * @classdesc Represents a CidrBlock.
+                                     * @implements ICidrBlock
+                                     * @constructor
+                                     * @param {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.ICidrBlock=} [properties] Properties to set
+                                     */
+                                    function CidrBlock(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * CidrBlock displayName.
+                                     * @member {string} displayName
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @instance
+                                     */
+                                    CidrBlock.prototype.displayName = "";
+    
+                                    /**
+                                     * CidrBlock cidrBlock.
+                                     * @member {string} cidrBlock
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @instance
+                                     */
+                                    CidrBlock.prototype.cidrBlock = "";
+    
+                                    /**
+                                     * Creates a new CidrBlock instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.ICidrBlock=} [properties] Properties to set
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock} CidrBlock instance
+                                     */
+                                    CidrBlock.create = function create(properties) {
+                                        return new CidrBlock(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified CidrBlock message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.ICidrBlock} message CidrBlock message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    CidrBlock.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                                        if (message.cidrBlock != null && Object.hasOwnProperty.call(message, "cidrBlock"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.cidrBlock);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified CidrBlock message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.ICidrBlock} message CidrBlock message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    CidrBlock.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a CidrBlock message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock} CidrBlock
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    CidrBlock.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.displayName = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.cidrBlock = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a CidrBlock message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock} CidrBlock
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    CidrBlock.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a CidrBlock message.
+                                     * @function verify
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    CidrBlock.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                            if (!$util.isString(message.displayName))
+                                                return "displayName: string expected";
+                                        if (message.cidrBlock != null && message.hasOwnProperty("cidrBlock"))
+                                            if (!$util.isString(message.cidrBlock))
+                                                return "cidrBlock: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a CidrBlock message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock} CidrBlock
+                                     */
+                                    CidrBlock.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock)
+                                            return object;
+                                        var message = new $root.google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock();
+                                        if (object.displayName != null)
+                                            message.displayName = String(object.displayName);
+                                        if (object.cidrBlock != null)
+                                            message.cidrBlock = String(object.cidrBlock);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a CidrBlock message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock} message CidrBlock
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    CidrBlock.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.displayName = "";
+                                            object.cidrBlock = "";
+                                        }
+                                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                            object.displayName = message.displayName;
+                                        if (message.cidrBlock != null && message.hasOwnProperty("cidrBlock"))
+                                            object.cidrBlock = message.cidrBlock;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this CidrBlock to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    CidrBlock.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for CidrBlock
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    CidrBlock.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock";
+                                    };
+    
+                                    return CidrBlock;
+                                })();
+    
+                                return MasterAuthorizedNetworksConfig;
                             })();
     
                             v1.Environment = (function() {
@@ -6912,6 +10793,8 @@
                                         case 2:
                                         case 3:
                                         case 4:
+                                        case 5:
+                                        case 6:
                                             break;
                                         }
                                     if (message.resource != null && message.hasOwnProperty("resource"))
@@ -7003,6 +10886,14 @@
                                     case "CHECK":
                                     case 4:
                                         message.operationType = 4;
+                                        break;
+                                    case "SAVE_SNAPSHOT":
+                                    case 5:
+                                        message.operationType = 5;
+                                        break;
+                                    case "LOAD_SNAPSHOT":
+                                    case 6:
+                                        message.operationType = 6;
                                         break;
                                     }
                                     if (object.resource != null)
@@ -7115,6 +11006,8 @@
                                  * @property {number} DELETE=2 DELETE value
                                  * @property {number} UPDATE=3 UPDATE value
                                  * @property {number} CHECK=4 CHECK value
+                                 * @property {number} SAVE_SNAPSHOT=5 SAVE_SNAPSHOT value
+                                 * @property {number} LOAD_SNAPSHOT=6 LOAD_SNAPSHOT value
                                  */
                                 OperationMetadata.Type = (function() {
                                     var valuesById = {}, values = Object.create(valuesById);
@@ -7123,6 +11016,8 @@
                                     values[valuesById[2] = "DELETE"] = 2;
                                     values[valuesById[3] = "UPDATE"] = 3;
                                     values[valuesById[4] = "CHECK"] = 4;
+                                    values[valuesById[5] = "SAVE_SNAPSHOT"] = 5;
+                                    values[valuesById[6] = "LOAD_SNAPSHOT"] = 6;
                                     return values;
                                 })();
     
@@ -7400,6 +11295,72 @@
                                  * @memberof google.cloud.orchestration.airflow.service.v1beta1.Environments
                                  * @instance
                                  * @param {google.cloud.orchestration.airflow.service.v1beta1.ICheckUpgradeRequest} request CheckUpgradeRequest message or plain object
+                                 * @returns {Promise<google.longrunning.Operation>} Promise
+                                 * @variation 2
+                                 */
+    
+                                /**
+                                 * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|saveSnapshot}.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.Environments
+                                 * @typedef SaveSnapshotCallback
+                                 * @type {function}
+                                 * @param {Error|null} error Error, if any
+                                 * @param {google.longrunning.Operation} [response] Operation
+                                 */
+    
+                                /**
+                                 * Calls SaveSnapshot.
+                                 * @function saveSnapshot
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.Environments
+                                 * @instance
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest} request SaveSnapshotRequest message or plain object
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.Environments.SaveSnapshotCallback} callback Node-style callback called with the error, if any, and Operation
+                                 * @returns {undefined}
+                                 * @variation 1
+                                 */
+                                Object.defineProperty(Environments.prototype.saveSnapshot = function saveSnapshot(request, callback) {
+                                    return this.rpcCall(saveSnapshot, $root.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest, $root.google.longrunning.Operation, request, callback);
+                                }, "name", { value: "SaveSnapshot" });
+    
+                                /**
+                                 * Calls SaveSnapshot.
+                                 * @function saveSnapshot
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.Environments
+                                 * @instance
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest} request SaveSnapshotRequest message or plain object
+                                 * @returns {Promise<google.longrunning.Operation>} Promise
+                                 * @variation 2
+                                 */
+    
+                                /**
+                                 * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|loadSnapshot}.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.Environments
+                                 * @typedef LoadSnapshotCallback
+                                 * @type {function}
+                                 * @param {Error|null} error Error, if any
+                                 * @param {google.longrunning.Operation} [response] Operation
+                                 */
+    
+                                /**
+                                 * Calls LoadSnapshot.
+                                 * @function loadSnapshot
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.Environments
+                                 * @instance
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest} request LoadSnapshotRequest message or plain object
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.Environments.LoadSnapshotCallback} callback Node-style callback called with the error, if any, and Operation
+                                 * @returns {undefined}
+                                 * @variation 1
+                                 */
+                                Object.defineProperty(Environments.prototype.loadSnapshot = function loadSnapshot(request, callback) {
+                                    return this.rpcCall(loadSnapshot, $root.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest, $root.google.longrunning.Operation, request, callback);
+                                }, "name", { value: "LoadSnapshot" });
+    
+                                /**
+                                 * Calls LoadSnapshot.
+                                 * @function loadSnapshot
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.Environments
+                                 * @instance
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest} request LoadSnapshotRequest message or plain object
                                  * @returns {Promise<google.longrunning.Operation>} Promise
                                  * @variation 2
                                  */
@@ -9006,6 +12967,1934 @@
                                 return RestartWebServerRequest;
                             })();
     
+                            v1beta1.ExecuteAirflowCommandResponse = (function() {
+    
+                                /**
+                                 * Properties of an ExecuteAirflowCommandResponse.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @interface IExecuteAirflowCommandResponse
+                                 * @property {string|null} [executionId] ExecuteAirflowCommandResponse executionId
+                                 * @property {string|null} [pod] ExecuteAirflowCommandResponse pod
+                                 * @property {string|null} [podNamespace] ExecuteAirflowCommandResponse podNamespace
+                                 * @property {string|null} [error] ExecuteAirflowCommandResponse error
+                                 */
+    
+                                /**
+                                 * Constructs a new ExecuteAirflowCommandResponse.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @classdesc Represents an ExecuteAirflowCommandResponse.
+                                 * @implements IExecuteAirflowCommandResponse
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandResponse=} [properties] Properties to set
+                                 */
+                                function ExecuteAirflowCommandResponse(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ExecuteAirflowCommandResponse executionId.
+                                 * @member {string} executionId
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @instance
+                                 */
+                                ExecuteAirflowCommandResponse.prototype.executionId = "";
+    
+                                /**
+                                 * ExecuteAirflowCommandResponse pod.
+                                 * @member {string} pod
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @instance
+                                 */
+                                ExecuteAirflowCommandResponse.prototype.pod = "";
+    
+                                /**
+                                 * ExecuteAirflowCommandResponse podNamespace.
+                                 * @member {string} podNamespace
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @instance
+                                 */
+                                ExecuteAirflowCommandResponse.prototype.podNamespace = "";
+    
+                                /**
+                                 * ExecuteAirflowCommandResponse error.
+                                 * @member {string} error
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @instance
+                                 */
+                                ExecuteAirflowCommandResponse.prototype.error = "";
+    
+                                /**
+                                 * Creates a new ExecuteAirflowCommandResponse instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandResponse=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse} ExecuteAirflowCommandResponse instance
+                                 */
+                                ExecuteAirflowCommandResponse.create = function create(properties) {
+                                    return new ExecuteAirflowCommandResponse(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ExecuteAirflowCommandResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandResponse} message ExecuteAirflowCommandResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ExecuteAirflowCommandResponse.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.executionId != null && Object.hasOwnProperty.call(message, "executionId"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.executionId);
+                                    if (message.pod != null && Object.hasOwnProperty.call(message, "pod"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.pod);
+                                    if (message.podNamespace != null && Object.hasOwnProperty.call(message, "podNamespace"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.podNamespace);
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.error);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ExecuteAirflowCommandResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandResponse} message ExecuteAirflowCommandResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ExecuteAirflowCommandResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ExecuteAirflowCommandResponse message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse} ExecuteAirflowCommandResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ExecuteAirflowCommandResponse.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.executionId = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.pod = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.podNamespace = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.error = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ExecuteAirflowCommandResponse message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse} ExecuteAirflowCommandResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ExecuteAirflowCommandResponse.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ExecuteAirflowCommandResponse message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ExecuteAirflowCommandResponse.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.executionId != null && message.hasOwnProperty("executionId"))
+                                        if (!$util.isString(message.executionId))
+                                            return "executionId: string expected";
+                                    if (message.pod != null && message.hasOwnProperty("pod"))
+                                        if (!$util.isString(message.pod))
+                                            return "pod: string expected";
+                                    if (message.podNamespace != null && message.hasOwnProperty("podNamespace"))
+                                        if (!$util.isString(message.podNamespace))
+                                            return "podNamespace: string expected";
+                                    if (message.error != null && message.hasOwnProperty("error"))
+                                        if (!$util.isString(message.error))
+                                            return "error: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ExecuteAirflowCommandResponse message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse} ExecuteAirflowCommandResponse
+                                 */
+                                ExecuteAirflowCommandResponse.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse();
+                                    if (object.executionId != null)
+                                        message.executionId = String(object.executionId);
+                                    if (object.pod != null)
+                                        message.pod = String(object.pod);
+                                    if (object.podNamespace != null)
+                                        message.podNamespace = String(object.podNamespace);
+                                    if (object.error != null)
+                                        message.error = String(object.error);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ExecuteAirflowCommandResponse message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse} message ExecuteAirflowCommandResponse
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ExecuteAirflowCommandResponse.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.executionId = "";
+                                        object.pod = "";
+                                        object.podNamespace = "";
+                                        object.error = "";
+                                    }
+                                    if (message.executionId != null && message.hasOwnProperty("executionId"))
+                                        object.executionId = message.executionId;
+                                    if (message.pod != null && message.hasOwnProperty("pod"))
+                                        object.pod = message.pod;
+                                    if (message.podNamespace != null && message.hasOwnProperty("podNamespace"))
+                                        object.podNamespace = message.podNamespace;
+                                    if (message.error != null && message.hasOwnProperty("error"))
+                                        object.error = message.error;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ExecuteAirflowCommandResponse to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ExecuteAirflowCommandResponse.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ExecuteAirflowCommandResponse
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ExecuteAirflowCommandResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse";
+                                };
+    
+                                return ExecuteAirflowCommandResponse;
+                            })();
+    
+                            v1beta1.PollAirflowCommandResponse = (function() {
+    
+                                /**
+                                 * Properties of a PollAirflowCommandResponse.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @interface IPollAirflowCommandResponse
+                                 * @property {Array.<google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ILine>|null} [output] PollAirflowCommandResponse output
+                                 * @property {boolean|null} [outputEnd] PollAirflowCommandResponse outputEnd
+                                 * @property {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.IExitInfo|null} [exitInfo] PollAirflowCommandResponse exitInfo
+                                 */
+    
+                                /**
+                                 * Constructs a new PollAirflowCommandResponse.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @classdesc Represents a PollAirflowCommandResponse.
+                                 * @implements IPollAirflowCommandResponse
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandResponse=} [properties] Properties to set
+                                 */
+                                function PollAirflowCommandResponse(properties) {
+                                    this.output = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * PollAirflowCommandResponse output.
+                                 * @member {Array.<google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ILine>} output
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @instance
+                                 */
+                                PollAirflowCommandResponse.prototype.output = $util.emptyArray;
+    
+                                /**
+                                 * PollAirflowCommandResponse outputEnd.
+                                 * @member {boolean} outputEnd
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @instance
+                                 */
+                                PollAirflowCommandResponse.prototype.outputEnd = false;
+    
+                                /**
+                                 * PollAirflowCommandResponse exitInfo.
+                                 * @member {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.IExitInfo|null|undefined} exitInfo
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @instance
+                                 */
+                                PollAirflowCommandResponse.prototype.exitInfo = null;
+    
+                                /**
+                                 * Creates a new PollAirflowCommandResponse instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandResponse=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse} PollAirflowCommandResponse instance
+                                 */
+                                PollAirflowCommandResponse.create = function create(properties) {
+                                    return new PollAirflowCommandResponse(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified PollAirflowCommandResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandResponse} message PollAirflowCommandResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PollAirflowCommandResponse.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.output != null && message.output.length)
+                                        for (var i = 0; i < message.output.length; ++i)
+                                            $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line.encode(message.output[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.outputEnd != null && Object.hasOwnProperty.call(message, "outputEnd"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.outputEnd);
+                                    if (message.exitInfo != null && Object.hasOwnProperty.call(message, "exitInfo"))
+                                        $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo.encode(message.exitInfo, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified PollAirflowCommandResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandResponse} message PollAirflowCommandResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PollAirflowCommandResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a PollAirflowCommandResponse message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse} PollAirflowCommandResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PollAirflowCommandResponse.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.output && message.output.length))
+                                                    message.output = [];
+                                                message.output.push($root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.outputEnd = reader.bool();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.exitInfo = $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a PollAirflowCommandResponse message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse} PollAirflowCommandResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PollAirflowCommandResponse.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a PollAirflowCommandResponse message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                PollAirflowCommandResponse.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.output != null && message.hasOwnProperty("output")) {
+                                        if (!Array.isArray(message.output))
+                                            return "output: array expected";
+                                        for (var i = 0; i < message.output.length; ++i) {
+                                            var error = $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line.verify(message.output[i]);
+                                            if (error)
+                                                return "output." + error;
+                                        }
+                                    }
+                                    if (message.outputEnd != null && message.hasOwnProperty("outputEnd"))
+                                        if (typeof message.outputEnd !== "boolean")
+                                            return "outputEnd: boolean expected";
+                                    if (message.exitInfo != null && message.hasOwnProperty("exitInfo")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo.verify(message.exitInfo);
+                                        if (error)
+                                            return "exitInfo." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a PollAirflowCommandResponse message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse} PollAirflowCommandResponse
+                                 */
+                                PollAirflowCommandResponse.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse();
+                                    if (object.output) {
+                                        if (!Array.isArray(object.output))
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.output: array expected");
+                                        message.output = [];
+                                        for (var i = 0; i < object.output.length; ++i) {
+                                            if (typeof object.output[i] !== "object")
+                                                throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.output: object expected");
+                                            message.output[i] = $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line.fromObject(object.output[i]);
+                                        }
+                                    }
+                                    if (object.outputEnd != null)
+                                        message.outputEnd = Boolean(object.outputEnd);
+                                    if (object.exitInfo != null) {
+                                        if (typeof object.exitInfo !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.exitInfo: object expected");
+                                        message.exitInfo = $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo.fromObject(object.exitInfo);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a PollAirflowCommandResponse message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse} message PollAirflowCommandResponse
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                PollAirflowCommandResponse.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.output = [];
+                                    if (options.defaults) {
+                                        object.outputEnd = false;
+                                        object.exitInfo = null;
+                                    }
+                                    if (message.output && message.output.length) {
+                                        object.output = [];
+                                        for (var j = 0; j < message.output.length; ++j)
+                                            object.output[j] = $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line.toObject(message.output[j], options);
+                                    }
+                                    if (message.outputEnd != null && message.hasOwnProperty("outputEnd"))
+                                        object.outputEnd = message.outputEnd;
+                                    if (message.exitInfo != null && message.hasOwnProperty("exitInfo"))
+                                        object.exitInfo = $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo.toObject(message.exitInfo, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this PollAirflowCommandResponse to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                PollAirflowCommandResponse.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for PollAirflowCommandResponse
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                PollAirflowCommandResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse";
+                                };
+    
+                                PollAirflowCommandResponse.Line = (function() {
+    
+                                    /**
+                                     * Properties of a Line.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                     * @interface ILine
+                                     * @property {number|null} [lineNumber] Line lineNumber
+                                     * @property {string|null} [content] Line content
+                                     */
+    
+                                    /**
+                                     * Constructs a new Line.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                     * @classdesc Represents a Line.
+                                     * @implements ILine
+                                     * @constructor
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ILine=} [properties] Properties to set
+                                     */
+                                    function Line(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Line lineNumber.
+                                     * @member {number} lineNumber
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line
+                                     * @instance
+                                     */
+                                    Line.prototype.lineNumber = 0;
+    
+                                    /**
+                                     * Line content.
+                                     * @member {string} content
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line
+                                     * @instance
+                                     */
+                                    Line.prototype.content = "";
+    
+                                    /**
+                                     * Creates a new Line instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ILine=} [properties] Properties to set
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line} Line instance
+                                     */
+                                    Line.create = function create(properties) {
+                                        return new Line(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Line message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ILine} message Line message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Line.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.lineNumber != null && Object.hasOwnProperty.call(message, "lineNumber"))
+                                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.lineNumber);
+                                        if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.content);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Line message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ILine} message Line message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Line.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Line message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line} Line
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Line.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.lineNumber = reader.int32();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.content = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Line message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line} Line
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Line.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Line message.
+                                     * @function verify
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Line.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.lineNumber != null && message.hasOwnProperty("lineNumber"))
+                                            if (!$util.isInteger(message.lineNumber))
+                                                return "lineNumber: integer expected";
+                                        if (message.content != null && message.hasOwnProperty("content"))
+                                            if (!$util.isString(message.content))
+                                                return "content: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Line message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line} Line
+                                     */
+                                    Line.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line)
+                                            return object;
+                                        var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line();
+                                        if (object.lineNumber != null)
+                                            message.lineNumber = object.lineNumber | 0;
+                                        if (object.content != null)
+                                            message.content = String(object.content);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Line message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line} message Line
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Line.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.lineNumber = 0;
+                                            object.content = "";
+                                        }
+                                        if (message.lineNumber != null && message.hasOwnProperty("lineNumber"))
+                                            object.lineNumber = message.lineNumber;
+                                        if (message.content != null && message.hasOwnProperty("content"))
+                                            object.content = message.content;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Line to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Line.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Line
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Line.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line";
+                                    };
+    
+                                    return Line;
+                                })();
+    
+                                PollAirflowCommandResponse.ExitInfo = (function() {
+    
+                                    /**
+                                     * Properties of an ExitInfo.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                     * @interface IExitInfo
+                                     * @property {number|null} [exitCode] ExitInfo exitCode
+                                     * @property {string|null} [error] ExitInfo error
+                                     */
+    
+                                    /**
+                                     * Constructs a new ExitInfo.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse
+                                     * @classdesc Represents an ExitInfo.
+                                     * @implements IExitInfo
+                                     * @constructor
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.IExitInfo=} [properties] Properties to set
+                                     */
+                                    function ExitInfo(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ExitInfo exitCode.
+                                     * @member {number} exitCode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo
+                                     * @instance
+                                     */
+                                    ExitInfo.prototype.exitCode = 0;
+    
+                                    /**
+                                     * ExitInfo error.
+                                     * @member {string} error
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo
+                                     * @instance
+                                     */
+                                    ExitInfo.prototype.error = "";
+    
+                                    /**
+                                     * Creates a new ExitInfo instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.IExitInfo=} [properties] Properties to set
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo} ExitInfo instance
+                                     */
+                                    ExitInfo.create = function create(properties) {
+                                        return new ExitInfo(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ExitInfo message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.IExitInfo} message ExitInfo message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ExitInfo.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.exitCode != null && Object.hasOwnProperty.call(message, "exitCode"))
+                                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.exitCode);
+                                        if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.error);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ExitInfo message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.IExitInfo} message ExitInfo message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ExitInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes an ExitInfo message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo} ExitInfo
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ExitInfo.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.exitCode = reader.int32();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.error = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes an ExitInfo message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo} ExitInfo
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ExitInfo.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies an ExitInfo message.
+                                     * @function verify
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ExitInfo.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.exitCode != null && message.hasOwnProperty("exitCode"))
+                                            if (!$util.isInteger(message.exitCode))
+                                                return "exitCode: integer expected";
+                                        if (message.error != null && message.hasOwnProperty("error"))
+                                            if (!$util.isString(message.error))
+                                                return "error: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates an ExitInfo message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo} ExitInfo
+                                     */
+                                    ExitInfo.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo)
+                                            return object;
+                                        var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo();
+                                        if (object.exitCode != null)
+                                            message.exitCode = object.exitCode | 0;
+                                        if (object.error != null)
+                                            message.error = String(object.error);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from an ExitInfo message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo} message ExitInfo
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ExitInfo.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.exitCode = 0;
+                                            object.error = "";
+                                        }
+                                        if (message.exitCode != null && message.hasOwnProperty("exitCode"))
+                                            object.exitCode = message.exitCode;
+                                        if (message.error != null && message.hasOwnProperty("error"))
+                                            object.error = message.error;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ExitInfo to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ExitInfo.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for ExitInfo
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    ExitInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo";
+                                    };
+    
+                                    return ExitInfo;
+                                })();
+    
+                                return PollAirflowCommandResponse;
+                            })();
+    
+                            v1beta1.SaveSnapshotRequest = (function() {
+    
+                                /**
+                                 * Properties of a SaveSnapshotRequest.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @interface ISaveSnapshotRequest
+                                 * @property {string|null} [environment] SaveSnapshotRequest environment
+                                 * @property {string|null} [snapshotLocation] SaveSnapshotRequest snapshotLocation
+                                 */
+    
+                                /**
+                                 * Constructs a new SaveSnapshotRequest.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @classdesc Represents a SaveSnapshotRequest.
+                                 * @implements ISaveSnapshotRequest
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest=} [properties] Properties to set
+                                 */
+                                function SaveSnapshotRequest(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SaveSnapshotRequest environment.
+                                 * @member {string} environment
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest
+                                 * @instance
+                                 */
+                                SaveSnapshotRequest.prototype.environment = "";
+    
+                                /**
+                                 * SaveSnapshotRequest snapshotLocation.
+                                 * @member {string} snapshotLocation
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest
+                                 * @instance
+                                 */
+                                SaveSnapshotRequest.prototype.snapshotLocation = "";
+    
+                                /**
+                                 * Creates a new SaveSnapshotRequest instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest} SaveSnapshotRequest instance
+                                 */
+                                SaveSnapshotRequest.create = function create(properties) {
+                                    return new SaveSnapshotRequest(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SaveSnapshotRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest} message SaveSnapshotRequest message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SaveSnapshotRequest.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.environment);
+                                    if (message.snapshotLocation != null && Object.hasOwnProperty.call(message, "snapshotLocation"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.snapshotLocation);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SaveSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest} message SaveSnapshotRequest message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SaveSnapshotRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SaveSnapshotRequest message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest} SaveSnapshotRequest
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SaveSnapshotRequest.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.environment = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.snapshotLocation = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SaveSnapshotRequest message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest} SaveSnapshotRequest
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SaveSnapshotRequest.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SaveSnapshotRequest message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SaveSnapshotRequest.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.environment != null && message.hasOwnProperty("environment"))
+                                        if (!$util.isString(message.environment))
+                                            return "environment: string expected";
+                                    if (message.snapshotLocation != null && message.hasOwnProperty("snapshotLocation"))
+                                        if (!$util.isString(message.snapshotLocation))
+                                            return "snapshotLocation: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SaveSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest} SaveSnapshotRequest
+                                 */
+                                SaveSnapshotRequest.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest();
+                                    if (object.environment != null)
+                                        message.environment = String(object.environment);
+                                    if (object.snapshotLocation != null)
+                                        message.snapshotLocation = String(object.snapshotLocation);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SaveSnapshotRequest message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest} message SaveSnapshotRequest
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SaveSnapshotRequest.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.environment = "";
+                                        object.snapshotLocation = "";
+                                    }
+                                    if (message.environment != null && message.hasOwnProperty("environment"))
+                                        object.environment = message.environment;
+                                    if (message.snapshotLocation != null && message.hasOwnProperty("snapshotLocation"))
+                                        object.snapshotLocation = message.snapshotLocation;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SaveSnapshotRequest to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SaveSnapshotRequest.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SaveSnapshotRequest
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SaveSnapshotRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest";
+                                };
+    
+                                return SaveSnapshotRequest;
+                            })();
+    
+                            v1beta1.SaveSnapshotResponse = (function() {
+    
+                                /**
+                                 * Properties of a SaveSnapshotResponse.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @interface ISaveSnapshotResponse
+                                 * @property {string|null} [snapshotPath] SaveSnapshotResponse snapshotPath
+                                 */
+    
+                                /**
+                                 * Constructs a new SaveSnapshotResponse.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @classdesc Represents a SaveSnapshotResponse.
+                                 * @implements ISaveSnapshotResponse
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse=} [properties] Properties to set
+                                 */
+                                function SaveSnapshotResponse(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SaveSnapshotResponse snapshotPath.
+                                 * @member {string} snapshotPath
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse
+                                 * @instance
+                                 */
+                                SaveSnapshotResponse.prototype.snapshotPath = "";
+    
+                                /**
+                                 * Creates a new SaveSnapshotResponse instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse} SaveSnapshotResponse instance
+                                 */
+                                SaveSnapshotResponse.create = function create(properties) {
+                                    return new SaveSnapshotResponse(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SaveSnapshotResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse} message SaveSnapshotResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SaveSnapshotResponse.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.snapshotPath != null && Object.hasOwnProperty.call(message, "snapshotPath"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.snapshotPath);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SaveSnapshotResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse} message SaveSnapshotResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SaveSnapshotResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SaveSnapshotResponse message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse} SaveSnapshotResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SaveSnapshotResponse.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.snapshotPath = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SaveSnapshotResponse message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse} SaveSnapshotResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SaveSnapshotResponse.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SaveSnapshotResponse message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SaveSnapshotResponse.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.snapshotPath != null && message.hasOwnProperty("snapshotPath"))
+                                        if (!$util.isString(message.snapshotPath))
+                                            return "snapshotPath: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SaveSnapshotResponse message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse} SaveSnapshotResponse
+                                 */
+                                SaveSnapshotResponse.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse();
+                                    if (object.snapshotPath != null)
+                                        message.snapshotPath = String(object.snapshotPath);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SaveSnapshotResponse message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse} message SaveSnapshotResponse
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SaveSnapshotResponse.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.snapshotPath = "";
+                                    if (message.snapshotPath != null && message.hasOwnProperty("snapshotPath"))
+                                        object.snapshotPath = message.snapshotPath;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SaveSnapshotResponse to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SaveSnapshotResponse.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SaveSnapshotResponse
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SaveSnapshotResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse";
+                                };
+    
+                                return SaveSnapshotResponse;
+                            })();
+    
+                            v1beta1.LoadSnapshotRequest = (function() {
+    
+                                /**
+                                 * Properties of a LoadSnapshotRequest.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @interface ILoadSnapshotRequest
+                                 * @property {string|null} [environment] LoadSnapshotRequest environment
+                                 * @property {string|null} [snapshotPath] LoadSnapshotRequest snapshotPath
+                                 * @property {boolean|null} [skipPypiPackagesInstallation] LoadSnapshotRequest skipPypiPackagesInstallation
+                                 * @property {boolean|null} [skipEnvironmentVariablesSetting] LoadSnapshotRequest skipEnvironmentVariablesSetting
+                                 * @property {boolean|null} [skipAirflowOverridesSetting] LoadSnapshotRequest skipAirflowOverridesSetting
+                                 * @property {boolean|null} [skipGcsDataCopying] LoadSnapshotRequest skipGcsDataCopying
+                                 */
+    
+                                /**
+                                 * Constructs a new LoadSnapshotRequest.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @classdesc Represents a LoadSnapshotRequest.
+                                 * @implements ILoadSnapshotRequest
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest=} [properties] Properties to set
+                                 */
+                                function LoadSnapshotRequest(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * LoadSnapshotRequest environment.
+                                 * @member {string} environment
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @instance
+                                 */
+                                LoadSnapshotRequest.prototype.environment = "";
+    
+                                /**
+                                 * LoadSnapshotRequest snapshotPath.
+                                 * @member {string} snapshotPath
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @instance
+                                 */
+                                LoadSnapshotRequest.prototype.snapshotPath = "";
+    
+                                /**
+                                 * LoadSnapshotRequest skipPypiPackagesInstallation.
+                                 * @member {boolean} skipPypiPackagesInstallation
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @instance
+                                 */
+                                LoadSnapshotRequest.prototype.skipPypiPackagesInstallation = false;
+    
+                                /**
+                                 * LoadSnapshotRequest skipEnvironmentVariablesSetting.
+                                 * @member {boolean} skipEnvironmentVariablesSetting
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @instance
+                                 */
+                                LoadSnapshotRequest.prototype.skipEnvironmentVariablesSetting = false;
+    
+                                /**
+                                 * LoadSnapshotRequest skipAirflowOverridesSetting.
+                                 * @member {boolean} skipAirflowOverridesSetting
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @instance
+                                 */
+                                LoadSnapshotRequest.prototype.skipAirflowOverridesSetting = false;
+    
+                                /**
+                                 * LoadSnapshotRequest skipGcsDataCopying.
+                                 * @member {boolean} skipGcsDataCopying
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @instance
+                                 */
+                                LoadSnapshotRequest.prototype.skipGcsDataCopying = false;
+    
+                                /**
+                                 * Creates a new LoadSnapshotRequest instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest} LoadSnapshotRequest instance
+                                 */
+                                LoadSnapshotRequest.create = function create(properties) {
+                                    return new LoadSnapshotRequest(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified LoadSnapshotRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest} message LoadSnapshotRequest message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LoadSnapshotRequest.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.environment);
+                                    if (message.snapshotPath != null && Object.hasOwnProperty.call(message, "snapshotPath"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.snapshotPath);
+                                    if (message.skipPypiPackagesInstallation != null && Object.hasOwnProperty.call(message, "skipPypiPackagesInstallation"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.skipPypiPackagesInstallation);
+                                    if (message.skipEnvironmentVariablesSetting != null && Object.hasOwnProperty.call(message, "skipEnvironmentVariablesSetting"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).bool(message.skipEnvironmentVariablesSetting);
+                                    if (message.skipAirflowOverridesSetting != null && Object.hasOwnProperty.call(message, "skipAirflowOverridesSetting"))
+                                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.skipAirflowOverridesSetting);
+                                    if (message.skipGcsDataCopying != null && Object.hasOwnProperty.call(message, "skipGcsDataCopying"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.skipGcsDataCopying);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified LoadSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest} message LoadSnapshotRequest message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LoadSnapshotRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a LoadSnapshotRequest message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest} LoadSnapshotRequest
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LoadSnapshotRequest.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.environment = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.snapshotPath = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.skipPypiPackagesInstallation = reader.bool();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.skipEnvironmentVariablesSetting = reader.bool();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.skipAirflowOverridesSetting = reader.bool();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.skipGcsDataCopying = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a LoadSnapshotRequest message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest} LoadSnapshotRequest
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LoadSnapshotRequest.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a LoadSnapshotRequest message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                LoadSnapshotRequest.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.environment != null && message.hasOwnProperty("environment"))
+                                        if (!$util.isString(message.environment))
+                                            return "environment: string expected";
+                                    if (message.snapshotPath != null && message.hasOwnProperty("snapshotPath"))
+                                        if (!$util.isString(message.snapshotPath))
+                                            return "snapshotPath: string expected";
+                                    if (message.skipPypiPackagesInstallation != null && message.hasOwnProperty("skipPypiPackagesInstallation"))
+                                        if (typeof message.skipPypiPackagesInstallation !== "boolean")
+                                            return "skipPypiPackagesInstallation: boolean expected";
+                                    if (message.skipEnvironmentVariablesSetting != null && message.hasOwnProperty("skipEnvironmentVariablesSetting"))
+                                        if (typeof message.skipEnvironmentVariablesSetting !== "boolean")
+                                            return "skipEnvironmentVariablesSetting: boolean expected";
+                                    if (message.skipAirflowOverridesSetting != null && message.hasOwnProperty("skipAirflowOverridesSetting"))
+                                        if (typeof message.skipAirflowOverridesSetting !== "boolean")
+                                            return "skipAirflowOverridesSetting: boolean expected";
+                                    if (message.skipGcsDataCopying != null && message.hasOwnProperty("skipGcsDataCopying"))
+                                        if (typeof message.skipGcsDataCopying !== "boolean")
+                                            return "skipGcsDataCopying: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a LoadSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest} LoadSnapshotRequest
+                                 */
+                                LoadSnapshotRequest.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest();
+                                    if (object.environment != null)
+                                        message.environment = String(object.environment);
+                                    if (object.snapshotPath != null)
+                                        message.snapshotPath = String(object.snapshotPath);
+                                    if (object.skipPypiPackagesInstallation != null)
+                                        message.skipPypiPackagesInstallation = Boolean(object.skipPypiPackagesInstallation);
+                                    if (object.skipEnvironmentVariablesSetting != null)
+                                        message.skipEnvironmentVariablesSetting = Boolean(object.skipEnvironmentVariablesSetting);
+                                    if (object.skipAirflowOverridesSetting != null)
+                                        message.skipAirflowOverridesSetting = Boolean(object.skipAirflowOverridesSetting);
+                                    if (object.skipGcsDataCopying != null)
+                                        message.skipGcsDataCopying = Boolean(object.skipGcsDataCopying);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a LoadSnapshotRequest message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest} message LoadSnapshotRequest
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                LoadSnapshotRequest.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.environment = "";
+                                        object.snapshotPath = "";
+                                        object.skipPypiPackagesInstallation = false;
+                                        object.skipEnvironmentVariablesSetting = false;
+                                        object.skipAirflowOverridesSetting = false;
+                                        object.skipGcsDataCopying = false;
+                                    }
+                                    if (message.environment != null && message.hasOwnProperty("environment"))
+                                        object.environment = message.environment;
+                                    if (message.snapshotPath != null && message.hasOwnProperty("snapshotPath"))
+                                        object.snapshotPath = message.snapshotPath;
+                                    if (message.skipPypiPackagesInstallation != null && message.hasOwnProperty("skipPypiPackagesInstallation"))
+                                        object.skipPypiPackagesInstallation = message.skipPypiPackagesInstallation;
+                                    if (message.skipEnvironmentVariablesSetting != null && message.hasOwnProperty("skipEnvironmentVariablesSetting"))
+                                        object.skipEnvironmentVariablesSetting = message.skipEnvironmentVariablesSetting;
+                                    if (message.skipAirflowOverridesSetting != null && message.hasOwnProperty("skipAirflowOverridesSetting"))
+                                        object.skipAirflowOverridesSetting = message.skipAirflowOverridesSetting;
+                                    if (message.skipGcsDataCopying != null && message.hasOwnProperty("skipGcsDataCopying"))
+                                        object.skipGcsDataCopying = message.skipGcsDataCopying;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this LoadSnapshotRequest to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                LoadSnapshotRequest.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for LoadSnapshotRequest
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                LoadSnapshotRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest";
+                                };
+    
+                                return LoadSnapshotRequest;
+                            })();
+    
+                            v1beta1.LoadSnapshotResponse = (function() {
+    
+                                /**
+                                 * Properties of a LoadSnapshotResponse.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @interface ILoadSnapshotResponse
+                                 */
+    
+                                /**
+                                 * Constructs a new LoadSnapshotResponse.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @classdesc Represents a LoadSnapshotResponse.
+                                 * @implements ILoadSnapshotResponse
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse=} [properties] Properties to set
+                                 */
+                                function LoadSnapshotResponse(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new LoadSnapshotResponse instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse} LoadSnapshotResponse instance
+                                 */
+                                LoadSnapshotResponse.create = function create(properties) {
+                                    return new LoadSnapshotResponse(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified LoadSnapshotResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse} message LoadSnapshotResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LoadSnapshotResponse.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified LoadSnapshotResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse} message LoadSnapshotResponse message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LoadSnapshotResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a LoadSnapshotResponse message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse} LoadSnapshotResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LoadSnapshotResponse.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a LoadSnapshotResponse message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse} LoadSnapshotResponse
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LoadSnapshotResponse.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a LoadSnapshotResponse message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                LoadSnapshotResponse.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a LoadSnapshotResponse message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse} LoadSnapshotResponse
+                                 */
+                                LoadSnapshotResponse.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse)
+                                        return object;
+                                    return new $root.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a LoadSnapshotResponse message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse} message LoadSnapshotResponse
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                LoadSnapshotResponse.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this LoadSnapshotResponse to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                LoadSnapshotResponse.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for LoadSnapshotResponse
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                LoadSnapshotResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse";
+                                };
+    
+                                return LoadSnapshotResponse;
+                            })();
+    
                             v1beta1.EnvironmentConfig = (function() {
     
                                 /**
@@ -9026,6 +14915,8 @@
                                  * @property {google.cloud.orchestration.airflow.service.v1beta1.IMaintenanceWindow|null} [maintenanceWindow] EnvironmentConfig maintenanceWindow
                                  * @property {google.cloud.orchestration.airflow.service.v1beta1.IWorkloadsConfig|null} [workloadsConfig] EnvironmentConfig workloadsConfig
                                  * @property {google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.EnvironmentSize|null} [environmentSize] EnvironmentConfig environmentSize
+                                 * @property {google.cloud.orchestration.airflow.service.v1beta1.IMasterAuthorizedNetworksConfig|null} [masterAuthorizedNetworksConfig] EnvironmentConfig masterAuthorizedNetworksConfig
+                                 * @property {google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig|null} [recoveryConfig] EnvironmentConfig recoveryConfig
                                  */
     
                                 /**
@@ -9156,6 +15047,22 @@
                                 EnvironmentConfig.prototype.environmentSize = 0;
     
                                 /**
+                                 * EnvironmentConfig masterAuthorizedNetworksConfig.
+                                 * @member {google.cloud.orchestration.airflow.service.v1beta1.IMasterAuthorizedNetworksConfig|null|undefined} masterAuthorizedNetworksConfig
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig
+                                 * @instance
+                                 */
+                                EnvironmentConfig.prototype.masterAuthorizedNetworksConfig = null;
+    
+                                /**
+                                 * EnvironmentConfig recoveryConfig.
+                                 * @member {google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig|null|undefined} recoveryConfig
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig
+                                 * @instance
+                                 */
+                                EnvironmentConfig.prototype.recoveryConfig = null;
+    
+                                /**
                                  * Creates a new EnvironmentConfig instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig
@@ -9207,6 +15114,10 @@
                                         $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.encode(message.workloadsConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                                     if (message.environmentSize != null && Object.hasOwnProperty.call(message, "environmentSize"))
                                         writer.uint32(/* id 16, wireType 0 =*/128).int32(message.environmentSize);
+                                    if (message.masterAuthorizedNetworksConfig != null && Object.hasOwnProperty.call(message, "masterAuthorizedNetworksConfig"))
+                                        $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.encode(message.masterAuthorizedNetworksConfig, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                                    if (message.recoveryConfig != null && Object.hasOwnProperty.call(message, "recoveryConfig"))
+                                        $root.google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig.encode(message.recoveryConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -9295,6 +15206,14 @@
                                             }
                                         case 16: {
                                                 message.environmentSize = reader.int32();
+                                                break;
+                                            }
+                                        case 17: {
+                                                message.masterAuthorizedNetworksConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 18: {
+                                                message.recoveryConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -9399,6 +15318,16 @@
                                         case 3:
                                             break;
                                         }
+                                    if (message.masterAuthorizedNetworksConfig != null && message.hasOwnProperty("masterAuthorizedNetworksConfig")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.verify(message.masterAuthorizedNetworksConfig);
+                                        if (error)
+                                            return "masterAuthorizedNetworksConfig." + error;
+                                    }
+                                    if (message.recoveryConfig != null && message.hasOwnProperty("recoveryConfig")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig.verify(message.recoveryConfig);
+                                        if (error)
+                                            return "recoveryConfig." + error;
+                                    }
                                     return null;
                                 };
     
@@ -9491,6 +15420,16 @@
                                         message.environmentSize = 3;
                                         break;
                                     }
+                                    if (object.masterAuthorizedNetworksConfig != null) {
+                                        if (typeof object.masterAuthorizedNetworksConfig !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.masterAuthorizedNetworksConfig: object expected");
+                                        message.masterAuthorizedNetworksConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.fromObject(object.masterAuthorizedNetworksConfig);
+                                    }
+                                    if (object.recoveryConfig != null) {
+                                        if (typeof object.recoveryConfig !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.recoveryConfig: object expected");
+                                        message.recoveryConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig.fromObject(object.recoveryConfig);
+                                    }
                                     return message;
                                 };
     
@@ -9522,6 +15461,8 @@
                                         object.maintenanceWindow = null;
                                         object.workloadsConfig = null;
                                         object.environmentSize = options.enums === String ? "ENVIRONMENT_SIZE_UNSPECIFIED" : 0;
+                                        object.masterAuthorizedNetworksConfig = null;
+                                        object.recoveryConfig = null;
                                     }
                                     if (message.gkeCluster != null && message.hasOwnProperty("gkeCluster"))
                                         object.gkeCluster = message.gkeCluster;
@@ -9551,6 +15492,10 @@
                                         object.workloadsConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.toObject(message.workloadsConfig, options);
                                     if (message.environmentSize != null && message.hasOwnProperty("environmentSize"))
                                         object.environmentSize = options.enums === String ? $root.google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.EnvironmentSize[message.environmentSize] === undefined ? message.environmentSize : $root.google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.EnvironmentSize[message.environmentSize] : message.environmentSize;
+                                    if (message.masterAuthorizedNetworksConfig != null && message.hasOwnProperty("masterAuthorizedNetworksConfig"))
+                                        object.masterAuthorizedNetworksConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.toObject(message.masterAuthorizedNetworksConfig, options);
+                                    if (message.recoveryConfig != null && message.hasOwnProperty("recoveryConfig"))
+                                        object.recoveryConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig.toObject(message.recoveryConfig, options);
                                     return object;
                                 };
     
@@ -10063,6 +16008,8 @@
                                  * @property {Object.<string,string>|null} [pypiPackages] SoftwareConfig pypiPackages
                                  * @property {Object.<string,string>|null} [envVariables] SoftwareConfig envVariables
                                  * @property {string|null} [pythonVersion] SoftwareConfig pythonVersion
+                                 * @property {number|null} [schedulerCount] SoftwareConfig schedulerCount
+                                 * @property {google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration|null} [cloudDataLineageIntegration] SoftwareConfig cloudDataLineageIntegration
                                  */
     
                                 /**
@@ -10124,6 +16071,22 @@
                                 SoftwareConfig.prototype.pythonVersion = "";
     
                                 /**
+                                 * SoftwareConfig schedulerCount.
+                                 * @member {number} schedulerCount
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SoftwareConfig
+                                 * @instance
+                                 */
+                                SoftwareConfig.prototype.schedulerCount = 0;
+    
+                                /**
+                                 * SoftwareConfig cloudDataLineageIntegration.
+                                 * @member {google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration|null|undefined} cloudDataLineageIntegration
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.SoftwareConfig
+                                 * @instance
+                                 */
+                                SoftwareConfig.prototype.cloudDataLineageIntegration = null;
+    
+                                /**
                                  * Creates a new SoftwareConfig instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.orchestration.airflow.service.v1beta1.SoftwareConfig
@@ -10160,6 +16123,10 @@
                                             writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.envVariables[keys[i]]).ldelim();
                                     if (message.pythonVersion != null && Object.hasOwnProperty.call(message, "pythonVersion"))
                                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.pythonVersion);
+                                    if (message.schedulerCount != null && Object.hasOwnProperty.call(message, "schedulerCount"))
+                                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.schedulerCount);
+                                    if (message.cloudDataLineageIntegration != null && Object.hasOwnProperty.call(message, "cloudDataLineageIntegration"))
+                                        $root.google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration.encode(message.cloudDataLineageIntegration, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -10271,6 +16238,14 @@
                                                 message.pythonVersion = reader.string();
                                                 break;
                                             }
+                                        case 7: {
+                                                message.schedulerCount = reader.int32();
+                                                break;
+                                            }
+                                        case 8: {
+                                                message.cloudDataLineageIntegration = $root.google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration.decode(reader, reader.uint32());
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -10336,6 +16311,14 @@
                                     if (message.pythonVersion != null && message.hasOwnProperty("pythonVersion"))
                                         if (!$util.isString(message.pythonVersion))
                                             return "pythonVersion: string expected";
+                                    if (message.schedulerCount != null && message.hasOwnProperty("schedulerCount"))
+                                        if (!$util.isInteger(message.schedulerCount))
+                                            return "schedulerCount: integer expected";
+                                    if (message.cloudDataLineageIntegration != null && message.hasOwnProperty("cloudDataLineageIntegration")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration.verify(message.cloudDataLineageIntegration);
+                                        if (error)
+                                            return "cloudDataLineageIntegration." + error;
+                                    }
                                     return null;
                                 };
     
@@ -10376,6 +16359,13 @@
                                     }
                                     if (object.pythonVersion != null)
                                         message.pythonVersion = String(object.pythonVersion);
+                                    if (object.schedulerCount != null)
+                                        message.schedulerCount = object.schedulerCount | 0;
+                                    if (object.cloudDataLineageIntegration != null) {
+                                        if (typeof object.cloudDataLineageIntegration !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.SoftwareConfig.cloudDataLineageIntegration: object expected");
+                                        message.cloudDataLineageIntegration = $root.google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration.fromObject(object.cloudDataLineageIntegration);
+                                    }
                                     return message;
                                 };
     
@@ -10400,6 +16390,8 @@
                                     if (options.defaults) {
                                         object.imageVersion = "";
                                         object.pythonVersion = "";
+                                        object.schedulerCount = 0;
+                                        object.cloudDataLineageIntegration = null;
                                     }
                                     if (message.imageVersion != null && message.hasOwnProperty("imageVersion"))
                                         object.imageVersion = message.imageVersion;
@@ -10421,6 +16413,10 @@
                                     }
                                     if (message.pythonVersion != null && message.hasOwnProperty("pythonVersion"))
                                         object.pythonVersion = message.pythonVersion;
+                                    if (message.schedulerCount != null && message.hasOwnProperty("schedulerCount"))
+                                        object.schedulerCount = message.schedulerCount;
+                                    if (message.cloudDataLineageIntegration != null && message.hasOwnProperty("cloudDataLineageIntegration"))
+                                        object.cloudDataLineageIntegration = $root.google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration.toObject(message.cloudDataLineageIntegration, options);
                                     return object;
                                 };
     
@@ -10765,6 +16761,7 @@
                                  * @property {Array.<string>|null} [tags] NodeConfig tags
                                  * @property {google.cloud.orchestration.airflow.service.v1beta1.IIPAllocationPolicy|null} [ipAllocationPolicy] NodeConfig ipAllocationPolicy
                                  * @property {number|null} [maxPodsPerNode] NodeConfig maxPodsPerNode
+                                 * @property {boolean|null} [enableIpMasqAgent] NodeConfig enableIpMasqAgent
                                  */
     
                                 /**
@@ -10865,6 +16862,14 @@
                                 NodeConfig.prototype.maxPodsPerNode = 0;
     
                                 /**
+                                 * NodeConfig enableIpMasqAgent.
+                                 * @member {boolean} enableIpMasqAgent
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.NodeConfig
+                                 * @instance
+                                 */
+                                NodeConfig.prototype.enableIpMasqAgent = false;
+    
+                                /**
                                  * Creates a new NodeConfig instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.orchestration.airflow.service.v1beta1.NodeConfig
@@ -10910,6 +16915,8 @@
                                         $root.google.cloud.orchestration.airflow.service.v1beta1.IPAllocationPolicy.encode(message.ipAllocationPolicy, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                     if (message.maxPodsPerNode != null && Object.hasOwnProperty.call(message, "maxPodsPerNode"))
                                         writer.uint32(/* id 10, wireType 0 =*/80).int32(message.maxPodsPerNode);
+                                    if (message.enableIpMasqAgent != null && Object.hasOwnProperty.call(message, "enableIpMasqAgent"))
+                                        writer.uint32(/* id 11, wireType 0 =*/88).bool(message.enableIpMasqAgent);
                                     return writer;
                                 };
     
@@ -10988,6 +16995,10 @@
                                                 message.maxPodsPerNode = reader.int32();
                                                 break;
                                             }
+                                        case 11: {
+                                                message.enableIpMasqAgent = reader.bool();
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -11063,6 +17074,9 @@
                                     if (message.maxPodsPerNode != null && message.hasOwnProperty("maxPodsPerNode"))
                                         if (!$util.isInteger(message.maxPodsPerNode))
                                             return "maxPodsPerNode: integer expected";
+                                    if (message.enableIpMasqAgent != null && message.hasOwnProperty("enableIpMasqAgent"))
+                                        if (typeof message.enableIpMasqAgent !== "boolean")
+                                            return "enableIpMasqAgent: boolean expected";
                                     return null;
                                 };
     
@@ -11111,6 +17125,8 @@
                                     }
                                     if (object.maxPodsPerNode != null)
                                         message.maxPodsPerNode = object.maxPodsPerNode | 0;
+                                    if (object.enableIpMasqAgent != null)
+                                        message.enableIpMasqAgent = Boolean(object.enableIpMasqAgent);
                                     return message;
                                 };
     
@@ -11140,6 +17156,7 @@
                                         object.serviceAccount = "";
                                         object.ipAllocationPolicy = null;
                                         object.maxPodsPerNode = 0;
+                                        object.enableIpMasqAgent = false;
                                     }
                                     if (message.location != null && message.hasOwnProperty("location"))
                                         object.location = message.location;
@@ -11167,6 +17184,8 @@
                                         object.ipAllocationPolicy = $root.google.cloud.orchestration.airflow.service.v1beta1.IPAllocationPolicy.toObject(message.ipAllocationPolicy, options);
                                     if (message.maxPodsPerNode != null && message.hasOwnProperty("maxPodsPerNode"))
                                         object.maxPodsPerNode = message.maxPodsPerNode;
+                                    if (message.enableIpMasqAgent != null && message.hasOwnProperty("enableIpMasqAgent"))
+                                        object.enableIpMasqAgent = message.enableIpMasqAgent;
                                     return object;
                                 };
     
@@ -11449,6 +17468,249 @@
                                 return PrivateClusterConfig;
                             })();
     
+                            v1beta1.NetworkingConfig = (function() {
+    
+                                /**
+                                 * Properties of a NetworkingConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @interface INetworkingConfig
+                                 * @property {google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.ConnectionType|null} [connectionType] NetworkingConfig connectionType
+                                 */
+    
+                                /**
+                                 * Constructs a new NetworkingConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @classdesc Represents a NetworkingConfig.
+                                 * @implements INetworkingConfig
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.INetworkingConfig=} [properties] Properties to set
+                                 */
+                                function NetworkingConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * NetworkingConfig connectionType.
+                                 * @member {google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.ConnectionType} connectionType
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig
+                                 * @instance
+                                 */
+                                NetworkingConfig.prototype.connectionType = 0;
+    
+                                /**
+                                 * Creates a new NetworkingConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.INetworkingConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig} NetworkingConfig instance
+                                 */
+                                NetworkingConfig.create = function create(properties) {
+                                    return new NetworkingConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified NetworkingConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.INetworkingConfig} message NetworkingConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NetworkingConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.connectionType != null && Object.hasOwnProperty.call(message, "connectionType"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.connectionType);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified NetworkingConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.INetworkingConfig} message NetworkingConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NetworkingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a NetworkingConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig} NetworkingConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NetworkingConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.connectionType = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a NetworkingConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig} NetworkingConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NetworkingConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a NetworkingConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                NetworkingConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.connectionType != null && message.hasOwnProperty("connectionType"))
+                                        switch (message.connectionType) {
+                                        default:
+                                            return "connectionType: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a NetworkingConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig} NetworkingConfig
+                                 */
+                                NetworkingConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig();
+                                    switch (object.connectionType) {
+                                    default:
+                                        if (typeof object.connectionType === "number") {
+                                            message.connectionType = object.connectionType;
+                                            break;
+                                        }
+                                        break;
+                                    case "CONNECTION_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.connectionType = 0;
+                                        break;
+                                    case "VPC_PEERING":
+                                    case 1:
+                                        message.connectionType = 1;
+                                        break;
+                                    case "PRIVATE_SERVICE_CONNECT":
+                                    case 2:
+                                        message.connectionType = 2;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a NetworkingConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig} message NetworkingConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                NetworkingConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.connectionType = options.enums === String ? "CONNECTION_TYPE_UNSPECIFIED" : 0;
+                                    if (message.connectionType != null && message.hasOwnProperty("connectionType"))
+                                        object.connectionType = options.enums === String ? $root.google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.ConnectionType[message.connectionType] === undefined ? message.connectionType : $root.google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.ConnectionType[message.connectionType] : message.connectionType;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this NetworkingConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                NetworkingConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for NetworkingConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                NetworkingConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig";
+                                };
+    
+                                /**
+                                 * ConnectionType enum.
+                                 * @name google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.ConnectionType
+                                 * @enum {number}
+                                 * @property {number} CONNECTION_TYPE_UNSPECIFIED=0 CONNECTION_TYPE_UNSPECIFIED value
+                                 * @property {number} VPC_PEERING=1 VPC_PEERING value
+                                 * @property {number} PRIVATE_SERVICE_CONNECT=2 PRIVATE_SERVICE_CONNECT value
+                                 */
+                                NetworkingConfig.ConnectionType = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "CONNECTION_TYPE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "VPC_PEERING"] = 1;
+                                    values[valuesById[2] = "PRIVATE_SERVICE_CONNECT"] = 2;
+                                    return values;
+                                })();
+    
+                                return NetworkingConfig;
+                            })();
+    
                             v1beta1.PrivateEnvironmentConfig = (function() {
     
                                 /**
@@ -11462,6 +17724,9 @@
                                  * @property {string|null} [webServerIpv4ReservedRange] PrivateEnvironmentConfig webServerIpv4ReservedRange
                                  * @property {string|null} [cloudComposerNetworkIpv4CidrBlock] PrivateEnvironmentConfig cloudComposerNetworkIpv4CidrBlock
                                  * @property {string|null} [cloudComposerNetworkIpv4ReservedRange] PrivateEnvironmentConfig cloudComposerNetworkIpv4ReservedRange
+                                 * @property {boolean|null} [enablePrivatelyUsedPublicIps] PrivateEnvironmentConfig enablePrivatelyUsedPublicIps
+                                 * @property {string|null} [cloudComposerConnectionSubnetwork] PrivateEnvironmentConfig cloudComposerConnectionSubnetwork
+                                 * @property {google.cloud.orchestration.airflow.service.v1beta1.INetworkingConfig|null} [networkingConfig] PrivateEnvironmentConfig networkingConfig
                                  */
     
                                 /**
@@ -11536,6 +17801,30 @@
                                 PrivateEnvironmentConfig.prototype.cloudComposerNetworkIpv4ReservedRange = "";
     
                                 /**
+                                 * PrivateEnvironmentConfig enablePrivatelyUsedPublicIps.
+                                 * @member {boolean} enablePrivatelyUsedPublicIps
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PrivateEnvironmentConfig
+                                 * @instance
+                                 */
+                                PrivateEnvironmentConfig.prototype.enablePrivatelyUsedPublicIps = false;
+    
+                                /**
+                                 * PrivateEnvironmentConfig cloudComposerConnectionSubnetwork.
+                                 * @member {string} cloudComposerConnectionSubnetwork
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PrivateEnvironmentConfig
+                                 * @instance
+                                 */
+                                PrivateEnvironmentConfig.prototype.cloudComposerConnectionSubnetwork = "";
+    
+                                /**
+                                 * PrivateEnvironmentConfig networkingConfig.
+                                 * @member {google.cloud.orchestration.airflow.service.v1beta1.INetworkingConfig|null|undefined} networkingConfig
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.PrivateEnvironmentConfig
+                                 * @instance
+                                 */
+                                PrivateEnvironmentConfig.prototype.networkingConfig = null;
+    
+                                /**
                                  * Creates a new PrivateEnvironmentConfig instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.orchestration.airflow.service.v1beta1.PrivateEnvironmentConfig
@@ -11569,10 +17858,16 @@
                                         writer.uint32(/* id 4, wireType 2 =*/34).string(message.cloudSqlIpv4CidrBlock);
                                     if (message.webServerIpv4ReservedRange != null && Object.hasOwnProperty.call(message, "webServerIpv4ReservedRange"))
                                         writer.uint32(/* id 5, wireType 2 =*/42).string(message.webServerIpv4ReservedRange);
+                                    if (message.enablePrivatelyUsedPublicIps != null && Object.hasOwnProperty.call(message, "enablePrivatelyUsedPublicIps"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.enablePrivatelyUsedPublicIps);
                                     if (message.cloudComposerNetworkIpv4CidrBlock != null && Object.hasOwnProperty.call(message, "cloudComposerNetworkIpv4CidrBlock"))
                                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.cloudComposerNetworkIpv4CidrBlock);
                                     if (message.cloudComposerNetworkIpv4ReservedRange != null && Object.hasOwnProperty.call(message, "cloudComposerNetworkIpv4ReservedRange"))
                                         writer.uint32(/* id 8, wireType 2 =*/66).string(message.cloudComposerNetworkIpv4ReservedRange);
+                                    if (message.cloudComposerConnectionSubnetwork != null && Object.hasOwnProperty.call(message, "cloudComposerConnectionSubnetwork"))
+                                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.cloudComposerConnectionSubnetwork);
+                                    if (message.networkingConfig != null && Object.hasOwnProperty.call(message, "networkingConfig"))
+                                        $root.google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.encode(message.networkingConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -11635,6 +17930,18 @@
                                                 message.cloudComposerNetworkIpv4ReservedRange = reader.string();
                                                 break;
                                             }
+                                        case 6: {
+                                                message.enablePrivatelyUsedPublicIps = reader.bool();
+                                                break;
+                                            }
+                                        case 9: {
+                                                message.cloudComposerConnectionSubnetwork = reader.string();
+                                                break;
+                                            }
+                                        case 10: {
+                                                message.networkingConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -11693,6 +18000,17 @@
                                     if (message.cloudComposerNetworkIpv4ReservedRange != null && message.hasOwnProperty("cloudComposerNetworkIpv4ReservedRange"))
                                         if (!$util.isString(message.cloudComposerNetworkIpv4ReservedRange))
                                             return "cloudComposerNetworkIpv4ReservedRange: string expected";
+                                    if (message.enablePrivatelyUsedPublicIps != null && message.hasOwnProperty("enablePrivatelyUsedPublicIps"))
+                                        if (typeof message.enablePrivatelyUsedPublicIps !== "boolean")
+                                            return "enablePrivatelyUsedPublicIps: boolean expected";
+                                    if (message.cloudComposerConnectionSubnetwork != null && message.hasOwnProperty("cloudComposerConnectionSubnetwork"))
+                                        if (!$util.isString(message.cloudComposerConnectionSubnetwork))
+                                            return "cloudComposerConnectionSubnetwork: string expected";
+                                    if (message.networkingConfig != null && message.hasOwnProperty("networkingConfig")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.verify(message.networkingConfig);
+                                        if (error)
+                                            return "networkingConfig." + error;
+                                    }
                                     return null;
                                 };
     
@@ -11725,6 +18043,15 @@
                                         message.cloudComposerNetworkIpv4CidrBlock = String(object.cloudComposerNetworkIpv4CidrBlock);
                                     if (object.cloudComposerNetworkIpv4ReservedRange != null)
                                         message.cloudComposerNetworkIpv4ReservedRange = String(object.cloudComposerNetworkIpv4ReservedRange);
+                                    if (object.enablePrivatelyUsedPublicIps != null)
+                                        message.enablePrivatelyUsedPublicIps = Boolean(object.enablePrivatelyUsedPublicIps);
+                                    if (object.cloudComposerConnectionSubnetwork != null)
+                                        message.cloudComposerConnectionSubnetwork = String(object.cloudComposerConnectionSubnetwork);
+                                    if (object.networkingConfig != null) {
+                                        if (typeof object.networkingConfig !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.PrivateEnvironmentConfig.networkingConfig: object expected");
+                                        message.networkingConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.fromObject(object.networkingConfig);
+                                    }
                                     return message;
                                 };
     
@@ -11747,8 +18074,11 @@
                                         object.webServerIpv4CidrBlock = "";
                                         object.cloudSqlIpv4CidrBlock = "";
                                         object.webServerIpv4ReservedRange = "";
+                                        object.enablePrivatelyUsedPublicIps = false;
                                         object.cloudComposerNetworkIpv4CidrBlock = "";
                                         object.cloudComposerNetworkIpv4ReservedRange = "";
+                                        object.cloudComposerConnectionSubnetwork = "";
+                                        object.networkingConfig = null;
                                     }
                                     if (message.enablePrivateEnvironment != null && message.hasOwnProperty("enablePrivateEnvironment"))
                                         object.enablePrivateEnvironment = message.enablePrivateEnvironment;
@@ -11760,10 +18090,16 @@
                                         object.cloudSqlIpv4CidrBlock = message.cloudSqlIpv4CidrBlock;
                                     if (message.webServerIpv4ReservedRange != null && message.hasOwnProperty("webServerIpv4ReservedRange"))
                                         object.webServerIpv4ReservedRange = message.webServerIpv4ReservedRange;
+                                    if (message.enablePrivatelyUsedPublicIps != null && message.hasOwnProperty("enablePrivatelyUsedPublicIps"))
+                                        object.enablePrivatelyUsedPublicIps = message.enablePrivatelyUsedPublicIps;
                                     if (message.cloudComposerNetworkIpv4CidrBlock != null && message.hasOwnProperty("cloudComposerNetworkIpv4CidrBlock"))
                                         object.cloudComposerNetworkIpv4CidrBlock = message.cloudComposerNetworkIpv4CidrBlock;
                                     if (message.cloudComposerNetworkIpv4ReservedRange != null && message.hasOwnProperty("cloudComposerNetworkIpv4ReservedRange"))
                                         object.cloudComposerNetworkIpv4ReservedRange = message.cloudComposerNetworkIpv4ReservedRange;
+                                    if (message.cloudComposerConnectionSubnetwork != null && message.hasOwnProperty("cloudComposerConnectionSubnetwork"))
+                                        object.cloudComposerConnectionSubnetwork = message.cloudComposerConnectionSubnetwork;
+                                    if (message.networkingConfig != null && message.hasOwnProperty("networkingConfig"))
+                                        object.networkingConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.toObject(message.networkingConfig, options);
                                     return object;
                                 };
     
@@ -12674,6 +19010,7 @@
                                  * @property {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ISchedulerResource|null} [scheduler] WorkloadsConfig scheduler
                                  * @property {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.IWebServerResource|null} [webServer] WorkloadsConfig webServer
                                  * @property {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.IWorkerResource|null} [worker] WorkloadsConfig worker
+                                 * @property {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource|null} [triggerer] WorkloadsConfig triggerer
                                  */
     
                                 /**
@@ -12716,6 +19053,14 @@
                                 WorkloadsConfig.prototype.worker = null;
     
                                 /**
+                                 * WorkloadsConfig triggerer.
+                                 * @member {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource|null|undefined} triggerer
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig
+                                 * @instance
+                                 */
+                                WorkloadsConfig.prototype.triggerer = null;
+    
+                                /**
                                  * Creates a new WorkloadsConfig instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig
@@ -12745,6 +19090,8 @@
                                         $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.WebServerResource.encode(message.webServer, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                     if (message.worker != null && Object.hasOwnProperty.call(message, "worker"))
                                         $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.WorkerResource.encode(message.worker, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.triggerer != null && Object.hasOwnProperty.call(message, "triggerer"))
+                                        $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource.encode(message.triggerer, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -12789,6 +19136,10 @@
                                             }
                                         case 3: {
                                                 message.worker = $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.WorkerResource.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.triggerer = $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -12841,6 +19192,11 @@
                                         if (error)
                                             return "worker." + error;
                                     }
+                                    if (message.triggerer != null && message.hasOwnProperty("triggerer")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource.verify(message.triggerer);
+                                        if (error)
+                                            return "triggerer." + error;
+                                    }
                                     return null;
                                 };
     
@@ -12871,6 +19227,11 @@
                                             throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.worker: object expected");
                                         message.worker = $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.WorkerResource.fromObject(object.worker);
                                     }
+                                    if (object.triggerer != null) {
+                                        if (typeof object.triggerer !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.triggerer: object expected");
+                                        message.triggerer = $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource.fromObject(object.triggerer);
+                                    }
                                     return message;
                                 };
     
@@ -12891,6 +19252,7 @@
                                         object.scheduler = null;
                                         object.webServer = null;
                                         object.worker = null;
+                                        object.triggerer = null;
                                     }
                                     if (message.scheduler != null && message.hasOwnProperty("scheduler"))
                                         object.scheduler = $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.SchedulerResource.toObject(message.scheduler, options);
@@ -12898,6 +19260,8 @@
                                         object.webServer = $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.WebServerResource.toObject(message.webServer, options);
                                     if (message.worker != null && message.hasOwnProperty("worker"))
                                         object.worker = $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.WorkerResource.toObject(message.worker, options);
+                                    if (message.triggerer != null && message.hasOwnProperty("triggerer"))
+                                        object.triggerer = $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource.toObject(message.triggerer, options);
                                     return object;
                                 };
     
@@ -13746,7 +20110,1416 @@
                                     return WorkerResource;
                                 })();
     
+                                WorkloadsConfig.TriggererResource = (function() {
+    
+                                    /**
+                                     * Properties of a TriggererResource.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig
+                                     * @interface ITriggererResource
+                                     * @property {number|null} [count] TriggererResource count
+                                     * @property {number|null} [cpu] TriggererResource cpu
+                                     * @property {number|null} [memoryGb] TriggererResource memoryGb
+                                     */
+    
+                                    /**
+                                     * Constructs a new TriggererResource.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig
+                                     * @classdesc Represents a TriggererResource.
+                                     * @implements ITriggererResource
+                                     * @constructor
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource=} [properties] Properties to set
+                                     */
+                                    function TriggererResource(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * TriggererResource count.
+                                     * @member {number} count
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @instance
+                                     */
+                                    TriggererResource.prototype.count = 0;
+    
+                                    /**
+                                     * TriggererResource cpu.
+                                     * @member {number} cpu
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @instance
+                                     */
+                                    TriggererResource.prototype.cpu = 0;
+    
+                                    /**
+                                     * TriggererResource memoryGb.
+                                     * @member {number} memoryGb
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @instance
+                                     */
+                                    TriggererResource.prototype.memoryGb = 0;
+    
+                                    /**
+                                     * Creates a new TriggererResource instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource=} [properties] Properties to set
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource} TriggererResource instance
+                                     */
+                                    TriggererResource.create = function create(properties) {
+                                        return new TriggererResource(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified TriggererResource message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource} message TriggererResource message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    TriggererResource.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.count);
+                                        if (message.cpu != null && Object.hasOwnProperty.call(message, "cpu"))
+                                            writer.uint32(/* id 2, wireType 5 =*/21).float(message.cpu);
+                                        if (message.memoryGb != null && Object.hasOwnProperty.call(message, "memoryGb"))
+                                            writer.uint32(/* id 3, wireType 5 =*/29).float(message.memoryGb);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified TriggererResource message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource} message TriggererResource message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    TriggererResource.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a TriggererResource message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource} TriggererResource
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    TriggererResource.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.count = reader.int32();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.cpu = reader.float();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.memoryGb = reader.float();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a TriggererResource message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource} TriggererResource
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    TriggererResource.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a TriggererResource message.
+                                     * @function verify
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    TriggererResource.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.count != null && message.hasOwnProperty("count"))
+                                            if (!$util.isInteger(message.count))
+                                                return "count: integer expected";
+                                        if (message.cpu != null && message.hasOwnProperty("cpu"))
+                                            if (typeof message.cpu !== "number")
+                                                return "cpu: number expected";
+                                        if (message.memoryGb != null && message.hasOwnProperty("memoryGb"))
+                                            if (typeof message.memoryGb !== "number")
+                                                return "memoryGb: number expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a TriggererResource message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource} TriggererResource
+                                     */
+                                    TriggererResource.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource)
+                                            return object;
+                                        var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource();
+                                        if (object.count != null)
+                                            message.count = object.count | 0;
+                                        if (object.cpu != null)
+                                            message.cpu = Number(object.cpu);
+                                        if (object.memoryGb != null)
+                                            message.memoryGb = Number(object.memoryGb);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a TriggererResource message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource} message TriggererResource
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    TriggererResource.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.count = 0;
+                                            object.cpu = 0;
+                                            object.memoryGb = 0;
+                                        }
+                                        if (message.count != null && message.hasOwnProperty("count"))
+                                            object.count = message.count;
+                                        if (message.cpu != null && message.hasOwnProperty("cpu"))
+                                            object.cpu = options.json && !isFinite(message.cpu) ? String(message.cpu) : message.cpu;
+                                        if (message.memoryGb != null && message.hasOwnProperty("memoryGb"))
+                                            object.memoryGb = options.json && !isFinite(message.memoryGb) ? String(message.memoryGb) : message.memoryGb;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this TriggererResource to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    TriggererResource.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for TriggererResource
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    TriggererResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource";
+                                    };
+    
+                                    return TriggererResource;
+                                })();
+    
                                 return WorkloadsConfig;
+                            })();
+    
+                            v1beta1.RecoveryConfig = (function() {
+    
+                                /**
+                                 * Properties of a RecoveryConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @interface IRecoveryConfig
+                                 * @property {google.cloud.orchestration.airflow.service.v1beta1.IScheduledSnapshotsConfig|null} [scheduledSnapshotsConfig] RecoveryConfig scheduledSnapshotsConfig
+                                 */
+    
+                                /**
+                                 * Constructs a new RecoveryConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @classdesc Represents a RecoveryConfig.
+                                 * @implements IRecoveryConfig
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig=} [properties] Properties to set
+                                 */
+                                function RecoveryConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RecoveryConfig scheduledSnapshotsConfig.
+                                 * @member {google.cloud.orchestration.airflow.service.v1beta1.IScheduledSnapshotsConfig|null|undefined} scheduledSnapshotsConfig
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig
+                                 * @instance
+                                 */
+                                RecoveryConfig.prototype.scheduledSnapshotsConfig = null;
+    
+                                /**
+                                 * Creates a new RecoveryConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig} RecoveryConfig instance
+                                 */
+                                RecoveryConfig.create = function create(properties) {
+                                    return new RecoveryConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RecoveryConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig} message RecoveryConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RecoveryConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.scheduledSnapshotsConfig != null && Object.hasOwnProperty.call(message, "scheduledSnapshotsConfig"))
+                                        $root.google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig.encode(message.scheduledSnapshotsConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RecoveryConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig} message RecoveryConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RecoveryConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RecoveryConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig} RecoveryConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RecoveryConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.scheduledSnapshotsConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RecoveryConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig} RecoveryConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RecoveryConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RecoveryConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RecoveryConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.scheduledSnapshotsConfig != null && message.hasOwnProperty("scheduledSnapshotsConfig")) {
+                                        var error = $root.google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig.verify(message.scheduledSnapshotsConfig);
+                                        if (error)
+                                            return "scheduledSnapshotsConfig." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RecoveryConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig} RecoveryConfig
+                                 */
+                                RecoveryConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig();
+                                    if (object.scheduledSnapshotsConfig != null) {
+                                        if (typeof object.scheduledSnapshotsConfig !== "object")
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig.scheduledSnapshotsConfig: object expected");
+                                        message.scheduledSnapshotsConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig.fromObject(object.scheduledSnapshotsConfig);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RecoveryConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig} message RecoveryConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RecoveryConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.scheduledSnapshotsConfig = null;
+                                    if (message.scheduledSnapshotsConfig != null && message.hasOwnProperty("scheduledSnapshotsConfig"))
+                                        object.scheduledSnapshotsConfig = $root.google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig.toObject(message.scheduledSnapshotsConfig, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RecoveryConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RecoveryConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RecoveryConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RecoveryConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig";
+                                };
+    
+                                return RecoveryConfig;
+                            })();
+    
+                            v1beta1.ScheduledSnapshotsConfig = (function() {
+    
+                                /**
+                                 * Properties of a ScheduledSnapshotsConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @interface IScheduledSnapshotsConfig
+                                 * @property {boolean|null} [enabled] ScheduledSnapshotsConfig enabled
+                                 * @property {string|null} [snapshotLocation] ScheduledSnapshotsConfig snapshotLocation
+                                 * @property {string|null} [snapshotCreationSchedule] ScheduledSnapshotsConfig snapshotCreationSchedule
+                                 * @property {string|null} [timeZone] ScheduledSnapshotsConfig timeZone
+                                 */
+    
+                                /**
+                                 * Constructs a new ScheduledSnapshotsConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @classdesc Represents a ScheduledSnapshotsConfig.
+                                 * @implements IScheduledSnapshotsConfig
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IScheduledSnapshotsConfig=} [properties] Properties to set
+                                 */
+                                function ScheduledSnapshotsConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ScheduledSnapshotsConfig enabled.
+                                 * @member {boolean} enabled
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @instance
+                                 */
+                                ScheduledSnapshotsConfig.prototype.enabled = false;
+    
+                                /**
+                                 * ScheduledSnapshotsConfig snapshotLocation.
+                                 * @member {string} snapshotLocation
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @instance
+                                 */
+                                ScheduledSnapshotsConfig.prototype.snapshotLocation = "";
+    
+                                /**
+                                 * ScheduledSnapshotsConfig snapshotCreationSchedule.
+                                 * @member {string} snapshotCreationSchedule
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @instance
+                                 */
+                                ScheduledSnapshotsConfig.prototype.snapshotCreationSchedule = "";
+    
+                                /**
+                                 * ScheduledSnapshotsConfig timeZone.
+                                 * @member {string} timeZone
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @instance
+                                 */
+                                ScheduledSnapshotsConfig.prototype.timeZone = "";
+    
+                                /**
+                                 * Creates a new ScheduledSnapshotsConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IScheduledSnapshotsConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig} ScheduledSnapshotsConfig instance
+                                 */
+                                ScheduledSnapshotsConfig.create = function create(properties) {
+                                    return new ScheduledSnapshotsConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ScheduledSnapshotsConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IScheduledSnapshotsConfig} message ScheduledSnapshotsConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ScheduledSnapshotsConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                    if (message.snapshotCreationSchedule != null && Object.hasOwnProperty.call(message, "snapshotCreationSchedule"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.snapshotCreationSchedule);
+                                    if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.timeZone);
+                                    if (message.snapshotLocation != null && Object.hasOwnProperty.call(message, "snapshotLocation"))
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.snapshotLocation);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ScheduledSnapshotsConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IScheduledSnapshotsConfig} message ScheduledSnapshotsConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ScheduledSnapshotsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ScheduledSnapshotsConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig} ScheduledSnapshotsConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ScheduledSnapshotsConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enabled = reader.bool();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.snapshotLocation = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.snapshotCreationSchedule = reader.string();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.timeZone = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ScheduledSnapshotsConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig} ScheduledSnapshotsConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ScheduledSnapshotsConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ScheduledSnapshotsConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ScheduledSnapshotsConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        if (typeof message.enabled !== "boolean")
+                                            return "enabled: boolean expected";
+                                    if (message.snapshotLocation != null && message.hasOwnProperty("snapshotLocation"))
+                                        if (!$util.isString(message.snapshotLocation))
+                                            return "snapshotLocation: string expected";
+                                    if (message.snapshotCreationSchedule != null && message.hasOwnProperty("snapshotCreationSchedule"))
+                                        if (!$util.isString(message.snapshotCreationSchedule))
+                                            return "snapshotCreationSchedule: string expected";
+                                    if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                        if (!$util.isString(message.timeZone))
+                                            return "timeZone: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ScheduledSnapshotsConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig} ScheduledSnapshotsConfig
+                                 */
+                                ScheduledSnapshotsConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig();
+                                    if (object.enabled != null)
+                                        message.enabled = Boolean(object.enabled);
+                                    if (object.snapshotLocation != null)
+                                        message.snapshotLocation = String(object.snapshotLocation);
+                                    if (object.snapshotCreationSchedule != null)
+                                        message.snapshotCreationSchedule = String(object.snapshotCreationSchedule);
+                                    if (object.timeZone != null)
+                                        message.timeZone = String(object.timeZone);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ScheduledSnapshotsConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig} message ScheduledSnapshotsConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ScheduledSnapshotsConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.enabled = false;
+                                        object.snapshotCreationSchedule = "";
+                                        object.timeZone = "";
+                                        object.snapshotLocation = "";
+                                    }
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        object.enabled = message.enabled;
+                                    if (message.snapshotCreationSchedule != null && message.hasOwnProperty("snapshotCreationSchedule"))
+                                        object.snapshotCreationSchedule = message.snapshotCreationSchedule;
+                                    if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                        object.timeZone = message.timeZone;
+                                    if (message.snapshotLocation != null && message.hasOwnProperty("snapshotLocation"))
+                                        object.snapshotLocation = message.snapshotLocation;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ScheduledSnapshotsConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ScheduledSnapshotsConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ScheduledSnapshotsConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ScheduledSnapshotsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig";
+                                };
+    
+                                return ScheduledSnapshotsConfig;
+                            })();
+    
+                            v1beta1.MasterAuthorizedNetworksConfig = (function() {
+    
+                                /**
+                                 * Properties of a MasterAuthorizedNetworksConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @interface IMasterAuthorizedNetworksConfig
+                                 * @property {boolean|null} [enabled] MasterAuthorizedNetworksConfig enabled
+                                 * @property {Array.<google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock>|null} [cidrBlocks] MasterAuthorizedNetworksConfig cidrBlocks
+                                 */
+    
+                                /**
+                                 * Constructs a new MasterAuthorizedNetworksConfig.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @classdesc Represents a MasterAuthorizedNetworksConfig.
+                                 * @implements IMasterAuthorizedNetworksConfig
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IMasterAuthorizedNetworksConfig=} [properties] Properties to set
+                                 */
+                                function MasterAuthorizedNetworksConfig(properties) {
+                                    this.cidrBlocks = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MasterAuthorizedNetworksConfig enabled.
+                                 * @member {boolean} enabled
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                 * @instance
+                                 */
+                                MasterAuthorizedNetworksConfig.prototype.enabled = false;
+    
+                                /**
+                                 * MasterAuthorizedNetworksConfig cidrBlocks.
+                                 * @member {Array.<google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock>} cidrBlocks
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                 * @instance
+                                 */
+                                MasterAuthorizedNetworksConfig.prototype.cidrBlocks = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new MasterAuthorizedNetworksConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IMasterAuthorizedNetworksConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig} MasterAuthorizedNetworksConfig instance
+                                 */
+                                MasterAuthorizedNetworksConfig.create = function create(properties) {
+                                    return new MasterAuthorizedNetworksConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MasterAuthorizedNetworksConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IMasterAuthorizedNetworksConfig} message MasterAuthorizedNetworksConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MasterAuthorizedNetworksConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                    if (message.cidrBlocks != null && message.cidrBlocks.length)
+                                        for (var i = 0; i < message.cidrBlocks.length; ++i)
+                                            $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock.encode(message.cidrBlocks[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MasterAuthorizedNetworksConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.IMasterAuthorizedNetworksConfig} message MasterAuthorizedNetworksConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MasterAuthorizedNetworksConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MasterAuthorizedNetworksConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig} MasterAuthorizedNetworksConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MasterAuthorizedNetworksConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enabled = reader.bool();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.cidrBlocks && message.cidrBlocks.length))
+                                                    message.cidrBlocks = [];
+                                                message.cidrBlocks.push($root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MasterAuthorizedNetworksConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig} MasterAuthorizedNetworksConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MasterAuthorizedNetworksConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MasterAuthorizedNetworksConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MasterAuthorizedNetworksConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        if (typeof message.enabled !== "boolean")
+                                            return "enabled: boolean expected";
+                                    if (message.cidrBlocks != null && message.hasOwnProperty("cidrBlocks")) {
+                                        if (!Array.isArray(message.cidrBlocks))
+                                            return "cidrBlocks: array expected";
+                                        for (var i = 0; i < message.cidrBlocks.length; ++i) {
+                                            var error = $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock.verify(message.cidrBlocks[i]);
+                                            if (error)
+                                                return "cidrBlocks." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MasterAuthorizedNetworksConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig} MasterAuthorizedNetworksConfig
+                                 */
+                                MasterAuthorizedNetworksConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig();
+                                    if (object.enabled != null)
+                                        message.enabled = Boolean(object.enabled);
+                                    if (object.cidrBlocks) {
+                                        if (!Array.isArray(object.cidrBlocks))
+                                            throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.cidrBlocks: array expected");
+                                        message.cidrBlocks = [];
+                                        for (var i = 0; i < object.cidrBlocks.length; ++i) {
+                                            if (typeof object.cidrBlocks[i] !== "object")
+                                                throw TypeError(".google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.cidrBlocks: object expected");
+                                            message.cidrBlocks[i] = $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock.fromObject(object.cidrBlocks[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MasterAuthorizedNetworksConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig} message MasterAuthorizedNetworksConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MasterAuthorizedNetworksConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.cidrBlocks = [];
+                                    if (options.defaults)
+                                        object.enabled = false;
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        object.enabled = message.enabled;
+                                    if (message.cidrBlocks && message.cidrBlocks.length) {
+                                        object.cidrBlocks = [];
+                                        for (var j = 0; j < message.cidrBlocks.length; ++j)
+                                            object.cidrBlocks[j] = $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock.toObject(message.cidrBlocks[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MasterAuthorizedNetworksConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MasterAuthorizedNetworksConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for MasterAuthorizedNetworksConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                MasterAuthorizedNetworksConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig";
+                                };
+    
+                                MasterAuthorizedNetworksConfig.CidrBlock = (function() {
+    
+                                    /**
+                                     * Properties of a CidrBlock.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                     * @interface ICidrBlock
+                                     * @property {string|null} [displayName] CidrBlock displayName
+                                     * @property {string|null} [cidrBlock] CidrBlock cidrBlock
+                                     */
+    
+                                    /**
+                                     * Constructs a new CidrBlock.
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig
+                                     * @classdesc Represents a CidrBlock.
+                                     * @implements ICidrBlock
+                                     * @constructor
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock=} [properties] Properties to set
+                                     */
+                                    function CidrBlock(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * CidrBlock displayName.
+                                     * @member {string} displayName
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @instance
+                                     */
+                                    CidrBlock.prototype.displayName = "";
+    
+                                    /**
+                                     * CidrBlock cidrBlock.
+                                     * @member {string} cidrBlock
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @instance
+                                     */
+                                    CidrBlock.prototype.cidrBlock = "";
+    
+                                    /**
+                                     * Creates a new CidrBlock instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock=} [properties] Properties to set
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock} CidrBlock instance
+                                     */
+                                    CidrBlock.create = function create(properties) {
+                                        return new CidrBlock(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified CidrBlock message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock} message CidrBlock message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    CidrBlock.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                                        if (message.cidrBlock != null && Object.hasOwnProperty.call(message, "cidrBlock"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.cidrBlock);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified CidrBlock message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock} message CidrBlock message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    CidrBlock.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a CidrBlock message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock} CidrBlock
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    CidrBlock.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.displayName = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.cidrBlock = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a CidrBlock message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock} CidrBlock
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    CidrBlock.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a CidrBlock message.
+                                     * @function verify
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    CidrBlock.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                            if (!$util.isString(message.displayName))
+                                                return "displayName: string expected";
+                                        if (message.cidrBlock != null && message.hasOwnProperty("cidrBlock"))
+                                            if (!$util.isString(message.cidrBlock))
+                                                return "cidrBlock: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a CidrBlock message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock} CidrBlock
+                                     */
+                                    CidrBlock.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock)
+                                            return object;
+                                        var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock();
+                                        if (object.displayName != null)
+                                            message.displayName = String(object.displayName);
+                                        if (object.cidrBlock != null)
+                                            message.cidrBlock = String(object.cidrBlock);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a CidrBlock message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock} message CidrBlock
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    CidrBlock.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.displayName = "";
+                                            object.cidrBlock = "";
+                                        }
+                                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                            object.displayName = message.displayName;
+                                        if (message.cidrBlock != null && message.hasOwnProperty("cidrBlock"))
+                                            object.cidrBlock = message.cidrBlock;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this CidrBlock to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    CidrBlock.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for CidrBlock
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    CidrBlock.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock";
+                                    };
+    
+                                    return CidrBlock;
+                                })();
+    
+                                return MasterAuthorizedNetworksConfig;
+                            })();
+    
+                            v1beta1.CloudDataLineageIntegration = (function() {
+    
+                                /**
+                                 * Properties of a CloudDataLineageIntegration.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @interface ICloudDataLineageIntegration
+                                 * @property {boolean|null} [enabled] CloudDataLineageIntegration enabled
+                                 */
+    
+                                /**
+                                 * Constructs a new CloudDataLineageIntegration.
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1
+                                 * @classdesc Represents a CloudDataLineageIntegration.
+                                 * @implements ICloudDataLineageIntegration
+                                 * @constructor
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration=} [properties] Properties to set
+                                 */
+                                function CloudDataLineageIntegration(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * CloudDataLineageIntegration enabled.
+                                 * @member {boolean} enabled
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration
+                                 * @instance
+                                 */
+                                CloudDataLineageIntegration.prototype.enabled = false;
+    
+                                /**
+                                 * Creates a new CloudDataLineageIntegration instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration=} [properties] Properties to set
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration} CloudDataLineageIntegration instance
+                                 */
+                                CloudDataLineageIntegration.create = function create(properties) {
+                                    return new CloudDataLineageIntegration(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified CloudDataLineageIntegration message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration} message CloudDataLineageIntegration message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CloudDataLineageIntegration.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified CloudDataLineageIntegration message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration} message CloudDataLineageIntegration message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CloudDataLineageIntegration.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a CloudDataLineageIntegration message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration} CloudDataLineageIntegration
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CloudDataLineageIntegration.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enabled = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a CloudDataLineageIntegration message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration} CloudDataLineageIntegration
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CloudDataLineageIntegration.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a CloudDataLineageIntegration message.
+                                 * @function verify
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                CloudDataLineageIntegration.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        if (typeof message.enabled !== "boolean")
+                                            return "enabled: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a CloudDataLineageIntegration message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration} CloudDataLineageIntegration
+                                 */
+                                CloudDataLineageIntegration.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration)
+                                        return object;
+                                    var message = new $root.google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration();
+                                    if (object.enabled != null)
+                                        message.enabled = Boolean(object.enabled);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a CloudDataLineageIntegration message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration
+                                 * @static
+                                 * @param {google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration} message CloudDataLineageIntegration
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                CloudDataLineageIntegration.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.enabled = false;
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        object.enabled = message.enabled;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this CloudDataLineageIntegration to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                CloudDataLineageIntegration.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for CloudDataLineageIntegration
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                CloudDataLineageIntegration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration";
+                                };
+    
+                                return CloudDataLineageIntegration;
                             })();
     
                             v1beta1.Environment = (function() {
@@ -15958,6 +23731,8 @@
                                         case 2:
                                         case 3:
                                         case 4:
+                                        case 5:
+                                        case 6:
                                             break;
                                         }
                                     if (message.resource != null && message.hasOwnProperty("resource"))
@@ -16045,6 +23820,14 @@
                                     case "CHECK":
                                     case 4:
                                         message.operationType = 4;
+                                        break;
+                                    case "SAVE_SNAPSHOT":
+                                    case 5:
+                                        message.operationType = 5;
+                                        break;
+                                    case "LOAD_SNAPSHOT":
+                                    case 6:
+                                        message.operationType = 6;
                                         break;
                                     }
                                     if (object.resource != null)
@@ -16155,6 +23938,8 @@
                                  * @property {number} DELETE=2 DELETE value
                                  * @property {number} UPDATE=3 UPDATE value
                                  * @property {number} CHECK=4 CHECK value
+                                 * @property {number} SAVE_SNAPSHOT=5 SAVE_SNAPSHOT value
+                                 * @property {number} LOAD_SNAPSHOT=6 LOAD_SNAPSHOT value
                                  */
                                 OperationMetadata.Type = (function() {
                                     var valuesById = {}, values = Object.create(valuesById);
@@ -16163,6 +23948,8 @@
                                     values[valuesById[2] = "DELETE"] = 2;
                                     values[valuesById[3] = "UPDATE"] = 3;
                                     values[valuesById[4] = "CHECK"] = 4;
+                                    values[valuesById[5] = "SAVE_SNAPSHOT"] = 5;
+                                    values[valuesById[6] = "LOAD_SNAPSHOT"] = 6;
                                     return values;
                                 })();
     

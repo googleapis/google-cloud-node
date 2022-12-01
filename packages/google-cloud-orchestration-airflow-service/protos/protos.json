@@ -141,6 +141,54 @@
                                       }
                                     }
                                   ]
+                                },
+                                "SaveSnapshot": {
+                                  "requestType": "SaveSnapshotRequest",
+                                  "responseType": "google.longrunning.Operation",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{environment=projects/*/locations/*/environments/*}:saveSnapshot",
+                                    "(google.api.http).body": "*",
+                                    "(google.longrunning.operation_info).response_type": "google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse",
+                                    "(google.longrunning.operation_info).metadata_type": "google.cloud.orchestration.airflow.service.v1.OperationMetadata"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{environment=projects/*/locations/*/environments/*}:saveSnapshot",
+                                        "body": "*"
+                                      }
+                                    },
+                                    {
+                                      "(google.longrunning.operation_info)": {
+                                        "response_type": "google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse",
+                                        "metadata_type": "google.cloud.orchestration.airflow.service.v1.OperationMetadata"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "LoadSnapshot": {
+                                  "requestType": "LoadSnapshotRequest",
+                                  "responseType": "google.longrunning.Operation",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{environment=projects/*/locations/*/environments/*}:loadSnapshot",
+                                    "(google.api.http).body": "*",
+                                    "(google.longrunning.operation_info).response_type": "google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse",
+                                    "(google.longrunning.operation_info).metadata_type": "google.cloud.orchestration.airflow.service.v1.OperationMetadata"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{environment=projects/*/locations/*/environments/*}:loadSnapshot",
+                                        "body": "*"
+                                      }
+                                    },
+                                    {
+                                      "(google.longrunning.operation_info)": {
+                                        "response_type": "google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse",
+                                        "metadata_type": "google.cloud.orchestration.airflow.service.v1.OperationMetadata"
+                                      }
+                                    }
+                                  ]
                                 }
                               }
                             },
@@ -217,6 +265,57 @@
                                 }
                               }
                             },
+                            "SaveSnapshotRequest": {
+                              "fields": {
+                                "environment": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "snapshotLocation": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "SaveSnapshotResponse": {
+                              "fields": {
+                                "snapshotPath": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "LoadSnapshotRequest": {
+                              "fields": {
+                                "environment": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "snapshotPath": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "skipPypiPackagesInstallation": {
+                                  "type": "bool",
+                                  "id": 3
+                                },
+                                "skipEnvironmentVariablesSetting": {
+                                  "type": "bool",
+                                  "id": 4
+                                },
+                                "skipAirflowOverridesSetting": {
+                                  "type": "bool",
+                                  "id": 5
+                                },
+                                "skipGcsDataCopying": {
+                                  "type": "bool",
+                                  "id": 6
+                                }
+                              }
+                            },
+                            "LoadSnapshotResponse": {
+                              "fields": {}
+                            },
                             "EnvironmentConfig": {
                               "fields": {
                                 "gkeCluster": {
@@ -271,9 +370,54 @@
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 },
+                                "maintenanceWindow": {
+                                  "type": "MaintenanceWindow",
+                                  "id": 12,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "workloadsConfig": {
+                                  "type": "WorkloadsConfig",
+                                  "id": 15,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "environmentSize": {
+                                  "type": "EnvironmentSize",
+                                  "id": 16,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
                                 "airflowUri": {
                                   "type": "string",
                                   "id": 6
+                                },
+                                "masterAuthorizedNetworksConfig": {
+                                  "type": "MasterAuthorizedNetworksConfig",
+                                  "id": 17,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "recoveryConfig": {
+                                  "type": "RecoveryConfig",
+                                  "id": 18,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "EnvironmentSize": {
+                                  "values": {
+                                    "ENVIRONMENT_SIZE_UNSPECIFIED": 0,
+                                    "ENVIRONMENT_SIZE_SMALL": 1,
+                                    "ENVIRONMENT_SIZE_MEDIUM": 2,
+                                    "ENVIRONMENT_SIZE_LARGE": 3
+                                  }
                                 }
                               }
                             },
@@ -336,6 +480,31 @@
                                 }
                               }
                             },
+                            "MaintenanceWindow": {
+                              "fields": {
+                                "startTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "endTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "recurrence": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
                             "SoftwareConfig": {
                               "fields": {
                                 "imageVersion": {
@@ -360,6 +529,13 @@
                                 "pythonVersion": {
                                   "type": "string",
                                   "id": 6
+                                },
+                                "schedulerCount": {
+                                  "type": "int32",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             },
@@ -458,6 +634,13 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "enableIpMasqAgent": {
+                                  "type": "bool",
+                                  "id": 11,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             },
@@ -482,6 +665,26 @@
                                   "id": 3,
                                   "options": {
                                     "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "NetworkingConfig": {
+                              "fields": {
+                                "connectionType": {
+                                  "type": "ConnectionType",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "ConnectionType": {
+                                  "values": {
+                                    "CONNECTION_TYPE_UNSPECIFIED": 0,
+                                    "VPC_PEERING": 1,
+                                    "PRIVATE_SERVICE_CONNECT": 2
                                   }
                                 }
                               }
@@ -521,6 +724,234 @@
                                   "id": 5,
                                   "options": {
                                     "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "cloudComposerNetworkIpv4CidrBlock": {
+                                  "type": "string",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "cloudComposerNetworkIpv4ReservedRange": {
+                                  "type": "string",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "enablePrivatelyUsedPublicIps": {
+                                  "type": "bool",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "cloudComposerConnectionSubnetwork": {
+                                  "type": "string",
+                                  "id": 9,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "networkingConfig": {
+                                  "type": "NetworkingConfig",
+                                  "id": 10,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "WorkloadsConfig": {
+                              "fields": {
+                                "scheduler": {
+                                  "type": "SchedulerResource",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "webServer": {
+                                  "type": "WebServerResource",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "worker": {
+                                  "type": "WorkerResource",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "SchedulerResource": {
+                                  "fields": {
+                                    "cpu": {
+                                      "type": "float",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "memoryGb": {
+                                      "type": "float",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "storageGb": {
+                                      "type": "float",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "count": {
+                                      "type": "int32",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                },
+                                "WebServerResource": {
+                                  "fields": {
+                                    "cpu": {
+                                      "type": "float",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "memoryGb": {
+                                      "type": "float",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "storageGb": {
+                                      "type": "float",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                },
+                                "WorkerResource": {
+                                  "fields": {
+                                    "cpu": {
+                                      "type": "float",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "memoryGb": {
+                                      "type": "float",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "storageGb": {
+                                      "type": "float",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "minCount": {
+                                      "type": "int32",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "maxCount": {
+                                      "type": "int32",
+                                      "id": 5,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "RecoveryConfig": {
+                              "fields": {
+                                "scheduledSnapshotsConfig": {
+                                  "type": "ScheduledSnapshotsConfig",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ScheduledSnapshotsConfig": {
+                              "fields": {
+                                "enabled": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "snapshotLocation": {
+                                  "type": "string",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "snapshotCreationSchedule": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "timeZone": {
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "MasterAuthorizedNetworksConfig": {
+                              "fields": {
+                                "enabled": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "cidrBlocks": {
+                                  "rule": "repeated",
+                                  "type": "CidrBlock",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "CidrBlock": {
+                                  "fields": {
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "cidrBlock": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
                                   }
                                 }
                               }
@@ -752,7 +1183,9 @@
                                     "CREATE": 1,
                                     "DELETE": 2,
                                     "UPDATE": 3,
-                                    "CHECK": 4
+                                    "CHECK": 4,
+                                    "SAVE_SNAPSHOT": 5,
+                                    "LOAD_SNAPSHOT": 6
                                   }
                                 }
                               }
@@ -938,6 +1371,54 @@
                                       }
                                     }
                                   ]
+                                },
+                                "SaveSnapshot": {
+                                  "requestType": "SaveSnapshotRequest",
+                                  "responseType": "google.longrunning.Operation",
+                                  "options": {
+                                    "(google.api.http).post": "/v1beta1/{environment=projects/*/locations/*/environments/*}:saveSnapshot",
+                                    "(google.api.http).body": "*",
+                                    "(google.longrunning.operation_info).response_type": "google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse",
+                                    "(google.longrunning.operation_info).metadata_type": "google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1beta1/{environment=projects/*/locations/*/environments/*}:saveSnapshot",
+                                        "body": "*"
+                                      }
+                                    },
+                                    {
+                                      "(google.longrunning.operation_info)": {
+                                        "response_type": "google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse",
+                                        "metadata_type": "google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "LoadSnapshot": {
+                                  "requestType": "LoadSnapshotRequest",
+                                  "responseType": "google.longrunning.Operation",
+                                  "options": {
+                                    "(google.api.http).post": "/v1beta1/{environment=projects/*/locations/*/environments/*}:loadSnapshot",
+                                    "(google.api.http).body": "*",
+                                    "(google.longrunning.operation_info).response_type": "google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse",
+                                    "(google.longrunning.operation_info).metadata_type": "google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1beta1/{environment=projects/*/locations/*/environments/*}:loadSnapshot",
+                                        "body": "*"
+                                      }
+                                    },
+                                    {
+                                      "(google.longrunning.operation_info)": {
+                                        "response_type": "google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse",
+                                        "metadata_type": "google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata"
+                                      }
+                                    }
+                                  ]
                                 }
                               }
                             },
@@ -1024,6 +1505,120 @@
                                   "id": 1
                                 }
                               }
+                            },
+                            "ExecuteAirflowCommandResponse": {
+                              "fields": {
+                                "executionId": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "pod": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "podNamespace": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "error": {
+                                  "type": "string",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "PollAirflowCommandResponse": {
+                              "fields": {
+                                "output": {
+                                  "rule": "repeated",
+                                  "type": "Line",
+                                  "id": 1
+                                },
+                                "outputEnd": {
+                                  "type": "bool",
+                                  "id": 2
+                                },
+                                "exitInfo": {
+                                  "type": "ExitInfo",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "Line": {
+                                  "fields": {
+                                    "lineNumber": {
+                                      "type": "int32",
+                                      "id": 1
+                                    },
+                                    "content": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "ExitInfo": {
+                                  "fields": {
+                                    "exitCode": {
+                                      "type": "int32",
+                                      "id": 1
+                                    },
+                                    "error": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "SaveSnapshotRequest": {
+                              "fields": {
+                                "environment": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "snapshotLocation": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "SaveSnapshotResponse": {
+                              "fields": {
+                                "snapshotPath": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "LoadSnapshotRequest": {
+                              "fields": {
+                                "environment": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "snapshotPath": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "skipPypiPackagesInstallation": {
+                                  "type": "bool",
+                                  "id": 3
+                                },
+                                "skipEnvironmentVariablesSetting": {
+                                  "type": "bool",
+                                  "id": 4
+                                },
+                                "skipAirflowOverridesSetting": {
+                                  "type": "bool",
+                                  "id": 5
+                                },
+                                "skipGcsDataCopying": {
+                                  "type": "bool",
+                                  "id": 6
+                                }
+                              }
+                            },
+                            "LoadSnapshotResponse": {
+                              "fields": {}
                             },
                             "EnvironmentConfig": {
                               "fields": {
@@ -1112,6 +1707,20 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "masterAuthorizedNetworksConfig": {
+                                  "type": "MasterAuthorizedNetworksConfig",
+                                  "id": 17,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "recoveryConfig": {
+                                  "type": "RecoveryConfig",
+                                  "id": 18,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               },
                               "nested": {
@@ -1184,6 +1793,20 @@
                                 "pythonVersion": {
                                   "type": "string",
                                   "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "schedulerCount": {
+                                  "type": "int32",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "cloudDataLineageIntegration": {
+                                  "type": "CloudDataLineageIntegration",
+                                  "id": 8,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -1302,6 +1925,13 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "enableIpMasqAgent": {
+                                  "type": "bool",
+                                  "id": 11,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             },
@@ -1326,6 +1956,26 @@
                                   "id": 3,
                                   "options": {
                                     "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "NetworkingConfig": {
+                              "fields": {
+                                "connectionType": {
+                                  "type": "ConnectionType",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "ConnectionType": {
+                                  "values": {
+                                    "CONNECTION_TYPE_UNSPECIFIED": 0,
+                                    "VPC_PEERING": 1,
+                                    "PRIVATE_SERVICE_CONNECT": 2
                                   }
                                 }
                               }
@@ -1379,6 +2029,27 @@
                                   "id": 8,
                                   "options": {
                                     "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "enablePrivatelyUsedPublicIps": {
+                                  "type": "bool",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "cloudComposerConnectionSubnetwork": {
+                                  "type": "string",
+                                  "id": 9,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "networkingConfig": {
+                                  "type": "NetworkingConfig",
+                                  "id": 10,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
@@ -1460,6 +2131,13 @@
                                 "worker": {
                                   "type": "WorkerResource",
                                   "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "triggerer": {
+                                  "type": "TriggererResource",
+                                  "id": 4,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -1560,6 +2238,112 @@
                                         "(google.api.field_behavior)": "OPTIONAL"
                                       }
                                     }
+                                  }
+                                },
+                                "TriggererResource": {
+                                  "fields": {
+                                    "count": {
+                                      "type": "int32",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "cpu": {
+                                      "type": "float",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "memoryGb": {
+                                      "type": "float",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "RecoveryConfig": {
+                              "fields": {
+                                "scheduledSnapshotsConfig": {
+                                  "type": "ScheduledSnapshotsConfig",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ScheduledSnapshotsConfig": {
+                              "fields": {
+                                "enabled": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "snapshotLocation": {
+                                  "type": "string",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "snapshotCreationSchedule": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "timeZone": {
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "MasterAuthorizedNetworksConfig": {
+                              "fields": {
+                                "enabled": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "cidrBlocks": {
+                                  "rule": "repeated",
+                                  "type": "CidrBlock",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "CidrBlock": {
+                                  "fields": {
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "cidrBlock": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "CloudDataLineageIntegration": {
+                              "fields": {
+                                "enabled": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
@@ -1811,7 +2595,9 @@
                                     "CREATE": 1,
                                     "DELETE": 2,
                                     "UPDATE": 3,
-                                    "CHECK": 4
+                                    "CHECK": 4,
+                                    "SAVE_SNAPSHOT": 5,
+                                    "LOAD_SNAPSHOT": 6
                                   }
                                 }
                               }
