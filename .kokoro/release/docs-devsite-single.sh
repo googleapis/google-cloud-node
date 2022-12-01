@@ -20,6 +20,7 @@ set -eo pipefail
 
 npm install
 
+# passes on current working directory for cloud rad
 export MONO_REPO_CWD=$PWD
 
 # publish docs to devsite
