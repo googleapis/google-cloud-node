@@ -23,7 +23,12 @@ logging.basicConfig(level=logging.DEBUG)
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
-s.move(templates, excludes=[".github/auto-label.yaml", ".github/release-please.yml"])
+s.move(templates, excludes=[
+    ".github/auto-label.yaml",
+    ".github/release-please.yml",
+    ".github/CODEOWNERS",
+    ".github/sync-repo-settings.yaml"
+])
 node.fix_hermetic()
 
 # --------------------------------------------------------------------------
