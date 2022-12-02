@@ -29,8 +29,8 @@ function main(parent, dataPolicy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the project that the data policy will belong to. The
-   *  format is `projects/{project_number}/locations/{location_id}`.
+   *  Required. Resource name of the project that the data policy will belong to.
+   *  The format is `projects/{project_number}/locations/{location_id}`.
    */
   // const parent = 'abc123'
   /**

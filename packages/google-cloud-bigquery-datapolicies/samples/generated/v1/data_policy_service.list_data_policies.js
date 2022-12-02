@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the project for which to list data policies. Format is
-   *  `projects/{project_number}/locations/{location_id}`.
+   *  Required. Resource name of the project for which to list data policies.
+   *  Format is `projects/{project_number}/locations/{location_id}`.
    */
   // const parent = 'abc123'
   /**
@@ -49,9 +49,9 @@ function main(parent) {
    *  are associated with. Currently filter only supports
    *  "policy<span></span>_tag" based filtering and OR based predicates. Sample
    *  filter can be "policy<span></span>_tag:
-   *  'projects/1/locations/us/taxonomies/2/policyTags/3'". You may use wildcard
-   *  such as "policy<span></span>_tag:
-   *  'projects/1/locations/us/taxonomies/2/*'".
+   *  `'projects/1/locations/us/taxonomies/2/policyTags/3'`". You may use
+   *  wildcard such as "policy<span></span>_tag:
+   *  `'projects/1/locations/us/taxonomies/2/*'`".
    */
   // const filter = 'abc123'
 
