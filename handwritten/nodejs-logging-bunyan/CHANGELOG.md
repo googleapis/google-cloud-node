@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [4.2.2](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.2.1...v4.2.2) (2022-12-02)
+
+
+### Bug Fixes
+
+* Add a partner team as approvers for PRs ([#677](https://github.com/googleapis/nodejs-logging-bunyan/issues/677)) ([7b88e97](https://github.com/googleapis/nodejs-logging-bunyan/commit/7b88e97aab7b70e0ccdf3c388edde013ac64707f))
+
 ## [4.2.1](https://github.com/googleapis/nodejs-logging-bunyan/compare/v4.2.0...v4.2.1) (2022-11-07)
 
 
