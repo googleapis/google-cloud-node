@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [5.2.3](https://github.com/googleapis/nodejs-logging-winston/compare/v5.2.2...v5.2.3) (2022-12-02)
+
+
+### Bug Fixes
+
+* Add a partner team as approvers for PRs ([#769](https://github.com/googleapis/nodejs-logging-winston/issues/769)) ([fbb96e0](https://github.com/googleapis/nodejs-logging-winston/commit/fbb96e0e6b54cd03774ed46e75cce6f52fb3c7a2))
+
 ## [5.2.2](https://github.com/googleapis/nodejs-logging-winston/compare/v5.2.1...v5.2.2) (2022-11-08)
 
 
