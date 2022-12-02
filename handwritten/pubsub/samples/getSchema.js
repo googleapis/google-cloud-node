@@ -20,10 +20,6 @@
  * at https://cloud.google.com/pubsub/docs.
  */
 
-// This is a generated sample. Please see typescript/README.md for more info.
-
-'use strict';
-
 // sample-metadata:
 //   title: Get a previously created schema
 //   description: Gets information about a schema which was previously created in the project.

@@ -20,10 +20,6 @@
  * at https://cloud.google.com/pubsub/docs.
  */
 
-// This is a generated sample. Please see typescript/README.md for more info.
-
-'use strict';
-
 // sample-metadata:
 //   title: Create an exactly-once delivery subscription
 //   description: Demonstrates how to create a subscription for exactly-once delivery.
@@ -55,6 +51,7 @@ async function createSubscriptionWithExactlyOnceDelivery(
   console.log(
     `Created subscription ${subscriptionNameOrId} with exactly-once delivery.`
   );
+
   console.log(
     'To process messages, remember to check the return value of ackWithResponse().'
   );

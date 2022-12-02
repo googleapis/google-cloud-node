@@ -20,10 +20,6 @@
  * at https://cloud.google.com/pubsub/docs.
  */
 
-// This is a generated sample. Please see typescript/README.md for more info.
-
-'use strict';
-
 // sample-metadata:
 //   title: Listen For Protobuf Messages
 //   description: Listens for messages in protobuf encoding from a subscription.

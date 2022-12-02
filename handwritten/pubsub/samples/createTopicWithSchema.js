@@ -20,10 +20,6 @@
  * at https://cloud.google.com/pubsub/docs.
  */
 
-// This is a generated sample. Please see typescript/README.md for more info.
-
-'use strict';
-
 // sample-metadata:
 //   title: Create Topic With Schema
 //   description: Creates a new topic, with a schema definition.

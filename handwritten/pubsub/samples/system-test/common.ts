@@ -13,10 +13,14 @@
 // limitations under the License.
 
 import * as cp from 'child_process';
+import * as path from 'path';
 
 export const execSync = (cmd: string): string =>
   cp.execSync(cmd, {encoding: 'utf-8'});
 
+// Processed versions of TS samples go to the same build location
+// as the rest of the JS samples.
 export function commandFor(action: string): string {
-  return `node ${action}.js`;
+  const jsPath = path.join('build', `${action}.js`);
+  return `node ${jsPath}`;
 }

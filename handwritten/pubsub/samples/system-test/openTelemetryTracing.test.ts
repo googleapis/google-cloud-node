@@ -15,7 +15,7 @@
 import {PubSub} from '@google-cloud/pubsub';
 import {assert} from 'chai';
 import {describe, it, before, after} from 'mocha';
-import {execSync} from './common';
+import {execSync, commandFor} from './common';
 import {TestResources} from './testResources';
 
 describe('openTelemetry', () => {
@@ -45,7 +45,7 @@ describe('openTelemetry', () => {
 
   it('should run the openTelemetryTracing sample', async () => {
     const stdout = execSync(
-      `node openTelemetryTracing ${topicName} ${subName}`
+      `${commandFor('openTelemetryTracing')} ${topicName} ${subName}`
     );
     assert.match(stdout, /Message .* published./);
     assert.match(stdout, /Message .* received/);

@@ -20,10 +20,6 @@
  * at https://cloud.google.com/pubsub/docs.
  */
 
-// This is a generated sample. Please see typescript/README.md for more info.
-
-'use strict';
-
 // sample-metadata:
 //   title: Create an Avro based Schema
 //   description: Creates a new schema definition on a project, using Avro
@@ -38,6 +34,7 @@
 
 // Imports the Google Cloud client library
 const {PubSub, SchemaTypes} = require('@google-cloud/pubsub');
+
 const fs = require('fs');
 
 // Creates a client; cache this for further use

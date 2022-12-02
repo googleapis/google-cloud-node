@@ -13,15 +13,12 @@
   },
   "scripts": {
     "test": "mocha build/system-test --timeout 600000",
-    "pretest": "npm run compile",
+    "pretest": "npm run compile && cp -f *.js build/",
     "tsc": "tsc -p .",
-    "simplifier": "node ./utils/simplifier.js post build/typescript/build/*.js",
-    "copybuilt": "cp *.js build/ && cp build/typescript/build/*.js build/",
     "sampletsc": "cd typescript && tsc -p . && cd ..",
-    "compile": "npm run tsc && npm run sampletsc && npm run simplifier && npm run copybuilt",
+    "compile": "npm run tsc && npm run sampletsc",
     "clean": "gts clean && rm -rf build/",
-    "precompile": "npm run clean && node ./utils/simplifier.js commentify typescript/*.ts",
-    "updatejs": "cp build/*.js ."
+    "precompile": "npm run clean"
   },
   "dependencies": {
     "@google-cloud/pubsub": "^3.2.1",

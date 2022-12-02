@@ -15,7 +15,7 @@
 import {PubSub} from '@google-cloud/pubsub';
 import {assert} from 'chai';
 import {describe, it, after} from 'mocha';
-import {execSync} from './common';
+import {execSync, commandFor} from './common';
 import {TestResources} from './testResources';
 
 describe('quickstart', () => {
@@ -40,7 +40,7 @@ describe('quickstart', () => {
 
   it('should run the quickstart', async () => {
     const stdout = execSync(
-      `node quickstart ${projectId} ${topicName} ${subName}`
+      `${commandFor('quickstart')} ${projectId} ${topicName} ${subName}`
     );
     assert.match(stdout, /^Topic .* created./);
     assert.match(stdout, /Received message.*Test/);

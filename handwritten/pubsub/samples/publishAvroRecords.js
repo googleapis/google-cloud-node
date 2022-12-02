@@ -20,10 +20,6 @@
  * at https://cloud.google.com/pubsub/docs.
  */
 
-// This is a generated sample. Please see typescript/README.md for more info.
-
-'use strict';
-
 // sample-metadata:
 //   title: Publish Avro Records to a Topic
 //   description: Publishes a record in Avro to a topic with a schema.
@@ -80,6 +76,7 @@ async function publishAvroRecords(topicNameOrId) {
       console.log(`Unknown schema encoding: ${schemaEncoding}`);
       break;
   }
+
   if (!dataBuffer) {
     console.log(`Invalid encoding ${schemaEncoding} on the topic.`);
     return;
