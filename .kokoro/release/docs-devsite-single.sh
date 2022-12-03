@@ -24,4 +24,5 @@ npm install
 export MONO_REPO_CWD=$PWD
 
 # publish docs to devsite
-npx @google-cloud/cloud-rad@0.2.21
+npm install --no-save @google-cloud/cloud-rad@^0.2.21
+npx @google-cloud/cloud-rad@^0.2.21
