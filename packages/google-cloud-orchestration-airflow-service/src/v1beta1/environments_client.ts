@@ -252,6 +252,18 @@ export class EnvironmentsClient {
     const checkUpgradeMetadata = protoFilesRoot.lookup(
       '.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const saveSnapshotResponse = protoFilesRoot.lookup(
+      '.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse'
+    ) as gax.protobuf.Type;
+    const saveSnapshotMetadata = protoFilesRoot.lookup(
+      '.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const loadSnapshotResponse = protoFilesRoot.lookup(
+      '.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse'
+    ) as gax.protobuf.Type;
+    const loadSnapshotMetadata = protoFilesRoot.lookup(
+      '.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createEnvironment: new this._gaxModule.LongrunningDescriptor(
@@ -278,6 +290,16 @@ export class EnvironmentsClient {
         this.operationsClient,
         checkUpgradeResponse.decode.bind(checkUpgradeResponse),
         checkUpgradeMetadata.decode.bind(checkUpgradeMetadata)
+      ),
+      saveSnapshot: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        saveSnapshotResponse.decode.bind(saveSnapshotResponse),
+        saveSnapshotMetadata.decode.bind(saveSnapshotMetadata)
+      ),
+      loadSnapshot: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        loadSnapshotResponse.decode.bind(loadSnapshotResponse),
+        loadSnapshotMetadata.decode.bind(loadSnapshotMetadata)
       ),
     };
 
@@ -339,6 +361,8 @@ export class EnvironmentsClient {
       'deleteEnvironment',
       'restartWebServer',
       'checkUpgrade',
+      'saveSnapshot',
+      'loadSnapshot',
     ];
     for (const methodName of environmentsStubMethods) {
       const callPromise = this.environmentsStub.then(
@@ -763,7 +787,9 @@ export class EnvironmentsClient {
    *   * `config.nodeCount`
    *       * Horizontally scale the number of nodes in the environment. An integer
    *         greater than or equal to 3 must be provided in the `config.nodeCount`
-   *         field. * `config.webServerNetworkAccessControl`
+   *         field. Supported for Cloud Composer environments in versions
+   *         composer-1.*.*-airflow-*.*.*.
+   *   * `config.webServerNetworkAccessControl`
    *       * Replace the environment's current WebServerNetworkAccessControl.
    *   * `config.softwareConfig.airflowConfigOverrides`
    *       * Replace all Apache Airflow config overrides. If a replacement config
@@ -782,30 +808,43 @@ export class EnvironmentsClient {
    *   * `config.softwareConfig.envVariables`
    *       * Replace all environment variables. If a replacement environment
    *         variable map is not included in `environment`, all custom environment
-   *         variables  are cleared.
-   *         It is an error to provide both this mask and a mask specifying one or
-   *         more individual environment variables.
+   *         variables are cleared.
    *   * `config.softwareConfig.imageVersion`
    *       * Upgrade the version of the environment in-place. Refer to
    *         `SoftwareConfig.image_version` for information on how to format the
    *         new image version. Additionally, the new image version cannot effect
-   *         a version downgrade and must match the current image version's
-   *         Composer major version and Airflow major and minor versions. Consult
-   *         the [Cloud Composer Version
-   *         List](https://cloud.google.com/composer/docs/concepts/versioning/composer-versions)
+   *         a version downgrade, and must match the current image version's
+   *         Composer and Airflow major versions. Consult the [Cloud Composer
+   *         version list](/composer/docs/concepts/versioning/composer-versions)
    *         for valid values.
    *   * `config.softwareConfig.schedulerCount`
    *       * Horizontally scale the number of schedulers in Airflow. A positive
    *         integer not greater than the number of nodes must be provided in the
-   *         `config.softwareConfig.schedulerCount` field. * `config.databaseConfig.machineType`
+   *         `config.softwareConfig.schedulerCount` field. Supported for Cloud
+   *         Composer environments in versions composer-1.*.*-airflow-2.*.*.
+   *   * `config.softwareConfig.cloudDataLineageIntegration`
+   *       * Configuration for Cloud Data Lineage integration.
+   *   * `config.databaseConfig.machineType`
    *       * Cloud SQL machine type used by Airflow database.
    *         It has to be one of: db-n1-standard-2, db-n1-standard-4,
-   *         db-n1-standard-8 or db-n1-standard-16. * `config.webServerConfig.machineType`
+   *         db-n1-standard-8 or db-n1-standard-16. Supported for Cloud Composer
+   *         environments in versions composer-1.*.*-airflow-*.*.*.
+   *   * `config.webServerConfig.machineType`
    *       * Machine type on which Airflow web server is running.
    *         It has to be one of: composer-n1-webserver-2, composer-n1-webserver-4
-   *         or composer-n1-webserver-8. * `config.maintenanceWindow`
+   *         or composer-n1-webserver-8. Supported for Cloud Composer environments
+   *         in versions composer-1.*.*-airflow-*.*.*.
+   *   * `config.maintenanceWindow`
    *       * Maintenance window during which Cloud Composer components may be
    *         under maintenance.
+   *   * `config.workloadsConfig`
+   *       * The workloads configuration settings for the GKE cluster associated
+   *         with the Cloud Composer environment. Supported for Cloud Composer
+   *         environments in versions composer-2.*.*-airflow-*.*.* and newer.
+   *   * `config.environmentSize`
+   *       * The size of the Cloud Composer environment. Supported for Cloud
+   *         Composer environments in versions composer-2.*.*-airflow-*.*.* and
+   *         newer.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1231,23 +1270,27 @@ export class EnvironmentsClient {
    *   The version of the software running in the environment.
    *   This encapsulates both the version of Cloud Composer functionality and the
    *   version of Apache Airflow. It must match the regular expression
-   *   `composer-([0-9]+\.[0-9]+\.[0-9]+|latest)-airflow-[0-9]+\.[0-9]+(\.[0-9]+.*)?`.
+   *   `composer-([0-9]+(\.[0-9]+\.[0-9]+(-preview\.[0-9]+)?)?|latest)-airflow-([0-9]+(\.[0-9]+(\.[0-9]+)?)?)`.
    *   When used as input, the server also checks if the provided version is
    *   supported and denies the request for an unsupported version.
    *
-   *   The Cloud Composer portion of the version is a
-   *   [semantic version](https://semver.org) or `latest`. When the patch version
-   *   is omitted, the current Cloud Composer patch version is selected.
-   *   When `latest` is provided instead of an explicit version number,
-   *   the server replaces `latest` with the current Cloud Composer version
-   *   and stores that version number in the same field.
+   *   The Cloud Composer portion of the image version is a full
+   *   [semantic version](https://semver.org), or an alias in the form of major
+   *   version number or `latest`. When an alias is provided, the server replaces
+   *   it with the current Cloud Composer version that satisfies the alias.
    *
-   *   The portion of the image version that follows `airflow-` is an
-   *   official Apache Airflow repository
-   *   [release name](https://github.com/apache/incubator-airflow/releases).
+   *   The Apache Airflow portion of the image version is a full semantic version
+   *   that points to one of the supported Apache Airflow versions, or an alias in
+   *   the form of only major or major.minor versions specified. When an alias is
+   *   provided, the server replaces it with the latest Apache Airflow version
+   *   that satisfies the alias and is supported in the given Cloud Composer
+   *   version.
    *
-   *   See also [Version List]
-   *   (/composer/docs/concepts/versioning/composer-versions).
+   *   In all cases, the resolved image version is stored in the same field.
+   *
+   *   See also [version
+   *   list](/composer/docs/concepts/versioning/composer-versions) and [versioning
+   *   overview](/composer/docs/concepts/versioning/composer-versioning-overview).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1376,6 +1419,308 @@ export class EnvironmentsClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeResponse,
+      protos.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a snapshots of a Cloud Composer environment.
+   *
+   * As a result of this operation, snapshot of environment's state is stored
+   * in a location specified in the SaveSnapshotRequest.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   The resource name of the source environment in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {string} request.snapshotLocation
+   *   Location in a Cloud Storage where the snapshot is going to be stored, e.g.:
+   *   "gs://my-bucket/snapshots".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/environments.save_snapshot.js</caption>
+   * region_tag:composer_v1beta1_generated_Environments_SaveSnapshot_async
+   */
+  saveSnapshot(
+    request?: protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse,
+        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  saveSnapshot(
+    request: protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse,
+        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  saveSnapshot(
+    request: protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse,
+        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  saveSnapshot(
+    request?: protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse,
+            protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse,
+        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse,
+        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        environment: request.environment ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.saveSnapshot(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `saveSnapshot()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/environments.save_snapshot.js</caption>
+   * region_tag:composer_v1beta1_generated_Environments_SaveSnapshot_async
+   */
+  async checkSaveSnapshotProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse,
+      protos.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.saveSnapshot,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse,
+      protos.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+    >;
+  }
+  /**
+   * Loads a snapshot of a Cloud Composer environment.
+   *
+   * As a result of this operation, a snapshot of environment's specified in
+   * LoadSnapshotRequest is loaded into the environment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   The resource name of the target environment in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {string} request.snapshotPath
+   *   A Cloud Storage path to a snapshot to load, e.g.:
+   *   "gs://my-bucket/snapshots/project_location_environment_timestamp".
+   * @param {boolean} request.skipPypiPackagesInstallation
+   *   Whether or not to skip installing Pypi packages when loading the
+   *   environment's state.
+   * @param {boolean} request.skipEnvironmentVariablesSetting
+   *   Whether or not to skip setting environment variables when loading the
+   *   environment's state.
+   * @param {boolean} request.skipAirflowOverridesSetting
+   *   Whether or not to skip setting Airflow overrides when loading the
+   *   environment's state.
+   * @param {boolean} request.skipGcsDataCopying
+   *   Whether or not to skip copying Cloud Storage data when loading the
+   *   environment's state.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/environments.load_snapshot.js</caption>
+   * region_tag:composer_v1beta1_generated_Environments_LoadSnapshot_async
+   */
+  loadSnapshot(
+    request?: protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse,
+        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  loadSnapshot(
+    request: protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse,
+        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  loadSnapshot(
+    request: protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse,
+        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  loadSnapshot(
+    request?: protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse,
+            protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse,
+        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse,
+        protos.google.cloud.orchestration.airflow.service.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        environment: request.environment ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.loadSnapshot(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `loadSnapshot()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/environments.load_snapshot.js</caption>
+   * region_tag:composer_v1beta1_generated_Environments_LoadSnapshot_async
+   */
+  async checkLoadSnapshotProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse,
+      protos.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.loadSnapshot,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse,
       protos.google.cloud.orchestration.airflow.service.v1beta1.OperationMetadata
     >;
   }
@@ -1571,6 +1916,183 @@ export class EnvironmentsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.orchestration.airflow.service.v1beta1.IEnvironment>;
   }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}. The promise has a method named
+   * "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
