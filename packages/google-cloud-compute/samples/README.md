@@ -639,6 +639,7 @@
   * [Target_ssl_proxies.set_proxy_header](#target_ssl_proxies.set_proxy_header)
   * [Target_ssl_proxies.set_ssl_certificates](#target_ssl_proxies.set_ssl_certificates)
   * [Target_ssl_proxies.set_ssl_policy](#target_ssl_proxies.set_ssl_policy)
+  * [Target_tcp_proxies.aggregated_list](#target_tcp_proxies.aggregated_list)
   * [Target_tcp_proxies.delete](#target_tcp_proxies.delete)
   * [Target_tcp_proxies.get](#target_tcp_proxies.get)
   * [Target_tcp_proxies.insert](#target_tcp_proxies.insert)
@@ -11356,6 +11357,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/target_ssl_proxies.set_ssl_policy.js`
+
+
+-----
+
+
+
+
+### Target_tcp_proxies.aggregated_list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/target_tcp_proxies.aggregated_list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/target_tcp_proxies.aggregated_list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/target_tcp_proxies.aggregated_list.js`
 
 
 -----
