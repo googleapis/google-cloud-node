@@ -30,6 +30,16 @@
                 "deleteEnvironment"
               ]
             },
+            "SaveSnapshot": {
+              "methods": [
+                "saveSnapshot"
+              ]
+            },
+            "LoadSnapshot": {
+              "methods": [
+                "loadSnapshot"
+              ]
+            },
             "ListEnvironments": {
               "methods": [
                 "listEnvironments",
@@ -60,6 +70,16 @@
             "DeleteEnvironment": {
               "methods": [
                 "deleteEnvironment"
+              ]
+            },
+            "SaveSnapshot": {
+              "methods": [
+                "saveSnapshot"
+              ]
+            },
+            "LoadSnapshot": {
+              "methods": [
+                "loadSnapshot"
               ]
             },
             "ListEnvironments": {
