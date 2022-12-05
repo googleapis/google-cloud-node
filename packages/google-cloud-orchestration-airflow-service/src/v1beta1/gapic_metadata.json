@@ -40,6 +40,16 @@
                 "checkUpgrade"
               ]
             },
+            "SaveSnapshot": {
+              "methods": [
+                "saveSnapshot"
+              ]
+            },
+            "LoadSnapshot": {
+              "methods": [
+                "loadSnapshot"
+              ]
+            },
             "ListEnvironments": {
               "methods": [
                 "listEnvironments",
@@ -80,6 +90,16 @@
             "CheckUpgrade": {
               "methods": [
                 "checkUpgrade"
+              ]
+            },
+            "SaveSnapshot": {
+              "methods": [
+                "saveSnapshot"
+              ]
+            },
+            "LoadSnapshot": {
+              "methods": [
+                "loadSnapshot"
               ]
             },
             "ListEnvironments": {
