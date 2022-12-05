@@ -154,7 +154,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 183,
+                    "end": 198,
                     "type": "FULL"
                 }
             ],
@@ -282,7 +282,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 75,
+                    "end": 78,
                     "type": "FULL"
                 }
             ],
@@ -308,6 +308,110 @@
                 "method": {
                     "shortName": "CheckUpgrade",
                     "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.CheckUpgrade",
+                    "service": {
+                        "shortName": "Environments",
+                        "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "composer_v1beta1_generated_Environments_SaveSnapshot_async",
+            "title": "Environments saveSnapshot Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a snapshots of a Cloud Composer environment. As a result of this operation, snapshot of environment's state is stored in a location specified in the SaveSnapshotRequest.",
+            "canonical": true,
+            "file": "environments.save_snapshot.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SaveSnapshot",
+                "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.SaveSnapshot",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "environment",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "snapshot_location",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "EnvironmentsClient",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.EnvironmentsClient"
+                },
+                "method": {
+                    "shortName": "SaveSnapshot",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.SaveSnapshot",
+                    "service": {
+                        "shortName": "Environments",
+                        "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "composer_v1beta1_generated_Environments_LoadSnapshot_async",
+            "title": "Environments loadSnapshot Sample",
+            "origin": "API_DEFINITION",
+            "description": " Loads a snapshot of a Cloud Composer environment. As a result of this operation, a snapshot of environment's specified in LoadSnapshotRequest is loaded into the environment.",
+            "canonical": true,
+            "file": "environments.load_snapshot.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 79,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "LoadSnapshot",
+                "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.LoadSnapshot",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "environment",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "snapshot_path",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "skip_pypi_packages_installation",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "skip_environment_variables_setting",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "skip_airflow_overrides_setting",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "skip_gcs_data_copying",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "EnvironmentsClient",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.EnvironmentsClient"
+                },
+                "method": {
+                    "shortName": "LoadSnapshot",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments.LoadSnapshot",
                     "service": {
                         "shortName": "Environments",
                         "fullName": "google.cloud.orchestration.airflow.service.v1beta1.Environments"
