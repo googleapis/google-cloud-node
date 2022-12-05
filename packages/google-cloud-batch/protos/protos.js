@@ -20144,6 +20144,7 @@
                              * @property {google.cloud.batch.v1alpha.AllocationPolicy.ProvisioningModel|null} [provisioningModel] InstancePolicy provisioningModel
                              * @property {Array.<google.cloud.batch.v1alpha.AllocationPolicy.IAccelerator>|null} [accelerators] InstancePolicy accelerators
                              * @property {Array.<google.cloud.batch.v1alpha.AllocationPolicy.IAttachedDisk>|null} [disks] InstancePolicy disks
+                             * @property {string|null} [reservation] InstancePolicy reservation
                              */
     
                             /**
@@ -20213,6 +20214,14 @@
                             InstancePolicy.prototype.disks = $util.emptyArray;
     
                             /**
+                             * InstancePolicy reservation.
+                             * @member {string} reservation
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.InstancePolicy
+                             * @instance
+                             */
+                            InstancePolicy.prototype.reservation = "";
+    
+                            /**
                              * Creates a new InstancePolicy instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.batch.v1alpha.AllocationPolicy.InstancePolicy
@@ -20251,6 +20260,8 @@
                                 if (message.disks != null && message.disks.length)
                                     for (var i = 0; i < message.disks.length; ++i)
                                         $root.google.cloud.batch.v1alpha.AllocationPolicy.AttachedDisk.encode(message.disks[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.reservation != null && Object.hasOwnProperty.call(message, "reservation"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.reservation);
                                 return writer;
                             };
     
@@ -20313,6 +20324,10 @@
                                             if (!(message.disks && message.disks.length))
                                                 message.disks = [];
                                             message.disks.push($root.google.cloud.batch.v1alpha.AllocationPolicy.AttachedDisk.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.reservation = reader.string();
                                             break;
                                         }
                                     default:
@@ -20391,6 +20406,9 @@
                                             return "disks." + error;
                                     }
                                 }
+                                if (message.reservation != null && message.hasOwnProperty("reservation"))
+                                    if (!$util.isString(message.reservation))
+                                        return "reservation: string expected";
                                 return null;
                             };
     
@@ -20461,6 +20479,8 @@
                                         message.disks[i] = $root.google.cloud.batch.v1alpha.AllocationPolicy.AttachedDisk.fromObject(object.disks[i]);
                                     }
                                 }
+                                if (object.reservation != null)
+                                    message.reservation = String(object.reservation);
                                 return message;
                             };
     
@@ -20486,6 +20506,7 @@
                                     object.machineType = "";
                                     object.minCpuPlatform = "";
                                     object.provisioningModel = options.enums === String ? "PROVISIONING_MODEL_UNSPECIFIED" : 0;
+                                    object.reservation = "";
                                 }
                                 if (message.allowedMachineTypes && message.allowedMachineTypes.length) {
                                     object.allowedMachineTypes = [];
@@ -20508,6 +20529,8 @@
                                     for (var j = 0; j < message.disks.length; ++j)
                                         object.disks[j] = $root.google.cloud.batch.v1alpha.AllocationPolicy.AttachedDisk.toObject(message.disks[j], options);
                                 }
+                                if (message.reservation != null && message.hasOwnProperty("reservation"))
+                                    object.reservation = message.reservation;
                                 return object;
                             };
     
