@@ -27,6 +27,11 @@
   * [Dataproc_metastore.restore_service](#dataproc_metastore.restore_service)
   * [Dataproc_metastore.update_metadata_import](#dataproc_metastore.update_metadata_import)
   * [Dataproc_metastore.update_service](#dataproc_metastore.update_service)
+  * [Dataproc_metastore_federation.create_federation](#dataproc_metastore_federation.create_federation)
+  * [Dataproc_metastore_federation.delete_federation](#dataproc_metastore_federation.delete_federation)
+  * [Dataproc_metastore_federation.get_federation](#dataproc_metastore_federation.get_federation)
+  * [Dataproc_metastore_federation.list_federations](#dataproc_metastore_federation.list_federations)
+  * [Dataproc_metastore_federation.update_federation](#dataproc_metastore_federation.update_federation)
   * [Dataproc_metastore.create_backup](#dataproc_metastore.create_backup)
   * [Dataproc_metastore.create_metadata_import](#dataproc_metastore.create_metadata_import)
   * [Dataproc_metastore.create_service](#dataproc_metastore.create_service)
@@ -42,6 +47,11 @@
   * [Dataproc_metastore.restore_service](#dataproc_metastore.restore_service)
   * [Dataproc_metastore.update_metadata_import](#dataproc_metastore.update_metadata_import)
   * [Dataproc_metastore.update_service](#dataproc_metastore.update_service)
+  * [Dataproc_metastore_federation.create_federation](#dataproc_metastore_federation.create_federation)
+  * [Dataproc_metastore_federation.delete_federation](#dataproc_metastore_federation.delete_federation)
+  * [Dataproc_metastore_federation.get_federation](#dataproc_metastore_federation.get_federation)
+  * [Dataproc_metastore_federation.list_federations](#dataproc_metastore_federation.list_federations)
+  * [Dataproc_metastore_federation.update_federation](#dataproc_metastore_federation.update_federation)
   * [Dataproc_metastore.create_backup](#dataproc_metastore.create_backup)
   * [Dataproc_metastore.create_metadata_import](#dataproc_metastore.create_metadata_import)
   * [Dataproc_metastore.create_service](#dataproc_metastore.create_service)
@@ -57,6 +67,11 @@
   * [Dataproc_metastore.restore_service](#dataproc_metastore.restore_service)
   * [Dataproc_metastore.update_metadata_import](#dataproc_metastore.update_metadata_import)
   * [Dataproc_metastore.update_service](#dataproc_metastore.update_service)
+  * [Dataproc_metastore_federation.create_federation](#dataproc_metastore_federation.create_federation)
+  * [Dataproc_metastore_federation.delete_federation](#dataproc_metastore_federation.delete_federation)
+  * [Dataproc_metastore_federation.get_federation](#dataproc_metastore_federation.get_federation)
+  * [Dataproc_metastore_federation.list_federations](#dataproc_metastore_federation.list_federations)
+  * [Dataproc_metastore_federation.update_federation](#dataproc_metastore_federation.update_federation)
   * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
@@ -330,6 +345,91 @@ __Usage:__
 
 
 
+### Dataproc_metastore_federation.create_federation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.create_federation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.create_federation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.create_federation.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.delete_federation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.delete_federation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.delete_federation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.delete_federation.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.get_federation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.get_federation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.get_federation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.get_federation.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.list_federations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.list_federations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.list_federations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.list_federations.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.update_federation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.update_federation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.update_federation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1/dataproc_metastore_federation.update_federation.js`
+
+
+-----
+
+
+
+
 ### Dataproc_metastore.create_backup
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore.create_backup.js).
@@ -585,6 +685,91 @@ __Usage:__
 
 
 
+### Dataproc_metastore_federation.create_federation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.create_federation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.create_federation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.create_federation.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.delete_federation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.delete_federation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.delete_federation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.delete_federation.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.get_federation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.get_federation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.get_federation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.get_federation.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.list_federations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.list_federations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.list_federations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.list_federations.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.update_federation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.update_federation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.update_federation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1alpha/dataproc_metastore_federation.update_federation.js`
+
+
+-----
+
+
+
+
 ### Dataproc_metastore.create_backup
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.create_backup.js).
@@ -833,6 +1018,91 @@ __Usage:__
 
 
 `node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore.update_service.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.create_federation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.create_federation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.create_federation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.create_federation.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.delete_federation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.delete_federation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.delete_federation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.delete_federation.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.get_federation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.get_federation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.get_federation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.get_federation.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.list_federations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.list_federations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.list_federations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.list_federations.js`
+
+
+-----
+
+
+
+
+### Dataproc_metastore_federation.update_federation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.update_federation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.update_federation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-metastore/samples/generated/v1beta/dataproc_metastore_federation.update_federation.js`
 
 
 -----

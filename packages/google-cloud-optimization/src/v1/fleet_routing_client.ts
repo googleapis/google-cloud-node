@@ -424,8 +424,9 @@ export class FleetRoutingClient {
    *       <= visits[0].start_time <= visits[1].start_time ...
    *       <= vehicle_end_time`).
    *     * a shipment may only be performed on a vehicle that is allowed. A
-   *       vehicle is allowed if {@link google.cloud.optimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices} is empty or
-   *       its `vehicle_index` is included in
+   *       vehicle is allowed if
+   *       {@link google.cloud.optimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}
+   *       is empty or its `vehicle_index` is included in
    *       {@link google.cloud.optimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}.
    *
    *   If the injected solution is not feasible, a validation error is not
@@ -460,16 +461,27 @@ export class FleetRoutingClient {
    * @param {boolean} request.interpretInjectedSolutionsUsingLabels
    *   If true:
    *
-   *     * uses {@link google.cloud.optimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label} instead of `vehicle_index` to
+   *     * uses
+   *     {@link google.cloud.optimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label}
+   *     instead of `vehicle_index` to
    *       match routes in an injected solution with vehicles in the request;
-   *       reuses the mapping of original {@link google.cloud.optimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index} to new
-   *       {@link google.cloud.optimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index} to update
+   *       reuses the mapping of original
+   *       {@link google.cloud.optimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
+   *       to new
+   *       {@link google.cloud.optimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
+   *       to update
    *       {@link google.cloud.optimization.v1.InjectedSolutionConstraint.ConstraintRelaxation.vehicle_indices|ConstraintRelaxation.vehicle_indices}
    *       if non-empty, but the mapping must be unambiguous (i.e., multiple
    *       `ShipmentRoute`s must not share the same original `vehicle_index`).
-   *     * uses {@link google.cloud.optimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label} instead of `shipment_index`
+   *     * uses
+   *     {@link google.cloud.optimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label}
+   *     instead of `shipment_index`
    *       to match visits in an injected solution with shipments in the request;
-   *     * uses {@link google.cloud.optimization.v1.SkippedShipment.label|SkippedShipment.label} instead of {@link google.cloud.optimization.v1.SkippedShipment.index|SkippedShipment.index} to
+   *     * uses
+   *     {@link google.cloud.optimization.v1.SkippedShipment.label|SkippedShipment.label}
+   *     instead of
+   *     {@link google.cloud.optimization.v1.SkippedShipment.index|SkippedShipment.index}
+   *     to
    *       match skipped shipments in the injected solution with request
    *       shipments.
    *
@@ -482,8 +494,10 @@ export class FleetRoutingClient {
    *   If true, labels in the following categories must appear at most once in
    *   their category:
    *
-   *     * {@link google.cloud.optimization.v1.Vehicle.label|Vehicle.label} in the request;
-   *     * {@link google.cloud.optimization.v1.Shipment.label|Shipment.label} in the request;
+   *     * {@link google.cloud.optimization.v1.Vehicle.label|Vehicle.label} in the
+   *     request;
+   *     * {@link google.cloud.optimization.v1.Shipment.label|Shipment.label} in the
+   *     request;
    *     * {@link google.cloud.optimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label} in the injected solution;
    *     * {@link google.cloud.optimization.v1.SkippedShipment.label|SkippedShipment.label} and {@link google.cloud.optimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label} in
    *       the injected solution (except pickup/delivery visit pairs, whose
@@ -493,27 +507,32 @@ export class FleetRoutingClient {
    *   request vehicle, the corresponding route is removed from the solution
    *   along with its visits. If a `shipment_label` in the injected solution does
    *   not correspond to a request shipment, the corresponding visit is removed
-   *   from the solution. If a {@link google.cloud.optimization.v1.SkippedShipment.label|SkippedShipment.label} in the injected solution
-   *   does not correspond to a request shipment, the `SkippedShipment` is removed
-   *   from the solution.
+   *   from the solution. If a
+   *   {@link google.cloud.optimization.v1.SkippedShipment.label|SkippedShipment.label}
+   *   in the injected solution does not correspond to a request shipment, the
+   *   `SkippedShipment` is removed from the solution.
    *
    *   Removing route visits or entire routes from an injected solution may
    *   have an effect on the implied constraints, which may lead to change in
    *   solution, validation errors, or infeasibility.
    *
-   *   NOTE: The caller must ensure that each {@link google.cloud.optimization.v1.Vehicle.label|Vehicle.label}
-   *   (resp. {@link google.cloud.optimization.v1.Shipment.label|Shipment.label}) uniquely identifies a vehicle (resp. shipment)
-   *   entity used across the two relevant requests: the past request that
-   *   produced the `OptimizeToursResponse` used in the injected solution and the
-   *   current request that includes the injected solution. The uniqueness checks
-   *   described above are not enough to guarantee this requirement.
+   *   NOTE: The caller must ensure that each
+   *   {@link google.cloud.optimization.v1.Vehicle.label|Vehicle.label} (resp.
+   *   {@link google.cloud.optimization.v1.Shipment.label|Shipment.label}) uniquely
+   *   identifies a vehicle (resp. shipment) entity used across the two relevant
+   *   requests: the past request that produced the `OptimizeToursResponse` used
+   *   in the injected solution and the current request that includes the injected
+   *   solution. The uniqueness checks described above are not enough to guarantee
+   *   this requirement.
    * @param {boolean} request.considerRoadTraffic
    *   Consider traffic estimation in calculating `ShipmentRoute` fields
    *   {@link google.cloud.optimization.v1.ShipmentRoute.Transition.travel_duration|Transition.travel_duration},
    *   {@link google.cloud.optimization.v1.ShipmentRoute.Visit.start_time|Visit.start_time},
    *   and `vehicle_end_time`; in setting the
-   *   {@link google.cloud.optimization.v1.ShipmentRoute.has_traffic_infeasibilities|ShipmentRoute.has_traffic_infeasibilities} field, and in calculating the
-   *   {@link google.cloud.optimization.v1.OptimizeToursResponse.total_cost|OptimizeToursResponse.total_cost} field.
+   *   {@link google.cloud.optimization.v1.ShipmentRoute.has_traffic_infeasibilities|ShipmentRoute.has_traffic_infeasibilities}
+   *   field, and in calculating the
+   *   {@link google.cloud.optimization.v1.OptimizeToursResponse.total_cost|OptimizeToursResponse.total_cost}
+   *   field.
    * @param {boolean} request.populatePolylines
    *   If true, polylines will be populated in response `ShipmentRoute`s.
    * @param {boolean} request.populateTransitionPolylines
@@ -539,10 +558,11 @@ export class FleetRoutingClient {
    *   Label that may be used to identify this request, reported back in the
    *   {@link google.cloud.optimization.v1.OptimizeToursResponse.request_label|OptimizeToursResponse.request_label}.
    * @param {boolean} request.populateTravelStepPolylines
-   *   Deprecated: Use {@link |OptimizeToursRequest.populate_transition_polylines} instead.
-   *   If true, polylines will be populated in response
-   *   {@link google.cloud.optimization.v1.ShipmentRoute.transitions|ShipmentRoute.transitions}. Note that in this case, the polylines will
-   *   also be populated in the deprecated `travel_steps`.
+   *   Deprecated: Use {@link |OptimizeToursRequest.populate_transition_polylines}
+   *   instead. If true, polylines will be populated in response
+   *   {@link google.cloud.optimization.v1.ShipmentRoute.transitions|ShipmentRoute.transitions}.
+   *   Note that in this case, the polylines will also be populated in the
+   *   deprecated `travel_steps`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -649,8 +669,8 @@ export class FleetRoutingClient {
    *
    *   If no location is specified, a region will be chosen automatically.
    * @param {number[]} request.modelConfigs
-   *   Required. Input/Output information each purchase model, such as file paths and data
-   *   formats.
+   *   Required. Input/Output information each purchase model, such as file paths
+   *   and data formats.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

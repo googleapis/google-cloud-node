@@ -116,13 +116,10 @@ function main() {
    *  * `config.nodeCount`
    *      * Horizontally scale the number of nodes in the environment. An integer
    *        greater than or equal to 3 must be provided in the `config.nodeCount`
-   *        field.
+   *        field. Supported for Cloud Composer environments in versions
+   *        composer-1.*.*-airflow-*.*.*.
    *  * `config.webServerNetworkAccessControl`
    *      * Replace the environment's current `WebServerNetworkAccessControl`.
-   *  * `config.databaseConfig`
-   *      * Replace the environment's current `DatabaseConfig`.
-   *  * `config.webServerConfig`
-   *      * Replace the environment's current `WebServerConfig`.
    *  * `config.softwareConfig.airflowConfigOverrides`
    *      * Replace all Apache Airflow config overrides. If a replacement config
    *        overrides map is not included in `environment`, all config overrides
@@ -140,9 +137,22 @@ function main() {
    *  * `config.softwareConfig.envVariables`
    *      * Replace all environment variables. If a replacement environment
    *        variable map is not included in `environment`, all custom environment
-   *        variables  are cleared.
-   *        It is an error to provide both this mask and a mask specifying one or
-   *        more individual environment variables.
+   *        variables are cleared.
+   *  * `config.softwareConfig.schedulerCount`
+   *      * Horizontally scale the number of schedulers in Airflow. A positive
+   *        integer not greater than the number of nodes must be provided in the
+   *        `config.softwareConfig.schedulerCount` field. Supported for Cloud
+   *        Composer environments in versions composer-1.*.*-airflow-2.*.*.
+   *  * `config.databaseConfig.machineType`
+   *      * Cloud SQL machine type used by Airflow database.
+   *        It has to be one of: db-n1-standard-2, db-n1-standard-4,
+   *        db-n1-standard-8 or db-n1-standard-16. Supported for Cloud Composer
+   *        environments in versions composer-1.*.*-airflow-*.*.*.
+   *  * `config.webServerConfig.machineType`
+   *      * Machine type on which Airflow web server is running.
+   *        It has to be one of: composer-n1-webserver-2, composer-n1-webserver-4
+   *        or composer-n1-webserver-8. Supported for Cloud Composer environments
+   *        in versions composer-1.*.*-airflow-*.*.*.
    */
   // const updateMask = {}
 
