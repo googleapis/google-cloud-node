@@ -127,57 +127,53 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta1.DataPolicyServiceClient', () => {
+describe('v1.DataPolicyServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
       const servicePath =
-        datapolicyserviceModule.v1beta1.DataPolicyServiceClient.servicePath;
+        datapolicyserviceModule.v1.DataPolicyServiceClient.servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
       const apiEndpoint =
-        datapolicyserviceModule.v1beta1.DataPolicyServiceClient.apiEndpoint;
+        datapolicyserviceModule.v1.DataPolicyServiceClient.apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = datapolicyserviceModule.v1beta1.DataPolicyServiceClient.port;
+      const port = datapolicyserviceModule.v1.DataPolicyServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient();
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          fallback: true,
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        fallback: true,
+      });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       assert.strictEqual(client.dataPolicyServiceStub, undefined);
       await client.initialize();
       assert(client.dataPolicyServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       assert(client.dataPolicyServiceStub);
       client.close().then(() => {
@@ -186,11 +182,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('has close method for the non-initialized client', done => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       assert.strictEqual(client.dataPolicyServiceStub, undefined);
       client.close().then(() => {
         done();
@@ -199,11 +194,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -212,11 +206,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -236,23 +229,22 @@ describe('v1beta1.DataPolicyServiceClient', () => {
 
   describe('createDataPolicy', () => {
     it('invokes createDataPolicy without error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+        new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
       );
       client.innerApiCalls.createDataPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.createDataPolicy(request);
@@ -268,23 +260,22 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes createDataPolicy without error using callback', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+        new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
       );
       client.innerApiCalls.createDataPolicy =
         stubSimpleCallWithCallback(expectedResponse);
@@ -293,7 +284,7 @@ describe('v1beta1.DataPolicyServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy | null
+            result?: protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy | null
           ) => {
             if (err) {
               reject(err);
@@ -316,17 +307,16 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes createDataPolicy with error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -348,17 +338,16 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes createDataPolicy with closed client', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -370,24 +359,23 @@ describe('v1beta1.DataPolicyServiceClient', () => {
 
   describe('updateDataPolicy', () => {
     it('invokes updateDataPolicy without error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest()
       );
       request.dataPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest',
         ['dataPolicy', 'name']
       );
       request.dataPolicy.name = defaultValue1;
       const expectedHeaderRequestParams = `data_policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+        new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
       );
       client.innerApiCalls.updateDataPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.updateDataPolicy(request);
@@ -403,24 +391,23 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes updateDataPolicy without error using callback', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest()
       );
       request.dataPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest',
         ['dataPolicy', 'name']
       );
       request.dataPolicy.name = defaultValue1;
       const expectedHeaderRequestParams = `data_policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+        new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
       );
       client.innerApiCalls.updateDataPolicy =
         stubSimpleCallWithCallback(expectedResponse);
@@ -429,7 +416,7 @@ describe('v1beta1.DataPolicyServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy | null
+            result?: protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy | null
           ) => {
             if (err) {
               reject(err);
@@ -452,18 +439,17 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes updateDataPolicy with error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest()
       );
       request.dataPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest',
         ['dataPolicy', 'name']
       );
       request.dataPolicy.name = defaultValue1;
@@ -485,18 +471,17 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes updateDataPolicy with closed client', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest()
       );
       request.dataPolicy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest',
         ['dataPolicy', 'name']
       );
       request.dataPolicy.name = defaultValue1;
@@ -506,19 +491,148 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
   });
 
-  describe('deleteDataPolicy', () => {
-    it('invokes deleteDataPolicy without error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+  describe('renameDataPolicy', () => {
+    it('invokes renameDataPolicy without error', async () => {
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
+      );
+      client.innerApiCalls.renameDataPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.renameDataPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.renameDataPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.renameDataPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes renameDataPolicy without error using callback', async () => {
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
+      );
+      client.innerApiCalls.renameDataPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.renameDataPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.renameDataPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.renameDataPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes renameDataPolicy with error', async () => {
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.renameDataPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.renameDataPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.renameDataPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.renameDataPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes renameDataPolicy with closed client', async () => {
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.renameDataPolicy(request), expectedError);
+    });
+  });
+
+  describe('deleteDataPolicy', () => {
+    it('invokes deleteDataPolicy without error', async () => {
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -540,17 +654,16 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes deleteDataPolicy without error using callback', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -588,17 +701,16 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes deleteDataPolicy with error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -620,17 +732,16 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes deleteDataPolicy with closed client', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -642,23 +753,22 @@ describe('v1beta1.DataPolicyServiceClient', () => {
 
   describe('getDataPolicy', () => {
     it('invokes getDataPolicy without error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+        new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
       );
       client.innerApiCalls.getDataPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.getDataPolicy(request);
@@ -674,23 +784,22 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes getDataPolicy without error using callback', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+        new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
       );
       client.innerApiCalls.getDataPolicy =
         stubSimpleCallWithCallback(expectedResponse);
@@ -699,7 +808,7 @@ describe('v1beta1.DataPolicyServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy | null
+            result?: protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy | null
           ) => {
             if (err) {
               reject(err);
@@ -722,17 +831,16 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes getDataPolicy with error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -754,17 +862,16 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes getDataPolicy with closed client', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest',
+        '.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -776,11 +883,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
 
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
@@ -808,11 +914,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes getIamPolicy without error using callback', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
@@ -856,11 +961,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes getIamPolicy with error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
@@ -888,11 +992,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes getIamPolicy with closed client', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
@@ -910,11 +1013,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
 
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
@@ -942,11 +1044,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes setIamPolicy without error using callback', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
@@ -990,11 +1091,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes setIamPolicy with error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
@@ -1022,11 +1122,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes setIamPolicy with closed client', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
@@ -1044,11 +1143,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
 
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
@@ -1077,11 +1175,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes testIamPermissions without error using callback', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
@@ -1125,11 +1222,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes testIamPermissions with error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
@@ -1157,11 +1253,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes testIamPermissions with closed client', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
@@ -1179,30 +1274,29 @@ describe('v1beta1.DataPolicyServiceClient', () => {
 
   describe('listDataPolicies', () => {
     it('invokes listDataPolicies without error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        '.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+          new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+          new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+          new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
         ),
       ];
       client.innerApiCalls.listDataPolicies = stubSimpleCall(expectedResponse);
@@ -1219,30 +1313,29 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes listDataPolicies without error using callback', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        '.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+          new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+          new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+          new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
         ),
       ];
       client.innerApiCalls.listDataPolicies =
@@ -1253,7 +1346,7 @@ describe('v1beta1.DataPolicyServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy[]
+              | protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy[]
               | null
           ) => {
             if (err) {
@@ -1277,17 +1370,16 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes listDataPolicies with error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        '.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1309,42 +1401,41 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes listDataPoliciesStream without error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        '.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+          new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+          new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+          new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
         ),
       ];
       client.descriptors.page.listDataPolicies.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listDataPoliciesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy[] =
+        const responses: protos.google.cloud.bigquery.datapolicies.v1.DataPolicy[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy
+            response: protos.google.cloud.bigquery.datapolicies.v1.DataPolicy
           ) => {
             responses.push(response);
           }
@@ -1373,17 +1464,16 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('invokes listDataPoliciesStream with error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        '.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1393,12 +1483,12 @@ describe('v1beta1.DataPolicyServiceClient', () => {
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.listDataPoliciesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy[] =
+        const responses: protos.google.cloud.bigquery.datapolicies.v1.DataPolicy[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy
+            response: protos.google.cloud.bigquery.datapolicies.v1.DataPolicy
           ) => {
             responses.push(response);
           }
@@ -1426,35 +1516,34 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('uses async iteration with listDataPolicies without error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        '.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+          new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+          new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
         ),
         generateSampleMessage(
-          new protos.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy()
+          new protos.google.cloud.bigquery.datapolicies.v1.DataPolicy()
         ),
       ];
       client.descriptors.page.listDataPolicies.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy[] =
+      const responses: protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy[] =
         [];
       const iterable = client.listDataPoliciesAsync(request);
       for await (const resource of iterable) {
@@ -1477,17 +1566,16 @@ describe('v1beta1.DataPolicyServiceClient', () => {
     });
 
     it('uses async iteration with listDataPolicies with error', async () => {
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
+        new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        '.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1497,7 +1585,7 @@ describe('v1beta1.DataPolicyServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listDataPoliciesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.datapolicies.v1beta1.IDataPolicy[] =
+        const responses: protos.google.cloud.bigquery.datapolicies.v1.IDataPolicy[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1527,11 +1615,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
         location: 'locationValue',
         data_policy: 'dataPolicyValue',
       };
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.dataPolicyPathTemplate.render = sinon
         .stub()
@@ -1591,11 +1678,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -1640,11 +1726,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client =
-        new datapolicyserviceModule.v1beta1.DataPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new datapolicyserviceModule.v1.DataPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
