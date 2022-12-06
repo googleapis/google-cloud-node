@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the organization assets should belong to. Its format is
-   *  "organizations/[organization_id], folders/[folder_id], or
+   *  Required. The name of the parent that the listed assets belong to. Its
+   *  format is "organizations/[organization_id], folders/[folder_id], or
    *  projects/[project_id]".
    */
   // const parent = 'abc123'
