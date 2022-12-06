@@ -8,7 +8,7 @@
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/clientconnectorservices",
-  "api_id": "google.cloud.beyondcorp.clientconnectorservices.v1",
+  "api_id": "beyondcorp.googleapis.com",
   "default_version": "v1",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO"

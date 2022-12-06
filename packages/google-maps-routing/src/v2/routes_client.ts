@@ -404,6 +404,13 @@ export class RoutesClient {
    *   measure used for the route, leg, step distance, and duration are not
    *   affected by this value. If you don't provide this value, then the display
    *   units are inferred from the location of the request.
+   * @param {number[]} [request.requestedReferenceRoutes]
+   *   Optional. Specifies what reference routes to calculate as part of the request in
+   *   addition to the default route.
+   *   A reference route is a route with a different route calculation objective
+   *   than the default route. For example an FUEL_EFFICIENT reference route
+   *   calculation takes into account various parameters that would generate an
+   *   optimal fuel efficient route.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

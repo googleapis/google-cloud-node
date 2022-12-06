@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,12 +17,13 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
   LROperation,
 } from 'google-gax';
 
@@ -34,7 +35,6 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './cloud_shell_service_client_config.json';
-import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -51,6 +51,7 @@ const version = require('../../../package.json').version;
 export class CloudShellServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
@@ -62,6 +63,7 @@ export class CloudShellServiceClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
@@ -72,7 +74,7 @@ export class CloudShellServiceClient {
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
-   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
    * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
@@ -95,17 +97,29 @@ export class CloudShellServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
-   *     In fallback mode, a special browser-compatible transport implementation is used
-   *     instead of gRPC transport. In browser context (if the `window` object is defined)
-   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
-   *     if you need to override this behavior.
+   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
+   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new CloudShellServiceClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CloudShellServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     const fallback =
@@ -113,13 +127,21 @@ export class CloudShellServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -129,6 +151,12 @@ export class CloudShellServiceClient {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = staticMembers.servicePath;
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -163,16 +191,19 @@ export class CloudShellServiceClient {
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
-
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback === 'rest') {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [];
+    }
     this.operationsClient = this._gaxModule
-      .lro({
-        auth: this.auth,
-        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
-      })
+      .lro(lroOptions)
       .operationsClient(opts);
     const startEnvironmentResponse = protoFilesRoot.lookup(
       '.google.cloud.shell.v1.StartEnvironmentResponse'
@@ -234,6 +265,9 @@ export class CloudShellServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -262,7 +296,8 @@ export class CloudShellServiceClient {
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.shell.v1.CloudShellService,
-      this._opts
+      this._opts,
+      this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -293,7 +328,8 @@ export class CloudShellServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -355,8 +391,26 @@ export class CloudShellServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets an environment. Returns NOT_FOUND if the environment does not exist.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the requested resource, for example `users/me/environments/default`
+   *   or `users/someone@example.com/environments/default`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Environment]{@link google.cloud.shell.v1.Environment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_shell_service.get_environment.js</caption>
+   * region_tag:cloudshell_v1_generated_CloudShellService_GetEnvironment_async
+   */
   getEnvironment(
-    request: protos.google.cloud.shell.v1.IGetEnvironmentRequest,
+    request?: protos.google.cloud.shell.v1.IGetEnvironmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -382,26 +436,8 @@ export class CloudShellServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets an environment. Returns NOT_FOUND if the environment does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the requested resource, for example `users/me/environments/default`
-   *   or `users/someone@example.com/environments/default`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Environment]{@link google.cloud.shell.v1.Environment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getEnvironment(request);
-   */
   getEnvironment(
-    request: protos.google.cloud.shell.v1.IGetEnvironmentRequest,
+    request?: protos.google.cloud.shell.v1.IGetEnvironmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -435,15 +471,48 @@ export class CloudShellServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getEnvironment(request, options, callback);
   }
 
+  /**
+   * Starts an existing environment, allowing clients to connect to it. The
+   * returned operation will contain an instance of StartEnvironmentMetadata in
+   * its metadata field. Users can wait for the environment to start by polling
+   * this operation via GetOperation. Once the environment has finished starting
+   * and is ready to accept connections, the operation will contain a
+   * StartEnvironmentResponse in its response field.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource that should be started, for example
+   *   `users/me/environments/default` or
+   *   `users/someone@example.com/environments/default`.
+   * @param {string} request.accessToken
+   *   The initial access token passed to the environment. If this is present and
+   *   valid, the environment will be pre-authenticated with gcloud so that the
+   *   user can run gcloud commands in Cloud Shell without having to log in. This
+   *   code can be updated later by calling AuthorizeEnvironment.
+   * @param {string[]} request.publicKeys
+   *   Public keys that should be added to the environment before it is started.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_shell_service.start_environment.js</caption>
+   * region_tag:cloudshell_v1_generated_CloudShellService_StartEnvironment_async
+   */
   startEnvironment(
-    request: protos.google.cloud.shell.v1.IStartEnvironmentRequest,
+    request?: protos.google.cloud.shell.v1.IStartEnvironmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -478,42 +547,8 @@ export class CloudShellServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Starts an existing environment, allowing clients to connect to it. The
-   * returned operation will contain an instance of StartEnvironmentMetadata in
-   * its metadata field. Users can wait for the environment to start by polling
-   * this operation via GetOperation. Once the environment has finished starting
-   * and is ready to accept connections, the operation will contain a
-   * StartEnvironmentResponse in its response field.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource that should be started, for example
-   *   `users/me/environments/default` or
-   *   `users/someone@example.com/environments/default`.
-   * @param {string} request.accessToken
-   *   The initial access token passed to the environment. If this is present and
-   *   valid, the environment will be pre-authenticated with gcloud so that the
-   *   user can run gcloud commands in Cloud Shell without having to log in. This
-   *   code can be updated later by calling AuthorizeEnvironment.
-   * @param {string[]} request.publicKeys
-   *   Public keys that should be added to the environment before it is started.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.startEnvironment(request);
-   * const [response] = await operation.promise();
-   */
   startEnvironment(
-    request: protos.google.cloud.shell.v1.IStartEnvironmentRequest,
+    request?: protos.google.cloud.shell.v1.IStartEnvironmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -554,8 +589,8 @@ export class CloudShellServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.startEnvironment(request, options, callback);
@@ -569,11 +604,8 @@ export class CloudShellServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkStartEnvironmentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_shell_service.start_environment.js</caption>
+   * region_tag:cloudshell_v1_generated_CloudShellService_StartEnvironment_async
    */
   async checkStartEnvironmentProgress(
     name: string
@@ -583,22 +615,54 @@ export class CloudShellServiceClient {
       protos.google.cloud.shell.v1.StartEnvironmentMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.startEnvironment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.shell.v1.StartEnvironmentResponse,
       protos.google.cloud.shell.v1.StartEnvironmentMetadata
     >;
   }
+  /**
+   * Sends OAuth credentials to a running environment on behalf of a user. When
+   * this completes, the environment will be authorized to run various Google
+   * Cloud command line tools without requiring the user to manually
+   * authenticate.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource that should receive the credentials, for example
+   *   `users/me/environments/default` or
+   *   `users/someone@example.com/environments/default`.
+   * @param {string} request.accessToken
+   *   The OAuth access token that should be sent to the environment.
+   * @param {string} request.idToken
+   *   The OAuth ID token that should be sent to the environment.
+   * @param {google.protobuf.Timestamp} request.expireTime
+   *   The time when the credentials expire. If not set, defaults to one hour from
+   *   when the server received the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_shell_service.authorize_environment.js</caption>
+   * region_tag:cloudshell_v1_generated_CloudShellService_AuthorizeEnvironment_async
+   */
   authorizeEnvironment(
-    request: protos.google.cloud.shell.v1.IAuthorizeEnvironmentRequest,
+    request?: protos.google.cloud.shell.v1.IAuthorizeEnvironmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -633,40 +697,8 @@ export class CloudShellServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Sends OAuth credentials to a running environment on behalf of a user. When
-   * this completes, the environment will be authorized to run various Google
-   * Cloud command line tools without requiring the user to manually
-   * authenticate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource that should receive the credentials, for example
-   *   `users/me/environments/default` or
-   *   `users/someone@example.com/environments/default`.
-   * @param {string} request.accessToken
-   *   The OAuth access token that should be sent to the environment.
-   * @param {string} request.idToken
-   *   The OAuth ID token that should be sent to the environment.
-   * @param {google.protobuf.Timestamp} request.expireTime
-   *   The time when the credentials expire. If not set, defaults to one hour from
-   *   when the server received the request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.authorizeEnvironment(request);
-   * const [response] = await operation.promise();
-   */
   authorizeEnvironment(
-    request: protos.google.cloud.shell.v1.IAuthorizeEnvironmentRequest,
+    request?: protos.google.cloud.shell.v1.IAuthorizeEnvironmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -707,8 +739,8 @@ export class CloudShellServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.authorizeEnvironment(request, options, callback);
@@ -722,11 +754,8 @@ export class CloudShellServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkAuthorizeEnvironmentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_shell_service.authorize_environment.js</caption>
+   * region_tag:cloudshell_v1_generated_CloudShellService_AuthorizeEnvironment_async
    */
   async checkAuthorizeEnvironmentProgress(
     name: string
@@ -736,22 +765,52 @@ export class CloudShellServiceClient {
       protos.google.cloud.shell.v1.AuthorizeEnvironmentMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.authorizeEnvironment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.shell.v1.AuthorizeEnvironmentResponse,
       protos.google.cloud.shell.v1.AuthorizeEnvironmentMetadata
     >;
   }
+  /**
+   * Adds a public SSH key to an environment, allowing clients with the
+   * corresponding private key to connect to that environment via SSH. If a key
+   * with the same content already exists, this will error with ALREADY_EXISTS.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   Environment this key should be added to, e.g.
+   *   `users/me/environments/default`.
+   * @param {string} request.key
+   *   Key that should be added to the environment. Supported formats are
+   *   `ssh-dss` (see RFC4253), `ssh-rsa` (see RFC4253), `ecdsa-sha2-nistp256`
+   *   (see RFC5656), `ecdsa-sha2-nistp384` (see RFC5656) and
+   *   `ecdsa-sha2-nistp521` (see RFC5656). It should be structured as
+   *   &lt;format&gt; &lt;content&gt;, where &lt;content&gt; part is encoded with
+   *   Base64.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_shell_service.add_public_key.js</caption>
+   * region_tag:cloudshell_v1_generated_CloudShellService_AddPublicKey_async
+   */
   addPublicKey(
-    request: protos.google.cloud.shell.v1.IAddPublicKeyRequest,
+    request?: protos.google.cloud.shell.v1.IAddPublicKeyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -786,38 +845,8 @@ export class CloudShellServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Adds a public SSH key to an environment, allowing clients with the
-   * corresponding private key to connect to that environment via SSH. If a key
-   * with the same content already exists, this will error with ALREADY_EXISTS.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.environment
-   *   Environment this key should be added to, e.g.
-   *   `users/me/environments/default`.
-   * @param {string} request.key
-   *   Key that should be added to the environment. Supported formats are
-   *   `ssh-dss` (see RFC4253), `ssh-rsa` (see RFC4253), `ecdsa-sha2-nistp256`
-   *   (see RFC5656), `ecdsa-sha2-nistp384` (see RFC5656) and
-   *   `ecdsa-sha2-nistp521` (see RFC5656). It should be structured as
-   *   &lt;format&gt; &lt;content&gt;, where &lt;content&gt; part is encoded with
-   *   Base64.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.addPublicKey(request);
-   * const [response] = await operation.promise();
-   */
   addPublicKey(
-    request: protos.google.cloud.shell.v1.IAddPublicKeyRequest,
+    request?: protos.google.cloud.shell.v1.IAddPublicKeyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -858,8 +887,8 @@ export class CloudShellServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        environment: request.environment || '',
+      this._gaxModule.routingHeader.fromParams({
+        environment: request.environment ?? '',
       });
     this.initialize();
     return this.innerApiCalls.addPublicKey(request, options, callback);
@@ -873,11 +902,8 @@ export class CloudShellServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkAddPublicKeyProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_shell_service.add_public_key.js</caption>
+   * region_tag:cloudshell_v1_generated_CloudShellService_AddPublicKey_async
    */
   async checkAddPublicKeyProgress(
     name: string
@@ -887,22 +913,48 @@ export class CloudShellServiceClient {
       protos.google.cloud.shell.v1.AddPublicKeyMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.addPublicKey,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.shell.v1.AddPublicKeyResponse,
       protos.google.cloud.shell.v1.AddPublicKeyMetadata
     >;
   }
+  /**
+   * Removes a public SSH key from an environment. Clients will no longer be
+   * able to connect to the environment using the corresponding private key.
+   * If a key with the same content is not present, this will error with
+   * NOT_FOUND.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   Environment this key should be removed from, e.g.
+   *   `users/me/environments/default`.
+   * @param {string} request.key
+   *   Key that should be removed from the environment.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_shell_service.remove_public_key.js</caption>
+   * region_tag:cloudshell_v1_generated_CloudShellService_RemovePublicKey_async
+   */
   removePublicKey(
-    request: protos.google.cloud.shell.v1.IRemovePublicKeyRequest,
+    request?: protos.google.cloud.shell.v1.IRemovePublicKeyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -937,34 +989,8 @@ export class CloudShellServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Removes a public SSH key from an environment. Clients will no longer be
-   * able to connect to the environment using the corresponding private key.
-   * If a key with the same content is not present, this will error with
-   * NOT_FOUND.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.environment
-   *   Environment this key should be removed from, e.g.
-   *   `users/me/environments/default`.
-   * @param {string} request.key
-   *   Key that should be removed from the environment.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.removePublicKey(request);
-   * const [response] = await operation.promise();
-   */
   removePublicKey(
-    request: protos.google.cloud.shell.v1.IRemovePublicKeyRequest,
+    request?: protos.google.cloud.shell.v1.IRemovePublicKeyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1005,8 +1031,8 @@ export class CloudShellServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        environment: request.environment || '',
+      this._gaxModule.routingHeader.fromParams({
+        environment: request.environment ?? '',
       });
     this.initialize();
     return this.innerApiCalls.removePublicKey(request, options, callback);
@@ -1020,11 +1046,8 @@ export class CloudShellServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkRemovePublicKeyProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_shell_service.remove_public_key.js</caption>
+   * region_tag:cloudshell_v1_generated_CloudShellService_RemovePublicKey_async
    */
   async checkRemovePublicKeyProgress(
     name: string
@@ -1034,20 +1057,198 @@ export class CloudShellServiceClient {
       protos.google.cloud.shell.v1.RemovePublicKeyMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.removePublicKey,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.shell.v1.RemovePublicKeyResponse,
       protos.google.cloud.shell.v1.RemovePublicKeyMetadata
     >;
   }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}. The promise has a method named
+   * "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1097,11 +1298,11 @@ export class CloudShellServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.cloudShellServiceStub!.then(stub => {
+    if (this.cloudShellServiceStub && !this._terminated) {
+      return this.cloudShellServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();

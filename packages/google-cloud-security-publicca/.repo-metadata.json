@@ -8,7 +8,7 @@
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/publicca",
-  "api_id": "google.cloud.security.publicca.v1beta1",
+  "api_id": "publicca.googleapis.com",
   "default_version": "v1beta1",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO"

@@ -44,7 +44,7 @@ describe('helper functions', () => {
 
     it('should add the .OwlBot.yaml name to the interContainerVars.json', async () => { 
        cp.execSync(
-        `node ./add-to-well-known-path.js ${__dirname} google-cloud-kms`);
+        `node ./add-to-well-known-path.js ${__dirname}/interContainerVars.json google-cloud-kms`);
 
         assert.deepStrictEqual(JSON.parse(fs.readFileSync(path.resolve(__dirname, 'interContainerVars.json')).toString('utf8')), {branchName: 'branchName', owlbotYamlPath: 'packages/google-cloud-kms/.OwlBot.yaml'})
     });

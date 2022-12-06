@@ -14,11 +14,11 @@ BeyondCorp API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-appconnectors/CHANGELOG.md).
 
 * [BeyondCorp API Node.js Client API Reference][client-docs]
 * [BeyondCorp API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
+* [github.com/googleapis/google-cloud-node/packages/google-cloud-beyondcorp-appconnectors](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-appconnectors)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -199,5 +199,5 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=google.cloud.beyondcorp.appconnectors.v1
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=beyondcorp.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started

@@ -14,11 +14,11 @@ cloudshell client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-shell/CHANGELOG.md).
 
 * [Cloud Shell Node.js Client API Reference][client-docs]
 * [Cloud Shell Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
+* [github.com/googleapis/google-cloud-node/packages/google-cloud-shell](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-shell)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -87,6 +87,11 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Cloud_shell_service.add_public_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.add_public_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.add_public_key.js,samples/README.md) |
+| Cloud_shell_service.authorize_environment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.authorize_environment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.authorize_environment.js,samples/README.md) |
+| Cloud_shell_service.get_environment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.get_environment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.get_environment.js,samples/README.md) |
+| Cloud_shell_service.remove_public_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.remove_public_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.remove_public_key.js,samples/README.md) |
+| Cloud_shell_service.start_environment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.start_environment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/generated/v1/cloud_shell_service.start_environment.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/quickstart.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-shell/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-shell/samples/test/quickstart.js,samples/README.md) |
 

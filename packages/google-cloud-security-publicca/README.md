@@ -14,11 +14,11 @@ Public Certificate Authority client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-security-publicca/CHANGELOG.md).
 
 * [Public Certificate Authority Node.js Client API Reference][client-docs]
 * [Public Certificate Authority Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
+* [github.com/googleapis/google-cloud-node/packages/google-cloud-security-publicca](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-security-publicca)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -187,5 +187,5 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=google.cloud.security.publicca.v1beta1
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=publicca.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started

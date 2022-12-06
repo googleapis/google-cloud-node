@@ -1299,6 +1299,11 @@
                     },
                     "Route": {
                       "fields": {
+                        "routeLabels": {
+                          "rule": "repeated",
+                          "type": "RouteLabel",
+                          "id": 13
+                        },
                         "legs": {
                           "rule": "repeated",
                           "type": "RouteLeg",
@@ -1336,6 +1341,10 @@
                         "travelAdvisory": {
                           "type": "RouteTravelAdvisory",
                           "id": 9
+                        },
+                        "routeToken": {
+                          "type": "string",
+                          "id": 12
                         }
                       }
                     },
@@ -1349,6 +1358,10 @@
                           "rule": "repeated",
                           "type": "SpeedReadingInterval",
                           "id": 3
+                        },
+                        "fuelConsumptionMicroliters": {
+                          "type": "int64",
+                          "id": 5
                         }
                       }
                     },
@@ -1441,6 +1454,14 @@
                           "type": "RouteLegStepTravelAdvisory",
                           "id": 7
                         }
+                      }
+                    },
+                    "RouteLabel": {
+                      "values": {
+                        "ROUTE_LABEL_UNSPECIFIED": 0,
+                        "DEFAULT_ROUTE": 1,
+                        "DEFAULT_ROUTE_ALTERNATE": 2,
+                        "FUEL_EFFICIENT": 3
                       }
                     },
                     "SpeedReadingInterval": {
@@ -1634,7 +1655,8 @@
                         "VEHICLE_EMISSION_TYPE_UNSPECIFIED": 0,
                         "GASOLINE": 1,
                         "ELECTRIC": 2,
-                        "HYBRID": 3
+                        "HYBRID": 3,
+                        "DIESEL": 4
                       }
                     },
                     "RouteTravelMode": {
@@ -1771,6 +1793,22 @@
                           "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestedReferenceRoutes": {
+                          "rule": "repeated",
+                          "type": "ReferenceRoute",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ReferenceRoute": {
+                          "values": {
+                            "REFERENCE_ROUTE_UNSPECIFIED": 0,
+                            "FUEL_EFFICIENT": 1
                           }
                         }
                       }

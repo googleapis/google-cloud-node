@@ -96,6 +96,15 @@ function main(origin, destination) {
    *  units are inferred from the location of the request.
    */
   // const units = {}
+  /**
+   *  Optional. Specifies what reference routes to calculate as part of the request in
+   *  addition to the default route.
+   *  A reference route is a route with a different route calculation objective
+   *  than the default route. For example an FUEL_EFFICIENT reference route
+   *  calculation takes into account various parameters that would generate an
+   *  optimal fuel efficient route.
+   */
+  // const requestedReferenceRoutes = 1234
 
   // Imports the Routing library
   const {RoutesClient} = require('@googlemaps/routing').v2;

@@ -957,6 +957,11 @@
                           "keyType": "string",
                           "type": "google.protobuf.Value",
                           "id": 6
+                        },
+                        "userLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8
                         }
                       }
                     },

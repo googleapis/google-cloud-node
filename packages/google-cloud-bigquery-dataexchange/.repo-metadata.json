@@ -8,7 +8,7 @@
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/bigquery-data-exchange",
-  "api_id": "analyticshub.googleapis.com",
+  "api_id": "bigquerydatapolicy.googleapis.com",
   "default_version": "v1beta1",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO"

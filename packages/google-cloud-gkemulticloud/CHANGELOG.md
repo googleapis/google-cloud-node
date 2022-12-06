@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.4](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v0.1.3...gkemulticloud-v0.1.4) (2022-11-10)
+
+
+### Bug Fixes
+
+* Regenerated proto JS and TS definitions (generator update) ([#3472](https://github.com/googleapis/google-cloud-node/issues/3472)) ([5e2230d](https://github.com/googleapis/google-cloud-node/commit/5e2230dfc4302bb2ac9628ff4200eb46509e103d))
+
+## [0.1.3](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v0.1.2...gkemulticloud-v0.1.3) (2022-11-03)
+
+
+### Bug Fixes
+
+* **deps:** Use google-gax v3.5.2 ([#3478](https://github.com/googleapis/google-cloud-node/issues/3478)) ([09305e0](https://github.com/googleapis/google-cloud-node/commit/09305e06548b89dc17bb3d3167e2d1e69588caa4))
+
 ## [0.1.2](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v0.1.1...gkemulticloud-v0.1.2) (2022-09-28)
 
 

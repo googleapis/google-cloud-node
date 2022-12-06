@@ -1,13 +1,18 @@
 {
   "name": "@google-cloud/bigquery-data-transfer",
   "description": "BigQuery Data Transfer API client for Node.js",
-  "version": "3.1.3",
+  "version": "3.1.5",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
     "node": ">=12.0.0"
   },
-  "repository": "googleapis/nodejs-bigquery-data-transfer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-cloud-bigquery-datatransfer"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-datatransfer",
   "main": "build/src/index.js",
   "files": [
     "build/protos",
@@ -43,7 +48,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "google-gax": "^3.3.0"
+    "google-gax": "^3.5.2"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
@@ -51,7 +56,7 @@
     "@types/sinon": "^10.0.0",
     "c8": "^7.0.0",
     "gts": "^3.1.0",
-    "jsdoc": "^3.6.2",
+    "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^2.0.0",
     "jsdoc-region-tag": "^2.0.0",
     "linkinator": "^4.0.0",

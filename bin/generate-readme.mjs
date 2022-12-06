@@ -71,6 +71,7 @@ async function downloadRepoMetadata () {
       meta = JSON.parse(
         Buffer.from(res.data.content, 'base64').toString('utf8')
       );
+      meta.linkToRepoHomepage = (meta.repo === 'googleapis/google-cloud-node') ? `https://github.com/googleapis/google-cloud-node/tree/main/packages/${urlandRepo.repo}` : `https://github.com/${urlandRepo.repo}`
     } catch (err) {
       if (!err.response || err.response.status !== 404) {
         throw err;
@@ -152,13 +153,25 @@ async function processMetadata (repoMetadata) {
         supportDocsUrl = 'https://cloud.google.com/stackdriver/docs/getting-support';
       }
 
+      if (!supportDocsUrl.match(/^https/)) {
+        supportDocsUrl = `https://${supportDocsUrl}`
+      }
+      
+      let res;
+      let remoteUrlExists = true;
       // if URL doesn't exist, fall back to the generic docs page
-      const res = await request({
-        url: supportDocsUrl,
-        method: 'HEAD',
-        validateStatus: () => true
-      });
-      const remoteUrlExists = res.status !== 404;
+      try {
+        res = await request({
+          url: supportDocsUrl,
+          method: 'HEAD',
+          validateStatus: () => true
+        });
+      } catch (err) {
+        if (err.status === 404) {
+          remoteUrlExists = false;
+        }
+      }
+
       if (!remoteUrlExists) {
         supportDocsUrl = metadata.product_documentation;
       }
@@ -202,7 +215,7 @@ async function generateReadme (libraries) {
         break;
     }
     const npmBadge = `[![npm](https://img.shields.io/npm/v/${lib.distribution_name})](https://npm.im/${lib.distribution_name})`;
-    partial += `| [${lib.name_pretty}](https://github.com/${lib.repo}) | ${stability} | ${npmBadge} |\n`;
+    partial += `| [${lib.name_pretty}](${lib.linkToRepoHomepage}) | ${stability} | ${npmBadge} |\n`;
   }
   writeFileSync('./README.md', template.replace('{{libraries}}', partial), 'utf8');
 }

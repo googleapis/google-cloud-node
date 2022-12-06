@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-phishingprotection",
-        "version": "3.0.4",
+        "version": "3.0.6",
         "language": "TYPESCRIPT",
         "apis": [
             {

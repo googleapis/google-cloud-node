@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Long = require("long");
 import type {protobuf as $protobuf} from "google-gax";
+import Long = require("long");
 /** Namespace google. */
 export namespace google {
 
@@ -3453,6 +3453,9 @@ export namespace google {
 
                     /** RecommendRequest params */
                     params?: ({ [k: string]: google.protobuf.IValue }|null);
+
+                    /** RecommendRequest userLabels */
+                    userLabels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a RecommendRequest. */
@@ -3481,6 +3484,9 @@ export namespace google {
 
                     /** RecommendRequest params. */
                     public params: { [k: string]: google.protobuf.IValue };
+
+                    /** RecommendRequest userLabels. */
+                    public userLabels: { [k: string]: string };
 
                     /**
                      * Creates a new RecommendRequest instance using the specified properties.

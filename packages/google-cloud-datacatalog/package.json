@@ -1,0 +1,72 @@
+{
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-datacatalog",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
+  "name": "@google-cloud/datacatalog",
+  "version": "3.1.1",
+  "author": "Google LLC",
+  "description": "Google Cloud Data Catalog API client for Node.js",
+  "main": "build/src/index.js",
+  "files": [
+    "build/src",
+    "build/protos",
+    "AUTHORS",
+    "COPYING"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google datacatalog",
+    "datacatalog",
+    "Google Cloud Data Catalog API"
+  ],
+  "dependencies": {
+    "google-gax": "^3.5.2"
+  },
+  "devDependencies": {
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^18.0.0",
+    "@types/sinon": "^10.0.0",
+    "c8": "^7.0.0",
+    "chai": "^4.2.0",
+    "gts": "^3.1.0",
+    "jsdoc": "^4.0.0",
+    "jsdoc-fresh": "^2.0.0",
+    "jsdoc-region-tag": "^2.0.0",
+    "linkinator": "^4.0.0",
+    "mocha": "^9.2.2",
+    "pack-n-play": "^1.0.0-2",
+    "sinon": "^14.0.0",
+    "typescript": "^4.6.4"
+  },
+  "scripts": {
+    "docs": "jsdoc -c .jsdoc.js",
+    "fix": "gts fix",
+    "lint": "gts check",
+    "test": "c8 mocha build/test/*.js",
+    "predocs-test": "npm run docs",
+    "docs-test": "linkinator docs",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
+    "prepare": "npm run compile-protos && npm run compile",
+    "pretest": "npm run compile",
+    "prelint": "cd samples; npm link ../; npm install",
+    "clean": "gts clean",
+    "precompile": "gts clean"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-datacatalog"
+}
