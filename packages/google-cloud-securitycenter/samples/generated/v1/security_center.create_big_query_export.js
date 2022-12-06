@@ -29,13 +29,13 @@ function main(parent, bigQueryExport, bigQueryExportId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the new big query export's parent. Its format is
-   *  "organizations/[organization_id]", "folders/[folder_id]", or
+   *  Required. The name of the parent resource of the new BigQuery export. Its
+   *  format is "organizations/[organization_id]", "folders/[folder_id]", or
    *  "projects/[project_id]".
    */
   // const parent = 'abc123'
   /**
-   *  Required. The big query export being created.
+   *  Required. The BigQuery export being created.
    */
   // const bigQueryExport = {}
   /**
