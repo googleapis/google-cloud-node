@@ -21,7 +21,6 @@ logging.basicConfig(level=logging.DEBUG)
 # List of excludes for the enhanced library
 node.owlbot_main(
     staging_excludes = [
-        ".kokoro/presubmit/node12/samples-test.cfg",
         "package.json",
         "README.md",
         "src/decorator.ts",
@@ -34,8 +33,6 @@ node.owlbot_main(
         "tsconfig.json",
     ],
     templates_excludes=[
-        ".kokoro/continuous/node12/samples-test.cfg",
-        ".kokoro/presubmit/node12/samples-test.cfg",
         "src/index.ts",
     ],
 )
