@@ -2272,6 +2272,9 @@ export namespace google {
 
                         /** PreprocessingConfig pad */
                         pad?: (google.cloud.video.transcoder.v1.PreprocessingConfig.IPad|null);
+
+                        /** PreprocessingConfig deinterlace */
+                        deinterlace?: (google.cloud.video.transcoder.v1.PreprocessingConfig.IDeinterlace|null);
                     }
 
                     /** Represents a PreprocessingConfig. */
@@ -2300,6 +2303,9 @@ export namespace google {
 
                         /** PreprocessingConfig pad. */
                         public pad?: (google.cloud.video.transcoder.v1.PreprocessingConfig.IPad|null);
+
+                        /** PreprocessingConfig deinterlace. */
+                        public deinterlace?: (google.cloud.video.transcoder.v1.PreprocessingConfig.IDeinterlace|null);
 
                         /**
                          * Creates a new PreprocessingConfig instance using the specified properties.
@@ -3033,6 +3039,339 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Deinterlace. */
+                        interface IDeinterlace {
+
+                            /** Deinterlace yadif */
+                            yadif?: (google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IYadifConfig|null);
+
+                            /** Deinterlace bwdif */
+                            bwdif?: (google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IBwdifConfig|null);
+                        }
+
+                        /** Represents a Deinterlace. */
+                        class Deinterlace implements IDeinterlace {
+
+                            /**
+                             * Constructs a new Deinterlace.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.PreprocessingConfig.IDeinterlace);
+
+                            /** Deinterlace yadif. */
+                            public yadif?: (google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IYadifConfig|null);
+
+                            /** Deinterlace bwdif. */
+                            public bwdif?: (google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IBwdifConfig|null);
+
+                            /** Deinterlace deinterlacingFilter. */
+                            public deinterlacingFilter?: ("yadif"|"bwdif");
+
+                            /**
+                             * Creates a new Deinterlace instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Deinterlace instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.PreprocessingConfig.IDeinterlace): google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace;
+
+                            /**
+                             * Encodes the specified Deinterlace message. Does not implicitly {@link google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.verify|verify} messages.
+                             * @param message Deinterlace message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.PreprocessingConfig.IDeinterlace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Deinterlace message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.verify|verify} messages.
+                             * @param message Deinterlace message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.PreprocessingConfig.IDeinterlace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Deinterlace message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Deinterlace
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace;
+
+                            /**
+                             * Decodes a Deinterlace message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Deinterlace
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace;
+
+                            /**
+                             * Verifies a Deinterlace message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Deinterlace message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Deinterlace
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace;
+
+                            /**
+                             * Creates a plain object from a Deinterlace message. Also converts values to other types if specified.
+                             * @param message Deinterlace
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Deinterlace to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Deinterlace
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Deinterlace {
+
+                            /** Properties of a YadifConfig. */
+                            interface IYadifConfig {
+
+                                /** YadifConfig mode */
+                                mode?: (string|null);
+
+                                /** YadifConfig disableSpatialInterlacing */
+                                disableSpatialInterlacing?: (boolean|null);
+
+                                /** YadifConfig parity */
+                                parity?: (string|null);
+
+                                /** YadifConfig deinterlaceAllFrames */
+                                deinterlaceAllFrames?: (boolean|null);
+                            }
+
+                            /** Represents a YadifConfig. */
+                            class YadifConfig implements IYadifConfig {
+
+                                /**
+                                 * Constructs a new YadifConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IYadifConfig);
+
+                                /** YadifConfig mode. */
+                                public mode: string;
+
+                                /** YadifConfig disableSpatialInterlacing. */
+                                public disableSpatialInterlacing: boolean;
+
+                                /** YadifConfig parity. */
+                                public parity: string;
+
+                                /** YadifConfig deinterlaceAllFrames. */
+                                public deinterlaceAllFrames: boolean;
+
+                                /**
+                                 * Creates a new YadifConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns YadifConfig instance
+                                 */
+                                public static create(properties?: google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IYadifConfig): google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig;
+
+                                /**
+                                 * Encodes the specified YadifConfig message. Does not implicitly {@link google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig.verify|verify} messages.
+                                 * @param message YadifConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IYadifConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified YadifConfig message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig.verify|verify} messages.
+                                 * @param message YadifConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IYadifConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a YadifConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns YadifConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig;
+
+                                /**
+                                 * Decodes a YadifConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns YadifConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig;
+
+                                /**
+                                 * Verifies a YadifConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a YadifConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns YadifConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig;
+
+                                /**
+                                 * Creates a plain object from a YadifConfig message. Also converts values to other types if specified.
+                                 * @param message YadifConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this YadifConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for YadifConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a BwdifConfig. */
+                            interface IBwdifConfig {
+
+                                /** BwdifConfig mode */
+                                mode?: (string|null);
+
+                                /** BwdifConfig parity */
+                                parity?: (string|null);
+
+                                /** BwdifConfig deinterlaceAllFrames */
+                                deinterlaceAllFrames?: (boolean|null);
+                            }
+
+                            /** Represents a BwdifConfig. */
+                            class BwdifConfig implements IBwdifConfig {
+
+                                /**
+                                 * Constructs a new BwdifConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IBwdifConfig);
+
+                                /** BwdifConfig mode. */
+                                public mode: string;
+
+                                /** BwdifConfig parity. */
+                                public parity: string;
+
+                                /** BwdifConfig deinterlaceAllFrames. */
+                                public deinterlaceAllFrames: boolean;
+
+                                /**
+                                 * Creates a new BwdifConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns BwdifConfig instance
+                                 */
+                                public static create(properties?: google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IBwdifConfig): google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig;
+
+                                /**
+                                 * Encodes the specified BwdifConfig message. Does not implicitly {@link google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig.verify|verify} messages.
+                                 * @param message BwdifConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IBwdifConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified BwdifConfig message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig.verify|verify} messages.
+                                 * @param message BwdifConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IBwdifConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a BwdifConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns BwdifConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig;
+
+                                /**
+                                 * Decodes a BwdifConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns BwdifConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig;
+
+                                /**
+                                 * Verifies a BwdifConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a BwdifConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns BwdifConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig;
+
+                                /**
+                                 * Creates a plain object from a BwdifConfig message. Also converts values to other types if specified.
+                                 * @param message BwdifConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this BwdifConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for BwdifConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
                         }
                     }
 

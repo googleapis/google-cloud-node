@@ -5132,6 +5132,9 @@ export namespace google {
 
                     /** AutomatedAgentReply allowCancellation */
                     allowCancellation?: (boolean|null);
+
+                    /** AutomatedAgentReply cxCurrentPage */
+                    cxCurrentPage?: (string|null);
                 }
 
                 /** Represents an AutomatedAgentReply. */
@@ -5151,6 +5154,9 @@ export namespace google {
 
                     /** AutomatedAgentReply allowCancellation. */
                     public allowCancellation: boolean;
+
+                    /** AutomatedAgentReply cxCurrentPage. */
+                    public cxCurrentPage: string;
 
                     /**
                      * Creates a new AutomatedAgentReply instance using the specified properties.
@@ -37195,6 +37201,9 @@ export namespace google {
 
                     /** AutomatedAgentReply allowCancellation */
                     allowCancellation?: (boolean|null);
+
+                    /** AutomatedAgentReply cxCurrentPage */
+                    cxCurrentPage?: (string|null);
                 }
 
                 /** Represents an AutomatedAgentReply. */
@@ -37232,6 +37241,9 @@ export namespace google {
 
                     /** AutomatedAgentReply allowCancellation. */
                     public allowCancellation: boolean;
+
+                    /** AutomatedAgentReply cxCurrentPage. */
+                    public cxCurrentPage: string;
 
                     /** AutomatedAgentReply response. */
                     public response?: "detectIntentResponse";
