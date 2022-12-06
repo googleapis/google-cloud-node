@@ -16,10 +16,18 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DataprocMetastoreClient} from '@google-cloud/dataproc-metastore';
+import {
+  DataprocMetastoreClient,
+  DataprocMetastoreFederationClient,
+} from '@google-cloud/dataproc-metastore';
 
 // check that the client class type name can be used
 function doStuffWithDataprocMetastoreClient(client: DataprocMetastoreClient) {
+  client.close();
+}
+function doStuffWithDataprocMetastoreFederationClient(
+  client: DataprocMetastoreFederationClient
+) {
   client.close();
 }
 
@@ -27,6 +35,12 @@ function main() {
   // check that the client instance can be created
   const dataprocMetastoreClient = new DataprocMetastoreClient();
   doStuffWithDataprocMetastoreClient(dataprocMetastoreClient);
+  // check that the client instance can be created
+  const dataprocMetastoreFederationClient =
+    new DataprocMetastoreFederationClient();
+  doStuffWithDataprocMetastoreFederationClient(
+    dataprocMetastoreFederationClient
+  );
 }
 
 main();

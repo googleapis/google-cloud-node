@@ -1,0 +1,29 @@
+{
+  "name": "nodejs-docs-samples-compute",
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "repository": "googleapis/nodejs-compute",
+  "private": true,
+  "files": [
+    "*.js"
+  ],
+  "scripts": {
+    "test": "mocha test --timeout 1200000"
+  },
+  "dependencies": {
+    "@google-cloud/compute": "^3.6.0",
+    "@sendgrid/mail": "^7.0.0",
+    "nodemailer": "^6.0.0",
+    "nodemailer-smtp-transport": "^2.7.4"
+  },
+  "devDependencies": {
+    "@google-cloud/storage": "^6.0.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.0.0",
+    "proxyquire": "^2.0.1",
+    "uuid": "^9.0.0"
+  }
+}

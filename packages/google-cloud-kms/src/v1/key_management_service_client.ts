@@ -1189,31 +1189,51 @@ export class KeyManagementServiceClient {
    *   Required. The {@link google.cloud.kms.v1.ImportJob.name|name} of the
    *   {@link google.cloud.kms.v1.ImportJob|ImportJob} that was used to wrap this key
    *   material.
-   * @param {Buffer} request.rsaAesWrappedKey
-   *   Wrapped key material produced with
-   *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA1_AES_256|RSA_OAEP_3072_SHA1_AES_256}
-   *   or
-   *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA1_AES_256|RSA_OAEP_4096_SHA1_AES_256}.
+   * @param {Buffer} [request.wrappedKey]
+   *   Optional. The wrapped key material to import.
    *
-   *   This field contains the concatenation of two wrapped keys:
+   *   Before wrapping, key material must be formatted. If importing symmetric key
+   *   material, the expected key material format is plain bytes. If importing
+   *   asymmetric key material, the expected key material format is PKCS#8-encoded
+   *   DER (the PrivateKeyInfo structure from RFC 5208).
+   *
+   *   When wrapping with import methods
+   *   ({@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA1_AES_256|RSA_OAEP_3072_SHA1_AES_256}
+   *   or
+   *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA1_AES_256|RSA_OAEP_4096_SHA1_AES_256}
+   *   or
+   *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA256_AES_256|RSA_OAEP_3072_SHA256_AES_256}
+   *   or
+   *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA256_AES_256|RSA_OAEP_4096_SHA256_AES_256}),
+   *
+   *   this field must contain the concatenation of:
    *   <ol>
    *     <li>An ephemeral AES-256 wrapping key wrapped with the
    *         {@link google.cloud.kms.v1.ImportJob.public_key|public_key} using
-   *         RSAES-OAEP with SHA-1/SHA-256, MGF1 with SHA-1/SHA-256, and an
-   *         empty label.
+   *         RSAES-OAEP with SHA-1/SHA-256, MGF1 with SHA-1/SHA-256, and an empty
+   *         label.
    *     </li>
-   *     <li>The key to be imported, wrapped with the ephemeral AES-256 key
-   *         using AES-KWP (RFC 5649).
+   *     <li>The formatted key to be imported, wrapped with the ephemeral AES-256
+   *         key using AES-KWP (RFC 5649).
    *     </li>
    *   </ol>
    *
-   *   If importing symmetric key material, it is expected that the unwrapped
-   *   key contains plain bytes. If importing asymmetric key material, it is
-   *   expected that the unwrapped key is in PKCS#8-encoded DER format (the
-   *   PrivateKeyInfo structure from RFC 5208).
-   *
    *   This format is the same as the format produced by PKCS#11 mechanism
    *   CKM_RSA_AES_KEY_WRAP.
+   *
+   *   When wrapping with import methods
+   *   ({@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_3072_SHA256|RSA_OAEP_3072_SHA256}
+   *   or
+   *   {@link google.cloud.kms.v1.ImportJob.ImportMethod.RSA_OAEP_4096_SHA256|RSA_OAEP_4096_SHA256}),
+   *
+   *   this field must contain the formatted key to be imported, wrapped with the
+   *   {@link google.cloud.kms.v1.ImportJob.public_key|public_key} using RSAES-OAEP
+   *   with SHA-256, MGF1 with SHA-256, and an empty label.
+   * @param {Buffer} [request.rsaAesWrappedKey]
+   *   Optional. This field has the same meaning as
+   *   {@link google.cloud.kms.v1.ImportCryptoKeyVersionRequest.wrapped_key|wrapped_key}.
+   *   Prefer to use that field in new work. Either that field or this field
+   *   (but not both) must be specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1942,7 +1962,9 @@ export class KeyManagementServiceClient {
    *
    *   The maximum size depends on the key version's
    *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}.
-   *   For {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE} keys, the
+   *   For {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE},
+   *   {@link google.cloud.kms.v1.ProtectionLevel.EXTERNAL|EXTERNAL}, and
+   *   {@link google.cloud.kms.v1.ProtectionLevel.EXTERNAL_VPC|EXTERNAL_VPC} keys, the
    *   plaintext must be no larger than 64KiB. For
    *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of
    *   the plaintext and additional_authenticated_data fields must be no larger
@@ -1954,8 +1976,10 @@ export class KeyManagementServiceClient {
    *
    *   The maximum size depends on the key version's
    *   {@link google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|protection_level}.
-   *   For {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE} keys, the AAD
-   *   must be no larger than 64KiB. For
+   *   For {@link google.cloud.kms.v1.ProtectionLevel.SOFTWARE|SOFTWARE},
+   *   {@link google.cloud.kms.v1.ProtectionLevel.EXTERNAL|EXTERNAL}, and
+   *   {@link google.cloud.kms.v1.ProtectionLevel.EXTERNAL_VPC|EXTERNAL_VPC} keys the
+   *   AAD must be no larger than 64KiB. For
    *   {@link google.cloud.kms.v1.ProtectionLevel.HSM|HSM} keys, the combined length of
    *   the plaintext and additional_authenticated_data fields must be no larger
    *   than 8KiB.
