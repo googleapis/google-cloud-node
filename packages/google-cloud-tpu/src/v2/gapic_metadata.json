@@ -2,7 +2,7 @@
   "schema": "1.0",
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
-  "protoPackage": "google.cloud.tpu.v2alpha1",
+  "protoPackage": "google.cloud.tpu.v2",
   "libraryPackage": "@google-cloud/tpu",
   "services": {
     "Tpu": {
@@ -13,11 +13,6 @@
             "GetNode": {
               "methods": [
                 "getNode"
-              ]
-            },
-            "GetQueuedResource": {
-              "methods": [
-                "getQueuedResource"
               ]
             },
             "GenerateServiceIdentity": {
@@ -65,33 +60,11 @@
                 "updateNode"
               ]
             },
-            "CreateQueuedResource": {
-              "methods": [
-                "createQueuedResource"
-              ]
-            },
-            "DeleteQueuedResource": {
-              "methods": [
-                "deleteQueuedResource"
-              ]
-            },
-            "SimulateMaintenanceEvent": {
-              "methods": [
-                "simulateMaintenanceEvent"
-              ]
-            },
             "ListNodes": {
               "methods": [
                 "listNodes",
                 "listNodesStream",
                 "listNodesAsync"
-              ]
-            },
-            "ListQueuedResources": {
-              "methods": [
-                "listQueuedResources",
-                "listQueuedResourcesStream",
-                "listQueuedResourcesAsync"
               ]
             },
             "ListAcceleratorTypes": {
@@ -118,11 +91,6 @@
                 "getNode"
               ]
             },
-            "GetQueuedResource": {
-              "methods": [
-                "getQueuedResource"
-              ]
-            },
             "GenerateServiceIdentity": {
               "methods": [
                 "generateServiceIdentity"
@@ -168,33 +136,11 @@
                 "updateNode"
               ]
             },
-            "CreateQueuedResource": {
-              "methods": [
-                "createQueuedResource"
-              ]
-            },
-            "DeleteQueuedResource": {
-              "methods": [
-                "deleteQueuedResource"
-              ]
-            },
-            "SimulateMaintenanceEvent": {
-              "methods": [
-                "simulateMaintenanceEvent"
-              ]
-            },
             "ListNodes": {
               "methods": [
                 "listNodes",
                 "listNodesStream",
                 "listNodesAsync"
-              ]
-            },
-            "ListQueuedResources": {
-              "methods": [
-                "listQueuedResources",
-                "listQueuedResourcesStream",
-                "listQueuedResourcesAsync"
               ]
             },
             "ListAcceleratorTypes": {

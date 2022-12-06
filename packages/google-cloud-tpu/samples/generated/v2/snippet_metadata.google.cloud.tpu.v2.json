@@ -5,14 +5,14 @@
         "language": "TYPESCRIPT",
         "apis": [
             {
-                "id": "google.cloud.tpu.v2alpha1",
-                "version": "v2alpha1"
+                "id": "google.cloud.tpu.v2",
+                "version": "v2"
             }
         ]
     },
     "snippets": [
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_ListNodes_async",
+            "regionTag": "tpu_v2_generated_Tpu_ListNodes_async",
             "title": "Tpu listNodes Sample",
             "origin": "API_DEFINITION",
             "description": " Lists nodes.",
@@ -28,7 +28,7 @@
             ],
             "clientMethod": {
                 "shortName": "ListNodes",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.ListNodes",
+                "fullName": "google.cloud.tpu.v2.Tpu.ListNodes",
                 "async": true,
                 "parameters": [
                     {
@@ -44,23 +44,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.tpu.v2alpha1.ListNodesResponse",
+                "resultType": ".google.cloud.tpu.v2.ListNodesResponse",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "ListNodes",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.ListNodes",
+                    "fullName": "google.cloud.tpu.v2.Tpu.ListNodes",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }
         },
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_GetNode_async",
+            "regionTag": "tpu_v2_generated_Tpu_GetNode_async",
             "title": "Tpu getNode Sample",
             "origin": "API_DEFINITION",
             "description": " Gets the details of a node.",
@@ -76,7 +76,7 @@
             ],
             "clientMethod": {
                 "shortName": "GetNode",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.GetNode",
+                "fullName": "google.cloud.tpu.v2.Tpu.GetNode",
                 "async": true,
                 "parameters": [
                     {
@@ -84,23 +84,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.tpu.v2alpha1.Node",
+                "resultType": ".google.cloud.tpu.v2.Node",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "GetNode",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.GetNode",
+                    "fullName": "google.cloud.tpu.v2.Tpu.GetNode",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }
         },
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_CreateNode_async",
+            "regionTag": "tpu_v2_generated_Tpu_CreateNode_async",
             "title": "Tpu createNode Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a node.",
@@ -110,13 +110,13 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],
             "clientMethod": {
                 "shortName": "CreateNode",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.CreateNode",
+                "fullName": "google.cloud.tpu.v2.Tpu.CreateNode",
                 "async": true,
                 "parameters": [
                     {
@@ -129,30 +129,26 @@
                     },
                     {
                         "name": "node",
-                        "type": ".google.cloud.tpu.v2alpha1.Node"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
+                        "type": ".google.cloud.tpu.v2.Node"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "CreateNode",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.CreateNode",
+                    "fullName": "google.cloud.tpu.v2.Tpu.CreateNode",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }
         },
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_DeleteNode_async",
+            "regionTag": "tpu_v2_generated_Tpu_DeleteNode_async",
             "title": "Tpu deleteNode Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a node.",
@@ -162,41 +158,37 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 58,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
             "clientMethod": {
                 "shortName": "DeleteNode",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.DeleteNode",
+                "fullName": "google.cloud.tpu.v2.Tpu.DeleteNode",
                 "async": true,
                 "parameters": [
                     {
                         "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
                         "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "DeleteNode",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.DeleteNode",
+                    "fullName": "google.cloud.tpu.v2.Tpu.DeleteNode",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }
         },
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_StopNode_async",
+            "regionTag": "tpu_v2_generated_Tpu_StopNode_async",
             "title": "Tpu stopNode Sample",
             "origin": "API_DEFINITION",
             "description": " Stops a node. This operation is only available with single TPU nodes.",
@@ -212,7 +204,7 @@
             ],
             "clientMethod": {
                 "shortName": "StopNode",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.StopNode",
+                "fullName": "google.cloud.tpu.v2.Tpu.StopNode",
                 "async": true,
                 "parameters": [
                     {
@@ -223,20 +215,20 @@
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "StopNode",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.StopNode",
+                    "fullName": "google.cloud.tpu.v2.Tpu.StopNode",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }
         },
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_StartNode_async",
+            "regionTag": "tpu_v2_generated_Tpu_StartNode_async",
             "title": "Tpu startNode Sample",
             "origin": "API_DEFINITION",
             "description": " Starts a node.",
@@ -252,7 +244,7 @@
             ],
             "clientMethod": {
                 "shortName": "StartNode",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.StartNode",
+                "fullName": "google.cloud.tpu.v2.Tpu.StartNode",
                 "async": true,
                 "parameters": [
                     {
@@ -263,20 +255,20 @@
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "StartNode",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.StartNode",
+                    "fullName": "google.cloud.tpu.v2.Tpu.StartNode",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }
         },
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_UpdateNode_async",
+            "regionTag": "tpu_v2_generated_Tpu_UpdateNode_async",
             "title": "Tpu updateNode Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the configurations of a node.",
@@ -292,7 +284,7 @@
             ],
             "clientMethod": {
                 "shortName": "UpdateNode",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.UpdateNode",
+                "fullName": "google.cloud.tpu.v2.Tpu.UpdateNode",
                 "async": true,
                 "parameters": [
                     {
@@ -301,210 +293,26 @@
                     },
                     {
                         "name": "node",
-                        "type": ".google.cloud.tpu.v2alpha1.Node"
+                        "type": ".google.cloud.tpu.v2.Node"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "UpdateNode",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.UpdateNode",
+                    "fullName": "google.cloud.tpu.v2.Tpu.UpdateNode",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }
         },
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_ListQueuedResources_async",
-            "title": "Tpu listQueuedResources Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists queued resources.",
-            "canonical": true,
-            "file": "tpu.list_queued_resources.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListQueuedResources",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.ListQueuedResources",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.tpu.v2alpha1.ListQueuedResourcesResponse",
-                "client": {
-                    "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
-                },
-                "method": {
-                    "shortName": "ListQueuedResources",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.ListQueuedResources",
-                    "service": {
-                        "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_GetQueuedResource_async",
-            "title": "Tpu getQueuedResource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a queued resource.",
-            "canonical": true,
-            "file": "tpu.get_queued_resource.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetQueuedResource",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.GetQueuedResource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.tpu.v2alpha1.QueuedResource",
-                "client": {
-                    "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
-                },
-                "method": {
-                    "shortName": "GetQueuedResource",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.GetQueuedResource",
-                    "service": {
-                        "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_CreateQueuedResource_async",
-            "title": "Tpu createQueuedResource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a QueuedResource TPU instance.",
-            "canonical": true,
-            "file": "tpu.create_queued_resource.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateQueuedResource",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.CreateQueuedResource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "queued_resource_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "queued_resource",
-                        "type": ".google.cloud.tpu.v2alpha1.QueuedResource"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
-                },
-                "method": {
-                    "shortName": "CreateQueuedResource",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.CreateQueuedResource",
-                    "service": {
-                        "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_DeleteQueuedResource_async",
-            "title": "Tpu deleteQueuedResource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a QueuedResource TPU instance.",
-            "canonical": true,
-            "file": "tpu.delete_queued_resource.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteQueuedResource",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.DeleteQueuedResource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
-                },
-                "method": {
-                    "shortName": "DeleteQueuedResource",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.DeleteQueuedResource",
-                    "service": {
-                        "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_GenerateServiceIdentity_async",
+            "regionTag": "tpu_v2_generated_Tpu_GenerateServiceIdentity_async",
             "title": "Tpu generateServiceIdentity Sample",
             "origin": "API_DEFINITION",
             "description": " Generates the Cloud TPU service identity for the project.",
@@ -520,7 +328,7 @@
             ],
             "clientMethod": {
                 "shortName": "GenerateServiceIdentity",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.GenerateServiceIdentity",
+                "fullName": "google.cloud.tpu.v2.Tpu.GenerateServiceIdentity",
                 "async": true,
                 "parameters": [
                     {
@@ -528,23 +336,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.tpu.v2alpha1.GenerateServiceIdentityResponse",
+                "resultType": ".google.cloud.tpu.v2.GenerateServiceIdentityResponse",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "GenerateServiceIdentity",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.GenerateServiceIdentity",
+                    "fullName": "google.cloud.tpu.v2.Tpu.GenerateServiceIdentity",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }
         },
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_ListAcceleratorTypes_async",
+            "regionTag": "tpu_v2_generated_Tpu_ListAcceleratorTypes_async",
             "title": "Tpu listAcceleratorTypes Sample",
             "origin": "API_DEFINITION",
             "description": " Lists accelerator types supported by this API.",
@@ -560,7 +368,7 @@
             ],
             "clientMethod": {
                 "shortName": "ListAcceleratorTypes",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.ListAcceleratorTypes",
+                "fullName": "google.cloud.tpu.v2.Tpu.ListAcceleratorTypes",
                 "async": true,
                 "parameters": [
                     {
@@ -584,23 +392,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.tpu.v2alpha1.ListAcceleratorTypesResponse",
+                "resultType": ".google.cloud.tpu.v2.ListAcceleratorTypesResponse",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "ListAcceleratorTypes",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.ListAcceleratorTypes",
+                    "fullName": "google.cloud.tpu.v2.Tpu.ListAcceleratorTypes",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }
         },
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_GetAcceleratorType_async",
+            "regionTag": "tpu_v2_generated_Tpu_GetAcceleratorType_async",
             "title": "Tpu getAcceleratorType Sample",
             "origin": "API_DEFINITION",
             "description": " Gets AcceleratorType.",
@@ -616,7 +424,7 @@
             ],
             "clientMethod": {
                 "shortName": "GetAcceleratorType",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.GetAcceleratorType",
+                "fullName": "google.cloud.tpu.v2.Tpu.GetAcceleratorType",
                 "async": true,
                 "parameters": [
                     {
@@ -624,23 +432,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.tpu.v2alpha1.AcceleratorType",
+                "resultType": ".google.cloud.tpu.v2.AcceleratorType",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "GetAcceleratorType",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.GetAcceleratorType",
+                    "fullName": "google.cloud.tpu.v2.Tpu.GetAcceleratorType",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }
         },
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_ListRuntimeVersions_async",
+            "regionTag": "tpu_v2_generated_Tpu_ListRuntimeVersions_async",
             "title": "Tpu listRuntimeVersions Sample",
             "origin": "API_DEFINITION",
             "description": " Lists runtime versions supported by this API.",
@@ -656,7 +464,7 @@
             ],
             "clientMethod": {
                 "shortName": "ListRuntimeVersions",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.ListRuntimeVersions",
+                "fullName": "google.cloud.tpu.v2.Tpu.ListRuntimeVersions",
                 "async": true,
                 "parameters": [
                     {
@@ -680,23 +488,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.tpu.v2alpha1.ListRuntimeVersionsResponse",
+                "resultType": ".google.cloud.tpu.v2.ListRuntimeVersionsResponse",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "ListRuntimeVersions",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.ListRuntimeVersions",
+                    "fullName": "google.cloud.tpu.v2.Tpu.ListRuntimeVersions",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }
         },
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_GetRuntimeVersion_async",
+            "regionTag": "tpu_v2_generated_Tpu_GetRuntimeVersion_async",
             "title": "Tpu getRuntimeVersion Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a runtime version.",
@@ -712,7 +520,7 @@
             ],
             "clientMethod": {
                 "shortName": "GetRuntimeVersion",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.GetRuntimeVersion",
+                "fullName": "google.cloud.tpu.v2.Tpu.GetRuntimeVersion",
                 "async": true,
                 "parameters": [
                     {
@@ -720,23 +528,23 @@
                         "type": "TYPE_STRING"
                     }
                 ],
-                "resultType": ".google.cloud.tpu.v2alpha1.RuntimeVersion",
+                "resultType": ".google.cloud.tpu.v2.RuntimeVersion",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "GetRuntimeVersion",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.GetRuntimeVersion",
+                    "fullName": "google.cloud.tpu.v2.Tpu.GetRuntimeVersion",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }
         },
         {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_GetGuestAttributes_async",
+            "regionTag": "tpu_v2_generated_Tpu_GetGuestAttributes_async",
             "title": "Tpu getGuestAttributes Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves the guest attributes for the node.",
@@ -752,7 +560,7 @@
             ],
             "clientMethod": {
                 "shortName": "GetGuestAttributes",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.GetGuestAttributes",
+                "fullName": "google.cloud.tpu.v2.Tpu.GetGuestAttributes",
                 "async": true,
                 "parameters": [
                     {
@@ -768,61 +576,17 @@
                         "type": "TYPE_STRING[]"
                     }
                 ],
-                "resultType": ".google.cloud.tpu.v2alpha1.GetGuestAttributesResponse",
+                "resultType": ".google.cloud.tpu.v2.GetGuestAttributesResponse",
                 "client": {
                     "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
+                    "fullName": "google.cloud.tpu.v2.TpuClient"
                 },
                 "method": {
                     "shortName": "GetGuestAttributes",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.GetGuestAttributes",
+                    "fullName": "google.cloud.tpu.v2.Tpu.GetGuestAttributes",
                     "service": {
                         "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "tpu_v2alpha1_generated_Tpu_SimulateMaintenanceEvent_async",
-            "title": "Tpu simulateMaintenanceEvent Sample",
-            "origin": "API_DEFINITION",
-            "description": " Simulates a maintenance event.",
-            "canonical": true,
-            "file": "tpu.simulate_maintenance_event.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SimulateMaintenanceEvent",
-                "fullName": "google.cloud.tpu.v2alpha1.Tpu.SimulateMaintenanceEvent",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "worker_ids",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "TpuClient",
-                    "fullName": "google.cloud.tpu.v2alpha1.TpuClient"
-                },
-                "method": {
-                    "shortName": "SimulateMaintenanceEvent",
-                    "fullName": "google.cloud.tpu.v2alpha1.Tpu.SimulateMaintenanceEvent",
-                    "service": {
-                        "shortName": "Tpu",
-                        "fullName": "google.cloud.tpu.v2alpha1.Tpu"
+                        "fullName": "google.cloud.tpu.v2.Tpu"
                     }
                 }
             }

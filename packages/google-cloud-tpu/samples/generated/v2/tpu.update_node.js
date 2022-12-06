@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START tpu_v2alpha1_generated_Tpu_StopNode_async]
+function main(updateMask, node) {
+  // [START tpu_v2_generated_Tpu_UpdateNode_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,30 +29,37 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name.
+   *  Required. Mask of fields from Node Tpu.Node  to update.
+   *  Supported fields: description, tags, labels, metadata,
+   *  network_config.enable_external_ips.
    */
-  // const name = 'abc123'
+  // const updateMask = {}
+  /**
+   *  Required. The node. Only fields specified in update_mask are updated.
+   */
+  // const node = {}
 
   // Imports the Tpu library
-  const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
+  const {TpuClient} = require('@google-cloud/tpu').v2;
 
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function callStopNode() {
+  async function callUpdateNode() {
     // Construct request
     const request = {
-      name,
+      updateMask,
+      node,
     };
 
     // Run request
-    const [operation] = await tpuClient.stopNode(request);
+    const [operation] = await tpuClient.updateNode(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callStopNode();
-  // [END tpu_v2alpha1_generated_Tpu_StopNode_async]
+  callUpdateNode();
+  // [END tpu_v2_generated_Tpu_UpdateNode_async]
 }
 
 process.on('unhandledRejection', err => {

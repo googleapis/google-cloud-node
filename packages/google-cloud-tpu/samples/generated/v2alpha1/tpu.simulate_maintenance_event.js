@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START tpu_v2alpha1_generated_Tpu_StopNode_async]
+  // [START tpu_v2alpha1_generated_Tpu_SimulateMaintenanceEvent_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -32,6 +32,13 @@ function main(name) {
    *  Required. The resource name.
    */
   // const name = 'abc123'
+  /**
+   *  The 0-based worker ID. If it is empty, worker ID 0 will be selected for
+   *  maintenance event simulation. A maintenance event will only be fired on the
+   *  first specified worker ID. Future implementations may support firing on
+   *  multiple workers.
+   */
+  // const workerIds = 'abc123'
 
   // Imports the Tpu library
   const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
@@ -39,20 +46,20 @@ function main(name) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function callStopNode() {
+  async function callSimulateMaintenanceEvent() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await tpuClient.stopNode(request);
+    const [operation] = await tpuClient.simulateMaintenanceEvent(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callStopNode();
-  // [END tpu_v2alpha1_generated_Tpu_StopNode_async]
+  callSimulateMaintenanceEvent();
+  // [END tpu_v2alpha1_generated_Tpu_SimulateMaintenanceEvent_async]
 }
 
 process.on('unhandledRejection', err => {

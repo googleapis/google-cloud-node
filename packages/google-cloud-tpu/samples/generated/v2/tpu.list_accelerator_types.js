@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START tpu_v2alpha1_generated_Tpu_StopNode_async]
+function main(parent) {
+  // [START tpu_v2_generated_Tpu_ListAcceleratorTypes_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,30 +29,47 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name.
+   *  Required. The parent resource name.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  The maximum number of items to return.
+   */
+  // const pageSize = 1234
+  /**
+   *  The next_page_token value returned from a previous List request, if any.
+   */
+  // const pageToken = 'abc123'
+  /**
+   *  List filter.
+   */
+  // const filter = 'abc123'
+  /**
+   *  Sort results.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Tpu library
-  const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
+  const {TpuClient} = require('@google-cloud/tpu').v2;
 
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function callStopNode() {
+  async function callListAcceleratorTypes() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const [operation] = await tpuClient.stopNode(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await tpuClient.listAcceleratorTypesAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callStopNode();
-  // [END tpu_v2alpha1_generated_Tpu_StopNode_async]
+  callListAcceleratorTypes();
+  // [END tpu_v2_generated_Tpu_ListAcceleratorTypes_async]
 }
 
 process.on('unhandledRejection', err => {

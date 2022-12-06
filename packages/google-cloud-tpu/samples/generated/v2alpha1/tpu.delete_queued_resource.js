@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START tpu_v2alpha1_generated_Tpu_StopNode_async]
+  // [START tpu_v2alpha1_generated_Tpu_DeleteQueuedResource_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -32,6 +32,10 @@ function main(name) {
    *  Required. The resource name.
    */
   // const name = 'abc123'
+  /**
+   *  Idempotent request UUID.
+   */
+  // const requestId = 'abc123'
 
   // Imports the Tpu library
   const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
@@ -39,20 +43,20 @@ function main(name) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function callStopNode() {
+  async function callDeleteQueuedResource() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await tpuClient.stopNode(request);
+    const [operation] = await tpuClient.deleteQueuedResource(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callStopNode();
-  // [END tpu_v2alpha1_generated_Tpu_StopNode_async]
+  callDeleteQueuedResource();
+  // [END tpu_v2alpha1_generated_Tpu_DeleteQueuedResource_async]
 }
 
 process.on('unhandledRejection', err => {

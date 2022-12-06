@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START tpu_v2alpha1_generated_Tpu_StopNode_async]
+function main(parent, queuedResource) {
+  // [START tpu_v2alpha1_generated_Tpu_CreateQueuedResource_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,9 +29,22 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name.
+   *  Required. The parent resource name.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  The unqualified resource name. Should follow the ^[A-Za-z0-9_.~+%-]+$
+   *  regex format.
+   */
+  // const queuedResourceId = 'abc123'
+  /**
+   *  Required. The queued resource.
+   */
+  // const queuedResource = {}
+  /**
+   *  Idempotent request UUID.
+   */
+  // const requestId = 'abc123'
 
   // Imports the Tpu library
   const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
@@ -39,20 +52,21 @@ function main(name) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function callStopNode() {
+  async function callCreateQueuedResource() {
     // Construct request
     const request = {
-      name,
+      parent,
+      queuedResource,
     };
 
     // Run request
-    const [operation] = await tpuClient.stopNode(request);
+    const [operation] = await tpuClient.createQueuedResource(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callStopNode();
-  // [END tpu_v2alpha1_generated_Tpu_StopNode_async]
+  callCreateQueuedResource();
+  // [END tpu_v2alpha1_generated_Tpu_CreateQueuedResource_async]
 }
 
 process.on('unhandledRejection', err => {

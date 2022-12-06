@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START tpu_v2alpha1_generated_Tpu_StopNode_async]
+  // [START tpu_v2_generated_Tpu_GetGuestAttributes_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -32,27 +32,35 @@ function main(name) {
    *  Required. The resource name.
    */
   // const name = 'abc123'
+  /**
+   *  The guest attributes path to be queried.
+   */
+  // const queryPath = 'abc123'
+  /**
+   *  The 0-based worker ID. If it is empty, all workers' GuestAttributes will be
+   *  returned.
+   */
+  // const workerIds = 'abc123'
 
   // Imports the Tpu library
-  const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
+  const {TpuClient} = require('@google-cloud/tpu').v2;
 
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function callStopNode() {
+  async function callGetGuestAttributes() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await tpuClient.stopNode(request);
-    const [response] = await operation.promise();
+    const response = await tpuClient.getGuestAttributes(request);
     console.log(response);
   }
 
-  callStopNode();
-  // [END tpu_v2alpha1_generated_Tpu_StopNode_async]
+  callGetGuestAttributes();
+  // [END tpu_v2_generated_Tpu_GetGuestAttributes_async]
 }
 
 process.on('unhandledRejection', err => {

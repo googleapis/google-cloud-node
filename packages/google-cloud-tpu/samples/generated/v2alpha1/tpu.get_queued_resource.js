@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START tpu_v2alpha1_generated_Tpu_StopNode_async]
+  // [START tpu_v2alpha1_generated_Tpu_GetQueuedResource_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -39,20 +39,19 @@ function main(name) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function callStopNode() {
+  async function callGetQueuedResource() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await tpuClient.stopNode(request);
-    const [response] = await operation.promise();
+    const response = await tpuClient.getQueuedResource(request);
     console.log(response);
   }
 
-  callStopNode();
-  // [END tpu_v2alpha1_generated_Tpu_StopNode_async]
+  callGetQueuedResource();
+  // [END tpu_v2alpha1_generated_Tpu_GetQueuedResource_async]
 }
 
 process.on('unhandledRejection', err => {

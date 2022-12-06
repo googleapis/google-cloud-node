@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START tpu_v2alpha1_generated_Tpu_StopNode_async]
+function main(parent, node) {
+  // [START tpu_v2_generated_Tpu_CreateNode_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,30 +29,39 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name.
+   *  Required. The parent resource name.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  The unqualified resource name.
+   */
+  // const nodeId = 'abc123'
+  /**
+   *  Required. The node.
+   */
+  // const node = {}
 
   // Imports the Tpu library
-  const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
+  const {TpuClient} = require('@google-cloud/tpu').v2;
 
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function callStopNode() {
+  async function callCreateNode() {
     // Construct request
     const request = {
-      name,
+      parent,
+      node,
     };
 
     // Run request
-    const [operation] = await tpuClient.stopNode(request);
+    const [operation] = await tpuClient.createNode(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callStopNode();
-  // [END tpu_v2alpha1_generated_Tpu_StopNode_async]
+  callCreateNode();
+  // [END tpu_v2_generated_Tpu_CreateNode_async]
 }
 
 process.on('unhandledRejection', err => {

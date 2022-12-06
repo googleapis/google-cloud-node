@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START tpu_v2alpha1_generated_Tpu_StopNode_async]
+function main(parent) {
+  // [START tpu_v2alpha1_generated_Tpu_ListQueuedResources_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,9 +29,17 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name.
+   *  Required. The parent resource name.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  The maximum number of items to return.
+   */
+  // const pageSize = 1234
+  /**
+   *  The next_page_token value returned from a previous List request, if any.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Tpu library
   const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
@@ -39,20 +47,21 @@ function main(name) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function callStopNode() {
+  async function callListQueuedResources() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const [operation] = await tpuClient.stopNode(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await tpuClient.listQueuedResourcesAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callStopNode();
-  // [END tpu_v2alpha1_generated_Tpu_StopNode_async]
+  callListQueuedResources();
+  // [END tpu_v2alpha1_generated_Tpu_ListQueuedResources_async]
 }
 
 process.on('unhandledRejection', err => {
