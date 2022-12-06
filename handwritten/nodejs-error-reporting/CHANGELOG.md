@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## [3.0.5](https://github.com/googleapis/nodejs-error-reporting/compare/v3.0.4...v3.0.5) (2022-12-02)
+
+
+### Bug Fixes
+
+* Add a partner team as approvers for PRs ([#686](https://github.com/googleapis/nodejs-error-reporting/issues/686)) ([18d2fed](https://github.com/googleapis/nodejs-error-reporting/commit/18d2fed84b4adc06274603a3fbae130313f9aa46))
+
 ## [3.0.4](https://github.com/googleapis/nodejs-error-reporting/compare/v3.0.3...v3.0.4) (2022-10-13)
 
 
