@@ -21,6 +21,8 @@ const metastore = require('@google-cloud/dataproc-metastore');
 
 function main() {
   const dataprocMetastoreClient = new metastore.DataprocMetastoreClient();
+  const dataprocMetastoreFederationClient =
+    new metastore.DataprocMetastoreFederationClient();
 }
 
 main();

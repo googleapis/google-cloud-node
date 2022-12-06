@@ -39,6 +39,14 @@
         "DeleteEnvironment": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "SaveSnapshot": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "LoadSnapshot": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }
