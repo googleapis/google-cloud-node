@@ -1860,6 +1860,10 @@ export namespace google {
                         EC_SIGN_P384_SHA384 = 13,
                         EC_SIGN_SECP256K1_SHA256 = 31,
                         HMAC_SHA256 = 32,
+                        HMAC_SHA1 = 33,
+                        HMAC_SHA384 = 34,
+                        HMAC_SHA512 = 35,
+                        HMAC_SHA224 = 36,
                         EXTERNAL_SYMMETRIC_ENCRYPTION = 18
                     }
 
@@ -2160,7 +2164,11 @@ export namespace google {
                     enum ImportMethod {
                         IMPORT_METHOD_UNSPECIFIED = 0,
                         RSA_OAEP_3072_SHA1_AES_256 = 1,
-                        RSA_OAEP_4096_SHA1_AES_256 = 2
+                        RSA_OAEP_4096_SHA1_AES_256 = 2,
+                        RSA_OAEP_3072_SHA256_AES_256 = 3,
+                        RSA_OAEP_4096_SHA256_AES_256 = 4,
+                        RSA_OAEP_3072_SHA256 = 5,
+                        RSA_OAEP_4096_SHA256 = 6
                     }
 
                     /** ImportJobState enum. */
@@ -4710,6 +4718,9 @@ export namespace google {
                     /** ImportCryptoKeyVersionRequest importJob */
                     importJob?: (string|null);
 
+                    /** ImportCryptoKeyVersionRequest wrappedKey */
+                    wrappedKey?: (Uint8Array|string|null);
+
                     /** ImportCryptoKeyVersionRequest rsaAesWrappedKey */
                     rsaAesWrappedKey?: (Uint8Array|string|null);
                 }
@@ -4734,6 +4745,9 @@ export namespace google {
 
                     /** ImportCryptoKeyVersionRequest importJob. */
                     public importJob: string;
+
+                    /** ImportCryptoKeyVersionRequest wrappedKey. */
+                    public wrappedKey: (Uint8Array|string);
 
                     /** ImportCryptoKeyVersionRequest rsaAesWrappedKey. */
                     public rsaAesWrappedKey?: (Uint8Array|string|null);

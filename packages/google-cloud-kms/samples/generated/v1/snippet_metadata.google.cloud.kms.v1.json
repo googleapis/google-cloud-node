@@ -786,7 +786,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 118,
+                    "end": 137,
                     "type": "FULL"
                 }
             ],
@@ -810,6 +810,10 @@
                     {
                         "name": "import_job",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "wrapped_key",
+                        "type": "TYPE_BYTES"
                     },
                     {
                         "name": "rsa_aes_wrapped_key",
@@ -1102,7 +1106,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 127,
+                    "end": 131,
                     "type": "FULL"
                 }
             ],

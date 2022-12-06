@@ -121,6 +121,34 @@ export namespace google {
                              * @returns Promise
                              */
                             public deleteEnvironment(request: google.cloud.orchestration.airflow.service.v1.IDeleteEnvironmentRequest): Promise<google.longrunning.Operation>;
+
+                            /**
+                             * Calls SaveSnapshot.
+                             * @param request SaveSnapshotRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and Operation
+                             */
+                            public saveSnapshot(request: google.cloud.orchestration.airflow.service.v1.ISaveSnapshotRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.SaveSnapshotCallback): void;
+
+                            /**
+                             * Calls SaveSnapshot.
+                             * @param request SaveSnapshotRequest message or plain object
+                             * @returns Promise
+                             */
+                            public saveSnapshot(request: google.cloud.orchestration.airflow.service.v1.ISaveSnapshotRequest): Promise<google.longrunning.Operation>;
+
+                            /**
+                             * Calls LoadSnapshot.
+                             * @param request LoadSnapshotRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and Operation
+                             */
+                            public loadSnapshot(request: google.cloud.orchestration.airflow.service.v1.ILoadSnapshotRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.LoadSnapshotCallback): void;
+
+                            /**
+                             * Calls LoadSnapshot.
+                             * @param request LoadSnapshotRequest message or plain object
+                             * @returns Promise
+                             */
+                            public loadSnapshot(request: google.cloud.orchestration.airflow.service.v1.ILoadSnapshotRequest): Promise<google.longrunning.Operation>;
                         }
 
                         namespace Environments {
@@ -159,6 +187,20 @@ export namespace google {
                              * @param [response] Operation
                              */
                             type DeleteEnvironmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|saveSnapshot}.
+                             * @param error Error, if any
+                             * @param [response] Operation
+                             */
+                            type SaveSnapshotCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|loadSnapshot}.
+                             * @param error Error, if any
+                             * @param [response] Operation
+                             */
+                            type LoadSnapshotCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                         }
 
                         /** Properties of a CreateEnvironmentRequest. */
@@ -779,6 +821,424 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of a SaveSnapshotRequest. */
+                        interface ISaveSnapshotRequest {
+
+                            /** SaveSnapshotRequest environment */
+                            environment?: (string|null);
+
+                            /** SaveSnapshotRequest snapshotLocation */
+                            snapshotLocation?: (string|null);
+                        }
+
+                        /** Represents a SaveSnapshotRequest. */
+                        class SaveSnapshotRequest implements ISaveSnapshotRequest {
+
+                            /**
+                             * Constructs a new SaveSnapshotRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.ISaveSnapshotRequest);
+
+                            /** SaveSnapshotRequest environment. */
+                            public environment: string;
+
+                            /** SaveSnapshotRequest snapshotLocation. */
+                            public snapshotLocation: string;
+
+                            /**
+                             * Creates a new SaveSnapshotRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SaveSnapshotRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.ISaveSnapshotRequest): google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest;
+
+                            /**
+                             * Encodes the specified SaveSnapshotRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest.verify|verify} messages.
+                             * @param message SaveSnapshotRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.ISaveSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SaveSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest.verify|verify} messages.
+                             * @param message SaveSnapshotRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.ISaveSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SaveSnapshotRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SaveSnapshotRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest;
+
+                            /**
+                             * Decodes a SaveSnapshotRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SaveSnapshotRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest;
+
+                            /**
+                             * Verifies a SaveSnapshotRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SaveSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SaveSnapshotRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest;
+
+                            /**
+                             * Creates a plain object from a SaveSnapshotRequest message. Also converts values to other types if specified.
+                             * @param message SaveSnapshotRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.SaveSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SaveSnapshotRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SaveSnapshotRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a SaveSnapshotResponse. */
+                        interface ISaveSnapshotResponse {
+
+                            /** SaveSnapshotResponse snapshotPath */
+                            snapshotPath?: (string|null);
+                        }
+
+                        /** Represents a SaveSnapshotResponse. */
+                        class SaveSnapshotResponse implements ISaveSnapshotResponse {
+
+                            /**
+                             * Constructs a new SaveSnapshotResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.ISaveSnapshotResponse);
+
+                            /** SaveSnapshotResponse snapshotPath. */
+                            public snapshotPath: string;
+
+                            /**
+                             * Creates a new SaveSnapshotResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SaveSnapshotResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.ISaveSnapshotResponse): google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse;
+
+                            /**
+                             * Encodes the specified SaveSnapshotResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse.verify|verify} messages.
+                             * @param message SaveSnapshotResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.ISaveSnapshotResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SaveSnapshotResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse.verify|verify} messages.
+                             * @param message SaveSnapshotResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.ISaveSnapshotResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SaveSnapshotResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SaveSnapshotResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse;
+
+                            /**
+                             * Decodes a SaveSnapshotResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SaveSnapshotResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse;
+
+                            /**
+                             * Verifies a SaveSnapshotResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SaveSnapshotResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SaveSnapshotResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse;
+
+                            /**
+                             * Creates a plain object from a SaveSnapshotResponse message. Also converts values to other types if specified.
+                             * @param message SaveSnapshotResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SaveSnapshotResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SaveSnapshotResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a LoadSnapshotRequest. */
+                        interface ILoadSnapshotRequest {
+
+                            /** LoadSnapshotRequest environment */
+                            environment?: (string|null);
+
+                            /** LoadSnapshotRequest snapshotPath */
+                            snapshotPath?: (string|null);
+
+                            /** LoadSnapshotRequest skipPypiPackagesInstallation */
+                            skipPypiPackagesInstallation?: (boolean|null);
+
+                            /** LoadSnapshotRequest skipEnvironmentVariablesSetting */
+                            skipEnvironmentVariablesSetting?: (boolean|null);
+
+                            /** LoadSnapshotRequest skipAirflowOverridesSetting */
+                            skipAirflowOverridesSetting?: (boolean|null);
+
+                            /** LoadSnapshotRequest skipGcsDataCopying */
+                            skipGcsDataCopying?: (boolean|null);
+                        }
+
+                        /** Represents a LoadSnapshotRequest. */
+                        class LoadSnapshotRequest implements ILoadSnapshotRequest {
+
+                            /**
+                             * Constructs a new LoadSnapshotRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.ILoadSnapshotRequest);
+
+                            /** LoadSnapshotRequest environment. */
+                            public environment: string;
+
+                            /** LoadSnapshotRequest snapshotPath. */
+                            public snapshotPath: string;
+
+                            /** LoadSnapshotRequest skipPypiPackagesInstallation. */
+                            public skipPypiPackagesInstallation: boolean;
+
+                            /** LoadSnapshotRequest skipEnvironmentVariablesSetting. */
+                            public skipEnvironmentVariablesSetting: boolean;
+
+                            /** LoadSnapshotRequest skipAirflowOverridesSetting. */
+                            public skipAirflowOverridesSetting: boolean;
+
+                            /** LoadSnapshotRequest skipGcsDataCopying. */
+                            public skipGcsDataCopying: boolean;
+
+                            /**
+                             * Creates a new LoadSnapshotRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LoadSnapshotRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.ILoadSnapshotRequest): google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest;
+
+                            /**
+                             * Encodes the specified LoadSnapshotRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest.verify|verify} messages.
+                             * @param message LoadSnapshotRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.ILoadSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LoadSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest.verify|verify} messages.
+                             * @param message LoadSnapshotRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.ILoadSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LoadSnapshotRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LoadSnapshotRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest;
+
+                            /**
+                             * Decodes a LoadSnapshotRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LoadSnapshotRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest;
+
+                            /**
+                             * Verifies a LoadSnapshotRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LoadSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LoadSnapshotRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest;
+
+                            /**
+                             * Creates a plain object from a LoadSnapshotRequest message. Also converts values to other types if specified.
+                             * @param message LoadSnapshotRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.LoadSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LoadSnapshotRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LoadSnapshotRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a LoadSnapshotResponse. */
+                        interface ILoadSnapshotResponse {
+                        }
+
+                        /** Represents a LoadSnapshotResponse. */
+                        class LoadSnapshotResponse implements ILoadSnapshotResponse {
+
+                            /**
+                             * Constructs a new LoadSnapshotResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.ILoadSnapshotResponse);
+
+                            /**
+                             * Creates a new LoadSnapshotResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LoadSnapshotResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.ILoadSnapshotResponse): google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse;
+
+                            /**
+                             * Encodes the specified LoadSnapshotResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse.verify|verify} messages.
+                             * @param message LoadSnapshotResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.ILoadSnapshotResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LoadSnapshotResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse.verify|verify} messages.
+                             * @param message LoadSnapshotResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.ILoadSnapshotResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LoadSnapshotResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LoadSnapshotResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse;
+
+                            /**
+                             * Decodes a LoadSnapshotResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LoadSnapshotResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse;
+
+                            /**
+                             * Verifies a LoadSnapshotResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LoadSnapshotResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LoadSnapshotResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse;
+
+                            /**
+                             * Creates a plain object from a LoadSnapshotResponse message. Also converts values to other types if specified.
+                             * @param message LoadSnapshotResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.LoadSnapshotResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LoadSnapshotResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LoadSnapshotResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Properties of an EnvironmentConfig. */
                         interface IEnvironmentConfig {
 
@@ -812,8 +1272,23 @@ export namespace google {
                             /** EnvironmentConfig encryptionConfig */
                             encryptionConfig?: (google.cloud.orchestration.airflow.service.v1.IEncryptionConfig|null);
 
+                            /** EnvironmentConfig maintenanceWindow */
+                            maintenanceWindow?: (google.cloud.orchestration.airflow.service.v1.IMaintenanceWindow|null);
+
+                            /** EnvironmentConfig workloadsConfig */
+                            workloadsConfig?: (google.cloud.orchestration.airflow.service.v1.IWorkloadsConfig|null);
+
+                            /** EnvironmentConfig environmentSize */
+                            environmentSize?: (google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize|keyof typeof google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize|null);
+
                             /** EnvironmentConfig airflowUri */
                             airflowUri?: (string|null);
+
+                            /** EnvironmentConfig masterAuthorizedNetworksConfig */
+                            masterAuthorizedNetworksConfig?: (google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig|null);
+
+                            /** EnvironmentConfig recoveryConfig */
+                            recoveryConfig?: (google.cloud.orchestration.airflow.service.v1.IRecoveryConfig|null);
                         }
 
                         /** Represents an EnvironmentConfig. */
@@ -855,8 +1330,23 @@ export namespace google {
                             /** EnvironmentConfig encryptionConfig. */
                             public encryptionConfig?: (google.cloud.orchestration.airflow.service.v1.IEncryptionConfig|null);
 
+                            /** EnvironmentConfig maintenanceWindow. */
+                            public maintenanceWindow?: (google.cloud.orchestration.airflow.service.v1.IMaintenanceWindow|null);
+
+                            /** EnvironmentConfig workloadsConfig. */
+                            public workloadsConfig?: (google.cloud.orchestration.airflow.service.v1.IWorkloadsConfig|null);
+
+                            /** EnvironmentConfig environmentSize. */
+                            public environmentSize: (google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize|keyof typeof google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize);
+
                             /** EnvironmentConfig airflowUri. */
                             public airflowUri: string;
+
+                            /** EnvironmentConfig masterAuthorizedNetworksConfig. */
+                            public masterAuthorizedNetworksConfig?: (google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig|null);
+
+                            /** EnvironmentConfig recoveryConfig. */
+                            public recoveryConfig?: (google.cloud.orchestration.airflow.service.v1.IRecoveryConfig|null);
 
                             /**
                              * Creates a new EnvironmentConfig instance using the specified properties.
@@ -934,6 +1424,17 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace EnvironmentConfig {
+
+                            /** EnvironmentSize enum. */
+                            enum EnvironmentSize {
+                                ENVIRONMENT_SIZE_UNSPECIFIED = 0,
+                                ENVIRONMENT_SIZE_SMALL = 1,
+                                ENVIRONMENT_SIZE_MEDIUM = 2,
+                                ENVIRONMENT_SIZE_LARGE = 3
+                            }
                         }
 
                         /** Properties of a WebServerNetworkAccessControl. */
@@ -1430,6 +1931,115 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of a MaintenanceWindow. */
+                        interface IMaintenanceWindow {
+
+                            /** MaintenanceWindow startTime */
+                            startTime?: (google.protobuf.ITimestamp|null);
+
+                            /** MaintenanceWindow endTime */
+                            endTime?: (google.protobuf.ITimestamp|null);
+
+                            /** MaintenanceWindow recurrence */
+                            recurrence?: (string|null);
+                        }
+
+                        /** Represents a MaintenanceWindow. */
+                        class MaintenanceWindow implements IMaintenanceWindow {
+
+                            /**
+                             * Constructs a new MaintenanceWindow.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IMaintenanceWindow);
+
+                            /** MaintenanceWindow startTime. */
+                            public startTime?: (google.protobuf.ITimestamp|null);
+
+                            /** MaintenanceWindow endTime. */
+                            public endTime?: (google.protobuf.ITimestamp|null);
+
+                            /** MaintenanceWindow recurrence. */
+                            public recurrence: string;
+
+                            /**
+                             * Creates a new MaintenanceWindow instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns MaintenanceWindow instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IMaintenanceWindow): google.cloud.orchestration.airflow.service.v1.MaintenanceWindow;
+
+                            /**
+                             * Encodes the specified MaintenanceWindow message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.MaintenanceWindow.verify|verify} messages.
+                             * @param message MaintenanceWindow message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified MaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.MaintenanceWindow.verify|verify} messages.
+                             * @param message MaintenanceWindow message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a MaintenanceWindow message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns MaintenanceWindow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.MaintenanceWindow;
+
+                            /**
+                             * Decodes a MaintenanceWindow message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns MaintenanceWindow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.MaintenanceWindow;
+
+                            /**
+                             * Verifies a MaintenanceWindow message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a MaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns MaintenanceWindow
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.MaintenanceWindow;
+
+                            /**
+                             * Creates a plain object from a MaintenanceWindow message. Also converts values to other types if specified.
+                             * @param message MaintenanceWindow
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.MaintenanceWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this MaintenanceWindow to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for MaintenanceWindow
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Properties of a SoftwareConfig. */
                         interface ISoftwareConfig {
 
@@ -1447,6 +2057,9 @@ export namespace google {
 
                             /** SoftwareConfig pythonVersion */
                             pythonVersion?: (string|null);
+
+                            /** SoftwareConfig schedulerCount */
+                            schedulerCount?: (number|null);
                         }
 
                         /** Represents a SoftwareConfig. */
@@ -1472,6 +2085,9 @@ export namespace google {
 
                             /** SoftwareConfig pythonVersion. */
                             public pythonVersion: string;
+
+                            /** SoftwareConfig schedulerCount. */
+                            public schedulerCount: number;
 
                             /**
                              * Creates a new SoftwareConfig instance using the specified properties.
@@ -1707,6 +2323,9 @@ export namespace google {
 
                             /** NodeConfig ipAllocationPolicy */
                             ipAllocationPolicy?: (google.cloud.orchestration.airflow.service.v1.IIPAllocationPolicy|null);
+
+                            /** NodeConfig enableIpMasqAgent */
+                            enableIpMasqAgent?: (boolean|null);
                         }
 
                         /** Represents a NodeConfig. */
@@ -1744,6 +2363,9 @@ export namespace google {
 
                             /** NodeConfig ipAllocationPolicy. */
                             public ipAllocationPolicy?: (google.cloud.orchestration.airflow.service.v1.IIPAllocationPolicy|null);
+
+                            /** NodeConfig enableIpMasqAgent. */
+                            public enableIpMasqAgent: boolean;
 
                             /**
                              * Creates a new NodeConfig instance using the specified properties.
@@ -1932,6 +2554,113 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of a NetworkingConfig. */
+                        interface INetworkingConfig {
+
+                            /** NetworkingConfig connectionType */
+                            connectionType?: (google.cloud.orchestration.airflow.service.v1.NetworkingConfig.ConnectionType|keyof typeof google.cloud.orchestration.airflow.service.v1.NetworkingConfig.ConnectionType|null);
+                        }
+
+                        /** Represents a NetworkingConfig. */
+                        class NetworkingConfig implements INetworkingConfig {
+
+                            /**
+                             * Constructs a new NetworkingConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.INetworkingConfig);
+
+                            /** NetworkingConfig connectionType. */
+                            public connectionType: (google.cloud.orchestration.airflow.service.v1.NetworkingConfig.ConnectionType|keyof typeof google.cloud.orchestration.airflow.service.v1.NetworkingConfig.ConnectionType);
+
+                            /**
+                             * Creates a new NetworkingConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns NetworkingConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.INetworkingConfig): google.cloud.orchestration.airflow.service.v1.NetworkingConfig;
+
+                            /**
+                             * Encodes the specified NetworkingConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.NetworkingConfig.verify|verify} messages.
+                             * @param message NetworkingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.INetworkingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified NetworkingConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.NetworkingConfig.verify|verify} messages.
+                             * @param message NetworkingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.INetworkingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a NetworkingConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns NetworkingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.NetworkingConfig;
+
+                            /**
+                             * Decodes a NetworkingConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns NetworkingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.NetworkingConfig;
+
+                            /**
+                             * Verifies a NetworkingConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a NetworkingConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns NetworkingConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.NetworkingConfig;
+
+                            /**
+                             * Creates a plain object from a NetworkingConfig message. Also converts values to other types if specified.
+                             * @param message NetworkingConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.NetworkingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this NetworkingConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for NetworkingConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace NetworkingConfig {
+
+                            /** ConnectionType enum. */
+                            enum ConnectionType {
+                                CONNECTION_TYPE_UNSPECIFIED = 0,
+                                VPC_PEERING = 1,
+                                PRIVATE_SERVICE_CONNECT = 2
+                            }
+                        }
+
                         /** Properties of a PrivateEnvironmentConfig. */
                         interface IPrivateEnvironmentConfig {
 
@@ -1949,6 +2678,21 @@ export namespace google {
 
                             /** PrivateEnvironmentConfig webServerIpv4ReservedRange */
                             webServerIpv4ReservedRange?: (string|null);
+
+                            /** PrivateEnvironmentConfig cloudComposerNetworkIpv4CidrBlock */
+                            cloudComposerNetworkIpv4CidrBlock?: (string|null);
+
+                            /** PrivateEnvironmentConfig cloudComposerNetworkIpv4ReservedRange */
+                            cloudComposerNetworkIpv4ReservedRange?: (string|null);
+
+                            /** PrivateEnvironmentConfig enablePrivatelyUsedPublicIps */
+                            enablePrivatelyUsedPublicIps?: (boolean|null);
+
+                            /** PrivateEnvironmentConfig cloudComposerConnectionSubnetwork */
+                            cloudComposerConnectionSubnetwork?: (string|null);
+
+                            /** PrivateEnvironmentConfig networkingConfig */
+                            networkingConfig?: (google.cloud.orchestration.airflow.service.v1.INetworkingConfig|null);
                         }
 
                         /** Represents a PrivateEnvironmentConfig. */
@@ -1974,6 +2718,21 @@ export namespace google {
 
                             /** PrivateEnvironmentConfig webServerIpv4ReservedRange. */
                             public webServerIpv4ReservedRange: string;
+
+                            /** PrivateEnvironmentConfig cloudComposerNetworkIpv4CidrBlock. */
+                            public cloudComposerNetworkIpv4CidrBlock: string;
+
+                            /** PrivateEnvironmentConfig cloudComposerNetworkIpv4ReservedRange. */
+                            public cloudComposerNetworkIpv4ReservedRange: string;
+
+                            /** PrivateEnvironmentConfig enablePrivatelyUsedPublicIps. */
+                            public enablePrivatelyUsedPublicIps: boolean;
+
+                            /** PrivateEnvironmentConfig cloudComposerConnectionSubnetwork. */
+                            public cloudComposerConnectionSubnetwork: string;
+
+                            /** PrivateEnvironmentConfig networkingConfig. */
+                            public networkingConfig?: (google.cloud.orchestration.airflow.service.v1.INetworkingConfig|null);
 
                             /**
                              * Creates a new PrivateEnvironmentConfig instance using the specified properties.
@@ -2051,6 +2810,884 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a WorkloadsConfig. */
+                        interface IWorkloadsConfig {
+
+                            /** WorkloadsConfig scheduler */
+                            scheduler?: (google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ISchedulerResource|null);
+
+                            /** WorkloadsConfig webServer */
+                            webServer?: (google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWebServerResource|null);
+
+                            /** WorkloadsConfig worker */
+                            worker?: (google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource|null);
+                        }
+
+                        /** Represents a WorkloadsConfig. */
+                        class WorkloadsConfig implements IWorkloadsConfig {
+
+                            /**
+                             * Constructs a new WorkloadsConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IWorkloadsConfig);
+
+                            /** WorkloadsConfig scheduler. */
+                            public scheduler?: (google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ISchedulerResource|null);
+
+                            /** WorkloadsConfig webServer. */
+                            public webServer?: (google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWebServerResource|null);
+
+                            /** WorkloadsConfig worker. */
+                            public worker?: (google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource|null);
+
+                            /**
+                             * Creates a new WorkloadsConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns WorkloadsConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IWorkloadsConfig): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig;
+
+                            /**
+                             * Encodes the specified WorkloadsConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.verify|verify} messages.
+                             * @param message WorkloadsConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IWorkloadsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified WorkloadsConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.verify|verify} messages.
+                             * @param message WorkloadsConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IWorkloadsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a WorkloadsConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns WorkloadsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig;
+
+                            /**
+                             * Decodes a WorkloadsConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns WorkloadsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig;
+
+                            /**
+                             * Verifies a WorkloadsConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a WorkloadsConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns WorkloadsConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig;
+
+                            /**
+                             * Creates a plain object from a WorkloadsConfig message. Also converts values to other types if specified.
+                             * @param message WorkloadsConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this WorkloadsConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for WorkloadsConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace WorkloadsConfig {
+
+                            /** Properties of a SchedulerResource. */
+                            interface ISchedulerResource {
+
+                                /** SchedulerResource cpu */
+                                cpu?: (number|null);
+
+                                /** SchedulerResource memoryGb */
+                                memoryGb?: (number|null);
+
+                                /** SchedulerResource storageGb */
+                                storageGb?: (number|null);
+
+                                /** SchedulerResource count */
+                                count?: (number|null);
+                            }
+
+                            /** Represents a SchedulerResource. */
+                            class SchedulerResource implements ISchedulerResource {
+
+                                /**
+                                 * Constructs a new SchedulerResource.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ISchedulerResource);
+
+                                /** SchedulerResource cpu. */
+                                public cpu: number;
+
+                                /** SchedulerResource memoryGb. */
+                                public memoryGb: number;
+
+                                /** SchedulerResource storageGb. */
+                                public storageGb: number;
+
+                                /** SchedulerResource count. */
+                                public count: number;
+
+                                /**
+                                 * Creates a new SchedulerResource instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns SchedulerResource instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ISchedulerResource): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource;
+
+                                /**
+                                 * Encodes the specified SchedulerResource message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource.verify|verify} messages.
+                                 * @param message SchedulerResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ISchedulerResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified SchedulerResource message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource.verify|verify} messages.
+                                 * @param message SchedulerResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ISchedulerResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a SchedulerResource message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns SchedulerResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource;
+
+                                /**
+                                 * Decodes a SchedulerResource message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns SchedulerResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource;
+
+                                /**
+                                 * Verifies a SchedulerResource message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a SchedulerResource message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns SchedulerResource
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource;
+
+                                /**
+                                 * Creates a plain object from a SchedulerResource message. Also converts values to other types if specified.
+                                 * @param message SchedulerResource
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.SchedulerResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this SchedulerResource to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for SchedulerResource
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a WebServerResource. */
+                            interface IWebServerResource {
+
+                                /** WebServerResource cpu */
+                                cpu?: (number|null);
+
+                                /** WebServerResource memoryGb */
+                                memoryGb?: (number|null);
+
+                                /** WebServerResource storageGb */
+                                storageGb?: (number|null);
+                            }
+
+                            /** Represents a WebServerResource. */
+                            class WebServerResource implements IWebServerResource {
+
+                                /**
+                                 * Constructs a new WebServerResource.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWebServerResource);
+
+                                /** WebServerResource cpu. */
+                                public cpu: number;
+
+                                /** WebServerResource memoryGb. */
+                                public memoryGb: number;
+
+                                /** WebServerResource storageGb. */
+                                public storageGb: number;
+
+                                /**
+                                 * Creates a new WebServerResource instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns WebServerResource instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWebServerResource): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource;
+
+                                /**
+                                 * Encodes the specified WebServerResource message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource.verify|verify} messages.
+                                 * @param message WebServerResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWebServerResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified WebServerResource message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource.verify|verify} messages.
+                                 * @param message WebServerResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWebServerResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a WebServerResource message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns WebServerResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource;
+
+                                /**
+                                 * Decodes a WebServerResource message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns WebServerResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource;
+
+                                /**
+                                 * Verifies a WebServerResource message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a WebServerResource message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns WebServerResource
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource;
+
+                                /**
+                                 * Creates a plain object from a WebServerResource message. Also converts values to other types if specified.
+                                 * @param message WebServerResource
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WebServerResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this WebServerResource to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for WebServerResource
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a WorkerResource. */
+                            interface IWorkerResource {
+
+                                /** WorkerResource cpu */
+                                cpu?: (number|null);
+
+                                /** WorkerResource memoryGb */
+                                memoryGb?: (number|null);
+
+                                /** WorkerResource storageGb */
+                                storageGb?: (number|null);
+
+                                /** WorkerResource minCount */
+                                minCount?: (number|null);
+
+                                /** WorkerResource maxCount */
+                                maxCount?: (number|null);
+                            }
+
+                            /** Represents a WorkerResource. */
+                            class WorkerResource implements IWorkerResource {
+
+                                /**
+                                 * Constructs a new WorkerResource.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource);
+
+                                /** WorkerResource cpu. */
+                                public cpu: number;
+
+                                /** WorkerResource memoryGb. */
+                                public memoryGb: number;
+
+                                /** WorkerResource storageGb. */
+                                public storageGb: number;
+
+                                /** WorkerResource minCount. */
+                                public minCount: number;
+
+                                /** WorkerResource maxCount. */
+                                public maxCount: number;
+
+                                /**
+                                 * Creates a new WorkerResource instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns WorkerResource instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource;
+
+                                /**
+                                 * Encodes the specified WorkerResource message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource.verify|verify} messages.
+                                 * @param message WorkerResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified WorkerResource message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource.verify|verify} messages.
+                                 * @param message WorkerResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a WorkerResource message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns WorkerResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource;
+
+                                /**
+                                 * Decodes a WorkerResource message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns WorkerResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource;
+
+                                /**
+                                 * Verifies a WorkerResource message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a WorkerResource message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns WorkerResource
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource;
+
+                                /**
+                                 * Creates a plain object from a WorkerResource message. Also converts values to other types if specified.
+                                 * @param message WorkerResource
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.WorkerResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this WorkerResource to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for WorkerResource
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a RecoveryConfig. */
+                        interface IRecoveryConfig {
+
+                            /** RecoveryConfig scheduledSnapshotsConfig */
+                            scheduledSnapshotsConfig?: (google.cloud.orchestration.airflow.service.v1.IScheduledSnapshotsConfig|null);
+                        }
+
+                        /** Represents a RecoveryConfig. */
+                        class RecoveryConfig implements IRecoveryConfig {
+
+                            /**
+                             * Constructs a new RecoveryConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IRecoveryConfig);
+
+                            /** RecoveryConfig scheduledSnapshotsConfig. */
+                            public scheduledSnapshotsConfig?: (google.cloud.orchestration.airflow.service.v1.IScheduledSnapshotsConfig|null);
+
+                            /**
+                             * Creates a new RecoveryConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RecoveryConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IRecoveryConfig): google.cloud.orchestration.airflow.service.v1.RecoveryConfig;
+
+                            /**
+                             * Encodes the specified RecoveryConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.RecoveryConfig.verify|verify} messages.
+                             * @param message RecoveryConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IRecoveryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RecoveryConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.RecoveryConfig.verify|verify} messages.
+                             * @param message RecoveryConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IRecoveryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RecoveryConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RecoveryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.RecoveryConfig;
+
+                            /**
+                             * Decodes a RecoveryConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RecoveryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.RecoveryConfig;
+
+                            /**
+                             * Verifies a RecoveryConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RecoveryConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RecoveryConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.RecoveryConfig;
+
+                            /**
+                             * Creates a plain object from a RecoveryConfig message. Also converts values to other types if specified.
+                             * @param message RecoveryConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.RecoveryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RecoveryConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RecoveryConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ScheduledSnapshotsConfig. */
+                        interface IScheduledSnapshotsConfig {
+
+                            /** ScheduledSnapshotsConfig enabled */
+                            enabled?: (boolean|null);
+
+                            /** ScheduledSnapshotsConfig snapshotLocation */
+                            snapshotLocation?: (string|null);
+
+                            /** ScheduledSnapshotsConfig snapshotCreationSchedule */
+                            snapshotCreationSchedule?: (string|null);
+
+                            /** ScheduledSnapshotsConfig timeZone */
+                            timeZone?: (string|null);
+                        }
+
+                        /** Represents a ScheduledSnapshotsConfig. */
+                        class ScheduledSnapshotsConfig implements IScheduledSnapshotsConfig {
+
+                            /**
+                             * Constructs a new ScheduledSnapshotsConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IScheduledSnapshotsConfig);
+
+                            /** ScheduledSnapshotsConfig enabled. */
+                            public enabled: boolean;
+
+                            /** ScheduledSnapshotsConfig snapshotLocation. */
+                            public snapshotLocation: string;
+
+                            /** ScheduledSnapshotsConfig snapshotCreationSchedule. */
+                            public snapshotCreationSchedule: string;
+
+                            /** ScheduledSnapshotsConfig timeZone. */
+                            public timeZone: string;
+
+                            /**
+                             * Creates a new ScheduledSnapshotsConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ScheduledSnapshotsConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IScheduledSnapshotsConfig): google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig;
+
+                            /**
+                             * Encodes the specified ScheduledSnapshotsConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig.verify|verify} messages.
+                             * @param message ScheduledSnapshotsConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IScheduledSnapshotsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ScheduledSnapshotsConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig.verify|verify} messages.
+                             * @param message ScheduledSnapshotsConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IScheduledSnapshotsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ScheduledSnapshotsConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ScheduledSnapshotsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig;
+
+                            /**
+                             * Decodes a ScheduledSnapshotsConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ScheduledSnapshotsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig;
+
+                            /**
+                             * Verifies a ScheduledSnapshotsConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ScheduledSnapshotsConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ScheduledSnapshotsConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig;
+
+                            /**
+                             * Creates a plain object from a ScheduledSnapshotsConfig message. Also converts values to other types if specified.
+                             * @param message ScheduledSnapshotsConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.ScheduledSnapshotsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ScheduledSnapshotsConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ScheduledSnapshotsConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a MasterAuthorizedNetworksConfig. */
+                        interface IMasterAuthorizedNetworksConfig {
+
+                            /** MasterAuthorizedNetworksConfig enabled */
+                            enabled?: (boolean|null);
+
+                            /** MasterAuthorizedNetworksConfig cidrBlocks */
+                            cidrBlocks?: (google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.ICidrBlock[]|null);
+                        }
+
+                        /** Represents a MasterAuthorizedNetworksConfig. */
+                        class MasterAuthorizedNetworksConfig implements IMasterAuthorizedNetworksConfig {
+
+                            /**
+                             * Constructs a new MasterAuthorizedNetworksConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig);
+
+                            /** MasterAuthorizedNetworksConfig enabled. */
+                            public enabled: boolean;
+
+                            /** MasterAuthorizedNetworksConfig cidrBlocks. */
+                            public cidrBlocks: google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.ICidrBlock[];
+
+                            /**
+                             * Creates a new MasterAuthorizedNetworksConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns MasterAuthorizedNetworksConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig): google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig;
+
+                            /**
+                             * Encodes the specified MasterAuthorizedNetworksConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.verify|verify} messages.
+                             * @param message MasterAuthorizedNetworksConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified MasterAuthorizedNetworksConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.verify|verify} messages.
+                             * @param message MasterAuthorizedNetworksConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IMasterAuthorizedNetworksConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a MasterAuthorizedNetworksConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns MasterAuthorizedNetworksConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig;
+
+                            /**
+                             * Decodes a MasterAuthorizedNetworksConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns MasterAuthorizedNetworksConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig;
+
+                            /**
+                             * Verifies a MasterAuthorizedNetworksConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a MasterAuthorizedNetworksConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns MasterAuthorizedNetworksConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig;
+
+                            /**
+                             * Creates a plain object from a MasterAuthorizedNetworksConfig message. Also converts values to other types if specified.
+                             * @param message MasterAuthorizedNetworksConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this MasterAuthorizedNetworksConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for MasterAuthorizedNetworksConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace MasterAuthorizedNetworksConfig {
+
+                            /** Properties of a CidrBlock. */
+                            interface ICidrBlock {
+
+                                /** CidrBlock displayName */
+                                displayName?: (string|null);
+
+                                /** CidrBlock cidrBlock */
+                                cidrBlock?: (string|null);
+                            }
+
+                            /** Represents a CidrBlock. */
+                            class CidrBlock implements ICidrBlock {
+
+                                /**
+                                 * Constructs a new CidrBlock.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.ICidrBlock);
+
+                                /** CidrBlock displayName. */
+                                public displayName: string;
+
+                                /** CidrBlock cidrBlock. */
+                                public cidrBlock: string;
+
+                                /**
+                                 * Creates a new CidrBlock instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CidrBlock instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.ICidrBlock): google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock;
+
+                                /**
+                                 * Encodes the specified CidrBlock message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock.verify|verify} messages.
+                                 * @param message CidrBlock message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.ICidrBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CidrBlock message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock.verify|verify} messages.
+                                 * @param message CidrBlock message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.ICidrBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CidrBlock message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CidrBlock
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock;
+
+                                /**
+                                 * Decodes a CidrBlock message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CidrBlock
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock;
+
+                                /**
+                                 * Verifies a CidrBlock message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CidrBlock message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CidrBlock
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock;
+
+                                /**
+                                 * Creates a plain object from a CidrBlock message. Also converts values to other types if specified.
+                                 * @param message CidrBlock
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CidrBlock to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CidrBlock
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
                         }
 
                         /** Properties of an Environment. */
@@ -2865,7 +4502,9 @@ export namespace google {
                                 CREATE = 1,
                                 DELETE = 2,
                                 UPDATE = 3,
-                                CHECK = 4
+                                CHECK = 4,
+                                SAVE_SNAPSHOT = 5,
+                                LOAD_SNAPSHOT = 6
                             }
                         }
                     }
@@ -2990,6 +4629,34 @@ export namespace google {
                              * @returns Promise
                              */
                             public checkUpgrade(request: google.cloud.orchestration.airflow.service.v1beta1.ICheckUpgradeRequest): Promise<google.longrunning.Operation>;
+
+                            /**
+                             * Calls SaveSnapshot.
+                             * @param request SaveSnapshotRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and Operation
+                             */
+                            public saveSnapshot(request: google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.SaveSnapshotCallback): void;
+
+                            /**
+                             * Calls SaveSnapshot.
+                             * @param request SaveSnapshotRequest message or plain object
+                             * @returns Promise
+                             */
+                            public saveSnapshot(request: google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest): Promise<google.longrunning.Operation>;
+
+                            /**
+                             * Calls LoadSnapshot.
+                             * @param request LoadSnapshotRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and Operation
+                             */
+                            public loadSnapshot(request: google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.LoadSnapshotCallback): void;
+
+                            /**
+                             * Calls LoadSnapshot.
+                             * @param request LoadSnapshotRequest message or plain object
+                             * @returns Promise
+                             */
+                            public loadSnapshot(request: google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest): Promise<google.longrunning.Operation>;
                         }
 
                         namespace Environments {
@@ -3042,6 +4709,20 @@ export namespace google {
                              * @param [response] Operation
                              */
                             type CheckUpgradeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|saveSnapshot}.
+                             * @param error Error, if any
+                             * @param [response] Operation
+                             */
+                            type SaveSnapshotCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|loadSnapshot}.
+                             * @param error Error, if any
+                             * @param [response] Operation
+                             */
+                            type LoadSnapshotCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                         }
 
                         /** Properties of a CreateEnvironmentRequest. */
@@ -3759,6 +5440,857 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of an ExecuteAirflowCommandResponse. */
+                        interface IExecuteAirflowCommandResponse {
+
+                            /** ExecuteAirflowCommandResponse executionId */
+                            executionId?: (string|null);
+
+                            /** ExecuteAirflowCommandResponse pod */
+                            pod?: (string|null);
+
+                            /** ExecuteAirflowCommandResponse podNamespace */
+                            podNamespace?: (string|null);
+
+                            /** ExecuteAirflowCommandResponse error */
+                            error?: (string|null);
+                        }
+
+                        /** Represents an ExecuteAirflowCommandResponse. */
+                        class ExecuteAirflowCommandResponse implements IExecuteAirflowCommandResponse {
+
+                            /**
+                             * Constructs a new ExecuteAirflowCommandResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandResponse);
+
+                            /** ExecuteAirflowCommandResponse executionId. */
+                            public executionId: string;
+
+                            /** ExecuteAirflowCommandResponse pod. */
+                            public pod: string;
+
+                            /** ExecuteAirflowCommandResponse podNamespace. */
+                            public podNamespace: string;
+
+                            /** ExecuteAirflowCommandResponse error. */
+                            public error: string;
+
+                            /**
+                             * Creates a new ExecuteAirflowCommandResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ExecuteAirflowCommandResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandResponse): google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse;
+
+                            /**
+                             * Encodes the specified ExecuteAirflowCommandResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse.verify|verify} messages.
+                             * @param message ExecuteAirflowCommandResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ExecuteAirflowCommandResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse.verify|verify} messages.
+                             * @param message ExecuteAirflowCommandResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IExecuteAirflowCommandResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ExecuteAirflowCommandResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ExecuteAirflowCommandResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse;
+
+                            /**
+                             * Decodes an ExecuteAirflowCommandResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ExecuteAirflowCommandResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse;
+
+                            /**
+                             * Verifies an ExecuteAirflowCommandResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ExecuteAirflowCommandResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ExecuteAirflowCommandResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse;
+
+                            /**
+                             * Creates a plain object from an ExecuteAirflowCommandResponse message. Also converts values to other types if specified.
+                             * @param message ExecuteAirflowCommandResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.ExecuteAirflowCommandResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ExecuteAirflowCommandResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ExecuteAirflowCommandResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a PollAirflowCommandResponse. */
+                        interface IPollAirflowCommandResponse {
+
+                            /** PollAirflowCommandResponse output */
+                            output?: (google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ILine[]|null);
+
+                            /** PollAirflowCommandResponse outputEnd */
+                            outputEnd?: (boolean|null);
+
+                            /** PollAirflowCommandResponse exitInfo */
+                            exitInfo?: (google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.IExitInfo|null);
+                        }
+
+                        /** Represents a PollAirflowCommandResponse. */
+                        class PollAirflowCommandResponse implements IPollAirflowCommandResponse {
+
+                            /**
+                             * Constructs a new PollAirflowCommandResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandResponse);
+
+                            /** PollAirflowCommandResponse output. */
+                            public output: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ILine[];
+
+                            /** PollAirflowCommandResponse outputEnd. */
+                            public outputEnd: boolean;
+
+                            /** PollAirflowCommandResponse exitInfo. */
+                            public exitInfo?: (google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.IExitInfo|null);
+
+                            /**
+                             * Creates a new PollAirflowCommandResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PollAirflowCommandResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandResponse): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse;
+
+                            /**
+                             * Encodes the specified PollAirflowCommandResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.verify|verify} messages.
+                             * @param message PollAirflowCommandResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PollAirflowCommandResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.verify|verify} messages.
+                             * @param message PollAirflowCommandResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PollAirflowCommandResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PollAirflowCommandResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse;
+
+                            /**
+                             * Decodes a PollAirflowCommandResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PollAirflowCommandResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse;
+
+                            /**
+                             * Verifies a PollAirflowCommandResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PollAirflowCommandResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PollAirflowCommandResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse;
+
+                            /**
+                             * Creates a plain object from a PollAirflowCommandResponse message. Also converts values to other types if specified.
+                             * @param message PollAirflowCommandResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PollAirflowCommandResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PollAirflowCommandResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace PollAirflowCommandResponse {
+
+                            /** Properties of a Line. */
+                            interface ILine {
+
+                                /** Line lineNumber */
+                                lineNumber?: (number|null);
+
+                                /** Line content */
+                                content?: (string|null);
+                            }
+
+                            /** Represents a Line. */
+                            class Line implements ILine {
+
+                                /**
+                                 * Constructs a new Line.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ILine);
+
+                                /** Line lineNumber. */
+                                public lineNumber: number;
+
+                                /** Line content. */
+                                public content: string;
+
+                                /**
+                                 * Creates a new Line instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Line instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ILine): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line;
+
+                                /**
+                                 * Encodes the specified Line message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line.verify|verify} messages.
+                                 * @param message Line message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ILine, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Line message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line.verify|verify} messages.
+                                 * @param message Line message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ILine, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Line message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Line
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line;
+
+                                /**
+                                 * Decodes a Line message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Line
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line;
+
+                                /**
+                                 * Verifies a Line message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Line message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Line
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line;
+
+                                /**
+                                 * Creates a plain object from a Line message. Also converts values to other types if specified.
+                                 * @param message Line
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.Line, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Line to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Line
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of an ExitInfo. */
+                            interface IExitInfo {
+
+                                /** ExitInfo exitCode */
+                                exitCode?: (number|null);
+
+                                /** ExitInfo error */
+                                error?: (string|null);
+                            }
+
+                            /** Represents an ExitInfo. */
+                            class ExitInfo implements IExitInfo {
+
+                                /**
+                                 * Constructs a new ExitInfo.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.IExitInfo);
+
+                                /** ExitInfo exitCode. */
+                                public exitCode: number;
+
+                                /** ExitInfo error. */
+                                public error: string;
+
+                                /**
+                                 * Creates a new ExitInfo instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ExitInfo instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.IExitInfo): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo;
+
+                                /**
+                                 * Encodes the specified ExitInfo message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo.verify|verify} messages.
+                                 * @param message ExitInfo message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.IExitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ExitInfo message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo.verify|verify} messages.
+                                 * @param message ExitInfo message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.IExitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an ExitInfo message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ExitInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo;
+
+                                /**
+                                 * Decodes an ExitInfo message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ExitInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo;
+
+                                /**
+                                 * Verifies an ExitInfo message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an ExitInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ExitInfo
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo;
+
+                                /**
+                                 * Creates a plain object from an ExitInfo message. Also converts values to other types if specified.
+                                 * @param message ExitInfo
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse.ExitInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ExitInfo to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ExitInfo
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a SaveSnapshotRequest. */
+                        interface ISaveSnapshotRequest {
+
+                            /** SaveSnapshotRequest environment */
+                            environment?: (string|null);
+
+                            /** SaveSnapshotRequest snapshotLocation */
+                            snapshotLocation?: (string|null);
+                        }
+
+                        /** Represents a SaveSnapshotRequest. */
+                        class SaveSnapshotRequest implements ISaveSnapshotRequest {
+
+                            /**
+                             * Constructs a new SaveSnapshotRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest);
+
+                            /** SaveSnapshotRequest environment. */
+                            public environment: string;
+
+                            /** SaveSnapshotRequest snapshotLocation. */
+                            public snapshotLocation: string;
+
+                            /**
+                             * Creates a new SaveSnapshotRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SaveSnapshotRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest): google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest;
+
+                            /**
+                             * Encodes the specified SaveSnapshotRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest.verify|verify} messages.
+                             * @param message SaveSnapshotRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SaveSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest.verify|verify} messages.
+                             * @param message SaveSnapshotRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SaveSnapshotRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SaveSnapshotRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest;
+
+                            /**
+                             * Decodes a SaveSnapshotRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SaveSnapshotRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest;
+
+                            /**
+                             * Verifies a SaveSnapshotRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SaveSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SaveSnapshotRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest;
+
+                            /**
+                             * Creates a plain object from a SaveSnapshotRequest message. Also converts values to other types if specified.
+                             * @param message SaveSnapshotRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SaveSnapshotRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SaveSnapshotRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a SaveSnapshotResponse. */
+                        interface ISaveSnapshotResponse {
+
+                            /** SaveSnapshotResponse snapshotPath */
+                            snapshotPath?: (string|null);
+                        }
+
+                        /** Represents a SaveSnapshotResponse. */
+                        class SaveSnapshotResponse implements ISaveSnapshotResponse {
+
+                            /**
+                             * Constructs a new SaveSnapshotResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse);
+
+                            /** SaveSnapshotResponse snapshotPath. */
+                            public snapshotPath: string;
+
+                            /**
+                             * Creates a new SaveSnapshotResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SaveSnapshotResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse): google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse;
+
+                            /**
+                             * Encodes the specified SaveSnapshotResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse.verify|verify} messages.
+                             * @param message SaveSnapshotResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SaveSnapshotResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse.verify|verify} messages.
+                             * @param message SaveSnapshotResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.ISaveSnapshotResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SaveSnapshotResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SaveSnapshotResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse;
+
+                            /**
+                             * Decodes a SaveSnapshotResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SaveSnapshotResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse;
+
+                            /**
+                             * Verifies a SaveSnapshotResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SaveSnapshotResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SaveSnapshotResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse;
+
+                            /**
+                             * Creates a plain object from a SaveSnapshotResponse message. Also converts values to other types if specified.
+                             * @param message SaveSnapshotResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.SaveSnapshotResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SaveSnapshotResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SaveSnapshotResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a LoadSnapshotRequest. */
+                        interface ILoadSnapshotRequest {
+
+                            /** LoadSnapshotRequest environment */
+                            environment?: (string|null);
+
+                            /** LoadSnapshotRequest snapshotPath */
+                            snapshotPath?: (string|null);
+
+                            /** LoadSnapshotRequest skipPypiPackagesInstallation */
+                            skipPypiPackagesInstallation?: (boolean|null);
+
+                            /** LoadSnapshotRequest skipEnvironmentVariablesSetting */
+                            skipEnvironmentVariablesSetting?: (boolean|null);
+
+                            /** LoadSnapshotRequest skipAirflowOverridesSetting */
+                            skipAirflowOverridesSetting?: (boolean|null);
+
+                            /** LoadSnapshotRequest skipGcsDataCopying */
+                            skipGcsDataCopying?: (boolean|null);
+                        }
+
+                        /** Represents a LoadSnapshotRequest. */
+                        class LoadSnapshotRequest implements ILoadSnapshotRequest {
+
+                            /**
+                             * Constructs a new LoadSnapshotRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest);
+
+                            /** LoadSnapshotRequest environment. */
+                            public environment: string;
+
+                            /** LoadSnapshotRequest snapshotPath. */
+                            public snapshotPath: string;
+
+                            /** LoadSnapshotRequest skipPypiPackagesInstallation. */
+                            public skipPypiPackagesInstallation: boolean;
+
+                            /** LoadSnapshotRequest skipEnvironmentVariablesSetting. */
+                            public skipEnvironmentVariablesSetting: boolean;
+
+                            /** LoadSnapshotRequest skipAirflowOverridesSetting. */
+                            public skipAirflowOverridesSetting: boolean;
+
+                            /** LoadSnapshotRequest skipGcsDataCopying. */
+                            public skipGcsDataCopying: boolean;
+
+                            /**
+                             * Creates a new LoadSnapshotRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LoadSnapshotRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest): google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest;
+
+                            /**
+                             * Encodes the specified LoadSnapshotRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest.verify|verify} messages.
+                             * @param message LoadSnapshotRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LoadSnapshotRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest.verify|verify} messages.
+                             * @param message LoadSnapshotRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LoadSnapshotRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LoadSnapshotRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest;
+
+                            /**
+                             * Decodes a LoadSnapshotRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LoadSnapshotRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest;
+
+                            /**
+                             * Verifies a LoadSnapshotRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LoadSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LoadSnapshotRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest;
+
+                            /**
+                             * Creates a plain object from a LoadSnapshotRequest message. Also converts values to other types if specified.
+                             * @param message LoadSnapshotRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LoadSnapshotRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LoadSnapshotRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a LoadSnapshotResponse. */
+                        interface ILoadSnapshotResponse {
+                        }
+
+                        /** Represents a LoadSnapshotResponse. */
+                        class LoadSnapshotResponse implements ILoadSnapshotResponse {
+
+                            /**
+                             * Constructs a new LoadSnapshotResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse);
+
+                            /**
+                             * Creates a new LoadSnapshotResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LoadSnapshotResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse): google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse;
+
+                            /**
+                             * Encodes the specified LoadSnapshotResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse.verify|verify} messages.
+                             * @param message LoadSnapshotResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LoadSnapshotResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse.verify|verify} messages.
+                             * @param message LoadSnapshotResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.ILoadSnapshotResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LoadSnapshotResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LoadSnapshotResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse;
+
+                            /**
+                             * Decodes a LoadSnapshotResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LoadSnapshotResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse;
+
+                            /**
+                             * Verifies a LoadSnapshotResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LoadSnapshotResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LoadSnapshotResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse;
+
+                            /**
+                             * Creates a plain object from a LoadSnapshotResponse message. Also converts values to other types if specified.
+                             * @param message LoadSnapshotResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.LoadSnapshotResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LoadSnapshotResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LoadSnapshotResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Properties of an EnvironmentConfig. */
                         interface IEnvironmentConfig {
 
@@ -3803,6 +6335,12 @@ export namespace google {
 
                             /** EnvironmentConfig environmentSize */
                             environmentSize?: (google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.EnvironmentSize|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.EnvironmentSize|null);
+
+                            /** EnvironmentConfig masterAuthorizedNetworksConfig */
+                            masterAuthorizedNetworksConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IMasterAuthorizedNetworksConfig|null);
+
+                            /** EnvironmentConfig recoveryConfig */
+                            recoveryConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig|null);
                         }
 
                         /** Represents an EnvironmentConfig. */
@@ -3855,6 +6393,12 @@ export namespace google {
 
                             /** EnvironmentConfig environmentSize. */
                             public environmentSize: (google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.EnvironmentSize|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.EnvironmentSize);
+
+                            /** EnvironmentConfig masterAuthorizedNetworksConfig. */
+                            public masterAuthorizedNetworksConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IMasterAuthorizedNetworksConfig|null);
+
+                            /** EnvironmentConfig recoveryConfig. */
+                            public recoveryConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig|null);
 
                             /**
                              * Creates a new EnvironmentConfig instance using the specified properties.
@@ -4165,6 +6709,12 @@ export namespace google {
 
                             /** SoftwareConfig pythonVersion */
                             pythonVersion?: (string|null);
+
+                            /** SoftwareConfig schedulerCount */
+                            schedulerCount?: (number|null);
+
+                            /** SoftwareConfig cloudDataLineageIntegration */
+                            cloudDataLineageIntegration?: (google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration|null);
                         }
 
                         /** Represents a SoftwareConfig. */
@@ -4190,6 +6740,12 @@ export namespace google {
 
                             /** SoftwareConfig pythonVersion. */
                             public pythonVersion: string;
+
+                            /** SoftwareConfig schedulerCount. */
+                            public schedulerCount: number;
+
+                            /** SoftwareConfig cloudDataLineageIntegration. */
+                            public cloudDataLineageIntegration?: (google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration|null);
 
                             /**
                              * Creates a new SoftwareConfig instance using the specified properties.
@@ -4422,6 +6978,9 @@ export namespace google {
 
                             /** NodeConfig maxPodsPerNode */
                             maxPodsPerNode?: (number|null);
+
+                            /** NodeConfig enableIpMasqAgent */
+                            enableIpMasqAgent?: (boolean|null);
                         }
 
                         /** Represents a NodeConfig. */
@@ -4462,6 +7021,9 @@ export namespace google {
 
                             /** NodeConfig maxPodsPerNode. */
                             public maxPodsPerNode: number;
+
+                            /** NodeConfig enableIpMasqAgent. */
+                            public enableIpMasqAgent: boolean;
 
                             /**
                              * Creates a new NodeConfig instance using the specified properties.
@@ -4650,6 +7212,113 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of a NetworkingConfig. */
+                        interface INetworkingConfig {
+
+                            /** NetworkingConfig connectionType */
+                            connectionType?: (google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.ConnectionType|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.ConnectionType|null);
+                        }
+
+                        /** Represents a NetworkingConfig. */
+                        class NetworkingConfig implements INetworkingConfig {
+
+                            /**
+                             * Constructs a new NetworkingConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.INetworkingConfig);
+
+                            /** NetworkingConfig connectionType. */
+                            public connectionType: (google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.ConnectionType|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.ConnectionType);
+
+                            /**
+                             * Creates a new NetworkingConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns NetworkingConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.INetworkingConfig): google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig;
+
+                            /**
+                             * Encodes the specified NetworkingConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.verify|verify} messages.
+                             * @param message NetworkingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.INetworkingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified NetworkingConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig.verify|verify} messages.
+                             * @param message NetworkingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.INetworkingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a NetworkingConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns NetworkingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig;
+
+                            /**
+                             * Decodes a NetworkingConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns NetworkingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig;
+
+                            /**
+                             * Verifies a NetworkingConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a NetworkingConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns NetworkingConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig;
+
+                            /**
+                             * Creates a plain object from a NetworkingConfig message. Also converts values to other types if specified.
+                             * @param message NetworkingConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.NetworkingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this NetworkingConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for NetworkingConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace NetworkingConfig {
+
+                            /** ConnectionType enum. */
+                            enum ConnectionType {
+                                CONNECTION_TYPE_UNSPECIFIED = 0,
+                                VPC_PEERING = 1,
+                                PRIVATE_SERVICE_CONNECT = 2
+                            }
+                        }
+
                         /** Properties of a PrivateEnvironmentConfig. */
                         interface IPrivateEnvironmentConfig {
 
@@ -4673,6 +7342,15 @@ export namespace google {
 
                             /** PrivateEnvironmentConfig cloudComposerNetworkIpv4ReservedRange */
                             cloudComposerNetworkIpv4ReservedRange?: (string|null);
+
+                            /** PrivateEnvironmentConfig enablePrivatelyUsedPublicIps */
+                            enablePrivatelyUsedPublicIps?: (boolean|null);
+
+                            /** PrivateEnvironmentConfig cloudComposerConnectionSubnetwork */
+                            cloudComposerConnectionSubnetwork?: (string|null);
+
+                            /** PrivateEnvironmentConfig networkingConfig */
+                            networkingConfig?: (google.cloud.orchestration.airflow.service.v1beta1.INetworkingConfig|null);
                         }
 
                         /** Represents a PrivateEnvironmentConfig. */
@@ -4704,6 +7382,15 @@ export namespace google {
 
                             /** PrivateEnvironmentConfig cloudComposerNetworkIpv4ReservedRange. */
                             public cloudComposerNetworkIpv4ReservedRange: string;
+
+                            /** PrivateEnvironmentConfig enablePrivatelyUsedPublicIps. */
+                            public enablePrivatelyUsedPublicIps: boolean;
+
+                            /** PrivateEnvironmentConfig cloudComposerConnectionSubnetwork. */
+                            public cloudComposerConnectionSubnetwork: string;
+
+                            /** PrivateEnvironmentConfig networkingConfig. */
+                            public networkingConfig?: (google.cloud.orchestration.airflow.service.v1beta1.INetworkingConfig|null);
 
                             /**
                              * Creates a new PrivateEnvironmentConfig instance using the specified properties.
@@ -5194,6 +7881,9 @@ export namespace google {
 
                             /** WorkloadsConfig worker */
                             worker?: (google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.IWorkerResource|null);
+
+                            /** WorkloadsConfig triggerer */
+                            triggerer?: (google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource|null);
                         }
 
                         /** Represents a WorkloadsConfig. */
@@ -5213,6 +7903,9 @@ export namespace google {
 
                             /** WorkloadsConfig worker. */
                             public worker?: (google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.IWorkerResource|null);
+
+                            /** WorkloadsConfig triggerer. */
+                            public triggerer?: (google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource|null);
 
                             /**
                              * Creates a new WorkloadsConfig instance using the specified properties.
@@ -5638,6 +8331,633 @@ export namespace google {
                                  */
                                 public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
+
+                            /** Properties of a TriggererResource. */
+                            interface ITriggererResource {
+
+                                /** TriggererResource count */
+                                count?: (number|null);
+
+                                /** TriggererResource cpu */
+                                cpu?: (number|null);
+
+                                /** TriggererResource memoryGb */
+                                memoryGb?: (number|null);
+                            }
+
+                            /** Represents a TriggererResource. */
+                            class TriggererResource implements ITriggererResource {
+
+                                /**
+                                 * Constructs a new TriggererResource.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource);
+
+                                /** TriggererResource count. */
+                                public count: number;
+
+                                /** TriggererResource cpu. */
+                                public cpu: number;
+
+                                /** TriggererResource memoryGb. */
+                                public memoryGb: number;
+
+                                /**
+                                 * Creates a new TriggererResource instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns TriggererResource instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource): google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource;
+
+                                /**
+                                 * Encodes the specified TriggererResource message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource.verify|verify} messages.
+                                 * @param message TriggererResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified TriggererResource message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource.verify|verify} messages.
+                                 * @param message TriggererResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a TriggererResource message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns TriggererResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource;
+
+                                /**
+                                 * Decodes a TriggererResource message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns TriggererResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource;
+
+                                /**
+                                 * Verifies a TriggererResource message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a TriggererResource message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns TriggererResource
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource;
+
+                                /**
+                                 * Creates a plain object from a TriggererResource message. Also converts values to other types if specified.
+                                 * @param message TriggererResource
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.TriggererResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this TriggererResource to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for TriggererResource
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a RecoveryConfig. */
+                        interface IRecoveryConfig {
+
+                            /** RecoveryConfig scheduledSnapshotsConfig */
+                            scheduledSnapshotsConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IScheduledSnapshotsConfig|null);
+                        }
+
+                        /** Represents a RecoveryConfig. */
+                        class RecoveryConfig implements IRecoveryConfig {
+
+                            /**
+                             * Constructs a new RecoveryConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig);
+
+                            /** RecoveryConfig scheduledSnapshotsConfig. */
+                            public scheduledSnapshotsConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IScheduledSnapshotsConfig|null);
+
+                            /**
+                             * Creates a new RecoveryConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RecoveryConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig): google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig;
+
+                            /**
+                             * Encodes the specified RecoveryConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig.verify|verify} messages.
+                             * @param message RecoveryConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RecoveryConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig.verify|verify} messages.
+                             * @param message RecoveryConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RecoveryConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RecoveryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig;
+
+                            /**
+                             * Decodes a RecoveryConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RecoveryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig;
+
+                            /**
+                             * Verifies a RecoveryConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RecoveryConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RecoveryConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig;
+
+                            /**
+                             * Creates a plain object from a RecoveryConfig message. Also converts values to other types if specified.
+                             * @param message RecoveryConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.RecoveryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RecoveryConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RecoveryConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ScheduledSnapshotsConfig. */
+                        interface IScheduledSnapshotsConfig {
+
+                            /** ScheduledSnapshotsConfig enabled */
+                            enabled?: (boolean|null);
+
+                            /** ScheduledSnapshotsConfig snapshotLocation */
+                            snapshotLocation?: (string|null);
+
+                            /** ScheduledSnapshotsConfig snapshotCreationSchedule */
+                            snapshotCreationSchedule?: (string|null);
+
+                            /** ScheduledSnapshotsConfig timeZone */
+                            timeZone?: (string|null);
+                        }
+
+                        /** Represents a ScheduledSnapshotsConfig. */
+                        class ScheduledSnapshotsConfig implements IScheduledSnapshotsConfig {
+
+                            /**
+                             * Constructs a new ScheduledSnapshotsConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IScheduledSnapshotsConfig);
+
+                            /** ScheduledSnapshotsConfig enabled. */
+                            public enabled: boolean;
+
+                            /** ScheduledSnapshotsConfig snapshotLocation. */
+                            public snapshotLocation: string;
+
+                            /** ScheduledSnapshotsConfig snapshotCreationSchedule. */
+                            public snapshotCreationSchedule: string;
+
+                            /** ScheduledSnapshotsConfig timeZone. */
+                            public timeZone: string;
+
+                            /**
+                             * Creates a new ScheduledSnapshotsConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ScheduledSnapshotsConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IScheduledSnapshotsConfig): google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig;
+
+                            /**
+                             * Encodes the specified ScheduledSnapshotsConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig.verify|verify} messages.
+                             * @param message ScheduledSnapshotsConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IScheduledSnapshotsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ScheduledSnapshotsConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig.verify|verify} messages.
+                             * @param message ScheduledSnapshotsConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IScheduledSnapshotsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ScheduledSnapshotsConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ScheduledSnapshotsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig;
+
+                            /**
+                             * Decodes a ScheduledSnapshotsConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ScheduledSnapshotsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig;
+
+                            /**
+                             * Verifies a ScheduledSnapshotsConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ScheduledSnapshotsConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ScheduledSnapshotsConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig;
+
+                            /**
+                             * Creates a plain object from a ScheduledSnapshotsConfig message. Also converts values to other types if specified.
+                             * @param message ScheduledSnapshotsConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.ScheduledSnapshotsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ScheduledSnapshotsConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ScheduledSnapshotsConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a MasterAuthorizedNetworksConfig. */
+                        interface IMasterAuthorizedNetworksConfig {
+
+                            /** MasterAuthorizedNetworksConfig enabled */
+                            enabled?: (boolean|null);
+
+                            /** MasterAuthorizedNetworksConfig cidrBlocks */
+                            cidrBlocks?: (google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock[]|null);
+                        }
+
+                        /** Represents a MasterAuthorizedNetworksConfig. */
+                        class MasterAuthorizedNetworksConfig implements IMasterAuthorizedNetworksConfig {
+
+                            /**
+                             * Constructs a new MasterAuthorizedNetworksConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IMasterAuthorizedNetworksConfig);
+
+                            /** MasterAuthorizedNetworksConfig enabled. */
+                            public enabled: boolean;
+
+                            /** MasterAuthorizedNetworksConfig cidrBlocks. */
+                            public cidrBlocks: google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock[];
+
+                            /**
+                             * Creates a new MasterAuthorizedNetworksConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns MasterAuthorizedNetworksConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IMasterAuthorizedNetworksConfig): google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig;
+
+                            /**
+                             * Encodes the specified MasterAuthorizedNetworksConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.verify|verify} messages.
+                             * @param message MasterAuthorizedNetworksConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IMasterAuthorizedNetworksConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified MasterAuthorizedNetworksConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.verify|verify} messages.
+                             * @param message MasterAuthorizedNetworksConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IMasterAuthorizedNetworksConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a MasterAuthorizedNetworksConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns MasterAuthorizedNetworksConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig;
+
+                            /**
+                             * Decodes a MasterAuthorizedNetworksConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns MasterAuthorizedNetworksConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig;
+
+                            /**
+                             * Verifies a MasterAuthorizedNetworksConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a MasterAuthorizedNetworksConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns MasterAuthorizedNetworksConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig;
+
+                            /**
+                             * Creates a plain object from a MasterAuthorizedNetworksConfig message. Also converts values to other types if specified.
+                             * @param message MasterAuthorizedNetworksConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this MasterAuthorizedNetworksConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for MasterAuthorizedNetworksConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace MasterAuthorizedNetworksConfig {
+
+                            /** Properties of a CidrBlock. */
+                            interface ICidrBlock {
+
+                                /** CidrBlock displayName */
+                                displayName?: (string|null);
+
+                                /** CidrBlock cidrBlock */
+                                cidrBlock?: (string|null);
+                            }
+
+                            /** Represents a CidrBlock. */
+                            class CidrBlock implements ICidrBlock {
+
+                                /**
+                                 * Constructs a new CidrBlock.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock);
+
+                                /** CidrBlock displayName. */
+                                public displayName: string;
+
+                                /** CidrBlock cidrBlock. */
+                                public cidrBlock: string;
+
+                                /**
+                                 * Creates a new CidrBlock instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CidrBlock instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock): google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock;
+
+                                /**
+                                 * Encodes the specified CidrBlock message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock.verify|verify} messages.
+                                 * @param message CidrBlock message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CidrBlock message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock.verify|verify} messages.
+                                 * @param message CidrBlock message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CidrBlock message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CidrBlock
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock;
+
+                                /**
+                                 * Decodes a CidrBlock message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CidrBlock
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock;
+
+                                /**
+                                 * Verifies a CidrBlock message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CidrBlock message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CidrBlock
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock;
+
+                                /**
+                                 * Creates a plain object from a CidrBlock message. Also converts values to other types if specified.
+                                 * @param message CidrBlock
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CidrBlock to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CidrBlock
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a CloudDataLineageIntegration. */
+                        interface ICloudDataLineageIntegration {
+
+                            /** CloudDataLineageIntegration enabled */
+                            enabled?: (boolean|null);
+                        }
+
+                        /** Represents a CloudDataLineageIntegration. */
+                        class CloudDataLineageIntegration implements ICloudDataLineageIntegration {
+
+                            /**
+                             * Constructs a new CloudDataLineageIntegration.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration);
+
+                            /** CloudDataLineageIntegration enabled. */
+                            public enabled: boolean;
+
+                            /**
+                             * Creates a new CloudDataLineageIntegration instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CloudDataLineageIntegration instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration): google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration;
+
+                            /**
+                             * Encodes the specified CloudDataLineageIntegration message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration.verify|verify} messages.
+                             * @param message CloudDataLineageIntegration message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CloudDataLineageIntegration message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration.verify|verify} messages.
+                             * @param message CloudDataLineageIntegration message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CloudDataLineageIntegration message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CloudDataLineageIntegration
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration;
+
+                            /**
+                             * Decodes a CloudDataLineageIntegration message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CloudDataLineageIntegration
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration;
+
+                            /**
+                             * Verifies a CloudDataLineageIntegration message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CloudDataLineageIntegration message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CloudDataLineageIntegration
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration;
+
+                            /**
+                             * Creates a plain object from a CloudDataLineageIntegration message. Also converts values to other types if specified.
+                             * @param message CloudDataLineageIntegration
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.CloudDataLineageIntegration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CloudDataLineageIntegration to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CloudDataLineageIntegration
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of an Environment. */
@@ -6554,7 +9874,9 @@ export namespace google {
                                 CREATE = 1,
                                 DELETE = 2,
                                 UPDATE = 3,
-                                CHECK = 4
+                                CHECK = 4,
+                                SAVE_SNAPSHOT = 5,
+                                LOAD_SNAPSHOT = 6
                             }
                         }
                     }

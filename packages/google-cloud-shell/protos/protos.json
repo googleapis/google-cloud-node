@@ -362,7 +362,8 @@
                             "IMAGE_UNAVAILABLE": 1,
                             "CLOUD_SHELL_DISABLED": 2,
                             "TOS_VIOLATION": 4,
-                            "QUOTA_EXCEEDED": 5
+                            "QUOTA_EXCEEDED": 5,
+                            "ENVIRONMENT_UNAVAILABLE": 6
                           }
                         }
                       }
@@ -1540,15 +1541,6 @@
             },
             "Empty": {
               "fields": {}
-            },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
             },
             "Timestamp": {
               "fields": {
