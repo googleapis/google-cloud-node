@@ -1,0 +1,165 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.api.servicemanagement.v1",
+  "libraryPackage": "@google-cloud/service-management",
+  "services": {
+    "ServiceManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ServiceManagerClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetServiceConfig": {
+              "methods": [
+                "getServiceConfig"
+              ]
+            },
+            "CreateServiceConfig": {
+              "methods": [
+                "createServiceConfig"
+              ]
+            },
+            "GetServiceRollout": {
+              "methods": [
+                "getServiceRollout"
+              ]
+            },
+            "GenerateConfigReport": {
+              "methods": [
+                "generateConfigReport"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "createService"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "deleteService"
+              ]
+            },
+            "UndeleteService": {
+              "methods": [
+                "undeleteService"
+              ]
+            },
+            "SubmitConfigSource": {
+              "methods": [
+                "submitConfigSource"
+              ]
+            },
+            "CreateServiceRollout": {
+              "methods": [
+                "createServiceRollout"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            },
+            "ListServiceConfigs": {
+              "methods": [
+                "listServiceConfigs",
+                "listServiceConfigsStream",
+                "listServiceConfigsAsync"
+              ]
+            },
+            "ListServiceRollouts": {
+              "methods": [
+                "listServiceRollouts",
+                "listServiceRolloutsStream",
+                "listServiceRolloutsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ServiceManagerClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetServiceConfig": {
+              "methods": [
+                "getServiceConfig"
+              ]
+            },
+            "CreateServiceConfig": {
+              "methods": [
+                "createServiceConfig"
+              ]
+            },
+            "GetServiceRollout": {
+              "methods": [
+                "getServiceRollout"
+              ]
+            },
+            "GenerateConfigReport": {
+              "methods": [
+                "generateConfigReport"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "createService"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "deleteService"
+              ]
+            },
+            "UndeleteService": {
+              "methods": [
+                "undeleteService"
+              ]
+            },
+            "SubmitConfigSource": {
+              "methods": [
+                "submitConfigSource"
+              ]
+            },
+            "CreateServiceRollout": {
+              "methods": [
+                "createServiceRollout"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            },
+            "ListServiceConfigs": {
+              "methods": [
+                "listServiceConfigs",
+                "listServiceConfigsStream",
+                "listServiceConfigsAsync"
+              ]
+            },
+            "ListServiceRollouts": {
+              "methods": [
+                "listServiceRollouts",
+                "listServiceRolloutsStream",
+                "listServiceRolloutsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
