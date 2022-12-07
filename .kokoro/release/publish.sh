@@ -30,7 +30,9 @@ export NPM_CONFIG_PREFIX=/home/node/.npm-global
 # Start the releasetool reporter
 python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
 
-NPM_TOKEN=$(cat "${KOKORO_GFILE_DIR}/secret_manager/repo_automation_bots_npm_publish_token")
+cd $(dirname $0)/..
+
+NPM_TOKEN=$(cat $KOKORO_KEYSTORE_DIR/73713_google-cloud-npm-token-1)
 echo "//wombat-dressing-room.appspot.com/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 
 SCRIPT=$(realpath $(dirname $0)/./publish-single.sh)
