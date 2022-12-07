@@ -2629,6 +2629,820 @@
                         return SynthesizeSpeechResponse;
                     })();
     
+                    v1.TextToSpeechLongAudioSynthesize = (function() {
+    
+                        /**
+                         * Constructs a new TextToSpeechLongAudioSynthesize service.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @classdesc Represents a TextToSpeechLongAudioSynthesize
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function TextToSpeechLongAudioSynthesize(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (TextToSpeechLongAudioSynthesize.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = TextToSpeechLongAudioSynthesize;
+    
+                        /**
+                         * Creates new TextToSpeechLongAudioSynthesize service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {TextToSpeechLongAudioSynthesize} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        TextToSpeechLongAudioSynthesize.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize|synthesizeLongAudio}.
+                         * @memberof google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize
+                         * @typedef SynthesizeLongAudioCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls SynthesizeLongAudio.
+                         * @function synthesizeLongAudio
+                         * @memberof google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize
+                         * @instance
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest} request SynthesizeLongAudioRequest message or plain object
+                         * @param {google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize.SynthesizeLongAudioCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TextToSpeechLongAudioSynthesize.prototype.synthesizeLongAudio = function synthesizeLongAudio(request, callback) {
+                            return this.rpcCall(synthesizeLongAudio, $root.google.cloud.texttospeech.v1.SynthesizeLongAudioRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "SynthesizeLongAudio" });
+    
+                        /**
+                         * Calls SynthesizeLongAudio.
+                         * @function synthesizeLongAudio
+                         * @memberof google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize
+                         * @instance
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest} request SynthesizeLongAudioRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return TextToSpeechLongAudioSynthesize;
+                    })();
+    
+                    v1.SynthesizeLongAudioRequest = (function() {
+    
+                        /**
+                         * Properties of a SynthesizeLongAudioRequest.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @interface ISynthesizeLongAudioRequest
+                         * @property {string|null} [parent] SynthesizeLongAudioRequest parent
+                         * @property {google.cloud.texttospeech.v1.ISynthesisInput|null} [input] SynthesizeLongAudioRequest input
+                         * @property {google.cloud.texttospeech.v1.IAudioConfig|null} [audioConfig] SynthesizeLongAudioRequest audioConfig
+                         * @property {string|null} [outputGcsUri] SynthesizeLongAudioRequest outputGcsUri
+                         * @property {google.cloud.texttospeech.v1.IVoiceSelectionParams|null} [voice] SynthesizeLongAudioRequest voice
+                         */
+    
+                        /**
+                         * Constructs a new SynthesizeLongAudioRequest.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @classdesc Represents a SynthesizeLongAudioRequest.
+                         * @implements ISynthesizeLongAudioRequest
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest=} [properties] Properties to set
+                         */
+                        function SynthesizeLongAudioRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SynthesizeLongAudioRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @instance
+                         */
+                        SynthesizeLongAudioRequest.prototype.parent = "";
+    
+                        /**
+                         * SynthesizeLongAudioRequest input.
+                         * @member {google.cloud.texttospeech.v1.ISynthesisInput|null|undefined} input
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @instance
+                         */
+                        SynthesizeLongAudioRequest.prototype.input = null;
+    
+                        /**
+                         * SynthesizeLongAudioRequest audioConfig.
+                         * @member {google.cloud.texttospeech.v1.IAudioConfig|null|undefined} audioConfig
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @instance
+                         */
+                        SynthesizeLongAudioRequest.prototype.audioConfig = null;
+    
+                        /**
+                         * SynthesizeLongAudioRequest outputGcsUri.
+                         * @member {string} outputGcsUri
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @instance
+                         */
+                        SynthesizeLongAudioRequest.prototype.outputGcsUri = "";
+    
+                        /**
+                         * SynthesizeLongAudioRequest voice.
+                         * @member {google.cloud.texttospeech.v1.IVoiceSelectionParams|null|undefined} voice
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @instance
+                         */
+                        SynthesizeLongAudioRequest.prototype.voice = null;
+    
+                        /**
+                         * Creates a new SynthesizeLongAudioRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1.SynthesizeLongAudioRequest} SynthesizeLongAudioRequest instance
+                         */
+                        SynthesizeLongAudioRequest.create = function create(properties) {
+                            return new SynthesizeLongAudioRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SynthesizeLongAudioRequest message. Does not implicitly {@link google.cloud.texttospeech.v1.SynthesizeLongAudioRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest} message SynthesizeLongAudioRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SynthesizeLongAudioRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.input != null && Object.hasOwnProperty.call(message, "input"))
+                                $root.google.cloud.texttospeech.v1.SynthesisInput.encode(message.input, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.audioConfig != null && Object.hasOwnProperty.call(message, "audioConfig"))
+                                $root.google.cloud.texttospeech.v1.AudioConfig.encode(message.audioConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.outputGcsUri != null && Object.hasOwnProperty.call(message, "outputGcsUri"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.outputGcsUri);
+                            if (message.voice != null && Object.hasOwnProperty.call(message, "voice"))
+                                $root.google.cloud.texttospeech.v1.VoiceSelectionParams.encode(message.voice, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SynthesizeLongAudioRequest message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.SynthesizeLongAudioRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest} message SynthesizeLongAudioRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SynthesizeLongAudioRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SynthesizeLongAudioRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1.SynthesizeLongAudioRequest} SynthesizeLongAudioRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SynthesizeLongAudioRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1.SynthesizeLongAudioRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.input = $root.google.cloud.texttospeech.v1.SynthesisInput.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.audioConfig = $root.google.cloud.texttospeech.v1.AudioConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.outputGcsUri = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.voice = $root.google.cloud.texttospeech.v1.VoiceSelectionParams.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SynthesizeLongAudioRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1.SynthesizeLongAudioRequest} SynthesizeLongAudioRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SynthesizeLongAudioRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SynthesizeLongAudioRequest message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SynthesizeLongAudioRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.input != null && message.hasOwnProperty("input")) {
+                                var error = $root.google.cloud.texttospeech.v1.SynthesisInput.verify(message.input);
+                                if (error)
+                                    return "input." + error;
+                            }
+                            if (message.audioConfig != null && message.hasOwnProperty("audioConfig")) {
+                                var error = $root.google.cloud.texttospeech.v1.AudioConfig.verify(message.audioConfig);
+                                if (error)
+                                    return "audioConfig." + error;
+                            }
+                            if (message.outputGcsUri != null && message.hasOwnProperty("outputGcsUri"))
+                                if (!$util.isString(message.outputGcsUri))
+                                    return "outputGcsUri: string expected";
+                            if (message.voice != null && message.hasOwnProperty("voice")) {
+                                var error = $root.google.cloud.texttospeech.v1.VoiceSelectionParams.verify(message.voice);
+                                if (error)
+                                    return "voice." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SynthesizeLongAudioRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1.SynthesizeLongAudioRequest} SynthesizeLongAudioRequest
+                         */
+                        SynthesizeLongAudioRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1.SynthesizeLongAudioRequest)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1.SynthesizeLongAudioRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.input != null) {
+                                if (typeof object.input !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1.SynthesizeLongAudioRequest.input: object expected");
+                                message.input = $root.google.cloud.texttospeech.v1.SynthesisInput.fromObject(object.input);
+                            }
+                            if (object.audioConfig != null) {
+                                if (typeof object.audioConfig !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1.SynthesizeLongAudioRequest.audioConfig: object expected");
+                                message.audioConfig = $root.google.cloud.texttospeech.v1.AudioConfig.fromObject(object.audioConfig);
+                            }
+                            if (object.outputGcsUri != null)
+                                message.outputGcsUri = String(object.outputGcsUri);
+                            if (object.voice != null) {
+                                if (typeof object.voice !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1.SynthesizeLongAudioRequest.voice: object expected");
+                                message.voice = $root.google.cloud.texttospeech.v1.VoiceSelectionParams.fromObject(object.voice);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SynthesizeLongAudioRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.SynthesizeLongAudioRequest} message SynthesizeLongAudioRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SynthesizeLongAudioRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.input = null;
+                                object.audioConfig = null;
+                                object.outputGcsUri = "";
+                                object.voice = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.input != null && message.hasOwnProperty("input"))
+                                object.input = $root.google.cloud.texttospeech.v1.SynthesisInput.toObject(message.input, options);
+                            if (message.audioConfig != null && message.hasOwnProperty("audioConfig"))
+                                object.audioConfig = $root.google.cloud.texttospeech.v1.AudioConfig.toObject(message.audioConfig, options);
+                            if (message.outputGcsUri != null && message.hasOwnProperty("outputGcsUri"))
+                                object.outputGcsUri = message.outputGcsUri;
+                            if (message.voice != null && message.hasOwnProperty("voice"))
+                                object.voice = $root.google.cloud.texttospeech.v1.VoiceSelectionParams.toObject(message.voice, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SynthesizeLongAudioRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SynthesizeLongAudioRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SynthesizeLongAudioRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SynthesizeLongAudioRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.texttospeech.v1.SynthesizeLongAudioRequest";
+                        };
+    
+                        return SynthesizeLongAudioRequest;
+                    })();
+    
+                    v1.SynthesizeLongAudioResponse = (function() {
+    
+                        /**
+                         * Properties of a SynthesizeLongAudioResponse.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @interface ISynthesizeLongAudioResponse
+                         */
+    
+                        /**
+                         * Constructs a new SynthesizeLongAudioResponse.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @classdesc Represents a SynthesizeLongAudioResponse.
+                         * @implements ISynthesizeLongAudioResponse
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse=} [properties] Properties to set
+                         */
+                        function SynthesizeLongAudioResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new SynthesizeLongAudioResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioResponse
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1.SynthesizeLongAudioResponse} SynthesizeLongAudioResponse instance
+                         */
+                        SynthesizeLongAudioResponse.create = function create(properties) {
+                            return new SynthesizeLongAudioResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SynthesizeLongAudioResponse message. Does not implicitly {@link google.cloud.texttospeech.v1.SynthesizeLongAudioResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioResponse
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse} message SynthesizeLongAudioResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SynthesizeLongAudioResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SynthesizeLongAudioResponse message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.SynthesizeLongAudioResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioResponse
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse} message SynthesizeLongAudioResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SynthesizeLongAudioResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SynthesizeLongAudioResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1.SynthesizeLongAudioResponse} SynthesizeLongAudioResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SynthesizeLongAudioResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1.SynthesizeLongAudioResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SynthesizeLongAudioResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1.SynthesizeLongAudioResponse} SynthesizeLongAudioResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SynthesizeLongAudioResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SynthesizeLongAudioResponse message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SynthesizeLongAudioResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SynthesizeLongAudioResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1.SynthesizeLongAudioResponse} SynthesizeLongAudioResponse
+                         */
+                        SynthesizeLongAudioResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1.SynthesizeLongAudioResponse)
+                                return object;
+                            return new $root.google.cloud.texttospeech.v1.SynthesizeLongAudioResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a SynthesizeLongAudioResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioResponse
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.SynthesizeLongAudioResponse} message SynthesizeLongAudioResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SynthesizeLongAudioResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this SynthesizeLongAudioResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SynthesizeLongAudioResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SynthesizeLongAudioResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SynthesizeLongAudioResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.texttospeech.v1.SynthesizeLongAudioResponse";
+                        };
+    
+                        return SynthesizeLongAudioResponse;
+                    })();
+    
+                    v1.SynthesizeLongAudioMetadata = (function() {
+    
+                        /**
+                         * Properties of a SynthesizeLongAudioMetadata.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @interface ISynthesizeLongAudioMetadata
+                         * @property {google.protobuf.ITimestamp|null} [startTime] SynthesizeLongAudioMetadata startTime
+                         * @property {google.protobuf.ITimestamp|null} [lastUpdateTime] SynthesizeLongAudioMetadata lastUpdateTime
+                         * @property {number|null} [progressPercentage] SynthesizeLongAudioMetadata progressPercentage
+                         */
+    
+                        /**
+                         * Constructs a new SynthesizeLongAudioMetadata.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @classdesc Represents a SynthesizeLongAudioMetadata.
+                         * @implements ISynthesizeLongAudioMetadata
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata=} [properties] Properties to set
+                         */
+                        function SynthesizeLongAudioMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SynthesizeLongAudioMetadata startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @instance
+                         */
+                        SynthesizeLongAudioMetadata.prototype.startTime = null;
+    
+                        /**
+                         * SynthesizeLongAudioMetadata lastUpdateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastUpdateTime
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @instance
+                         */
+                        SynthesizeLongAudioMetadata.prototype.lastUpdateTime = null;
+    
+                        /**
+                         * SynthesizeLongAudioMetadata progressPercentage.
+                         * @member {number} progressPercentage
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @instance
+                         */
+                        SynthesizeLongAudioMetadata.prototype.progressPercentage = 0;
+    
+                        /**
+                         * Creates a new SynthesizeLongAudioMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata} SynthesizeLongAudioMetadata instance
+                         */
+                        SynthesizeLongAudioMetadata.create = function create(properties) {
+                            return new SynthesizeLongAudioMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SynthesizeLongAudioMetadata message. Does not implicitly {@link google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata} message SynthesizeLongAudioMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SynthesizeLongAudioMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.lastUpdateTime != null && Object.hasOwnProperty.call(message, "lastUpdateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastUpdateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.progressPercentage != null && Object.hasOwnProperty.call(message, "progressPercentage"))
+                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.progressPercentage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SynthesizeLongAudioMetadata message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata} message SynthesizeLongAudioMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SynthesizeLongAudioMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SynthesizeLongAudioMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata} SynthesizeLongAudioMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SynthesizeLongAudioMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.lastUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.progressPercentage = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SynthesizeLongAudioMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata} SynthesizeLongAudioMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SynthesizeLongAudioMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SynthesizeLongAudioMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SynthesizeLongAudioMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.lastUpdateTime != null && message.hasOwnProperty("lastUpdateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastUpdateTime);
+                                if (error)
+                                    return "lastUpdateTime." + error;
+                            }
+                            if (message.progressPercentage != null && message.hasOwnProperty("progressPercentage"))
+                                if (typeof message.progressPercentage !== "number")
+                                    return "progressPercentage: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SynthesizeLongAudioMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata} SynthesizeLongAudioMetadata
+                         */
+                        SynthesizeLongAudioMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata();
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.lastUpdateTime != null) {
+                                if (typeof object.lastUpdateTime !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata.lastUpdateTime: object expected");
+                                message.lastUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.lastUpdateTime);
+                            }
+                            if (object.progressPercentage != null)
+                                message.progressPercentage = Number(object.progressPercentage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SynthesizeLongAudioMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata} message SynthesizeLongAudioMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SynthesizeLongAudioMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.lastUpdateTime = null;
+                                object.progressPercentage = 0;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.lastUpdateTime != null && message.hasOwnProperty("lastUpdateTime"))
+                                object.lastUpdateTime = $root.google.protobuf.Timestamp.toObject(message.lastUpdateTime, options);
+                            if (message.progressPercentage != null && message.hasOwnProperty("progressPercentage"))
+                                object.progressPercentage = options.json && !isFinite(message.progressPercentage) ? String(message.progressPercentage) : message.progressPercentage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SynthesizeLongAudioMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SynthesizeLongAudioMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SynthesizeLongAudioMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SynthesizeLongAudioMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata";
+                        };
+    
+                        return SynthesizeLongAudioMetadata;
+                    })();
+    
                     return v1;
                 })();
     
