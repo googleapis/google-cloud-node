@@ -423,11 +423,6 @@
                     },
                     "AddressMetadata": {
                       "oneofs": {
-                        "_highrise": {
-                          "oneof": [
-                            "highrise"
-                          ]
-                        },
                         "_business": {
                           "oneof": [
                             "business"
@@ -438,11 +433,6 @@
                             "poBox"
                           ]
                         },
-                        "_multiFamily": {
-                          "oneof": [
-                            "multiFamily"
-                          ]
-                        },
                         "_residential": {
                           "oneof": [
                             "residential"
@@ -450,14 +440,6 @@
                         }
                       },
                       "fields": {
-                        "highrise": {
-                          "type": "bool",
-                          "id": 1,
-                          "options": {
-                            "deprecated": true,
-                            "proto3_optional": true
-                          }
-                        },
                         "business": {
                           "type": "bool",
                           "id": 2,
@@ -469,14 +451,6 @@
                           "type": "bool",
                           "id": 3,
                           "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "multiFamily": {
-                          "type": "bool",
-                          "id": 4,
-                          "options": {
-                            "deprecated": true,
                             "proto3_optional": true
                           }
                         },
