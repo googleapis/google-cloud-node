@@ -510,6 +510,11 @@
                             "traceId": {
                               "type": "string",
                               "id": 6
+                            },
+                            "missingValueInterpretations": {
+                              "keyType": "string",
+                              "type": "MissingValueInterpretation",
+                              "id": 7
                             }
                           },
                           "nested": {
@@ -523,6 +528,13 @@
                                   "type": "ProtoRows",
                                   "id": 2
                                 }
+                              }
+                            },
+                            "MissingValueInterpretation": {
+                              "values": {
+                                "MISSING_VALUE_INTERPRETATION_UNSPECIFIED": 0,
+                                "NULL_VALUE": 1,
+                                "DEFAULT_VALUE": 2
                               }
                             }
                           }
@@ -1529,6 +1541,902 @@
                             "snapshotTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "v1beta2": {
+                      "options": {
+                        "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/storage/v1beta2;storage",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "TableProto",
+                        "java_package": "com.google.cloud.bigquery.storage.v1beta2",
+                        "(google.api.resource_definition).type": "bigquery.googleapis.com/Table",
+                        "(google.api.resource_definition).pattern": "projects/{project}/datasets/{dataset}/tables/{table}"
+                      },
+                      "nested": {
+                        "ArrowSchema": {
+                          "fields": {
+                            "serializedSchema": {
+                              "type": "bytes",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ArrowRecordBatch": {
+                          "fields": {
+                            "serializedRecordBatch": {
+                              "type": "bytes",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ArrowSerializationOptions": {
+                          "fields": {
+                            "format": {
+                              "type": "Format",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Format": {
+                              "values": {
+                                "FORMAT_UNSPECIFIED": 0,
+                                "ARROW_0_14": 1,
+                                "ARROW_0_15": 2
+                              }
+                            }
+                          }
+                        },
+                        "AvroSchema": {
+                          "fields": {
+                            "schema": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "AvroRows": {
+                          "fields": {
+                            "serializedBinaryRows": {
+                              "type": "bytes",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ProtoSchema": {
+                          "fields": {
+                            "protoDescriptor": {
+                              "type": "google.protobuf.DescriptorProto",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ProtoRows": {
+                          "fields": {
+                            "serializedRows": {
+                              "rule": "repeated",
+                              "type": "bytes",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "BigQueryRead": {
+                          "options": {
+                            "(google.api.default_host)": "bigquerystorage.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/bigquery,https://www.googleapis.com/auth/cloud-platform"
+                          },
+                          "methods": {
+                            "CreateReadSession": {
+                              "requestType": "CreateReadSessionRequest",
+                              "responseType": "ReadSession",
+                              "options": {
+                                "(google.api.http).post": "/v1beta2/{read_session.table=projects/*/datasets/*/tables/*}",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "parent,read_session,max_stream_count"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta2/{read_session.table=projects/*/datasets/*/tables/*}",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,read_session,max_stream_count"
+                                }
+                              ]
+                            },
+                            "ReadRows": {
+                              "requestType": "ReadRowsRequest",
+                              "responseType": "ReadRowsResponse",
+                              "responseStream": true,
+                              "options": {
+                                "(google.api.http).get": "/v1beta2/{read_stream=projects/*/locations/*/sessions/*/streams/*}",
+                                "(google.api.method_signature)": "read_stream,offset"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta2/{read_stream=projects/*/locations/*/sessions/*/streams/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "read_stream,offset"
+                                }
+                              ]
+                            },
+                            "SplitReadStream": {
+                              "requestType": "SplitReadStreamRequest",
+                              "responseType": "SplitReadStreamResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1beta2/{name=projects/*/locations/*/sessions/*/streams/*}"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta2/{name=projects/*/locations/*/sessions/*/streams/*}"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "BigQueryWrite": {
+                          "options": {
+                            "(google.api.default_host)": "bigquerystorage.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/bigquery,https://www.googleapis.com/auth/bigquery.insertdata,https://www.googleapis.com/auth/cloud-platform"
+                          },
+                          "methods": {
+                            "CreateWriteStream": {
+                              "requestType": "CreateWriteStreamRequest",
+                              "responseType": "WriteStream",
+                              "options": {
+                                "(google.api.http).post": "/v1beta2/{parent=projects/*/datasets/*/tables/*}",
+                                "(google.api.http).body": "write_stream",
+                                "(google.api.method_signature)": "parent,write_stream"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta2/{parent=projects/*/datasets/*/tables/*}",
+                                    "body": "write_stream"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,write_stream"
+                                }
+                              ]
+                            },
+                            "AppendRows": {
+                              "requestType": "AppendRowsRequest",
+                              "requestStream": true,
+                              "responseType": "AppendRowsResponse",
+                              "responseStream": true,
+                              "options": {
+                                "(google.api.http).post": "/v1beta2/{write_stream=projects/*/datasets/*/tables/*/streams/*}",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "write_stream"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta2/{write_stream=projects/*/datasets/*/tables/*/streams/*}",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "write_stream"
+                                }
+                              ]
+                            },
+                            "GetWriteStream": {
+                              "requestType": "GetWriteStreamRequest",
+                              "responseType": "WriteStream",
+                              "options": {
+                                "(google.api.http).post": "/v1beta2/{name=projects/*/datasets/*/tables/*/streams/*}",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta2/{name=projects/*/datasets/*/tables/*/streams/*}",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "FinalizeWriteStream": {
+                              "requestType": "FinalizeWriteStreamRequest",
+                              "responseType": "FinalizeWriteStreamResponse",
+                              "options": {
+                                "(google.api.http).post": "/v1beta2/{name=projects/*/datasets/*/tables/*/streams/*}",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta2/{name=projects/*/datasets/*/tables/*/streams/*}",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "BatchCommitWriteStreams": {
+                              "requestType": "BatchCommitWriteStreamsRequest",
+                              "responseType": "BatchCommitWriteStreamsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1beta2/{parent=projects/*/datasets/*/tables/*}",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta2/{parent=projects/*/datasets/*/tables/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "FlushRows": {
+                              "requestType": "FlushRowsRequest",
+                              "responseType": "FlushRowsResponse",
+                              "options": {
+                                "(google.api.http).post": "/v1beta2/{write_stream=projects/*/datasets/*/tables/*/streams/*}",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "write_stream"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta2/{write_stream=projects/*/datasets/*/tables/*/streams/*}",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "write_stream"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "CreateReadSessionRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                              }
+                            },
+                            "readSession": {
+                              "type": "ReadSession",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "maxStreamCount": {
+                              "type": "int32",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ReadRowsRequest": {
+                          "fields": {
+                            "readStream": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerystorage.googleapis.com/ReadStream"
+                              }
+                            },
+                            "offset": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ThrottleState": {
+                          "fields": {
+                            "throttlePercent": {
+                              "type": "int32",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "StreamStats": {
+                          "fields": {
+                            "progress": {
+                              "type": "Progress",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Progress": {
+                              "fields": {
+                                "atResponseStart": {
+                                  "type": "double",
+                                  "id": 1
+                                },
+                                "atResponseEnd": {
+                                  "type": "double",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ReadRowsResponse": {
+                          "oneofs": {
+                            "rows": {
+                              "oneof": [
+                                "avroRows",
+                                "arrowRecordBatch"
+                              ]
+                            },
+                            "schema": {
+                              "oneof": [
+                                "avroSchema",
+                                "arrowSchema"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "avroRows": {
+                              "type": "AvroRows",
+                              "id": 3
+                            },
+                            "arrowRecordBatch": {
+                              "type": "ArrowRecordBatch",
+                              "id": 4
+                            },
+                            "rowCount": {
+                              "type": "int64",
+                              "id": 6
+                            },
+                            "stats": {
+                              "type": "StreamStats",
+                              "id": 2
+                            },
+                            "throttleState": {
+                              "type": "ThrottleState",
+                              "id": 5
+                            },
+                            "avroSchema": {
+                              "type": "AvroSchema",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "arrowSchema": {
+                              "type": "ArrowSchema",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "SplitReadStreamRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerystorage.googleapis.com/ReadStream"
+                              }
+                            },
+                            "fraction": {
+                              "type": "double",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SplitReadStreamResponse": {
+                          "fields": {
+                            "primaryStream": {
+                              "type": "ReadStream",
+                              "id": 1
+                            },
+                            "remainderStream": {
+                              "type": "ReadStream",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "CreateWriteStreamRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquery.googleapis.com/Table"
+                              }
+                            },
+                            "writeStream": {
+                              "type": "WriteStream",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "AppendRowsRequest": {
+                          "oneofs": {
+                            "rows": {
+                              "oneof": [
+                                "protoRows"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "writeStream": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerystorage.googleapis.com/WriteStream"
+                              }
+                            },
+                            "offset": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 2
+                            },
+                            "protoRows": {
+                              "type": "ProtoData",
+                              "id": 4
+                            },
+                            "traceId": {
+                              "type": "string",
+                              "id": 6
+                            }
+                          },
+                          "nested": {
+                            "ProtoData": {
+                              "fields": {
+                                "writerSchema": {
+                                  "type": "ProtoSchema",
+                                  "id": 1
+                                },
+                                "rows": {
+                                  "type": "ProtoRows",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AppendRowsResponse": {
+                          "oneofs": {
+                            "response": {
+                              "oneof": [
+                                "appendResult",
+                                "error"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "appendResult": {
+                              "type": "AppendResult",
+                              "id": 1
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 2
+                            },
+                            "updatedSchema": {
+                              "type": "TableSchema",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "AppendResult": {
+                              "fields": {
+                                "offset": {
+                                  "type": "google.protobuf.Int64Value",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "GetWriteStreamRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerystorage.googleapis.com/WriteStream"
+                              }
+                            }
+                          }
+                        },
+                        "BatchCommitWriteStreamsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "writeStreams": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "BatchCommitWriteStreamsResponse": {
+                          "fields": {
+                            "commitTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "streamErrors": {
+                              "rule": "repeated",
+                              "type": "StorageError",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "FinalizeWriteStreamRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerystorage.googleapis.com/WriteStream"
+                              }
+                            }
+                          }
+                        },
+                        "FinalizeWriteStreamResponse": {
+                          "fields": {
+                            "rowCount": {
+                              "type": "int64",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "FlushRowsRequest": {
+                          "fields": {
+                            "writeStream": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerystorage.googleapis.com/WriteStream"
+                              }
+                            },
+                            "offset": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "FlushRowsResponse": {
+                          "fields": {
+                            "offset": {
+                              "type": "int64",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "StorageError": {
+                          "fields": {
+                            "code": {
+                              "type": "StorageErrorCode",
+                              "id": 1
+                            },
+                            "entity": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "errorMessage": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "StorageErrorCode": {
+                              "values": {
+                                "STORAGE_ERROR_CODE_UNSPECIFIED": 0,
+                                "TABLE_NOT_FOUND": 1,
+                                "STREAM_ALREADY_COMMITTED": 2,
+                                "STREAM_NOT_FOUND": 3,
+                                "INVALID_STREAM_TYPE": 4,
+                                "INVALID_STREAM_STATE": 5,
+                                "STREAM_FINALIZED": 6
+                              }
+                            }
+                          }
+                        },
+                        "DataFormat": {
+                          "values": {
+                            "DATA_FORMAT_UNSPECIFIED": 0,
+                            "AVRO": 1,
+                            "ARROW": 2
+                          }
+                        },
+                        "ReadSession": {
+                          "options": {
+                            "(google.api.resource).type": "bigquerystorage.googleapis.com/ReadSession",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/sessions/{session}"
+                          },
+                          "oneofs": {
+                            "schema": {
+                              "oneof": [
+                                "avroSchema",
+                                "arrowSchema"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "expireTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "dataFormat": {
+                              "type": "DataFormat",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "avroSchema": {
+                              "type": "AvroSchema",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "arrowSchema": {
+                              "type": "ArrowSchema",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "table": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.resource_reference).type": "bigquery.googleapis.com/Table"
+                              }
+                            },
+                            "tableModifiers": {
+                              "type": "TableModifiers",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "readOptions": {
+                              "type": "TableReadOptions",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "streams": {
+                              "rule": "repeated",
+                              "type": "ReadStream",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "TableModifiers": {
+                              "fields": {
+                                "snapshotTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "TableReadOptions": {
+                              "fields": {
+                                "selectedFields": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "rowRestriction": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "arrowSerializationOptions": {
+                                  "type": "ArrowSerializationOptions",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ReadStream": {
+                          "options": {
+                            "(google.api.resource).type": "bigquerystorage.googleapis.com/ReadStream",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/sessions/{session}/streams/{stream}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "WriteStream": {
+                          "options": {
+                            "(google.api.resource).type": "bigquerystorage.googleapis.com/WriteStream",
+                            "(google.api.resource).pattern": "projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "commitTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "tableSchema": {
+                              "type": "TableSchema",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "COMMITTED": 1,
+                                "PENDING": 2,
+                                "BUFFERED": 3
+                              }
+                            }
+                          }
+                        },
+                        "TableSchema": {
+                          "fields": {
+                            "fields": {
+                              "rule": "repeated",
+                              "type": "TableFieldSchema",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "TableFieldSchema": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "mode": {
+                              "type": "Mode",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "fields": {
+                              "rule": "repeated",
+                              "type": "TableFieldSchema",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "STRING": 1,
+                                "INT64": 2,
+                                "DOUBLE": 3,
+                                "STRUCT": 4,
+                                "BYTES": 5,
+                                "BOOL": 6,
+                                "TIMESTAMP": 7,
+                                "DATE": 8,
+                                "TIME": 9,
+                                "DATETIME": 10,
+                                "GEOGRAPHY": 11,
+                                "NUMERIC": 12,
+                                "BIGNUMERIC": 13,
+                                "INTERVAL": 14,
+                                "JSON": 15
+                              }
+                            },
+                            "Mode": {
+                              "values": {
+                                "MODE_UNSPECIFIED": 0,
+                                "NULLABLE": 1,
+                                "REQUIRED": 2,
+                                "REPEATED": 3
+                              }
                             }
                           }
                         }

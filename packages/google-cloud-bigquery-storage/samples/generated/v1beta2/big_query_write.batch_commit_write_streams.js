@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(billingAccount) {
-  // [START cloudbilling_v1_generated_CloudBilling_CreateBillingAccount_async]
+function main(parent, writeStreams) {
+  // [START bigquerystorage_v1beta2_generated_BigQueryWrite_BatchCommitWriteStreams_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,32 +29,35 @@ function main(billingAccount) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The billing account resource to create.
-   *  Currently CreateBillingAccount only supports subaccount creation, so
-   *  any created billing accounts must be under a provided parent billing
-   *  account.
+   *  Required. Parent table that all the streams should belong to, in the form of
+   *  `projects/{project}/datasets/{dataset}/tables/{table}`.
    */
-  // const billingAccount = {}
+  // const parent = 'abc123'
+  /**
+   *  Required. The group of streams that will be committed atomically.
+   */
+  // const writeStreams = 'abc123'
 
-  // Imports the Billing library
-  const {CloudBillingClient} = require('@google-cloud/billing').v1;
+  // Imports the Storage library
+  const {BigQueryWriteClient} = require('storage').v1beta2;
 
   // Instantiates a client
-  const billingClient = new CloudBillingClient();
+  const storageClient = new BigQueryWriteClient();
 
-  async function callCreateBillingAccount() {
+  async function callBatchCommitWriteStreams() {
     // Construct request
     const request = {
-      billingAccount,
+      parent,
+      writeStreams,
     };
 
     // Run request
-    const response = await billingClient.createBillingAccount(request);
+    const response = await storageClient.batchCommitWriteStreams(request);
     console.log(response);
   }
 
-  callCreateBillingAccount();
-  // [END cloudbilling_v1_generated_CloudBilling_CreateBillingAccount_async]
+  callBatchCommitWriteStreams();
+  // [END bigquerystorage_v1beta2_generated_BigQueryWrite_BatchCommitWriteStreams_async]
 }
 
 process.on('unhandledRejection', err => {

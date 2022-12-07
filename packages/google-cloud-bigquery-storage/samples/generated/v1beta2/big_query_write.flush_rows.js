@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(billingAccount) {
-  // [START cloudbilling_v1_generated_CloudBilling_CreateBillingAccount_async]
+function main(writeStream) {
+  // [START bigquerystorage_v1beta2_generated_BigQueryWrite_FlushRows_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,32 +29,34 @@ function main(billingAccount) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The billing account resource to create.
-   *  Currently CreateBillingAccount only supports subaccount creation, so
-   *  any created billing accounts must be under a provided parent billing
-   *  account.
+   *  Required. The stream that is the target of the flush operation.
    */
-  // const billingAccount = {}
+  // const writeStream = 'abc123'
+  /**
+   *  Ending offset of the flush operation. Rows before this offset(including
+   *  this offset) will be flushed.
+   */
+  // const offset = {}
 
-  // Imports the Billing library
-  const {CloudBillingClient} = require('@google-cloud/billing').v1;
+  // Imports the Storage library
+  const {BigQueryWriteClient} = require('storage').v1beta2;
 
   // Instantiates a client
-  const billingClient = new CloudBillingClient();
+  const storageClient = new BigQueryWriteClient();
 
-  async function callCreateBillingAccount() {
+  async function callFlushRows() {
     // Construct request
     const request = {
-      billingAccount,
+      writeStream,
     };
 
     // Run request
-    const response = await billingClient.createBillingAccount(request);
+    const response = await storageClient.flushRows(request);
     console.log(response);
   }
 
-  callCreateBillingAccount();
-  // [END cloudbilling_v1_generated_CloudBilling_CreateBillingAccount_async]
+  callFlushRows();
+  // [END bigquerystorage_v1beta2_generated_BigQueryWrite_FlushRows_async]
 }
 
 process.on('unhandledRejection', err => {
