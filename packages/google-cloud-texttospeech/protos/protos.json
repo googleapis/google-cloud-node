@@ -12,7 +12,7 @@
                     "csharp_namespace": "Google.Cloud.TextToSpeech.V1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/texttospeech/v1;texttospeech",
                     "java_multiple_files": true,
-                    "java_outer_classname": "TextToSpeechProto",
+                    "java_outer_classname": "TextToSpeechLongAudioSynthesisProto",
                     "java_package": "com.google.cloud.texttospeech.v1",
                     "php_namespace": "Google\\Cloud\\TextToSpeech\\V1",
                     "ruby_package": "Google::Cloud::TextToSpeech::V1",
@@ -273,6 +273,87 @@
                         "audioContent": {
                           "type": "bytes",
                           "id": 1
+                        }
+                      }
+                    },
+                    "TextToSpeechLongAudioSynthesize": {
+                      "options": {
+                        "(google.api.default_host)": "texttospeech.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "SynthesizeLongAudio": {
+                          "requestType": "SynthesizeLongAudioRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/voices/*}:SynthesizeLongAudio",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "SynthesizeLongAudioResponse",
+                            "(google.longrunning.operation_info).metadata_type": "SynthesizeLongAudioMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/voices/*}:SynthesizeLongAudio",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "SynthesizeLongAudioResponse",
+                                "metadata_type": "SynthesizeLongAudioMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "SynthesizeLongAudioRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "input": {
+                          "type": "SynthesisInput",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "audioConfig": {
+                          "type": "AudioConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "outputGcsUri": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "voice": {
+                          "type": "VoiceSelectionParams",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "SynthesizeLongAudioResponse": {
+                      "fields": {}
+                    },
+                    "SynthesizeLongAudioMetadata": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "lastUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "progressPercentage": {
+                          "type": "double",
+                          "id": 3
                         }
                       }
                     }

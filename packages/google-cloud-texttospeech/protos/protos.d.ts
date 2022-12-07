@@ -1085,6 +1085,372 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Represents a TextToSpeechLongAudioSynthesize */
+                class TextToSpeechLongAudioSynthesize extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new TextToSpeechLongAudioSynthesize service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new TextToSpeechLongAudioSynthesize service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): TextToSpeechLongAudioSynthesize;
+
+                    /**
+                     * Calls SynthesizeLongAudio.
+                     * @param request SynthesizeLongAudioRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public synthesizeLongAudio(request: google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest, callback: google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize.SynthesizeLongAudioCallback): void;
+
+                    /**
+                     * Calls SynthesizeLongAudio.
+                     * @param request SynthesizeLongAudioRequest message or plain object
+                     * @returns Promise
+                     */
+                    public synthesizeLongAudio(request: google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace TextToSpeechLongAudioSynthesize {
+
+                    /**
+                     * Callback as used by {@link google.cloud.texttospeech.v1.TextToSpeechLongAudioSynthesize|synthesizeLongAudio}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SynthesizeLongAudioCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a SynthesizeLongAudioRequest. */
+                interface ISynthesizeLongAudioRequest {
+
+                    /** SynthesizeLongAudioRequest parent */
+                    parent?: (string|null);
+
+                    /** SynthesizeLongAudioRequest input */
+                    input?: (google.cloud.texttospeech.v1.ISynthesisInput|null);
+
+                    /** SynthesizeLongAudioRequest audioConfig */
+                    audioConfig?: (google.cloud.texttospeech.v1.IAudioConfig|null);
+
+                    /** SynthesizeLongAudioRequest outputGcsUri */
+                    outputGcsUri?: (string|null);
+
+                    /** SynthesizeLongAudioRequest voice */
+                    voice?: (google.cloud.texttospeech.v1.IVoiceSelectionParams|null);
+                }
+
+                /** Represents a SynthesizeLongAudioRequest. */
+                class SynthesizeLongAudioRequest implements ISynthesizeLongAudioRequest {
+
+                    /**
+                     * Constructs a new SynthesizeLongAudioRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest);
+
+                    /** SynthesizeLongAudioRequest parent. */
+                    public parent: string;
+
+                    /** SynthesizeLongAudioRequest input. */
+                    public input?: (google.cloud.texttospeech.v1.ISynthesisInput|null);
+
+                    /** SynthesizeLongAudioRequest audioConfig. */
+                    public audioConfig?: (google.cloud.texttospeech.v1.IAudioConfig|null);
+
+                    /** SynthesizeLongAudioRequest outputGcsUri. */
+                    public outputGcsUri: string;
+
+                    /** SynthesizeLongAudioRequest voice. */
+                    public voice?: (google.cloud.texttospeech.v1.IVoiceSelectionParams|null);
+
+                    /**
+                     * Creates a new SynthesizeLongAudioRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SynthesizeLongAudioRequest instance
+                     */
+                    public static create(properties?: google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest): google.cloud.texttospeech.v1.SynthesizeLongAudioRequest;
+
+                    /**
+                     * Encodes the specified SynthesizeLongAudioRequest message. Does not implicitly {@link google.cloud.texttospeech.v1.SynthesizeLongAudioRequest.verify|verify} messages.
+                     * @param message SynthesizeLongAudioRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SynthesizeLongAudioRequest message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.SynthesizeLongAudioRequest.verify|verify} messages.
+                     * @param message SynthesizeLongAudioRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.texttospeech.v1.ISynthesizeLongAudioRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SynthesizeLongAudioRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SynthesizeLongAudioRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1.SynthesizeLongAudioRequest;
+
+                    /**
+                     * Decodes a SynthesizeLongAudioRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SynthesizeLongAudioRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1.SynthesizeLongAudioRequest;
+
+                    /**
+                     * Verifies a SynthesizeLongAudioRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SynthesizeLongAudioRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SynthesizeLongAudioRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1.SynthesizeLongAudioRequest;
+
+                    /**
+                     * Creates a plain object from a SynthesizeLongAudioRequest message. Also converts values to other types if specified.
+                     * @param message SynthesizeLongAudioRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.texttospeech.v1.SynthesizeLongAudioRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SynthesizeLongAudioRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SynthesizeLongAudioRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SynthesizeLongAudioResponse. */
+                interface ISynthesizeLongAudioResponse {
+                }
+
+                /** Represents a SynthesizeLongAudioResponse. */
+                class SynthesizeLongAudioResponse implements ISynthesizeLongAudioResponse {
+
+                    /**
+                     * Constructs a new SynthesizeLongAudioResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse);
+
+                    /**
+                     * Creates a new SynthesizeLongAudioResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SynthesizeLongAudioResponse instance
+                     */
+                    public static create(properties?: google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse): google.cloud.texttospeech.v1.SynthesizeLongAudioResponse;
+
+                    /**
+                     * Encodes the specified SynthesizeLongAudioResponse message. Does not implicitly {@link google.cloud.texttospeech.v1.SynthesizeLongAudioResponse.verify|verify} messages.
+                     * @param message SynthesizeLongAudioResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SynthesizeLongAudioResponse message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.SynthesizeLongAudioResponse.verify|verify} messages.
+                     * @param message SynthesizeLongAudioResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.texttospeech.v1.ISynthesizeLongAudioResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SynthesizeLongAudioResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SynthesizeLongAudioResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1.SynthesizeLongAudioResponse;
+
+                    /**
+                     * Decodes a SynthesizeLongAudioResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SynthesizeLongAudioResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1.SynthesizeLongAudioResponse;
+
+                    /**
+                     * Verifies a SynthesizeLongAudioResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SynthesizeLongAudioResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SynthesizeLongAudioResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1.SynthesizeLongAudioResponse;
+
+                    /**
+                     * Creates a plain object from a SynthesizeLongAudioResponse message. Also converts values to other types if specified.
+                     * @param message SynthesizeLongAudioResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.texttospeech.v1.SynthesizeLongAudioResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SynthesizeLongAudioResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SynthesizeLongAudioResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SynthesizeLongAudioMetadata. */
+                interface ISynthesizeLongAudioMetadata {
+
+                    /** SynthesizeLongAudioMetadata startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SynthesizeLongAudioMetadata lastUpdateTime */
+                    lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SynthesizeLongAudioMetadata progressPercentage */
+                    progressPercentage?: (number|null);
+                }
+
+                /** Represents a SynthesizeLongAudioMetadata. */
+                class SynthesizeLongAudioMetadata implements ISynthesizeLongAudioMetadata {
+
+                    /**
+                     * Constructs a new SynthesizeLongAudioMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata);
+
+                    /** SynthesizeLongAudioMetadata startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SynthesizeLongAudioMetadata lastUpdateTime. */
+                    public lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SynthesizeLongAudioMetadata progressPercentage. */
+                    public progressPercentage: number;
+
+                    /**
+                     * Creates a new SynthesizeLongAudioMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SynthesizeLongAudioMetadata instance
+                     */
+                    public static create(properties?: google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata): google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata;
+
+                    /**
+                     * Encodes the specified SynthesizeLongAudioMetadata message. Does not implicitly {@link google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata.verify|verify} messages.
+                     * @param message SynthesizeLongAudioMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SynthesizeLongAudioMetadata message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata.verify|verify} messages.
+                     * @param message SynthesizeLongAudioMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.texttospeech.v1.ISynthesizeLongAudioMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SynthesizeLongAudioMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SynthesizeLongAudioMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata;
+
+                    /**
+                     * Decodes a SynthesizeLongAudioMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SynthesizeLongAudioMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata;
+
+                    /**
+                     * Verifies a SynthesizeLongAudioMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SynthesizeLongAudioMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SynthesizeLongAudioMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata;
+
+                    /**
+                     * Creates a plain object from a SynthesizeLongAudioMetadata message. Also converts values to other types if specified.
+                     * @param message SynthesizeLongAudioMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.texttospeech.v1.SynthesizeLongAudioMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SynthesizeLongAudioMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SynthesizeLongAudioMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
 
             /** Namespace v1beta1. */
