@@ -1621,6 +1621,9 @@ export namespace google {
 
                     /** Sku serviceProviderName */
                     serviceProviderName?: (string|null);
+
+                    /** Sku geoTaxonomy */
+                    geoTaxonomy?: (google.cloud.billing.v1.IGeoTaxonomy|null);
                 }
 
                 /** Represents a Sku. */
@@ -1652,6 +1655,9 @@ export namespace google {
 
                     /** Sku serviceProviderName. */
                     public serviceProviderName: string;
+
+                    /** Sku geoTaxonomy. */
+                    public geoTaxonomy?: (google.cloud.billing.v1.IGeoTaxonomy|null);
 
                     /**
                      * Creates a new Sku instance using the specified properties.
@@ -1973,6 +1979,12 @@ export namespace google {
                     /** PricingExpression usageUnit */
                     usageUnit?: (string|null);
 
+                    /** PricingExpression displayQuantity */
+                    displayQuantity?: (number|null);
+
+                    /** PricingExpression tieredRates */
+                    tieredRates?: (google.cloud.billing.v1.PricingExpression.ITierRate[]|null);
+
                     /** PricingExpression usageUnitDescription */
                     usageUnitDescription?: (string|null);
 
@@ -1984,12 +1996,6 @@ export namespace google {
 
                     /** PricingExpression baseUnitConversionFactor */
                     baseUnitConversionFactor?: (number|null);
-
-                    /** PricingExpression displayQuantity */
-                    displayQuantity?: (number|null);
-
-                    /** PricingExpression tieredRates */
-                    tieredRates?: (google.cloud.billing.v1.PricingExpression.ITierRate[]|null);
                 }
 
                 /** Represents a PricingExpression. */
@@ -2004,6 +2010,12 @@ export namespace google {
                     /** PricingExpression usageUnit. */
                     public usageUnit: string;
 
+                    /** PricingExpression displayQuantity. */
+                    public displayQuantity: number;
+
+                    /** PricingExpression tieredRates. */
+                    public tieredRates: google.cloud.billing.v1.PricingExpression.ITierRate[];
+
                     /** PricingExpression usageUnitDescription. */
                     public usageUnitDescription: string;
 
@@ -2015,12 +2027,6 @@ export namespace google {
 
                     /** PricingExpression baseUnitConversionFactor. */
                     public baseUnitConversionFactor: number;
-
-                    /** PricingExpression displayQuantity. */
-                    public displayQuantity: number;
-
-                    /** PricingExpression tieredRates. */
-                    public tieredRates: google.cloud.billing.v1.PricingExpression.ITierRate[];
 
                     /**
                      * Creates a new PricingExpression instance using the specified properties.
@@ -2329,6 +2335,120 @@ export namespace google {
                         AGGREGATION_INTERVAL_UNSPECIFIED = 0,
                         DAILY = 1,
                         MONTHLY = 2
+                    }
+                }
+
+                /** Properties of a GeoTaxonomy. */
+                interface IGeoTaxonomy {
+
+                    /** GeoTaxonomy type */
+                    type?: (google.cloud.billing.v1.GeoTaxonomy.Type|keyof typeof google.cloud.billing.v1.GeoTaxonomy.Type|null);
+
+                    /** GeoTaxonomy regions */
+                    regions?: (string[]|null);
+                }
+
+                /** Represents a GeoTaxonomy. */
+                class GeoTaxonomy implements IGeoTaxonomy {
+
+                    /**
+                     * Constructs a new GeoTaxonomy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.billing.v1.IGeoTaxonomy);
+
+                    /** GeoTaxonomy type. */
+                    public type: (google.cloud.billing.v1.GeoTaxonomy.Type|keyof typeof google.cloud.billing.v1.GeoTaxonomy.Type);
+
+                    /** GeoTaxonomy regions. */
+                    public regions: string[];
+
+                    /**
+                     * Creates a new GeoTaxonomy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GeoTaxonomy instance
+                     */
+                    public static create(properties?: google.cloud.billing.v1.IGeoTaxonomy): google.cloud.billing.v1.GeoTaxonomy;
+
+                    /**
+                     * Encodes the specified GeoTaxonomy message. Does not implicitly {@link google.cloud.billing.v1.GeoTaxonomy.verify|verify} messages.
+                     * @param message GeoTaxonomy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.billing.v1.IGeoTaxonomy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GeoTaxonomy message, length delimited. Does not implicitly {@link google.cloud.billing.v1.GeoTaxonomy.verify|verify} messages.
+                     * @param message GeoTaxonomy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.billing.v1.IGeoTaxonomy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GeoTaxonomy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GeoTaxonomy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.billing.v1.GeoTaxonomy;
+
+                    /**
+                     * Decodes a GeoTaxonomy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GeoTaxonomy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.billing.v1.GeoTaxonomy;
+
+                    /**
+                     * Verifies a GeoTaxonomy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GeoTaxonomy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GeoTaxonomy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.billing.v1.GeoTaxonomy;
+
+                    /**
+                     * Creates a plain object from a GeoTaxonomy message. Also converts values to other types if specified.
+                     * @param message GeoTaxonomy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.billing.v1.GeoTaxonomy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GeoTaxonomy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GeoTaxonomy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GeoTaxonomy {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        GLOBAL = 1,
+                        REGIONAL = 2,
+                        MULTI_REGIONAL = 3
                     }
                 }
 
