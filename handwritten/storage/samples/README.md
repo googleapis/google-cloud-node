@@ -50,8 +50,10 @@ objects to users via direct download.
   * [Download Byte Range](#download-byte-range)
   * [Download Encrypted File](#download-encrypted-file)
   * [Download File](#download-file)
+  * [Download a File in Chunks Utilzing Transfer Manager](#download-a-file-in-chunks-utilzing-transfer-manager)
   * [Download File Using Requester Pays](#download-file-using-requester-pays)
   * [Download Into Memory](#download-into-memory)
+  * [Download Many Files With Transfer Manager](#download-many-files-with-transfer-manager)
   * [Storage Download Public File.](#storage-download-public-file.)
   * [Enable Bucket Lifecycle Management](#enable-bucket-lifecycle-management)
   * [Storage Enable Bucket Versioning.](#storage-enable-bucket-versioning.)
@@ -126,6 +128,7 @@ objects to users via direct download.
   * [Upload File](#upload-file)
   * [Upload File With Kms Key](#upload-file-with-kms-key)
   * [Upload From Memory](#upload-from-memory)
+  * [Upload Many Files With Transfer Manager](#upload-many-files-with-transfer-manager)
   * [Upload Without Authentication](#upload-without-authentication)
   * [Upload Without Authentication Signed Url](#upload-without-authentication-signed-url)
   * [View Bucket Iam Members](#view-bucket-iam-members)
@@ -713,6 +716,25 @@ __Usage:__
 
 
 
+### Download a File in Chunks Utilzing Transfer Manager
+
+Downloads a single file in in chunks in parallel utilizing transfer manager.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/downloadFileInChunksWithTransferManager.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/downloadFileInChunksWithTransferManager.js,samples/README.md)
+
+__Usage:__
+
+
+`node downloadFileInChunksWithTransferManager.js <BUCKET_NAME> <FILE_NAME> <DESTINATION_FILE_NAME> <CHUNK_SIZE>`
+
+
+-----
+
+
+
+
 ### Download File Using Requester Pays
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/downloadFileUsingRequesterPays.js).
@@ -740,6 +762,25 @@ __Usage:__
 
 
 `node samples/downloadIntoMemory.js`
+
+
+-----
+
+
+
+
+### Download Many Files With Transfer Manager
+
+Downloads many files in parallel utilizing transfer manager.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/downloadManyFilesWithTransferManager.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/downloadManyFilesWithTransferManager.js,samples/README.md)
+
+__Usage:__
+
+
+`node downloadManyFilesWithTransferManager.js <BUCKET_NAME> <FIRST_FILE_NAME> <SECOND_FILE_NAME>`
 
 
 -----
@@ -2032,6 +2073,25 @@ __Usage:__
 
 
 `node samples/uploadFromMemory.js`
+
+
+-----
+
+
+
+
+### Upload Many Files With Transfer Manager
+
+Uploads many files in parallel utilizing transfer manager.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/uploadManyFilesWithTransferManager.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/uploadManyFilesWithTransferManager.js,samples/README.md)
+
+__Usage:__
+
+
+`node uploadManyFilesWithTransferManager.js <BUCKET_NAME> <FIRST_FILE_NAME> <SECOND_FILE_NAME>`
 
 
 -----

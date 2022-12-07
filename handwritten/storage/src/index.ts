@@ -256,3 +256,4 @@ export {
   StorageOptions,
 } from './storage';
 export {GetSignedUrlCallback, GetSignedUrlResponse} from './signer';
+export * from './transfer-manager';

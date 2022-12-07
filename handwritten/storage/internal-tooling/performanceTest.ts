@@ -18,7 +18,7 @@ import {appendFile} from 'fs/promises';
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
 import {Worker} from 'worker_threads';
 import yargs = require('yargs');
-import {TestResult} from './performPerformanceTest';
+import {TestResult} from './performanceUtils';
 import {existsSync} from 'fs';
 import {writeFile} from 'fs/promises';
 
@@ -27,11 +27,33 @@ const DEFAULT_THREADS = 1;
 const CSV_HEADERS =
   'Op,ObjectSize,AppBufferSize,LibBufferSize,Crc32cEnabled,MD5Enabled,ApiName,ElapsedTimeUs,CpuTimeUs,Status\n';
 const START_TIME = Date.now();
+export const enum TRANSFER_MANAGER_TEST_TYPES {
+  WRITE_ONE_READ_THREE = 'w1r3',
+  TRANSFER_MANAGER_UPLOAD_MANY_FILES = 'tm-upload',
+  TRANSFER_MANAGER_DOWNLOAD_MANY_FILES = 'tm-download',
+  TRANSFER_MANAGER_CHUNKED_FILE_DOWNLOAD = 'tm-chunked',
+  APPLICATION_LARGE_FILE_DOWNLOAD = 'application-large',
+  APPLICATION_UPLOAD_MULTIPLE_OBJECTS = 'application-upload',
+  APPLICATION_DOWNLOAD_MULTIPLE_OBJECTS = 'application-download',
+}
 
 const argv = yargs(process.argv.slice(2))
   .options({
     iterations: {type: 'number', default: DEFAULT_ITERATIONS},
     numthreads: {type: 'number', default: DEFAULT_THREADS},
+    testtype: {
+      type: 'string',
+      choices: [
+        TRANSFER_MANAGER_TEST_TYPES.WRITE_ONE_READ_THREE,
+        TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_UPLOAD_MANY_FILES,
+        TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_DOWNLOAD_MANY_FILES,
+        TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_CHUNKED_FILE_DOWNLOAD,
+        TRANSFER_MANAGER_TEST_TYPES.APPLICATION_DOWNLOAD_MULTIPLE_OBJECTS,
+        TRANSFER_MANAGER_TEST_TYPES.APPLICATION_LARGE_FILE_DOWNLOAD,
+        TRANSFER_MANAGER_TEST_TYPES.APPLICATION_UPLOAD_MULTIPLE_OBJECTS,
+      ],
+      default: TRANSFER_MANAGER_TEST_TYPES.WRITE_ONE_READ_THREE,
+    },
   })
   .parseSync();
 
@@ -51,6 +73,9 @@ function main() {
     );
     numThreads = iterationsRemaining;
   }
+  if (argv.testtype !== TRANSFER_MANAGER_TEST_TYPES.WRITE_ONE_READ_THREE) {
+    numThreads = 1;
+  }
   for (let i = 0; i < numThreads; i++) {
     createWorker();
   }
@@ -65,9 +90,33 @@ function createWorker() {
   console.log(
     `Starting new iteration. Current iterations remaining: ${iterationsRemaining}`
   );
-  const w = new Worker(__dirname + '/performPerformanceTest.js', {
+  let testPath = '';
+  if (argv.testtype === TRANSFER_MANAGER_TEST_TYPES.WRITE_ONE_READ_THREE) {
+    testPath = `${__dirname}/performPerformanceTest.js`;
+  } else if (
+    argv.testtype ===
+      TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_UPLOAD_MANY_FILES ||
+    argv.testtype ===
+      TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_CHUNKED_FILE_DOWNLOAD ||
+    argv.testtype ===
+      TRANSFER_MANAGER_TEST_TYPES.TRANSFER_MANAGER_DOWNLOAD_MANY_FILES
+  ) {
+    testPath = `${__dirname}/performTransferManagerTest.js`;
+  } else if (
+    argv.testtype ===
+      TRANSFER_MANAGER_TEST_TYPES.APPLICATION_UPLOAD_MULTIPLE_OBJECTS ||
+    argv.testtype ===
+      TRANSFER_MANAGER_TEST_TYPES.APPLICATION_LARGE_FILE_DOWNLOAD ||
+    argv.testtype ===
+      TRANSFER_MANAGER_TEST_TYPES.APPLICATION_DOWNLOAD_MULTIPLE_OBJECTS
+  ) {
+    testPath = `${__dirname}/performApplicationPerformanceTest.js`;
+  }
+
+  const w = new Worker(testPath, {
     argv: process.argv.slice(2),
   });
+
   w.on('message', data => {
     console.log('Successfully completed iteration.');
     appendResultToCSV(data);
@@ -75,8 +124,9 @@ function createWorker() {
       createWorker();
     }
   });
-  w.on('error', () => {
+  w.on('error', e => {
     console.log('An error occurred.');
+    console.log(e);
   });
 }
 
@@ -85,13 +135,16 @@ function createWorker() {
  *
  * @param {TestResult[]} results
  */
-async function appendResultToCSV(results: TestResult[]) {
+async function appendResultToCSV(results: TestResult[] | TestResult) {
   const fileName = `nodejs-perf-metrics-${START_TIME}-${argv.iterations}.csv`;
+  const resultsToAppend: TestResult[] = Array.isArray(results)
+    ? results
+    : [results];
 
   if (!existsSync(fileName)) {
     await writeFile(fileName, CSV_HEADERS);
   }
-  const csv = results.map(result => Object.values(result));
+  const csv = resultsToAppend.map(result => Object.values(result));
   const csvString = csv.join('\n');
   await appendFile(fileName, `${csvString}\n`);
 }
