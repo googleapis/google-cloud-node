@@ -14,8 +14,10 @@
 * [Samples](#samples)
   * [Text_to_speech.list_voices](#text_to_speech.list_voices)
   * [Text_to_speech.synthesize_speech](#text_to_speech.synthesize_speech)
+  * [Text_to_speech_long_audio_synthesize.synthesize_long_audio](#text_to_speech_long_audio_synthesize.synthesize_long_audio)
   * [Text_to_speech.list_voices](#text_to_speech.list_voices)
   * [Text_to_speech.synthesize_speech](#text_to_speech.synthesize_speech)
+  * [Text_to_speech_long_audio_synthesize.synthesize_long_audio](#text_to_speech_long_audio_synthesize.synthesize_long_audio)
   * [Quickstart](#quickstart)
   * [Quickstart.test](#quickstart.test)
 
@@ -68,6 +70,23 @@ __Usage:__
 
 
 
+### Text_to_speech_long_audio_synthesize.synthesize_long_audio
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js`
+
+
+-----
+
+
+
+
 ### Text_to_speech.list_voices
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.list_voices.js).
@@ -95,6 +114,23 @@ __Usage:__
 
 
 `node packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.synthesize_speech.js`
+
+
+-----
+
+
+
+
+### Text_to_speech_long_audio_synthesize.synthesize_long_audio
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js`
 
 
 -----

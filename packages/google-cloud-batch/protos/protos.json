@@ -1897,6 +1897,10 @@
                               "rule": "repeated",
                               "type": "AttachedDisk",
                               "id": 6
+                            },
+                            "reservation": {
+                              "type": "string",
+                              "id": 7
                             }
                           }
                         },
