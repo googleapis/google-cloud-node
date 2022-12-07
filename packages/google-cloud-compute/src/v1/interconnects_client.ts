@@ -329,7 +329,7 @@ export class InterconnectsClient {
   // -- Service calls --
   // -------------------
   /**
-   * Deletes the specified interconnect.
+   * Deletes the specified Interconnect.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -450,7 +450,7 @@ export class InterconnectsClient {
       );
   }
   /**
-   * Returns the specified interconnect. Get a list of available interconnects by making a list() request.
+   * Returns the specified Interconnect. Get a list of available Interconnects by making a list() request.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -538,7 +538,7 @@ export class InterconnectsClient {
     return this.innerApiCalls.get(request, options, callback);
   }
   /**
-   * Returns the interconnectDiagnostics for the specified interconnect.
+   * Returns the interconnectDiagnostics for the specified Interconnect.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -638,7 +638,7 @@ export class InterconnectsClient {
     return this.innerApiCalls.getDiagnostics(request, options, callback);
   }
   /**
-   * Creates a Interconnect in the specified project using the data included in the request.
+   * Creates an Interconnect in the specified project using the data included in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -758,7 +758,7 @@ export class InterconnectsClient {
       );
   }
   /**
-   * Updates the specified interconnect with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+   * Updates the specified Interconnect with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1003,7 +1003,7 @@ export class InterconnectsClient {
   }
 
   /**
-   * Retrieves the list of interconnect available to the specified project.
+   * Retrieves the list of Interconnects available to the specified project.
    *
    * @param {Object} request
    *   The request object that will be sent.

@@ -55,6 +55,7 @@ function main() {
   const licensesClient = new compute.LicensesClient();
   const machineImagesClient = new compute.MachineImagesClient();
   const machineTypesClient = new compute.MachineTypesClient();
+  const networkAttachmentsClient = new compute.NetworkAttachmentsClient();
   const networkEdgeSecurityServicesClient =
     new compute.NetworkEdgeSecurityServicesClient();
   const networkEndpointGroupsClient = new compute.NetworkEndpointGroupsClient();
