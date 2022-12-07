@@ -453,7 +453,8 @@ export class AddressValidationClient {
    *   If this field is set to `VALIDATION_CONCLUSION_UNSPECIFIED`, an
    *   `INVALID_ARGUMENT` error will be returned.
    * @param {string} request.responseId
-   *   Required. The ID of the response that this feedback is for. This should be the
+   *   Required. The ID of the response that this feedback is for. This should be
+   *   the
    *   {@link google.maps.addressvalidation.v1.ValidateAddressRequest.response_id|response_id}
    *   from the first response in a series of address validation attempts.
    * @param {object} [options]
