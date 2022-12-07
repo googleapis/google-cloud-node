@@ -3147,6 +3147,91 @@
                         }
                       }
                     },
+                    "AggregatedListNetworkAttachmentsRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_includeAllScopes": {
+                          "oneof": [
+                            "includeAllScopes"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "includeAllScopes": {
+                          "type": "bool",
+                          "id": 391327988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "AggregatedListNetworkEdgeSecurityServicesRequest": {
                       "oneofs": {
                         "_filter": {
@@ -11732,6 +11817,47 @@
                         }
                       }
                     },
+                    "DeleteNetworkAttachmentRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkAttachment": {
+                          "type": "string",
+                          "id": 224644052,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "DeleteNetworkEdgeSecurityServiceRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -18544,6 +18670,45 @@
                         }
                       }
                     },
+                    "GetIamPolicyNetworkAttachmentRequest": {
+                      "oneofs": {
+                        "_optionsRequestedPolicyVersion": {
+                          "oneof": [
+                            "optionsRequestedPolicyVersion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "optionsRequestedPolicyVersion": {
+                          "type": "int32",
+                          "id": 499220029,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetIamPolicyNetworkFirewallPolicyRequest": {
                       "oneofs": {
                         "_optionsRequestedPolicyVersion": {
@@ -19316,6 +19481,31 @@
                         "router": {
                           "type": "string",
                           "id": 148608841,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetNetworkAttachmentRequest": {
+                      "fields": {
+                        "networkAttachment": {
+                          "type": "string",
+                          "id": 224644052,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -24562,6 +24752,47 @@
                         "sourceInstance": {
                           "type": "string",
                           "id": 396315705,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InsertNetworkAttachmentRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkAttachmentResource": {
+                          "type": "NetworkAttachment",
+                          "id": 210974745,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
                           "options": {
                             "proto3_optional": true
                           }
@@ -30843,6 +31074,16 @@
                     },
                     "InterconnectDiagnostics": {
                       "oneofs": {
+                        "_bundleAggregationType": {
+                          "oneof": [
+                            "bundleAggregationType"
+                          ]
+                        },
+                        "_bundleOperationalStatus": {
+                          "oneof": [
+                            "bundleOperationalStatus"
+                          ]
+                        },
                         "_macAddress": {
                           "oneof": [
                             "macAddress"
@@ -30855,6 +31096,20 @@
                           "type": "InterconnectDiagnosticsARPEntry",
                           "id": 414591761
                         },
+                        "bundleAggregationType": {
+                          "type": "string",
+                          "id": 434939028,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "bundleOperationalStatus": {
+                          "type": "string",
+                          "id": 106433500,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "links": {
                           "rule": "repeated",
                           "type": "InterconnectDiagnosticsLinkStatus",
@@ -30865,6 +31120,22 @@
                           "id": 332540164,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "BundleAggregationType": {
+                          "values": {
+                            "UNDEFINED_BUNDLE_AGGREGATION_TYPE": 0,
+                            "BUNDLE_AGGREGATION_TYPE_LACP": 27758925,
+                            "BUNDLE_AGGREGATION_TYPE_STATIC": 50678873
+                          }
+                        },
+                        "BundleOperationalStatus": {
+                          "values": {
+                            "UNDEFINED_BUNDLE_OPERATIONAL_STATUS": 0,
+                            "BUNDLE_OPERATIONAL_STATUS_DOWN": 453842693,
+                            "BUNDLE_OPERATIONAL_STATUS_UP": 161366462
                           }
                         }
                       }
@@ -31009,6 +31280,11 @@
                             "lacpStatus"
                           ]
                         },
+                        "_operationalStatus": {
+                          "oneof": [
+                            "operationalStatus"
+                          ]
+                        },
                         "_receivingOpticalPower": {
                           "oneof": [
                             "receivingOpticalPower"
@@ -31047,6 +31323,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "operationalStatus": {
+                          "type": "string",
+                          "id": 201070847,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "receivingOpticalPower": {
                           "type": "InterconnectDiagnosticsLinkOpticalPower",
                           "id": 244717279,
@@ -31059,6 +31342,15 @@
                           "id": 459431197,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "OperationalStatus": {
+                          "values": {
+                            "UNDEFINED_OPERATIONAL_STATUS": 0,
+                            "LINK_OPERATIONAL_STATUS_DOWN": 281653885,
+                            "LINK_OPERATIONAL_STATUS_UP": 305879862
                           }
                         }
                       }
@@ -34955,6 +35247,86 @@
                           "id": 249363395,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListNetworkAttachmentsRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
                           }
                         },
                         "maxResults": {
@@ -41635,6 +42007,411 @@
                             "UNDEFINED_NETWORK_FIREWALL_POLICY_ENFORCEMENT_ORDER": 0,
                             "AFTER_CLASSIC_FIREWALL": 154582608,
                             "BEFORE_CLASSIC_FIREWALL": 338458349
+                          }
+                        }
+                      }
+                    },
+                    "NetworkAttachment": {
+                      "oneofs": {
+                        "_connectionPreference": {
+                          "oneof": [
+                            "connectionPreference"
+                          ]
+                        },
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_fingerprint": {
+                          "oneof": [
+                            "fingerprint"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_network": {
+                          "oneof": [
+                            "network"
+                          ]
+                        },
+                        "_region": {
+                          "oneof": [
+                            "region"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "connectionEndpoints": {
+                          "rule": "repeated",
+                          "type": "NetworkAttachmentConnectedEndpoint",
+                          "id": 326078813
+                        },
+                        "connectionPreference": {
+                          "type": "string",
+                          "id": 285818076,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "fingerprint": {
+                          "type": "string",
+                          "id": 234678500,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 232872494,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "producerAcceptLists": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 202804523
+                        },
+                        "producerRejectLists": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4112002
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subnetworks": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 415853125
+                        }
+                      },
+                      "nested": {
+                        "ConnectionPreference": {
+                          "values": {
+                            "UNDEFINED_CONNECTION_PREFERENCE": 0,
+                            "ACCEPT_AUTOMATIC": 75250580,
+                            "ACCEPT_MANUAL": 373061341,
+                            "INVALID": 530283991
+                          }
+                        }
+                      }
+                    },
+                    "NetworkAttachmentAggregatedList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "NetworkAttachmentsScopedList",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "NetworkAttachmentConnectedEndpoint": {
+                      "oneofs": {
+                        "_ipAddress": {
+                          "oneof": [
+                            "ipAddress"
+                          ]
+                        },
+                        "_projectIdOrNum": {
+                          "oneof": [
+                            "projectIdOrNum"
+                          ]
+                        },
+                        "_status": {
+                          "oneof": [
+                            "status"
+                          ]
+                        },
+                        "_subnetwork": {
+                          "oneof": [
+                            "subnetwork"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 406272220,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "projectIdOrNum": {
+                          "type": "string",
+                          "id": 349783336,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "secondaryIpCidrRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 117184788
+                        },
+                        "status": {
+                          "type": "string",
+                          "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subnetwork": {
+                          "type": "string",
+                          "id": 307827694,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Status": {
+                          "values": {
+                            "UNDEFINED_STATUS": 0,
+                            "ACCEPTED": 246714279,
+                            "CLOSED": 380163436,
+                            "NEEDS_ATTENTION": 344491452,
+                            "PENDING": 35394935,
+                            "REJECTED": 174130302,
+                            "STATUS_UNSPECIFIED": 42133066
+                          }
+                        }
+                      }
+                    },
+                    "NetworkAttachmentList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "NetworkAttachment",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "NetworkAttachmentsScopedList": {
+                      "oneofs": {
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkAttachments": {
+                          "rule": "repeated",
+                          "type": "NetworkAttachment",
+                          "id": 521514783
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -48724,6 +49501,11 @@
                             "usageExportLocation"
                           ]
                         },
+                        "_vmDnsSetting": {
+                          "oneof": [
+                            "vmDnsSetting"
+                          ]
+                        },
                         "_xpnProjectStatus": {
                           "oneof": [
                             "xpnProjectStatus"
@@ -48811,6 +49593,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "vmDnsSetting": {
+                          "type": "string",
+                          "id": 58856370,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "xpnProjectStatus": {
                           "type": "string",
                           "id": 228419265,
@@ -48827,6 +49616,15 @@
                             "PREMIUM": 399530551,
                             "STANDARD": 484642493,
                             "STANDARD_OVERRIDES_FIXED_STANDARD": 465847234
+                          }
+                        },
+                        "VmDnsSetting": {
+                          "values": {
+                            "UNDEFINED_VM_DNS_SETTING": 0,
+                            "GLOBAL_DEFAULT": 345419141,
+                            "UNSPECIFIED_VM_DNS_SETTING": 35691930,
+                            "ZONAL_DEFAULT": 368475782,
+                            "ZONAL_ONLY": 521198951
                           }
                         },
                         "XpnProjectStatus": {
@@ -49783,8 +50581,12 @@
                             "EXTERNAL_VPN_GATEWAYS": 272457134,
                             "FIREWALLS": 374485843,
                             "FORWARDING_RULES": 432668949,
+                            "GLOBAL_EXTERNAL_MANAGED_BACKEND_SERVICES": 164566753,
                             "GLOBAL_EXTERNAL_MANAGED_FORWARDING_RULES": 327611949,
+                            "GLOBAL_EXTERNAL_PROXY_LB_BACKEND_SERVICES": 400256169,
                             "GLOBAL_INTERNAL_ADDRESSES": 42738332,
+                            "GLOBAL_INTERNAL_MANAGED_BACKEND_SERVICES": 256608303,
+                            "GLOBAL_INTERNAL_TRAFFIC_DIRECTOR_BACKEND_SERVICES": 323514196,
                             "GPUS_ALL_REGIONS": 39387177,
                             "HEALTH_CHECKS": 289347502,
                             "IMAGES": 15562360,
@@ -49844,7 +50646,11 @@
                             "PUBLIC_ADVERTISED_PREFIXES": 471371980,
                             "PUBLIC_DELEGATED_PREFIXES": 532465974,
                             "REGIONAL_AUTOSCALERS": 29363772,
+                            "REGIONAL_EXTERNAL_MANAGED_BACKEND_SERVICES": 4240989,
+                            "REGIONAL_EXTERNAL_NETWORK_LB_BACKEND_SERVICES": 409564525,
                             "REGIONAL_INSTANCE_GROUP_MANAGERS": 37543696,
+                            "REGIONAL_INTERNAL_LB_BACKEND_SERVICES": 137983760,
+                            "REGIONAL_INTERNAL_MANAGED_BACKEND_SERVICES": 96282539,
                             "RESERVATIONS": 32644647,
                             "RESOURCE_POLICIES": 83955297,
                             "ROUTERS": 493018666,
@@ -51957,6 +52763,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "resourcePolicies": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 22220385
                         },
                         "satisfiesPzs": {
                           "type": "bool",
@@ -57708,6 +58519,11 @@
                             "connectionLimit"
                           ]
                         },
+                        "_networkUrl": {
+                          "oneof": [
+                            "networkUrl"
+                          ]
+                        },
                         "_projectIdOrNum": {
                           "oneof": [
                             "projectIdOrNum"
@@ -57718,6 +58534,13 @@
                         "connectionLimit": {
                           "type": "uint32",
                           "id": 131403546,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "networkUrl": {
+                          "type": "string",
+                          "id": 207194078,
                           "options": {
                             "proto3_optional": true
                           }
@@ -58493,6 +59316,38 @@
                         "project": {
                           "type": "string",
                           "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SetIamPolicyNetworkAttachmentRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "regionSetPolicyRequestResource": {
+                          "type": "RegionSetPolicyRequest",
+                          "id": 276489091,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -62683,6 +63538,11 @@
                     },
                     "StopInstanceRequest": {
                       "oneofs": {
+                        "_discardLocalSsd": {
+                          "oneof": [
+                            "discardLocalSsd"
+                          ]
+                        },
                         "_requestId": {
                           "oneof": [
                             "requestId"
@@ -62690,6 +63550,13 @@
                         }
                       },
                       "fields": {
+                        "discardLocalSsd": {
+                          "type": "bool",
+                          "id": 319517903,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "instance": {
                           "type": "string",
                           "id": 18257045,
@@ -63416,6 +64283,11 @@
                     },
                     "SuspendInstanceRequest": {
                       "oneofs": {
+                        "_discardLocalSsd": {
+                          "oneof": [
+                            "discardLocalSsd"
+                          ]
+                        },
                         "_requestId": {
                           "oneof": [
                             "requestId"
@@ -63423,6 +64295,13 @@
                         }
                       },
                       "fields": {
+                        "discardLocalSsd": {
+                          "type": "bool",
+                          "id": 319517903,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "instance": {
                           "type": "string",
                           "id": 18257045,
@@ -66472,6 +67351,38 @@
                         "project": {
                           "type": "string",
                           "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsNetworkAttachmentRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -76518,6 +77429,172 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "NetworkAttachments": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "AggregatedList": {
+                          "requestType": "AggregatedListNetworkAttachmentsRequest",
+                          "responseType": "NetworkAttachmentAggregatedList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/aggregated/networkAttachments",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/aggregated/networkAttachments"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "Delete": {
+                          "requestType": "DeleteNetworkAttachmentRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/v1/projects/{project}/regions/{region}/networkAttachments/{network_attachment}",
+                            "(google.api.method_signature)": "project,region,network_attachment",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/v1/projects/{project}/regions/{region}/networkAttachments/{network_attachment}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_attachment"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetNetworkAttachmentRequest",
+                          "responseType": "NetworkAttachment",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/networkAttachments/{network_attachment}",
+                            "(google.api.method_signature)": "project,region,network_attachment"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/networkAttachments/{network_attachment}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_attachment"
+                            }
+                          ]
+                        },
+                        "GetIamPolicy": {
+                          "requestType": "GetIamPolicyNetworkAttachmentRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/networkAttachments/{resource}/getIamPolicy",
+                            "(google.api.method_signature)": "project,region,resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/networkAttachments/{resource}/getIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertNetworkAttachmentRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "network_attachment_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/networkAttachments",
+                            "(google.api.method_signature)": "project,region,network_attachment_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "network_attachment_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/networkAttachments"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_attachment_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListNetworkAttachmentsRequest",
+                          "responseType": "NetworkAttachmentList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/networkAttachments",
+                            "(google.api.method_signature)": "project,region"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/networkAttachments"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "SetIamPolicyNetworkAttachmentRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).body": "region_set_policy_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/networkAttachments/{resource}/setIamPolicy",
+                            "(google.api.method_signature)": "project,region,resource,region_set_policy_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "region_set_policy_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/networkAttachments/{resource}/setIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,region_set_policy_request_resource"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsNetworkAttachmentRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/networkAttachments/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/networkAttachments/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
                             }
                           ]
                         }
