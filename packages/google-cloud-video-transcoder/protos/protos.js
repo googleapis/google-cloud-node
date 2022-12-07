@@ -5962,6 +5962,7 @@
                              * @property {google.cloud.video.transcoder.v1.PreprocessingConfig.IAudio|null} [audio] PreprocessingConfig audio
                              * @property {google.cloud.video.transcoder.v1.PreprocessingConfig.ICrop|null} [crop] PreprocessingConfig crop
                              * @property {google.cloud.video.transcoder.v1.PreprocessingConfig.IPad|null} [pad] PreprocessingConfig pad
+                             * @property {google.cloud.video.transcoder.v1.PreprocessingConfig.IDeinterlace|null} [deinterlace] PreprocessingConfig deinterlace
                              */
     
                             /**
@@ -6028,6 +6029,14 @@
                             PreprocessingConfig.prototype.pad = null;
     
                             /**
+                             * PreprocessingConfig deinterlace.
+                             * @member {google.cloud.video.transcoder.v1.PreprocessingConfig.IDeinterlace|null|undefined} deinterlace
+                             * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig
+                             * @instance
+                             */
+                            PreprocessingConfig.prototype.deinterlace = null;
+    
+                            /**
                              * Creates a new PreprocessingConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig
@@ -6063,6 +6072,8 @@
                                     $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Crop.encode(message.crop, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 if (message.pad != null && Object.hasOwnProperty.call(message, "pad"))
                                     $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Pad.encode(message.pad, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.deinterlace != null && Object.hasOwnProperty.call(message, "deinterlace"))
+                                    $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.encode(message.deinterlace, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 return writer;
                             };
     
@@ -6119,6 +6130,10 @@
                                         }
                                     case 6: {
                                             message.pad = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Pad.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.deinterlace = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -6186,6 +6201,11 @@
                                     if (error)
                                         return "pad." + error;
                                 }
+                                if (message.deinterlace != null && message.hasOwnProperty("deinterlace")) {
+                                    var error = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.verify(message.deinterlace);
+                                    if (error)
+                                        return "deinterlace." + error;
+                                }
                                 return null;
                             };
     
@@ -6231,6 +6251,11 @@
                                         throw TypeError(".google.cloud.video.transcoder.v1.PreprocessingConfig.pad: object expected");
                                     message.pad = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Pad.fromObject(object.pad);
                                 }
+                                if (object.deinterlace != null) {
+                                    if (typeof object.deinterlace !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.PreprocessingConfig.deinterlace: object expected");
+                                    message.deinterlace = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.fromObject(object.deinterlace);
+                                }
                                 return message;
                             };
     
@@ -6254,6 +6279,7 @@
                                     object.audio = null;
                                     object.crop = null;
                                     object.pad = null;
+                                    object.deinterlace = null;
                                 }
                                 if (message.color != null && message.hasOwnProperty("color"))
                                     object.color = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Color.toObject(message.color, options);
@@ -6267,6 +6293,8 @@
                                     object.crop = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Crop.toObject(message.crop, options);
                                 if (message.pad != null && message.hasOwnProperty("pad"))
                                     object.pad = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Pad.toObject(message.pad, options);
+                                if (message.deinterlace != null && message.hasOwnProperty("deinterlace"))
+                                    object.deinterlace = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.toObject(message.deinterlace, options);
                                 return object;
                             };
     
@@ -7794,6 +7822,791 @@
                                 };
     
                                 return Pad;
+                            })();
+    
+                            PreprocessingConfig.Deinterlace = (function() {
+    
+                                /**
+                                 * Properties of a Deinterlace.
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig
+                                 * @interface IDeinterlace
+                                 * @property {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IYadifConfig|null} [yadif] Deinterlace yadif
+                                 * @property {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IBwdifConfig|null} [bwdif] Deinterlace bwdif
+                                 */
+    
+                                /**
+                                 * Constructs a new Deinterlace.
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig
+                                 * @classdesc Represents a Deinterlace.
+                                 * @implements IDeinterlace
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.IDeinterlace=} [properties] Properties to set
+                                 */
+                                function Deinterlace(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Deinterlace yadif.
+                                 * @member {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IYadifConfig|null|undefined} yadif
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @instance
+                                 */
+                                Deinterlace.prototype.yadif = null;
+    
+                                /**
+                                 * Deinterlace bwdif.
+                                 * @member {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IBwdifConfig|null|undefined} bwdif
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @instance
+                                 */
+                                Deinterlace.prototype.bwdif = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * Deinterlace deinterlacingFilter.
+                                 * @member {"yadif"|"bwdif"|undefined} deinterlacingFilter
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @instance
+                                 */
+                                Object.defineProperty(Deinterlace.prototype, "deinterlacingFilter", {
+                                    get: $util.oneOfGetter($oneOfFields = ["yadif", "bwdif"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new Deinterlace instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.IDeinterlace=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace} Deinterlace instance
+                                 */
+                                Deinterlace.create = function create(properties) {
+                                    return new Deinterlace(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Deinterlace message. Does not implicitly {@link google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.IDeinterlace} message Deinterlace message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Deinterlace.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.yadif != null && Object.hasOwnProperty.call(message, "yadif"))
+                                        $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig.encode(message.yadif, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.bwdif != null && Object.hasOwnProperty.call(message, "bwdif"))
+                                        $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig.encode(message.bwdif, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Deinterlace message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.IDeinterlace} message Deinterlace message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Deinterlace.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Deinterlace message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace} Deinterlace
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Deinterlace.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.yadif = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.bwdif = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Deinterlace message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace} Deinterlace
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Deinterlace.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Deinterlace message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Deinterlace.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.yadif != null && message.hasOwnProperty("yadif")) {
+                                        properties.deinterlacingFilter = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig.verify(message.yadif);
+                                            if (error)
+                                                return "yadif." + error;
+                                        }
+                                    }
+                                    if (message.bwdif != null && message.hasOwnProperty("bwdif")) {
+                                        if (properties.deinterlacingFilter === 1)
+                                            return "deinterlacingFilter: multiple values";
+                                        properties.deinterlacingFilter = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig.verify(message.bwdif);
+                                            if (error)
+                                                return "bwdif." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Deinterlace message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace} Deinterlace
+                                 */
+                                Deinterlace.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace)
+                                        return object;
+                                    var message = new $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace();
+                                    if (object.yadif != null) {
+                                        if (typeof object.yadif !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.yadif: object expected");
+                                        message.yadif = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig.fromObject(object.yadif);
+                                    }
+                                    if (object.bwdif != null) {
+                                        if (typeof object.bwdif !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.bwdif: object expected");
+                                        message.bwdif = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig.fromObject(object.bwdif);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Deinterlace message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace} message Deinterlace
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Deinterlace.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.yadif != null && message.hasOwnProperty("yadif")) {
+                                        object.yadif = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig.toObject(message.yadif, options);
+                                        if (options.oneofs)
+                                            object.deinterlacingFilter = "yadif";
+                                    }
+                                    if (message.bwdif != null && message.hasOwnProperty("bwdif")) {
+                                        object.bwdif = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig.toObject(message.bwdif, options);
+                                        if (options.oneofs)
+                                            object.deinterlacingFilter = "bwdif";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Deinterlace to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Deinterlace.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Deinterlace
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Deinterlace.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace";
+                                };
+    
+                                Deinterlace.YadifConfig = (function() {
+    
+                                    /**
+                                     * Properties of a YadifConfig.
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                     * @interface IYadifConfig
+                                     * @property {string|null} [mode] YadifConfig mode
+                                     * @property {boolean|null} [disableSpatialInterlacing] YadifConfig disableSpatialInterlacing
+                                     * @property {string|null} [parity] YadifConfig parity
+                                     * @property {boolean|null} [deinterlaceAllFrames] YadifConfig deinterlaceAllFrames
+                                     */
+    
+                                    /**
+                                     * Constructs a new YadifConfig.
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                     * @classdesc Represents a YadifConfig.
+                                     * @implements IYadifConfig
+                                     * @constructor
+                                     * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IYadifConfig=} [properties] Properties to set
+                                     */
+                                    function YadifConfig(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * YadifConfig mode.
+                                     * @member {string} mode
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @instance
+                                     */
+                                    YadifConfig.prototype.mode = "";
+    
+                                    /**
+                                     * YadifConfig disableSpatialInterlacing.
+                                     * @member {boolean} disableSpatialInterlacing
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @instance
+                                     */
+                                    YadifConfig.prototype.disableSpatialInterlacing = false;
+    
+                                    /**
+                                     * YadifConfig parity.
+                                     * @member {string} parity
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @instance
+                                     */
+                                    YadifConfig.prototype.parity = "";
+    
+                                    /**
+                                     * YadifConfig deinterlaceAllFrames.
+                                     * @member {boolean} deinterlaceAllFrames
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @instance
+                                     */
+                                    YadifConfig.prototype.deinterlaceAllFrames = false;
+    
+                                    /**
+                                     * Creates a new YadifConfig instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @static
+                                     * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IYadifConfig=} [properties] Properties to set
+                                     * @returns {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig} YadifConfig instance
+                                     */
+                                    YadifConfig.create = function create(properties) {
+                                        return new YadifConfig(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified YadifConfig message. Does not implicitly {@link google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @static
+                                     * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IYadifConfig} message YadifConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    YadifConfig.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.mode);
+                                        if (message.disableSpatialInterlacing != null && Object.hasOwnProperty.call(message, "disableSpatialInterlacing"))
+                                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.disableSpatialInterlacing);
+                                        if (message.parity != null && Object.hasOwnProperty.call(message, "parity"))
+                                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.parity);
+                                        if (message.deinterlaceAllFrames != null && Object.hasOwnProperty.call(message, "deinterlaceAllFrames"))
+                                            writer.uint32(/* id 4, wireType 0 =*/32).bool(message.deinterlaceAllFrames);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified YadifConfig message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @static
+                                     * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IYadifConfig} message YadifConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    YadifConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a YadifConfig message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig} YadifConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    YadifConfig.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.mode = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.disableSpatialInterlacing = reader.bool();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.parity = reader.string();
+                                                    break;
+                                                }
+                                            case 4: {
+                                                    message.deinterlaceAllFrames = reader.bool();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a YadifConfig message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig} YadifConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    YadifConfig.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a YadifConfig message.
+                                     * @function verify
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    YadifConfig.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.mode != null && message.hasOwnProperty("mode"))
+                                            if (!$util.isString(message.mode))
+                                                return "mode: string expected";
+                                        if (message.disableSpatialInterlacing != null && message.hasOwnProperty("disableSpatialInterlacing"))
+                                            if (typeof message.disableSpatialInterlacing !== "boolean")
+                                                return "disableSpatialInterlacing: boolean expected";
+                                        if (message.parity != null && message.hasOwnProperty("parity"))
+                                            if (!$util.isString(message.parity))
+                                                return "parity: string expected";
+                                        if (message.deinterlaceAllFrames != null && message.hasOwnProperty("deinterlaceAllFrames"))
+                                            if (typeof message.deinterlaceAllFrames !== "boolean")
+                                                return "deinterlaceAllFrames: boolean expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a YadifConfig message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig} YadifConfig
+                                     */
+                                    YadifConfig.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig)
+                                            return object;
+                                        var message = new $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig();
+                                        if (object.mode != null)
+                                            message.mode = String(object.mode);
+                                        if (object.disableSpatialInterlacing != null)
+                                            message.disableSpatialInterlacing = Boolean(object.disableSpatialInterlacing);
+                                        if (object.parity != null)
+                                            message.parity = String(object.parity);
+                                        if (object.deinterlaceAllFrames != null)
+                                            message.deinterlaceAllFrames = Boolean(object.deinterlaceAllFrames);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a YadifConfig message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @static
+                                     * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig} message YadifConfig
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    YadifConfig.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.mode = "";
+                                            object.disableSpatialInterlacing = false;
+                                            object.parity = "";
+                                            object.deinterlaceAllFrames = false;
+                                        }
+                                        if (message.mode != null && message.hasOwnProperty("mode"))
+                                            object.mode = message.mode;
+                                        if (message.disableSpatialInterlacing != null && message.hasOwnProperty("disableSpatialInterlacing"))
+                                            object.disableSpatialInterlacing = message.disableSpatialInterlacing;
+                                        if (message.parity != null && message.hasOwnProperty("parity"))
+                                            object.parity = message.parity;
+                                        if (message.deinterlaceAllFrames != null && message.hasOwnProperty("deinterlaceAllFrames"))
+                                            object.deinterlaceAllFrames = message.deinterlaceAllFrames;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this YadifConfig to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    YadifConfig.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for YadifConfig
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    YadifConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig";
+                                    };
+    
+                                    return YadifConfig;
+                                })();
+    
+                                Deinterlace.BwdifConfig = (function() {
+    
+                                    /**
+                                     * Properties of a BwdifConfig.
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                     * @interface IBwdifConfig
+                                     * @property {string|null} [mode] BwdifConfig mode
+                                     * @property {string|null} [parity] BwdifConfig parity
+                                     * @property {boolean|null} [deinterlaceAllFrames] BwdifConfig deinterlaceAllFrames
+                                     */
+    
+                                    /**
+                                     * Constructs a new BwdifConfig.
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace
+                                     * @classdesc Represents a BwdifConfig.
+                                     * @implements IBwdifConfig
+                                     * @constructor
+                                     * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IBwdifConfig=} [properties] Properties to set
+                                     */
+                                    function BwdifConfig(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * BwdifConfig mode.
+                                     * @member {string} mode
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @instance
+                                     */
+                                    BwdifConfig.prototype.mode = "";
+    
+                                    /**
+                                     * BwdifConfig parity.
+                                     * @member {string} parity
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @instance
+                                     */
+                                    BwdifConfig.prototype.parity = "";
+    
+                                    /**
+                                     * BwdifConfig deinterlaceAllFrames.
+                                     * @member {boolean} deinterlaceAllFrames
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @instance
+                                     */
+                                    BwdifConfig.prototype.deinterlaceAllFrames = false;
+    
+                                    /**
+                                     * Creates a new BwdifConfig instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @static
+                                     * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IBwdifConfig=} [properties] Properties to set
+                                     * @returns {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig} BwdifConfig instance
+                                     */
+                                    BwdifConfig.create = function create(properties) {
+                                        return new BwdifConfig(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified BwdifConfig message. Does not implicitly {@link google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @static
+                                     * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IBwdifConfig} message BwdifConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    BwdifConfig.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.mode);
+                                        if (message.parity != null && Object.hasOwnProperty.call(message, "parity"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.parity);
+                                        if (message.deinterlaceAllFrames != null && Object.hasOwnProperty.call(message, "deinterlaceAllFrames"))
+                                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deinterlaceAllFrames);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified BwdifConfig message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @static
+                                     * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.IBwdifConfig} message BwdifConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    BwdifConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a BwdifConfig message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig} BwdifConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    BwdifConfig.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.mode = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.parity = reader.string();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.deinterlaceAllFrames = reader.bool();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a BwdifConfig message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig} BwdifConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    BwdifConfig.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a BwdifConfig message.
+                                     * @function verify
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    BwdifConfig.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.mode != null && message.hasOwnProperty("mode"))
+                                            if (!$util.isString(message.mode))
+                                                return "mode: string expected";
+                                        if (message.parity != null && message.hasOwnProperty("parity"))
+                                            if (!$util.isString(message.parity))
+                                                return "parity: string expected";
+                                        if (message.deinterlaceAllFrames != null && message.hasOwnProperty("deinterlaceAllFrames"))
+                                            if (typeof message.deinterlaceAllFrames !== "boolean")
+                                                return "deinterlaceAllFrames: boolean expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a BwdifConfig message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig} BwdifConfig
+                                     */
+                                    BwdifConfig.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig)
+                                            return object;
+                                        var message = new $root.google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig();
+                                        if (object.mode != null)
+                                            message.mode = String(object.mode);
+                                        if (object.parity != null)
+                                            message.parity = String(object.parity);
+                                        if (object.deinterlaceAllFrames != null)
+                                            message.deinterlaceAllFrames = Boolean(object.deinterlaceAllFrames);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a BwdifConfig message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @static
+                                     * @param {google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig} message BwdifConfig
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    BwdifConfig.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.mode = "";
+                                            object.parity = "";
+                                            object.deinterlaceAllFrames = false;
+                                        }
+                                        if (message.mode != null && message.hasOwnProperty("mode"))
+                                            object.mode = message.mode;
+                                        if (message.parity != null && message.hasOwnProperty("parity"))
+                                            object.parity = message.parity;
+                                        if (message.deinterlaceAllFrames != null && message.hasOwnProperty("deinterlaceAllFrames"))
+                                            object.deinterlaceAllFrames = message.deinterlaceAllFrames;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this BwdifConfig to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    BwdifConfig.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for BwdifConfig
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    BwdifConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig";
+                                    };
+    
+                                    return BwdifConfig;
+                                })();
+    
+                                return Deinterlace;
                             })();
     
                             return PreprocessingConfig;

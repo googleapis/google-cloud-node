@@ -550,6 +550,10 @@
                             "pad": {
                               "type": "Pad",
                               "id": 6
+                            },
+                            "deinterlace": {
+                              "type": "Deinterlace",
+                              "id": 7
                             }
                           },
                           "nested": {
@@ -646,6 +650,64 @@
                                 "rightPixels": {
                                   "type": "int32",
                                   "id": 4
+                                }
+                              }
+                            },
+                            "Deinterlace": {
+                              "oneofs": {
+                                "deinterlacingFilter": {
+                                  "oneof": [
+                                    "yadif",
+                                    "bwdif"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "yadif": {
+                                  "type": "YadifConfig",
+                                  "id": 1
+                                },
+                                "bwdif": {
+                                  "type": "BwdifConfig",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "YadifConfig": {
+                                  "fields": {
+                                    "mode": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "disableSpatialInterlacing": {
+                                      "type": "bool",
+                                      "id": 2
+                                    },
+                                    "parity": {
+                                      "type": "string",
+                                      "id": 3
+                                    },
+                                    "deinterlaceAllFrames": {
+                                      "type": "bool",
+                                      "id": 4
+                                    }
+                                  }
+                                },
+                                "BwdifConfig": {
+                                  "fields": {
+                                    "mode": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "parity": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "deinterlaceAllFrames": {
+                                      "type": "bool",
+                                      "id": 3
+                                    }
+                                  }
                                 }
                               }
                             }
