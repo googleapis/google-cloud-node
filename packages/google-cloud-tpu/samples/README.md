@@ -36,6 +36,24 @@
   * [Tpu.start_node](#tpu.start_node)
   * [Tpu.stop_node](#tpu.stop_node)
   * [Tpu.update_node](#tpu.update_node)
+  * [Tpu.create_node](#tpu.create_node)
+  * [Tpu.create_queued_resource](#tpu.create_queued_resource)
+  * [Tpu.delete_node](#tpu.delete_node)
+  * [Tpu.delete_queued_resource](#tpu.delete_queued_resource)
+  * [Tpu.generate_service_identity](#tpu.generate_service_identity)
+  * [Tpu.get_accelerator_type](#tpu.get_accelerator_type)
+  * [Tpu.get_guest_attributes](#tpu.get_guest_attributes)
+  * [Tpu.get_node](#tpu.get_node)
+  * [Tpu.get_queued_resource](#tpu.get_queued_resource)
+  * [Tpu.get_runtime_version](#tpu.get_runtime_version)
+  * [Tpu.list_accelerator_types](#tpu.list_accelerator_types)
+  * [Tpu.list_nodes](#tpu.list_nodes)
+  * [Tpu.list_queued_resources](#tpu.list_queued_resources)
+  * [Tpu.list_runtime_versions](#tpu.list_runtime_versions)
+  * [Tpu.simulate_maintenance_event](#tpu.simulate_maintenance_event)
+  * [Tpu.start_node](#tpu.start_node)
+  * [Tpu.stop_node](#tpu.stop_node)
+  * [Tpu.update_node](#tpu.update_node)
   * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
@@ -243,6 +261,227 @@ __Usage:__
 
 ### Tpu.create_node
 
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.create_node.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.create_node.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.create_node.js`
+
+
+-----
+
+
+
+
+### Tpu.delete_node
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.delete_node.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.delete_node.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.delete_node.js`
+
+
+-----
+
+
+
+
+### Tpu.generate_service_identity
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.generate_service_identity.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.generate_service_identity.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.generate_service_identity.js`
+
+
+-----
+
+
+
+
+### Tpu.get_accelerator_type
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.get_accelerator_type.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.get_accelerator_type.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.get_accelerator_type.js`
+
+
+-----
+
+
+
+
+### Tpu.get_guest_attributes
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.get_guest_attributes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.get_guest_attributes.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.get_guest_attributes.js`
+
+
+-----
+
+
+
+
+### Tpu.get_node
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.get_node.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.get_node.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.get_node.js`
+
+
+-----
+
+
+
+
+### Tpu.get_runtime_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.get_runtime_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.get_runtime_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.get_runtime_version.js`
+
+
+-----
+
+
+
+
+### Tpu.list_accelerator_types
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.list_accelerator_types.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.list_accelerator_types.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.list_accelerator_types.js`
+
+
+-----
+
+
+
+
+### Tpu.list_nodes
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.list_nodes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.list_nodes.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.list_nodes.js`
+
+
+-----
+
+
+
+
+### Tpu.list_runtime_versions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.list_runtime_versions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.list_runtime_versions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.list_runtime_versions.js`
+
+
+-----
+
+
+
+
+### Tpu.start_node
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.start_node.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.start_node.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.start_node.js`
+
+
+-----
+
+
+
+
+### Tpu.stop_node
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.stop_node.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.stop_node.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.stop_node.js`
+
+
+-----
+
+
+
+
+### Tpu.update_node
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2/tpu.update_node.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2/tpu.update_node.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2/tpu.update_node.js`
+
+
+-----
+
+
+
+
+### Tpu.create_node
+
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.create_node.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.create_node.js,samples/README.md)
@@ -251,6 +490,23 @@ __Usage:__
 
 
 `node packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.create_node.js`
+
+
+-----
+
+
+
+
+### Tpu.create_queued_resource
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.create_queued_resource.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.create_queued_resource.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.create_queued_resource.js`
 
 
 -----
@@ -268,6 +524,23 @@ __Usage:__
 
 
 `node packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.delete_node.js`
+
+
+-----
+
+
+
+
+### Tpu.delete_queued_resource
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.delete_queued_resource.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.delete_queued_resource.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.delete_queued_resource.js`
 
 
 -----
@@ -343,6 +616,23 @@ __Usage:__
 
 
 
+### Tpu.get_queued_resource
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.get_queued_resource.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.get_queued_resource.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.get_queued_resource.js`
+
+
+-----
+
+
+
+
 ### Tpu.get_runtime_version
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.get_runtime_version.js).
@@ -394,6 +684,23 @@ __Usage:__
 
 
 
+### Tpu.list_queued_resources
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.list_queued_resources.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.list_queued_resources.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.list_queued_resources.js`
+
+
+-----
+
+
+
+
 ### Tpu.list_runtime_versions
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.list_runtime_versions.js).
@@ -404,6 +711,23 @@ __Usage:__
 
 
 `node packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.list_runtime_versions.js`
+
+
+-----
+
+
+
+
+### Tpu.simulate_maintenance_event
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.simulate_maintenance_event.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.simulate_maintenance_event.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-tpu/samples/generated/v2alpha1/tpu.simulate_maintenance_event.js`
 
 
 -----

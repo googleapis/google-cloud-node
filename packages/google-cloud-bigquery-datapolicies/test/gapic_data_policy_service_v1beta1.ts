@@ -245,9 +245,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDataPolicyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -276,9 +277,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDataPolicyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -323,9 +325,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDataPolicyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -354,9 +357,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDataPolicyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -376,10 +380,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
         new protos.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest()
       );
       request.dataPolicy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDataPolicyRequest', [
-        'dataPolicy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest',
+        ['dataPolicy', 'name']
+      );
       request.dataPolicy.name = defaultValue1;
       const expectedHeaderRequestParams = `data_policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -409,10 +413,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
         new protos.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest()
       );
       request.dataPolicy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDataPolicyRequest', [
-        'dataPolicy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest',
+        ['dataPolicy', 'name']
+      );
       request.dataPolicy.name = defaultValue1;
       const expectedHeaderRequestParams = `data_policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -458,10 +462,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
         new protos.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest()
       );
       request.dataPolicy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDataPolicyRequest', [
-        'dataPolicy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest',
+        ['dataPolicy', 'name']
+      );
       request.dataPolicy.name = defaultValue1;
       const expectedHeaderRequestParams = `data_policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -491,10 +495,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
         new protos.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest()
       );
       request.dataPolicy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDataPolicyRequest', [
-        'dataPolicy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest',
+        ['dataPolicy', 'name']
+      );
       request.dataPolicy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -513,9 +517,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDataPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -544,9 +549,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDataPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -591,9 +597,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDataPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -622,9 +629,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDataPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -643,9 +651,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -674,9 +683,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -721,9 +731,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -752,9 +763,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -773,9 +785,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -804,9 +817,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -851,9 +865,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -882,9 +897,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -903,9 +919,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -934,9 +951,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -981,9 +999,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1012,9 +1031,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1033,9 +1053,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1065,9 +1086,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1112,9 +1134,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1143,9 +1166,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1164,9 +1188,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1203,9 +1228,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1260,9 +1286,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1291,9 +1318,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1354,9 +1382,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1406,9 +1435,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1456,9 +1486,10 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataPoliciesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
