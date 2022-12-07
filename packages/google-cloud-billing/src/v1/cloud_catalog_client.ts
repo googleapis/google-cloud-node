@@ -122,6 +122,9 @@ export class CloudCatalogClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -311,7 +314,11 @@ export class CloudCatalogClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-billing',
+      'https://www.googleapis.com/auth/cloud-billing.readonly',
+      'https://www.googleapis.com/auth/cloud-platform',
+    ];
   }
 
   getProjectId(): Promise<string>;
