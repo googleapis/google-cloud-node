@@ -1760,17 +1760,11 @@ export namespace google {
                 /** Properties of an AddressMetadata. */
                 interface IAddressMetadata {
 
-                    /** AddressMetadata highrise */
-                    highrise?: (boolean|null);
-
                     /** AddressMetadata business */
                     business?: (boolean|null);
 
                     /** AddressMetadata poBox */
                     poBox?: (boolean|null);
-
-                    /** AddressMetadata multiFamily */
-                    multiFamily?: (boolean|null);
 
                     /** AddressMetadata residential */
                     residential?: (boolean|null);
@@ -1785,32 +1779,20 @@ export namespace google {
                      */
                     constructor(properties?: google.maps.addressvalidation.v1.IAddressMetadata);
 
-                    /** AddressMetadata highrise. */
-                    public highrise?: (boolean|null);
-
                     /** AddressMetadata business. */
                     public business?: (boolean|null);
 
                     /** AddressMetadata poBox. */
                     public poBox?: (boolean|null);
 
-                    /** AddressMetadata multiFamily. */
-                    public multiFamily?: (boolean|null);
-
                     /** AddressMetadata residential. */
                     public residential?: (boolean|null);
-
-                    /** AddressMetadata _highrise. */
-                    public _highrise?: "highrise";
 
                     /** AddressMetadata _business. */
                     public _business?: "business";
 
                     /** AddressMetadata _poBox. */
                     public _poBox?: "poBox";
-
-                    /** AddressMetadata _multiFamily. */
-                    public _multiFamily?: "multiFamily";
 
                     /** AddressMetadata _residential. */
                     public _residential?: "residential";
