@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Long = require("long");
 import type {protobuf as $protobuf} from "google-gax";
+import Long = require("long");
 /** Namespace google. */
 export namespace google {
 
@@ -7790,6 +7790,9 @@ export namespace google {
 
                         /** InstancePolicy disks */
                         disks?: (google.cloud.batch.v1alpha.AllocationPolicy.IAttachedDisk[]|null);
+
+                        /** InstancePolicy reservation */
+                        reservation?: (string|null);
                     }
 
                     /** Represents an InstancePolicy. */
@@ -7818,6 +7821,9 @@ export namespace google {
 
                         /** InstancePolicy disks. */
                         public disks: google.cloud.batch.v1alpha.AllocationPolicy.IAttachedDisk[];
+
+                        /** InstancePolicy reservation. */
+                        public reservation: string;
 
                         /**
                          * Creates a new InstancePolicy instance using the specified properties.

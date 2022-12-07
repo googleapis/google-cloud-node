@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [3.0.6](https://github.com/googleapis/google-cloud-node/compare/phishing-protection-v3.0.5...phishing-protection-v3.0.6) (2022-11-10)
+
+
+### Bug Fixes
+
+* Regenerated proto JS and TS definitions (generator update) ([#3472](https://github.com/googleapis/google-cloud-node/issues/3472)) ([5e2230d](https://github.com/googleapis/google-cloud-node/commit/5e2230dfc4302bb2ac9628ff4200eb46509e103d))
+
 ## [3.0.5](https://github.com/googleapis/google-cloud-node/compare/phishing-protection-v3.0.4...phishing-protection-v3.0.5) (2022-11-03)
 
 

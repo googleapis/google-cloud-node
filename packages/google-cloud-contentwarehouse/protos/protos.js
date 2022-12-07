@@ -1269,6 +1269,12 @@
                                 return object;
                             var message = new $root.google.cloud.contentwarehouse.v1.UpdateOptions();
                             switch (object.updateType) {
+                            default:
+                                if (typeof object.updateType === "number") {
+                                    message.updateType = object.updateType;
+                                    break;
+                                }
+                                break;
                             case "UPDATE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.updateType = 0;
@@ -1326,7 +1332,7 @@
                                 object.mergeFieldsOptions = null;
                             }
                             if (message.updateType != null && message.hasOwnProperty("updateType"))
-                                object.updateType = options.enums === String ? $root.google.cloud.contentwarehouse.v1.UpdateType[message.updateType] : message.updateType;
+                                object.updateType = options.enums === String ? $root.google.cloud.contentwarehouse.v1.UpdateType[message.updateType] === undefined ? message.updateType : $root.google.cloud.contentwarehouse.v1.UpdateType[message.updateType] : message.updateType;
                             if (message.updateMask != null && message.hasOwnProperty("updateMask"))
                                 object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
                             if (message.mergeFieldsOptions != null && message.hasOwnProperty("mergeFieldsOptions"))
@@ -2264,6 +2270,12 @@
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
                             }
                             switch (object.rawDocumentFileType) {
+                            default:
+                                if (typeof object.rawDocumentFileType === "number") {
+                                    message.rawDocumentFileType = object.rawDocumentFileType;
+                                    break;
+                                }
+                                break;
                             case "RAW_DOCUMENT_FILE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.rawDocumentFileType = 0;
@@ -2362,7 +2374,7 @@
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.rawDocumentFileType != null && message.hasOwnProperty("rawDocumentFileType"))
-                                object.rawDocumentFileType = options.enums === String ? $root.google.cloud.contentwarehouse.v1.RawDocumentFileType[message.rawDocumentFileType] : message.rawDocumentFileType;
+                                object.rawDocumentFileType = options.enums === String ? $root.google.cloud.contentwarehouse.v1.RawDocumentFileType[message.rawDocumentFileType] === undefined ? message.rawDocumentFileType : $root.google.cloud.contentwarehouse.v1.RawDocumentFileType[message.rawDocumentFileType] : message.rawDocumentFileType;
                             if (message.referenceId != null && message.hasOwnProperty("referenceId"))
                                 object.referenceId = message.referenceId;
                             if (message.asyncEnabled != null && message.hasOwnProperty("asyncEnabled"))
@@ -7441,6 +7453,12 @@
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
                             }
                             switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
                             case "STATE_UNSPECIFIED":
                             case 0:
                                 message.state = 0;
@@ -7492,7 +7510,7 @@
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.contentwarehouse.v1.DocumentLink.State[message.state] : message.state;
+                                object.state = options.enums === String ? $root.google.cloud.contentwarehouse.v1.DocumentLink.State[message.state] === undefined ? message.state : $root.google.cloud.contentwarehouse.v1.DocumentLink.State[message.state] : message.state;
                             return object;
                         };
     
@@ -17533,6 +17551,12 @@
                                 message.timeRange = $root.google.type.Interval.fromObject(object.timeRange);
                             }
                             switch (object.timeField) {
+                            default:
+                                if (typeof object.timeField === "number") {
+                                    message.timeField = object.timeField;
+                                    break;
+                                }
+                                break;
                             case "TIME_FIELD_UNSPECIFIED":
                             case 0:
                                 message.timeField = 0;
@@ -17569,7 +17593,7 @@
                             if (message.timeRange != null && message.hasOwnProperty("timeRange"))
                                 object.timeRange = $root.google.type.Interval.toObject(message.timeRange, options);
                             if (message.timeField != null && message.hasOwnProperty("timeField"))
-                                object.timeField = options.enums === String ? $root.google.cloud.contentwarehouse.v1.TimeFilter.TimeField[message.timeField] : message.timeField;
+                                object.timeField = options.enums === String ? $root.google.cloud.contentwarehouse.v1.TimeFilter.TimeField[message.timeField] === undefined ? message.timeField : $root.google.cloud.contentwarehouse.v1.TimeFilter.TimeField[message.timeField] : message.timeField;
                             return object;
                         };
     
@@ -18002,6 +18026,12 @@
                                 return object;
                             var message = new $root.google.cloud.contentwarehouse.v1.FileTypeFilter();
                             switch (object.fileType) {
+                            default:
+                                if (typeof object.fileType === "number") {
+                                    message.fileType = object.fileType;
+                                    break;
+                                }
+                                break;
                             case "FILE_TYPE_UNSPECIFIED":
                             case 0:
                                 message.fileType = 0;
@@ -18038,7 +18068,7 @@
                             if (options.defaults)
                                 object.fileType = options.enums === String ? "FILE_TYPE_UNSPECIFIED" : 0;
                             if (message.fileType != null && message.hasOwnProperty("fileType"))
-                                object.fileType = options.enums === String ? $root.google.cloud.contentwarehouse.v1.FileTypeFilter.FileType[message.fileType] : message.fileType;
+                                object.fileType = options.enums === String ? $root.google.cloud.contentwarehouse.v1.FileTypeFilter.FileType[message.fileType] === undefined ? message.fileType : $root.google.cloud.contentwarehouse.v1.FileTypeFilter.FileType[message.fileType] : message.fileType;
                             return object;
                         };
     
@@ -18565,6 +18595,12 @@
                                     message.propertyNames[i] = String(object.propertyNames[i]);
                             }
                             switch (object.yAxis) {
+                            default:
+                                if (typeof object.yAxis === "number") {
+                                    message.yAxis = object.yAxis;
+                                    break;
+                                }
+                                break;
                             case "HISTOGRAM_YAXIS_DOCUMENT":
                             case 0:
                                 message.yAxis = 0;
@@ -18607,7 +18643,7 @@
                                     object.propertyNames[j] = message.propertyNames[j];
                             }
                             if (message.yAxis != null && message.hasOwnProperty("yAxis"))
-                                object.yAxis = options.enums === String ? $root.google.cloud.contentwarehouse.v1.HistogramQueryPropertyNameFilter.HistogramYAxis[message.yAxis] : message.yAxis;
+                                object.yAxis = options.enums === String ? $root.google.cloud.contentwarehouse.v1.HistogramQueryPropertyNameFilter.HistogramYAxis[message.yAxis] === undefined ? message.yAxis : $root.google.cloud.contentwarehouse.v1.HistogramQueryPropertyNameFilter.HistogramYAxis[message.yAxis] : message.yAxis;
                             return object;
                         };
     
@@ -19463,6 +19499,12 @@
                             if (object.ruleId != null)
                                 message.ruleId = String(object.ruleId);
                             switch (object.triggerType) {
+                            default:
+                                if (typeof object.triggerType === "number") {
+                                    message.triggerType = object.triggerType;
+                                    break;
+                                }
+                                break;
                             case "UNKNOWN":
                             case 0:
                                 message.triggerType = 0;
@@ -19517,7 +19559,7 @@
                             if (message.ruleId != null && message.hasOwnProperty("ruleId"))
                                 object.ruleId = message.ruleId;
                             if (message.triggerType != null && message.hasOwnProperty("triggerType"))
-                                object.triggerType = options.enums === String ? $root.google.cloud.contentwarehouse.v1.Rule.TriggerType[message.triggerType] : message.triggerType;
+                                object.triggerType = options.enums === String ? $root.google.cloud.contentwarehouse.v1.Rule.TriggerType[message.triggerType] === undefined ? message.triggerType : $root.google.cloud.contentwarehouse.v1.Rule.TriggerType[message.triggerType] : message.triggerType;
                             if (message.condition != null && message.hasOwnProperty("condition"))
                                 object.condition = message.condition;
                             if (message.actions && message.actions.length) {
@@ -20211,6 +20253,12 @@
                                 return object;
                             var message = new $root.google.cloud.contentwarehouse.v1.AccessControlAction();
                             switch (object.operationType) {
+                            default:
+                                if (typeof object.operationType === "number") {
+                                    message.operationType = object.operationType;
+                                    break;
+                                }
+                                break;
                             case "UNKNOWN":
                             case 0:
                                 message.operationType = 0;
@@ -20254,7 +20302,7 @@
                                 object.policy = null;
                             }
                             if (message.operationType != null && message.hasOwnProperty("operationType"))
-                                object.operationType = options.enums === String ? $root.google.cloud.contentwarehouse.v1.AccessControlAction.OperationType[message.operationType] : message.operationType;
+                                object.operationType = options.enums === String ? $root.google.cloud.contentwarehouse.v1.AccessControlAction.OperationType[message.operationType] === undefined ? message.operationType : $root.google.cloud.contentwarehouse.v1.AccessControlAction.OperationType[message.operationType] : message.operationType;
                             if (message.policy != null && message.hasOwnProperty("policy"))
                                 object.policy = $root.google.iam.v1.Policy.toObject(message.policy, options);
                             return object;
@@ -23153,6 +23201,12 @@
                             if (object.actionId != null)
                                 message.actionId = String(object.actionId);
                             switch (object.actionState) {
+                            default:
+                                if (typeof object.actionState === "number") {
+                                    message.actionState = object.actionState;
+                                    break;
+                                }
+                                break;
                             case "UNKNOWN":
                             case 0:
                                 message.actionState = 0;
@@ -23200,7 +23254,7 @@
                             if (message.actionId != null && message.hasOwnProperty("actionId"))
                                 object.actionId = message.actionId;
                             if (message.actionState != null && message.hasOwnProperty("actionState"))
-                                object.actionState = options.enums === String ? $root.google.cloud.contentwarehouse.v1.ActionOutput.State[message.actionState] : message.actionState;
+                                object.actionState = options.enums === String ? $root.google.cloud.contentwarehouse.v1.ActionOutput.State[message.actionState] === undefined ? message.actionState : $root.google.cloud.contentwarehouse.v1.ActionOutput.State[message.actionState] : message.actionState;
                             if (message.outputMessage != null && message.hasOwnProperty("outputMessage"))
                                 object.outputMessage = message.outputMessage;
                             return object;
@@ -27831,6 +27885,7 @@
                              * @property {string|null} [textStyle] Style textStyle
                              * @property {string|null} [textDecoration] Style textDecoration
                              * @property {google.cloud.documentai.v1.Document.Style.IFontSize|null} [fontSize] Style fontSize
+                             * @property {string|null} [fontFamily] Style fontFamily
                              */
     
                             /**
@@ -27905,6 +27960,14 @@
                             Style.prototype.fontSize = null;
     
                             /**
+                             * Style fontFamily.
+                             * @member {string} fontFamily
+                             * @memberof google.cloud.documentai.v1.Document.Style
+                             * @instance
+                             */
+                            Style.prototype.fontFamily = "";
+    
+                            /**
                              * Creates a new Style instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.documentai.v1.Document.Style
@@ -27942,6 +28005,8 @@
                                     writer.uint32(/* id 6, wireType 2 =*/50).string(message.textDecoration);
                                 if (message.fontSize != null && Object.hasOwnProperty.call(message, "fontSize"))
                                     $root.google.cloud.documentai.v1.Document.Style.FontSize.encode(message.fontSize, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.fontFamily != null && Object.hasOwnProperty.call(message, "fontFamily"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.fontFamily);
                                 return writer;
                             };
     
@@ -28002,6 +28067,10 @@
                                         }
                                     case 7: {
                                             message.fontSize = $root.google.cloud.documentai.v1.Document.Style.FontSize.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.fontFamily = reader.string();
                                             break;
                                         }
                                     default:
@@ -28068,6 +28137,9 @@
                                     if (error)
                                         return "fontSize." + error;
                                 }
+                                if (message.fontFamily != null && message.hasOwnProperty("fontFamily"))
+                                    if (!$util.isString(message.fontFamily))
+                                        return "fontFamily: string expected";
                                 return null;
                             };
     
@@ -28109,6 +28181,8 @@
                                         throw TypeError(".google.cloud.documentai.v1.Document.Style.fontSize: object expected");
                                     message.fontSize = $root.google.cloud.documentai.v1.Document.Style.FontSize.fromObject(object.fontSize);
                                 }
+                                if (object.fontFamily != null)
+                                    message.fontFamily = String(object.fontFamily);
                                 return message;
                             };
     
@@ -28133,6 +28207,7 @@
                                     object.textStyle = "";
                                     object.textDecoration = "";
                                     object.fontSize = null;
+                                    object.fontFamily = "";
                                 }
                                 if (message.textAnchor != null && message.hasOwnProperty("textAnchor"))
                                     object.textAnchor = $root.google.cloud.documentai.v1.Document.TextAnchor.toObject(message.textAnchor, options);
@@ -28148,6 +28223,8 @@
                                     object.textDecoration = message.textDecoration;
                                 if (message.fontSize != null && message.hasOwnProperty("fontSize"))
                                     object.fontSize = $root.google.cloud.documentai.v1.Document.Style.FontSize.toObject(message.fontSize, options);
+                                if (message.fontFamily != null && message.hasOwnProperty("fontFamily"))
+                                    object.fontFamily = message.fontFamily;
                                 return object;
                             };
     
@@ -28428,6 +28505,7 @@
                              * @property {Array.<google.cloud.documentai.v1.Document.Page.IFormField>|null} [formFields] Page formFields
                              * @property {Array.<google.cloud.documentai.v1.Document.Page.ISymbol>|null} [symbols] Page symbols
                              * @property {Array.<google.cloud.documentai.v1.Document.Page.IDetectedBarcode>|null} [detectedBarcodes] Page detectedBarcodes
+                             * @property {google.cloud.documentai.v1.Document.Page.IImageQualityScores|null} [imageQualityScores] Page imageQualityScores
                              * @property {google.cloud.documentai.v1.Document.IProvenance|null} [provenance] Page provenance
                              */
     
@@ -28578,6 +28656,14 @@
                             Page.prototype.detectedBarcodes = $util.emptyArray;
     
                             /**
+                             * Page imageQualityScores.
+                             * @member {google.cloud.documentai.v1.Document.Page.IImageQualityScores|null|undefined} imageQualityScores
+                             * @memberof google.cloud.documentai.v1.Document.Page
+                             * @instance
+                             */
+                            Page.prototype.imageQualityScores = null;
+    
+                            /**
                              * Page provenance.
                              * @member {google.cloud.documentai.v1.Document.IProvenance|null|undefined} provenance
                              * @memberof google.cloud.documentai.v1.Document.Page
@@ -28652,6 +28738,8 @@
                                         $root.google.cloud.documentai.v1.Document.Page.DetectedBarcode.encode(message.detectedBarcodes[i], writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                                 if (message.provenance != null && Object.hasOwnProperty.call(message, "provenance"))
                                     $root.google.cloud.documentai.v1.Document.Provenance.encode(message.provenance, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                                if (message.imageQualityScores != null && Object.hasOwnProperty.call(message, "imageQualityScores"))
+                                    $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.encode(message.imageQualityScores, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                                 return writer;
                             };
     
@@ -28766,6 +28854,10 @@
                                             if (!(message.detectedBarcodes && message.detectedBarcodes.length))
                                                 message.detectedBarcodes = [];
                                             message.detectedBarcodes.push($root.google.cloud.documentai.v1.Document.Page.DetectedBarcode.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 17: {
+                                            message.imageQualityScores = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 16: {
@@ -28924,6 +29016,11 @@
                                             return "detectedBarcodes." + error;
                                     }
                                 }
+                                if (message.imageQualityScores != null && message.hasOwnProperty("imageQualityScores")) {
+                                    var error = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.verify(message.imageQualityScores);
+                                    if (error)
+                                        return "imageQualityScores." + error;
+                                }
                                 if (message.provenance != null && message.hasOwnProperty("provenance")) {
                                     var error = $root.google.cloud.documentai.v1.Document.Provenance.verify(message.provenance);
                                     if (error)
@@ -29071,6 +29168,11 @@
                                         message.detectedBarcodes[i] = $root.google.cloud.documentai.v1.Document.Page.DetectedBarcode.fromObject(object.detectedBarcodes[i]);
                                     }
                                 }
+                                if (object.imageQualityScores != null) {
+                                    if (typeof object.imageQualityScores !== "object")
+                                        throw TypeError(".google.cloud.documentai.v1.Document.Page.imageQualityScores: object expected");
+                                    message.imageQualityScores = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.fromObject(object.imageQualityScores);
+                                }
                                 if (object.provenance != null) {
                                     if (typeof object.provenance !== "object")
                                         throw TypeError(".google.cloud.documentai.v1.Document.Page.provenance: object expected");
@@ -29111,6 +29213,7 @@
                                     object.layout = null;
                                     object.image = null;
                                     object.provenance = null;
+                                    object.imageQualityScores = null;
                                 }
                                 if (message.pageNumber != null && message.hasOwnProperty("pageNumber"))
                                     object.pageNumber = message.pageNumber;
@@ -29177,6 +29280,8 @@
                                 }
                                 if (message.provenance != null && message.hasOwnProperty("provenance"))
                                     object.provenance = $root.google.cloud.documentai.v1.Document.Provenance.toObject(message.provenance, options);
+                                if (message.imageQualityScores != null && message.hasOwnProperty("imageQualityScores"))
+                                    object.imageQualityScores = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.toObject(message.imageQualityScores, options);
                                 return object;
                             };
     
@@ -30248,6 +30353,12 @@
                                         message.boundingPoly = $root.google.cloud.documentai.v1.BoundingPoly.fromObject(object.boundingPoly);
                                     }
                                     switch (object.orientation) {
+                                    default:
+                                        if (typeof object.orientation === "number") {
+                                            message.orientation = object.orientation;
+                                            break;
+                                        }
+                                        break;
                                     case "ORIENTATION_UNSPECIFIED":
                                     case 0:
                                         message.orientation = 0;
@@ -30298,7 +30409,7 @@
                                     if (message.boundingPoly != null && message.hasOwnProperty("boundingPoly"))
                                         object.boundingPoly = $root.google.cloud.documentai.v1.BoundingPoly.toObject(message.boundingPoly, options);
                                     if (message.orientation != null && message.hasOwnProperty("orientation"))
-                                        object.orientation = options.enums === String ? $root.google.cloud.documentai.v1.Document.Page.Layout.Orientation[message.orientation] : message.orientation;
+                                        object.orientation = options.enums === String ? $root.google.cloud.documentai.v1.Document.Page.Layout.Orientation[message.orientation] === undefined ? message.orientation : $root.google.cloud.documentai.v1.Document.Page.Layout.Orientation[message.orientation] : message.orientation;
                                     return object;
                                 };
     
@@ -31661,6 +31772,12 @@
                                             return object;
                                         var message = new $root.google.cloud.documentai.v1.Document.Page.Token.DetectedBreak();
                                         switch (object.type) {
+                                        default:
+                                            if (typeof object.type === "number") {
+                                                message.type = object.type;
+                                                break;
+                                            }
+                                            break;
                                         case "TYPE_UNSPECIFIED":
                                         case 0:
                                             message.type = 0;
@@ -31697,7 +31814,7 @@
                                         if (options.defaults)
                                             object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                                         if (message.type != null && message.hasOwnProperty("type"))
-                                            object.type = options.enums === String ? $root.google.cloud.documentai.v1.Document.Page.Token.DetectedBreak.Type[message.type] : message.type;
+                                            object.type = options.enums === String ? $root.google.cloud.documentai.v1.Document.Page.Token.DetectedBreak.Type[message.type] === undefined ? message.type : $root.google.cloud.documentai.v1.Document.Page.Token.DetectedBreak.Type[message.type] : message.type;
                                         return object;
                                     };
     
@@ -32291,6 +32408,7 @@
                                  * @property {Array.<google.cloud.documentai.v1.Document.Page.Table.ITableRow>|null} [headerRows] Table headerRows
                                  * @property {Array.<google.cloud.documentai.v1.Document.Page.Table.ITableRow>|null} [bodyRows] Table bodyRows
                                  * @property {Array.<google.cloud.documentai.v1.Document.Page.IDetectedLanguage>|null} [detectedLanguages] Table detectedLanguages
+                                 * @property {google.cloud.documentai.v1.Document.IProvenance|null} [provenance] Table provenance
                                  */
     
                                 /**
@@ -32344,6 +32462,14 @@
                                 Table.prototype.detectedLanguages = $util.emptyArray;
     
                                 /**
+                                 * Table provenance.
+                                 * @member {google.cloud.documentai.v1.Document.IProvenance|null|undefined} provenance
+                                 * @memberof google.cloud.documentai.v1.Document.Page.Table
+                                 * @instance
+                                 */
+                                Table.prototype.provenance = null;
+    
+                                /**
                                  * Creates a new Table instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.documentai.v1.Document.Page.Table
@@ -32378,6 +32504,8 @@
                                     if (message.detectedLanguages != null && message.detectedLanguages.length)
                                         for (var i = 0; i < message.detectedLanguages.length; ++i)
                                             $root.google.cloud.documentai.v1.Document.Page.DetectedLanguage.encode(message.detectedLanguages[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    if (message.provenance != null && Object.hasOwnProperty.call(message, "provenance"))
+                                        $root.google.cloud.documentai.v1.Document.Provenance.encode(message.provenance, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -32432,6 +32560,10 @@
                                                 if (!(message.detectedLanguages && message.detectedLanguages.length))
                                                     message.detectedLanguages = [];
                                                 message.detectedLanguages.push($root.google.cloud.documentai.v1.Document.Page.DetectedLanguage.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.provenance = $root.google.cloud.documentai.v1.Document.Provenance.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -32501,6 +32633,11 @@
                                                 return "detectedLanguages." + error;
                                         }
                                     }
+                                    if (message.provenance != null && message.hasOwnProperty("provenance")) {
+                                        var error = $root.google.cloud.documentai.v1.Document.Provenance.verify(message.provenance);
+                                        if (error)
+                                            return "provenance." + error;
+                                    }
                                     return null;
                                 };
     
@@ -32551,6 +32688,11 @@
                                             message.detectedLanguages[i] = $root.google.cloud.documentai.v1.Document.Page.DetectedLanguage.fromObject(object.detectedLanguages[i]);
                                         }
                                     }
+                                    if (object.provenance != null) {
+                                        if (typeof object.provenance !== "object")
+                                            throw TypeError(".google.cloud.documentai.v1.Document.Page.Table.provenance: object expected");
+                                        message.provenance = $root.google.cloud.documentai.v1.Document.Provenance.fromObject(object.provenance);
+                                    }
                                     return message;
                                 };
     
@@ -32572,8 +32714,10 @@
                                         object.bodyRows = [];
                                         object.detectedLanguages = [];
                                     }
-                                    if (options.defaults)
+                                    if (options.defaults) {
                                         object.layout = null;
+                                        object.provenance = null;
+                                    }
                                     if (message.layout != null && message.hasOwnProperty("layout"))
                                         object.layout = $root.google.cloud.documentai.v1.Document.Page.Layout.toObject(message.layout, options);
                                     if (message.headerRows && message.headerRows.length) {
@@ -32591,6 +32735,8 @@
                                         for (var j = 0; j < message.detectedLanguages.length; ++j)
                                             object.detectedLanguages[j] = $root.google.cloud.documentai.v1.Document.Page.DetectedLanguage.toObject(message.detectedLanguages[j], options);
                                     }
+                                    if (message.provenance != null && message.hasOwnProperty("provenance"))
+                                        object.provenance = $root.google.cloud.documentai.v1.Document.Provenance.toObject(message.provenance, options);
                                     return object;
                                 };
     
@@ -34033,6 +34179,481 @@
                                 };
     
                                 return DetectedLanguage;
+                            })();
+    
+                            Page.ImageQualityScores = (function() {
+    
+                                /**
+                                 * Properties of an ImageQualityScores.
+                                 * @memberof google.cloud.documentai.v1.Document.Page
+                                 * @interface IImageQualityScores
+                                 * @property {number|null} [qualityScore] ImageQualityScores qualityScore
+                                 * @property {Array.<google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect>|null} [detectedDefects] ImageQualityScores detectedDefects
+                                 */
+    
+                                /**
+                                 * Constructs a new ImageQualityScores.
+                                 * @memberof google.cloud.documentai.v1.Document.Page
+                                 * @classdesc Represents an ImageQualityScores.
+                                 * @implements IImageQualityScores
+                                 * @constructor
+                                 * @param {google.cloud.documentai.v1.Document.Page.IImageQualityScores=} [properties] Properties to set
+                                 */
+                                function ImageQualityScores(properties) {
+                                    this.detectedDefects = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ImageQualityScores qualityScore.
+                                 * @member {number} qualityScore
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @instance
+                                 */
+                                ImageQualityScores.prototype.qualityScore = 0;
+    
+                                /**
+                                 * ImageQualityScores detectedDefects.
+                                 * @member {Array.<google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect>} detectedDefects
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @instance
+                                 */
+                                ImageQualityScores.prototype.detectedDefects = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new ImageQualityScores instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.Document.Page.IImageQualityScores=} [properties] Properties to set
+                                 * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores} ImageQualityScores instance
+                                 */
+                                ImageQualityScores.create = function create(properties) {
+                                    return new ImageQualityScores(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ImageQualityScores message. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.ImageQualityScores.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.Document.Page.IImageQualityScores} message ImageQualityScores message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ImageQualityScores.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.qualityScore != null && Object.hasOwnProperty.call(message, "qualityScore"))
+                                        writer.uint32(/* id 1, wireType 5 =*/13).float(message.qualityScore);
+                                    if (message.detectedDefects != null && message.detectedDefects.length)
+                                        for (var i = 0; i < message.detectedDefects.length; ++i)
+                                            $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.encode(message.detectedDefects[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ImageQualityScores message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.ImageQualityScores.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.Document.Page.IImageQualityScores} message ImageQualityScores message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ImageQualityScores.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ImageQualityScores message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores} ImageQualityScores
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ImageQualityScores.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.qualityScore = reader.float();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.detectedDefects && message.detectedDefects.length))
+                                                    message.detectedDefects = [];
+                                                message.detectedDefects.push($root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ImageQualityScores message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores} ImageQualityScores
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ImageQualityScores.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ImageQualityScores message.
+                                 * @function verify
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ImageQualityScores.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.qualityScore != null && message.hasOwnProperty("qualityScore"))
+                                        if (typeof message.qualityScore !== "number")
+                                            return "qualityScore: number expected";
+                                    if (message.detectedDefects != null && message.hasOwnProperty("detectedDefects")) {
+                                        if (!Array.isArray(message.detectedDefects))
+                                            return "detectedDefects: array expected";
+                                        for (var i = 0; i < message.detectedDefects.length; ++i) {
+                                            var error = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.verify(message.detectedDefects[i]);
+                                            if (error)
+                                                return "detectedDefects." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ImageQualityScores message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores} ImageQualityScores
+                                 */
+                                ImageQualityScores.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores)
+                                        return object;
+                                    var message = new $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores();
+                                    if (object.qualityScore != null)
+                                        message.qualityScore = Number(object.qualityScore);
+                                    if (object.detectedDefects) {
+                                        if (!Array.isArray(object.detectedDefects))
+                                            throw TypeError(".google.cloud.documentai.v1.Document.Page.ImageQualityScores.detectedDefects: array expected");
+                                        message.detectedDefects = [];
+                                        for (var i = 0; i < object.detectedDefects.length; ++i) {
+                                            if (typeof object.detectedDefects[i] !== "object")
+                                                throw TypeError(".google.cloud.documentai.v1.Document.Page.ImageQualityScores.detectedDefects: object expected");
+                                            message.detectedDefects[i] = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.fromObject(object.detectedDefects[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ImageQualityScores message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.Document.Page.ImageQualityScores} message ImageQualityScores
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ImageQualityScores.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.detectedDefects = [];
+                                    if (options.defaults)
+                                        object.qualityScore = 0;
+                                    if (message.qualityScore != null && message.hasOwnProperty("qualityScore"))
+                                        object.qualityScore = options.json && !isFinite(message.qualityScore) ? String(message.qualityScore) : message.qualityScore;
+                                    if (message.detectedDefects && message.detectedDefects.length) {
+                                        object.detectedDefects = [];
+                                        for (var j = 0; j < message.detectedDefects.length; ++j)
+                                            object.detectedDefects[j] = $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.toObject(message.detectedDefects[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ImageQualityScores to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ImageQualityScores.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ImageQualityScores
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ImageQualityScores.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.documentai.v1.Document.Page.ImageQualityScores";
+                                };
+    
+                                ImageQualityScores.DetectedDefect = (function() {
+    
+                                    /**
+                                     * Properties of a DetectedDefect.
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                     * @interface IDetectedDefect
+                                     * @property {string|null} [type] DetectedDefect type
+                                     * @property {number|null} [confidence] DetectedDefect confidence
+                                     */
+    
+                                    /**
+                                     * Constructs a new DetectedDefect.
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores
+                                     * @classdesc Represents a DetectedDefect.
+                                     * @implements IDetectedDefect
+                                     * @constructor
+                                     * @param {google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect=} [properties] Properties to set
+                                     */
+                                    function DetectedDefect(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * DetectedDefect type.
+                                     * @member {string} type
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @instance
+                                     */
+                                    DetectedDefect.prototype.type = "";
+    
+                                    /**
+                                     * DetectedDefect confidence.
+                                     * @member {number} confidence
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @instance
+                                     */
+                                    DetectedDefect.prototype.confidence = 0;
+    
+                                    /**
+                                     * Creates a new DetectedDefect instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect=} [properties] Properties to set
+                                     * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect} DetectedDefect instance
+                                     */
+                                    DetectedDefect.create = function create(properties) {
+                                        return new DetectedDefect(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified DetectedDefect message. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect} message DetectedDefect message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    DetectedDefect.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                                        if (message.confidence != null && Object.hasOwnProperty.call(message, "confidence"))
+                                            writer.uint32(/* id 2, wireType 5 =*/21).float(message.confidence);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified DetectedDefect message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.Page.ImageQualityScores.IDetectedDefect} message DetectedDefect message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    DetectedDefect.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a DetectedDefect message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect} DetectedDefect
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    DetectedDefect.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.type = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.confidence = reader.float();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a DetectedDefect message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect} DetectedDefect
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    DetectedDefect.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a DetectedDefect message.
+                                     * @function verify
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    DetectedDefect.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.type != null && message.hasOwnProperty("type"))
+                                            if (!$util.isString(message.type))
+                                                return "type: string expected";
+                                        if (message.confidence != null && message.hasOwnProperty("confidence"))
+                                            if (typeof message.confidence !== "number")
+                                                return "confidence: number expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a DetectedDefect message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect} DetectedDefect
+                                     */
+                                    DetectedDefect.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect)
+                                            return object;
+                                        var message = new $root.google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect();
+                                        if (object.type != null)
+                                            message.type = String(object.type);
+                                        if (object.confidence != null)
+                                            message.confidence = Number(object.confidence);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a DetectedDefect message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect} message DetectedDefect
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    DetectedDefect.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.type = "";
+                                            object.confidence = 0;
+                                        }
+                                        if (message.type != null && message.hasOwnProperty("type"))
+                                            object.type = message.type;
+                                        if (message.confidence != null && message.hasOwnProperty("confidence"))
+                                            object.confidence = options.json && !isFinite(message.confidence) ? String(message.confidence) : message.confidence;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this DetectedDefect to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    DetectedDefect.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for DetectedDefect
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    DetectedDefect.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect";
+                                    };
+    
+                                    return DetectedDefect;
+                                })();
+    
+                                return ImageQualityScores;
                             })();
     
                             return Page;
@@ -36175,6 +36796,12 @@
                                         else if (typeof object.page === "object")
                                             message.page = new $util.LongBits(object.page.low >>> 0, object.page.high >>> 0).toNumber();
                                     switch (object.layoutType) {
+                                    default:
+                                        if (typeof object.layoutType === "number") {
+                                            message.layoutType = object.layoutType;
+                                            break;
+                                        }
+                                        break;
                                     case "LAYOUT_TYPE_UNSPECIFIED":
                                     case 0:
                                         message.layoutType = 0;
@@ -36250,7 +36877,7 @@
                                         else
                                             object.page = options.longs === String ? $util.Long.prototype.toString.call(message.page) : options.longs === Number ? new $util.LongBits(message.page.low >>> 0, message.page.high >>> 0).toNumber() : message.page;
                                     if (message.layoutType != null && message.hasOwnProperty("layoutType"))
-                                        object.layoutType = options.enums === String ? $root.google.cloud.documentai.v1.Document.PageAnchor.PageRef.LayoutType[message.layoutType] : message.layoutType;
+                                        object.layoutType = options.enums === String ? $root.google.cloud.documentai.v1.Document.PageAnchor.PageRef.LayoutType[message.layoutType] === undefined ? message.layoutType : $root.google.cloud.documentai.v1.Document.PageAnchor.PageRef.LayoutType[message.layoutType] : message.layoutType;
                                     if (message.layoutId != null && message.hasOwnProperty("layoutId"))
                                         object.layoutId = message.layoutId;
                                     if (message.boundingPoly != null && message.hasOwnProperty("boundingPoly"))
@@ -36556,6 +37183,12 @@
                                     }
                                 }
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "OPERATION_TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -36618,7 +37251,7 @@
                                         object.parents[j] = $root.google.cloud.documentai.v1.Document.Provenance.Parent.toObject(message.parents[j], options);
                                 }
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.documentai.v1.Document.Provenance.OperationType[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.documentai.v1.Document.Provenance.OperationType[message.type] === undefined ? message.type : $root.google.cloud.documentai.v1.Document.Provenance.OperationType[message.type] : message.type;
                                 return object;
                             };
     
@@ -39172,6 +39805,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -39196,6 +39835,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -39243,7 +39886,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -39251,7 +39894,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };
@@ -43025,6 +43668,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -43039,6 +43688,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -43165,9 +43820,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -45514,6 +46169,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -45622,7 +46283,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -46424,6 +47085,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -46440,6 +47107,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -46478,6 +47151,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -46548,7 +47225,7 @@
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -46556,7 +47233,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -46569,7 +47246,7 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
@@ -47926,6 +48603,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -47989,7 +48672,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -49742,6 +50425,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -49791,7 +50480,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -56587,6 +57276,12 @@
                             return object;
                         var message = new $root.google.iam.v1.AuditLogConfig();
                         switch (object.logType) {
+                        default:
+                            if (typeof object.logType === "number") {
+                                message.logType = object.logType;
+                                break;
+                            }
+                            break;
                         case "LOG_TYPE_UNSPECIFIED":
                         case 0:
                             message.logType = 0;
@@ -56632,7 +57327,7 @@
                         if (options.defaults)
                             object.logType = options.enums === String ? "LOG_TYPE_UNSPECIFIED" : 0;
                         if (message.logType != null && message.hasOwnProperty("logType"))
-                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
+                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] === undefined ? message.logType : $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
                         if (message.exemptedMembers && message.exemptedMembers.length) {
                             object.exemptedMembers = [];
                             for (var j = 0; j < message.exemptedMembers.length; ++j)
@@ -57169,6 +57864,12 @@
                             return object;
                         var message = new $root.google.iam.v1.BindingDelta();
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "ACTION_UNSPECIFIED":
                         case 0:
                             message.action = 0;
@@ -57214,7 +57915,7 @@
                             object.condition = null;
                         }
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
                         if (message.role != null && message.hasOwnProperty("role"))
                             object.role = message.role;
                         if (message.member != null && message.hasOwnProperty("member"))
@@ -57479,6 +58180,12 @@
                             return object;
                         var message = new $root.google.iam.v1.AuditConfigDelta();
                         switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
                         case "ACTION_UNSPECIFIED":
                         case 0:
                             message.action = 0;
@@ -57521,7 +58228,7 @@
                             object.logType = "";
                         }
                         if (message.action != null && message.hasOwnProperty("action"))
-                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
+                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
                         if (message.service != null && message.hasOwnProperty("service"))
                             object.service = message.service;
                         if (message.exemptedMember != null && message.hasOwnProperty("exemptedMember"))

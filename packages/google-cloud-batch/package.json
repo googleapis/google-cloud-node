@@ -1,8 +1,13 @@
 {
   "name": "@google-cloud/batch",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Batch client for Node.js",
-  "repository": "googleapis/google-cloud-node",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-cloud-batch"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-batch",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
@@ -47,7 +52,7 @@
     "@types/sinon": "^10.0.0",
     "c8": "^7.3.5",
     "gts": "^3.1.0",
-    "jsdoc": "^3.6.6",
+    "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^2.0.0",
     "jsdoc-region-tag": "^2.0.0",
     "linkinator": "^4.0.0",

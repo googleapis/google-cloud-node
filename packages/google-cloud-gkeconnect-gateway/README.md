@@ -14,11 +14,11 @@ apigateway client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gkeconnect-gateway/CHANGELOG.md).
 
 * [GKE Connect Gateway Node.js Client API Reference][client-docs]
 * [GKE Connect Gateway Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
+* [github.com/googleapis/google-cloud-node/packages/google-cloud-gkeconnect-gateway](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gkeconnect-gateway)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].

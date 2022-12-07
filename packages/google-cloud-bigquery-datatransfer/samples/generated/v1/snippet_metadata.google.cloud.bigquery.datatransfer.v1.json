@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-datatransfer",
-        "version": "3.1.4",
+        "version": "3.1.5",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -110,7 +110,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 95,
+                    "end": 104,
                     "type": "FULL"
                 }
             ],
@@ -166,7 +166,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 93,
+                    "end": 101,
                     "type": "FULL"
                 }
             ],
@@ -671,14 +671,14 @@
             "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_EnrollDataSources_async",
             "title": "DataTransferService enrollDataSources Sample",
             "origin": "API_DEFINITION",
-            "description": " Enroll data sources in a user project. This allows users to create transfer configurations for these data sources. They will also appear in the ListDataSources RPC and as such, will appear in the BigQuery UI 'https://bigquery.cloud.google.com' (and the documents can be found at https://cloud.google.com/bigquery/bigquery-web-ui and https://cloud.google.com/bigquery/docs/working-with-transfers).",
+            "description": " Enroll data sources in a user project. This allows users to create transfer configurations for these data sources. They will also appear in the ListDataSources RPC and as such, will appear in the [BigQuery UI](https://console.cloud.google.com/bigquery), and the documents can be found in the public guide for [BigQuery Web UI](https://cloud.google.com/bigquery/bigquery-web-ui) and [Data Transfer Service](https://cloud.google.com/bigquery/docs/working-with-transfers).",
             "canonical": true,
             "file": "data_transfer_service.enroll_data_sources.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 58,
+                    "end": 57,
                     "type": "FULL"
                 }
             ],

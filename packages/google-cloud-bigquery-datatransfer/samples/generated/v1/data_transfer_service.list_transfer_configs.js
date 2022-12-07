@@ -29,7 +29,7 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The BigQuery project id for which data sources
+   *  Required. The BigQuery project id for which transfer configs
    *  should be returned: `projects/{project_id}` or
    *  `projects/{project_id}/locations/{location_id}`
    */
