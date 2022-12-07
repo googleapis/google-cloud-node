@@ -26,13 +26,8 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
-describe.skip('Quickstart', async () => {
+describe('Quickstart', async () => {
   it('should run quickstart', async () => {
-    try {
       execSync('node quickstart.js', {cwd});
-    } catch (err) {
-      // Since we don't have credentials, we need to assert this eror
-      assert.match(err, /insufficient authentication scopes/);
-    }
   });
 });
