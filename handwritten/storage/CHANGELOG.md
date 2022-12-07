@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.8.0](https://github.com/googleapis/nodejs-storage/compare/v6.7.0...v6.8.0) (2022-12-07)
+
+
+### Features
+
+* Implement parallel operations ([#2067](https://github.com/googleapis/nodejs-storage/issues/2067)) ([#2109](https://github.com/googleapis/nodejs-storage/issues/2109)) ([ce15b5e](https://github.com/googleapis/nodejs-storage/commit/ce15b5ef68353efbc005cb3a1a780e064ea04deb))
+
 ## [6.7.0](https://github.com/googleapis/nodejs-storage/compare/v6.6.0...v6.7.0) (2022-11-03)
 
 
