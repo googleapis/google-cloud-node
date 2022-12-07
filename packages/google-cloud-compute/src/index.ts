@@ -84,6 +84,8 @@ const MachineImagesClient = v1.MachineImagesClient;
 type MachineImagesClient = v1.MachineImagesClient;
 const MachineTypesClient = v1.MachineTypesClient;
 type MachineTypesClient = v1.MachineTypesClient;
+const NetworkAttachmentsClient = v1.NetworkAttachmentsClient;
+type NetworkAttachmentsClient = v1.NetworkAttachmentsClient;
 const NetworkEdgeSecurityServicesClient = v1.NetworkEdgeSecurityServicesClient;
 type NetworkEdgeSecurityServicesClient = v1.NetworkEdgeSecurityServicesClient;
 const NetworkEndpointGroupsClient = v1.NetworkEndpointGroupsClient;
@@ -233,6 +235,7 @@ export {
   LicensesClient,
   MachineImagesClient,
   MachineTypesClient,
+  NetworkAttachmentsClient,
   NetworkEdgeSecurityServicesClient,
   NetworkEndpointGroupsClient,
   NetworkFirewallPoliciesClient,
@@ -324,6 +327,7 @@ export default {
   LicensesClient,
   MachineImagesClient,
   MachineTypesClient,
+  NetworkAttachmentsClient,
   NetworkEdgeSecurityServicesClient,
   NetworkEndpointGroupsClient,
   NetworkFirewallPoliciesClient,
