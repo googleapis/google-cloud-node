@@ -29,6 +29,10 @@ function main(instance, project, zone) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  If true, discard the contents of any attached localSSD partitions. Default value is false.
+   */
+  // const discardLocalSsd = true
+  /**
    *  Name of the instance resource to suspend.
    */
   // const instance = 'abc123'
