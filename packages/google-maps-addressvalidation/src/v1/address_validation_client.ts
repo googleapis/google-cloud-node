@@ -117,6 +117,9 @@ export class AddressValidationClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -313,7 +316,7 @@ export class AddressValidationClient {
    *   Required. The address being validated. Unformatted addresses should be
    *   submitted via {@link google.type.PostalAddress.address_lines|`address_lines`}.
    *
-   *   The total length of the fields in this input must not exceed 300
+   *   The total length of the fields in this input must not exceed 280
    *   characters.
    *
    *   Supported regions can be found in the
@@ -450,7 +453,8 @@ export class AddressValidationClient {
    *   If this field is set to `VALIDATION_CONCLUSION_UNSPECIFIED`, an
    *   `INVALID_ARGUMENT` error will be returned.
    * @param {string} request.responseId
-   *   Required. The ID of the response that this feedback is for. This should be the
+   *   Required. The ID of the response that this feedback is for. This should be
+   *   the
    *   {@link google.maps.addressvalidation.v1.ValidateAddressRequest.response_id|response_id}
    *   from the first response in a series of address validation attempts.
    * @param {object} [options]
